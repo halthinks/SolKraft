@@ -4,13 +4,15 @@ The repository ships a native Codex plugin, a repository marketplace, and a down
 
 ## Install
 
-Use Python 3.11 or newer in the environment from which you launch Codex:
+Use Python 3.11 or newer and Git in the environment from which you launch Codex:
 
 ```sh
 python -m pip install "git+https://github.com/halthinks/SolKraft.git"
-codex plugin marketplace add halthinks/SolKraft
+codex plugin marketplace add halthinks/SolKraft --sparse .agents/plugins --sparse plugins/solkraft
 codex plugin add solkraft@solkraft
 ```
+
+The sparse flags download the marketplace and plugin folders without checking out the full skill source tree. This avoids unnecessarily large marketplace caches and deep Windows path failures.
 
 Restart the local client or start a new Codex session. Check the installed plugin in the client's plugin list. The package is not currently published on PyPI; `pip install solkraft` is not the documented installation route.
 

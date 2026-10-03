@@ -21,7 +21,7 @@ Requires Python 3.11+ and a Codex client with plugin support:
 
 ```sh
 python -m pip install "git+https://github.com/halthinks/SolKraft.git"
-codex plugin marketplace add halthinks/SolKraft
+codex plugin marketplace add halthinks/SolKraft --sparse .agents/plugins --sparse plugins/solkraft
 codex plugin add solkraft@solkraft
 ```
 
