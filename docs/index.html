@@ -9,14 +9,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/style.css">
-  <script defer src="assets/app.js?v=b1c4091026b6"></script>
+  <link rel="stylesheet" href="assets/style.css?v=9c96e0631785">
+  <script defer src="assets/flow.js?v=a253bed95d0e"></script>
+  <script defer src="assets/app.js?v=14cc3a1da9c7"></script>
 </head>
 <body>
   <div class="noise"></div>
   <header class="topbar">
     <a class="brand" href="#top" aria-label="SolKraft home"><span class="brand-mark">S<span>✳</span></span><span>SOLKRAFT</span><small>SKILL OS</small></a>
-    <nav><a href="#explore">Explore</a><a href="https://github.com/halthinks/SolKraft" target="_blank" rel="noreferrer">GitHub ↗</a><a href="https://github.com/halthinks/SolKraft/issues/new/choose" target="_blank" rel="noreferrer">Issues ↗</a></nav>
+    <nav><a href="#how-it-works">How it works</a><a href="#explore">Explore</a><a href="https://github.com/halthinks/SolKraft" target="_blank" rel="noreferrer">GitHub ↗</a><a href="https://github.com/halthinks/SolKraft/issues/new/choose" target="_blank" rel="noreferrer">Issues ↗</a></nav>
     <span id="connection" class="connection"><i></i> Not connected</span>
   </header>
   <main id="top">
@@ -24,15 +25,33 @@
       <div class="hero-copy">
         <div class="eyebrow"><span class="pulse"></span> OPEN SKILL INFRASTRUCTURE <b>·</b> v0.1</div>
         <h1>Give every task<br>the <em>right skills.</em></h1>
-        <p class="lead">A callable skill catalog and routing layer for agents. Find the procedure, fetch only what you need, keep the decisions yours.</p>
+        <p class="lead">Find reusable instructions for your AI agent. SolKraft turns a task into an ordered set of skills, explains the selection, and retrieves the procedures your agent needs to do the work.</p>
         <div class="hero-actions"><a class="button primary" href="#explore">Explore the catalog <span>↓</span></a><a class="button quiet" href="https://github.com/halthinks/SolKraft" target="_blank" rel="noreferrer">View source ↗</a></div>
         <div class="hero-note"><span class="dot"></span> Read-only by design <span class="slash">/</span> REST + MCP <span class="slash">/</span> Open source</div>
       </div>
       <div class="hero-art" aria-hidden="true"><div class="orbit orbit-a"></div><div class="orbit orbit-b"></div><div class="orbit orbit-c"></div><div class="core"><span>SK</span><small>ROUTE<br>·<br>RETRIEVE</small></div><span class="node node-one">SEARCH</span><span class="node node-two">COMPOSE</span><span class="node node-three">MCP</span><span class="node node-four">REST</span><span class="spark s1">✳</span><span class="spark s2">·</span></div>
     </section>
 
+
+    <section id="how-it-works" class="guide workspace">
+      <div class="eyebrow">FROM A REQUEST TO USEFUL WORK</div>
+      <h2>Your agent does the work. SolKraft supplies the method.</h2>
+      <p class="guide-lead">A skill is a reusable procedure with instructions and supporting resources. The <strong>solforge</strong> skill contains the orchestration and semantic routing machinery; it is also a node in the selection graph. Specialist skills supply the methods for research, building, testing, writing, and engineering. <strong>Capability-preserving execution</strong> supplies the adaptive execution loop: frame the outcome, map dependencies, schedule safe work, preserve evidence, repair failures, and verify completion. It is an instruction-based execution layer, not a hidden Python scheduler.</p>
+      <div class="core-skill-actions"><button class="inspect-btn" data-inspect-skill="solforge">Inspect SolForge and its Python files →</button> <button class="inspect-btn" data-inspect-skill="capability-preserving-execution">Inspect capability-preserving execution →</button></div>
+      <div class="flow-heading"><span>FOLLOW THE REQUEST</span><button id="motion-toggle" class="inspect-btn" aria-pressed="false">Pause animation</button></div>
+      <div id="workflow-diagram" class="workflow-diagram" role="img" aria-label="Your request goes to the SolForge semantic parser, which uses the selection graph to suggest ordered skills. Selected instructions are retrieved, then your host agent applies them and verifies its work."><p>Your request → semantic parser + selection graph → ordered skills → selected instructions → your agent → verified result</p></div>
+      <p class="muted">The animated arrows show information moving between stages, not a running job. The host agent owns tools, execution, and verification.</p>
+      <div class="guide-grid">
+        <article><span class="step-number">01</span><h3>Discover a procedure</h3><p>Browse the paginated catalog or search names and descriptions. Inspect a skill, then copy its instructions into your agent. This works here without an account or API key.</p></article>
+        <article><span class="step-number">02</span><h3>Understand the route</h3><p>Try the worked example below. For your own request, connect a SolKraft API and use Compose a route. The result shows stages, selected skills, reasons, and unresolved work.</p></article>
+        <article><span class="step-number">03</span><h3>Execute with preserved capability</h3><p>Copy instructions manually, or let an MCP or REST client retrieve them. Your agent reads the selected procedures, uses its own tools, and verifies the requested result.</p></article>
+      </div>
+      <div class="worked-example"><div class="eyebrow">TRY IT · NO CONNECTION NEEDED</div><h3>A bug fix with a release check</h3><blockquote>Inspect the codebase, fix the bug, add a regression test, and verify the release build. Do not deploy or publish anything.</blockquote><p>See the actual parser output generated from this request, inspect its selected procedures, and copy the request for your agent.</p><button id="example-btn" class="button primary">Walk through this example →</button></div>
+      <details class="parser-explanation"><summary>How the semantic parser and graph actually work</summary><div class="guide-grid"><article><h3>Read the requested actions</h3><p>The deterministic parser uses scoped rules, concept aliases, domain context, and lexical ranking. It separates requested stages while treating quoted instructions, exclusions, and recognised completed or deferred work as context.</p></article><article><h3>Select and order skills</h3><p>The tested semantic core matches stages to workflow nodes. Conditional graph edges describe when a supporting procedure is useful. Explicit skill IDs support direct selection. Recognised unmatched stages can use catalog matching; ambiguity can remain unresolved.</p></article><article><h3>Keep the limits visible</h3><p>This is a heuristic parser, not an LLM call. Rule scores are relative rankings, not probability estimates. The graph includes catalog-only skills without inventing dependencies. A proposed route never grants permission or executes a job.</p></article></div><p>Catalog search on this static site is keyword filtering. Custom semantic composition runs in your connected server. The example is real, precomputed parser output and is labelled separately from a live response.</p><a href="https://github.com/halthinks/SolKraft/blob/main/solkraft/skillpacks/solforge/SKILL.md">Read the orchestration skill ↗</a> · <a href="https://github.com/halthinks/SolKraft/blob/main/docs/CLIENTS.md">Set up REST or MCP ↗</a></details>
+    </section>
+
     <section class="connect-strip" aria-label="Connect to your SolKraft API">
-      <div><span class="micro-label">YOUR API</span><strong>Connect to a SolKraft server</strong><small>Local or hosted · your key stays in this tab</small></div>
+      <div><span class="micro-label">YOUR API</span><strong>Connect to a SolKraft server</strong><small>Optional · enables custom routing · your key stays in this tab</small></div>
       <label class="field endpoint"><span>Endpoint</span><input id="api-url" type="url" placeholder="https://your-service.onrender.com" autocomplete="url"></label>
       <label class="field key"><span>Bearer key</span><input id="api-key" type="password" placeholder="Paste your API key" autocomplete="off"></label>
       <button id="connect-btn" class="button connect-btn">Connect <span>→</span></button>
@@ -44,13 +63,14 @@
       <div id="search-panel" class="panel active" role="tabpanel">
         <div class="searchbar"><span class="search-icon">⌕</span><input id="search-input" type="search" placeholder="Try “test a software release” or “compare market options”" autocomplete="off"><kbd>ENTER</kbd></div>
         <div class="results-head"><span id="result-label">POPULAR SKILLS</span><span>SELECT TO INSPECT</span></div>
-        <div id="results" class="results"><div class="empty-state"><span class="empty-orbit">✳</span><strong>Your skill catalog is ready when you are.</strong><p>Connect to an API endpoint above, then search by the task you need done.</p></div></div>
+        <div id="results" class="results"><div class="empty-state"><span class="empty-orbit">✳</span><strong>Your skill catalog is ready when you are.</strong><p>The bundled catalog loads automatically. An API connection is optional.</p></div></div>
+        <nav class="pagination" aria-label="Skill catalog pages"><button id="page-prev" class="button quiet">← Previous</button><span id="page-status" role="status" aria-live="polite"></span><label>Per page <select id="page-size"><option selected>12</option><option>24</option><option>48</option></select></label><button id="page-next" class="button quiet">Next →</button></nav>
       </div>
       <div id="route-panel" class="panel" role="tabpanel" hidden>
-        <div class="route-intro"><div><div class="eyebrow">ADVISORY ROUTING</div><h3>Describe the outcome. Get a sequence.</h3><p>SolKraft suggests up to 50 skills in stage order. It does not run them.</p></div><div class="route-glyph">↗</div></div>
+        <div class="route-intro"><div><div class="eyebrow">ADVISORY ROUTING</div><h3>Describe the outcome. Get a sequence.</h3><p>Connect your API to compose a custom request, or load the worked example without connecting. Select a suggested skill to read and copy its procedure.</p></div><div class="route-glyph">↗</div></div>
         <label class="route-field"><span>YOUR TASK</span><textarea id="route-input" rows="4" maxlength="20000" placeholder="Example: inspect the codebase, fix the bug, add a regression test, and verify the release build"></textarea></label>
-        <div class="route-controls"><label>Maximum skills <select id="max-skills"><option>5</option><option selected>10</option><option>20</option><option>50</option></select></label><button id="route-btn" class="button primary">Build my route <span>→</span></button></div>
-        <div id="route-results" class="route-results"></div>
+        <div class="route-controls"><label>Maximum skills <select id="max-skills"><option>5</option><option selected>10</option><option>20</option><option>50</option></select></label><button id="copy-task" class="button quiet">Copy request</button><button id="route-btn" class="button primary">Build my route <span>→</span></button></div>
+        <p id="route-mode" class="muted">Custom requests require a connected API. The worked example is available without one.</p><div id="route-results" class="route-results"></div>
       </div>
     </section>
 

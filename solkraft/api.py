@@ -67,8 +67,9 @@ def create_app(catalog: SkillCatalog | None = None, *, api_key: str | None = Non
 
     @app.get("/v1/skills")
     async def list_skills(q: str = Query(default="", max_length=500), limit: int = Query(default=20, ge=1, le=100), offset: int = Query(default=0, ge=0)):
-        items = catalog.search(q, limit=limit) if q else catalog.list(limit=limit, offset=offset)
-        return {"count": len(items), "items": items}
+        available = catalog.search(q, limit=len(catalog.records())) if q else catalog.list(limit=len(catalog.records()))
+        items = available[offset:offset + limit]
+        return {"count": len(items), "total": len(available), "items": items}
 
     @app.get("/v1/skills/{skill_id}")
     async def get_skill(skill_id: str):

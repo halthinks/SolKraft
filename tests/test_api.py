@@ -6,6 +6,22 @@ from solkraft.api import create_app
 from solkraft.catalog import SkillCatalog
 
 
+def test_catalog_pagination_preserves_search_order_and_total(tmp_path):
+    for index in range(25):
+        folder = tmp_path / f"skill-{index:02}"
+        folder.mkdir()
+        (folder / "SKILL.md").write_text(
+            f"---\nname: skill-{index:02}\ndescription: Review release artifacts.\n---\n", encoding="utf-8")
+    with TestClient(create_app(SkillCatalog([tmp_path]), api_key="test-key")) as client:
+        headers = {"Authorization": "Bearer test-key"}
+        first = client.get('/v1/skills?q=release&limit=12&offset=0', headers=headers).json()
+        last = client.get('/v1/skills?q=release&limit=12&offset=24', headers=headers).json()
+        assert first['total'] == last['total'] == 25
+        assert first['count'] == 12 and last['count'] == 1
+        assert first['items'][0]['id'] == 'skill-00'
+        assert last['items'][0]['id'] == 'skill-24'
+
+
 def test_api_lists_routes_and_returns_selected_skill_only(tmp_path):
     root = tmp_path / "skills"
     folder = root / "data-chart"

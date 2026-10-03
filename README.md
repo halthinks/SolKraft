@@ -94,8 +94,16 @@ solkraft graph
 
 `GET /v1/graph` and MCP `get_selection_graph` expose the portable graph and conditional follow-ups. Configure `SOLKRAFT_ALLOWED_HOSTS` for a custom hosted MCP domain; Render's assigned hostname is recognized automatically. The repository includes a Render deployment blueprint; deploy it from your Render account to obtain the API URL.
 
-The discovery graph covers all 173 bundled skills. Its 123-workflow semantic core carries 213 conditional relationships; other catalog nodes support discovery and explicit selection without fabricated dependencies. Operator-mounted skill roots join the same discovery graph. See [validation evidence](VALIDATION.md) for the regression suite, reproducible routing battery, and its limits.
+The discovery graph covers all 173 bundled skills. Its 121-workflow semantic core carries 213 conditional relationships; other catalog nodes support discovery and explicit selection without fabricated dependencies. Operator-mounted skill roots join the same discovery graph. See [validation evidence](VALIDATION.md) for the regression suite, reproducible routing battery, and its limits.
 
 ### Discover installed skills locally
 
 Use `solkraft search "your objective" --installed`, `solkraft route "your objective" --installed`, or `solkraft mcp --installed` to include `~/.codex/skills`, `~/.agents/skills`, and `~/.codex/plugins/cache`. Identical entrypoints are collapsed; different versions receive source-qualified IDs. Bundled workflow IDs remain stable. `solkraft api --installed` requires a localhost bind. Public deployments serve the redistributable bundle by default.
+
+## Use the console
+
+The [public console](https://halthinks.github.io/SolKraft/) is a browser for procedures and an interface to the router. Browse skills in pages of 12, 24, or 48; search descriptions; inspect a procedure and its supporting files; then copy its instructions for your agent. No API connection is needed for the bundled catalog or worked example.
+
+The worked bug-fix example contains parser output generated from the same bundled Python engine used by the service. It shows ordered stages, reasons, exclusions, and links to the selected procedures. It is labelled as precomputed evidence, not a live request. Connect your own server to compose arbitrary objectives through the API.
+
+The animated Mermaid walkthrough explains three distinct layers: SolForge selects relevant skills using the parser and graph; capability-preserving execution guides the host agent's dependency management, recovery, and verification; specialist skills supply the method for each stage. The UI retrieves and explains procedures. Your host agent performs the actual work. See [the UI and parser guide](docs/UI_GUIDE.md).
