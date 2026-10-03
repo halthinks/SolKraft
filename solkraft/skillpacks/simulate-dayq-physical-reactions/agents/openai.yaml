@@ -1,4 +1,0 @@
-interface:
-  display_name: "DayQ Physical Reactions"
-  short_description: "Build hit reactions falls and ragdolls"
-  default_prompt: "Use $simulate-dayq-physical-reactions to implement DayQ physical reactions ragdolls and recovery."

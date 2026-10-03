@@ -1,4 +1,0 @@
-interface:
-  display_name: "Operate DayQ Edge Interfaces"
-  short_description: "Operate persistent physical Edge Interfaces"
-  default_prompt: "Use operate-dayq-edge-interfaces to execute its DayQ contract without replacing existing authoritative owners."

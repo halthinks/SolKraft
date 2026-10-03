@@ -1,4 +1,0 @@
-interface:
-  display_name: "DayQ Systems Design"
-  short_description: "Specify connected systemic game rules"
-  default_prompt: "Use $design-dayq-systems to create complete decision sheets for the requested DayQ systems."

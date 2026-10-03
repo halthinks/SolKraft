@@ -1,4 +1,0 @@
-interface:
-  display_name: "DayQ Authoritative Weather"
-  short_description: "Build causal persistent world weather"
-  default_prompt: "Use $simulate-dayq-authoritative-weather to implement and validate one authoritative DayQ weather slice."

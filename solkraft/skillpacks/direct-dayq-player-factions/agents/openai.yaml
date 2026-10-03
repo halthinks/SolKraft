@@ -1,4 +1,0 @@
-interface:
-  display_name: "Direct DayQ Player Factions"
-  short_description: "Maintain DayQ origin canon and faction integrations"
-  default_prompt: "Use -dayq-player-factions to implement or validate DayQ player-origin canon."

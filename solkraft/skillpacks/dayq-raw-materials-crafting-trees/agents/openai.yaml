@@ -1,4 +1,0 @@
-interface:
-  display_name: "DayQ Raw Materials and Crafting"
-  short_description: "Build traceable DayQ production trees"
-  default_prompt: "Use $dayq-raw-materials-crafting-trees to design and validate this DayQ production chain."

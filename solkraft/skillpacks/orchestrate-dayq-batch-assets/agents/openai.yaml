@@ -1,4 +1,0 @@
-interface:
-  display_name: "Orchestrate DayQ Batch Assets"
-  short_description: "Run traceable batches through the DayQ asset factory."
-  default_prompt: "Use $orchestrate-dayq-batch-assets to schedule and validate a batch of DayQ asset-family jobs."

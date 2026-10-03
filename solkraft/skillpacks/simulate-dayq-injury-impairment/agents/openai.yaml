@@ -1,4 +1,0 @@
-interface:
-  display_name: "DayQ Injury and Impairment"
-  short_description: "Connect body injuries to physical capability"
-  default_prompt: "Use $simulate-dayq-injury-impairment to implement body-region injuries and movement impairment."

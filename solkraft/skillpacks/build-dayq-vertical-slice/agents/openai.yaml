@@ -1,4 +1,0 @@
-interface:
-  display_name: "DayQ Vertical Slice"
-  short_description: "Integrate the first playable region"
-  default_prompt: "Use $build-dayq-vertical-slice to plan, build, and accept the next complete DayQ vertical-slice milestone."

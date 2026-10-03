@@ -1,4 +1,0 @@
-interface:
-  display_name: "DayQ Systemic Asset Factory"
-  short_description: "Build and prove every DayQ asset end to end"
-  default_prompt: "Use $build-dayq-systemic-asset-factory to produce and validate this DayQ asset through sourcing, environment, Blender, and Unreal gates."

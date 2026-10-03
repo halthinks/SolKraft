@@ -1,4 +1,0 @@
-interface:
-  display_name: "Manage DayQ Sleep"
-  short_description: "Build fatigue, rest, and vulnerability gameplay"
-  default_prompt: "Use $manage-dayq-sleep-fatigue to implement or validate DayQ fatigue, sleep, waking, bedding, or guarded-rest gameplay."

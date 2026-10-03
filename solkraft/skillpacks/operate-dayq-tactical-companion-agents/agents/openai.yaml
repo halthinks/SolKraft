@@ -1,4 +1,0 @@
-interface:
-  display_name: "Operate DayQ Tactical Companions"
-  short_description: "Operate embodied tactical companion agents"
-  default_prompt: "Use operate-dayq-tactical-companion-agents to execute its DayQ contract without replacing existing authoritative owners."

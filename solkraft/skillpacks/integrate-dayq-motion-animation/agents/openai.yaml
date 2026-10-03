@@ -1,4 +1,0 @@
-interface:
-  display_name: "DayQ Motion and Animation"
-  short_description: "Integrate motion matching IK and warping"
-  default_prompt: "Use $integrate-dayq-motion-animation to build DayQ motion matching animation and IK."

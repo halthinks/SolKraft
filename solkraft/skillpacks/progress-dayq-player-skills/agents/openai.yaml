@@ -1,4 +1,0 @@
-interface:
-  display_name: "Progress DayQ Player Skills"
-  short_description: "Implement DayQ use-based skill progression"
-  default_prompt: "Use -dayq-player-skills to implement or validate DayQ player progression."

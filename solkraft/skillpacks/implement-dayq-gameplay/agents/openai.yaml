@@ -1,4 +1,0 @@
-interface:
-  display_name: "DayQ Gameplay Implementation"
-  short_description: "Build combat and survival gameplay"
-  default_prompt: "Use $implement-dayq-gameplay to implement and validate the requested DayQ gameplay mechanics."

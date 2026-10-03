@@ -1,4 +1,0 @@
-interface:
-  display_name: "DayQ Multiplayer Engineering"
-  short_description: "Engineer authority and persistence"
-  default_prompt: "Use $engineer-dayq-multiplayer to implement and validate the requested replicated persistent system."

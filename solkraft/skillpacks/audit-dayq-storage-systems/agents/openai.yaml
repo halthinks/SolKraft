@@ -1,4 +1,0 @@
-interface:
-  display_name: "Audit DayQ Storage Systems"
-  short_description: "Validate storage capacity, authority, assets, and coverage."
-  default_prompt: "Use $audit-dayq-storage-systems to audit DayQ storage definitions, production, runtime, and placement."

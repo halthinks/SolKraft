@@ -1,4 +1,0 @@
-interface:
-  display_name: "DayQ Ground Locomotion"
-  short_description: "Implement grounded movement and stance physics"
-  default_prompt: "Use $implement-dayq-ground-locomotion to implement or validate DayQ ground movement mechanics."

@@ -1,4 +1,0 @@
-interface:
-  display_name: "DayQ Companion Agent Progression"
-  short_description: "Progress companion skills, dialogue, and voice"
-  default_prompt: "Use $progress-dayq-companion-agent to design an evidence-gated companion skill branch, conversation flow, and combat voice behavior."

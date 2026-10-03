@@ -1,4 +1,0 @@
-interface:
-  display_name: "Build DayQ Glentech Fabrication"
-  short_description: "Implement DayQ Glentech manufacturing progression"
-  default_prompt: "Use -dayq-glentech-fabrication to implement and validate DayQ reclamation and fabrication."

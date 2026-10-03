@@ -1,4 +1,0 @@
-interface:
-  display_name: "Validate DayQ Ballistic Armor"
-  short_description: "Validate vendor-neutral ballistic armor response"
-  default_prompt: "Use validate-dayq-ballistic-armor to execute its DayQ contract without replacing existing authoritative owners."

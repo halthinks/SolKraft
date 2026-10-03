@@ -1,4 +1,0 @@
-interface:
-  display_name: "Produce DayQ Assets"
-  short_description: "Route DayQ assets from reference to engine."
-  default_prompt: "Create and validate a production asset contract for this DayQ request."

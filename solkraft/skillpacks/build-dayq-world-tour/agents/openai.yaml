@@ -1,4 +1,0 @@
-interface:
-  display_name: "Build DayQ World Tour"
-  short_description: "Create seam-locked DayQ cinematic journeys."
-  default_prompt: "Plan a canonical DayQ cinematic world tour for this campaign."

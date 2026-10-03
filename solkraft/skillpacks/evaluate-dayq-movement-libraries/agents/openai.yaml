@@ -1,4 +1,0 @@
-interface:
-  display_name: "DayQ Movement Library Evaluation"
-  short_description: "Bake off movement animation and physics stacks"
-  default_prompt: "Use $evaluate-dayq-movement-libraries to run a controlled DayQ movement-library bakeoff."

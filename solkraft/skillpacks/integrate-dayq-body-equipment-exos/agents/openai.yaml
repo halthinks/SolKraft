@@ -1,4 +1,0 @@
-interface:
-  display_name: "DayQ Body Equipment and Exos"
-  short_description: "Integrate load clothing armor and powered frames"
-  default_prompt: "Use $integrate-dayq-body-equipment-exos to connect body mechanics with equipment load and exoskeletons."

@@ -1,4 +1,0 @@
-interface:
-  display_name: "Operate DayQ Radios"
-  short_description: "Build physical server-authorized radio communications"
-  default_prompt: "Use $operate-dayq-radio-comms to implement or validate a DayQ handheld, vehicle, relay, base-radio, intercom, or operational voice route."

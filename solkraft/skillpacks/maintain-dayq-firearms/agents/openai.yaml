@@ -1,4 +1,0 @@
-interface:
-  display_name: "Maintain DayQ Firearms"
-  short_description: "Build firearm maintenance and familiarity."
-  default_prompt: "Implement a DayQ firearm field-strip, cleaning, repair, and weapon-familiarity vertical slice with authoritative state and live Unreal evidence."

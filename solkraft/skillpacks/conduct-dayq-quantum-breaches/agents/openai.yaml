@@ -1,4 +1,0 @@
-interface:
-  display_name: "Conduct DayQ Quantum Breaches"
-  short_description: "Implement staged fictional quantum breach operations"
-  default_prompt: "Use conduct-dayq-quantum-breaches to execute its DayQ contract without replacing existing authoritative owners."

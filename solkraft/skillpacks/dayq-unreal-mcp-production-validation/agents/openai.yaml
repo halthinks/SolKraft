@@ -1,4 +1,0 @@
-interface:
-  display_name: "DayQ Unreal MCP Production"
-  short_description: "Build and prove DayQ inside Unreal"
-  default_prompt: "Use $dayq-unreal-mcp-production-validation to implement and validate this DayQ work order in Unreal with MCP, PIE, evidence, and repair gates."

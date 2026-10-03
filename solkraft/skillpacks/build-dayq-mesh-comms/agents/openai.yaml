@@ -1,4 +1,0 @@
-interface:
-  display_name: "Build DayQ Mesh Comms"
-  short_description: "Build physical DayQ relay and mesh communications"
-  default_prompt: "Use build-dayq-mesh-comms to execute its DayQ contract without replacing existing authoritative owners."

@@ -1,4 +1,0 @@
-interface:
-  display_name: "Audit DayQ Content Coverage"
-  short_description: "Find missing, orphaned, duplicated, or unproven content."
-  default_prompt: "Use $audit-dayq-content-coverage to validate DayQ catalog, production, runtime, and world-placement coverage."

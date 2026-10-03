@@ -1,4 +1,0 @@
-interface:
-  display_name: "Design DayQ Game Ordnance"
-  short_description: "Design safe, systemic in-game ordnance and abstract crafting."
-  default_prompt: "Design DayQ ordnance gameplay, recipes, progression, authority, persistence, and validation without real construction instructions."

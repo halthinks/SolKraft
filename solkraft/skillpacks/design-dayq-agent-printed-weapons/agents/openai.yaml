@@ -1,4 +1,0 @@
-interface:
-  display_name: "DayQ Agent-Designed Printed Weapons"
-  short_description: "Design and validate printed weapon families"
-  default_prompt: "Use $design-dayq-agent-printed-weapons to turn a weapon build file found as loot into a playable DayQ recipe and manufactured weapon integrated with existing maintenance and wear."

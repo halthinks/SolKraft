@@ -1,4 +1,0 @@
-interface:
-  display_name: "DayQ Character Rig and Collision"
-  short_description: "Build body rigs collision and hit regions"
-  default_prompt: "Use $build-dayq-character-rig-collision to define a production DayQ character rig and collision contract."

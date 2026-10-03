@@ -1,4 +1,0 @@
-interface:
-  display_name: "Evaluate DayQ Unreal Libraries"
-  short_description: "Evidence-gated Unreal dependency bakeoffs"
-  default_prompt: "Use $evaluate-dayq-unreal-libraries to evaluate an Unreal library in an isolated DayQ-compatible bakeoff."

@@ -1,4 +1,0 @@
-interface:
-  display_name: "Generate DayQ Agent System Assets"
-  short_description: "Route complete agent-system asset production"
-  default_prompt: "Use generate-dayq-agent-system-assets to execute its DayQ contract without replacing existing authoritative owners."

@@ -1,4 +1,0 @@
-interface:
-  display_name: "Defend DayQ Against Drones"
-  short_description: "Implement layered counter-drone defenses"
-  default_prompt: "Use defend-dayq-against-drones to execute its DayQ contract without replacing existing authoritative owners."

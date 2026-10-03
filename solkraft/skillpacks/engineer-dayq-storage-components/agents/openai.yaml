@@ -1,4 +1,0 @@
-interface:
-  display_name: "Engineer DayQ Storage Parts"
-  short_description: "Design storage shells, closures, fittings, and repairs."
-  default_prompt: "Use $engineer-dayq-storage-components to define buildable and repairable storage components."

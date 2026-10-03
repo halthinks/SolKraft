@@ -1,4 +1,0 @@
-interface:
-  display_name: "Generate DayQ Systemic Asset Prompts"
-  short_description: "Generate production-ready prompts for any DayQ asset."
-  default_prompt: "Turn this asset request into a complete DayQ production prompt."

@@ -1,4 +1,0 @@
-interface:
-  display_name: "DayQ Bases and Raids"
-  short_description: "Build bases, industry, and raids"
-  default_prompt: "Use $build-dayq-bases-raids to implement and test the requested DayQ construction or raid feature."

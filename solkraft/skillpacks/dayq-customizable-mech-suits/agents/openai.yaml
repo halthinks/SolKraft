@@ -1,4 +1,0 @@
-interface:
-  display_name: "DayQ Customizable Mech Suits"
-  short_description: "Design modular persistent DayQ mechs"
-  default_prompt: "Use $dayq-customizable-mech-suits to design and validate this original DayQ mech-suit system."

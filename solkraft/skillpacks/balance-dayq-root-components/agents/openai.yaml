@@ -1,4 +1,0 @@
-interface:
-  display_name: "Balance DayQ Root Components"
-  short_description: "Build fair DayQ salvage and component economies"
-  default_prompt: "Use -dayq-root-components to implement DayQ salvage, reclamation, and standardized component balance."

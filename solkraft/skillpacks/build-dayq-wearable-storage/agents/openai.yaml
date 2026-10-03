@@ -1,4 +1,0 @@
-interface:
-  display_name: "Build DayQ Wearable Storage"
-  short_description: "Design backpacks, pouches, belts, slings, and harnesses."
-  default_prompt: "Use $build-dayq-wearable-storage to define wearable storage and load behavior."

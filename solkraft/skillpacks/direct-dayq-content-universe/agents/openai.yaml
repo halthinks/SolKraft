@@ -1,4 +1,0 @@
-interface:
-  display_name: "Direct DayQ Content Universe"
-  short_description: "Govern DayQ content catalogs and dependency graphs."
-  default_prompt: "Use $direct-dayq-content-universe to define or reconcile the complete DayQ content universe and its dependency graph."

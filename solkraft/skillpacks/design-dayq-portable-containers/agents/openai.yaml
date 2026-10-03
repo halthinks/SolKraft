@@ -1,4 +1,0 @@
-interface:
-  display_name: "Design DayQ Portable Storage"
-  short_description: "Design bins, cases, cans, crates, luggage, and toolboxes."
-  default_prompt: "Use $design-dayq-portable-containers to design a physical portable-container family."

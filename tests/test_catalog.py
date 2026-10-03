@@ -48,7 +48,7 @@ def test_exclusion_filter_does_not_hide_other_specialist_skills(tmp_path, monkey
 
 def test_bundled_catalog_uses_reserved_fingerprints_and_contains_engineering_skills():
     catalog = SkillCatalog([BUNDLE_ROOT])
-    assert len(catalog.records()) >= 230
+    assert len(catalog.records()) == 144
     assert "solforge-workflow-engineering-requirements" in {record.id for record in catalog.records()}
     for record in catalog.records():
         identifiers = {record.name.casefold(), *(part.casefold() for part in record.entrypoint.relative_to(record.root).parts)}

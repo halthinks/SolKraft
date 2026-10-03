@@ -1,4 +1,0 @@
-interface:
-  display_name: "DayQ Decision Governance"
-  short_description: "Lock evidence-backed DayQ decisions"
-  default_prompt: "Use $govern-dayq-decisions to resolve and record the next dependent DayQ design decisions."

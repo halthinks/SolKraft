@@ -1,4 +1,0 @@
-interface:
-  display_name: "Build DayQ Material States"
-  short_description: "Govern DayQ material, wear, weather, and damage states."
-  default_prompt: "Use $build-dayq-material-state-library to define or extend DayQ material and damage-state families."

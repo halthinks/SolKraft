@@ -1,4 +1,0 @@
-interface:
-  display_name: "DayQ Product Research"
-  short_description: "Research market, platform, and legal"
-  default_prompt: "Use $research-dayq-product to answer the requested current DayQ product, platform, or legal question with primary evidence."

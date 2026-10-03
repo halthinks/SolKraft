@@ -1,4 +1,0 @@
-interface:
-  display_name: "Equip DayQ Drone Missions"
-  short_description: "Integrate bounded drone mission payloads"
-  default_prompt: "Use equip-dayq-drone-missions to execute its DayQ contract without replacing existing authoritative owners."

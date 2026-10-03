@@ -1,4 +1,0 @@
-interface:
-  display_name: "Produce DayQ Organic Assets"
-  short_description: "Route DayQ characters, creatures, cloth, and deformables."
-  default_prompt: "Use $produce-dayq-organic-assets to produce a governed DayQ character, creature, cloth, or other deformable asset."

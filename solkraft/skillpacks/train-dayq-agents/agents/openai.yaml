@@ -1,4 +1,0 @@
-interface:
-  display_name: "Train DayQ Agents"
-  short_description: "Train and certify persistent DayQ agents"
-  default_prompt: "Use train-dayq-agents to execute its DayQ contract without replacing existing authoritative owners."
