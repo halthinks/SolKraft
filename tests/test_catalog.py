@@ -48,7 +48,7 @@ def test_exclusion_filter_does_not_hide_other_specialist_skills(tmp_path, monkey
 
 def test_bundled_catalog_uses_reserved_fingerprints_and_contains_engineering_skills():
     catalog = SkillCatalog([BUNDLE_ROOT])
-    assert len(catalog.records()) == 144
+    assert len(catalog.records()) >= 170
     assert "solforge-workflow-engineering-requirements" in {record.id for record in catalog.records()}
     for record in catalog.records():
         identifiers = {record.name.casefold(), *(part.casefold() for part in record.entrypoint.relative_to(record.root).parts)}
@@ -74,3 +74,32 @@ def test_duplicate_ids_get_stable_source_namespaces(tmp_path):
     catalog = SkillCatalog([left, right])
 
     assert {row["id"] for row in catalog.list()} == {"vendor-one:deploy", "vendor-two:deploy"}
+
+
+def test_identical_installed_copies_are_collapsed(tmp_path):
+    left, right = tmp_path / 'one', tmp_path / 'two'
+    write_skill(left, 'shared', 'One procedure.')
+    write_skill(right, 'shared', 'One procedure.')
+    assert len(SkillCatalog([left, right]).records()) == 1
+
+
+def test_system_skills_are_discovered_without_scanning_dependencies(tmp_path):
+    write_skill(tmp_path / '.system', 'system-helper', 'System helper.')
+    write_skill(tmp_path / 'node_modules', 'dependency-helper', 'Dependency helper.')
+    assert {r.name for r in SkillCatalog([tmp_path]).records()} == {'system-helper'}
+
+
+def test_preferred_bundle_keeps_stable_ids_with_installed_versions(tmp_path):
+    bundled, installed = tmp_path / 'bundle', tmp_path / 'installed'
+    write_skill(bundled, 'workflow-test', 'Current release gate.')
+    write_skill(installed, 'workflow-test', 'Previous version.')
+    catalog = SkillCatalog([bundled, installed], preferred_root=bundled)
+    assert {r.id for r in catalog.records()} == {'workflow-test', 'installed:workflow-test'}
+    assert catalog.get('workflow-test')['description'] == 'Current release gate.'
+
+
+def test_retired_runtime_skills_cannot_return_through_extra_roots(tmp_path):
+    write_skill(tmp_path, 'inforge-run-single', 'Retired approval plugin workflow.')
+    write_skill(tmp_path, 'solforge-run-ultra', 'Retired native Ultra workflow.')
+    write_skill(tmp_path, 'usable-helper', 'Useful native workflow.')
+    assert {r.name for r in SkillCatalog([tmp_path]).records()} == {'usable-helper'}

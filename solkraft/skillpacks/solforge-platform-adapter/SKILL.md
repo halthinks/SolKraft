@@ -9,6 +9,10 @@ Implement platform-specific filesystem, process, UI, storage, permissions, and l
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
 
-Read [capability detail](references/capability-detail.md) when the requested scope needs the full domain-specific criteria. Legacy runtime steps in that reference apply only to an explicitly requested legacy protocol.
+Define the source and requested target platform, architecture, versions, exact artifact, and meaning of compatibility. Establish baseline behavior and inspect OS APIs, native dependencies, paths, permissions, processes, lifecycle, and packaging.
 
-Apply this procedure directly within the current task. Reuse valid inputs and completed work; read a linked method only when it adds missing guidance. Return the requested result. Consult the [router](../solforge/SKILL.md) only if the next useful workflow is unclear.
+Classify concrete coupling points and choose a narrow adapter, shared core, platform shell, or bounded redesign. Preserve existing behavior and public interfaces while changing the requested boundary.
+
+Build with the actual target toolchain and run relevant checks on each available target. Record command, configuration, artifact hash, environment, and observed results; distinguish source inspection, cross-build, emulator, and real-target execution.
+
+Report verified, buildable, adapter-required, redesign-required, unsupported, or unknown status per target, together with remaining checks and rollback. Do not inherit another target result or require a retired route receipt.

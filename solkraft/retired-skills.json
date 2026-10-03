@@ -1,0 +1,14 @@
+{
+  "skills": [
+    "inforge-multi",
+    "inforge-report-writer",
+    "inforge-run-multi",
+    "inforge-run-single",
+    "inforge-run-ultra",
+    "inforge-single",
+    "inforge-ultra",
+    "solforge-prompt-ultra",
+    "solforge-run-ultra"
+  ],
+  "reason": "Requires retired capsule, approval-widget, or native Ultra execution infrastructure."
+}

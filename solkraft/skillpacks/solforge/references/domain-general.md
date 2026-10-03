@@ -31,7 +31,6 @@ Select the capability matching the actual task. Read its entrypoint only when ne
 - [solforge-prompt-compiler](../../solforge-prompt-compiler/SKILL.md): Compile an objective, selected workflows, inputs, constraints, and acceptance criteria into an execution prompt.
 - [solforge-prompt-multi](../../solforge-prompt-multi/SKILL.md): Write a coordinated multi-agent execution prompt with ownership, dependencies, handoffs, and integration checks.
 - [solforge-prompt-single](../../solforge-prompt-single/SKILL.md): Write a single-agent execution prompt preserving the objective, required inputs, and acceptance evidence.
-- [solforge-prompt-ultra](../../solforge-prompt-ultra/SKILL.md): Write a sustained orchestration prompt with resource bounds, user controls, and evidence-based completion.
 - [solforge-propose](../../solforge-propose/SKILL.md): Turn research or a codebase audit into a concrete implementation proposal with scoped changes and verification.
 - [solforge-readme](../../solforge-readme/SKILL.md): Convert reports and architecture evidence into a README with verified commands, links, and supported claims.
 - [solforge-release-matrix](../../solforge-release-matrix/SKILL.md): Reconcile platform artifacts, signing, provenance, update support, and release-readiness evidence.
@@ -48,7 +47,6 @@ Select the capability matching the actual task. Read its entrypoint only when ne
 - [solforge-run-report-write](../../solforge-run-report-write/SKILL.md): Execute a report-production plan with source checks, authored content, review, and requested exports.
 - [solforge-run-research](../../solforge-run-research/SKILL.md): Execute a research plan with source tracking, contradictions, reproducible searches, and uncertainty.
 - [solforge-run-single](../../solforge-run-single/SKILL.md): Execute a selected implementation plan with one agent, scoped changes, checkpoints, and verification.
-- [solforge-run-ultra](../../solforge-run-ultra/SKILL.md): Carry out sustained authorized work with adaptive stages, user controls, and evidence-based completion.
 - [solforge-sign-and-prove](../../solforge-sign-and-prove/SKILL.md): Create and verify artifact checksums, SBOMs, provenance, and authorized signing evidence.
 - [solforge-software-portability](../../solforge-software-portability/SKILL.md): Audit, implement, build, and verify software portability across specified operating systems and architectures.
 - [solforge-steer](../../solforge-steer/SKILL.md): Apply user corrections to scope or direction while preserving completed evidence and valid work.

@@ -1,6 +1,0 @@
-interface:
-  display_name: "InForge Multi"
-  short_description: "Transpose requests into coordinated agent prompts"
-  default_prompt: "Use $inforge-multi to transpose this request through the full source prompt for coordinated desktop agents."
-policy:
-  allow_implicit_invocation: false

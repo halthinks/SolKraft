@@ -6,7 +6,7 @@ The accepted plan is the immutable source of truth. Bind its absolute path,
 actual byte SHA-256, and acceptance reference before generating the execution
 directive. Re-read and re-hash it at finalization.
 
-Locked decisions are preserved verbatim in original order. The server assigns
+Locked decisions are preserved verbatim in original order. Assign
 `LOCK-001`, `LOCK-002`, and so on. Structure may be added around a decision,
 but a synonym, shortened paraphrase, renamed concept, or visually convenient
 substitute does not replace it.
@@ -93,7 +93,7 @@ machine-readable manifests/ledgers above, final render PNGs, and QA page PNGs.
 
 ## Acceptance
 
-`solforge_finalize_product_line_paper` verifies:
+Before delivery, verify:
 
 1. accepted-plan identity and prompt identity;
 2. locked-decision coverage;
@@ -106,4 +106,4 @@ machine-readable manifests/ledgers above, final render PNGs, and QA page PNGs.
 9. artifact bytes and hashes;
 10. semantic-preservation and cross-artifact synchronization audits.
 
-An idempotently accepted package cannot be replaced by different bytes.
+Bind the final report claims and inspections to the actual delivered artifact bytes. Revalidate changed outputs.

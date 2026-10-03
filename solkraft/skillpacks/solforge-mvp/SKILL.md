@@ -9,6 +9,4 @@ Define and deliver a bounded working MVP or vertical slice with acceptance evide
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
 
-Read [capability detail](references/capability-detail.md) when the requested scope needs the full domain-specific criteria. Legacy runtime steps in that reference apply only to an explicitly requested legacy protocol.
-
-Apply this procedure directly within the current task. Reuse valid inputs and completed work; read a linked method only when it adds missing guidance. Return the requested result. Consult the [router](../solforge/SKILL.md) only if the next useful workflow is unclear.
+Define the smallest usable outcome with explicit users, critical journey, acceptance evidence, and deferred features. Identify dependencies that must actually work for that journey. Return the requested scope or decision; implementing it requires an implementation request.

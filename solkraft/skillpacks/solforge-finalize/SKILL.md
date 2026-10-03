@@ -9,6 +9,4 @@ Deliver completed work with its verification evidence, remaining limits, and req
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
 
-Read [capability detail](references/capability-detail.md) when the requested scope needs the full domain-specific criteria. Legacy runtime steps in that reference apply only to an explicitly requested legacy protocol.
-
-Apply this procedure directly within the current task. Reuse valid inputs and completed work; read a linked method only when it adds missing guidance. Return the requested result. Consult the [router](../solforge/SKILL.md) only if the next useful workflow is unclear.
+Reconcile the requested outcome against actual files, executed checks, and repository state. Verify that the handoff identifies the exact revision or artifact, explains how to use it, and separates completed work from blockers. Deliver the requested result without inventing publication, deployment, or qualification evidence.

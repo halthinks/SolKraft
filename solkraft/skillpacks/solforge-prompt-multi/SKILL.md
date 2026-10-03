@@ -9,8 +9,10 @@ Write a coordinated multi-agent execution prompt with ownership, dependencies, h
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
 
-Read [capability detail](references/capability-detail.md) when the requested scope needs the full domain-specific criteria. Legacy runtime steps in that reference apply only to an explicitly requested legacy protocol.
+Preserve the exact downstream objective, required inputs, exclusions, authority, tools, and observable acceptance conditions. Resolve material contradictions before compiling instructions.
 
-Apply this procedure directly within the current task. Reuse valid inputs and completed work; read a linked method only when it adds missing guidance. Return the requested result. Consult the [router](../solforge/SKILL.md) only if the next useful workflow is unclear.
+Write a portable prompt with dependency-ordered stages, relevant skills, evidence requirements, failure recovery, and stop conditions. For multi-agent prompts, define real ownership boundaries, handoffs, integration, and host capability prerequisites.
 
-Prompt generation produces a prompt; it does not execute that prompt or authorize agents.
+Check the complete prompt against every user requirement, available capability, and effect boundary. Avoid equivalent skill stacks, invented tools, fictional agent counts, or model-tier guarantees.
+
+Return the requested prompt format. Prompt generation does not execute the downstream task, spawn agents, or grant new authority.

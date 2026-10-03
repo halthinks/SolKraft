@@ -9,6 +9,4 @@ Reconcile platform artifacts, signing, provenance, update support, and release-r
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
 
-Read [capability detail](references/capability-detail.md) when the requested scope needs the full domain-specific criteria. Legacy runtime steps in that reference apply only to an explicitly requested legacy protocol.
-
-Apply this procedure directly within the current task. Reuse valid inputs and completed work; read a linked method only when it adds missing guidance. Return the requested result. Consult the [router](../solforge/SKILL.md) only if the next useful workflow is unclear.
+Build a target-by-target matrix of artifact identity, build result, installation or launch result, compatibility, and unresolved release gates. Keep missing, failed, and passed checks distinct. Promote a target only on evidence for that exact artifact and environment.

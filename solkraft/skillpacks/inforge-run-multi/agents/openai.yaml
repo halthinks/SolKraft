@@ -1,6 +1,0 @@
-interface:
-  display_name: "InForge Run Multi"
-  short_description: "Execute InForge tasks with desktop agents"
-  default_prompt: "Use $inforge-run-multi to execute this validated InForge Multi capsule."
-policy:
-  allow_implicit_invocation: false

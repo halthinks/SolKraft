@@ -1,0 +1,192 @@
+[
+  {
+    "skill": "android-emulator-qa",
+    "license": "Apache-2.0",
+    "notice": "solkraft/skillpacks/android-emulator-qa/LICENSE.txt"
+  },
+  {
+    "skill": "brainstorming",
+    "license": "MIT",
+    "notice": "solkraft/skillpacks/brainstorming/LICENSE.txt"
+  },
+  {
+    "skill": "build-chatgpt-app",
+    "license": "Apache-2.0",
+    "notice": "solkraft/skillpacks/build-chatgpt-app/LICENSE.txt"
+  },
+  {
+    "skill": "chatgpt-app-submission",
+    "license": "Apache-2.0",
+    "notice": "solkraft/skillpacks/chatgpt-app-submission/LICENSE.txt"
+  },
+  {
+    "skill": "dispatching-parallel-agents",
+    "license": "MIT",
+    "notice": "solkraft/skillpacks/dispatching-parallel-agents/LICENSE.txt"
+  },
+  {
+    "skill": "executing-plans",
+    "license": "MIT",
+    "notice": "solkraft/skillpacks/executing-plans/LICENSE.txt"
+  },
+  {
+    "skill": "finishing-a-development-branch",
+    "license": "MIT",
+    "notice": "solkraft/skillpacks/finishing-a-development-branch/LICENSE.txt"
+  },
+  {
+    "skill": "gh-address-comments",
+    "license": "Apache-2.0",
+    "notice": "solkraft/skillpacks/gh-address-comments/LICENSE.txt"
+  },
+  {
+    "skill": "gh-fix-ci",
+    "license": "Apache-2.0",
+    "notice": "solkraft/skillpacks/gh-fix-ci/LICENSE.txt"
+  },
+  {
+    "skill": "imagegen",
+    "license": "Apache-2.0",
+    "notice": "solkraft/skillpacks/imagegen/LICENSE.txt"
+  },
+  {
+    "skill": "netlify-ai-gateway",
+    "license": "Apache-2.0",
+    "notice": "solkraft/skillpacks/netlify-ai-gateway/LICENSE.txt"
+  },
+  {
+    "skill": "netlify-blobs",
+    "license": "Apache-2.0",
+    "notice": "solkraft/skillpacks/netlify-blobs/LICENSE.txt"
+  },
+  {
+    "skill": "netlify-caching",
+    "license": "Apache-2.0",
+    "notice": "solkraft/skillpacks/netlify-caching/LICENSE.txt"
+  },
+  {
+    "skill": "netlify-cli-and-deploy",
+    "license": "Apache-2.0",
+    "notice": "solkraft/skillpacks/netlify-cli-and-deploy/LICENSE.txt"
+  },
+  {
+    "skill": "netlify-config",
+    "license": "Apache-2.0",
+    "notice": "solkraft/skillpacks/netlify-config/LICENSE.txt"
+  },
+  {
+    "skill": "netlify-deploy",
+    "license": "Apache-2.0",
+    "notice": "solkraft/skillpacks/netlify-deploy/LICENSE.txt"
+  },
+  {
+    "skill": "netlify-edge-functions",
+    "license": "Apache-2.0",
+    "notice": "solkraft/skillpacks/netlify-edge-functions/LICENSE.txt"
+  },
+  {
+    "skill": "netlify-forms",
+    "license": "Apache-2.0",
+    "notice": "solkraft/skillpacks/netlify-forms/LICENSE.txt"
+  },
+  {
+    "skill": "netlify-frameworks",
+    "license": "Apache-2.0",
+    "notice": "solkraft/skillpacks/netlify-frameworks/LICENSE.txt"
+  },
+  {
+    "skill": "netlify-functions",
+    "license": "Apache-2.0",
+    "notice": "solkraft/skillpacks/netlify-functions/LICENSE.txt"
+  },
+  {
+    "skill": "netlify-identity",
+    "license": "Apache-2.0",
+    "notice": "solkraft/skillpacks/netlify-identity/LICENSE.txt"
+  },
+  {
+    "skill": "netlify-image-cdn",
+    "license": "Apache-2.0",
+    "notice": "solkraft/skillpacks/netlify-image-cdn/LICENSE.txt"
+  },
+  {
+    "skill": "openai-docs",
+    "license": "Apache-2.0",
+    "notice": "solkraft/skillpacks/openai-docs/LICENSE.txt"
+  },
+  {
+    "skill": "receiving-code-review",
+    "license": "MIT",
+    "notice": "solkraft/skillpacks/receiving-code-review/LICENSE.txt"
+  },
+  {
+    "skill": "requesting-code-review",
+    "license": "MIT",
+    "notice": "solkraft/skillpacks/requesting-code-review/LICENSE.txt"
+  },
+  {
+    "skill": "skill-creator",
+    "license": "Apache-2.0",
+    "notice": "solkraft/skillpacks/skill-creator/LICENSE.txt"
+  },
+  {
+    "skill": "skill-installer",
+    "license": "Apache-2.0",
+    "notice": "solkraft/skillpacks/skill-installer/LICENSE.txt"
+  },
+  {
+    "skill": "subagent-driven-development",
+    "license": "MIT",
+    "notice": "solkraft/skillpacks/subagent-driven-development/LICENSE.txt"
+  },
+  {
+    "skill": "supabase",
+    "license": "MIT",
+    "notice": "solkraft/skillpacks/supabase/LICENSE.txt"
+  },
+  {
+    "skill": "supabase-postgres-best-practices",
+    "license": "MIT",
+    "notice": "solkraft/skillpacks/supabase-postgres-best-practices/LICENSE.txt"
+  },
+  {
+    "skill": "systematic-debugging",
+    "license": "MIT",
+    "notice": "solkraft/skillpacks/systematic-debugging/LICENSE.txt"
+  },
+  {
+    "skill": "test-driven-development",
+    "license": "MIT",
+    "notice": "solkraft/skillpacks/test-driven-development/LICENSE.txt"
+  },
+  {
+    "skill": "using-git-worktrees",
+    "license": "MIT",
+    "notice": "solkraft/skillpacks/using-git-worktrees/LICENSE.txt"
+  },
+  {
+    "skill": "using-superpowers",
+    "license": "MIT",
+    "notice": "solkraft/skillpacks/using-superpowers/LICENSE.txt"
+  },
+  {
+    "skill": "verification-before-completion",
+    "license": "MIT",
+    "notice": "solkraft/skillpacks/verification-before-completion/LICENSE.txt"
+  },
+  {
+    "skill": "writing-plans",
+    "license": "MIT",
+    "notice": "solkraft/skillpacks/writing-plans/LICENSE.txt"
+  },
+  {
+    "skill": "writing-skills",
+    "license": "MIT",
+    "notice": "solkraft/skillpacks/writing-skills/LICENSE.txt"
+  },
+  {
+    "skill": "yeet",
+    "license": "Apache-2.0",
+    "notice": "solkraft/skillpacks/yeet/LICENSE.txt"
+  }
+]

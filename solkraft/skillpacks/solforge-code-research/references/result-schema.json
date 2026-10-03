@@ -4,10 +4,6 @@
   "title": "SolForge Code Research result",
   "type": "object",
   "required": [
-    "planHash",
-    "graphHash",
-    "whitepaperSha256",
-    "repositoryProfileSha256",
     "scopeAndRepositoryGraph",
     "evidence",
     "explicitIntent",
@@ -26,19 +22,23 @@
     "implementationHandoff",
     "completionClaim",
     "mutations",
-    "externalEffects"
+    "externalEffects",
+    "sourceRevision"
   ],
   "properties": {
-    "planHash": { "$ref": "#/$defs/hash" },
-    "graphHash": { "$ref": "#/$defs/hash" },
-    "whitepaperSha256": { "$ref": "#/$defs/hash" },
-    "repositoryProfileSha256": { "$ref": "#/$defs/hash" },
     "scopeAndRepositoryGraph": {
       "type": "object",
-      "required": ["repositories"],
+      "required": [
+        "repositories"
+      ],
       "properties": {
-        "repositories": { "type": "array", "minItems": 1 },
-        "exclusions": { "type": "array" },
+        "repositories": {
+          "type": "array",
+          "minItems": 1
+        },
+        "exclusions": {
+          "type": "array"
+        },
         "focusBoundary": {
           "type": "object",
           "required": [
@@ -50,14 +50,26 @@
             "outOfBoundaryDependencies"
           ],
           "properties": {
-            "included": { "$ref": "#/$defs/nonEmptyStrings" },
-            "excluded": { "$ref": "#/$defs/nonEmptyStrings" },
-            "regressionBoundary": { "$ref": "#/$defs/nonEmptyStrings" },
-            "affectedContracts": { "$ref": "#/$defs/nonEmptyStrings" },
-            "affectedDependents": { "$ref": "#/$defs/nonEmptyStrings" },
+            "included": {
+              "$ref": "#/$defs/nonEmptyStrings"
+            },
+            "excluded": {
+              "$ref": "#/$defs/nonEmptyStrings"
+            },
+            "regressionBoundary": {
+              "$ref": "#/$defs/nonEmptyStrings"
+            },
+            "affectedContracts": {
+              "$ref": "#/$defs/nonEmptyStrings"
+            },
+            "affectedDependents": {
+              "$ref": "#/$defs/nonEmptyStrings"
+            },
             "outOfBoundaryDependencies": {
               "type": "array",
-              "items": { "$ref": "#/$defs/nonBlank" }
+              "items": {
+                "$ref": "#/$defs/nonBlank"
+              }
             }
           },
           "additionalProperties": true
@@ -68,67 +80,120 @@
     "evidence": {
       "type": "array",
       "minItems": 1,
-      "items": { "$ref": "#/$defs/evidence" }
+      "items": {
+        "$ref": "#/$defs/evidence"
+      }
     },
-    "explicitIntent": { "$ref": "#/$defs/materialArray" },
+    "explicitIntent": {
+      "$ref": "#/$defs/materialArray"
+    },
     "inferredDesign": {
       "type": "array",
-      "minItems": 1,
+      "minItems": 0,
       "items": {
         "allOf": [
-          { "$ref": "#/$defs/material" },
+          {
+            "$ref": "#/$defs/material"
+          },
           {
             "type": "object",
-            "required": ["confidence", "contraryEvidenceIds"],
+            "required": [
+              "confidence",
+              "contraryEvidenceIds"
+            ],
             "properties": {
-              "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+              "confidence": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
               "contraryEvidenceIds": {
                 "type": "array",
-                "items": { "$ref": "#/$defs/nonBlank" },
+                "items": {
+                  "$ref": "#/$defs/nonBlank"
+                },
                 "uniqueItems": true
               },
-              "contraryEvidenceSearchBoundary": { "$ref": "#/$defs/nonBlank" }
+              "contraryEvidenceSearchBoundary": {
+                "$ref": "#/$defs/nonBlank"
+              }
             }
           }
         ]
       }
     },
-    "capabilityMap": { "$ref": "#/$defs/materialArray" },
-    "inconsistencies": { "$ref": "#/$defs/materialArray" },
+    "capabilityMap": {
+      "$ref": "#/$defs/materialArray"
+    },
+    "inconsistencies": {
+      "$ref": "#/$defs/materialArray"
+    },
     "coverage": {
       "type": "array",
-      "minItems": 1,
+      "minItems": 0,
       "items": {
         "type": "object",
-        "required": ["layer", "status", "explanation", "evidenceIds"],
+        "required": [
+          "layer",
+          "status",
+          "explanation",
+          "evidenceIds"
+        ],
         "properties": {
-          "layer": { "$ref": "#/$defs/nonBlank" },
-          "status": { "enum": ["covered", "not_applicable", "blocker"] },
-          "explanation": { "$ref": "#/$defs/nonBlank" },
-          "evidenceIds": { "$ref": "#/$defs/evidenceIds" }
+          "layer": {
+            "$ref": "#/$defs/nonBlank"
+          },
+          "status": {
+            "enum": [
+              "covered",
+              "not_applicable",
+              "blocker"
+            ]
+          },
+          "explanation": {
+            "$ref": "#/$defs/nonBlank"
+          },
+          "evidenceIds": {
+            "$ref": "#/$defs/evidenceIds"
+          }
         },
         "additionalProperties": true
       }
     },
-    "completionGaps": { "$ref": "#/$defs/materialArray" },
-    "endState": { "$ref": "#/$defs/materialArray" },
+    "completionGaps": {
+      "$ref": "#/$defs/materialArray"
+    },
+    "endState": {
+      "$ref": "#/$defs/materialArray"
+    },
     "remediationSteps": {
       "type": "array",
-      "minItems": 1,
-      "items": { "$ref": "#/$defs/remediationStep" }
+      "minItems": 0,
+      "items": {
+        "$ref": "#/$defs/remediationStep"
+      }
     },
     "criticFindings": {
       "type": "array",
-      "minItems": 1,
+      "minItems": 0,
       "items": {
         "allOf": [
-          { "$ref": "#/$defs/material" },
+          {
+            "$ref": "#/$defs/material"
+          },
           {
             "type": "object",
-            "required": ["challenge", "disposition"],
+            "required": [
+              "challenge",
+              "disposition"
+            ],
             "properties": {
-              "challenge": { "$ref": "#/$defs/nonBlank" },
-              "disposition": { "$ref": "#/$defs/nonBlank" }
+              "challenge": {
+                "$ref": "#/$defs/nonBlank"
+              },
+              "disposition": {
+                "$ref": "#/$defs/nonBlank"
+              }
             }
           }
         ]
@@ -136,17 +201,29 @@
     },
     "falsificationProbes": {
       "type": "array",
-      "minItems": 1,
+      "minItems": 0,
       "items": {
         "allOf": [
-          { "$ref": "#/$defs/material" },
+          {
+            "$ref": "#/$defs/material"
+          },
           {
             "type": "object",
-            "required": ["hypothesis", "method", "outcome"],
+            "required": [
+              "hypothesis",
+              "method",
+              "outcome"
+            ],
             "properties": {
-              "hypothesis": { "$ref": "#/$defs/nonBlank" },
-              "method": { "$ref": "#/$defs/nonBlank" },
-              "outcome": { "$ref": "#/$defs/nonBlank" }
+              "hypothesis": {
+                "$ref": "#/$defs/nonBlank"
+              },
+              "method": {
+                "$ref": "#/$defs/nonBlank"
+              },
+              "outcome": {
+                "$ref": "#/$defs/nonBlank"
+              }
             }
           }
         ]
@@ -154,50 +231,102 @@
     },
     "regressionAnalysis": {
       "type": "array",
-      "minItems": 1,
+      "minItems": 0,
       "items": {
         "allOf": [
-          { "$ref": "#/$defs/material" },
+          {
+            "$ref": "#/$defs/material"
+          },
           {
             "type": "object",
-            "required": ["boundary", "risk", "tests"],
+            "required": [
+              "boundary",
+              "risk",
+              "tests"
+            ],
             "properties": {
-              "boundary": { "$ref": "#/$defs/nonBlank" },
-              "risk": { "$ref": "#/$defs/nonBlank" },
-              "tests": { "$ref": "#/$defs/nonEmptyStrings" },
-              "focusBoundaryRefs": { "$ref": "#/$defs/nonEmptyStrings" }
+              "boundary": {
+                "$ref": "#/$defs/nonBlank"
+              },
+              "risk": {
+                "$ref": "#/$defs/nonBlank"
+              },
+              "tests": {
+                "$ref": "#/$defs/nonEmptyStrings"
+              },
+              "focusBoundaryRefs": {
+                "$ref": "#/$defs/nonEmptyStrings"
+              }
             }
           }
         ]
       }
     },
-    "semanticAlignment": { "$ref": "#/$defs/materialArray" },
-    "uncertainties": { "$ref": "#/$defs/materialArray" },
+    "semanticAlignment": {
+      "$ref": "#/$defs/materialArray"
+    },
+    "uncertainties": {
+      "$ref": "#/$defs/materialArray"
+    },
     "implementationHandoff": {
       "type": "object",
-      "required": ["implementationAuthorized"],
+      "required": [
+        "implementationAuthorized"
+      ],
       "properties": {
-        "implementationAuthorized": { "const": false }
+        "implementationAuthorized": {
+          "const": false
+        }
       },
       "additionalProperties": true
     },
     "completionClaim": {
       "type": "object",
-      "required": ["status", "boundary"],
+      "required": [
+        "status",
+        "boundary"
+      ],
       "properties": {
-        "status": { "enum": ["qualified_complete", "incomplete"] },
-        "boundary": { "$ref": "#/$defs/nonBlank" },
-        "designEnvelopeHash": { "$ref": "#/$defs/hash" }
+        "status": {
+          "enum": [
+            "qualified_complete",
+            "incomplete"
+          ]
+        },
+        "boundary": {
+          "$ref": "#/$defs/nonBlank"
+        },
+        "designEnvelopeHash": {
+          "$ref": "#/$defs/hash"
+        }
       },
       "additionalProperties": true
     },
-    "mutations": { "type": "array", "maxItems": 0 },
-    "externalEffects": { "type": "array", "maxItems": 0 }
+    "mutations": {
+      "type": "array",
+      "maxItems": 0,
+      "minItems": 0
+    },
+    "externalEffects": {
+      "type": "array",
+      "maxItems": 0,
+      "minItems": 0
+    },
+    "sourceRevision": {
+      "type": "string",
+      "description": "Observed source revision or explicit unavailable status."
+    }
   },
   "additionalProperties": true,
   "$defs": {
-    "hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
-    "nonBlank": { "type": "string", "pattern": "\\S" },
+    "hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "nonBlank": {
+      "type": "string",
+      "pattern": "\\S"
+    },
     "repositoryRelativePath": {
       "type": "string",
       "pattern": "^(?![A-Za-z]:[\\\\/])(?![\\\\/])(?!.*(?:^|[\\\\/])\\.\\.(?:[\\\\/]|$)).*\\S.*$"
@@ -205,31 +334,46 @@
     "nonEmptyStrings": {
       "type": "array",
       "minItems": 1,
-      "items": { "$ref": "#/$defs/nonBlank" }
+      "items": {
+        "$ref": "#/$defs/nonBlank"
+      }
     },
     "evidenceIds": {
       "type": "array",
       "minItems": 1,
       "uniqueItems": true,
-      "items": { "$ref": "#/$defs/nonBlank" }
+      "items": {
+        "$ref": "#/$defs/nonBlank"
+      }
     },
     "material": {
       "type": "object",
-      "required": ["id", "evidenceIds"],
+      "required": [
+        "id",
+        "evidenceIds"
+      ],
       "properties": {
-        "id": { "$ref": "#/$defs/nonBlank" },
-        "evidenceIds": { "$ref": "#/$defs/evidenceIds" }
+        "id": {
+          "$ref": "#/$defs/nonBlank"
+        },
+        "evidenceIds": {
+          "$ref": "#/$defs/evidenceIds"
+        }
       },
       "additionalProperties": true
     },
     "materialArray": {
       "type": "array",
-      "minItems": 1,
-      "items": { "$ref": "#/$defs/material" }
+      "minItems": 0,
+      "items": {
+        "$ref": "#/$defs/material"
+      }
     },
     "remediationStep": {
       "allOf": [
-        { "$ref": "#/$defs/material" },
+        {
+          "$ref": "#/$defs/material"
+        },
         {
           "type": "object",
           "required": [
@@ -249,19 +393,37 @@
             "testCommands"
           ],
           "properties": {
-            "gapIds": { "$ref": "#/$defs/nonEmptyStrings" },
-            "skillId": { "$ref": "#/$defs/nonBlank" },
-            "toolRoute": { "$ref": "#/$defs/nonBlank" },
-            "prerequisites": { "$ref": "#/$defs/nonEmptyStrings" },
+            "gapIds": {
+              "$ref": "#/$defs/nonEmptyStrings"
+            },
+            "skillId": {
+              "$ref": "#/$defs/nonBlank"
+            },
+            "toolRoute": {
+              "$ref": "#/$defs/nonBlank"
+            },
+            "prerequisites": {
+              "$ref": "#/$defs/nonEmptyStrings"
+            },
             "dependsOnStepIds": {
               "type": "array",
-              "items": { "$ref": "#/$defs/nonBlank" },
+              "items": {
+                "$ref": "#/$defs/nonBlank"
+              },
               "uniqueItems": true
             },
-            "risks": { "$ref": "#/$defs/nonEmptyStrings" },
-            "verification": { "$ref": "#/$defs/nonBlank" },
-            "rollback": { "$ref": "#/$defs/nonBlank" },
-            "acceptance": { "$ref": "#/$defs/nonBlank" },
+            "risks": {
+              "$ref": "#/$defs/nonEmptyStrings"
+            },
+            "verification": {
+              "$ref": "#/$defs/nonBlank"
+            },
+            "rollback": {
+              "$ref": "#/$defs/nonBlank"
+            },
+            "acceptance": {
+              "$ref": "#/$defs/nonBlank"
+            },
             "plainLanguage": {
               "type": "object",
               "required": [
@@ -272,37 +434,68 @@
                 "remainingUnproved"
               ],
               "properties": {
-                "currentFailure": { "$ref": "#/$defs/nonBlank" },
-                "exactChange": { "$ref": "#/$defs/nonBlank" },
-                "observableOutcome": { "$ref": "#/$defs/nonBlank" },
-                "check": { "$ref": "#/$defs/nonBlank" },
-                "remainingUnproved": { "$ref": "#/$defs/nonBlank" }
+                "currentFailure": {
+                  "$ref": "#/$defs/nonBlank"
+                },
+                "exactChange": {
+                  "$ref": "#/$defs/nonBlank"
+                },
+                "observableOutcome": {
+                  "$ref": "#/$defs/nonBlank"
+                },
+                "check": {
+                  "$ref": "#/$defs/nonBlank"
+                },
+                "remainingUnproved": {
+                  "$ref": "#/$defs/nonBlank"
+                }
               },
               "additionalProperties": false
             },
-            "stopConditions": { "$ref": "#/$defs/nonEmptyStrings" },
-            "landing": { "$ref": "#/$defs/nonBlank" },
+            "stopConditions": {
+              "$ref": "#/$defs/nonEmptyStrings"
+            },
+            "landing": {
+              "$ref": "#/$defs/nonBlank"
+            },
             "intendedMutations": {
               "type": "array",
               "minItems": 1,
               "items": {
                 "type": "object",
-                "required": ["repositoryId", "path"],
+                "required": [
+                  "repositoryId",
+                  "path"
+                ],
                 "properties": {
-                  "repositoryId": { "$ref": "#/$defs/nonBlank" },
-                  "path": { "$ref": "#/$defs/repositoryRelativePath" }
+                  "repositoryId": {
+                    "$ref": "#/$defs/nonBlank"
+                  },
+                  "path": {
+                    "$ref": "#/$defs/repositoryRelativePath"
+                  }
                 },
                 "additionalProperties": false
               }
             },
             "testCommands": {
               "type": "object",
-              "required": ["focused"],
+              "required": [
+                "focused"
+              ],
               "properties": {
-                "focused": { "$ref": "#/$defs/repositoryTestCommands" },
-                "regression": { "$ref": "#/$defs/optionalRepositoryTestCommands" },
-                "adversarial": { "$ref": "#/$defs/optionalRepositoryTestCommands" },
-                "full_suite": { "$ref": "#/$defs/optionalRepositoryTestCommands" }
+                "focused": {
+                  "$ref": "#/$defs/repositoryTestCommands"
+                },
+                "regression": {
+                  "$ref": "#/$defs/optionalRepositoryTestCommands"
+                },
+                "adversarial": {
+                  "$ref": "#/$defs/optionalRepositoryTestCommands"
+                },
+                "full_suite": {
+                  "$ref": "#/$defs/optionalRepositoryTestCommands"
+                }
               },
               "additionalProperties": false
             }
@@ -315,17 +508,26 @@
       "minItems": 1,
       "items": {
         "type": "object",
-        "required": ["repositoryId", "command"],
+        "required": [
+          "repositoryId",
+          "command"
+        ],
         "properties": {
-          "repositoryId": { "$ref": "#/$defs/nonBlank" },
-          "command": { "$ref": "#/$defs/nonBlank" }
+          "repositoryId": {
+            "$ref": "#/$defs/nonBlank"
+          },
+          "command": {
+            "$ref": "#/$defs/nonBlank"
+          }
         },
         "additionalProperties": false
       }
     },
     "optionalRepositoryTestCommands": {
       "type": "array",
-      "items": { "$ref": "#/$defs/repositoryTestCommands/items" }
+      "items": {
+        "$ref": "#/$defs/repositoryTestCommands/items"
+      }
     },
     "evidence": {
       "type": "object",
@@ -337,18 +539,37 @@
         "verificationStatus"
       ],
       "properties": {
-        "id": { "$ref": "#/$defs/nonBlank" },
-        "locator": { "$ref": "#/$defs/nonBlank" },
-        "observationMethod": { "$ref": "#/$defs/nonBlank" },
-        "result": { "$ref": "#/$defs/nonBlank" },
-        "verificationStatus": { "$ref": "#/$defs/nonBlank" },
+        "id": {
+          "$ref": "#/$defs/nonBlank"
+        },
+        "locator": {
+          "$ref": "#/$defs/nonBlank"
+        },
+        "observationMethod": {
+          "$ref": "#/$defs/nonBlank"
+        },
+        "result": {
+          "$ref": "#/$defs/nonBlank"
+        },
+        "verificationStatus": {
+          "$ref": "#/$defs/nonBlank"
+        },
         "coverageLayers": {
           "type": "array",
-          "items": { "$ref": "#/$defs/nonBlank" },
+          "items": {
+            "$ref": "#/$defs/nonBlank"
+          },
           "uniqueItems": true
         },
-        "claimType": { "enum": ["presence", "absence"] },
-        "absenceBoundary": { "$ref": "#/$defs/nonBlank" }
+        "claimType": {
+          "enum": [
+            "presence",
+            "absence"
+          ]
+        },
+        "absenceBoundary": {
+          "$ref": "#/$defs/nonBlank"
+        }
       },
       "additionalProperties": true
     }

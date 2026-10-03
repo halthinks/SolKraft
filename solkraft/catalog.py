@@ -4,6 +4,8 @@ from __future__ import annotations
 from collections import Counter
 from dataclasses import dataclass
 import hashlib
+import json
+import os
 from pathlib import Path
 import re
 from typing import Iterable
@@ -11,11 +13,13 @@ from typing import Iterable
 import yaml
 
 
+RETIRED_SKILLS = frozenset(json.loads((Path(__file__).parent / 'retired-skills.json').read_text(encoding='utf-8'))['skills'])
 MAX_ENTRYPOINT_BYTES = 128_000
 ID_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.:-]{0,159}$")
 TOKEN_RE = re.compile(r"[a-z0-9]+")
 # Catalog identity constraints use stable fingerprints.
 RESERVED_SKILL_DIGESTS = frozenset({
+    '088a975a1b2e13c8b3d25ebf2bfe6a09bf14cab64aad091985157100690a1e61',
     "0495f731a53b6b2bf383ce23195c4fc8e80fdaf772104067c8e61e7433921904",
     "4c5286c8e758c4a2b88fcbd71a38d3e5601e000796e1b917ff51db89f6aee5a9",
     "b45df0229355259f8587ddc98766447d0806449f8b6874a763cf9a52f468b9f2",
@@ -25,6 +29,7 @@ RESERVED_SKILL_DIGESTS = frozenset({
 
 def _is_reserved_skill(name: str, relative: Path) -> bool:
     identifiers = {name.casefold(), *(part.casefold() for part in relative.parts)}
+    identifiers.update(name.casefold().split("-"))
     return any(hashlib.sha256(value.encode("utf-8")).hexdigest() in RESERVED_SKILL_DIGESTS for value in identifiers)
 
 
@@ -50,13 +55,15 @@ class SkillRecord:
 class SkillCatalog:
     """Index SKILL.md metadata; load a body only after the caller selects it."""
 
-    def __init__(self, roots: Iterable[str | Path]):
+    def __init__(self, roots: Iterable[str | Path], *, preferred_root: Path | None = None):
         self.roots = tuple(Path(root).expanduser() for root in roots)
+        self.preferred_root = preferred_root.resolve() if preferred_root else None
         self._records: dict[str, SkillRecord] = {}
         self.refresh()
 
     def refresh(self) -> int:
         candidates: list[tuple[str, str, Path, Path, str]] = []
+        seen_contents = set()
         for root in self.roots:
             try:
                 resolved_root = root.resolve(strict=True)
@@ -65,10 +72,8 @@ class SkillCatalog:
             if not resolved_root.is_dir():
                 continue
             try:
-                entrypoints = resolved_root.rglob("SKILL.md")
+                entrypoints = self._entrypoints(resolved_root)
                 for entrypoint in entrypoints:
-                    if any(part.startswith(".") for part in entrypoint.relative_to(resolved_root).parts):
-                        continue
                     try:
                         resolved_entry = entrypoint.resolve(strict=True)
                         resolved_entry.relative_to(resolved_root)
@@ -88,8 +93,12 @@ class SkillCatalog:
                         continue
                     description = " ".join(description.split())[:2000]
                     relative = resolved_entry.relative_to(resolved_root)
-                    if _is_reserved_skill(name, relative):
+                    if name in RETIRED_SKILLS or _is_reserved_skill(name, relative):
                         continue
+                    digest = hashlib.sha256(resolved_entry.read_bytes()).digest()
+                    if digest in seen_contents:
+                        continue
+                    seen_contents.add(digest)
                     candidates.append((name, description, resolved_root, resolved_entry, root.name or "skills"))
             except OSError:
                 continue
@@ -97,7 +106,7 @@ class SkillCatalog:
         counts = Counter(row[0] for row in candidates)
         records: dict[str, SkillRecord] = {}
         for name, description, root, entrypoint, namespace in candidates:
-            skill_id = f"{namespace}:{name}" if counts[name] > 1 else name
+            skill_id = f"{namespace}:{name}" if counts[name] > 1 and root != self.preferred_root else name
             # Root names can themselves collide; use a stable relative folder as a second discriminator.
             if skill_id in records:
                 relative_parent = entrypoint.parent.relative_to(root).as_posix().replace("/", ".")
@@ -107,6 +116,16 @@ class SkillCatalog:
             records[skill_id] = SkillRecord(skill_id, description, root, entrypoint, name)
         self._records = dict(sorted(records.items(), key=lambda pair: pair[0].casefold()))
         return len(self._records)
+
+    @staticmethod
+    def _entrypoints(root: Path):
+        for parent, directories, files in os.walk(root, followlinks=False):
+            directories[:] = sorted(d for d in directories
+                if (not d.startswith('.') or d == '.system')
+                and d not in {'node_modules', '__pycache__', 'dist', 'build'}
+                and not (Path(parent) / d).is_symlink())
+            if 'SKILL.md' in files:
+                yield Path(parent) / 'SKILL.md'
 
     @staticmethod
     def _frontmatter(path: Path) -> dict:

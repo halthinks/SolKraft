@@ -21,7 +21,7 @@ hardware inputs are source obligations and do not convert the route to
 
 - `exactVision`: the user's authoritative product vision verbatim.
 - `requestTexts`: every mandatory request statement verbatim and in original
-  order. The server assigns `REQ-001`, `REQ-002`, and so on.
+  order. Assign `REQ-001`, `REQ-002`, and so on.
 - `reportTitle`: optional title only; it may not replace the vision.
 - `profile`: normally `auto`. `single` or `multi` is accepted only with a
   matching `profileSelection` whose source is `explicit_user` and whose
@@ -42,79 +42,11 @@ Every source has:
 The generator adds `SRC-USER-REQUEST`, hashes the vision and requests, and
 rejects duplicate IDs or partial study modes.
 
-## Prompt-generation output
+## Execute the report work
 
-The generator returns:
+Preserve the exact vision and requests, inventory the required sources, study material inputs, research unresolved assumptions, derive architecture and MVP decisions, write the report, and inspect the finished output. Respect dependencies and use native tools actually available.
 
-- exact immutable prompt and SHA-256;
-- exact directive path and SHA-256;
-- all evaluated production origins and the selected Product Systems Masterplan
-  origin;
-- Single or Multi topology;
-- topology selection source and evidence;
-- Full-Power effort controls;
-- live capability inventory selected by operation evidence from actual skill,
-  route, and tool contracts rather than names;
-- request and source manifests;
-- report-only authority;
-- a durable stage program with required work units, required operations,
-  selected capabilities, dependencies, and recovery state;
-- an explicit user choice between standalone-chat and durable-artifact
-  delivery;
-- an exact accepted-plan completion hash.
-
-Prompt generation writes no product source and starts no execution.
-
-## Durable execution
-
-Execution starts through `solforge_run_plan_report` only after the user chooses
-`standalone_chat` or `durable_artifact`. The choice is immutable. Goal state is
-informational and never consulted in either mode.
-
-The program is a DAG:
-
-1. intake lock;
-2. source inventory;
-3. full source study, full repository study, requirements traceability, and
-   external research become independently runnable after source inventory;
-7. architecture and MVP;
-8. report writing;
-9. independent challenge;
-10. package and finalization preparation.
-
-Every runnable node must first be atomically claimed with
-`solforge_claim_plan_report_stage`. Claims bind stage, worker, revision, token,
-and lease. Independent nodes may hold simultaneous claims. Stale revisions,
-expired claims, duplicate claims, cross-worker recording, and double-completion
-are rejected.
-
-`solforge_record_plan_report_stage` accepts a claimed completed stage only when every
-declared work unit has an evidence-backed result receipt and every required
-operation has a receipt from a capability selected for that operation. Stage
-dependencies, hashes, and idempotency are server enforced. A blocked receipt
-keeps the stage recoverable; `solforge_run_plan_report` returns all runnable
-nodes, active claims, and dependency blockers after restart, interruption, or
-context compaction.
-
-Pass counts written in prose are not execution evidence. Only persisted
-work-unit, capability, and transition receipts count.
-
-## Append-only amendments
-
-Before acceptance, every later user request or source enters through
-`solforge_amend_plan_report`. The amendment:
-
-- preserves the new request verbatim;
-- assigns the next stable `REQ-###` and source IDs;
-- writes an immutable hash-linked directive supplement;
-- updates effective request and source manifest hashes;
-- archives prior affected stage executions without erasing them;
-- preserves still-valid source and requirement receipts by exact ID;
-- reopens every affected downstream stage.
-
-The root prompt hash never changes. Finalization binds both the root prompt and
-the latest effective directive, request register, source manifest, and amendment
-lineage.
+When the user supplies amendments, preserve them, identify affected decisions, retain valid evidence, and revisit dependent sections. Prompt production and report execution remain separate deliverables; no stage-claim tool, receipt service, lease, or server-generated acceptance is required.
 
 ## Mandatory report sections
 
@@ -173,10 +105,10 @@ does not satisfy a missing request.
 
 ## Final acceptance
 
-`solforge_finalize_plan_report` verifies:
+Before delivery, verify:
 
 1. root prompt and effective directive identity;
-2. completion of every durable execution stage and receipt contract;
+2. completion of the required stages with concrete supporting evidence;
 3. all required source studies;
 4. repository evidence;
 5. all effective request mappings, including amendments;
@@ -185,5 +117,4 @@ does not satisfy a missing request.
    artifact bytes against supplied SHA-256 values in durable-artifact mode;
 8. no-semantic-substitution audit.
 
-The acceptance receipt is immutable and idempotent. A different package cannot
-replace an accepted package under the same session.
+Keep delivered versions identifiable and revalidate changed output rather than claiming an earlier check covers new bytes.

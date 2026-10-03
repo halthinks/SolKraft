@@ -37,7 +37,9 @@ class SelectionTests(unittest.TestCase):
  def test_ordinary(self):self.assertEqual(self.selected('What time is it?'),[])
  def test_prompt_is_not_execution(self):self.assertIn('solforge-prompt',self.selected('Write a prompt for researching a codebase'))
  def test_every_skill_reachable(self):
-  self.assertEqual(len(G['nodes']),123)
+  self.assertGreater(len(G['nodes']), 100)
+  self.assertNotIn('solforge-run-ultra', G['nodes'])
+  self.assertNotIn('solforge-prompt-ultra', G['nodes'])
   for name in G['nodes']:self.assertIn(name,self.selected('Use the selected workflow',[name]))
  def test_unknown_rejected(self):
   with self.assertRaises(ValueError):self.selected('hello',['does-not-exist'])

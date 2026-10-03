@@ -6,9 +6,8 @@ Run three complete sovereign workers in strict sequence:
 
 1. Research owns and repeatedly executes its own plan until its current pass finds no more actionable Research issues.
 2. Mastery starts from the changed product and owns and repeatedly executes its own independent plan until its current pass finds no more actionable Mastery issues.
-3. Perfection starts from the changed product and owns exactly 30 complete investigate-plan-execute-check-reinspect loops as one continuous autonomous phase action, working from easy high-leverage failures toward deeper complex completion. A loop counts only after its repairs and checks are recorded internally; internal records do not open another MCP surface or request another user turn.
-   - Invoke `solforge_run_perfection_batch` once for the active program. It performs the internal recorder/check cycle and returns only after loop 30 or the first concrete repair failure. Never expand this phase into 30 chat turns or 30 rendered MCP calls.
-4. After Perfection loop 30, repeat Research, then Mastery, then exactly 30 new Perfection loops.
+3. Perfection starts from the changed product and owns acceptance-driven investigate-plan-execute-check-reinspect loops as one continuous autonomous phase action, working from easy high-leverage failures toward deeper complex completion. A loop counts only after its repairs and checks are recorded internally; internal records do not open another MCP surface or request another user turn.
+4. At demonstrated acceptance, finish. Reopen a stage only when a changed requirement, failed check, or new finding invalidates its conclusion.
 
 Do not combine the worker plans. Do not reduce Research or Mastery to analysis-only handoffs. Do not route every Perfection repair back through them. Preserve each worker's own planning, execution, reinspection, evidence, and convergence rationale inside the larger loop.
 

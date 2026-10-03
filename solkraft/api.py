@@ -15,10 +15,13 @@ from .mcp_server import build_mcp_server
 from .routing import BUNDLE_ROOT, route_request, get_graph, catalog_graph
 
 
-def _configured_roots() -> list[Path]:
+def _configured_roots(include_installed: bool = False) -> list[Path]:
     roots = [BUNDLE_ROOT]
     value = os.getenv("SOLKRAFT_SKILL_ROOTS", "")
     roots.extend(Path(item.strip()) for item in value.split(os.pathsep) if item.strip())
+    if include_installed:
+        home = Path.home()
+        roots.extend([home / '.codex/skills', home / '.agents/skills', home / '.codex/plugins/cache'])
     return roots
 
 

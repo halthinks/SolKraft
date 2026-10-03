@@ -14,5 +14,3 @@ Distinguish code that exists from code registered, called, reachable, and exerci
 For competing explanations, state the discriminating observation and collect it. Prefer a small reproduction or existing relevant test when it can resolve uncertainty. Inspection alone does not establish runtime behavior.
 
 Answer with the finding, concrete file/function evidence, relevant dependency path, and unresolved uncertainty. If changes were requested, carry the evidence into implementation; otherwise deliver the investigation without starting a repair.
-
-Read [legacy capability detail](references/capability-detail.md) only for an explicitly requested legacy work-bundle protocol.

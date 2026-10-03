@@ -1,7 +1,0 @@
-interface:
-  display_name: SolForge Run Ultra
-  short_description: Carry out sustained authorized work with adaptive stages, use.
-  default_prompt: Use $solforge-run-ultra for this task with native tools and verify
-    the result.
-policy:
-  allow_implicit_invocation: true

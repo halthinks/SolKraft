@@ -494,23 +494,6 @@
       "selection": "automatic or explicit",
       "exit_evidence": "The requested verified requested deliverable is supported by inspected sources or observed behavior; unresolved limits are stated."
     },
-    "solforge-prompt-ultra": {
-      "id": "solforge-prompt-ultra",
-      "description": "Write a sustained orchestration prompt with resource bounds, user controls, and evidence-based completion.",
-      "path": "../solforge-prompt-ultra/SKILL.md",
-      "domain": "general",
-      "inputs": [
-        "user objective",
-        "supplied evidence",
-        "applicable scope and acceptance criteria"
-      ],
-      "outputs": [
-        "verified requested deliverable"
-      ],
-      "effect": false,
-      "selection": "automatic or explicit",
-      "exit_evidence": "The requested verified requested deliverable is supported by inspected sources or observed behavior; unresolved limits are stated."
-    },
     "solforge-propose": {
       "id": "solforge-propose",
       "description": "Turn research or a codebase audit into a concrete implementation proposal with scoped changes and verification.",
@@ -770,23 +753,6 @@
       "id": "solforge-run-single",
       "description": "Execute a selected implementation plan with one agent, scoped changes, checkpoints, and verification.",
       "path": "../solforge-run-single/SKILL.md",
-      "domain": "general",
-      "inputs": [
-        "user objective",
-        "supplied evidence",
-        "applicable scope and acceptance criteria"
-      ],
-      "outputs": [
-        "verified requested deliverable"
-      ],
-      "effect": false,
-      "selection": "automatic or explicit",
-      "exit_evidence": "The requested verified requested deliverable is supported by inspected sources or observed behavior; unresolved limits are stated."
-    },
-    "solforge-run-ultra": {
-      "id": "solforge-run-ultra",
-      "description": "Carry out sustained authorized work with adaptive stages, user controls, and evidence-based completion.",
-      "path": "../solforge-run-ultra/SKILL.md",
       "domain": "general",
       "inputs": [
         "user objective",
@@ -1491,7 +1457,7 @@
     },
     "solforge-workflow-math-compute": {
       "id": "solforge-workflow-math-compute",
-      "description": "Design reproducible symbolic or numerical experiments that inform—but do not substitute for—proof.",
+      "description": "Design reproducible symbolic or numerical experiments that inform\u2014but do not substitute for\u2014proof.",
       "path": "../solforge-workflow-math-compute/SKILL.md",
       "domain": "mathematics",
       "inputs": [
@@ -2872,12 +2838,6 @@
     },
     {
       "from": "solforge",
-      "to": "solforge-prompt-ultra",
-      "type": "select",
-      "condition": "The user objective matches this capability or explicitly names it. Effects require separate action authorization."
-    },
-    {
-      "from": "solforge",
       "to": "solforge-propose",
       "type": "select",
       "condition": "The user objective matches this capability or explicitly names it. Effects require separate action authorization."
@@ -2969,12 +2929,6 @@
     {
       "from": "solforge",
       "to": "solforge-run-single",
-      "type": "select",
-      "condition": "The user objective matches this capability or explicitly names it. Effects require separate action authorization."
-    },
-    {
-      "from": "solforge",
-      "to": "solforge-run-ultra",
       "type": "select",
       "condition": "The user objective matches this capability or explicitly names it. Effects require separate action authorization."
     },
@@ -4058,16 +4012,6 @@
       "priority": 120
     },
     {
-      "id": "solforge-prompt-ultra",
-      "all": [
-        "\\bprompt\\b",
-        "\\b(ultra|sustained orchestration)\\b"
-      ],
-      "unless": [],
-      "lane": "prompt",
-      "priority": 125
-    },
-    {
       "id": "solforge-workflow-software-portability-audit",
       "all": [
         "\\b(portability|platform|operating systems)\\b",
@@ -4232,16 +4176,6 @@
       "all": [
         "\\b(execute|run)\\b",
         "\\b(single.agent plan|one.agent plan)\\b"
-      ],
-      "unless": [],
-      "lane": "execution",
-      "priority": 85
-    },
-    {
-      "id": "solforge-run-ultra",
-      "all": [
-        "\\b(execute|run)\\b",
-        "\\b(ultra|sustained program)\\b"
       ],
       "unless": [],
       "lane": "execution",

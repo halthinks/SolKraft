@@ -27,7 +27,10 @@ solkraft = "solkraft.__main__:main"
 include = ["solkraft*"]
 
 [tool.setuptools.package-data]
-solkraft = ["skillpacks/**/*"]
+solkraft = ["skillpacks/**/*", "retired-skills.json"]
+
+[tool.setuptools.exclude-package-data]
+"*" = ["**/__pycache__/*", "__pycache__/*", "**/*.pyc", "*.pyc"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

@@ -1,6 +1,6 @@
 # Code Research result contract
 
-The result is a structured object bound to the accepted `planHash`, `graphHash`, `whitepaperSha256`, and `repositoryProfileSha256`. [result-schema.json](result-schema.json) is the machine-readable shape; the runtime validator adds plan-dependent hashes, coverage layers, evidence references, focused-boundary, and completion invariants.
+Bind the result to the inspected source identity, accepted scope, requirements, and evidence. Use structured output when requested; no service-generated plan or graph receipt is required.
 
 ## Required sections
 
@@ -34,7 +34,7 @@ For `focused_mastery`, `scopeAndRepositoryGraph.focusBoundary` contains non-empt
 
 ## Coverage and capability
 
-`coverage` has one item for every layer in the accepted plan with `status`, `explanation`, and evidence IDs. Each cited evidence record names that exact layer in `coverageLayers`; one generic observation cannot impersonate whole-system coverage. Total completion requires at least eight distinct coverage evidence records and focused mastery at least five. A layer that is genuinely not applicable still needs evidence and an explanation; omission is not coverage.
+`coverage` has one item for every layer in the agreed scope with `status`, `explanation`, and evidence IDs. Each cited evidence record names that exact layer in `coverageLayers`; one generic observation cannot impersonate whole-system coverage. Use distinct evidence for materially different coverage claims; fixed evidence counts do not establish completeness. A layer that is genuinely not applicable still needs evidence and an explanation; omission is not coverage.
 
 `capabilityMap.classification` is one of:
 
@@ -49,13 +49,11 @@ For `focused_mastery`, `scopeAndRepositoryGraph.focusBoundary` contains non-empt
 
 ## Remediation
 
-Every completion gap appears in at least one remediation step and no step may name a phantom gap. Each step includes `gapIds`, a live registry-backed `skillId`, a callable `toolRoute`, prerequisites, ordered dependencies, risks, `verification`, `rollback`, `acceptance`, stop conditions, landing, repository-qualified `intendedMutations`, and at least one repository-qualified focused test command. Regression checks are added only for directly affected boundaries, adversarial checks only for material security, safety, trust, or destructive-action risk, and a full suite only when explicitly requested or no cheaper decisive release check exists. Mutation paths are relative to the named repository and cannot escape it. These fields are the later closure execution allowlist, not suggestions.
+Every completion gap appears in at least one remediation step and no step may name a phantom gap. Each step includes `gapIds`, a relevant skill and an available host tool, prerequisites, ordered dependencies, risks, `verification`, `rollback`, `acceptance`, stop conditions, landing, repository-qualified `intendedMutations`, and at least one repository-qualified focused test command. Regression checks are added only for directly affected boundaries, adversarial checks only for material security, safety, trust, or destructive-action risk, and a full suite only when explicitly requested or no cheaper decisive release check exists. Mutation paths are relative to the named repository and cannot escape it. These fields make remediation actionable without granting execution authority.
 
 Every remediation step also includes a `plainLanguage` object with five non-empty fields: `currentFailure`, `exactChange`, `observableOutcome`, `check`, and `remainingUnproved`. User-facing plans, Goals, progress, and completion reports lead with these explanations. Restrictions come only from explicit user constraints and the accepted effect plan; the result must not manufacture or routinely narrate a blanket list of absent actions. Gap IDs, route names, and hashes may follow only as secondary traceability.
 
-SolForge remains an external control plane. Remediation may not add `.solforge` state or SolForge receipts, capsules, checkpoints, research ledgers, evidence stores, required wrappers, runtime imports, or configuration to a target repository merely because SolForge performed the work. The target must remain independently buildable, runnable, testable, releasable, and understandable without SolForge installed.
-
-`implementationHandoff.implementationAuthorized` is always false. It may contain ordered child capsule specifications, but applying them requires a separately accepted flow.
+The target repository must remain independently buildable, runnable, testable, and understandable. Add workflow-specific state only when the task or repository requires it. A research handoff identifies proposed implementation; it does not authorize that implementation.
 
 ## Challenge and regression
 
@@ -65,6 +63,4 @@ SolForge remains an external control plane. Remediation may not add `.solforge` 
 
 `completionClaim.status` is `qualified_complete` or `incomplete`. Qualified completion requires no critical open gap or critical unresolved uncertainty and includes `designEnvelopeHash`, the SHA-256 of the exact `endState` array. The claim is limited to the accepted design envelope.
 
-In an automatic loop, a qualified Research pass with no repair steps still supplies at least one repository-qualified command in `completionClaim.testCommands.focused`. Saving clean findings is not convergence: SolForge runs and records that focused check before Mastery may inspect the changed repository independently.
-
-Validation still ensures that research claims are structurally meaningful and evidence-backed. Execution is driven by the accepted Decision Program and plan receipts, never by Goal state or a second receipt gate. The service records the real current repository state, actual changed paths, focused-check output, and any external effects as traceability. Repository drift, an adjacent in-scope file change, a missing caller-formatted mutation record, or a failed focused check does not terminate an autonomous loop. In `auto_loop_until_stopped`, every cycle stores a readable Markdown action plan and structured JSON execution plan outside the target repositories, links them from the durable program ledger, and immediately continues. The plan includes plain-language actions, exact repository work, focused checks, and the ordered skill/tool route. A failed focused check is stored as the next repair action and updates the same program instead of forcing another approval or terminating the loop.
+Completion is limited to the accepted audit boundary. Bind every behavioral claim to observed checks, preserve failures and unresolved dependencies, and stop when the requested acceptance holds. No service-generated receipt or perpetual loop is required.

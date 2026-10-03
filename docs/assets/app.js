@@ -98,7 +98,7 @@
     detail.append(loading);
     dialog.showModal();
     try {
-      const skill = apiBase ? await request(`/v1/skills/${encodeURIComponent(id)}`) : await fetch(`assets/skills/${encodeURIComponent(id)}.json`).then(response => response.json());
+      const skill = apiBase ? await request(`/v1/skills/${encodeURIComponent(id)}`) : await fetch(`assets/skills/${encodeURIComponent(id)}.json`, { cache: 'no-store' }).then(response => response.json());
       detail.replaceChildren();
       const label = document.createElement('div');
       label.className = 'eyebrow';
@@ -216,10 +216,29 @@
     }
   }
 
-  fetch('assets/catalog.json').then(response => response.json()).then(skills => {
+  fetch('assets/catalog.json', { cache: 'no-store' }).then(response => response.json()).then(skills => {
     offlineSkills = skills;
     if (!apiBase) searchSkills('');
   }).catch(() => notify('Catalog unavailable. Connect an API to browse skills.'));
+
+  let discoveryGraph;
+  function renderGraph(query = '') {
+    if (!discoveryGraph) return;
+    const edges = discoveryGraph.edges.filter(edge => JSON.stringify(edge).toLowerCase().includes(query.toLowerCase()));
+    $('#graph-summary').textContent = `${Object.keys(discoveryGraph.nodes).length} skills · ${discoveryGraph.edges.length} conditional relationships · ${discoveryGraph.semantic_core_count} semantic workflows`;
+    const container = $('#graph-results');
+    container.replaceChildren();
+    for (const edge of edges.slice(0, 60)) {
+      const row = document.createElement('article'); row.className = 'skill-row';
+      const info = document.createElement('div');
+      const title = document.createElement('h3'); title.textContent = `${edge.from} → ${edge.to}`;
+      const condition = document.createElement('p'); condition.textContent = `${edge.type}: ${edge.condition}`;
+      info.append(title, condition); row.append(info); container.append(row);
+    }
+    if (!edges.length) container.textContent = 'No matching relationships. Catalog-only skills remain available through discovery and explicit selection.';
+  }
+  fetch('assets/graph.json', { cache: 'no-store' }).then(r => r.json()).then(graph => { discoveryGraph = graph; renderGraph(); }).catch(() => { $('#graph-summary').textContent = 'Graph unavailable. Reload to retry.'; });
+  $('#graph-search').addEventListener('input', event => renderGraph(event.currentTarget.value));
 
   $('#connect-btn').addEventListener('click', connect);
   $('#api-key').addEventListener('keydown', (event) => { if (event.key === 'Enter') connect(); });

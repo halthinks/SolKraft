@@ -1,6 +1,6 @@
 # Validation evidence
 
-The service and bundled parser have 68 passing regression tests. These cover intentional abstention, release-gate context, explicit skill selection, catalog-wide graph visibility, supporting resource containment, authentication, and real mounted MCP initialization and routing.
+The service and bundled parser have 72 passing regression tests. These cover intentional abstention, release-gate context, explicit skill selection, catalog-wide graph visibility, supporting resource containment, authentication, and real mounted MCP initialization and routing.
 
 Run the same suite:
 

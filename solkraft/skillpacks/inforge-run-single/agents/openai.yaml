@@ -1,6 +1,0 @@
-interface:
-  display_name: "InForge Run Single"
-  short_description: "Execute validated InForge tasks with one agent"
-  default_prompt: "Use $inforge-run-single to execute this validated InForge Single capsule."
-policy:
-  allow_implicit_invocation: false

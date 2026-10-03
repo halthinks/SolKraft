@@ -12,8 +12,8 @@ Preserve a tested behavioral baseline before changing platform boundaries. Recor
 
 Prefer shared core plus narrow adapters when behavior is portable. Prefer platform shells when user experience or lifecycle differs. Use compatibility runtimes only when their operational dependency and limitations are acceptable. Every claim must state the exact OS, architecture, runtime, evidence tier, and known gaps.
 
-## Executable bindings
+## Verification bindings
 
-Compilation requires the complete verified Blender `finalActionGoal` and a cryptographically intact accepted route receipt. Each target binds one `selectedStrategyId`; a result using a different route is rejected. `topChoices` shows three options while `allChoices` preserves every Advanced route.
+Identify the source baseline, chosen strategy, target, build configuration, exact artifact, and decisive acceptance checks. Attach concrete build and runtime evidence to each claimed target. A route receipt, Blender finalActionGoal, or external registry is not required.
 
-Evidence kinds are allowlisted and every passed record requires a SHA-256. Buildable or verified targets require behavior baseline, adapter contract, cross-build, rollback, and compatibility-report evidence; verified additionally requires real-target evidence. Unknown result fields and unauthorized commit, push, publication, store, device-farm, hosting, or deployment claims fail closed.
+Buildable and verified status must cite the corresponding observed results. Preserve rollback and compatibility boundaries; publication, store submission, device-farm use, or deployment requires the applicable task authority.

@@ -1,0 +1,20 @@
+---
+name: brainstorming
+description: Explore product requirements and design alternatives when the user requests design help or material design decisions remain unresolved.
+---
+
+# Brainstorming Ideas Into Designs
+
+Develop a design that resolves the user's material product choices and is concrete enough to implement.
+
+Use existing project context and stated requirements. Ask only for missing decisions that materially affect the result; present alternatives when the tradeoff matters. For routine choices within an authorized implementation, use judgment and continue.
+
+Describe the outcome, component boundaries, data flow, failure behavior, and acceptance criteria at the level the task needs. Keep unrelated refactoring out of scope. For a large project, identify dependencies and a coherent first deliverable while preserving the overall objective.
+
+If the user requested design only, deliver the design and stop before implementation. If implementation is already authorized, continue after resolving material decisions; this skill does not add a separate approval gate for every design section. Preserve any review checkpoints explicitly required by the user or repository.
+
+Save a reusable spec when requested or when the implementation needs a durable handoff. The default location is `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md`; follow project conventions or a user-selected path. Commit only within the user's authorized Git workflow.
+
+Use a visual when it clarifies a real design decision. For the optional browser companion, obtain any required consent and read [visual-companion.md](visual-companion.md) before starting it.
+
+Use the writing-plans skill when an implementation plan would resolve dependencies or the user asks for one. Do not force a separate planning phase for a fully specified small change.

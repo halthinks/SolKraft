@@ -14,5 +14,3 @@ Evaluate evidence at the level of the claim: source inspection establishes code 
 Look specifically for omitted requirements, stale evidence after edits, mocks standing in for required dependencies, inaccessible outputs, and tests that cannot distinguish success from the original defect. Reuse valid checks rather than repeat them for ceremony. Independence means challenging the proposed conclusion with evidence; it does not require spawning an agent.
 
 If a gap is fixable within the authorized task, resolve it and repeat only the affected validation. Otherwise state the unmet condition and the evidence or external action needed. Report completion only to the extent demonstrated, with remaining limitations alongside the affected claim.
-
-Read [legacy capability detail](references/capability-detail.md) only when auditing an explicitly requested legacy protocol.

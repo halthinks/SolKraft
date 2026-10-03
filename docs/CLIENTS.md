@@ -47,3 +47,5 @@ API clients send JSON to `POST /v1/route`, including the bearer header:
 Read `selected`, ordered `stages`, `selection_trace`, and `unselected_requested_stages`; fetch the selected skill bodies rather than loading the whole catalog into context. Explicit IDs are supported across the configured catalog. Operator-mounted skill roots join discovery and explicit routing through `SOLKRAFT_SKILL_ROOTS`, using the operating system's path separator.
 
 Connecting a service does not install these behavioral instructions into every existing agent session. The host must load `AGENTS.md` or equivalent instructions. Long-running hosts should retain them and reassess relevant skills as the work changes stage.
+
+For the complete local installed catalog, add `--installed` to the CLI invocation, including MCP stdio arguments `["-m", "solkraft", "mcp", "--installed"]`. This scans the standard Codex, agent, and plugin skill roots while preserving stable bundled workflow IDs.

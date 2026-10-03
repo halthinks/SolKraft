@@ -10,7 +10,7 @@
 
 Every target needs an acquisition path, integrity check, prerequisites, install, launch, update, uninstall, troubleshooting, and verification story. Prefer native ecosystem conventions. A `curl` command must download over HTTPS, verify a pinned checksum or signature, avoid secret-bearing arguments, and have a download-and-inspect alternative. Never make piping remote code the only path.
 
-Mobile artifacts require an existing verified mobile target or an accepted Blender result. Signing identity, notarization, store review, registry namespaces, and release publication are external effects, not packaging assumptions.
+Mobile artifacts require an existing verified mobile target with a viable native build and test path. Signing identity, notarization, store review, registry namespaces, and release publication are external effects, not packaging assumptions.
 
 ## Executable bindings
 

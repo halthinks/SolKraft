@@ -1,6 +1,0 @@
-interface:
-  display_name: "InForge Run Ultra"
-  short_description: "Execute InForge tasks with bounded native Ultra"
-  default_prompt: "Use $inforge-run-ultra to execute this validated InForge Ultra capsule."
-policy:
-  allow_implicit_invocation: false

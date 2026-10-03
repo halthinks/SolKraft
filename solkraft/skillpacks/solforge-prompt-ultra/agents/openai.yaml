@@ -1,7 +1,0 @@
-interface:
-  display_name: SolForge Prompt Ultra
-  short_description: Write a sustained orchestration prompt with resource bounds.
-  default_prompt: Use $solforge-prompt-ultra for this task with native tools and verify
-    the result.
-policy:
-  allow_implicit_invocation: true

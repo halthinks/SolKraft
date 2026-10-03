@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css">
-  <script defer src="assets/app.js"></script>
+  <script defer src="assets/app.js?v=2e282edb7de6"></script>
 </head>
 <body>
   <div class="noise"></div>
@@ -40,7 +40,7 @@
 
     <section id="explore" class="workspace">
       <div class="section-heading"><div><div class="eyebrow">THE WORKSPACE</div><h2>What are you working on?</h2></div><div id="catalog-count" class="count-pill">Connect to load catalog</div></div>
-      <div class="tabs" role="tablist"><button class="tab active" role="tab" aria-selected="true" data-panel="search-panel">Discover skills <span>01</span></button><button class="tab" role="tab" aria-selected="false" data-panel="route-panel">Compose a route <span>02</span></button></div>
+      <div class="tabs" role="tablist"><button class="tab active" role="tab" aria-selected="true" data-panel="search-panel">Discover skills <span>01</span></button><button class="tab" role="tab" aria-selected="false" data-panel="route-panel">Compose a route <span>02</span></button><button class="tab" role="tab" aria-selected="false" data-panel="graph-panel">Explore the graph <span>03</span></button></div>
       <div id="search-panel" class="panel active" role="tabpanel">
         <div class="searchbar"><span class="search-icon">⌕</span><input id="search-input" type="search" placeholder="Try “test a software release” or “compare market options”" autocomplete="off"><kbd>ENTER</kbd></div>
         <div class="results-head"><span id="result-label">POPULAR SKILLS</span><span>SELECT TO INSPECT</span></div>
@@ -53,6 +53,8 @@
         <div id="route-results" class="route-results"></div>
       </div>
     </section>
+
+    <section id="graph-panel" class="panel workspace" role="tabpanel" hidden><div class="eyebrow">WORKFLOW RELATIONSHIPS</div><h2>See how skills connect.</h2><p id="graph-summary" class="muted">Loading graph…</p><div class="searchbar"><input id="graph-search" type="search" aria-label="Filter graph" placeholder="Filter relationships by skill or condition"></div><div id="graph-results" class="results"></div></section>
 
     <section class="lower-grid"><article class="feature-card"><div class="card-icon">⌘</div><div class="eyebrow">BUILT FOR AGENTS</div><h3>Small context.<br>Full capability.</h3><p>Search compact descriptions first. Pull the full instructions only when a skill earns its place in the workflow.</p><a href="https://github.com/halthinks/SolKraft/blob/main/AGENTS.md" target="_blank" rel="noreferrer">Read the agent guide ↗</a></article><article class="feature-card accent-card"><div class="card-icon">⟡</div><div class="eyebrow">ONE INTERFACE</div><h3>REST for apps.<br>MCP for agents.</h3><p>One catalog serves a clean API and five read-only MCP tools. Routing never grants execution authority.</p><a href="https://github.com/halthinks/SolKraft#run-the-api" target="_blank" rel="noreferrer">Connect your client ↗</a></article><article class="feature-card status-card"><div class="status-top"><span class="eyebrow">PROJECT STATUS</span><span class="live-tag"><i></i> COMMUNITY BUILT</span></div><h3>Early, open,<br>ready to shape.</h3><p>Bring a skill, a bug report, or a better idea for how agents find their tools.</p><a href="https://github.com/halthinks/SolKraft/issues/new/choose" target="_blank" rel="noreferrer">Help build SolKraft ↗</a></article></section>
   </main>

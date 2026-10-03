@@ -9,6 +9,10 @@ Turn an evidence-backed product plan into a consistent illustrated product-famil
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
 
-Read [capability detail](references/capability-detail.md) when the requested scope needs the full domain-specific criteria. Legacy runtime steps in that reference apply only to an explicitly requested legacy protocol.
+Identify the audience, actual decision, required source material, selected product decisions, output formats, and acceptance criteria. Preserve every material user constraint and verify sources behind important claims.
 
-Apply this procedure directly within the current task. Reuse valid inputs and completed work; read a linked method only when it adds missing guidance. Return the requested result. Consult the [router](../solforge/SKILL.md) only if the next useful workflow is unclear.
+Develop the requested document or handoff with a clear argument, traceable evidence, useful tables or visuals, contrary evidence, and explicit uncertainty. Keep product-family variants, calculations, and selected component identities consistent.
+
+Render and inspect requested deliverables. Check links, commands, citations, tables, visual labels, and agreement across exports; distinguish illustrative visuals from engineering or physical proof.
+
+Deliver the actual requested files or in-chat result with demonstrated limits. Do not require a report widget, configuration receipt, external studio, or unrequested export package.

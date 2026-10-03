@@ -13,7 +13,7 @@ SolKraft indexes ordinary `SKILL.md` folders. Search and routing return compact 
 - **GitHub Pages console:** browse and inspect the full bundled catalog offline, then connect an API to compose routes. API keys stay in memory and are never saved.
 - **Local-first:** run it on your machine or deploy a free API instance yourself.
 
-This release bundles **144 first-party skills** across software, research, science, data, business, engineering, writing, and general workflows. The live API can additionally scan skill roots you choose.
+This release bundles **173 owner-contributed and licensed skills** across software, research, science, data, business, engineering, writing, and general workflows. The live API can additionally scan skill roots you choose.
 
 ## Try it locally
 
@@ -72,7 +72,7 @@ python -m pytest -q
 
 ## License
 
-MIT. See [LICENSE](LICENSE). Bundled skill provenance and license notes are tracked in [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).
+Project code is MIT. Bundled third-party skills retain their own MIT or Apache-2.0 licenses. See [LICENSE](LICENSE). Bundled skill provenance and license notes are tracked in [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).
 
 ## Use the operating system
 
@@ -94,4 +94,8 @@ solkraft graph
 
 `GET /v1/graph` and MCP `get_selection_graph` expose the portable graph and conditional follow-ups. Configure `SOLKRAFT_ALLOWED_HOSTS` for a custom hosted MCP domain; Render's assigned hostname is recognized automatically. The repository includes a Render deployment blueprint; deploy it from your Render account to obtain the API URL.
 
-The discovery graph covers all 144 bundled skills. Its 123-workflow semantic core carries 213 conditional relationships; other catalog nodes support discovery and explicit selection without fabricated dependencies. Operator-mounted skill roots join the same discovery graph. See [validation evidence](VALIDATION.md) for the regression suite, reproducible routing battery, and its limits.
+The discovery graph covers all 173 bundled skills. Its 123-workflow semantic core carries 213 conditional relationships; other catalog nodes support discovery and explicit selection without fabricated dependencies. Operator-mounted skill roots join the same discovery graph. See [validation evidence](VALIDATION.md) for the regression suite, reproducible routing battery, and its limits.
+
+### Discover installed skills locally
+
+Use `solkraft search "your objective" --installed`, `solkraft route "your objective" --installed`, or `solkraft mcp --installed` to include `~/.codex/skills`, `~/.agents/skills`, and `~/.codex/plugins/cache`. Identical entrypoints are collapsed; different versions receive source-qualified IDs. Bundled workflow IDs remain stable. `solkraft api --installed` requires a localhost bind. Public deployments serve the redistributable bundle by default.

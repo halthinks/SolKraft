@@ -9,6 +9,10 @@ Build reproducible installer and package artifacts for specified platforms and e
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
 
-Read [capability detail](references/capability-detail.md) when the requested scope needs the full domain-specific criteria. Legacy runtime steps in that reference apply only to an explicitly requested legacy protocol.
+Identify the requested versions, source revision, target platforms and architectures, package formats, entrypoints, dependency pins, and existing build or install path. Separate demonstrated support from aspiration.
 
-Apply this procedure directly within the current task. Reuse valid inputs and completed work; read a linked method only when it adds missing guidance. Return the requested result. Consult the [router](../solforge/SKILL.md) only if the next useful workflow is unclear.
+Inspect acquisition integrity, prerequisite detection, installation scope, first launch, updates, uninstall, and recovery. Implement or build only the distribution surfaces requested, using the repository toolchain.
+
+Validate the exact artifact through its consumer path where available. Bind checksums, signatures, provenance, installation, and runtime evidence to its bytes; report missing tools, credentials, or targets.
+
+Deliver the requested inventory, plan, artifact, or release matrix. Distinguish planned, built, installed, tested, signed, and published; local build success does not authorize or prove publication.
