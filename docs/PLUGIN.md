@@ -2,7 +2,12 @@
 
 The repository ships a native Codex plugin, a repository marketplace, and a downloadable ZIP. The plugin combines a compact integration skill with the five read-only MCP tools. The Python runtime contains the 173 bundled skills and the SolForge router. It runs locally; no hosted account or model API key is required for the service itself.
 
-## Install
+## Install the included private plugin
+
+SolKraft ships its own plugin in this repository. Install it from our repository marketplace; it is not listed in the public plugin directory. It runs on your computer. You do not need Render, a hosted API, or a SolKraft API key. You still need your usual Codex access.
+
+You need Python 3.11 or newer, Git, and Codex with plugin support. Open PowerShell on Windows or your terminal on Linux. Run `codex plugin --help` and check that it lists `add` and `marketplace`. If they are missing, update Codex or use the manual MCP setup in CLIENTS.md.
+
 
 Use Python 3.11 or newer and Git in the environment from which you launch Codex:
 
@@ -14,7 +19,7 @@ codex plugin add solkraft@solkraft
 
 The sparse flags download the marketplace and plugin folders without checking out the full skill source tree. This avoids unnecessarily large marketplace caches and deep Windows path failures.
 
-Restart the local client or start a new Codex session. Check the installed plugin in the client's plugin list. The package is not currently published on PyPI; `pip install solkraft` is not the documented installation route.
+Start Codex from the same terminal, then open a new chat. Check the installed plugin in the client's plugin list. The package is not currently published on PyPI; `pip install solkraft` is not the documented installation route.
 
 For a checkout, install with `python -m pip install .` and register it using `codex plugin marketplace add .`. The ZIP at [the console download](https://halthinks.github.io/SolKraft/downloads/solkraft-plugin.zip) contains the plugin configuration and integration skill, not Python or its dependencies. Installing the runtime remains required.
 

@@ -16,8 +16,8 @@
       { title: 'Apply the method and verify.', body: 'For “fix this bug and test it,” the agent retrieves investigation, implementation, and test procedures as needed. It uses its existing repository tools, preserves the task’s requirements, and runs real checks. A tool response does not install behavior into all sessions, authorize deployment, or certify the output.', result: 'Useful instructions become concrete work only when the host reads and applies them.', visual: ['Selected skill', 'Host edits + tests', 'Evidence + limits'] }
     ] },
     plugin: { label: 'Install local plugin', subtitle: 'Let Codex find useful skills while you work.', steps: [
-      { title: 'Install the Python runtime.', body: 'Use Python 3.11+ and Git. Create a virtual environment, activate it, then install SolKraft. Windows uses Scripts; Linux, WSL, and Omarchy use bin. Keep the environment active when launching Codex so the solkraft command is on PATH. The package contains the public catalog and router.', result: 'The same Python package serves Windows and Linux. No desktop executable is required.', visual: ['Python environment', 'Install package', 'solkraft on PATH'] },
-      { title: 'Install the Codex plugin.', body: 'Add the repository marketplace with a sparse checkout, then install solkraft@solkraft. The plugin includes a manifest, MCP launch configuration, and an integration skill explaining when retrieval is useful. It starts the installed runtime; the plugin ZIP alone does not contain Python or dependencies.', result: 'A configured local MCP server and natural-use instructions, not a second catalog copy.', visual: ['Marketplace', 'Plugin configuration', 'Local MCP server'] },
+      { title: 'Install the skill library.', body: 'Use Python 3.11+ and Git. Create a virtual environment, activate it, then install SolKraft. Windows uses Scripts; Linux, WSL, and Omarchy use bin. Keep the environment active when launching Codex so the solkraft command is on PATH. The package contains the public catalog and router.', result: 'The same Python package serves Windows and Linux. No desktop executable is required.', visual: ['Python environment', 'Install package', 'solkraft on PATH'] },
+      { title: 'Install the included private plugin.', body: 'Add the repository marketplace with a sparse checkout, then install solkraft@solkraft. The plugin includes a manifest, MCP launch configuration, and an integration skill explaining when retrieval is useful. It starts the installed runtime; the plugin ZIP alone does not contain Python or dependencies.', result: 'A configured local MCP server and natural-use instructions, not a second catalog copy.', visual: ['Marketplace', 'Plugin configuration', 'Local MCP server'] },
       { title: 'Start a new session.', body: 'Launch or restart Codex from the activated environment. Existing running sessions do not automatically gain newly installed tools. Check the client’s MCP status if tools are missing. The solkraft command must be available to the process that starts the MCP server.', result: 'The compatible host can discover the five SolKraft tools.', visual: ['Active environment', 'New Codex session', 'Discover tools'], template: 'solkraft search "software test"' },
       { title: 'Ask for your real outcome.', body: 'Ask normally: “Inspect this codebase, fix the bug, and verify the release build.” The integration skill guides the agent to search clear requests or route compound ones, retrieve only useful procedures, and apply them using its existing tools. Model selection can vary; installation does not guarantee every turn uses a skill.', result: 'You ask for work. The host selects useful methods and keeps evidence of what it did.', visual: ['Normal request', 'Relevant procedures', 'Host performs work'] }
     ] }
@@ -65,13 +65,15 @@
   if (typeof module !== 'undefined' && module.exports) { module.exports = { paths, normalizeEndpoint, stepAt, commandFor }; return; }
   const root = document.querySelector('#setup-lab');
   if (!root) return;
-  let path = 'render', index = 0, timer;
+  let path = 'plugin', index = 0, timer;
   const $ = selector => root.querySelector(selector);
   function el(tag, text, className) { const node = document.createElement(tag); node.textContent = text; if (className) node.className = className; return node; }
   function stopSequence() { clearTimeout(timer); timer = undefined; $('#setup-play').textContent = 'Watch the sequence ↗'; }
   function render() {
     const route = paths[path], step = route.steps[index];
     root.dataset.path = path;
+    $('#setup-endpoint').closest('label').hidden = path === 'plugin' || path === 'contribute';
+    $('#setup-use').hidden = path === 'plugin' || path === 'contribute';
     root.querySelectorAll('[data-setup-path]').forEach(button => { const active = button.dataset.setupPath === path; button.setAttribute('aria-selected', String(active)); button.setAttribute('aria-controls', 'setup-scene'); button.tabIndex = active ? 0 : -1; button.classList.toggle('active', active); });
     $('#setup-subtitle').textContent = route.subtitle;
     const rail = $('#setup-steps'); rail.replaceChildren();
@@ -92,7 +94,7 @@
   }
   root.querySelectorAll('[data-setup-path]').forEach(button => button.onclick = () => { stopSequence(); path = button.dataset.setupPath; index = 0; render(); });
   root.querySelector('.setup-paths').onkeydown = event => {
-    const keys = Object.keys(paths), current = keys.indexOf(path);
+    const keys = [...root.querySelectorAll('[data-setup-path]')].map(button => button.dataset.setupPath), current = keys.indexOf(path);
     if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
     event.preventDefault(); stopSequence();
     path = keys[event.key === 'Home' ? 0 : event.key === 'End' ? keys.length - 1 : (current + (event.key === 'ArrowRight' ? 1 : -1) + keys.length) % keys.length];
