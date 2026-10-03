@@ -4,7 +4,7 @@ The repository ships a native Codex plugin, a repository marketplace, and a down
 
 ## Install the included private plugin
 
-SolKraft ships its own plugin in this repository. Install it from our repository marketplace; it is not listed in the public plugin directory. It runs on your computer. You do not need Render, a hosted API, or a SolKraft API key. You still need your usual Codex access.
+SolKraft ships its own plugin in this repository. Install it directly from GitHub; it is not listed in the public plugin directory. It runs on your computer. You do not need Render, a hosted API, or a SolKraft API key. You still need your usual Codex access.
 
 You need Python 3.11 or newer, Git, and Codex with plugin support. Open PowerShell on Windows or your terminal on Linux. Run `codex plugin --help` and check that it lists `add` and `marketplace`. If they are missing, update Codex or use the manual MCP setup in CLIENTS.md.
 
@@ -16,6 +16,8 @@ python -m pip install "git+https://github.com/halthinks/SolKraft.git"
 codex plugin marketplace add halthinks/SolKraft --sparse .agents/plugins --sparse plugins/solkraft
 codex plugin add solkraft@solkraft
 ```
+
+Codex calls a plugin source a “marketplace.” Here that means this GitHub repository, not a shop or a purchase. The first Codex command registers the source; the second installs its plugin.
 
 The sparse flags download the marketplace and plugin folders without checking out the full skill source tree. This avoids unnecessarily large marketplace caches and deep Windows path failures.
 

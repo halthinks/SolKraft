@@ -49,7 +49,7 @@ def main():
         run('Python and routing tests', [sys.executable, '-m', 'pytest', '-q', 'tests',
                                        'solkraft/skillpacks/solforge/tests', '-p', 'no:cacheprovider'])
         run('Python compilation', [sys.executable, '-m', 'compileall', '-q', 'solkraft', 'scripts'])
-        for asset in ('app.js', 'flow.js', 'setup.js'):
+        for asset in ('app.js', 'flow.js', 'setup.js', 'static-data.js'):
             run(f'{asset} syntax', [node, '--check', f'docs/assets/{asset}'])
         run('Setup behavior tests', [node, '--test', 'tests/setup.test.cjs'])
         run('Build static console', [sys.executable, '-m', 'scripts.build_console'])

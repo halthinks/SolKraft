@@ -40,5 +40,19 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--mint);outline-offse
 .setup-layout aside{min-width:0} @media(max-width:850px){.setup-layout{grid-template-columns:minmax(0,1fr)}#setup-steps{max-width:100%}}
 .setup-paths{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
 @media(max-width:600px){.setup-paths{grid-template-columns:1fr 1fr}.setup-paths button:last-child{grid-column:1/-1}}
-.setup-paths{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
-@media(max-width:600px){.setup-paths{grid-template-columns:1fr 1fr}.setup-paths button:last-child{grid-column:1/-1}}
+
+/* Connection choices: balanced cards, readable copy, and matching pointer/keyboard feedback. */
+.connection-explainer{margin-top:38px;padding-top:32px;border-top:1px solid #30443c}
+.connection-explainer>h3{font-size:clamp(24px,3vw,34px);line-height:1.2;letter-spacing:-.035em;margin:14px 0}
+.connection-explainer p{font-size:14px;line-height:1.8;color:#b1c4d0;max-width:78ch}
+.connection-explainer .guide-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.connection-explainer article{display:flex;flex-direction:column;padding:26px;border-radius:18px;background:linear-gradient(140deg,#182a2b,#101923);transition:transform .25s,border-color .25s,box-shadow .25s}
+.connection-explainer article h3{font-size:24px;line-height:1.25;letter-spacing:-.025em}
+.connection-explainer article:first-child{border-color:#759b58;background:linear-gradient(140deg,#233625,#111d22)}
+.connection-explainer article:hover,.connection-explainer article:focus-within{transform:translateY(-4px);border-color:#89b978;box-shadow:0 16px 38px #0004}
+.connection-explainer article a{margin-top:auto;padding-top:16px;color:var(--mint);font-size:14px;font-weight:700;text-underline-offset:5px}
+input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--mint);outline-offset:3px}
+section[id]{scroll-margin-top:24px}
+@media(max-width:700px){.connection-explainer .guide-grid{grid-template-columns:minmax(0,1fr)}.connection-explainer article{padding:22px}.connection-explainer article h3{font-size:23px}}
+/* Keep motion preferences authoritative even for rules declared later in this file. */
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}

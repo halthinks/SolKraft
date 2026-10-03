@@ -50,7 +50,7 @@ You can use the skill instructions without connecting a server:
 3. Open a skill and copy its instructions.
 4. Paste the instructions into ChatGPT with your task. Ask it to follow the procedure and explain its results.
 
-This gives ChatGPT a method to follow. It does not let ChatGPT search the hosted library automatically. You need no Render account or API key for copying instructions. Codex users who want automatic retrieval can follow the connection steps above.
+This gives ChatGPT a method to follow. It does not let ChatGPT connect to your SolKraft server automatically. You need no Render account or API key for copying instructions. Codex users who want automatic retrieval can follow the connection steps above.
 
 ## Common problems
 

@@ -1,6 +1,44 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const { paths, normalizeEndpoint, stepAt, commandFor } = require('../docs/assets/setup.js');
+const { createStaticLoader } = require('../docs/assets/static-data.js');
+
+test('browser loads the bundled-data loader before its consumer', () => {
+  const html = require('node:fs').readFileSync(require('node:path').join(__dirname, '../docs/index.html'), 'utf8');
+  const loader = html.indexOf('src="assets/static-data.js');
+  assert.ok(loader > 0 && loader < html.indexOf('src="assets/app.js'));
+});
+
+test('bundled data shares concurrent requests and reuses successful results', async () => {
+  let calls = 0;
+  const load = createStaticLoader(async (path, options) => {
+    calls++;
+    assert.equal(options.cache, 'no-cache');
+    return { ok: true, json: async () => ({ path }) };
+  });
+  const [first, second] = await Promise.all([load('catalog.json'), load('catalog.json')]);
+  assert.equal(first, second);
+  assert.equal(await load('catalog.json'), first);
+  assert.equal(calls, 1);
+  await load('graph.json');
+  assert.equal(calls, 2);
+});
+
+test('failed bundled requests can be retried, including malformed JSON', async () => {
+  for (const failure of ['http', 'json', 'network']) {
+    let calls = 0;
+    const load = createStaticLoader(async () => {
+      if (++calls === 1) {
+        if (failure === 'network') throw new Error('offline');
+        return { ok: failure !== 'http', json: async () => { throw new Error('invalid JSON'); } };
+      }
+      return { ok: true, json: async () => ['recovered'] };
+    });
+    await assert.rejects(load('catalog.json'));
+    assert.deepEqual(await load('catalog.json'), ['recovered']);
+    assert.equal(calls, 2);
+  }
+});
 
 test('each setup path is complete and navigation stays bounded', () => {
   for (const id of ['render', 'api', 'plugin', 'remote', 'contribute']) {

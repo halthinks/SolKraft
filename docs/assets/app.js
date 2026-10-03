@@ -119,7 +119,7 @@
     detail.append(loading);
     dialog.showModal();
     try {
-      const skill = apiBase ? await request(`/v1/skills/${encodeURIComponent(id)}`) : await fetch(`assets/skills/${encodeURIComponent(id)}.json`, { cache: 'no-store' }).then(response => response.json());
+      const skill = apiBase ? await request(`/v1/skills/${encodeURIComponent(id)}`) : await window.loadSolKraftStatic(`assets/skills/${encodeURIComponent(id)}.json`);
       detail.replaceChildren();
       const label = document.createElement('div');
       label.className = 'eyebrow';
@@ -278,9 +278,7 @@
   }
   $('#example-btn').addEventListener('click', async () => {
     try {
-      const response = await fetch('assets/example-route.json', {cache: 'no-store'});
-      if (!response.ok) throw new Error('The worked example could not load.');
-      const example = await response.json();
+      const example = await window.loadSolKraftStatic('assets/example-route.json');
       activatePanel('route-panel'); $('#route-input').value = example.objective;
       $('#route-mode').textContent = 'Worked example · actual bundled parser output generated when this site was built. This is not a live server request.';
       renderRoute(example.route); $('#explore').scrollIntoView({behavior: 'smooth'});
@@ -293,8 +291,8 @@
   document.querySelectorAll('[data-inspect-skill]').forEach(button => button.addEventListener('click', () => inspectSkill(button.dataset.inspectSkill)));
   $('#copy-task').addEventListener('click', () => copyText($('#route-input').value));
 
-  fetch('assets/skill-structure.json', {cache: 'no-store'}).then(r => r.json()).then(data => { skillStructure = data; }).catch(() => {});
-  fetch('assets/catalog.json', { cache: 'no-store' }).then(response => response.json()).then(skills => {
+  window.loadSolKraftStatic('assets/skill-structure.json').then(data => { skillStructure = data; }).catch(() => {});
+  window.loadSolKraftStatic('assets/catalog.json').then(skills => {
     offlineSkills = skills;
     if (!apiBase) searchSkills('');
   }).catch(() => notify('Catalog unavailable. Connect an API to browse skills.'));
@@ -315,7 +313,7 @@
     }
     if (!edges.length) container.textContent = 'No matching relationships. Catalog-only skills remain available through discovery and explicit selection.';
   }
-  fetch('assets/graph.json', { cache: 'no-store' }).then(r => r.json()).then(graph => { discoveryGraph = graph; renderGraph(); }).catch(() => { $('#graph-summary').textContent = 'Graph unavailable. Reload to retry.'; });
+  window.loadSolKraftStatic('assets/graph.json').then(graph => { discoveryGraph = graph; renderGraph(); }).catch(() => { $('#graph-summary').textContent = 'Graph unavailable. Reload to retry.'; });
   $('#graph-search').addEventListener('input', event => renderGraph(event.currentTarget.value));
 
   $('#connect-btn').addEventListener('click', connect);
