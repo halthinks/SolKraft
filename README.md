@@ -76,6 +76,8 @@ MIT. See [LICENSE](LICENSE). Bundled skill provenance and license notes are trac
 
 ## Use the operating system
 
+[Connect an agent through MCP, API, or CLI](docs/CLIENTS.md), including shell access from Grok CLI.
+
 Agents read `AGENTS.md`, apply `ENGINEERING_CONSTRAINTS_V1.json` for engineering work, and load relevant skill procedures at task start and stage changes. The shared composer understands ordered actions, exclusions, quoted context, explicit IDs, and established session context. The graph supplies conditional relationships; skills carry the procedures and supporting resources.
 
 Route requests accept optional `skills` and `context` fields. Responses retain `selection_trace` and `unselected_requested_stages`. Retrieve a supporting text resource at `GET /v1/skills/{id}/resources/{relative-path}` or MCP `get_skill_resource`. Load only the entrypoints and resources needed for the current stage.
