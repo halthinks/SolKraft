@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "profile": "ultra",
+  "source_version": "1.0.0",
+  "control_version": "3.0.0",
+  "source_sha256": "04e86ee4fb1248586a9652a6cc4bd48d508ca1c013c29ef8dcc24288fdbaf3be",
+  "contract_sha256": "25f193aa7a2ef9766a4106f7836a34e1d948ed0078c9aa1bbad7ea746ff0e326",
+  "execution_boundary": "transpose_only",
+  "required_role_ids": [
+    "R01",
+    "R02",
+    "R03",
+    "R04",
+    "R05",
+    "R06",
+    "R07",
+    "R08",
+    "R09",
+    "R10",
+    "R11",
+    "R12"
+  ],
+  "files": {
+    "scripts/verify_bundle.py": "cb73e60ee614bc7dfc33d8cf9ba3cb678ae251a107454c38922d413bc5ded217",
+    "references/control-policy.md": "0ce43f255a99e0e87dac6922b6e93affdf3ee0a729e42f746e87e8ba5d55bbb8",
+    "references/transposition-contract.md": "25f193aa7a2ef9766a4106f7836a34e1d948ed0078c9aa1bbad7ea746ff0e326",
+    "references/source-prompt.md": "04e86ee4fb1248586a9652a6cc4bd48d508ca1c013c29ef8dcc24288fdbaf3be",
+    "references/evaluation-corpus.json": "d47585c899bc981068df11990f92a8277e7f40a280296a2754663e39ff80c958",
+    "scripts/validate_package.py": "6f68c54703acd0b33408b9116d9ad0bf4c3c098ab18ed16e38fb831b121410db",
+    "scripts/run_evaluation_corpus.py": "b0917d8d17b5b622c6a117e1aec60cd85a0fa281ab233229fbb43ceaf9e23ddd",
+    "SKILL.md": "30f7f156f2cd38b70384d4cd4e84cdb7fdcbd8f9aee0ddf7e4480a4a56092d5d",
+    "references/audit-package-schema.json": "8bbd88e002a8474a8dec226ce50dd6aac046b9c259d22935facd736706a05865",
+    "agents/openai.yaml": "fcc70bc1e5af541114a5557a5c156c88eadf2c51da7f2aca41a72f6d82999958",
+    "scripts/validate_transposition.py": "31d9b7959f21982fafce893bc97c0e765db8325811119f2c988f1ca7704bd8a0",
+    "scripts/build_execution_capsule.py": "277b93cff6e9ec5b8e8daaf2c405396a1e690c43f12d498ea5bcb9e8e5e75e41",
+    "references/execution-authority.schema.json": "6480a39cc74356158a990aa349c4bfd78561693831c72f7674740874cd8c3cc0",
+    "references/execution-capsule.schema.json": "cd62d04d5a5d8226ca798ad697b6387f844c9a4dc998387513be846ab0fcaf9e"
+  }
+}

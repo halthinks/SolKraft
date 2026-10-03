@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Product Line Paper'
+  short_description: Turn a selected, traceable plan into synchronized product-fam.
+  default_prompt: Use $solforge-workflow-product-line-paper for this task with native
+    tools and verify the result.
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Realize CAD-Bound Product"
+  short_description: "Turn requirements into dimensionally closed products"
+  default_prompt: "Use $realize-cad-bound-product to turn this product concept into a physically packaged, CAD-bound design and evidence-backed render pipeline."

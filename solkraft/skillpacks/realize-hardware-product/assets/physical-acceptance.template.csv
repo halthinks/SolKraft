@@ -1,0 +1,4 @@
+test_id,phase,article_or_sample_id,requirement,method,equipment_id,calibration_due,condition,acceptance_limit,raw_evidence,result,measured_value,operator,date,deviation_id,disposition
+RX-001,receiving,PENDING,Exact part and revision match,Compare label and packing record to purchase order,PENDING,PENDING,As received,Exact match,PENDING,PENDING,PENDING,PENDING,PENDING,,PENDING
+MECH-001,assembly,PENDING,No prohibited interference,Install on representative fixture and exercise controls/cables,PENDING,PENDING,Configured use cases,No contact in prohibited pairs and required clearances met,PENDING,PENDING,PENDING,PENDING,PENDING,,PENDING
+MASS-001,verification,PENDING,Mass and center of gravity,Calibrated scale and balance fixture,PENDING,PENDING,Zero/one/two accessories,Within released limits,PENDING,PENDING,PENDING,PENDING,PENDING,,PENDING

@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge Now
+  short_description: Coordinate an authorized objective across research, implement.
+  default_prompt: Use $solforge-now for this task with native tools and verify the
+    result.
+policy:
+  allow_implicit_invocation: true

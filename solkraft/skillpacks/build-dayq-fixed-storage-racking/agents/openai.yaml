@@ -1,0 +1,4 @@
+interface:
+  display_name: "Build DayQ Storage Racks"
+  short_description: "Design shelving, lockers, cabinets, racks, and anchoring."
+  default_prompt: "Use $build-dayq-fixed-storage-racking to design fixed or modular storage systems."

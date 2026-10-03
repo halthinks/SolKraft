@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Business Diligence'
+  short_description: Test the investment or operating thesis against source qualit.
+  default_prompt: Use $solforge-workflow-business-diligence for this task with native
+    tools and verify the result.
+policy:
+  allow_implicit_invocation: true

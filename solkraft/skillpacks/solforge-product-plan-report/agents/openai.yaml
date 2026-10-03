@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge Product Plan Report
+  short_description: Study supplied sources and develop a source-bound product res.
+  default_prompt: Use $solforge-product-plan-report for this task with native tools
+    and verify the result.
+policy:
+  allow_implicit_invocation: true

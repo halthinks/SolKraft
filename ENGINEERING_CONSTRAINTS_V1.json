@@ -1,0 +1,126 @@
+{
+  "schema": "clawkraft/capability-program-template/v1",
+  "template_id": "ENGINEERING_CONSTRAINTS_V1",
+  "title": "Timeless engineering constraints",
+  "version": 1,
+  "classification": {
+    "schema": "clawkraft/program-classification/v1",
+    "program_origin": "BUILTIN_CAPABILITY",
+    "distribution_scope": "SHIPPED",
+    "target_scope": "NONE",
+    "capability_template_id": "ENGINEERING_CONSTRAINTS_V1",
+    "target_project_ref": null
+  },
+  "purpose": "Constrain source changes and review toward low future change cost, local reasoning, single authority, explicit boundaries, and invariant-driven correctness without turning design judgment into a mechanical checklist.",
+  "constraint_semantics": {
+    "not_a_checklist": true,
+    "conflict_rule": "When principles collide, prefer the choice that reduces future change cost and reduces the number of things a maintainer must understand simultaneously in THIS codebase.",
+    "hard_rule": "Expose the correct boundary with the minimum behavior-preserving refactor first; prove existing behavior still holds; then change behavior.",
+    "judgment_rule": "Treat these as design constraints, not slogans. If literal application of a principle would increase future cost in this codebase, choose the lower-cost design and make the exception and evidence explicit in the durable review record."
+  },
+  "principles": [
+    {
+      "id": "EC-001",
+      "name": "Separation of Concerns",
+      "constraint": "One kind of work per part: UI, domain, persistence, and infrastructure remain distinct unless a proven local simplification reduces future change cost."
+    },
+    {
+      "id": "EC-002",
+      "name": "Encapsulation / Information Hiding",
+      "constraint": "Expose small stable contracts and hide implementation details behind them."
+    },
+    {
+      "id": "EC-003",
+      "name": "High Cohesion + Loose Coupling",
+      "constraint": "Things that change together live together; independent parts communicate through narrow contracts."
+    },
+    {
+      "id": "EC-004",
+      "name": "DRY",
+      "constraint": "Maintain one authoritative representation of each piece of knowledge. Similar-looking code may remain separate when it does not encode the same knowledge; avoid over-DRY."
+    },
+    {
+      "id": "EC-005",
+      "name": "KISS",
+      "constraint": "Prefer the simplest design that satisfies current requirements; complexity is a long-term tax."
+    },
+    {
+      "id": "EC-006",
+      "name": "Single Responsibility",
+      "constraint": "A unit should have one coherent reason to change."
+    },
+    {
+      "id": "EC-007",
+      "name": "Depend on Abstractions",
+      "constraint": "Policy does not depend on implementation details; policy and details depend on explicit contracts."
+    },
+    {
+      "id": "EC-008",
+      "name": "YAGNI",
+      "constraint": "Do not add speculative features, frameworks, extension hooks, or indirection for hypothetical future use."
+    },
+    {
+      "id": "EC-009",
+      "name": "Composition over Inheritance",
+      "constraint": "Assemble behavior from focused pieces rather than growing fragile inheritance hierarchies."
+    },
+    {
+      "id": "EC-010",
+      "name": "Open/Closed with discipline",
+      "constraint": "Extend at stable boundaries only after the same axis of change has appeared at least twice; do not pre-build extension systems."
+    },
+    {
+      "id": "EC-011",
+      "name": "One Authority per Fact",
+      "constraint": "Every durable fact has exactly one authoritative owner and representation. Everything else derives, references, or explicitly caches it; never synchronize competing truths."
+    },
+    {
+      "id": "EC-012",
+      "name": "Enforce Invariants at Boundaries",
+      "constraint": "Put correctness in schemas, state transitions, constraints, contracts, and acceptance gates rather than worker memory or procedural instructions; invalid transitions must be impossible or rejected immediately."
+    }
+  ],
+  "supporting_constraints": [
+    "Law of Demeter: prefer local knowledge and narrow collaborator surfaces.",
+    "Fail fast and make illegal states unrepresentable where practical.",
+    "Optimize for deletion: make obsolete behavior easy to remove cleanly.",
+    "Unix discipline: do one thing well and compose through explicit contracts."
+  ],
+  "source_mutation_rules": [
+    "Do not add a second path around an existing abstraction merely to make a task pass. If the abstraction is wrong, repair the abstraction first.",
+    "If two implementations encode the same domain knowledge, consolidate the authority before adding new behavior.",
+    "Use an existing stable extension boundary when one already fits; do not create a parallel framework.",
+    "A behavior-changing patch must preserve or improve local reasoning: the change should not require understanding unrelated layers to modify one concern.",
+    "When a behavior change requires a boundary repair, the behavior-preserving refactor must be independently reviewable and proven before the behavior change."
+  ],
+  "review_enforcement": {
+    "applies_to": [
+      "SOURCE_MUTATION",
+      "ARCHITECTURE_CHANGE",
+      "REFACTOR",
+      "GLOBAL_REVIEW"
+    ],
+    "blocking_conditions": [
+      "A new implementation path bypasses an existing appropriate abstraction instead of repairing it.",
+      "A durable fact gains a second competing authority without explicit replicated/read-model semantics.",
+      "A behavior-changing patch that requires a boundary repair combines the structural repair and behavioral change without independently proving preserved behavior.",
+      "Correctness depends only on worker instructions or call ordering when the invariant can be enforced at a schema, transition, contract, or acceptance boundary.",
+      "Speculative abstractions or extension points are introduced without demonstrated current need."
+    ],
+    "evidence_rule": "Review findings cite the concrete boundary, authority, invariant, or future-change-cost consequence. Principle names alone are not sufficient evidence."
+  },
+  "invariants": [
+    "These constraints are authoritative engineering knowledge for ClawKraft source mutation and review; other Programs reference this template instead of copying its full rule set.",
+    "The constraints do not create a second scheduler, task graph, acceptance authority, merge authority, or deployment authority.",
+    "Architecture judgment remains codebase-specific and evidence-backed; the constraint set is not a mechanical checklist."
+  ],
+  "generated_instance_classification": {
+    "schema": "clawkraft/program-classification/v1",
+    "program_origin": "GENERATED_FROM_CAPABILITY",
+    "distribution_scope": "PROJECT_PRIVATE",
+    "target_scope": "REGISTERED_PROJECT",
+    "capability_template_id": "ENGINEERING_CONSTRAINTS_V1",
+    "target_project_ref": "<selected-project-ref>"
+  },
+  "composes_with": []
+}

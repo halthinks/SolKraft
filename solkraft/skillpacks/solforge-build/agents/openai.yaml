@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge Build
+  short_description: Implement features, fixes, automation, or local artifacts wit.
+  default_prompt: Use $solforge-build for this task with native tools and verify the
+    result.
+policy:
+  allow_implicit_invocation: true

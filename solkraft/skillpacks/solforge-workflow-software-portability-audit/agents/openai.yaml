@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Software Portability Audit'
+  short_description: Inventory platform coupling and build an evidence-bound compa.
+  default_prompt: Use $solforge-workflow-software-portability-audit for this task
+    with native tools and verify the result.
+policy:
+  allow_implicit_invocation: true

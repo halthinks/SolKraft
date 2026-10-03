@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Launcher Release Readiness'
+  short_description: Reconcile artifacts, checksums, SBOM, provenance, signing rea.
+  default_prompt: Use $solforge-workflow-launcher-release-readiness for this task
+    with native tools and verify the result.
+policy:
+  allow_implicit_invocation: true

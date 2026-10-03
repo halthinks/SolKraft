@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "1.0",
+  "id": "one_shot_ambitious_artifact",
+  "displayName": "One-Shot Ambitious Artifact",
+  "version": "1.1.0",
+  "status": "production",
+  "selectable": true,
+  "flagship": false,
+  "operatingIdea": "Turn a high-level experience into a complete inspected artifact.",
+  "bestFor": "A functional, coherent, publicly demonstrable experience where implementation freedom is valuable.",
+  "useCases": [
+    "Interactive application",
+    "Simulation",
+    "Game",
+    "Visual explanation"
+  ],
+  "produces": "A working artifact that is built, run, visually inspected, interaction-tested, and refined rather than left as a mockup.",
+  "antiUseCases": [
+    "Do not use when formal correctness or evidence review matters more than an integrated experiential artifact."
+  ],
+  "representativeRequest": "Use One-Shot Ambitious Artifact to interactive application with explicit evidence and acceptance gates.",
+  "downstreamLineage": [
+    "Origin-locked objective",
+    "Single, Multi, or Ultra profile",
+    "Effort contract",
+    "Exact hardened prompt",
+    "Hash-bound capsule",
+    "Approval and native Goal",
+    "Contextual workflow tree",
+    "Governed execution and deliverable"
+  ],
+  "priority": 60,
+  "routingSignals": [
+    {
+      "pattern": "\\b(app|application|website|simulation|game|interactive|dashboard|visual)\\b",
+      "flags": "iu",
+      "weight": 7
+    },
+    {
+      "pattern": "\\b(experience|compelling|beautiful|polished|demonstrat)\\b",
+      "flags": "iu",
+      "weight": 5
+    },
+    {
+      "pattern": "\\b(mockup|prototype|artifact)\\b",
+      "flags": "iu",
+      "weight": 3
+    }
+  ],
+  "requiredReasoningRoles": [
+    "experience architect",
+    "implementation owner",
+    "visual and interaction reviewer",
+    "runtime verifier"
+  ],
+  "applicabilityGate": [
+    "Use this origin only for one bounded, integrated artifact with a concrete user-visible or otherwise inspectable outcome; do not expand it into an unsolicited surrounding product or program.",
+    "Before action, verify the requested artifact, target runtime or medium, supplied inputs, material constraints, acceptance criteria, and authority over files, tools, network access, external systems, and consequential actions.",
+    "If a required input, credential, dependency, content source, or action authority is missing, produce an explicit conditional or deferred artifact contract; use a simulation only when it is authorized and unmistakably labeled.",
+    "Do not invent requirements, content, integrations, runtime results, user evidence, or permissions to make the artifact appear complete."
+  ],
+  "observableOutputContract": [
+    "An action-authority and input-gate decision with allowed scope, missing inputs, and deferred actions.",
+    "A bounded artifact specification mapping the material experience and acceptance criteria to implementation surfaces.",
+    "The integrated artifact itself, or a clearly labeled conditional artifact when execution inputs are unavailable.",
+    "A provenance and simulation ledger identifying supplied, generated, simulated, and deferred content or integrations.",
+    "Reproducible run and inspection evidence for each core action and public surface actually exercised.",
+    "Known limitations, unresolved failures, and explicitly deferred surrounding work."
+  ],
+  "solExecutionContract": [
+    "Apply the action-authority and input gate before designing or changing anything; record the allowed scope, supplied materials, missing dependencies, target runtime, and observable acceptance criteria.",
+    "Define the material user experience, core interaction, functional outcome, and demonstration threshold without inventing product requirements or expanding beyond the artifact and its necessary support.",
+    "Choose architecture, interaction model, visual language, and implementation details only within verified authority and supplied constraints; defer any integration or external action whose authority or inputs are absent.",
+    "Build the bounded artifact end to end. Decorative scaffolds, dead navigation, placeholder claims, fabricated content, and falsely live integrations do not count; authorized simulations must be conspicuously labeled.",
+    "Run and inspect only what can actually be exercised, test every material public surface and core action, preserve observed failures, and refine coherence, accessibility, responsiveness, and failure states.",
+    "Deliver the artifact or conditional artifact with reproducible instructions, actual validation evidence, provenance, simulation boundaries, deferred actions, and known limitations; never present proposed or unavailable checks as passed."
+  ],
+  "failureAndAdversarialChecklist": [
+    "Reject requirement loss, unsupported claims, fabricated evidence, or unapproved authority expansion.",
+    "Test boundary cases, counterexamples, failure modes, and the strongest plausible rejected alternative.",
+    "Require observable acceptance evidence and state unresolved uncertainty explicitly.",
+    "Do not use when formal correctness or evidence review matters more than an integrated experiential artifact."
+  ],
+  "profileAdaptations": {
+    "single": "One Sol agent owns synthesis and uses independent internal passes without claiming nonexistent agents.",
+    "multi": "Delegate only genuinely independent bounded workstreams; preserve provenance, handoffs, integration tests, and root synthesis.",
+    "ultra": "Production Ultra uses full_approved_capsule semantics only after a signed and verified native capability attestation and user authorization bind the canonical capsule, complete budget, kill switch, and lease policy plus branch termination and root acceptance; proof_only is a development and validation mode, never the production default."
+  },
+  "sharedControlVersion": "solforge-origin-controls-v1",
+  "promotion": {
+    "status": "production",
+    "promotedAt": "2026-07-15T12:00:00.000Z",
+    "receiptPath": "promotion-receipt.json",
+    "rollbackTarget": "candidate-1.1.0"
+  }
+}

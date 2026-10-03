@@ -1,0 +1,4 @@
+interface:
+  display_name: "Hardware Product Pipeline"
+  short_description: "Six-skill 0-to-1 hardware product loop"
+  default_prompt: "Use $hardware-product-pipeline to run select, preserve, build-matrix, realize, and CAD-bind as one product root. Do not treat pcb-generation as release evidence."

@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "runner_version": "1.0.0",
+  "profile": "ultra",
+  "capsule_schema_sha256": "cd62d04d5a5d8226ca798ad697b6387f844c9a4dc998387513be846ab0fcaf9e",
+  "files": {
+    "agents/openai.yaml": "438a82712a63e85d12017691bdee8177fd1f9a2add6c2f81954873d634996d1f",
+    "references/execution-capsule.schema.json": "cd62d04d5a5d8226ca798ad697b6387f844c9a4dc998387513be846ab0fcaf9e",
+    "references/execution-policy.md": "877f9dfe332ed62e38f1ef7ddbfaec7a16da26af477625c6faec0af28f0aab98",
+    "references/ultra-budget.schema.json": "b65ccd000a0fb5c55b218bf6f0f045b67521d0ea71987a21e74d12118f812754",
+    "references/ultra-execution-policy.md": "28489a5bc9ee79a83920ab703441e2e7e50e653d6d311f70aceb40a7d032bbb1",
+    "scripts/acceptance_audit.py": "1f98f1b32adc966cc42e96fd9800002811ece71962928db8b156449fb287c785",
+    "scripts/execution_state.py": "384a616b5309c22072e722c7f195be029c3232be4d4f83ed755cdf2be55919c6",
+    "scripts/selftest_ultra.py": "41dc55c15c830a495b120d3f1583308f6edb3ab058cc92a1cfe33c496959e5b2",
+    "scripts/validate_capsule.py": "4b76827a0e195f0f21273401de0ca7974c926790f6da869c9311b372ad5ed41f",
+    "scripts/validate_ultra_budget.py": "2573136b629f1071f562e22494c736ff02b123f9d8ec9f8751901f71761ec96a",
+    "scripts/verify_bundle.py": "20650a77eea0869dc57c96b4395f4445628e634b7969d5e4543b337b971d327b",
+    "SKILL.md": "a563ee64053af3e831f0b6fee9077f92093886b5ba3f7c77e82880311a040f62"
+  }
+}

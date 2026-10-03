@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1.0",
+  "originId": "counterfactual_world",
+  "version": "1.1.0",
+  "decision": "promote",
+  "evidence": "AUTO routing and protected prompt-contract benchmark gates passed; promotion does not claim universal downstream model superiority.",
+  "decidedAt": "2026-07-15T12:00:00.000Z",
+  "manifestHash": "3a15a92ae2bfecabdac8dfa65e7c59a0e5026a40a0cf943ae9b68f4da168d907",
+  "benchmarkSha256": "ec2bacad9495f2a94dc654182a7d147ca08f7b8e3dda9439a85b2173dad7318f",
+  "evaluationPackageSha256": "32c5255178771da736febecc6662749a4f2929d1c7a061ab108c30d0108dc2eb",
+  "rollbackTarget": "candidate-1.1.0",
+  "receiptHash": "96419a6d67c3b00ab54a2eb98fa3b7b98fa86f557b969b74da7b64f43d1ce3a0"
+}

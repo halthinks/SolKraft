@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge Run Single
+  short_description: Execute a selected implementation plan with one agent, scoped.
+  default_prompt: Use $solforge-run-single for this task with native tools and verify
+    the result.
+policy:
+  allow_implicit_invocation: true

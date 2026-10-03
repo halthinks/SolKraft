@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "1.0",
+  "originId": "recursive_judge_builder",
+  "version": "1.1.0",
+  "status": "production",
+  "sharedControlVersion": "solforge-origin-controls-v1",
+  "files": {
+    "origin.json": "ccd24be0dfb52a81fbd8960e645a98b1c52b67909d4ebc1f5c92c1bf8e391f0b",
+    "source-prompt.md": "dc1d9ccee32c78732d2c2795e7b3a0e2eefe31bef6a704c3a375e2afd4fe7efc",
+    "evaluation-corpus.json": "e615a9557ca9afeb0b4f2f36b7971106469492c36ab298b282fff8deed832527"
+  },
+  "rollbackTarget": "candidate-1.1.0",
+  "manifestHash": "e66c87daa22303de75d028a59f42ad38dbb49f61ede7da85041bfbbffcbf6930",
+  "sharedControlSha256": "6b5f508cac80442753e25f943b6889ed9a7eb344a5504e8e976f17bd6a7b4376"
+}

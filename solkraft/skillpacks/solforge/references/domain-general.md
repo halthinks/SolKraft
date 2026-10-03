@@ -1,0 +1,74 @@
+# General workflows
+
+Select the capability matching the actual task. Read its entrypoint only when needed.
+
+- [sol-merge-report](../../sol-merge-report/SKILL.md): Compare candidate and target repositories for evidence-backed adoption, reuse, licensing, and integration decisions.
+- [solforge](../../solforge/SKILL.md): Select and compose workflows for substantial research, code investigation, implementation, verification, and reports. Use for work spanning stages or an explicit SolForge request.
+- [solforge-build](../../solforge-build/SKILL.md): Implement features, fixes, automation, or local artifacts with scoped changes and proportional verification.
+- [solforge-code-mastery](../../solforge-code-mastery/SKILL.md): Turn a codebase completion audit into coherent implementation, integration, and release evidence.
+- [solforge-code-research](../../solforge-code-research/SKILL.md): Audit a whole codebase or ecosystem for intended architecture, hidden capabilities, inconsistencies, and completion gaps.
+- [solforge-codebase](../../solforge-codebase/SKILL.md): Investigate repository behavior, architecture, history, ownership, and failure evidence at specific files and revisions.
+- [solforge-compatibility-report](../../solforge-compatibility-report/SKILL.md): Report verified platform compatibility, unsupported targets, migration costs, and remaining evidence gaps.
+- [solforge-context-curator](../../solforge-context-curator/SKILL.md): Select the requirements, sources, skills, and evidence needed at the current stage of substantial work.
+- [solforge-cross-build](../../solforge-cross-build/SKILL.md): Configure target toolchains and build reproducible cross-platform artifacts with dependency and architecture checks.
+- [solforge-finalize](../../solforge-finalize/SKILL.md): Deliver completed work with its verification evidence, remaining limits, and requested handoff artifacts.
+- [solforge-independent-challenger](../../solforge-independent-challenger/SKILL.md): Challenge consequential plans or results for missing evidence, unsupported assumptions, and untested failure modes.
+- [solforge-install-plan](../../solforge-install-plan/SKILL.md): Design installation, launch, update, uninstall, troubleshooting, and rollback for a software product.
+- [solforge-launcher](../../solforge-launcher/SKILL.md): Build and verify product installers, launchers, update flows, packaging, and release readiness.
+- [solforge-mvp](../../solforge-mvp/SKILL.md): Define and deliver a bounded working MVP or vertical slice with acceptance evidence and explicit exclusions.
+- [solforge-mvp-create](../../solforge-mvp-create/SKILL.md): Turn a product brief, research result, or selected plan into a working vertical slice with a PRD and architecture.
+- [solforge-now](../../solforge-now/SKILL.md): Coordinate an authorized objective across research, implementation, verification, and delivery without a separate planning checkpoint.
+- [solforge-package-build](../../solforge-package-build/SKILL.md): Build reproducible installer and package artifacts for specified platforms and ecosystems.
+- [solforge-package-detect](../../solforge-package-detect/SKILL.md): Inspect a repository for runtimes, entrypoints, build systems, dependencies, and packaging options.
+- [solforge-perfection](../../solforge-perfection/SKILL.md): Improve a product through real user journeys, repairs, and repeated verification until the requested acceptance criteria hold.
+- [solforge-platform-adapter](../../solforge-platform-adapter/SKILL.md): Implement platform-specific filesystem, process, UI, storage, permissions, and lifecycle adapters.
+- [solforge-plugin-development](../../solforge-plugin-development/SKILL.md): Maintain SolForge-owned skill tooling, routing, packaging, or its separately requested plugin implementation.
+- [solforge-plugin-skill-release](../../solforge-plugin-skill-release/SKILL.md): Create, update, install, and validate SolForge-owned native skills and their routing metadata.
+- [solforge-portability-audit](../../solforge-portability-audit/SKILL.md): Audit platform coupling, runtime assumptions, dependencies, and evidence for requested software targets.
+- [solforge-product-line-paper](../../solforge-product-line-paper/SKILL.md): Turn an evidence-backed product plan into a consistent illustrated product-family paper, BOM, and power ledgers.
+- [solforge-product-plan-report](../../solforge-product-plan-report/SKILL.md): Study supplied sources and develop a source-bound product research, MVP, architecture, and design-plan report.
+- [solforge-prompt](../../solforge-prompt/SKILL.md): Write a portable execution prompt from an objective; use when the requested deliverable is a prompt.
+- [solforge-prompt-compiler](../../solforge-prompt-compiler/SKILL.md): Compile an objective, selected workflows, inputs, constraints, and acceptance criteria into an execution prompt.
+- [solforge-prompt-multi](../../solforge-prompt-multi/SKILL.md): Write a coordinated multi-agent execution prompt with ownership, dependencies, handoffs, and integration checks.
+- [solforge-prompt-single](../../solforge-prompt-single/SKILL.md): Write a single-agent execution prompt preserving the objective, required inputs, and acceptance evidence.
+- [solforge-prompt-ultra](../../solforge-prompt-ultra/SKILL.md): Write a sustained orchestration prompt with resource bounds, user controls, and evidence-based completion.
+- [solforge-propose](../../solforge-propose/SKILL.md): Turn research or a codebase audit into a concrete implementation proposal with scoped changes and verification.
+- [solforge-readme](../../solforge-readme/SKILL.md): Convert reports and architecture evidence into a README with verified commands, links, and supported claims.
+- [solforge-release-matrix](../../solforge-release-matrix/SKILL.md): Reconcile platform artifacts, signing, provenance, update support, and release-readiness evidence.
+- [solforge-report](../../solforge-report/SKILL.md): Produce and export a professional report matched to its audience, evidence, and requested format.
+- [solforge-report-writer](../../solforge-report-writer/SKILL.md): Write evidence-backed papers, whitepapers, due-diligence reports, briefs, and technical handoffs.
+- [solforge-research](../../solforge-research/SKILL.md): Conduct source-backed research with claim evidence, contrary findings, freshness, and uncertainty.
+- [solforge-research-mastery-loop](../../solforge-research-mastery-loop/SKILL.md): Coordinate codebase research and implementation in dependency order for a requested completion program.
+- [solforge-research-mastery-perfection](../../solforge-research-mastery-perfection/SKILL.md): Coordinate research, implementation, and user-journey verification for comprehensive product completion.
+- [solforge-result-validator](../../solforge-result-validator/SKILL.md): Verify deliverables against requirements, real outputs, test evidence, and supported completion claims.
+- [solforge-route-architect](../../solforge-route-architect/SKILL.md): Compose a workflow graph with explicit inputs, dependencies, output checks, and conditional next steps.
+- [solforge-run-comparison](../../solforge-run-comparison/SKILL.md): Compare repositories, products, architectures, or evidence sets using symmetric criteria and sources.
+- [solforge-run-multi](../../solforge-run-multi/SKILL.md): Execute an authorized multi-agent plan with bounded ownership, handoffs, and root integration.
+- [solforge-run-refactor](../../solforge-run-refactor/SKILL.md): Execute a scoped behavior-preserving repository refactor with regression evidence and rollback.
+- [solforge-run-report-write](../../solforge-run-report-write/SKILL.md): Execute a report-production plan with source checks, authored content, review, and requested exports.
+- [solforge-run-research](../../solforge-run-research/SKILL.md): Execute a research plan with source tracking, contradictions, reproducible searches, and uncertainty.
+- [solforge-run-single](../../solforge-run-single/SKILL.md): Execute a selected implementation plan with one agent, scoped changes, checkpoints, and verification.
+- [solforge-run-ultra](../../solforge-run-ultra/SKILL.md): Carry out sustained authorized work with adaptive stages, user controls, and evidence-based completion.
+- [solforge-sign-and-prove](../../solforge-sign-and-prove/SKILL.md): Create and verify artifact checksums, SBOMs, provenance, and authorized signing evidence.
+- [solforge-software-portability](../../solforge-software-portability/SKILL.md): Audit, implement, build, and verify software portability across specified operating systems and architectures.
+- [solforge-steer](../../solforge-steer/SKILL.md): Apply user corrections to scope or direction while preserving completed evidence and valid work.
+- [solforge-target-verify](../../solforge-target-verify/SKILL.md): Verify exact platform artifacts while distinguishing cross-build, emulator, simulator, and real-target evidence.
+- [solforge-user-control](../../solforge-user-control/SKILL.md): Apply user Pause, Resume, Stop, and scope corrections during active work.
+- [solforge-workflow-consequential-activate](../../solforge-workflow-consequential-activate/SKILL.md): Carry out an explicitly authorized activate action for its exact target and verify the resulting effect. Requires explicit effect authorization.
+- [solforge-workflow-consequential-delete](../../solforge-workflow-consequential-delete/SKILL.md): Carry out an explicitly authorized delete action for its exact target and verify the resulting effect. Requires explicit effect authorization.
+- [solforge-workflow-consequential-deploy](../../solforge-workflow-consequential-deploy/SKILL.md): Carry out an explicitly authorized deploy action for its exact target and verify the resulting effect. Requires explicit effect authorization.
+- [solforge-workflow-consequential-merge](../../solforge-workflow-consequential-merge/SKILL.md): Carry out an explicitly authorized merge action for its exact target and verify the resulting effect. Requires explicit effect authorization.
+- [solforge-workflow-consequential-publish](../../solforge-workflow-consequential-publish/SKILL.md): Carry out an explicitly authorized publish action for its exact target and verify the resulting effect. Requires explicit effect authorization.
+- [solforge-workflow-consequential-purchase](../../solforge-workflow-consequential-purchase/SKILL.md): Carry out an explicitly authorized purchase action for its exact target and verify the resulting effect. Requires explicit effect authorization.
+- [solforge-workflow-consequential-push](../../solforge-workflow-consequential-push/SKILL.md): Carry out an explicitly authorized push action for its exact target and verify the resulting effect. Requires explicit effect authorization.
+- [solforge-workflow-consequential-revoke](../../solforge-workflow-consequential-revoke/SKILL.md): Carry out an explicitly authorized revoke action for its exact target and verify the resulting effect. Requires explicit effect authorization.
+- [solforge-workflow-consequential-rotate](../../solforge-workflow-consequential-rotate/SKILL.md): Carry out an explicitly authorized rotate action for its exact target and verify the resulting effect. Requires explicit effect authorization.
+- [solforge-workflow-consequential-send](../../solforge-workflow-consequential-send/SKILL.md): Carry out an explicitly authorized send action for its exact target and verify the resulting effect. Requires explicit effect authorization.
+- [solforge-workflow-finish](../../solforge-workflow-finish/SKILL.md): Explicitly accept the completed result as the final deliverable without creating another execution or report work bundle.
+- [solforge-workflow-implementation](../../solforge-workflow-implementation/SKILL.md): Apply the selected Single, Multi, or Ultra runner to a bounded implementation task with explicit writes, tests, rollback, and verification.
+- [solforge-workflow-merge-report](../../solforge-workflow-merge-report/SKILL.md): Inspect candidate and target repositories at real revisions, prove capabilities from implementation evidence, and recommend adoption across architecture, runtime, dependencies, evidence quality, licensing, and risk without mutating code.
+- [solforge-workflow-product-line-paper](../../solforge-workflow-product-line-paper/SKILL.md): Turn a selected, traceable plan into synchronized product-family industrial renders, BOM and power ledgers, a polished DOCX, and a visually verified PDF without drifting from locked decisions.
+- [solforge-workflow-product-plan-report](../../solforge-workflow-product-plan-report/SKILL.md): Study supplied sources and develop a source-bound product research, MVP, architecture, and design-plan report.
+- [solforge-workflow-report](../../solforge-workflow-report/SKILL.md): Turn the exact result and evidence into a separately configured Concise, Handoff, Collegiate, or Scientific report package.
+- [solforge-workflow-research](../../solforge-workflow-research/SKILL.md): Extend the prompt result through source-backed research, claim-evidence mapping, contradiction analysis, and explicit uncertainty.
+- [solforge-workflow-solforge-plugin-development](../../solforge-workflow-solforge-plugin-development/SKILL.md): Change, test, package, install, and verify the SolForge plugin product or one of its owned skills through the repository's native development workflow.

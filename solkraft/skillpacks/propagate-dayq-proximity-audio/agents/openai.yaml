@@ -1,0 +1,4 @@
+interface:
+  display_name: "Propagate DayQ Audio"
+  short_description: "Build physical voice, acoustics, and AI hearing"
+  default_prompt: "Use $propagate-dayq-proximity-audio to implement or validate DayQ voice, acoustic propagation, radio routing, privacy, or AI-hearing gameplay."

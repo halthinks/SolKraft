@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge User Control
+  short_description: Apply user Pause, Resume, Stop, and scope corrections during.
+  default_prompt: Use $solforge-user-control for this task with native tools and verify
+    the result.
+policy:
+  allow_implicit_invocation: true

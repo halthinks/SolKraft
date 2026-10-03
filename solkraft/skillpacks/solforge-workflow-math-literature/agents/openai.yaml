@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Math Literature'
+  short_description: Map related results, equivalent formulations, known technique.
+  default_prompt: Use $solforge-workflow-math-literature for this task with native
+    tools and verify the result.
+policy:
+  allow_implicit_invocation: true

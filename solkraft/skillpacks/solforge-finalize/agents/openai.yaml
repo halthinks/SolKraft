@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge Finalize
+  short_description: Deliver completed work with its verification evidence, remain.
+  default_prompt: Use $solforge-finalize for this task with native tools and verify
+    the result.
+policy:
+  allow_implicit_invocation: true

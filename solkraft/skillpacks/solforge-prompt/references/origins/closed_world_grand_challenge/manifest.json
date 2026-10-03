@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "1.0",
+  "originId": "closed_world_grand_challenge",
+  "version": "1.1.0",
+  "status": "production",
+  "sharedControlVersion": "solforge-origin-controls-v1",
+  "files": {
+    "origin.json": "c63f49f4021191fc67b427722482ff28653f962171215a879b580ad2731123f2",
+    "source-prompt.md": "86b85f8c9a0c6505269ca6c8c6a747ee0756135203da1cffa8fbc9967da96067",
+    "evaluation-corpus.json": "1857f8bba1a16ccd733c3801d8ce82c9b897e93da32d7999bbc4dc2b9c568d43"
+  },
+  "rollbackTarget": null,
+  "manifestHash": "2caf8a247d2487a912edd50ee3ef8d478476b2a42ef13ee18eece3828a7e5685",
+  "sharedControlSha256": "6b5f508cac80442753e25f943b6889ed9a7eb344a5504e8e976f17bd6a7b4376"
+}

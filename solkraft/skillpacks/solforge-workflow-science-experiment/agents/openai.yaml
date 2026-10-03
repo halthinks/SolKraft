@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Science Experiment'
+  short_description: Specify methods, controls, measurements, power assumptions, r.
+  default_prompt: Use $solforge-workflow-science-experiment for this task with native
+    tools and verify the result.
+policy:
+  allow_implicit_invocation: true

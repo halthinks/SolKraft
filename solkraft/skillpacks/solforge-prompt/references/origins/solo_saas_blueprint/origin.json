@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "1.0",
+  "id": "solo_saas_blueprint",
+  "displayName": "Solo SaaS Production Blueprint",
+  "version": "1.1.0",
+  "status": "production",
+  "selectable": true,
+  "flagship": false,
+  "operatingIdea": "Apply production discipline without enterprise bloat to find the smallest SaaS one creator can safely build and operate.",
+  "bestFor": "A SaaS concept, prototype, roadmap, or codebase that must become a secure, maintainable, deployable, observable, commercially usable service for a solo creator or very small team.",
+  "useCases": [
+    "Solo SaaS production design",
+    "Lean SaaS architecture",
+    "MCP-enabled SaaS",
+    "Small-team product launch"
+  ],
+  "produces": "A smallest-complete production blueprint with lean architecture, full user lifecycle, scoped API and MCP surfaces, security, billing, deployment, recovery, support, cost controls, explicit exclusions, and a solo-executable vertical roadmap.",
+  "antiUseCases": [
+    "Do not use for a broad enterprise or multi-team platform master plan where cross-functional organizational completeness is the controlling objective.",
+    "Do not use when the request is only to implement an already approved design rather than decide the minimum trustworthy SaaS system."
+  ],
+  "representativeRequest": "Turn this SaaS concept and prototype into the smallest secure production service a solo creator can deploy, operate, expose through API and MCP, and grow without an immediate rewrite.",
+  "downstreamLineage": [
+    "Origin-locked objective",
+    "Single, Multi, or Ultra profile",
+    "Effort contract",
+    "Exact hardened prompt",
+    "Hash-bound capsule",
+    "Approval and native Goal",
+    "Contextual workflow tree",
+    "Governed execution and deliverable"
+  ],
+  "priority": 78,
+  "routingSignals": [
+    {
+      "pattern": "\\b(solo creator|solo founder|one[- ]person|indie hacker|very small team|small team)\\b",
+      "flags": "iu",
+      "weight": 11
+    },
+    {
+      "pattern": "\\b(lean saas|solo saas|smallest complete saas|production discipline without enterprise bloat|enterprise bloat)\\b",
+      "flags": "iu",
+      "weight": 10
+    },
+    {
+      "pattern": "\\b(modular monolith|managed services|api[- ]ready|mcp[- ]accessible|mcp-enabled|cost and complexity control)\\b",
+      "flags": "iu",
+      "weight": 6
+    }
+  ],
+  "requiredReasoningRoles": [
+    "minimum-complete-product designer",
+    "solo-operator architecture and cost owner",
+    "security, authorization, billing, API, and MCP reviewer",
+    "deployment, observability, recovery, and support owner",
+    "complexity deletion and adversarial auditor"
+  ],
+  "applicabilityGate": [
+    "Use this origin only for a SaaS intended to be built and operated by one creator or a very small team; route broad multi-team platforms and already approved implementation tasks elsewhere.",
+    "Inventory the supplied concept, user and buyer evidence, validated outcome, implementation state, constraints, operator capacity, data, integrations, and commercial assumptions before designing the blueprint.",
+    "Do not invent customers, demand, pricing, acquisition, usage, scale, regulation, integrations, or repository state; make unsupported decisions conditional and state the evidence needed to activate them.",
+    "Partition scope into launch core required for trustworthy first operation, conditional capabilities triggered by specific evidence or risk, and a growth layer deferred until measurable thresholds are met."
+  ],
+  "observableOutputContract": [
+    "An evidence and assumption inventory for user value, buyer, implementation state, operator capacity, economics, data, and integrations.",
+    "A launch-core blueprint containing only the end-to-end product, trust, billing, deployment, recovery, and support capabilities material to first operation.",
+    "A conditional-capability register tying each optional API, MCP, AI, compliance, workflow, or integration surface to activation evidence.",
+    "A deferred growth layer with measurable scale, demand, risk, cost, and team triggers.",
+    "A solo-operator architecture, cost, security, operations, and failure-recovery model with explicit ownership and limits.",
+    "A vertical launch sequence with observable acceptance evidence, exclusions, rollback, and unresolved decisions."
+  ],
+  "solExecutionContract": [
+    "Apply the applicability gate and inventory the supplied SaaS purpose, user and buyer evidence, core outcome, recurring value, implementation state, operator capacity, data, integrations, commercial assumptions, and uncertainty without inventing missing market or product facts.",
+    "Separate the blueprint into three layers: a launch core required for trustworthy first operation, conditional capabilities tied to explicit evidence or risk, and a growth layer deferred behind measurable scale, demand, cost, risk, or team triggers.",
+    "Define the launch core as the smallest evidenced end-to-end system covering only material discovery, account lifecycle, first and repeat value, paid access where validated, failure recovery, support, export, and deletion—not the fewest screens or a speculative feature catalog.",
+    "Default to a modular monolith and managed services for the launch core; require every retained component to justify development time, operator burden, cost, security exposure, and cognitive complexity, with observable replacement triggers.",
+    "Unify domain logic, server-side authorization, validation, billing, entitlements, metering, and audit behavior across only the surfaces activated for launch; keep public APIs, MCP, AI, advanced administration, and integrations conditional unless evidence makes them material now.",
+    "Design security, data ownership, tenant isolation, privacy, billing integrity, environment separation, delivery, testing, observability, backups, restore, rollback, incident response, and support in proportion to the actual launch stakes; defer inapplicable machinery explicitly.",
+    "Model evidenced costs and operator load for launch, then provide conditional scenarios rather than fabricated projections for unavailable usage levels; identify free-tier traps, lock-in, unbounded costs, and excluded enterprise systems.",
+    "Deliver a solo-executable vertical sequence that proves the launch core before conditional capabilities and growth work, with acceptance evidence, rollback, exclusions, activation triggers, and unresolved inputs at every stage.",
+    "Adversarially test the material launch boundary and activated surfaces; return conditional or deferred outputs for unsupported market, scale, API, MCP, AI, compliance, or growth claims rather than treating them as committed requirements."
+  ],
+  "failureAndAdversarialChecklist": [
+    "Reject generic SaaS checklists, enterprise cargo cult, premature microservices, self-hosted infrastructure without evidence, custom identity or billing, and abstractions that hide the real product.",
+    "Reject an MVP that omits account recovery, server-side authorization, billing consistency, support, export or deletion, failure recovery, deployability, observability, or backup restoration where the product requires them.",
+    "Attack cross-tenant access, frontend-only authorization, unsafe webhooks, unrestricted MCP tools, secret exposure, duplicated business logic, silent job loss, irreversible actions without confirmation, and costs that can grow without limits.",
+    "Require every retained dependency and control to justify its cost, every excluded enterprise system to have a future trigger, and every critical workflow to have measurable tests and recovery evidence.",
+    "Do not use when broad enterprise/platform strategy and multi-function organizational design are the primary deliverable."
+  ],
+  "profileAdaptations": {
+    "single": "One Sol agent owns the coherent solo-operator tradeoff ledger and complete vertical blueprint, using independent security, cost, and recovery passes without claiming nonexistent agents.",
+    "multi": "Delegate product flow, lean architecture, security/API/MCP/billing, and operations/cost review only where lanes are truly independent; root synthesis must preserve one minimal system and one operator burden model.",
+    "ultra": "Production Ultra uses full_approved_capsule semantics only after a signed and verified native capability attestation and user authorization bind the canonical capsule, complete budget, kill switch, and lease policy plus hard branch termination and root acceptance; proof_only is a development and validation mode, never the production default. The approved plan must also prove that orchestration does not violate the solo-complexity objective."
+  },
+  "sharedControlVersion": "solforge-origin-controls-v1",
+  "promotion": {
+    "status": "production",
+    "promotedAt": "2026-07-15T12:00:00.000Z",
+    "receiptPath": "promotion-receipt.json",
+    "rollbackTarget": "candidate-1.1.0"
+  }
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Manufacture DayQ Armor Panels"
+  short_description: "Manufacture bounded armor material systems"
+  default_prompt: "Use manufacture-dayq-armor-panels to execute its DayQ contract without replacing existing authoritative owners."

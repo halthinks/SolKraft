@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Research'
+  short_description: Extend the prompt result through source-backed research, clai.
+  default_prompt: Use $solforge-workflow-research for this task with native tools
+    and verify the result.
+policy:
+  allow_implicit_invocation: true

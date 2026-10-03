@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Engineering Trade'
+  short_description: Compare design alternatives with common constraints, models.
+  default_prompt: Use $solforge-workflow-engineering-trade for this task with native
+    tools and verify the result.
+policy:
+  allow_implicit_invocation: true

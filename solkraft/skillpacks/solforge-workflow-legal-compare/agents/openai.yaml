@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Legal Compare'
+  short_description: Compare rules, implementation, evidence, risks, and applicabi.
+  default_prompt: Use $solforge-workflow-legal-compare for this task with native tools
+    and verify the result.
+policy:
+  allow_implicit_invocation: true

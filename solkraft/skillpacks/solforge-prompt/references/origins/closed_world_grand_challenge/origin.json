@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "1.0",
+  "id": "closed_world_grand_challenge",
+  "displayName": "Closed-World Grand Challenge",
+  "version": "1.1.0",
+  "status": "production",
+  "selectable": true,
+  "flagship": true,
+  "operatingIdea": "Force complete resolution inside a precisely bounded problem world.",
+  "bestFor": "A sharply defined frontier problem where partial progress, evasion, or equivalent restatement must not count.",
+  "useCases": [
+    "Mathematical proof",
+    "Algorithmic resolution",
+    "Theoretical science",
+    "Hard architecture invariants"
+  ],
+  "produces": "A complete candidate resolution subjected to counterexample search, boundary checks, and an explicit irreparable-blocker condition.",
+  "antiUseCases": [
+    "Do not use when the problem boundary, evidence access, or success condition is genuinely open-ended."
+  ],
+  "representativeRequest": "Use Closed-World Grand Challenge to mathematical proof with explicit evidence and acceptance gates.",
+  "downstreamLineage": [
+    "Origin-locked objective",
+    "Single, Multi, or Ultra profile",
+    "Effort contract",
+    "Exact hardened prompt",
+    "Hash-bound capsule",
+    "Approval and native Goal",
+    "Contextual workflow tree",
+    "Governed execution and deliverable"
+  ],
+  "priority": 100,
+  "routingSignals": [
+    {
+      "pattern": "\\b(prove|proof|theorem|conjecture|lemma)\\b",
+      "flags": "iu",
+      "weight": 8
+    },
+    {
+      "pattern": "\\b(resolve completely|complete solution|existence|impossibility)\\b",
+      "flags": "iu",
+      "weight": 6
+    },
+    {
+      "pattern": "\\b(mathematics?|combinator|algebra|geometry)\\b",
+      "flags": "iu",
+      "weight": 4
+    }
+  ],
+  "requiredReasoningRoles": [
+    "boundary formalizer",
+    "candidate constructor",
+    "counterexample hunter",
+    "acceptance auditor"
+  ],
+  "applicabilityGate": [
+    "Confirm that the requested object, governing rules, available evidence, and completion condition form a genuinely closed problem world.",
+    "Treat missing but obtainable inputs as repairable underdetermination, not as an irreparable blocker; identify the smallest input contract that would close the world.",
+    "Never replace the requested object with a meta-compliance exercise or mark completion from self-invented premises, tests, or evidence."
+  ],
+  "observableOutputContract": [
+    "A normalized closed-world statement with explicit objects, rules, evidence, and completion claims.",
+    "At least one substantive candidate resolution, or the strongest conditional candidate when repairable inputs are missing.",
+    "Counterexample and boundary results tied to the candidate's exact claims.",
+    "A final COMPLETE, CONDITIONAL, BLOCKED, or NOT_APPLICABLE status whose evidence is stated explicitly."
+  ],
+  "solExecutionContract": [
+    "Run the applicability gate first. Define every supplied object and boundary needed to make the problem closed; do not silently invent missing premises or redefine the requested object.",
+    "Assume for search purposes that a complete valid resolution exists, without treating that assumption as evidence or as permission to assert the conclusion.",
+    "Enumerate the exact claims that constitute completion and the plausible-looking partial results that do not count.",
+    "Develop materially different candidate routes, preserve independence long enough to expose real strengths, and block any route that merely renames the central difficulty.",
+    "Search aggressively for counterexamples, circularity, hidden assumptions, degenerate cases, and failures at the task boundary.",
+    "When inputs are repairably incomplete, produce the strongest substantive conditional candidate plus the exact minimal input contract needed to verify it; do not collapse into a generic plan.",
+    "Return COMPLETE only for a verified resolution, CONDITIONAL for an evidence-bounded candidate, BLOCKED only for a supported external impediment, or NOT_APPLICABLE when the world cannot legitimately be closed."
+  ],
+  "failureAndAdversarialChecklist": [
+    "Reject requirement loss, unsupported claims, fabricated evidence, or unapproved authority expansion.",
+    "Test boundary cases, counterexamples, failure modes, and the strongest plausible rejected alternative.",
+    "Require observable acceptance evidence and state unresolved uncertainty explicitly.",
+    "Do not use when the problem boundary, evidence access, or success condition is genuinely open-ended."
+  ],
+  "profileAdaptations": {
+    "single": "One Sol agent owns synthesis and uses independent internal passes without claiming nonexistent agents.",
+    "multi": "Delegate only genuinely independent bounded workstreams; preserve provenance, handoffs, integration tests, and root synthesis.",
+    "ultra": "Production Ultra uses full_approved_capsule semantics only after a signed and verified native capability attestation and user authorization bind the canonical capsule, complete budget, kill switch, and lease policy plus branch termination and root acceptance; proof_only is a development and validation mode, never the production default."
+  },
+  "sharedControlVersion": "solforge-origin-controls-v1",
+  "promotion": {
+    "status": "production",
+    "promotedAt": "2026-07-15T12:00:00.000Z",
+    "receiptPath": "promotion-receipt.json",
+    "rollbackTarget": null
+  }
+}

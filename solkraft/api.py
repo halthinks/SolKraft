@@ -1,0 +1,101 @@
+"""REST API and Streamable HTTP MCP mount."""
+from __future__ import annotations
+
+import os
+from pathlib import Path
+import secrets
+
+from fastapi import FastAPI, HTTPException, Query, Request
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
+from pydantic import BaseModel, Field
+
+from .catalog import SkillCatalog, SkillNotFound
+from .mcp_server import build_mcp_server
+from .routing import BUNDLE_ROOT, route_request, get_graph, catalog_graph
+
+
+def _configured_roots() -> list[Path]:
+    roots = [BUNDLE_ROOT]
+    value = os.getenv("SOLKRAFT_SKILL_ROOTS", "")
+    roots.extend(Path(item.strip()) for item in value.split(os.pathsep) if item.strip())
+    return roots
+
+
+class RouteBody(BaseModel):
+    objective: str = Field(min_length=1, max_length=20_000)
+    max_skills: int = Field(default=10, ge=1, le=50)
+    skills: list[str] = Field(default_factory=list, max_length=50)
+    context: dict[str, str] | None = None
+
+
+def create_app(catalog: SkillCatalog | None = None, *, api_key: str | None = None, require_api_key: bool = True) -> FastAPI:
+    catalog = catalog or SkillCatalog(_configured_roots())
+    api_key = api_key if api_key is not None else os.getenv("SOLKRAFT_API_KEY")
+    from contextlib import asynccontextmanager
+    mcp = build_mcp_server(catalog)
+
+    @asynccontextmanager
+    async def lifespan(app):
+        async with mcp.session_manager.run():
+            yield
+
+    app = FastAPI(lifespan=lifespan, title="SolKraft API", version="0.1.0", description="Read-only skill catalog and router.")
+    origins = [item.strip() for item in os.getenv("SOLKRAFT_CORS_ORIGINS", "https://halthinks.github.io").split(",") if item.strip()]
+    app.add_middleware(CORSMiddleware, allow_origins=origins, allow_methods=["GET", "POST", "OPTIONS"], allow_headers=["Authorization", "Content-Type"], max_age=600)
+
+    @app.middleware("http")
+    async def protect_api(request: Request, call_next):
+        protected = request.url.path.startswith("/v1/") or request.url.path == "/mcp" or request.url.path.startswith("/mcp/")
+        if protected and request.method != "OPTIONS" and require_api_key:
+            authorization = request.headers.get("authorization", "")
+            supplied = authorization[7:] if authorization.startswith("Bearer ") else ""
+            if not api_key or not secrets.compare_digest(supplied, api_key):
+                return JSONResponse(status_code=401, content={"detail": "A valid bearer API key is required."}, headers={"WWW-Authenticate": "Bearer"})
+        return await call_next(request)
+
+    @app.get("/healthz")
+    async def health():
+        return {"status": "ok", "service": "solkraft"}
+
+    @app.get("/v1/graph")
+    async def graph():
+        return catalog_graph(catalog)
+
+    @app.get("/v1/skills")
+    async def list_skills(q: str = Query(default="", max_length=500), limit: int = Query(default=20, ge=1, le=100), offset: int = Query(default=0, ge=0)):
+        items = catalog.search(q, limit=limit) if q else catalog.list(limit=limit, offset=offset)
+        return {"count": len(items), "items": items}
+
+    @app.get("/v1/skills/{skill_id}")
+    async def get_skill(skill_id: str):
+        try:
+            return catalog.get(skill_id)
+        except SkillNotFound as exc:
+            raise HTTPException(status_code=404, detail="Skill not found") from exc
+
+    @app.post("/v1/route")
+    async def route(body: RouteBody):
+        try:
+            return route_request(catalog, body.objective, body.max_skills, explicit=body.skills, context=body.context)
+        except ValueError as exc:
+            raise HTTPException(status_code=422, detail=str(exc)) from exc
+
+    @app.get("/v1/skills/{skill_id}/resources/{resource:path}")
+    async def get_resource(skill_id: str, resource: str):
+        try:
+            return catalog.get_resource(skill_id, resource)
+        except SkillNotFound as exc:
+            raise HTTPException(status_code=404, detail="Resource not found") from exc
+
+    @app.post("/v1/refresh")
+    async def refresh():
+        return {"count": catalog.refresh(), "status": "refreshed"}
+
+    app.mount("/mcp", mcp.streamable_http_app())
+    app.state.skill_catalog = catalog
+    app.state.mcp_server = mcp
+    return app
+
+
+app = create_app()

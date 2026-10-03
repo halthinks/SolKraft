@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge Run Report Write
+  short_description: Execute a report-production plan with source checks, authored.
+  default_prompt: Use $solforge-run-report-write for this task with native tools and
+    verify the result.
+policy:
+  allow_implicit_invocation: true

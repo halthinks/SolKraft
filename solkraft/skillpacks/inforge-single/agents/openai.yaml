@@ -1,0 +1,6 @@
+interface:
+  display_name: "InForge Single"
+  short_description: "Transpose requests into rigorous single prompts"
+  default_prompt: "Use $inforge-single to transpose this request through the full source prompt for one desktop Codex agent."
+policy:
+  allow_implicit_invocation: false

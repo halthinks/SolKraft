@@ -1,0 +1,441 @@
+[
+  {
+    "text": "Run the repository release gate before opening a draft pull request",
+    "want": [
+      "solforge-workflow-software-test"
+    ],
+    "context": null
+  },
+  {
+    "text": "Prepare a draft PR after verifying the repository release gate",
+    "want": [
+      "solforge-workflow-software-test"
+    ],
+    "context": null
+  },
+  {
+    "text": "Check the draft pull request for merge readiness",
+    "want": [
+      "solforge-workflow-software-test"
+    ],
+    "context": null
+  },
+  {
+    "text": "Run pre-merge checks on this PR",
+    "want": [
+      "solforge-workflow-software-test"
+    ],
+    "context": null
+  },
+  {
+    "text": "Verify CI checks for the pull request",
+    "want": [
+      "solforge-workflow-software-test"
+    ],
+    "context": null
+  },
+  {
+    "text": "Run the regression suite before opening a draft PR",
+    "want": [
+      "solforge-workflow-software-test"
+    ],
+    "context": null
+  },
+  {
+    "text": "Validate the draft PR against release-gate checks",
+    "want": [
+      "solforge-workflow-software-test"
+    ],
+    "context": null
+  },
+  {
+    "text": "Check whether this pull request passes the required checks",
+    "want": [
+      "solforge-workflow-software-test"
+    ],
+    "context": null
+  },
+  {
+    "text": "Test the merge request before handoff",
+    "want": [
+      "solforge-workflow-software-test"
+    ],
+    "context": null
+  },
+  {
+    "text": "Run the test suite for PR #42",
+    "want": [
+      "solforge-workflow-software-test"
+    ],
+    "context": null
+  },
+  {
+    "text": "Run unit tests for the draft pull request",
+    "want": [
+      "solforge-workflow-software-test"
+    ],
+    "context": null
+  },
+  {
+    "text": "Run the repository quality gate",
+    "want": [
+      "solforge-workflow-software-test"
+    ],
+    "context": null
+  },
+  {
+    "text": "Verify this branch before creating a pull request",
+    "want": [
+      "solforge-workflow-software-test"
+    ],
+    "context": null
+  },
+  {
+    "text": "Draft pull request",
+    "want": [
+      "solforge-workflow-software-test"
+    ],
+    "context": {
+      "domain": "software",
+      "stage": "repository-release-gate"
+    }
+  },
+  {
+    "text": "Prepare the draft PR",
+    "want": [
+      "solforge-workflow-software-test"
+    ],
+    "context": {
+      "domain": "software",
+      "stage": "repository-release-gate"
+    }
+  },
+  {
+    "text": "Continue the release gate",
+    "want": [
+      "solforge-workflow-software-test"
+    ],
+    "context": {
+      "domain": "software",
+      "stage": "repository-release-gate"
+    }
+  },
+  {
+    "text": "Write the pull request description",
+    "want": [
+      "solforge-workflow-writing-draft"
+    ],
+    "context": null
+  },
+  {
+    "text": "Draft the PR body",
+    "want": [
+      "solforge-workflow-writing-draft"
+    ],
+    "context": null
+  },
+  {
+    "text": "Polish the pull request title",
+    "want": [
+      "solforge-workflow-writing-review"
+    ],
+    "context": null
+  },
+  {
+    "text": "Write a summary for the merge request",
+    "want": [
+      "solforge-workflow-writing-draft"
+    ],
+    "context": null
+  },
+  {
+    "text": "Draft an email about the release gate",
+    "want": [
+      "solforge-workflow-writing-draft"
+    ],
+    "context": null
+  },
+  {
+    "text": "Write an article about CI checks",
+    "want": [
+      "solforge-workflow-writing-draft"
+    ],
+    "context": null
+  },
+  {
+    "text": "Draft pull request",
+    "want": [],
+    "context": null
+  },
+  {
+    "text": "Prepare a PR",
+    "want": [],
+    "context": null
+  },
+  {
+    "text": "Diagnose the failing CI job",
+    "want": [
+      "solforge-workflow-software-diagnose"
+    ],
+    "context": null
+  },
+  {
+    "text": "Find why the pull request checks are failing",
+    "want": [
+      "solforge-workflow-software-diagnose"
+    ],
+    "context": null
+  },
+  {
+    "text": "Investigate the broken build pipeline",
+    "want": [
+      "solforge-workflow-software-diagnose"
+    ],
+    "context": null
+  },
+  {
+    "text": "Review the code changes in this draft pull request",
+    "want": [
+      "solforge-workflow-codebase"
+    ],
+    "context": null
+  },
+  {
+    "text": "Inspect the diff for this merge request",
+    "want": [
+      "solforge-workflow-codebase"
+    ],
+    "context": null
+  },
+  {
+    "text": "Write regression tests for this pull request",
+    "want": [
+      "solforge-workflow-software-test"
+    ],
+    "context": null
+  },
+  {
+    "text": "Add unit tests for the changed code",
+    "want": [
+      "solforge-workflow-software-test"
+    ],
+    "context": null
+  },
+  {
+    "text": "Run the pre-merge checks, then write the PR description",
+    "want": [
+      "solforge-workflow-software-test",
+      "solforge-workflow-writing-draft"
+    ],
+    "context": null
+  },
+  {
+    "text": "Write a report about the repository release gate",
+    "want": [
+      "solforge-workflow-report"
+    ],
+    "context": null
+  },
+  {
+    "text": "Do not run the release gate; write the PR description",
+    "want": [
+      "solforge-workflow-writing-draft"
+    ],
+    "context": null
+  },
+  {
+    "text": "Explain what a draft pull request is",
+    "want": [],
+    "context": null
+  },
+  {
+    "text": "Draft the PR body",
+    "want": [
+      "solforge-workflow-writing-draft"
+    ],
+    "context": {
+      "domain": "software",
+      "stage": "repository-release-gate"
+    }
+  },
+  {
+    "text": "Run the release gate tomorrow; draft an email now",
+    "want": [
+      "solforge-workflow-writing-draft"
+    ],
+    "context": null
+  },
+  {
+    "text": "Run CI for this PR",
+    "want": [
+      "solforge-workflow-software-test"
+    ],
+    "context": null
+  },
+  {
+    "text": "Execute the pre-merge checks",
+    "want": [
+      "solforge-workflow-software-test"
+    ],
+    "context": null
+  },
+  {
+    "text": "Run the required checks for this branch",
+    "want": [
+      "solforge-workflow-software-test"
+    ],
+    "context": null
+  },
+  {
+    "text": "Check PR #42",
+    "want": [
+      "solforge-workflow-software-test"
+    ],
+    "context": null
+  },
+  {
+    "text": "Verify the pull request",
+    "want": [
+      "solforge-workflow-software-test"
+    ],
+    "context": null
+  },
+  {
+    "text": "Review this PR for failing checks",
+    "want": [
+      "solforge-workflow-software-diagnose"
+    ],
+    "context": null
+  },
+  {
+    "text": "Debug the failed GitHub Actions workflow",
+    "want": [
+      "solforge-workflow-software-diagnose"
+    ],
+    "context": null
+  },
+  {
+    "text": "Diagnose CI failures",
+    "want": [
+      "solforge-workflow-software-diagnose"
+    ],
+    "context": null
+  },
+  {
+    "text": "Check the merge request diff",
+    "want": [
+      "solforge-workflow-codebase"
+    ],
+    "context": null
+  },
+  {
+    "text": "Review the pull request description",
+    "want": [
+      "solforge-workflow-writing-review"
+    ],
+    "context": null
+  },
+  {
+    "text": "Revise the PR body",
+    "want": [
+      "solforge-workflow-writing-review"
+    ],
+    "context": null
+  },
+  {
+    "text": "Write an article about failed CI jobs",
+    "want": [
+      "solforge-workflow-writing-draft"
+    ],
+    "context": null
+  },
+  {
+    "text": "Write a report about failing PR checks",
+    "want": [
+      "solforge-workflow-report"
+    ],
+    "context": null
+  },
+  {
+    "text": "Draft a release announcement",
+    "want": [
+      "solforge-workflow-writing-draft"
+    ],
+    "context": null
+  },
+  {
+    "text": "Open a draft PR",
+    "want": [],
+    "context": null
+  },
+  {
+    "text": "Create a draft pull request",
+    "want": [],
+    "context": null
+  },
+  {
+    "text": "Explain how to run CI",
+    "want": [],
+    "context": null
+  },
+  {
+    "text": "Do not run CI",
+    "want": [],
+    "context": null
+  },
+  {
+    "text": "Skip pre-merge checks",
+    "want": [],
+    "context": null
+  },
+  {
+    "text": "Run CI tomorrow",
+    "want": [],
+    "context": null
+  },
+  {
+    "text": "Run CI now, then draft the PR body",
+    "want": [
+      "solforge-workflow-software-test",
+      "solforge-workflow-writing-draft"
+    ],
+    "context": null
+  },
+  {
+    "text": "Review the code diff, then run CI",
+    "want": [
+      "solforge-workflow-codebase",
+      "solforge-workflow-software-test"
+    ],
+    "context": null
+  },
+  {
+    "text": "Run CI; do not write the PR body",
+    "want": [
+      "solforge-workflow-software-test"
+    ],
+    "context": null
+  },
+  {
+    "text": "Draft the PR body; do not run CI",
+    "want": [
+      "solforge-workflow-writing-draft"
+    ],
+    "context": null
+  },
+  {
+    "text": "Write a prompt to run CI",
+    "want": [
+      "solforge-prompt"
+    ],
+    "context": null
+  },
+  {
+    "text": "Run unit tests then draft a release announcement",
+    "want": [
+      "solforge-workflow-software-test",
+      "solforge-workflow-writing-draft"
+    ],
+    "context": null
+  }
+]

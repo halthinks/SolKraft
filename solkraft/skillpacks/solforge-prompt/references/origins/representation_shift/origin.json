@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "1.0",
+  "id": "representation_shift",
+  "displayName": "Representation Shift",
+  "version": "1.1.0",
+  "status": "production",
+  "selectable": true,
+  "flagship": false,
+  "operatingIdea": "Search for a formulation where the hard part becomes natural or disappears.",
+  "bestFor": "A problem repeatedly attacked in one vocabulary, decomposition, or architecture without decisive progress.",
+  "useCases": [
+    "Algorithm invention",
+    "Architecture redesign",
+    "Scientific modeling",
+    "Stalled theoretical work"
+  ],
+  "produces": "An explicit reversible mapping to a stronger representation, the structure it reveals, and a mapped-back validated solution.",
+  "antiUseCases": [
+    "Do not use when the current representation is already direct and the remaining work is routine execution."
+  ],
+  "representativeRequest": "Use Representation Shift to algorithm invention with explicit evidence and acceptance gates.",
+  "downstreamLineage": [
+    "Origin-locked objective",
+    "Single, Multi, or Ultra profile",
+    "Effort contract",
+    "Exact hardened prompt",
+    "Hash-bound capsule",
+    "Approval and native Goal",
+    "Contextual workflow tree",
+    "Governed execution and deliverable"
+  ],
+  "priority": 50,
+  "routingSignals": [
+    {
+      "pattern": "\\b(reframe|representation|formulation|duality|invariant|latent|transform)\\b",
+      "flags": "iu",
+      "weight": 7
+    },
+    {
+      "pattern": "\\b(stuck|stalled|new approach|nonlinear|complexity)\\b",
+      "flags": "iu",
+      "weight": 4
+    },
+    {
+      "pattern": "\\b(architecture|algorithm|model)\\b",
+      "flags": "iu",
+      "weight": 3
+    }
+  ],
+  "requiredReasoningRoles": [
+    "representation inventor",
+    "mapping auditor",
+    "complexity evaluator",
+    "mapped-back verifier"
+  ],
+  "applicabilityGate": [
+    "Use this origin only when the current representation may be the material source of difficulty and the task has an inspectable baseline, objective, and success criteria.",
+    "Treat the identity baseline as an eligible candidate that may remain best; a shift is not required merely because this origin was selected.",
+    "Define the invariants, information that must be preserved, mapping direction, and equivalence evidence before preferring an alternate representation.",
+    "If equivalence or mapped-back validation cannot be established from supplied or observed evidence, return conditional alternatives and the missing proof obligations; never invent invariants or proof."
+  ],
+  "observableOutputContract": [
+    "An explicit identity baseline with current performance, failure, or complexity evidence.",
+    "A material invariant and preservation ledger defining what every eligible representation must retain.",
+    "A bounded set of alternate representations with forward and reverse mappings, information loss, and newly natural operations.",
+    "A comparison matrix that includes the identity baseline and uses the same material success criteria for every candidate.",
+    "Identity, equivalence, and mapped-back proof statuses labeled evidenced, conditional, unverified, contradicted, or blocked.",
+    "A selected representation or no-shift verdict, with mapped-back validation and the strongest rejected alternative."
+  ],
+  "solExecutionContract": [
+    "Apply the applicability gate first. Record the current representation as the identity baseline, its observed difficulty, the task objective, and material success criteria; retain it as a candidate throughout evaluation.",
+    "Identify only evidence-supported hidden structure and define the invariants and information that every eligible representation must preserve before proposing a shift.",
+    "Construct a bounded set of materially different representations—structural, geometric, algebraic, state-transition, optimization, probabilistic, dual, compressed, expanded, or adjacent-field only where relevant.",
+    "For each candidate, including the identity baseline, provide the forward and reverse mapping, information loss, newly visible invariants, operations made natural, assumptions introduced, and proof status.",
+    "Select only when observed or derivable evidence shows a material improvement under the same criteria; prefer the identity baseline when alternatives add novelty without proven reduction, and combine representations only through precise interfaces.",
+    "Derive and map back the result, validate preservation and equivalence, attack introduced assumptions, and return a conditional or no-shift verdict when proof is unavailable; never claim a representation shift succeeded from plausibility alone."
+  ],
+  "failureAndAdversarialChecklist": [
+    "Reject requirement loss, unsupported claims, fabricated evidence, or unapproved authority expansion.",
+    "Test boundary cases, counterexamples, failure modes, and the strongest plausible rejected alternative.",
+    "Require observable acceptance evidence and state unresolved uncertainty explicitly.",
+    "Do not use when the current representation is already direct and the remaining work is routine execution."
+  ],
+  "profileAdaptations": {
+    "single": "One Sol agent owns synthesis and uses independent internal passes without claiming nonexistent agents.",
+    "multi": "Delegate only genuinely independent bounded workstreams; preserve provenance, handoffs, integration tests, and root synthesis.",
+    "ultra": "Production Ultra uses full_approved_capsule semantics only after a signed and verified native capability attestation and user authorization bind the canonical capsule, complete budget, kill switch, and lease policy plus branch termination and root acceptance; proof_only is a development and validation mode, never the production default."
+  },
+  "sharedControlVersion": "solforge-origin-controls-v1",
+  "promotion": {
+    "status": "production",
+    "promotedAt": "2026-07-15T12:00:00.000Z",
+    "receiptPath": "promotion-receipt.json",
+    "rollbackTarget": "candidate-1.1.0"
+  }
+}

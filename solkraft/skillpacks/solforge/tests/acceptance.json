@@ -1,0 +1,468 @@
+[
+  {
+    "text": "Find out what makes the application freeze when I click Save",
+    "want": [
+      "solforge-workflow-software-diagnose"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Track down the cause of this stack trace",
+    "want": [
+      "solforge-workflow-software-diagnose"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "The service throws an exception at startup; investigate it",
+    "want": [
+      "solforge-workflow-software-diagnose"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Add support for downloading records as CSV",
+    "want": [
+      "solforge-workflow-software-build"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Make this endpoint return paginated results",
+    "want": [
+      "solforge-workflow-software-build"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Restructure these modules without changing behavior",
+    "want": [
+      "solforge-workflow-software-refactor"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Check that the fix did not break existing functionality",
+    "want": [
+      "solforge-workflow-software-test"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Look for authentication bypasses in this endpoint",
+    "want": [
+      "solforge-workflow-software-security"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Find authoritative up-to-date information about battery recycling",
+    "want": [
+      "sol-search"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Look up the latest supported Python release",
+    "want": [
+      "sol-search"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Can you substantiate the assertions in this article?",
+    "want": [
+      "solforge-workflow-writing-factcheck"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Survey published studies and synthesize where they disagree",
+    "want": [
+      "solforge-workflow-science-literature"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Check this proof for a hidden assumption",
+    "want": [
+      "solforge-workflow-math-verify"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Show that the theorem follows from these axioms",
+    "want": [
+      "solforge-workflow-math-prove"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Find a construction that disproves this conjecture",
+    "want": [
+      "solforge-workflow-math-counterexample"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Work out the closed-form solution to this equation",
+    "want": [
+      "solforge-workflow-math-solve"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Find duplicates, nulls, and inconsistent types in these records",
+    "want": [
+      "solforge-workflow-data-validate"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Fit a forecast to next quarter sales",
+    "want": [
+      "solforge-workflow-data-model"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Plot revenue over time with clear units",
+    "want": [
+      "solforge-workflow-data-visualize"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Evaluate demand and competing vendors for this business",
+    "want": [
+      "solforge-workflow-business-market"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Pressure-test the investment thesis and red flags",
+    "want": [
+      "solforge-workflow-business-diligence"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Contrast privacy obligations in California and the EU",
+    "want": [
+      "solforge-workflow-legal-compare"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Translate this product brief into measurable interface requirements",
+    "want": [
+      "solforge-workflow-engineering-requirements"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Polish the prose and strengthen the argument in this manuscript",
+    "want": [
+      "solforge-workflow-writing-review"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Turn the technical paper into a repository landing page",
+    "want": [
+      "solforge-workflow-whitepaper-to-readme"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Make this Windows desktop program run on macOS",
+    "want": [
+      "solforge-workflow-software-native-port"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Assess which operating systems our library can support",
+    "want": [
+      "solforge-workflow-software-portability-audit"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Generate an SBOM and verify artifact digests",
+    "want": [
+      "solforge-sign-and-prove"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Create a one-agent execution prompt",
+    "want": [
+      "solforge-prompt-single"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Write a prompt for several cooperating agents",
+    "want": [
+      "solforge-prompt-multi"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Implement the feature; then refactor duplicated code; then test the repository",
+    "want": [
+      "solforge-workflow-software-build",
+      "solforge-workflow-software-refactor",
+      "solforge-workflow-software-test"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Do not implement anything; just research the options",
+    "want": [
+      "sol-search"
+    ],
+    "avoid": [
+      "solforge-workflow-software-build",
+      "solforge-build"
+    ],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Skip research and implement CSV export",
+    "want": [
+      "solforge-workflow-software-build"
+    ],
+    "avoid": [
+      "sol-search"
+    ],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Do not refactor this code; diagnose the crash",
+    "want": [
+      "solforge-workflow-software-diagnose"
+    ],
+    "avoid": [
+      "solforge-workflow-software-refactor"
+    ],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Do not use solforge-build; use sol-search",
+    "want": [
+      "sol-search"
+    ],
+    "avoid": [
+      "solforge-build"
+    ],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "The implementation is already complete; now test the repository",
+    "want": [
+      "solforge-workflow-software-test"
+    ],
+    "avoid": [
+      "solforge-workflow-software-build"
+    ],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Write a prompt to implement and test a repository",
+    "want": [
+      "solforge-prompt"
+    ],
+    "avoid": [
+      "solforge-workflow-software-build",
+      "solforge-workflow-software-test"
+    ],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Summarize this text: \"implement a feature and run tests in the repository\"",
+    "want": [],
+    "avoid": [
+      "solforge-workflow-software-build",
+      "solforge-workflow-software-test"
+    ],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Explain what solforge-build does",
+    "want": [],
+    "avoid": [
+      "solforge-build",
+      "solforge-workflow-software-build"
+    ],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "What time is it?",
+    "want": [],
+    "avoid": [
+      "sol-search"
+    ],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Thanks!",
+    "want": [],
+    "avoid": [
+      "sol-search"
+    ],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Fix it",
+    "want": [
+      "solforge-workflow-software-build"
+    ],
+    "avoid": [],
+    "context": {
+      "domain": "software"
+    },
+    "exact": true
+  },
+  {
+    "text": "Fix it",
+    "want": [],
+    "avoid": [
+      "solforge-workflow-software-build"
+    ],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Make it better",
+    "want": [],
+    "avoid": [
+      "solforge-workflow-software-build",
+      "sol-search"
+    ],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Do not deploy. Draft release notes.",
+    "want": [
+      "solforge-workflow-writing-draft"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Review the draft, then verify the citations",
+    "want": [
+      "solforge-workflow-writing-review",
+      "solforge-workflow-writing-factcheck"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Research how to implement authentication in this API",
+    "want": [
+      "sol-search"
+    ],
+    "avoid": [
+      "solforge-workflow-software-build"
+    ],
+    "exact": true
+  },
+  {
+    "text": "No implementation; just research the repository options",
+    "want": [
+      "sol-search"
+    ],
+    "avoid": [
+      "solforge-workflow-software-build"
+    ],
+    "exact": true
+  },
+  {
+    "text": "Plan how to implement CSV export in this repository",
+    "want": [
+      "solforge-propose"
+    ],
+    "avoid": [
+      "solforge-workflow-software-build"
+    ],
+    "exact": true
+  }
+]

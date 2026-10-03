@@ -1,0 +1,32 @@
+{
+  "schema_version": "hardware-render-lineage.v1",
+  "product": "PRODUCT_NAME",
+  "revision": "REVISION",
+  "geometry_authority": {
+    "path": "PENDING",
+    "sha256": "PENDING"
+  },
+  "render_pipeline": {
+    "software": "PENDING",
+    "script": "PENDING",
+    "mesh_export_report": "PENDING",
+    "method": "CAD-derived meshes with presentation-only materials, lighting, labels, UI, and context"
+  },
+  "render_inputs": [],
+  "renders": [
+    {
+      "path": "PENDING",
+      "sha256": "PENDING",
+      "view": "PENDING",
+      "geometry_authority_sha256": "PENDING",
+      "geometry_modified_for_presentation": false
+    }
+  ],
+  "visual_review": {
+    "reviewer": "PENDING",
+    "date": "PENDING",
+    "result": "PENDING",
+    "notes": "PENDING"
+  },
+  "claim_boundary": "Render lineage records digital ancestry only; it is not physical-product evidence."
+}

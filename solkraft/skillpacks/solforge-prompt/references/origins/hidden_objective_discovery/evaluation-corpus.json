@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "1.0",
+  "originId": "hidden_objective_discovery",
+  "originVersion": "1.0.0",
+  "status": "accepted",
+  "cases": [
+    {
+      "id": "hidden_objective_discovery-1",
+      "objective": "Produce a rigorous product strategy result with explicit constraints, evidence, falsification, and acceptance criteria.",
+      "intendedOrigin": "hidden_objective_discovery",
+      "acceptableSecondaryOrigins": [
+        "closed_world_grand_challenge"
+      ],
+      "disallowedOrigins": [],
+      "rationale": "Hidden-Objective Discovery directly matches the product strategy operating mode.",
+      "difficulty": "medium",
+      "ambiguity": "low"
+    },
+    {
+      "id": "hidden_objective_discovery-2",
+      "objective": "Produce a rigorous kpi design result with explicit constraints, evidence, falsification, and acceptance criteria.",
+      "intendedOrigin": "hidden_objective_discovery",
+      "acceptableSecondaryOrigins": [
+        "closed_world_grand_challenge"
+      ],
+      "disallowedOrigins": [],
+      "rationale": "Hidden-Objective Discovery directly matches the kpi design operating mode.",
+      "difficulty": "medium",
+      "ambiguity": "medium"
+    },
+    {
+      "id": "hidden_objective_discovery-3",
+      "objective": "Produce a rigorous automation decisions result with explicit constraints, evidence, falsification, and acceptance criteria.",
+      "intendedOrigin": "hidden_objective_discovery",
+      "acceptableSecondaryOrigins": [
+        "closed_world_grand_challenge"
+      ],
+      "disallowedOrigins": [],
+      "rationale": "Hidden-Objective Discovery directly matches the automation decisions operating mode.",
+      "difficulty": "hard",
+      "ambiguity": "low"
+    }
+  ]
+}

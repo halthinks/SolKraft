@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge Portability Audit
+  short_description: Audit platform coupling, runtime assumptions, dependencies, a.
+  default_prompt: Use $solforge-portability-audit for this task with native tools
+    and verify the result.
+policy:
+  allow_implicit_invocation: true

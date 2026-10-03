@@ -1,0 +1,45 @@
+{
+  "schema_version": "hardware-realization-manifest.v1",
+  "product": "PRODUCT_NAME",
+  "revision": "REVISION",
+  "closure_level": "CONCEPT",
+  "root_datum": "Describe coordinate system and origins",
+  "authority": {
+    "product_lock": "path-or-id",
+    "software_contracts": [],
+    "user_journey": "path-or-id"
+  },
+  "requirements": [],
+  "components": [],
+  "interfaces": [],
+  "geometry": {
+    "master_assembly": "PENDING",
+    "custom_part_exports": [],
+    "supplier_geometry": [],
+    "overall_envelope_mm": {"x": null, "y": null, "z": null},
+    "dimensionally_closed": false
+  },
+  "analysis": {
+    "collision_report": "PENDING",
+    "balance_report": "PENDING",
+    "power_report": "PENDING",
+    "thermal_report": "PENDING",
+    "pcb_status": "PENDING"
+  },
+  "presentation": {
+    "render_lineage": "PENDING",
+    "released_renders": [],
+    "geometry_unchanged_for_presentation": false
+  },
+  "acceptance": {
+    "ledger": "PENDING",
+    "required_test_ids": [],
+    "executed_test_ids": [],
+    "raw_evidence": []
+  },
+  "claims": {
+    "supported": [],
+    "prohibited_until_evidence": []
+  },
+  "open_gates": []
+}

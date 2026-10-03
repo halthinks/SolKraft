@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "originId": "solo_saas_blueprint",
+  "originVersion": "1.0.0",
+  "status": "accepted",
+  "cases": [
+    {
+      "id": "solo-saas-blueprint-1",
+      "objective": "Turn this SaaS prototype into the smallest complete secure production service a solo creator can deploy, operate, monitor, recover, and sell without enterprise bloat.",
+      "intendedOrigin": "solo_saas_blueprint",
+      "acceptableSecondaryOrigins": [
+        "autonomous_mission"
+      ],
+      "disallowedOrigins": [
+        "product_systems_masterplan",
+        "one_shot_ambitious_artifact"
+      ],
+      "rationale": "Solo ownership and production completeness under anti-bloat constraints are explicit.",
+      "difficulty": "hard",
+      "ambiguity": "low"
+    },
+    {
+      "id": "solo-saas-blueprint-2",
+      "objective": "Design a lean SaaS architecture for a very small team using a modular monolith and managed services, with scoped public APIs, safe MCP tools, billing, observability, backups, and explicit cost triggers.",
+      "intendedOrigin": "solo_saas_blueprint",
+      "acceptableSecondaryOrigins": [
+        "first_principles_mechanism"
+      ],
+      "disallowedOrigins": [
+        "product_systems_masterplan"
+      ],
+      "rationale": "The request declares the origin's architecture, API/MCP, and cost-control mechanism.",
+      "difficulty": "hard",
+      "ambiguity": "low"
+    },
+    {
+      "id": "solo-saas-blueprint-3",
+      "objective": "Create a solo-founder production blueprint that protects accounts and paid access, supports preview deployments, CI, tests, rollback, support, data export and deletion, and grows without an immediate rewrite.",
+      "intendedOrigin": "solo_saas_blueprint",
+      "acceptableSecondaryOrigins": [
+        "recursive_judge_builder"
+      ],
+      "disallowedOrigins": [
+        "closed_world_grand_challenge"
+      ],
+      "rationale": "The request is a minimum trustworthy SaaS lifecycle for one operator.",
+      "difficulty": "hard",
+      "ambiguity": "medium"
+    }
+  ]
+}

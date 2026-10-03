@@ -1,0 +1,6 @@
+interface:
+  display_name: "InForge Ultra"
+  short_description: "Transpose requests into native Ultra prompts"
+  default_prompt: "Use $inforge-ultra to transpose this request through the full source prompt for verified native Ultra orchestration."
+policy:
+  allow_implicit_invocation: false

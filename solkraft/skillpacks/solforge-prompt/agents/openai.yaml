@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge Prompt
+  short_description: Write a portable execution prompt from an objective; use when.
+  default_prompt: Use $solforge-prompt for this task with native tools and verify
+    the result.
+policy:
+  allow_implicit_invocation: true

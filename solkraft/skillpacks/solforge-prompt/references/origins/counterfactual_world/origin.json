@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "1.0",
+  "id": "counterfactual_world",
+  "displayName": "Counterfactual World",
+  "version": "1.1.0",
+  "status": "production",
+  "selectable": true,
+  "flagship": false,
+  "operatingIdea": "Stress the solution across alternate worlds and extract what survives.",
+  "bestFor": "Costly or irreversible decisions exposed to changing technology, regulation, scale, incentives, or resource constraints.",
+  "useCases": [
+    "Long-term strategy",
+    "Emerging technology",
+    "Investment thesis",
+    "Migration-ready architecture"
+  ],
+  "produces": "A robust core, thresholds where the preferred solution changes, adaptation paths, and monitored invalidation signals.",
+  "antiUseCases": [
+    "Do not use when the decision is cheap, reversible, and insensitive to plausible world changes."
+  ],
+  "representativeRequest": "Use Counterfactual World to long-term strategy with explicit evidence and acceptance gates.",
+  "downstreamLineage": [
+    "Origin-locked objective",
+    "Single, Multi, or Ultra profile",
+    "Effort contract",
+    "Exact hardened prompt",
+    "Hash-bound capsule",
+    "Approval and native Goal",
+    "Contextual workflow tree",
+    "Governed execution and deliverable"
+  ],
+  "priority": 10,
+  "routingSignals": [
+    {
+      "pattern": "\\b(future|scenario|counterfactual|uncertain|roadmap|forecast)\\b",
+      "flags": "iu",
+      "weight": 7
+    },
+    {
+      "pattern": "\\b(scale|regulation|technology|market|investment)\\b",
+      "flags": "iu",
+      "weight": 4
+    },
+    {
+      "pattern": "\\b(migration|threshold|option value|robust)\\b",
+      "flags": "iu",
+      "weight": 4
+    }
+  ],
+  "requiredReasoningRoles": [
+    "scenario architect",
+    "world-specific solver",
+    "invariant extractor",
+    "migration-trigger auditor"
+  ],
+  "applicabilityGate": [
+    "Use only for a materially costly, durable, or difficult-to-reverse decision that may change under uncertainty.",
+    "Require at least one decisive dependency with evidence-supported alternatives, bounds, or sensitivity ranges.",
+    "Route away when the decision is cheap, reversible, or demonstrably insensitive to plausible changes."
+  ],
+  "solExecutionContract": [
+    "Bind the common objective, constraints, decision, and acceptance basis, then identify only dependencies whose variation could change the preferred decision.",
+    "Select two to four coherent counterfactual worlds, each changing a decisive assumption supported by supplied evidence, observed alternatives, or credible bounds; do not generate a generic scenario catalog.",
+    "If credible world facts or bounds are insufficient, replace narrative worlds with sensitivity analysis over explicit variables and ranges, and label the result as sensitivity rather than scenario evidence.",
+    "Solve the same decision within each selected world or range, preserving common objective constraints, and compare outcomes, regret, option value, and adaptation cost.",
+    "Identify invariants, thresholds where the preferred solution changes, fragile dependencies, reversible decisions, lock-in, invalidation signals, and migration triggers.",
+    "Synthesize a robust core with explicit adaptations and state the smallest evidence-supported change that destroys its value, including survival, migration, warning, or honest scope."
+  ],
+  "observableOutputContract": [
+    "Decisive-assumption and dependency ledger with evidence or ranges",
+    "Two to four world cards, or an explicitly labeled sensitivity grid",
+    "Cross-world decision matrix with thresholds, regret, adaptation cost, and invalidation signals",
+    "Robust core with migration triggers and the smallest value-destroying change"
+  ],
+  "failureAndAdversarialChecklist": [
+    "Reject requirement loss, unsupported claims, fabricated evidence, or unapproved authority expansion.",
+    "Test boundary cases, counterexamples, failure modes, and the strongest plausible rejected alternative.",
+    "Require observable acceptance evidence and state unresolved uncertainty explicitly.",
+    "Do not use when the decision is cheap, reversible, and insensitive to plausible world changes."
+  ],
+  "profileAdaptations": {
+    "single": "One Sol agent owns synthesis and uses independent internal passes without claiming nonexistent agents.",
+    "multi": "Delegate only genuinely independent bounded workstreams; preserve provenance, handoffs, integration tests, and root synthesis.",
+    "ultra": "Production Ultra uses full_approved_capsule semantics only after a signed and verified native capability attestation and user authorization bind the canonical capsule, complete budget, kill switch, and lease policy plus branch termination and root acceptance; proof_only is a development and validation mode, never the production default."
+  },
+  "sharedControlVersion": "solforge-origin-controls-v1",
+  "promotion": {
+    "status": "production",
+    "promotedAt": "2026-07-15T12:00:00.000Z",
+    "receiptPath": "promotion-receipt.json",
+    "rollbackTarget": "candidate-1.1.0"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "1.0",
+  "originId": "first_principles_mechanism",
+  "originVersion": "1.0.0",
+  "status": "accepted",
+  "cases": [
+    {
+      "id": "first_principles_mechanism-1",
+      "objective": "Produce a rigorous root-cause diagnosis result with explicit constraints, evidence, falsification, and acceptance criteria.",
+      "intendedOrigin": "first_principles_mechanism",
+      "acceptableSecondaryOrigins": [
+        "closed_world_grand_challenge"
+      ],
+      "disallowedOrigins": [],
+      "rationale": "First-Principles Mechanism directly matches the root-cause diagnosis operating mode.",
+      "difficulty": "medium",
+      "ambiguity": "low"
+    },
+    {
+      "id": "first_principles_mechanism-2",
+      "objective": "Produce a rigorous scientific mechanism result with explicit constraints, evidence, falsification, and acceptance criteria.",
+      "intendedOrigin": "first_principles_mechanism",
+      "acceptableSecondaryOrigins": [
+        "closed_world_grand_challenge"
+      ],
+      "disallowedOrigins": [],
+      "rationale": "First-Principles Mechanism directly matches the scientific mechanism operating mode.",
+      "difficulty": "medium",
+      "ambiguity": "medium"
+    },
+    {
+      "id": "first_principles_mechanism-3",
+      "objective": "Produce a rigorous engineering invention result with explicit constraints, evidence, falsification, and acceptance criteria.",
+      "intendedOrigin": "first_principles_mechanism",
+      "acceptableSecondaryOrigins": [
+        "closed_world_grand_challenge"
+      ],
+      "disallowedOrigins": [],
+      "rationale": "First-Principles Mechanism directly matches the engineering invention operating mode.",
+      "difficulty": "hard",
+      "ambiguity": "low"
+    }
+  ]
+}

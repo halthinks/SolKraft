@@ -1,0 +1,4 @@
+interface:
+  display_name: "Audit Git Worktrees"
+  short_description: "Evidence-bound Git worktree inventory and triage"
+  default_prompt: "Use $audit-git-worktrees to audit every registered worktree for this canonical repository without modifying any worktree."

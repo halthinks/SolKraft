@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Software Diagnose'
+  short_description: Trace behavior, ownership, history, data flow, and failure ev.
+  default_prompt: Use $solforge-workflow-software-diagnose for this task with native
+    tools and verify the result.
+policy:
+  allow_implicit_invocation: true

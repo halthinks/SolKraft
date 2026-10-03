@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Software Test'
+  short_description: Design and run proportional tests, regression checks, adversa.
+  default_prompt: Use $solforge-workflow-software-test for this task with native tools
+    and verify the result.
+policy:
+  allow_implicit_invocation: true

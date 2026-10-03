@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Software Target Verify'
+  short_description: Build and verify exact target artifacts with explicit cross-b.
+  default_prompt: Use $solforge-workflow-software-target-verify for this task with
+    native tools and verify the result.
+policy:
+  allow_implicit_invocation: true

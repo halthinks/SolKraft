@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Math Verify'
+  short_description: Check every inference, dependency, edge case, and hidden assu.
+  default_prompt: Use $solforge-workflow-math-verify for this task with native tools
+    and verify the result.
+policy:
+  allow_implicit_invocation: true

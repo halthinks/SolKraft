@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Finish'
+  short_description: Explicitly accept the completed result as the final deliverab.
+  default_prompt: Use $solforge-workflow-finish for this task with native tools and
+    verify the result.
+policy:
+  allow_implicit_invocation: true

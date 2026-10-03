@@ -1,0 +1,4 @@
+interface:
+  display_name: "Build DayQ Mesh"
+  short_description: "Build resilient mesh data and base intranets"
+  default_prompt: "Use $build-dayq-resilient-mesh-intranet to implement or validate a DayQ low-bandwidth mesh, repeater, gateway, or physical base-intranet route."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "DayQ Exoskeleton Progression"
+  short_description: "Design core DayQ exos and combat roles"
+  default_prompt: "Use $dayq-exoskeleton-progression-combat to design and validate this DayQ exoskeleton feature."

@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1.0",
+  "originId": "solo_saas_blueprint",
+  "version": "1.1.0",
+  "decision": "promote",
+  "evidence": "AUTO routing and protected prompt-contract benchmark gates passed; promotion does not claim universal downstream model superiority.",
+  "decidedAt": "2026-07-15T12:00:00.000Z",
+  "manifestHash": "884d5e175888dbc07fc06cfd8d2b5ab07aa5655a3b5d8a1ac195505e638b41df",
+  "benchmarkSha256": "5fb87974c3f9c28c2242a4ba62a138dadce90b6958312cc10fa6e817a4238d16",
+  "evaluationPackageSha256": "32c5255178771da736febecc6662749a4f2929d1c7a061ab108c30d0108dc2eb",
+  "rollbackTarget": "candidate-1.1.0",
+  "receiptHash": "879ef137ddae4e88a0e1d54b01750df62219c137af0057d4121d334715dc645d"
+}

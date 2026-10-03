@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge Run Refactor
+  short_description: Execute a scoped behavior-preserving repository refactor with.
+  default_prompt: Use $solforge-run-refactor for this task with native tools and verify
+    the result.
+policy:
+  allow_implicit_invocation: true

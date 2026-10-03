@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "1.0",
+  "originId": "independent_discovery_synthesis",
+  "originVersion": "1.0.0",
+  "status": "accepted",
+  "cases": [
+    {
+      "id": "independent_discovery_synthesis-1",
+      "objective": "Produce a rigorous multi-hypothesis research result with explicit constraints, evidence, falsification, and acceptance criteria.",
+      "intendedOrigin": "independent_discovery_synthesis",
+      "acceptableSecondaryOrigins": [
+        "closed_world_grand_challenge"
+      ],
+      "disallowedOrigins": [],
+      "rationale": "Independent Discovery and Adversarial Synthesis directly matches the multi-hypothesis research operating mode.",
+      "difficulty": "medium",
+      "ambiguity": "low"
+    },
+    {
+      "id": "independent_discovery_synthesis-2",
+      "objective": "Produce a rigorous repository comparison result with explicit constraints, evidence, falsification, and acceptance criteria.",
+      "intendedOrigin": "independent_discovery_synthesis",
+      "acceptableSecondaryOrigins": [
+        "closed_world_grand_challenge"
+      ],
+      "disallowedOrigins": [],
+      "rationale": "Independent Discovery and Adversarial Synthesis directly matches the repository comparison operating mode.",
+      "difficulty": "medium",
+      "ambiguity": "medium"
+    },
+    {
+      "id": "independent_discovery_synthesis-3",
+      "objective": "Produce a rigorous strategic alternatives result with explicit constraints, evidence, falsification, and acceptance criteria.",
+      "intendedOrigin": "independent_discovery_synthesis",
+      "acceptableSecondaryOrigins": [
+        "closed_world_grand_challenge"
+      ],
+      "disallowedOrigins": [],
+      "rationale": "Independent Discovery and Adversarial Synthesis directly matches the strategic alternatives operating mode.",
+      "difficulty": "hard",
+      "ambiguity": "low"
+    }
+  ]
+}

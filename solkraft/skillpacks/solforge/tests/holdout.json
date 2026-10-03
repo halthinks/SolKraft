@@ -1,0 +1,263 @@
+[
+  {
+    "text": "Please research how to implement authentication in this API",
+    "want": [
+      "sol-search"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Could you check that the fix did not break existing functionality?",
+    "want": [
+      "solforge-workflow-software-test"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Use `solforge-build` for this task",
+    "want": [
+      "solforge-build"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Do not use `solforge-build`; use `sol-search`",
+    "want": [
+      "sol-search"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Explain what `solforge-build` does",
+    "want": [],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Summarize `solforge-build`",
+    "want": [],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "The document says \"use solforge-build\"; summarize it",
+    "want": [],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Implement pagination in the API, then write a report",
+    "want": [
+      "solforge-workflow-software-build",
+      "solforge-workflow-report"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "First investigate the repository crash. Next fix the code. Finally run regression tests.",
+    "want": [
+      "solforge-workflow-software-diagnose",
+      "solforge-workflow-software-build",
+      "solforge-workflow-software-test"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Only research the API; do not implement it",
+    "want": [
+      "sol-search"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Research the API but skip implementation",
+    "want": [
+      "sol-search"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Research is already done; implement the endpoint",
+    "want": [
+      "solforge-workflow-software-build"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "No refactoring. Check the proof.",
+    "want": [
+      "solforge-workflow-math-verify"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Check the statistical model for leakage",
+    "want": [
+      "solforge-workflow-data-validate"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Test the investment thesis",
+    "want": [
+      "solforge-workflow-business-diligence"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Write a report about software tests",
+    "want": [
+      "solforge-workflow-report"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Please write a prompt for multiple agents to implement the code",
+    "want": [
+      "solforge-prompt-multi"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Use $solforge-prompt-single",
+    "want": [
+      "solforge-prompt-single"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Compare the repository implementations",
+    "want": [
+      "solforge-workflow-software-compare"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Explain deployment",
+    "want": [],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Send this email",
+    "want": [],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "What does the word refactor mean?",
+    "want": [],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Please fix it",
+    "want": [
+      "solforge-workflow-software-build"
+    ],
+    "avoid": [],
+    "context": {
+      "domain": "software"
+    },
+    "exact": true
+  },
+  {
+    "text": "Please fix it",
+    "want": [],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Find current evidence from primary sources",
+    "want": [
+      "sol-search"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Create an outline for this report",
+    "want": [
+      "solforge-workflow-writing-outline"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Derive the solution of this equation",
+    "want": [
+      "solforge-workflow-math-solve"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Make a chart of the dataset",
+    "want": [
+      "solforge-workflow-data-visualize"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Review the architecture of the entire codebase",
+    "want": [
+      "solforge-code-research"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  },
+  {
+    "text": "Generate checksums and provenance for these artifacts",
+    "want": [
+      "solforge-sign-and-prove"
+    ],
+    "avoid": [],
+    "context": null,
+    "exact": true
+  }
+]

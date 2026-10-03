@@ -1,0 +1,5 @@
+$ErrorActionPreference = 'Stop'
+# Render only from a hash-bound release manifest. Download to a temporary file,
+# verify SHA-256, then execute or install. Never bypass execution policy globally.
+$ArtifactUrl = '{{ARTIFACT_URL}}'
+$ArtifactSha256 = '{{ARTIFACT_SHA256}}'

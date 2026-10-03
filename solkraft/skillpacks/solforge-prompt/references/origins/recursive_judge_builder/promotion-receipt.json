@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1.0",
+  "originId": "recursive_judge_builder",
+  "version": "1.1.0",
+  "decision": "promote",
+  "evidence": "AUTO routing and protected prompt-contract benchmark gates passed; promotion does not claim universal downstream model superiority.",
+  "decidedAt": "2026-07-15T12:00:00.000Z",
+  "manifestHash": "e66c87daa22303de75d028a59f42ad38dbb49f61ede7da85041bfbbffcbf6930",
+  "benchmarkSha256": "1b276fd9b9887a7f81e5e48ff008b491b1c9d4caf0271ec94c41ff4b17b6b720",
+  "evaluationPackageSha256": "32c5255178771da736febecc6662749a4f2929d1c7a061ab108c30d0108dc2eb",
+  "rollbackTarget": "candidate-1.1.0",
+  "receiptHash": "25fb1dfda27f6b4b530da45aafcbb7e555475f8f6088ea0b12608f8d39c00b22"
+}

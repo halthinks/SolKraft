@@ -1,0 +1,3 @@
+# Fire integration ownership
+
+Fire owns combustion-local state and derived physical outputs. Existing systems retain item/fuel identity and transactions; construction/placement/permissions; health/wounds/death; survival/body temperature; clothing; weather/water; combat damage; AI perception/behavior; raids/offline rules; economy; and persistence infrastructure. Shared adapters carry material-region events, heat/smoke evidence, resource reservations, damage requests, acoustic events, sleeping interruption, AI/sensor evidence, and journal commits. Asset production routes through `build-dayq-systemic-asset-factory`; runtime evidence routes through `dayq-unreal-mcp-production-validation`.

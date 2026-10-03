@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Solforge Plugin Development'
+  short_description: Change, test, package, install, and verify the SolForge plugi.
+  default_prompt: Use $solforge-workflow-solforge-plugin-development for this task
+    with native tools and verify the result.
+policy:
+  allow_implicit_invocation: true

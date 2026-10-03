@@ -1,0 +1,4 @@
+interface:
+  display_name: "Armor DayQ Exos and Mechs"
+  short_description: "Integrate armor with powered frames and mechs"
+  default_prompt: "Use armor-dayq-exos-and-mechs to execute its DayQ contract without replacing existing authoritative owners."

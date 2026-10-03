@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.solforge/adaptive-capsule-root.schema.json",
+  "title": "SolForge adaptive capsule root",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "kind", "capsuleVersion", "rootRevision", "kernel", "recipe", "contextCatalog", "branches", "expansionReceipts", "specialistsRecommendOnly", "authorityExpansionAuthorized", "branchHashes", "dependencyGraph", "omissionManifest", "rootHash"],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "kind": { "const": "solforge-adaptive-capsule" },
+    "capsuleVersion": { "const": "solforge-adaptive-capsule-v1" },
+    "rootRevision": { "type": "integer", "minimum": 1 },
+    "kernel": { "type": "object" },
+    "recipe": { "type": "object" },
+    "contextCatalog": { "type": "object" },
+    "branches": { "type": "object", "minProperties": 5, "maxProperties": 5 },
+    "expansionReceipts": { "type": "array" },
+    "specialistsRecommendOnly": { "const": true },
+    "authorityExpansionAuthorized": { "const": false },
+    "branchHashes": { "type": "object", "minProperties": 5, "maxProperties": 5, "additionalProperties": { "$ref": "#/$defs/hash" } },
+    "dependencyGraph": { "type": "object", "minProperties": 5, "maxProperties": 5 },
+    "omissionManifest": { "type": "object", "required": ["complete", "roles", "omissionManifestHash"] },
+    "rootHash": { "$ref": "#/$defs/hash" }
+  },
+  "$defs": { "hash": { "type": "string", "pattern": "^[0-9a-f]{64}$" } }
+}

@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Software Security'
+  short_description: Inspect threat boundaries, unsafe flows, dependencies, exploi.
+  default_prompt: Use $solforge-workflow-software-security for this task with native
+    tools and verify the result.
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge README
+  short_description: Convert reports and architecture evidence into a README with.
+  default_prompt: Use $solforge-readme for this task with native tools and verify
+    the result.
+policy:
+  allow_implicit_invocation: true

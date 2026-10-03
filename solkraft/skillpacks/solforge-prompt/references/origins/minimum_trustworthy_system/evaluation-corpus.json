@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "1.0",
+  "originId": "minimum_trustworthy_system",
+  "originVersion": "1.0.0",
+  "status": "accepted",
+  "cases": [
+    {
+      "id": "minimum-trustworthy-system-1",
+      "objective": "Turn these fragmented requirements into the minimum trustworthy system that can deliver the intended outcome repeatedly, operate in its real context, recover from failure, and evolve without unnecessary complexity.",
+      "intendedOrigin": "minimum_trustworthy_system",
+      "acceptableSecondaryOrigins": [
+        "product_systems_masterplan"
+      ],
+      "disallowedOrigins": [
+        "solo_saas_blueprint",
+        "one_shot_ambitious_artifact"
+      ],
+      "rationale": "The request explicitly asks for the generalized minimum-trustworthy-system mechanism rather than a SaaS or single artifact.",
+      "difficulty": "hard",
+      "ambiguity": "low"
+    },
+    {
+      "id": "minimum-trustworthy-system-2",
+      "objective": "Design the smallest complete system for a community intake and response program, including human roles, handoffs, information boundaries, proportional safeguards, feedback, failure recovery, and measurable expansion triggers.",
+      "intendedOrigin": "minimum_trustworthy_system",
+      "acceptableSecondaryOrigins": [
+        "first_principles_mechanism"
+      ],
+      "disallowedOrigins": [
+        "solo_saas_blueprint",
+        "autonomous_mission"
+      ],
+      "rationale": "This is a noncommercial mixed human-information system whose completeness and trust boundary control the work.",
+      "difficulty": "hard",
+      "ambiguity": "medium"
+    },
+    {
+      "id": "minimum-trustworthy-system-3",
+      "objective": "Create a minimum viable system for a field research workflow that works under constrained staffing, keeps a clear source of truth, detects silent failure, supports recovery and succession, and excludes unjustified software or process.",
+      "intendedOrigin": "minimum_trustworthy_system",
+      "acceptableSecondaryOrigins": [
+        "independent_discovery_synthesis"
+      ],
+      "disallowedOrigins": [
+        "solo_saas_blueprint",
+        "one_shot_ambitious_artifact"
+      ],
+      "rationale": "The objective centers a lean, reliable operating system across people, evidence, and procedures rather than a business type or single skill.",
+      "difficulty": "hard",
+      "ambiguity": "medium"
+    }
+  ]
+}

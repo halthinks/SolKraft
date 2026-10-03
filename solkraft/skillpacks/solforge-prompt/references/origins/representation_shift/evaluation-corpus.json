@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "1.0",
+  "originId": "representation_shift",
+  "originVersion": "1.0.0",
+  "status": "accepted",
+  "cases": [
+    {
+      "id": "representation_shift-1",
+      "objective": "Produce a rigorous algorithm invention result with explicit constraints, evidence, falsification, and acceptance criteria.",
+      "intendedOrigin": "representation_shift",
+      "acceptableSecondaryOrigins": [
+        "closed_world_grand_challenge"
+      ],
+      "disallowedOrigins": [],
+      "rationale": "Representation Shift directly matches the algorithm invention operating mode.",
+      "difficulty": "medium",
+      "ambiguity": "low"
+    },
+    {
+      "id": "representation_shift-2",
+      "objective": "Produce a rigorous architecture redesign result with explicit constraints, evidence, falsification, and acceptance criteria.",
+      "intendedOrigin": "representation_shift",
+      "acceptableSecondaryOrigins": [
+        "closed_world_grand_challenge"
+      ],
+      "disallowedOrigins": [],
+      "rationale": "Representation Shift directly matches the architecture redesign operating mode.",
+      "difficulty": "medium",
+      "ambiguity": "medium"
+    },
+    {
+      "id": "representation_shift-3",
+      "objective": "Produce a rigorous scientific modeling result with explicit constraints, evidence, falsification, and acceptance criteria.",
+      "intendedOrigin": "representation_shift",
+      "acceptableSecondaryOrigins": [
+        "closed_world_grand_challenge"
+      ],
+      "disallowedOrigins": [],
+      "rationale": "Representation Shift directly matches the scientific modeling operating mode.",
+      "difficulty": "hard",
+      "ambiguity": "low"
+    }
+  ]
+}

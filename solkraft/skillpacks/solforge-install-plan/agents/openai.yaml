@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge Install Plan
+  short_description: Design installation, launch, update, uninstall, troubleshooti.
+  default_prompt: Use $solforge-install-plan for this task with native tools and verify
+    the result.
+policy:
+  allow_implicit_invocation: true

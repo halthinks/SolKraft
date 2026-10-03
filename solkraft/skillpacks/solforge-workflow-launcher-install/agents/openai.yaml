@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Launcher Install'
+  short_description: Design and implement safe acquisition, integrity, prerequisit.
+  default_prompt: Use $solforge-workflow-launcher-install for this task with native
+    tools and verify the result.
+policy:
+  allow_implicit_invocation: true

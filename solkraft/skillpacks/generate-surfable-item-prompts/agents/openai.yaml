@@ -1,0 +1,4 @@
+interface:
+  display_name: "Generate Surfable Item Prompts"
+  short_description: "Generate physics-ready prompts for any surfable item."
+  default_prompt: "Turn this item into a complete surfing-game asset and hydrodynamics prompt."

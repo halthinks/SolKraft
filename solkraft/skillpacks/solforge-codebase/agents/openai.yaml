@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge Codebase
+  short_description: Investigate repository behavior, architecture, history, owner.
+  default_prompt: Use $solforge-codebase for this task with native tools and verify
+    the result.
+policy:
+  allow_implicit_invocation: true

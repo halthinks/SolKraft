@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/halthinks/SolKraft/security/advisories/new
+    about: Report a vulnerability privately. Do not include API keys in public issues.

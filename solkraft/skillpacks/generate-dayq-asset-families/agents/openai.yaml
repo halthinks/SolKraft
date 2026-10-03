@@ -1,0 +1,4 @@
+interface:
+  display_name: "Generate DayQ Asset Families"
+  short_description: "Design DayQ asset families, variants, and modular kits."
+  default_prompt: "Use $generate-dayq-asset-families to turn catalog needs into governed production families and variants."

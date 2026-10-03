@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Launcher Package Matrix'
+  short_description: Build reproducible native, runtime-bundled, container, and ec.
+  default_prompt: Use $solforge-workflow-launcher-package-matrix for this task with
+    native tools and verify the result.
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "1.0",
+  "originId": "counterfactual_world",
+  "version": "1.1.0",
+  "status": "production",
+  "sharedControlVersion": "solforge-origin-controls-v1",
+  "files": {
+    "origin.json": "24a1975dcda869a237d0cc56fb86aa88dc41bf3ba857961cdf1b3cbceff0f23a",
+    "source-prompt.md": "93132155864b7b859abd58e27897e0f32ae3ed3292bfa3547ad2b8760736dc34",
+    "evaluation-corpus.json": "3c8d913b4e89eca7c67d61372a560fa5f58c7cead7339f88ff15928e6c782c21"
+  },
+  "rollbackTarget": "candidate-1.1.0",
+  "manifestHash": "3a15a92ae2bfecabdac8dfa65e7c59a0e5026a40a0cf943ae9b68f4da168d907",
+  "sharedControlSha256": "6b5f508cac80442753e25f943b6889ed9a7eb344a5504e8e976f17bd6a7b4376"
+}

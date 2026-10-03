@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "1.0",
+  "originId": "autonomous_mission",
+  "version": "1.1.0",
+  "status": "production",
+  "sharedControlVersion": "solforge-origin-controls-v1",
+  "files": {
+    "origin.json": "59b7eabb2ff05e1cee3d91fc05be7832006268cf1177143dcbad70736730b3dc",
+    "source-prompt.md": "25db0c6806fb2e61dc1848e743a873f930da0c67c13e012c318abf93e98bd117",
+    "evaluation-corpus.json": "5d9bba39f819f8787326975befc0a1116195e70fe96485c52452de321bce10ed"
+  },
+  "rollbackTarget": "candidate-1.1.0",
+  "manifestHash": "3301a30d98a7014cc1005e2c49d0be50feedbcae20a598c8d8bebb7663a6fd00",
+  "sharedControlSha256": "6b5f508cac80442753e25f943b6889ed9a7eb344a5504e8e976f17bd6a7b4376"
+}

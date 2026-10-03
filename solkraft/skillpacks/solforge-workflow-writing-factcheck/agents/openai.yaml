@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Writing Factcheck'
+  short_description: Verify material claims against authoritative sources and expo.
+  default_prompt: Use $solforge-workflow-writing-factcheck for this task with native
+    tools and verify the result.
+policy:
+  allow_implicit_invocation: true

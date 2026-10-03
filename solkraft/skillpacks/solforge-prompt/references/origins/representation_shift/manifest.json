@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "1.0",
+  "originId": "representation_shift",
+  "version": "1.1.0",
+  "status": "production",
+  "sharedControlVersion": "solforge-origin-controls-v1",
+  "files": {
+    "origin.json": "84d8a2968b10ef40e2e22436090341cffbec8504f54c6ee2ba72a7aab665a2e2",
+    "source-prompt.md": "9e6e94d60d222b7b9e736c9c0d7bd37afdeeb95f56b49123bbd8273c40e8725a",
+    "evaluation-corpus.json": "c570e17a6c9b7ee797e8e73345e1e110beee83c28be491b064f5d0fb2b6c268c"
+  },
+  "rollbackTarget": "candidate-1.1.0",
+  "manifestHash": "c6cc0bd0190235ac8795ca51bc8c9271fc92b1f60385f3afc885b17345c6e8b7",
+  "sharedControlSha256": "6b5f508cac80442753e25f943b6889ed9a7eb344a5504e8e976f17bd6a7b4376"
+}

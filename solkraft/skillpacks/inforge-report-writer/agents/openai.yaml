@@ -1,0 +1,4 @@
+interface:
+  display_name: "InForge Report Writer"
+  short_description: "Build evidence-governed professional reports"
+  default_prompt: "Use $inforge-report-writer to create a verified report from my research evidence."

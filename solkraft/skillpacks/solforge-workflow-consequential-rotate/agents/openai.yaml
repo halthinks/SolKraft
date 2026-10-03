@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Consequential Rotate'
+  short_description: Carry out an explicitly authorized rotate action for its exac.
+  default_prompt: Use $solforge-workflow-consequential-rotate for this task with native
+    tools and verify the result.
+policy:
+  allow_implicit_invocation: true

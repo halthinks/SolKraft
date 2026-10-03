@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge Plugin Skill Release
+  short_description: Create, update, install, and validate SolForge-owned native s.
+  default_prompt: Use $solforge-plugin-skill-release for this task with native tools
+    and verify the result.
+policy:
+  allow_implicit_invocation: true

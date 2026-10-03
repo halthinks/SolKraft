@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge Research Mastery Loop
+  short_description: Coordinate codebase research and implementation in dependency.
+  default_prompt: Use $solforge-research-mastery-loop for this task with native tools
+    and verify the result.
+policy:
+  allow_implicit_invocation: true

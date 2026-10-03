@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "1.0",
+  "originId": "first_principles_mechanism",
+  "version": "1.1.0",
+  "status": "production",
+  "sharedControlVersion": "solforge-origin-controls-v1",
+  "files": {
+    "origin.json": "d13dfce6832da94f42b5da8b3e78a8f43545a917f089b499a453898f6a9b2383",
+    "source-prompt.md": "19ee7d48336b6f7a75d9c11e1e2dc25e44f163e03865803be05840094d73e530",
+    "evaluation-corpus.json": "c1ecd0b85680e36899adab3ee15d8f6a247a97485bd07b03ccbf75bf49950488"
+  },
+  "rollbackTarget": "candidate-1.1.0",
+  "manifestHash": "6fa1f88cceed1d7d072e5de0d879b53b55670b98733992a78cb37be15e38fae3",
+  "sharedControlSha256": "6b5f508cac80442753e25f943b6889ed9a7eb344a5504e8e976f17bd6a7b4376"
+}

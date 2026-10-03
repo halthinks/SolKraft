@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "profile": "ultra",
+  "source_version": "1.0.0",
+  "control_version": "3.0.0",
+  "source_sha256": "04e86ee4fb1248586a9652a6cc4bd48d508ca1c013c29ef8dcc24288fdbaf3be",
+  "contract_sha256": "54f5134317124ddae9e61099c2f152022524402f454dd549d86061340250b6fa",
+  "execution_boundary": "transpose_only",
+  "required_role_ids": [
+    "R01",
+    "R02",
+    "R03",
+    "R04",
+    "R05",
+    "R06",
+    "R07",
+    "R08",
+    "R09",
+    "R10",
+    "R11",
+    "R12"
+  ],
+  "files": {
+    "scripts/verify_bundle.py": "4812bd9cf82f57f156d0cd3a95ae89538a2c8ff687e59dd1bd5655181d69118d",
+    "references/control-policy.md": "5c30275c947d6daf35a195c923fddcd24a461cd173926376488a4cc116f81976",
+    "references/transposition-contract.md": "54f5134317124ddae9e61099c2f152022524402f454dd549d86061340250b6fa",
+    "references/source-prompt.md": "04e86ee4fb1248586a9652a6cc4bd48d508ca1c013c29ef8dcc24288fdbaf3be",
+    "references/evaluation-corpus.json": "f026bc46a8779deb90d001fd2bb233c7f48004a8934241f9aba03708f253cd2f",
+    "scripts/validate_package.py": "f2ded5f8d3f4aece480739835d6d2bb95bbec3eb5f6977894e06dbc101bcf186",
+    "scripts/run_evaluation_corpus.py": "1494712223c7005d7e6633a073b05838d163a1baf48f875234ddba531b0f6d97",
+    "SKILL.md": "ecab3cef7e3afea1e57def777bfb8c05ae4a7d788e83e74e610d62c76fbdf717",
+    "references/audit-package-schema.json": "7355b7474150b519d87cb680be0ecf35d14ae3f106b0bb2e64519571bdf778ca",
+    "agents/openai.yaml": "620117d59b37b60cab3a92a04b04a6a084d6ad884ed5fadf5accae9ba5acd3fe",
+    "scripts/validate_transposition.py": "c63a7a589ce8a15d2f824d862daa9d485066c2298e699d20cdbd505fe89f4867",
+    "scripts/build_execution_capsule.py": "181a0edad92aa2d286b62df8ba821e72f5db322f74ffadfb78d9c60cf0165797",
+    "references/execution-authority.schema.json": "48b8b32380781e21d13eb220abcfc1425995eff4a4fa4b1144a1c04bae6a1556",
+    "references/execution-capsule.schema.json": "77b7c959f7c5504daaada9b966e903d111f62cc518630e1033acfb2ab1ea72ae"
+  },
+  "capsule_schema_sha256": "77b7c959f7c5504daaada9b966e903d111f62cc518630e1033acfb2ab1ea72ae"
+}

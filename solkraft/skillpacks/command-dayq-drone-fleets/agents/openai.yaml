@@ -1,0 +1,4 @@
+interface:
+  display_name: "Command DayQ Drone Fleets"
+  short_description: "Operate sensors mesh command and drone fleets"
+  default_prompt: "Use command-dayq-drone-fleets to execute its DayQ contract without replacing existing authoritative owners."

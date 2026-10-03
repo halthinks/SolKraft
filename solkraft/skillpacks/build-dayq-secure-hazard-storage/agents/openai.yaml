@@ -1,0 +1,4 @@
+interface:
+  display_name: "Build DayQ Secure Storage"
+  short_description: "Design locked, sealed, ammo, chemical, and cold storage."
+  default_prompt: "Use $build-dayq-secure-hazard-storage to define secure or hazard-controlled storage."

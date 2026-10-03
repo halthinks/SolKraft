@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge Product Line Paper
+  short_description: Turn an evidence-backed product plan into a consistent illust.
+  default_prompt: Use $solforge-product-line-paper for this task with native tools
+    and verify the result.
+policy:
+  allow_implicit_invocation: true

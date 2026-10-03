@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.solforge/adaptive-capsule-role.schema.json",
+  "title": "SolForge adaptive role subcapsule",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "kind", "subcapsuleVersion", "roleId", "skillId", "active", "omissionReason", "kernelHash", "recipeHash", "contextCatalogHash", "dependencies", "dependencyBranchHashes", "passes", "contextBudget", "views", "sourceContextHash", "inputIds", "omissionManifest", "expansionPolicy", "expansionHistory", "requiredOutputSchema", "specialistsRecommendOnly", "authorityExpansionAuthorized", "branchHash"],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "kind": { "const": "solforge-role-subcapsule" },
+    "subcapsuleVersion": { "const": "solforge-role-subcapsule-v1" },
+    "roleId": { "$ref": "#/$defs/role" },
+    "skillId": { "type": "string", "pattern": "^solforge-" },
+    "active": { "type": "boolean" },
+    "omissionReason": { "type": ["string", "null"] },
+    "kernelHash": { "$ref": "#/$defs/hash" },
+    "recipeHash": { "$ref": "#/$defs/hash" },
+    "contextCatalogHash": { "$ref": "#/$defs/hash" },
+    "dependencies": { "type": "array", "items": { "$ref": "#/$defs/role" }, "uniqueItems": true },
+    "dependencyBranchHashes": { "type": "object", "additionalProperties": { "$ref": "#/$defs/hash" } },
+    "passes": { "type": "integer", "minimum": 0 },
+    "contextBudget": { "type": "object", "required": ["maxBytes", "maxEvidenceItems", "maxSkillItems", "maxToolItems", "maxExpansions", "expansionItemAllowance", "expansionByteAllowance"] },
+    "views": { "type": "object", "required": ["skills", "tools", "evidence"] },
+    "sourceContextHash": { "oneOf": [{ "$ref": "#/$defs/hash" }, { "type": "null" }] },
+    "inputIds": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+    "omissionManifest": { "type": "object", "required": ["complete", "items", "omissionHash"] },
+    "expansionPolicy": { "type": "object", "required": ["version", "maximumExpansions", "expansionCount", "triggers"] },
+    "expansionHistory": { "type": "array" },
+    "requiredOutputSchema": { "type": "object", "required": ["id", "version", "branchHashRequired", "evidenceReferencesRequired", "authorityExpansionAuthorized"] },
+    "specialistsRecommendOnly": { "const": true },
+    "authorityExpansionAuthorized": { "const": false },
+    "branchHash": { "$ref": "#/$defs/hash" }
+  },
+  "$defs": {
+    "hash": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "role": { "enum": ["context_curator", "route_architect", "prompt_compiler", "independent_challenger", "contract_validator"] }
+  }
+}

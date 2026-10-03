@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Science Replication'
+  short_description: Reproduce claims independently, compare conditions, quantify.
+  default_prompt: Use $solforge-workflow-science-replication for this task with native
+    tools and verify the result.
+policy:
+  allow_implicit_invocation: true

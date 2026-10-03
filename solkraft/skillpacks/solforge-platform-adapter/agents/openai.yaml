@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge Platform Adapter
+  short_description: Implement platform-specific filesystem, process, UI, storage.
+  default_prompt: Use $solforge-platform-adapter for this task with native tools and
+    verify the result.
+policy:
+  allow_implicit_invocation: true

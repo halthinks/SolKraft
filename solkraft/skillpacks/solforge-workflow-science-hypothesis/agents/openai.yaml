@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Science Hypothesis'
+  short_description: Derive testable hypotheses from the selected evidence with al.
+  default_prompt: Use $solforge-workflow-science-hypothesis for this task with native
+    tools and verify the result.
+policy:
+  allow_implicit_invocation: true

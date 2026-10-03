@@ -1,0 +1,7 @@
+interface:
+  display_name: "Capability-Preserving Execution"
+  short_description: "Dependency-aware, evidence-based orchestration"
+  default_prompt: "Use $capability-preserving-execution to complete this substantial multi-step task with dependency-aware execution and evidence-based validation."
+
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,29 @@
+---
+name: simulate-dayq-physical-reactions
+description: Implement DayQ hit reactions, balance loss, falls, ragdolls, recovery, and networked physical animation.
+---
+
+# Simulate DayQ Physical Reactions
+
+Read [PHYSICAL_REACTION_CONTRACT.md](references/PHYSICAL_REACTION_CONTRACT.md). Preserve movement, health, combat, death and persistence owners.
+
+## Workflow
+
+1. Classify impulses into additive reaction, braced displacement, stumble, knockdown, partial simulation, full ragdoll or fatal body state.
+2. Resolve gameplay consequences authoritatively before presentation.
+3. Use Physics Asset profiles and Physical Animation for bounded live-body responses.
+4. Use full Chaos ragdoll only when the movement state hands off deliberately and recovery/termination is defined.
+5. Reconcile capsule, mesh, contacts, carried items, weapons, tethers, slopes and moving platforms.
+6. Validate server pose/state replication at compact fidelity; do not stream every bone indiscriminately.
+7. Persist only lasting outcome and body transform/identity required by death or suspended interaction rules.
+
+## Rules
+
+- Never infer damage solely from cosmetic bone motion.
+- Never allow client impulses to author knockdown, displacement or damage.
+- Avoid physics launches, wall clipping, endless jitter, stand-up through geometry and capsule teleport.
+- Make recovery depend on consciousness, injuries, load, space, footing and assistance.
+
+## Output
+
+Deliver reaction thresholds, Physics Asset profiles, state machine, handoff/recovery rules, replication strategy, body interaction contract, tests, profiles and evidence.

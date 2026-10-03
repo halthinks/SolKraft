@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge Perfection
+  short_description: Improve a product through real user journeys, repairs, and re.
+  default_prompt: Use $solforge-perfection for this task with native tools and verify
+    the result.
+policy:
+  allow_implicit_invocation: true

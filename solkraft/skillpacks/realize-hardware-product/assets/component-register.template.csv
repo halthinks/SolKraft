@@ -1,0 +1,2 @@
+item_id,category,manufacturer,exact_model_or_order_code,quantity,selection_state,order_path,source_url,source_document_revision,nominal_envelope_mm,nominal_mass_g,power_or_rating,evidence_class,local_source,sha256,received_sample_id,received_measurement_record,open_gate
+EXAMPLE-001,compute,Manufacturer,Exact order code,1,SELECTED,Manufacturer or distributor order path,https://manufacturer.example/product,Rev A,10 x 20 x 3,5,5 V 1 A,MFR,supplier-sources/example.pdf,,PENDING,PENDING,Receive and inspect before physical verification

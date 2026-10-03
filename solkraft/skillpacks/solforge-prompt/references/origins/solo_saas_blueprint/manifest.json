@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "1.0",
+  "originId": "solo_saas_blueprint",
+  "version": "1.1.0",
+  "status": "production",
+  "sharedControlVersion": "solforge-origin-controls-v1",
+  "files": {
+    "origin.json": "e8511a9002603cd2803df127eff29bc9a6e245186b42e7f7aec9b189d4520645",
+    "source-prompt.md": "e2f9513c89b86e3be6622298c73627b8274efb2d858e92bce05a048537e6b75e",
+    "evaluation-corpus.json": "100c7b1ad1e18443d838cd08fd820cd16e160aa8aaa30818cfdb2e8114acdcec"
+  },
+  "rollbackTarget": "candidate-1.1.0",
+  "manifestHash": "884d5e175888dbc07fc06cfd8d2b5ab07aa5655a3b5d8a1ac195505e638b41df",
+  "sharedControlSha256": "6b5f508cac80442753e25f943b6889ed9a7eb344a5504e8e976f17bd6a7b4376"
+}

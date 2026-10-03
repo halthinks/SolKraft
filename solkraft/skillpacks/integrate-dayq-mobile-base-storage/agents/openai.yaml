@@ -1,0 +1,4 @@
+interface:
+  display_name: "Integrate DayQ Mobile Storage"
+  short_description: "Connect storage to bases, vehicles, drones, exos, and mechs."
+  default_prompt: "Use $integrate-dayq-mobile-base-storage to integrate storage into bases and mobile platforms."

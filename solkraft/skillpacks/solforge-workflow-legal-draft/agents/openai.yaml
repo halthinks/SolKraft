@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Legal Draft'
+  short_description: Produce a clearly scoped draft with user scope references, as.
+  default_prompt: Use $solforge-workflow-legal-draft for this task with native tools
+    and verify the result.
+policy:
+  allow_implicit_invocation: true

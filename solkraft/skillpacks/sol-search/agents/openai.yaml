@@ -1,0 +1,7 @@
+interface:
+  display_name: "Sol Search"
+  short_description: "SolForge-grade research with evidence audits"
+  default_prompt: "Use $sol-search to research this question in chat with primary sources, current-version checks, claim and uncertainty audits, and local-repository grounding when applicable."
+
+policy:
+  allow_implicit_invocation: true

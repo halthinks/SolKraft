@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Math Prove'
+  short_description: Construct and audit a proof using independent approaches, lem.
+  default_prompt: Use $solforge-workflow-math-prove for this task with native tools
+    and verify the result.
+policy:
+  allow_implicit_invocation: true

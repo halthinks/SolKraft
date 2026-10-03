@@ -1,0 +1,4 @@
+interface:
+  display_name: "Build Selected Hardware Product"
+  short_description: "Realize locked parts into build evidence"
+  default_prompt: "Use $build-selected-hardware-product to carry selected components through BOM, schematic, PCB, firmware, CAD, first article, and measured release validation."

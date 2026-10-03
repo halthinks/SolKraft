@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge Run Research
+  short_description: Execute a research plan with source tracking, contradictions.
+  default_prompt: Use $solforge-run-research for this task with native tools and verify
+    the result.
+policy:
+  allow_implicit_invocation: true

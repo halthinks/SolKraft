@@ -1,0 +1,4 @@
+interface:
+  display_name: "Standardize DayQ Rigs"
+  short_description: "Standardize DayQ rigs, sockets, animations, and interactions."
+  default_prompt: "Use $standardize-dayq-rigs-interactions to define reusable DayQ rig and interaction contracts."

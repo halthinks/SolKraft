@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "1.0",
+  "originId": "one_shot_ambitious_artifact",
+  "version": "1.1.0",
+  "status": "production",
+  "sharedControlVersion": "solforge-origin-controls-v1",
+  "files": {
+    "origin.json": "025551c4f993f1d4c59a26b9054834250afa259c1f04a6f4c6577bab6d4d85fb",
+    "source-prompt.md": "6c1cbf8ede71f2c5bd7e8f5081a3cd1939f90627bbdc1ca37e6dc86f88f34bd2",
+    "evaluation-corpus.json": "bc670ec67e88074bab67eaea2d48359ca1980dde6b8e3d85f5f10f60cdd4f2dc"
+  },
+  "rollbackTarget": "candidate-1.1.0",
+  "manifestHash": "4f0d75d328712f91532fb31abd7c47a9aaf279c4ff5a953d411bdfbacdeb7eae",
+  "sharedControlSha256": "6b5f508cac80442753e25f943b6889ed9a7eb344a5504e8e976f17bd6a7b4376"
+}

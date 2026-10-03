@@ -1,0 +1,4 @@
+interface:
+  display_name: "Operate DayQ Weapons"
+  short_description: "Build authentic authoritative DayQ gunplay"
+  default_prompt: "Use $operate-dayq-authentic-weapons to implement or validate physical DayQ weapons, ammunition, handling, ballistics, malfunctions, or multiplayer combat."

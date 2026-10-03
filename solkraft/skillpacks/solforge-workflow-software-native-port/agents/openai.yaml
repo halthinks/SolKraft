@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Software Native Port'
+  short_description: Port shared behavior through explicit native platform adapter.
+  default_prompt: Use $solforge-workflow-software-native-port for this task with native
+    tools and verify the result.
+policy:
+  allow_implicit_invocation: true

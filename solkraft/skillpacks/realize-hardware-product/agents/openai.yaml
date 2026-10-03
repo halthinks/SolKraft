@@ -1,0 +1,6 @@
+interface:
+  display_name: "Hardware Product Realization"
+  short_description: "Close hardware designs with evidence-bound physical gates"
+  default_prompt: "Use $realize-hardware-product to turn this product concept into a dimensionally closed, evidence-bound realization package."
+policy:
+  allow_implicit_invocation: true

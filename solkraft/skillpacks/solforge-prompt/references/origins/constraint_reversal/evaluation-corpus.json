@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "1.0",
+  "originId": "constraint_reversal",
+  "originVersion": "1.0.0",
+  "status": "accepted",
+  "cases": [
+    {
+      "id": "constraint_reversal-1",
+      "objective": "Produce a rigorous product invention result with explicit constraints, evidence, falsification, and acceptance criteria.",
+      "intendedOrigin": "constraint_reversal",
+      "acceptableSecondaryOrigins": [
+        "closed_world_grand_challenge"
+      ],
+      "disallowedOrigins": [],
+      "rationale": "Constraint Reversal directly matches the product invention operating mode.",
+      "difficulty": "medium",
+      "ambiguity": "low"
+    },
+    {
+      "id": "constraint_reversal-2",
+      "objective": "Produce a rigorous regulated markets result with explicit constraints, evidence, falsification, and acceptance criteria.",
+      "intendedOrigin": "constraint_reversal",
+      "acceptableSecondaryOrigins": [
+        "closed_world_grand_challenge"
+      ],
+      "disallowedOrigins": [],
+      "rationale": "Constraint Reversal directly matches the regulated markets operating mode.",
+      "difficulty": "medium",
+      "ambiguity": "medium"
+    },
+    {
+      "id": "constraint_reversal-3",
+      "objective": "Produce a rigorous cost reduction result with explicit constraints, evidence, falsification, and acceptance criteria.",
+      "intendedOrigin": "constraint_reversal",
+      "acceptableSecondaryOrigins": [
+        "closed_world_grand_challenge"
+      ],
+      "disallowedOrigins": [],
+      "rationale": "Constraint Reversal directly matches the cost reduction operating mode.",
+      "difficulty": "hard",
+      "ambiguity": "low"
+    }
+  ]
+}

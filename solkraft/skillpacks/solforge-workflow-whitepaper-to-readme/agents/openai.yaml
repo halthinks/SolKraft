@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Whitepaper To README'
+  short_description: Convert an evidence-rich report into a progressive-disclosure.
+  default_prompt: Use $solforge-workflow-whitepaper-to-readme for this task with native
+    tools and verify the result.
+policy:
+  allow_implicit_invocation: true

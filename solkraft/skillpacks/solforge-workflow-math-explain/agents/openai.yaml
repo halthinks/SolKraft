@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Math Explain'
+  short_description: Produce a level-appropriate explanation with intuition, forma.
+  default_prompt: Use $solforge-workflow-math-explain for this task with native tools
+    and verify the result.
+policy:
+  allow_implicit_invocation: true

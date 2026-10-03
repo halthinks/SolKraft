@@ -1,0 +1,4 @@
+interface:
+  display_name: "Evidence-Bound Product Realization"
+  short_description: "Close real products without false evidence"
+  default_prompt: "Use $evidence-bound-product-realization to take this product from requirements through source-bound hardware, PCB, CAD, rendering, and honest physical-release gates."

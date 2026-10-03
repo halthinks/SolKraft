@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge Sign And Prove
+  short_description: Create and verify artifact checksums, SBOMs, provenance, and.
+  default_prompt: Use $solforge-sign-and-prove for this task with native tools and
+    verify the result.
+policy:
+  allow_implicit_invocation: true

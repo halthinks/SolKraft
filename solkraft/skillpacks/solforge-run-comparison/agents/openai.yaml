@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge Run Comparison
+  short_description: Compare repositories, products, architectures, or evidence se.
+  default_prompt: Use $solforge-run-comparison for this task with native tools and
+    verify the result.
+policy:
+  allow_implicit_invocation: true

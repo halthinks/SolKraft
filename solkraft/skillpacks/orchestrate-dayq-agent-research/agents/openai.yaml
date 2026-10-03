@@ -1,0 +1,4 @@
+interface:
+  display_name: "Orchestrate DayQ Agent Research"
+  short_description: "Run bounded agent research and evaluation"
+  default_prompt: "Use orchestrate-dayq-agent-research to execute its DayQ contract without replacing existing authoritative owners."

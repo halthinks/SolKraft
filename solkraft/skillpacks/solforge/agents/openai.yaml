@@ -1,0 +1,6 @@
+interface:
+  display_name: SolForge
+  short_description: Select and compose workflows for substantial research, code i.
+  default_prompt: Use $solforge for this task with native tools and verify the result.
+policy:
+  allow_implicit_invocation: true

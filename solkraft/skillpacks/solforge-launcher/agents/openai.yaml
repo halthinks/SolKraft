@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge Launcher
+  short_description: Build and verify product installers, launchers, update flows.
+  default_prompt: Use $solforge-launcher for this task with native tools and verify
+    the result.
+policy:
+  allow_implicit_invocation: true

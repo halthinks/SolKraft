@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge MVP Create
+  short_description: Turn a product brief, research result, or selected plan into.
+  default_prompt: Use $solforge-mvp-create for this task with native tools and verify
+    the result.
+policy:
+  allow_implicit_invocation: true

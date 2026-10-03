@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge Result Validator
+  short_description: Verify deliverables against requirements, real outputs, test.
+  default_prompt: Use $solforge-result-validator for this task with native tools and
+    verify the result.
+policy:
+  allow_implicit_invocation: true

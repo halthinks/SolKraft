@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge Propose
+  short_description: Turn research or a codebase audit into a concrete implementat.
+  default_prompt: Use $solforge-propose for this task with native tools and verify
+    the result.
+policy:
+  allow_implicit_invocation: true

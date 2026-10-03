@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge Prompt Compiler
+  short_description: Compile an objective, selected workflows, inputs, constraints.
+  default_prompt: Use $solforge-prompt-compiler for this task with native tools and
+    verify the result.
+policy:
+  allow_implicit_invocation: true

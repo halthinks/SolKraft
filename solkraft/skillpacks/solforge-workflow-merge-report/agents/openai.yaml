@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Merge Report'
+  short_description: Inspect candidate and target repositories at real revisions.
+  default_prompt: Use $solforge-workflow-merge-report for this task with native tools
+    and verify the result.
+policy:
+  allow_implicit_invocation: true

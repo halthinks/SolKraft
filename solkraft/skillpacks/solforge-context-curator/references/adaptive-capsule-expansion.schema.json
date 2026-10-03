@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.solforge/adaptive-capsule-expansion.schema.json",
+  "title": "SolForge adaptive capsule expansion request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "version", "roleId", "priorBranchHash", "triggerId", "additionalContextIds", "reason", "requestedAtRevision", "expansionRequestHash"],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "version": { "const": "solforge-capsule-expansion-v1" },
+    "roleId": { "enum": ["context_curator", "route_architect", "prompt_compiler", "independent_challenger", "contract_validator"] },
+    "priorBranchHash": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "triggerId": { "type": "string", "minLength": 1 },
+    "additionalContextIds": { "type": "array", "items": { "type": "string", "minLength": 1 }, "minItems": 1, "uniqueItems": true },
+    "reason": { "type": "string", "minLength": 1 },
+    "requestedAtRevision": { "type": "integer", "minimum": 1 },
+    "expansionRequestHash": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  }
+}

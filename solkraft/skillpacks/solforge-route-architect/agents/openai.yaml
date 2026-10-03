@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge Route Architect
+  short_description: Compose a workflow graph with explicit inputs, dependencies.
+  default_prompt: Use $solforge-route-architect for this task with native tools and
+    verify the result.
+policy:
+  allow_implicit_invocation: true

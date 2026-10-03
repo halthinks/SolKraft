@@ -1,0 +1,4 @@
+interface:
+  display_name: "Build DayQ Energy Progression"
+  short_description: "Implement the locked storage-Stirling spiral"
+  default_prompt: "Use $build-dayq-circular-hydrogen-energy to implement and validate DayQ's locked B0-B5 storage, LS0-LS4 Stirling, plastic-fuel, municipal peak-power, physical-network, and surplus-hydrogen progression through existing authoritative owners."

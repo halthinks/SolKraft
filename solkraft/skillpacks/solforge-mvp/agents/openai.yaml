@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge MVP
+  short_description: Define and deliver a bounded working MVP or vertical slice wi.
+  default_prompt: Use $solforge-mvp for this task with native tools and verify the
+    result.
+policy:
+  allow_implicit_invocation: true

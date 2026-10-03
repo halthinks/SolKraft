@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge Code Mastery
+  short_description: Turn a codebase completion audit into coherent implementation.
+  default_prompt: Use $solforge-code-mastery for this task with native tools and verify
+    the result.
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Engineering Prototype'
+  short_description: Create a requested prototype or design artifact with simulati.
+  default_prompt: Use $solforge-workflow-engineering-prototype for this task with
+    native tools and verify the result.
+policy:
+  allow_implicit_invocation: true

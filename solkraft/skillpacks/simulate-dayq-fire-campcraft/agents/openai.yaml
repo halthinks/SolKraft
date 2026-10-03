@@ -1,0 +1,4 @@
+interface:
+  display_name: "Simulate DayQ Fire"
+  short_description: "Build authoritative fire and campcraft systems"
+  default_prompt: "Use $simulate-dayq-fire-campcraft to implement or validate a complete DayQ fire, heat, smoke, campcraft, or firefighting route."

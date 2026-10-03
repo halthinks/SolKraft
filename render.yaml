@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: solkraft-api
+    runtime: python
+    plan: free
+    buildCommand: pip install .
+    startCommand: python -m solkraft api
+    healthCheckPath: /healthz
+    envVars:
+      - key: SOLKRAFT_API_KEY
+        sync: false
+      - key: SOLKRAFT_CORS_ORIGINS
+        value: https://halthinks.github.io

@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "1.0",
+  "id": "independent_discovery_synthesis",
+  "displayName": "Independent Discovery and Adversarial Synthesis",
+  "version": "1.1.0",
+  "status": "production",
+  "selectable": true,
+  "flagship": false,
+  "operatingIdea": "Protect independent searches, attack each candidate, then synthesize by evidence.",
+  "bestFor": "Problems where different representations or evidence streams can be explored independently before cross-pollination.",
+  "useCases": [
+    "Multi-hypothesis research",
+    "Repository comparison",
+    "Strategic alternatives",
+    "Native Ultra orchestration"
+  ],
+  "produces": "A synthesized solution selected by correctness and evidence, plus the strongest rejected alternative and why it failed.",
+  "antiUseCases": [
+    "Do not use when workstreams cannot be made genuinely independent or synthesis cost dominates."
+  ],
+  "representativeRequest": "Use Independent Discovery and Adversarial Synthesis to multi-hypothesis research with explicit evidence and acceptance gates.",
+  "downstreamLineage": [
+    "Origin-locked objective",
+    "Single, Multi, or Ultra profile",
+    "Effort contract",
+    "Exact hardened prompt",
+    "Hash-bound capsule",
+    "Approval and native Goal",
+    "Contextual workflow tree",
+    "Governed execution and deliverable"
+  ],
+  "priority": 70,
+  "routingSignals": [
+    {
+      "pattern": "\\b(compare|alternatives?|hypotheses|independent|parallel|multi-agent|ultra)\\b",
+      "flags": "iu",
+      "weight": 6
+    },
+    {
+      "pattern": "\\b(synthesize|triangulate|cross-source|competing)\\b",
+      "flags": "iu",
+      "weight": 5
+    },
+    {
+      "pattern": "\\b(adversarial|critic|falsif)\\b",
+      "flags": "iu",
+      "weight": 4
+    }
+  ],
+  "requiredReasoningRoles": [
+    "independent route owners",
+    "adversarial challengers",
+    "evidence integrator",
+    "rejected-alternative auditor"
+  ],
+  "applicabilityGate": [
+    "Use only when at least two genuinely distinct, substantive routes can address the same literal objective.",
+    "Require a common evidence, authority, constraint, and acceptance basis that makes route results comparable.",
+    "Route away when independent search cannot be sustained or synthesis cost is disproportionate to the decision."
+  ],
+  "solExecutionContract": [
+    "Bind one literal objective, evidence set, authority boundary, constraints, and acceptance basis that every candidate route must share.",
+    "Create at least two substantive independent candidates that differ in representation, mechanism, method, or governing insight, each with enough provenance and checkable work to yield a comparable result rather than wording variation.",
+    "Keep candidates isolated through their first strong result; maintain an approach registry and redirect duplication toward underexplored routes.",
+    "If fewer than two substantive comparable candidates can be produced from the common evidence, return SYNTHESIS_BLOCKED with the exact missing evidence or route and do not fabricate plurality.",
+    "Assign an adversarial challenge to every serious candidate covering assumptions, transformations, boundaries, circularity, source support, failure conditions, and conflicts with common evidence.",
+    "Revise or eliminate candidates from evidence; never choose by consensus, confidence, elegance, or an aggregate formula unless every dimension, scale, normalization, and weight is explicitly defined and evidence-justified.",
+    "Synthesize only compatible surviving components through claim-evidence mapping, leaving incompatible components separate, and report the decisive insight, verification, uncertainty, and strongest rejected alternative."
+  ],
+  "observableOutputContract": [
+    "Common evidence, authority, constraint, objective, and acceptance packet",
+    "At least two substantive independent candidate dossiers with provenance and checkable results",
+    "Adversarial challenge and elimination ledger plus synthesis compatibility matrix",
+    "Evidence-mapped synthesis, or a SYNTHESIS_BLOCKED packet naming the missing evidence or route"
+  ],
+  "failureAndAdversarialChecklist": [
+    "Reject requirement loss, unsupported claims, fabricated evidence, or unapproved authority expansion.",
+    "Test boundary cases, counterexamples, failure modes, and the strongest plausible rejected alternative.",
+    "Require observable acceptance evidence and state unresolved uncertainty explicitly.",
+    "Do not use when workstreams cannot be made genuinely independent or synthesis cost dominates."
+  ],
+  "profileAdaptations": {
+    "single": "One Sol agent owns synthesis and uses independent internal passes without claiming nonexistent agents.",
+    "multi": "Delegate only genuinely independent bounded workstreams; preserve provenance, handoffs, integration tests, and root synthesis.",
+    "ultra": "Production Ultra uses full_approved_capsule semantics only after a signed and verified native capability attestation and user authorization bind the canonical capsule, complete budget, kill switch, and lease policy plus branch termination and root acceptance; proof_only is a development and validation mode, never the production default."
+  },
+  "sharedControlVersion": "solforge-origin-controls-v1",
+  "promotion": {
+    "status": "production",
+    "promotedAt": "2026-07-15T12:00:00.000Z",
+    "receiptPath": "promotion-receipt.json",
+    "rollbackTarget": "candidate-1.1.0"
+  }
+}

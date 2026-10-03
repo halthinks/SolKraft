@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Business Market'
+  short_description: Build a source-verifiable market and segment view with compet.
+  default_prompt: Use $solforge-workflow-business-market for this task with native
+    tools and verify the result.
+policy:
+  allow_implicit_invocation: true

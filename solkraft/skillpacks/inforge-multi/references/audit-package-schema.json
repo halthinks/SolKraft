@@ -1,0 +1,274 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.inforge/audit-package.schema.json",
+  "title": "InForge private audit package",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "profile",
+    "control_version",
+    "source_version",
+    "source_sha256",
+    "contract_sha256",
+    "execution_boundary",
+    "intent_record",
+    "role_map",
+    "omitted_requirement_ids",
+    "added_permissions",
+    "feasibility_claims",
+    "prompt"
+  ],
+  "properties": {
+    "profile": {
+      "enum": [
+        "single",
+        "multi",
+        "ultra"
+      ]
+    },
+    "control_version": {
+      "type": "string"
+    },
+    "source_version": {
+      "type": "string"
+    },
+    "source_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "contract_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "execution_boundary": {
+      "const": "transpose_only"
+    },
+    "intent_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "objective",
+        "scope",
+        "inputs",
+        "assumptions",
+        "authorization_boundaries",
+        "constraints",
+        "deliverables",
+        "acceptance_criteria",
+        "unacceptable_partial_outcomes",
+        "search_policy",
+        "risk_categories",
+        "high_consequence",
+        "confirmation_required"
+      ],
+      "properties": {
+        "objective": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scope": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "assumptions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "authorization_boundaries": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "constraints": {
+          "$ref": "#/$defs/requirements"
+        },
+        "deliverables": {
+          "$ref": "#/$defs/requirements"
+        },
+        "acceptance_criteria": {
+          "$ref": "#/$defs/requirements"
+        },
+        "unacceptable_partial_outcomes": {
+          "$ref": "#/$defs/requirements"
+        },
+        "search_policy": {
+          "type": "string",
+          "minLength": 1
+        },
+        "risk_categories": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "destructive_or_irreversible",
+              "external_side_effect",
+              "production_or_deployment",
+              "security_or_privileged_access",
+              "credentials_or_sensitive_data",
+              "financial_commitment",
+              "legal_medical_financial_reliance",
+              "broad_scope_state_change"
+            ]
+          }
+        },
+        "high_consequence": {
+          "type": "boolean"
+        },
+        "confirmation_required": {
+          "type": "boolean"
+        }
+      }
+    },
+    "role_map": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/role"
+      }
+    },
+    "omitted_requirement_ids": {
+      "type": "array",
+      "maxItems": 0
+    },
+    "added_permissions": {
+      "type": "array",
+      "maxItems": 0
+    },
+    "feasibility_claims": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/feasibility"
+      }
+    },
+    "prompt": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "$defs": {
+    "requirements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "text"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "role": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_role_id",
+        "source_function",
+        "status",
+        "task_expression",
+        "prompt_evidence",
+        "requirement_ids",
+        "authorization_basis",
+        "feasibility_basis",
+        "search_policy_basis",
+        "justification"
+      ],
+      "properties": {
+        "source_role_id": {
+          "type": "string",
+          "pattern": "^R[0-9]{2}$"
+        },
+        "source_function": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "enum": [
+            "mapped",
+            "not_applicable"
+          ]
+        },
+        "task_expression": {
+          "type": "string"
+        },
+        "prompt_evidence": {
+          "type": "string"
+        },
+        "requirement_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "authorization_basis": {
+          "enum": [
+            "user_explicit",
+            "higher_priority_policy",
+            "derived_nonexpansive",
+            "not_applicable"
+          ]
+        },
+        "feasibility_basis": {
+          "type": "string",
+          "minLength": 1
+        },
+        "search_policy_basis": {
+          "type": "string",
+          "minLength": 1
+        },
+        "justification": {
+          "type": "string"
+        }
+      }
+    },
+    "feasibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "claim",
+        "status",
+        "basis"
+      ],
+      "properties": {
+        "claim": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "enum": [
+            "verified",
+            "assumption",
+            "unknown"
+          ]
+        },
+        "basis": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Consequential Push'
+  short_description: Carry out an explicitly authorized push action for its exact.
+  default_prompt: Use $solforge-workflow-consequential-push for this task with native
+    tools and verify the result.
+policy:
+  allow_implicit_invocation: true

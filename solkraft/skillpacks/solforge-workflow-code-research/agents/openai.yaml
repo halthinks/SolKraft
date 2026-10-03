@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Code Research'
+  short_description: Audit a whole codebase or ecosystem for intended architecture.
+  default_prompt: Use $solforge-workflow-code-research for this task with native tools
+    and verify the result.
+policy:
+  allow_implicit_invocation: true

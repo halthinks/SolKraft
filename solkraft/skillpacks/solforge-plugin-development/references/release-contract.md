@@ -1,0 +1,3 @@
+# Skill Release Contract
+
+Source-only is incomplete. A released skill requires concise instructions, native metadata, callable runtime behavior, executable tests, an intentional owned-path commit, official local installation, receipt and bundle verification, installed skill validation, and MCP discovery. Releases are blue-green: preserve every attached MCP transport, pin existing tasks to their verified immutable version receipt, and route new connections to the new registry version. A targeted MCP reload may expose new tools to an existing task, but neither a full Codex restart nor a new task is part of the release contract.

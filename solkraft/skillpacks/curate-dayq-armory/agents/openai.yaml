@@ -1,0 +1,4 @@
+interface:
+  display_name: "Curate DayQ Armory"
+  short_description: "Build governed firearm, optics, and military weapon catalogs."
+  default_prompt: "Create or expand a DayQ armory family with production, runtime, progression, and validation contracts."

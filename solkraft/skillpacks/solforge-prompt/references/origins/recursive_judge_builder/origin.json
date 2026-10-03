@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "1.0",
+  "id": "recursive_judge_builder",
+  "displayName": "Recursive Judge-and-Builder",
+  "version": "1.1.0",
+  "status": "production",
+  "selectable": true,
+  "flagship": false,
+  "operatingIdea": "Define the evaluation system, build, judge, reconstruct, and repeat.",
+  "bestFor": "Work whose quality standard is knowable but whose strongest architecture must emerge through repeated independent evaluation.",
+  "useCases": [
+    "Production software",
+    "Engineering design",
+    "Scientific solutions",
+    "High-stakes deliverables"
+  ],
+  "produces": "A solution that survives fixed non-negotiable criteria, reconstruction pressure, adversarial tests, and material-improvement convergence.",
+  "antiUseCases": [
+    "Do not use when one direct pass has a fixed mechanical answer and reconstruction would add only ceremony."
+  ],
+  "representativeRequest": "Use Recursive Judge-and-Builder to production software with explicit evidence and acceptance gates.",
+  "downstreamLineage": [
+    "Origin-locked objective",
+    "Single, Multi, or Ultra profile",
+    "Effort contract",
+    "Exact hardened prompt",
+    "Hash-bound capsule",
+    "Approval and native Goal",
+    "Contextual workflow tree",
+    "Governed execution and deliverable"
+  ],
+  "priority": 90,
+  "routingSignals": [
+    {
+      "pattern": "\\b(best|strongest|production|quality|polish|expert standard)\\b",
+      "flags": "iu",
+      "weight": 4
+    },
+    {
+      "pattern": "\\b(evaluate|rubric|judge|acceptance|stress test)\\b",
+      "flags": "iu",
+      "weight": 5
+    },
+    {
+      "pattern": "\\b(revise|iterate|improve|reconstruct)\\b",
+      "flags": "iu",
+      "weight": 4
+    }
+  ],
+  "requiredReasoningRoles": [
+    "evaluation-constitution author",
+    "builder",
+    "adversarial judge",
+    "reconstruction auditor"
+  ],
+  "applicabilityGate": [
+    "Use this origin only when quality depends on evaluating materially different candidates against a knowable standard; do not use it for a fixed mechanical answer or unbounded ideation.",
+    "Require a fixed evaluation constitution plus inspectable candidate evidence, or verified authority and inputs to produce candidate evidence, before assigning scores or verdicts.",
+    "If the rubric, candidate, or material evidence is missing, return a judge design and deferred evidence request; never invent observations, scores, test results, or candidate capability.",
+    "Bound the search to the baseline plus at most two materially distinct candidate branches, one adversarial evidence review, and one final adjudication unless the user explicitly authorizes a different finite bound."
+  ],
+  "observableOutputContract": [
+    "A fixed evaluation constitution with hard gates, weighted criteria where justified, evidence requirements, and rejection conditions.",
+    "A bounded candidate registry containing the baseline and no more than two materially distinct alternatives by default.",
+    "A candidate-to-evidence ledger that distinguishes observed, supplied, proposed, missing, and contradicted evidence.",
+    "Per-candidate judgments with criterion results, uncertainty, disqualifiers, and strongest counterargument.",
+    "A bounded recursion trace covering one adversarial review, any material reconstruction, and final adjudication.",
+    "A supported verdict or an explicit deferred verdict with the minimum missing evidence."
+  ],
+  "solExecutionContract": [
+    "Apply the applicability gate first. Freeze a constitution containing non-negotiable validity, quality criteria, evidence requirements, adversarial tests, rejection conditions, and the finite candidate and review bounds before building or judging.",
+    "Register the supplied baseline and create at most two materially distinct alternatives only when authority and inputs permit; keep candidate generation separate from evidence evaluation and do not let a builder self-certify observations.",
+    "Judge every candidate against the same constitution using only supplied or actually observed evidence; record missing and contradicted evidence and defer any score or verdict that the evidence cannot support.",
+    "Use one adversarial evidence branch to test boundary cases, scale limits, implementation failures, and strongest objections; reconstruct only foundations whose change can materially improve a failed criterion.",
+    "Perform one final adjudication against the unchanged constitution, preserve disagreement and uncertainty, and stop at the declared bound even if further iteration could be imagined.",
+    "Return the constitution, candidate registry, evidence ledger, bounded recursion trace, material changes, and supported or deferred verdict; never lower criteria, fabricate evidence, or claim convergence from self-evaluation alone."
+  ],
+  "failureAndAdversarialChecklist": [
+    "Reject requirement loss, unsupported claims, fabricated evidence, or unapproved authority expansion.",
+    "Test boundary cases, counterexamples, failure modes, and the strongest plausible rejected alternative.",
+    "Require observable acceptance evidence and state unresolved uncertainty explicitly.",
+    "Do not use when one direct pass has a fixed mechanical answer and reconstruction would add only ceremony."
+  ],
+  "profileAdaptations": {
+    "single": "One Sol agent owns synthesis and uses independent internal passes without claiming nonexistent agents.",
+    "multi": "Delegate only genuinely independent bounded workstreams; preserve provenance, handoffs, integration tests, and root synthesis.",
+    "ultra": "Production Ultra uses full_approved_capsule semantics only after a signed and verified native capability attestation and user authorization bind the canonical capsule, complete budget, kill switch, and lease policy plus branch termination and root acceptance; proof_only is a development and validation mode, never the production default."
+  },
+  "sharedControlVersion": "solforge-origin-controls-v1",
+  "promotion": {
+    "status": "production",
+    "promotedAt": "2026-07-15T12:00:00.000Z",
+    "receiptPath": "promotion-receipt.json",
+    "rollbackTarget": "candidate-1.1.0"
+  }
+}

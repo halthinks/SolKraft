@@ -1,0 +1,4 @@
+interface:
+  display_name: "Select and Validate Hardware Parts"
+  short_description: "Choose real parts through evidence and tradeoffs"
+  default_prompt: "Use $select-and-validate-hardware-parts to compare real orderable components, prove why each winner fits the product, and produce an evidence-bound selection register."

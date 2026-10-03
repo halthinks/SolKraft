@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1.0",
+  "originId": "product_systems_masterplan",
+  "version": "1.1.0",
+  "decision": "promote",
+  "evidence": "AUTO routing and protected prompt-contract benchmark gates passed; promotion does not claim universal downstream model superiority.",
+  "decidedAt": "2026-07-15T12:00:00.000Z",
+  "manifestHash": "63be1e66e35a8db8009258be626d49f068f4f0486611e17c618f116363c1c359",
+  "benchmarkSha256": "5ae176a26365ffd7ace04d4c015d97a26fe78a77869f658a0cd201dab3f26288",
+  "evaluationPackageSha256": "32c5255178771da736febecc6662749a4f2929d1c7a061ab108c30d0108dc2eb",
+  "rollbackTarget": "candidate-1.1.0",
+  "receiptHash": "9ff938ee055f632799e99c3cb3d52962f6186a0ae0555d92eb86bf42b02dcd76"
+}

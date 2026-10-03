@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.solforge/adaptive-capsule-kernel.schema.json",
+  "title": "SolForge adaptive capsule invariant kernel",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "kind", "kernelVersion", "objective", "objectiveHash", "strategyGraphHash", "registryHash", "whitepaperSha256", "semanticReferenceSha256", "contextCatalogHash", "authorityAllowlist", "userConstraints", "priorAcceptedDecisionReceipts", "invariants", "kernelHash"],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "kind": { "const": "solforge-adaptive-capsule-kernel" },
+    "kernelVersion": { "const": "solforge-capsule-kernel-v1" },
+    "objective": { "type": "string", "minLength": 1 },
+    "objectiveHash": { "$ref": "#/$defs/hash" },
+    "strategyGraphHash": { "oneOf": [{ "$ref": "#/$defs/hash" }, { "type": "null" }] },
+    "registryHash": { "$ref": "#/$defs/hash" },
+    "whitepaperSha256": { "$ref": "#/$defs/hash" },
+    "semanticReferenceSha256": { "$ref": "#/$defs/hash" },
+    "contextCatalogHash": { "$ref": "#/$defs/hash" },
+    "authorityAllowlist": { "type": "object" },
+    "userConstraints": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+    "priorAcceptedDecisionReceipts": { "type": "array", "items": { "$ref": "#/$defs/hash" }, "uniqueItems": true },
+    "invariants": {
+      "type": "object",
+      "required": ["specialistsRecommendOnly", "deterministicCompilerFinalSay", "authorityExpansionAuthorized", "effortOrPaymentGrantsAuthority", "evidenceReferencesRequired", "receiptLineageRequired", "finalAcceptanceRequired", "nativeGoalOnlyAfterFinalAcceptance", "omissionsMustBeExplicit", "expansionMustBeBounded"],
+      "properties": {
+        "specialistsRecommendOnly": { "const": true },
+        "deterministicCompilerFinalSay": { "const": true },
+        "authorityExpansionAuthorized": { "const": false },
+        "effortOrPaymentGrantsAuthority": { "const": false },
+        "evidenceReferencesRequired": { "const": true },
+        "receiptLineageRequired": { "const": true },
+        "finalAcceptanceRequired": { "const": true },
+        "nativeGoalOnlyAfterFinalAcceptance": { "const": true },
+        "omissionsMustBeExplicit": { "const": true },
+        "expansionMustBeBounded": { "const": true }
+      }
+    },
+    "kernelHash": { "$ref": "#/$defs/hash" }
+  },
+  "$defs": { "hash": { "type": "string", "pattern": "^[0-9a-f]{64}$" } }
+}

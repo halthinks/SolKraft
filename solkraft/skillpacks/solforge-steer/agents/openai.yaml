@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge Steer
+  short_description: Apply user corrections to scope or direction while preserving.
+  default_prompt: Use $solforge-steer for this task with native tools and verify the
+    result.
+policy:
+  allow_implicit_invocation: true

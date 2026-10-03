@@ -1,0 +1,4 @@
+interface:
+  display_name: "DayQ Game Validation"
+  short_description: "Run spikes, playtests, and QA"
+  default_prompt: "Use $validate-dayq-game to execute evidence-based technical, gameplay, or regression validation for DayQ."

@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Math Counterexample'
+  short_description: Stress the statement across boundary cases, constructions, co.
+  default_prompt: Use $solforge-workflow-math-counterexample for this task with native
+    tools and verify the result.
+policy:
+  allow_implicit_invocation: true

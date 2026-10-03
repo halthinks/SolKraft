@@ -1,0 +1,7 @@
+interface:
+  display_name: Sol Merge Report
+  short_description: Compare candidate and target repositories for evidence-backed.
+  default_prompt: Use $sol-merge-report for this task with native tools and verify
+    the result.
+policy:
+  allow_implicit_invocation: true

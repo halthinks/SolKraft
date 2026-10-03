@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge Report Writer
+  short_description: Write evidence-backed papers, whitepapers, due-diligence repo.
+  default_prompt: Use $solforge-report-writer for this task with native tools and
+    verify the result.
+policy:
+  allow_implicit_invocation: true

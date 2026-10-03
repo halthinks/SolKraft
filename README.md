@@ -1,0 +1,95 @@
+# SolKraft
+
+**An open skill OS for agents.** Find the right procedure, compose multi-step work, and retrieve only the instructions needed for the next step. SolKraft provides a searchable catalog, advisory router, REST API, and Model Context Protocol (MCP) server.
+
+[Open the console](https://halthinks.github.io/SolKraft/) · [Browse skills](solkraft/skillpacks) · [Report a bug](https://github.com/halthinks/SolKraft/issues/new/choose) · [API quickstart](#run-the-api)
+
+## What it does
+
+SolKraft indexes ordinary `SKILL.md` folders. Search and routing return compact metadata; agents can fetch a selected skill when useful. It never executes a skill, starts a workflow, runs shell commands, or grants authority. The host agent remains in control.
+
+- **REST API:** authenticated search, retrieve, refresh and route endpoints.
+- **MCP:** the same read-only capabilities through tools including `search_skills`, `route_request`, `get_skill`.
+- **GitHub Pages console:** browse and inspect the full bundled catalog offline, then connect an API to compose routes. API keys stay in memory and are never saved.
+- **Local-first:** run it on your machine or deploy a free API instance yourself.
+
+This release bundles **231 first-party skills** across software, research, science, data, business, engineering, writing, and general workflows. The live API can additionally scan skill roots you choose.
+
+## Try it locally
+
+Requires Python 3.11 or newer.
+
+```powershell
+py -m venv .venv
+.venv\Scripts\Activate.ps1
+python -m pip install -e .
+$env:SOLKRAFT_API_KEY = "replace-with-a-long-random-secret"
+python -m solkraft api
+```
+
+Open `http://127.0.0.1:8765/docs` for interactive API documentation. Set `SOLKRAFT_SKILL_ROOTS` to additional directories (semicolon-separated on Windows, colon-separated elsewhere). Added roots are read-only inputs; never point them at private directories when operating a public service.
+
+## Run the API
+
+Every `/v1/*` and `/mcp` request needs `Authorization: Bearer <key>`. `/healthz` is public. The browser console has a key field; the key is held only in memory for the current page session.
+
+| Endpoint | Purpose |
+|---|---|
+| `GET /healthz` | Liveness check |
+| `GET /v1/skills?q=...&limit=20` | Search skill metadata |
+| `GET /v1/skills/{id}` | Fetch one selected `SKILL.md` |
+| `POST /v1/route` | Return an ordered advisory route; `max_skills` 1–50 |
+| `POST /v1/refresh` | Re-index configured roots |
+| `/mcp` | MCP Streamable HTTP transport |
+
+Example:
+
+```sh
+curl -H "Authorization: Bearer $SOLKRAFT_API_KEY" \
+  "https://YOUR-SERVICE.onrender.com/v1/skills?q=repository%20test"
+```
+
+The default route uses the included SolForge graph and preserves intentional abstention and adapts recognized active stages to mounted skills. Results explicitly carry `execution_authorized: false`; routing is a suggestion, not an agent-policy hook. It does not silently alter Codex or another agent's native skill picker.
+
+## Free hosting
+
+[Deploy your API on Render](https://render.com/deploy?repo=https://github.com/halthinks/SolKraft)
+
+The included `render.yaml` is a one-click starting point for Render's free Python web service. Create a free Render account, connect this GitHub repository, set a long random `SOLKRAFT_API_KEY` in the service environment, and deploy. The GitHub Pages workflow builds the UI automatically when the repository is enabled for Pages (Settings → Pages → GitHub Actions).
+
+Render's free web services sleep after 15 minutes without inbound traffic and can take about a minute to wake. The free tier is intended for hobby/testing use, so expect cold starts and service limits; it is not an always-on production SLA. The static Pages console is free and remains available while the API sleeps. See [Render's current free-service details](https://render.com/docs/free).
+
+Do not publish a shared API key in frontend source or commit secrets. A browser key is visible to the person using that browser; use personal keys for personal deployments. Public shared deployments need an operator-managed auth, rate limiting, monitoring, and an explicit privacy policy. SolKraft does not relay model API calls and has no paid dependency.
+
+## Contribute
+
+See [AGENTS.md](AGENTS.md) for the full architecture, contracts, safety boundaries and agent workflow. Read [CONTRIBUTING.md](CONTRIBUTING.md), search existing [issues](https://github.com/halthinks/SolKraft/issues), then open a focused issue or pull request. The issue chooser includes bug reports and skill proposals. Sensitive vulnerabilities belong in [SECURITY.md](SECURITY.md), not a public issue.
+
+```sh
+python -m pip install -e ".[dev]"
+python -m pytest -q
+```
+
+## License
+
+MIT. See [LICENSE](LICENSE). Bundled skill provenance and license notes are tracked in [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).
+
+## Use the operating system
+
+Agents read `AGENTS.md`, apply `ENGINEERING_CONSTRAINTS_V1.json` for engineering work, and load relevant skill procedures at task start and stage changes. The shared composer understands ordered actions, exclusions, quoted context, explicit IDs, and established session context. The graph supplies conditional relationships; skills carry the procedures and supporting resources.
+
+Route requests accept optional `skills` and `context` fields. Responses retain `selection_trace` and `unselected_requested_stages`. Retrieve a supporting text resource at `GET /v1/skills/{id}/resources/{relative-path}` or MCP `get_skill_resource`. Load only the entrypoints and resources needed for the current stage.
+
+### CLI and graph
+
+```sh
+solkraft search "repository tests"
+solkraft route "Inspect the repository, implement the fix, then run regression tests" --max-skills 50
+solkraft get solforge-workflow-software-test
+solkraft resource solforge references/matcher-guide.md
+solkraft graph
+```
+
+`GET /v1/graph` and MCP `get_selection_graph` expose the portable graph and conditional follow-ups. Configure `SOLKRAFT_ALLOWED_HOSTS` for a custom hosted MCP domain; Render's assigned hostname is recognized automatically. The repository includes a Render deployment blueprint; deploy it from your Render account to obtain the API URL.
+
+The discovery graph covers all 231 bundled skills. Its 123-workflow semantic core carries 213 conditional relationships; other catalog nodes support discovery and explicit selection without fabricated dependencies. Operator-mounted skill roots join the same discovery graph. See [validation evidence](VALIDATION.md) for the regression suite, reproducible routing battery, and its limits.

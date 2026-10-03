@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "originId": "product_systems_masterplan",
+  "originVersion": "1.0.0",
+  "status": "accepted",
+  "cases": [
+    {
+      "id": "product-systems-masterplan-1",
+      "objective": "Reconcile our product outline, roadmap, business plan, whitepaper, architecture notes, prototypes, and compliance requirements into one traceable implementation-ready product master plan for a cross-functional team.",
+      "intendedOrigin": "product_systems_masterplan",
+      "acceptableSecondaryOrigins": [
+        "independent_discovery_synthesis"
+      ],
+      "disallowedOrigins": [
+        "solo_saas_blueprint",
+        "one_shot_ambitious_artifact"
+      ],
+      "rationale": "The request requires heterogeneous source reconstruction and a complete cross-functional product system, not a solo-operator minimization exercise.",
+      "difficulty": "hard",
+      "ambiguity": "low"
+    },
+    {
+      "id": "product-systems-masterplan-2",
+      "objective": "Create a platform systems blueprint covering product strategy, user journeys, technical and data architecture, security, operating model, unit economics, go-to-market, roadmap, and decision register.",
+      "intendedOrigin": "product_systems_masterplan",
+      "acceptableSecondaryOrigins": [
+        "recursive_judge_builder"
+      ],
+      "disallowedOrigins": [
+        "solo_saas_blueprint"
+      ],
+      "rationale": "The declared deliverable is a broad platform blueprint with integrated business and operating systems.",
+      "difficulty": "hard",
+      "ambiguity": "low"
+    },
+    {
+      "id": "product-systems-masterplan-3",
+      "objective": "Turn conflicting requirements, prior decisions, market research, financial assumptions, and architecture diagrams into an executable end-to-end product plan with traceability and explicit contradiction resolution.",
+      "intendedOrigin": "product_systems_masterplan",
+      "acceptableSecondaryOrigins": [
+        "independent_discovery_synthesis"
+      ],
+      "disallowedOrigins": [
+        "closed_world_grand_challenge"
+      ],
+      "rationale": "Cross-source reconstruction, contradiction resolution, and executable product-system integration are the defining mechanism.",
+      "difficulty": "hard",
+      "ambiguity": "medium"
+    }
+  ]
+}

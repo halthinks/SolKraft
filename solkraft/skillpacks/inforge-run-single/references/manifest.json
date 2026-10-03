@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "runner_version": "1.2.0",
+  "profile": "single",
+  "capsule_schema_sha256": "9feec1f5b1a4a4bb89433ebe2dd1a1feb7f14457c443ba38a027d1592ae47419",
+  "files": {
+    "agents/openai.yaml": "f124b36525c5e96242056a7b7d1a518e5586fc51e8bd1070f31f89cd6e010eba",
+    "references/execution-capsule.schema.json": "9feec1f5b1a4a4bb89433ebe2dd1a1feb7f14457c443ba38a027d1592ae47419",
+    "references/execution-policy.md": "04ad4d162b69f776b6c25beab29896c167f2383c41c527121f992e542d347f71",
+    "scripts/acceptance_audit.py": "0730499ec56c9ac51cbbcafa1e602b4460792bc779dec92f15e082dc9b2482c5",
+    "scripts/execution_state.py": "0290ff92321f10ee89db4a07579830968e15d3378d54eac0346aff31a689463f",
+    "scripts/selftest.py": "4201e107eb708cce2b5ad6dc148a77e86670955c9d8b20d137b351025dd84b52",
+    "scripts/validate_capsule.py": "b500fbe29561a066e4dc2068b37801bb176ec69e323cf61028a2749808d50896",
+    "scripts/verify_bundle.py": "20650a77eea0869dc57c96b4395f4445628e634b7969d5e4543b337b971d327b",
+    "SKILL.md": "ba82ed621c7ec3179031b920a178faee9992de31cca11ec29e5c7c03924cf7d4"
+  }
+}

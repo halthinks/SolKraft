@@ -1,0 +1,4 @@
+interface:
+  display_name: "Build DayQ Clothing"
+  short_description: "Build systemic DayQ clothing lifecycles"
+  default_prompt: "Use $build-dayq-clothing to design, integrate, or validate a complete DayQ garment lifecycle."

@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "1.0",
+  "originId": "autonomous_mission",
+  "originVersion": "1.0.0",
+  "status": "accepted",
+  "cases": [
+    {
+      "id": "autonomous_mission-1",
+      "objective": "Produce a rigorous repository implementation result with explicit constraints, evidence, falsification, and acceptance criteria.",
+      "intendedOrigin": "autonomous_mission",
+      "acceptableSecondaryOrigins": [
+        "closed_world_grand_challenge"
+      ],
+      "disallowedOrigins": [],
+      "rationale": "Autonomous Mission directly matches the repository implementation operating mode.",
+      "difficulty": "medium",
+      "ambiguity": "low"
+    },
+    {
+      "id": "autonomous_mission-2",
+      "objective": "Produce a rigorous system repair result with explicit constraints, evidence, falsification, and acceptance criteria.",
+      "intendedOrigin": "autonomous_mission",
+      "acceptableSecondaryOrigins": [
+        "closed_world_grand_challenge"
+      ],
+      "disallowedOrigins": [],
+      "rationale": "Autonomous Mission directly matches the system repair operating mode.",
+      "difficulty": "medium",
+      "ambiguity": "medium"
+    },
+    {
+      "id": "autonomous_mission-3",
+      "objective": "Produce a rigorous operational research result with explicit constraints, evidence, falsification, and acceptance criteria.",
+      "intendedOrigin": "autonomous_mission",
+      "acceptableSecondaryOrigins": [
+        "closed_world_grand_challenge"
+      ],
+      "disallowedOrigins": [],
+      "rationale": "Autonomous Mission directly matches the operational research operating mode.",
+      "difficulty": "hard",
+      "ambiguity": "low"
+    }
+  ]
+}

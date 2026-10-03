@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design DayQ With Agents"
+  short_description: "Turn certified agent research into designs"
+  default_prompt: "Use design-dayq-with-agents to execute its DayQ contract without replacing existing authoritative owners."

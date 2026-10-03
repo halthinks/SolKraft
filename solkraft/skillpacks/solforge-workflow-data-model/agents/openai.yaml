@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Data Model'
+  short_description: Build and validate a transparent model with baselines, holdou.
+  default_prompt: Use $solforge-workflow-data-model for this task with native tools
+    and verify the result.
+policy:
+  allow_implicit_invocation: true

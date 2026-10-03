@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge Report
+  short_description: Produce and export a professional report matched to its audie.
+  default_prompt: Use $solforge-report for this task with native tools and verify
+    the result.
+policy:
+  allow_implicit_invocation: true

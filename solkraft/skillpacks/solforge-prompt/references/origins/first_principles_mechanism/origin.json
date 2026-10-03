@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "1.0",
+  "id": "first_principles_mechanism",
+  "displayName": "First-Principles Mechanism",
+  "version": "1.1.0",
+  "status": "production",
+  "selectable": true,
+  "flagship": false,
+  "operatingIdea": "Rebuild from irreducible entities, states, flows, causes, and falsifiable mechanisms.",
+  "bestFor": "A phenomenon or system whose inherited labels and conventional explanations may conceal the causal chain.",
+  "useCases": [
+    "Root-cause diagnosis",
+    "Scientific mechanism",
+    "Engineering invention",
+    "System debugging"
+  ],
+  "produces": "A minimal causal mechanism, discriminating tests, failure boundaries, and a reconstructed solution derived from necessity.",
+  "antiUseCases": [
+    "Do not use when a validated operational procedure is needed but causal reconstruction adds no decision value."
+  ],
+  "representativeRequest": "Use First-Principles Mechanism to root-cause diagnosis with explicit evidence and acceptance gates.",
+  "downstreamLineage": [
+    "Origin-locked objective",
+    "Single, Multi, or Ultra profile",
+    "Effort contract",
+    "Exact hardened prompt",
+    "Hash-bound capsule",
+    "Approval and native Goal",
+    "Contextual workflow tree",
+    "Governed execution and deliverable"
+  ],
+  "priority": 30,
+  "routingSignals": [
+    {
+      "pattern": "\\b(why|cause|root cause|mechanism|first principles|debug|diagnos)\\b",
+      "flags": "iu",
+      "weight": 7
+    },
+    {
+      "pattern": "\\b(system behavior|failure|phenomenon|causal)\\b",
+      "flags": "iu",
+      "weight": 5
+    },
+    {
+      "pattern": "\\b(flow|feedback|state transition)\\b",
+      "flags": "iu",
+      "weight": 3
+    }
+  ],
+  "requiredReasoningRoles": [
+    "causal decomposer",
+    "mechanism constructor",
+    "falsification designer",
+    "intervention verifier"
+  ],
+  "applicabilityGate": [
+    "Use only when a causal explanation or mechanism-level intervention would materially improve the decision or solution.",
+    "Require observations and system boundaries sufficient to instantiate at least two testable candidate mechanisms or one directly evidenced mechanism.",
+    "Route away when a validated procedure already answers the need and causal reconstruction adds no decision value."
+  ],
+  "solExecutionContract": [
+    "Select and declare the domain-fit mechanism mode before decomposition: physical or causal, software or state-transition, organizational or incentive, economic or flow, or epistemic or evidence; use only the modes warranted by the problem.",
+    "Within the selected mode, separate observations from inferences and enumerate the relevant entities, states, transformations, information, resources, incentives, timescales, and failure mechanisms without force-fitting physical terminology.",
+    "For every major causal claim identify the transmission from cause to consequence, competing explanations, operating scale, removal behavior, evidence, and epistemic status.",
+    "Build only evidence-consistent competing mechanisms with initial conditions, transitions, feedback, failure boundaries, distinct predictions, and minimal interventions.",
+    "Prefer causal compression only after discrimination; if available evidence cannot choose among viable mechanisms, return MECHANISM_UNDERDETERMINED and specify the minimum discriminating observation, experiment, trace, or intervention required.",
+    "When evidence discriminates, reconstruct the solution from the minimal supported mechanism, derive falsifying tests, and expose remaining unverified assumptions."
+  ],
+  "observableOutputContract": [
+    "Declared domain-fit mechanism mode and observation-to-inference boundary",
+    "Entity, state, flow, incentive, or evidence map appropriate to that mode",
+    "Competing-mechanism table with distinct predictions and falsifiers",
+    "Selected minimal mechanism with intervention tests, or a MECHANISM_UNDERDETERMINED packet naming minimum discriminating evidence"
+  ],
+  "failureAndAdversarialChecklist": [
+    "Reject requirement loss, unsupported claims, fabricated evidence, or unapproved authority expansion.",
+    "Test boundary cases, counterexamples, failure modes, and the strongest plausible rejected alternative.",
+    "Require observable acceptance evidence and state unresolved uncertainty explicitly.",
+    "Do not use when a validated operational procedure is needed but causal reconstruction adds no decision value."
+  ],
+  "profileAdaptations": {
+    "single": "One Sol agent owns synthesis and uses independent internal passes without claiming nonexistent agents.",
+    "multi": "Delegate only genuinely independent bounded workstreams; preserve provenance, handoffs, integration tests, and root synthesis.",
+    "ultra": "Production Ultra uses full_approved_capsule semantics only after a signed and verified native capability attestation and user authorization bind the canonical capsule, complete budget, kill switch, and lease policy plus branch termination and root acceptance; proof_only is a development and validation mode, never the production default."
+  },
+  "sharedControlVersion": "solforge-origin-controls-v1",
+  "promotion": {
+    "status": "production",
+    "promotedAt": "2026-07-15T12:00:00.000Z",
+    "receiptPath": "promotion-receipt.json",
+    "rollbackTarget": "candidate-1.1.0"
+  }
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Operate DayQ Drone Flight"
+  short_description: "Implement authoritative drone flight and autonomy"
+  default_prompt: "Use operate-dayq-drone-flight to execute its DayQ contract without replacing existing authoritative owners."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Training Claim Verification"
+  short_description: "Verify ML training, dataset, proxy, and promotion claims"
+  default_prompt: "Verify this training or dataset readiness claim before it is committed or reported."

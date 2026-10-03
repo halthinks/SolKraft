@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "1.0",
+  "originId": "one_shot_ambitious_artifact",
+  "originVersion": "1.0.0",
+  "status": "accepted",
+  "cases": [
+    {
+      "id": "one_shot_ambitious_artifact-1",
+      "objective": "Produce a rigorous interactive application result with explicit constraints, evidence, falsification, and acceptance criteria.",
+      "intendedOrigin": "one_shot_ambitious_artifact",
+      "acceptableSecondaryOrigins": [
+        "closed_world_grand_challenge"
+      ],
+      "disallowedOrigins": [],
+      "rationale": "One-Shot Ambitious Artifact directly matches the interactive application operating mode.",
+      "difficulty": "medium",
+      "ambiguity": "low"
+    },
+    {
+      "id": "one_shot_ambitious_artifact-2",
+      "objective": "Produce a rigorous simulation result with explicit constraints, evidence, falsification, and acceptance criteria.",
+      "intendedOrigin": "one_shot_ambitious_artifact",
+      "acceptableSecondaryOrigins": [
+        "closed_world_grand_challenge"
+      ],
+      "disallowedOrigins": [],
+      "rationale": "One-Shot Ambitious Artifact directly matches the simulation operating mode.",
+      "difficulty": "medium",
+      "ambiguity": "medium"
+    },
+    {
+      "id": "one_shot_ambitious_artifact-3",
+      "objective": "Produce a rigorous game result with explicit constraints, evidence, falsification, and acceptance criteria.",
+      "intendedOrigin": "one_shot_ambitious_artifact",
+      "acceptableSecondaryOrigins": [
+        "closed_world_grand_challenge"
+      ],
+      "disallowedOrigins": [],
+      "rationale": "One-Shot Ambitious Artifact directly matches the game operating mode.",
+      "difficulty": "hard",
+      "ambiguity": "low"
+    }
+  ]
+}

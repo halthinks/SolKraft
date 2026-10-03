@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Business Compare'
+  short_description: Compare named alternatives using explicit criteria, evidence.
+  default_prompt: Use $solforge-workflow-business-compare for this task with native
+    tools and verify the result.
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "1.0",
+  "id": "autonomous_mission",
+  "displayName": "Autonomous Mission",
+  "version": "1.1.0",
+  "status": "production",
+  "selectable": true,
+  "flagship": false,
+  "operatingIdea": "Own the complete act-observe-diagnose-revise-validate loop.",
+  "bestFor": "A concrete outcome that requires tools, files, tests, inspection, and persistence—not merely an answer or plan.",
+  "useCases": [
+    "Repository implementation",
+    "System repair",
+    "Operational research",
+    "End-to-end delivery"
+  ],
+  "produces": "A completed observable outcome with real actions, validation evidence, known limitations, and no unapproved authority expansion.",
+  "antiUseCases": [
+    "Do not use for advice-only requests or where the user has not authorized the required actions."
+  ],
+  "representativeRequest": "Use Autonomous Mission to repository implementation with explicit evidence and acceptance gates.",
+  "downstreamLineage": [
+    "Origin-locked objective",
+    "Single, Multi, or Ultra profile",
+    "Effort contract",
+    "Exact hardened prompt",
+    "Hash-bound capsule",
+    "Approval and native Goal",
+    "Contextual workflow tree",
+    "Governed execution and deliverable"
+  ],
+  "priority": 80,
+  "routingSignals": [
+    {
+      "pattern": "\\b(build|implement|fix|repair|migrate|deploy|deliver|execute)\\b",
+      "flags": "iu",
+      "weight": 7
+    },
+    {
+      "pattern": "\\b(repo|repository|codebase|files?|tests?|build)\\b",
+      "flags": "iu",
+      "weight": 5
+    },
+    {
+      "pattern": "\\b(end[- ]to[- ]end|working|functional)\\b",
+      "flags": "iu",
+      "weight": 4
+    }
+  ],
+  "requiredReasoningRoles": [
+    "authority and acceptance planner",
+    "tool operator",
+    "failure diagnostician",
+    "outcome verifier"
+  ],
+  "applicabilityGate": [
+    "Use only when the objective is concrete, the required actions are authorized, and completion can be demonstrated with observable evidence.",
+    "Verify that the minimum workspace, inputs, dependencies, tools, and credentials needed to begin are present or inspectable.",
+    "Never infer authority from urgency, access, or technical capability, and never broaden the requested scope to bypass a prerequisite."
+  ],
+  "solExecutionContract": [
+    "Before acting, bind the literal objective to observable acceptance evidence and create an authority-and-prerequisite ledger that distinguishes provided, inspectable, and missing requirements.",
+    "If required authority or a minimum prerequisite is absent, do not simulate execution or claim progress: return MISSION_BLOCKED with the exact blocker, safe inspection already completed, the minimum user or external action needed, and a resumable next action.",
+    "When the gate passes, own the complete loop: inspect, plan, act, observe, diagnose, revise, validate, and deliver within the bound authority.",
+    "Use real tools and inspect real outputs; do not substitute a plan, scaffold, inferred success, or fabricated integration for execution evidence.",
+    "Investigate unexpected failures and attempt safe in-scope alternatives while checkpointing recoverable state.",
+    "Finish only when the observable outcome satisfies acceptance, no known critical defect remains, and limitations and unauthorized actions are explicit."
+  ],
+  "observableOutputContract": [
+    "Authority-and-prerequisite ledger with an explicit applicability result",
+    "Action and change record tied to the literal objective",
+    "Observable verification and acceptance evidence",
+    "Completed deliverable with limitations, or a MISSION_BLOCKED packet with exact resumption conditions"
+  ],
+  "failureAndAdversarialChecklist": [
+    "Reject requirement loss, unsupported claims, fabricated evidence, or unapproved authority expansion.",
+    "Test boundary cases, counterexamples, failure modes, and the strongest plausible rejected alternative.",
+    "Require observable acceptance evidence and state unresolved uncertainty explicitly.",
+    "Do not use for advice-only requests or where the user has not authorized the required actions."
+  ],
+  "profileAdaptations": {
+    "single": "One Sol agent owns synthesis and uses independent internal passes without claiming nonexistent agents.",
+    "multi": "Delegate only genuinely independent bounded workstreams; preserve provenance, handoffs, integration tests, and root synthesis.",
+    "ultra": "Production Ultra uses full_approved_capsule semantics only after a signed and verified native capability attestation and user authorization bind the canonical capsule, complete budget, kill switch, and lease policy plus branch termination and root acceptance; proof_only is a development and validation mode, never the production default."
+  },
+  "sharedControlVersion": "solforge-origin-controls-v1",
+  "promotion": {
+    "status": "production",
+    "promotedAt": "2026-07-15T12:00:00.000Z",
+    "receiptPath": "promotion-receipt.json",
+    "rollbackTarget": "candidate-1.1.0"
+  }
+}

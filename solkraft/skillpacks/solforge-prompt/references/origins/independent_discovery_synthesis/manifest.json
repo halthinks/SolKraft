@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "1.0",
+  "originId": "independent_discovery_synthesis",
+  "version": "1.1.0",
+  "status": "production",
+  "sharedControlVersion": "solforge-origin-controls-v1",
+  "files": {
+    "origin.json": "1f35ffa7d839e913cb1a583865d690342b0cf9d672d909fa7e95209784f564cb",
+    "source-prompt.md": "6158fbab5d40137579b50136b3eb3c3e588134eac4cbf828f4344e60a716a212",
+    "evaluation-corpus.json": "bb6e98575828e5823c7de4d7db64aa4d75120b481795d7f8ca895278fb035e25"
+  },
+  "rollbackTarget": "candidate-1.1.0",
+  "manifestHash": "a11c5e4285210931efc9442fdff8a801af0a810d7fb0093275f458a11822639f",
+  "sharedControlSha256": "6b5f508cac80442753e25f943b6889ed9a7eb344a5504e8e976f17bd6a7b4376"
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Direct DayQ Content"
+  short_description: "Create canon-bound systemic DayQ content."
+  default_prompt: "Turn this DayQ request into a canon-bound implementation brief."

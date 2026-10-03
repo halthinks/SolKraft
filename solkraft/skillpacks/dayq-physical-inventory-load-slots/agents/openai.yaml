@@ -1,0 +1,4 @@
+interface:
+  display_name: "DayQ Physical Inventory"
+  short_description: "Model physical load, packs, and slots"
+  default_prompt: "Use $dayq-physical-inventory-load-slots to design and validate this DayQ inventory or carried-load change."

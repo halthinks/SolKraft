@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "1.0",
+  "id": "minimum_trustworthy_system",
+  "displayName": "Minimum Trustworthy System",
+  "version": "1.1.0",
+  "status": "production",
+  "selectable": true,
+  "flagship": false,
+  "operatingIdea": "Apply risk-proportionate discipline without bloat to find the smallest complete system that deserves trust in its real operating context.",
+  "bestFor": "A product, service, workflow, program, tool, process, or mixed human-technical initiative that must become complete, operable, recoverable, and evolvable without unnecessary complexity.",
+  "useCases": [
+    "Lean system design",
+    "Operational workflow design",
+    "Service and program blueprinting",
+    "Trustworthy production planning",
+    "Human-technical system design"
+  ],
+  "produces": "A context-specific minimum-trustworthy-system blueprint defining the outcome loop, necessary components, interfaces, ownership, proportional safeguards, verification, operations, recovery, resource model, staged delivery, exclusions, and evidence-based expansion triggers.",
+  "antiUseCases": [
+    "Do not use when the controlling objective is a SaaS-specific solo-operator blueprint with accounts, billing, APIs, and MCP as required product surfaces.",
+    "Do not use for a broad cross-functional product or platform master plan whose purpose is to reconcile every business and organizational function regardless of minimum-system boundaries.",
+    "Do not use when the user only requests one narrow artifact or skill execution and no surrounding operating system must be designed."
+  ],
+  "representativeRequest": "Turn these fragmented requirements into the smallest complete and trustworthy system that can deliver the intended outcome repeatedly, survive realistic failures, and evolve without avoidable complexity.",
+  "downstreamLineage": [
+    "Origin-locked objective",
+    "Single, Multi, or Ultra profile",
+    "Effort contract",
+    "Exact hardened prompt",
+    "Hash-bound capsule",
+    "Approval and native Goal",
+    "Contextual workflow tree",
+    "Governed execution and deliverable"
+  ],
+  "priority": 80,
+  "routingSignals": [
+    {
+      "pattern": "\\b(minimum trustworthy system|minimum complete system|smallest complete system|minimum viable system)\\b",
+      "flags": "iu",
+      "weight": 13
+    },
+    {
+      "pattern": "\\b(risk[- ]proportionate completeness|production discipline without (?:enterprise|organizational|operational) bloat|complexity budget)\\b",
+      "flags": "iu",
+      "weight": 10
+    },
+    {
+      "pattern": "\\b(real operating context|human[- ]technical system|failure recovery|reversible decisions|explicit replacement triggers)\\b",
+      "flags": "iu",
+      "weight": 6
+    }
+  ],
+  "requiredReasoningRoles": [
+    "outcome-loop and system-boundary designer",
+    "risk, trust, and proportional-controls reviewer",
+    "operations, ownership, failure, and recovery designer",
+    "resource, burden, and complexity-budget owner",
+    "verification, exclusion, and adversarial auditor"
+  ],
+  "applicabilityGate": [
+    "Use this origin only when the request needs the smallest repeatable operating system that can earn trust across a material outcome and lifecycle; route a narrow standalone artifact elsewhere.",
+    "Inventory the supplied objective, beneficiaries and affected parties, stakes, evidence, constraints, current state, authority, lifecycle obligations, and credible failure consequences before designing the system.",
+    "When a material input is absent or contradictory, return a conditional or deferred blueprint plus the minimum evidence needed to resolve it; never invent dependencies, controls, implementation state, users, economics, or proof.",
+    "Keep only components and controls that are material now, and place plausible future additions behind measurable evidence or risk triggers."
+  ],
+  "observableOutputContract": [
+    "An evidence inventory that labels material claims confirmed, implied, assumed, unresolved, contradicted, or unnecessary.",
+    "A bounded outcome and lifecycle loop with the minimum trustworthy system boundary and explicit non-goals.",
+    "A component, owner, interface, and materiality ledger that justifies every retained element and control.",
+    "A marker-to-proof register that distinguishes marker-only, evidenced, unverified, and blocked trust claims.",
+    "A failure, recovery, and acceptance model with a vertical evidence-bearing delivery sequence.",
+    "Explicit exclusions, conditional or deferred elements, and measurable expansion or replacement triggers."
+  ],
+  "solExecutionContract": [
+    "Apply the applicability gate first. Reconstruct the intended outcome, parties, recurring loop, supplied evidence, constraints, current state, resources, authority, environment, dependencies, harms, uncertainties, and success conditions without filling evidence gaps by invention.",
+    "Classify each material claim as confirmed, implied, assumed, unresolved, contradicted, or unnecessary, and distinguish a control or document that merely marks intent from observable proof that it works; use marker-only, evidenced, unverified, and blocked proof statuses.",
+    "Define the minimum complete system by material outcomes and lifecycle rather than artifact count: entry, first success, repeat operation, ownership, normal exceptions, failure recovery, escalation, change, and safe retirement are included only where the evidence or stakes require them.",
+    "Select only justified roles, procedures, physical elements, information, software, services, interfaces, controls, and documentation; require each retained element to justify time, money, cognitive load, coordination burden, risk exposure, and replacement cost.",
+    "Make safeguards proportional to evidenced stakes. Include safety, security, privacy, quality, accessibility, legal or ethical review, authorization, auditability, and human approval only when material, but never omit a material control merely because the system is small.",
+    "Design one coherent operating model with explicit ownership, handoffs, decision rights, sources of truth, state transitions, feedback, observability, failure behavior, recovery, and change control across the retained human and technical components.",
+    "Treat commercial models, accounts, billing, APIs, MCP, AI, deployment infrastructure, physical logistics, compliance, and organizational governance as conditional modules; include them only when supplied evidence, authority, or material risk requires them, otherwise defer them with activation evidence.",
+    "Produce a vertical sequence that proves the critical outcome loop early, then adds only material safeguards and capacity; attach acceptance evidence, resource bounds, reversal, unresolved proof statuses, and measurable expansion triggers to each stage.",
+    "Adversarially test only the material boundary and return conditional or deferred outputs when required proof or authority is unavailable; do not claim that markers, plans, or proposed tests constitute verified operation."
+  ],
+  "failureAndAdversarialChecklist": [
+    "Reject generic checklists, domain cargo cult, enterprise bloat, premature automation, needless process, and components retained only because they are conventional.",
+    "Reject false minimalism that removes a critical lifecycle step, owner, safeguard, recovery path, feedback loop, source of truth, or verification method.",
+    "Attack ambiguous ownership, hidden manual labor, unsafe handoffs, duplicated rules, silent failure, irreversible action, unbounded cost, exclusion of affected parties, and assumptions that only hold under ideal conditions.",
+    "Require every included module to be context-justified, every exclusion to be explicit, every future addition to have a measurable trigger, and every critical outcome and recovery path to have observable evidence.",
+    "Do not force software, business, commercial, API, MCP, AI, or organizational machinery into a system that does not need it."
+  ],
+  "profileAdaptations": {
+    "single": "One Sol agent owns the system boundary, tradeoff ledger, and coherent blueprint, using separate outcome, risk, operations, and complexity passes without claiming nonexistent agents.",
+    "multi": "Delegate outcome and stakeholder reconstruction, system and interface design, trust and failure analysis, and resource review only where lanes are independent; root synthesis must preserve one minimum system and one source of truth.",
+    "ultra": "Production Ultra uses full_approved_capsule semantics only after a signed and verified native capability attestation and user authorization bind the canonical capsule, complete budget, kill switch, and lease policy plus hard branch termination and root acceptance; proof_only is a development and validation mode, never the production default. The approved plan must also prove that orchestration complexity is justified by the system's stakes."
+  },
+  "sharedControlVersion": "solforge-origin-controls-v1",
+  "promotion": {
+    "status": "production",
+    "promotedAt": "2026-07-15T12:00:00.000Z",
+    "receiptPath": "promotion-receipt.json",
+    "rollbackTarget": "candidate-1.1.0"
+  }
+}

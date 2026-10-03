@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Software Shared Core'
+  short_description: Separate portable behavior from target-specific UI, lifecycle.
+  default_prompt: Use $solforge-workflow-software-shared-core for this task with native
+    tools and verify the result.
+policy:
+  allow_implicit_invocation: true

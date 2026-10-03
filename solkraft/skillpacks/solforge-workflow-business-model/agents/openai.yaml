@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Business Model'
+  short_description: Build explicit assumptions, scenarios, sensitivities, and dec.
+  default_prompt: Use $solforge-workflow-business-model for this task with native
+    tools and verify the result.
+policy:
+  allow_implicit_invocation: true

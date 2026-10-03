@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1.0",
+  "originId": "independent_discovery_synthesis",
+  "version": "1.1.0",
+  "decision": "promote",
+  "evidence": "AUTO routing and protected prompt-contract benchmark gates passed; promotion does not claim universal downstream model superiority.",
+  "decidedAt": "2026-07-15T12:00:00.000Z",
+  "manifestHash": "a11c5e4285210931efc9442fdff8a801af0a810d7fb0093275f458a11822639f",
+  "benchmarkSha256": "758ba782e0cbd2f886f5e81a8a1a2fcc1bdfe2533aaee0c07b613554edbbf172",
+  "evaluationPackageSha256": "32c5255178771da736febecc6662749a4f2929d1c7a061ab108c30d0108dc2eb",
+  "rollbackTarget": "candidate-1.1.0",
+  "receiptHash": "e660aac8f8998858ccbde9c0aedcbad8db4e6cc133b9264f1b26656e25ac3a93"
+}

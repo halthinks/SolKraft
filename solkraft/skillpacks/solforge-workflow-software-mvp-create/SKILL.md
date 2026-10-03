@@ -1,0 +1,18 @@
+---
+name: solforge-workflow-software-mvp-create
+description: Turn a product brief or selected research into a PRD, architecture, and working vertical slice.
+---
+
+# Build a software MVP
+
+Use the [native execution contract](../solforge/references/native-execution.md) once per task.
+
+Establish the product brief or selected research, the target user and core job, explicit acceptance criteria, and any constraints on stack, hosting, or existing repository. Resolve the smallest vertical slice that demonstrates the core value end to end before writing the PRD; a brief that names ten features without ranking them needs a deliberate cut, and the cut belongs in the PRD as in-scope versus deferred with reasons. Scale depth to the request: a solo internal tool and a launchable product warrant different architecture rigor.
+
+Write the PRD with the user flow, the slice's exact behaviors, deferred items, and an observable acceptance check for each behavior. Then choose the architecture: stack, data model, external dependencies, and the seams where the slice will grow. Prefer boring, well-understood technology unless the core value requires otherwise, and record each decision a replacement implementer could not infer from the code alone. Design for the next two or three slices, not the five-year roadmap.
+
+Build the slice as one runnable path from entry to result: real data in, real persistence or computation, real output. Vertical means the whole flow works; horizontal scaffolding across many screens with no depth is not an MVP. Where an external service is needed but not yet authorized, stub it behind an interface and say so, rather than faking the integration or blocking silently. Follow repository build and testing requirements where they exist.
+
+Verify by building and running the actual artifact from a clean state: install, start, and execute the core flow as the target user would. Confirm each PRD acceptance check against observed behavior, not against code that looks like it should work. Named anti-patterns: a PRD without a runnable slice, a slice that only works in the developer's existing environment, seeded or hardcoded data presented as real end-to-end behavior, and a mock or stub presented as evidence for an integration never exercised. Distinguish what genuinely runs from what is stubbed, deferred, or untested.
+
+Report what was built and verified, the PRD and architecture decisions with their rationale, deferred scope, open risks, and what the next slice should address. Use [solforge-mvp-create](../solforge-mvp-create/SKILL.md) for the underlying method when it supplies missing procedure.

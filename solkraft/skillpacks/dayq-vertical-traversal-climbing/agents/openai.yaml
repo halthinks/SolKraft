@@ -1,0 +1,4 @@
+interface:
+  display_name: "DayQ Vertical Traversal"
+  short_description: "Build systemic climbing and vertical play"
+  default_prompt: "Use $dayq-vertical-traversal-climbing to design and validate this DayQ vertical traversal feature."

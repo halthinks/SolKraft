@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.solforge/execution-capsule.schema.json",
+  "title": "SolForge Multi execution capsule",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "profile", "capsule_id", "payload", "capsule_sha256", "confirmation"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "profile": {"const": "multi"},
+    "capsule_id": {"type": "string", "minLength": 1},
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["original_request", "structured_intent", "hardened_prompt", "solforge_provenance", "requirements", "scope", "authorization", "risks", "budgets", "retry_limit", "source_artifacts"],
+      "properties": {
+        "original_request": {"type": "string", "minLength": 1},
+        "structured_intent": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["objective", "inputs", "constraints", "deliverables", "acceptance_criteria", "authorization_boundaries"],
+          "properties": {
+            "objective": {"type": "string", "minLength": 1},
+            "inputs": {"type": "array", "items": {"type": "string", "minLength": 1}},
+            "constraints": {"type": "array", "items": {"type": "string", "minLength": 1}},
+            "deliverables": {"type": "array", "items": {"type": "string", "minLength": 1}},
+            "acceptance_criteria": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}}
+            ,"authorization_boundaries": {"type": "array", "items": {"type": "string", "minLength": 1}}
+          }
+        },
+        "hardened_prompt": {"type": "string", "minLength": 1},
+        "solforge_provenance": {"type": "string", "pattern": "profile=single.*execution_boundary=transpose_only"},
+        "requirements": {
+          "type": "array", "minItems": 1,
+          "items": {"type": "object", "additionalProperties": false, "required": ["id", "text"], "properties": {"id": {"type": "string", "pattern": "^[A-Za-z0-9_.-]+$"}, "text": {"type": "string", "minLength": 1}}}
+        },
+        "scope": {
+          "type": "object", "additionalProperties": false, "required": ["in_scope", "out_of_scope"],
+          "properties": {"in_scope": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}}, "out_of_scope": {"type": "array", "items": {"type": "string", "minLength": 1}}}
+        },
+        "authorization": {
+          "type": "object", "additionalProperties": false,
+          "required": ["allowed_actions", "prohibited_actions", "allowed_tools", "permission_evidence", "mutation_allowed", "external_side_effects_allowed"],
+          "properties": {
+            "allowed_actions": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+            "prohibited_actions": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+            "allowed_tools": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+            "permission_evidence": {"type": "array", "minItems": 1, "items": {"type": "object", "additionalProperties": false, "required": ["permission", "basis", "evidence"], "properties": {"permission": {"type": "string", "minLength": 1}, "basis": {"enum": ["user_explicit", "derived_nonexpansive", "higher_priority_policy"]}, "evidence": {"type": "string", "minLength": 1}}}},
+            "mutation_allowed": {"type": "boolean"},
+            "external_side_effects_allowed": {"type": "boolean"}
+          }
+        },
+        "risks": {
+          "type": "object", "additionalProperties": false, "required": ["categories", "high_consequence"],
+          "properties": {
+            "categories": {"type": "array", "uniqueItems": true, "items": {"enum": ["destructive_or_irreversible", "external_side_effect", "production_or_deployment", "security_or_privileged_access", "credentials_or_sensitive_data", "financial_commitment", "legal_medical_financial_reliance", "broad_scope_state_change"]}},
+            "high_consequence": {"type": "boolean"}
+          }
+        },
+        "budgets": {
+          "type": "object", "additionalProperties": false,
+          "required": ["max_elapsed_seconds", "max_tool_calls", "max_rounds", "max_agents", "max_cost_usd"],
+          "properties": {
+            "max_elapsed_seconds": {"type": "number", "exclusiveMinimum": 0},
+            "max_tool_calls": {"type": "integer", "minimum": 0},
+            "max_rounds": {"type": "integer", "minimum": 1},
+            "max_agents": {"type": "integer", "minimum": 1},
+            "max_cost_usd": {"type": "number", "minimum": 0}
+          }
+        },
+        "retry_limit": {"type": "integer", "minimum": 0},
+        "source_artifacts": {
+          "type": "array", "uniqueItems": true,
+          "items": {"type": "object", "additionalProperties": false, "required": ["path", "sha256"], "properties": {"path": {"type": "string", "minLength": 1}, "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}}
+        }
+      }
+    },
+    "capsule_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "confirmation": {
+      "oneOf": [
+        {"type": "null"},
+        {"type": "object", "additionalProperties": false, "required": ["author", "capsule_sha256", "confirmed", "statement"], "properties": {"author": {"const": "user"}, "capsule_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}, "confirmed": {"const": true}, "statement": {"type": "string", "minLength": 1}}}
+      ]
+    }
+  }
+}

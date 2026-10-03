@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Data Analyze'
+  short_description: Execute a reproducible analysis with grain, definitions, assu.
+  default_prompt: Use $solforge-workflow-data-analyze for this task with native tools
+    and verify the result.
+policy:
+  allow_implicit_invocation: true

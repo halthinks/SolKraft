@@ -1,0 +1,4 @@
+interface:
+  display_name: "Uparmor DayQ Platforms"
+  short_description: "Integrate armor on vehicles drones and bases"
+  default_prompt: "Use uparmor-dayq-platforms to execute its DayQ contract without replacing existing authoritative owners."

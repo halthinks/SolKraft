@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Data Visualize'
+  short_description: Build evidence-linked charts and an explanatory narrative mat.
+  default_prompt: Use $solforge-workflow-data-visualize for this task with native
+    tools and verify the result.
+policy:
+  allow_implicit_invocation: true

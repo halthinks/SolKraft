@@ -1,0 +1,4 @@
+interface:
+  display_name: "Evidence-Bound Product Pipeline"
+  short_description: "Close hardware products with honest evidence"
+  default_prompt: "Use $evidence-bound-product-pipeline to realize this hardware product without proxy geometry or false physical claims."

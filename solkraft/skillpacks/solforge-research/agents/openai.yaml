@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge Research
+  short_description: Conduct source-backed research with claim evidence, contrary.
+  default_prompt: Use $solforge-research for this task with native tools and verify
+    the result.
+policy:
+  allow_implicit_invocation: true

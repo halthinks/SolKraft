@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Implementation'
+  short_description: Apply the selected Single, Multi, or Ultra runner to a bounde.
+  default_prompt: Use $solforge-workflow-implementation for this task with native
+    tools and verify the result.
+policy:
+  allow_implicit_invocation: true

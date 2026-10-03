@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "1.0",
+  "id": "constraint_reversal",
+  "displayName": "Constraint Reversal",
+  "version": "1.1.0",
+  "status": "production",
+  "selectable": true,
+  "flagship": false,
+  "operatingIdea": "Audit assumed limits and convert the right limitation into leverage.",
+  "bestFor": "A solution space dominated by constraints that may be conventional, reversible, removable, or useful as resources.",
+  "useCases": [
+    "Product invention",
+    "Regulated markets",
+    "Cost reduction",
+    "Severe engineering limits"
+  ],
+  "produces": "A feasible mechanism produced by reversing or exploiting a nonessential constraint, with transferred costs and true limits exposed.",
+  "antiUseCases": [
+    "Do not reverse safety, legal, ethical, or objective-defining constraints."
+  ],
+  "representativeRequest": "Use Constraint Reversal to product invention with explicit evidence and acceptance gates.",
+  "downstreamLineage": [
+    "Origin-locked objective",
+    "Single, Multi, or Ultra profile",
+    "Effort contract",
+    "Exact hardened prompt",
+    "Hash-bound capsule",
+    "Approval and native Goal",
+    "Contextual workflow tree",
+    "Governed execution and deliverable"
+  ],
+  "priority": 40,
+  "routingSignals": [
+    {
+      "pattern": "\\b(constraint|limitation|scarcity|regulated|regulation|compliance|cost)\\b",
+      "flags": "iu",
+      "weight": 7
+    },
+    {
+      "pattern": "\\b(reverse|remove|invert|exploit|tradeoff)\\b",
+      "flags": "iu",
+      "weight": 5
+    },
+    {
+      "pattern": "\\b(moat|advantage|resource)\\b",
+      "flags": "iu",
+      "weight": 3
+    }
+  ],
+  "requiredReasoningRoles": [
+    "constraint classifier",
+    "reversal inventor",
+    "feasibility auditor",
+    "transferred-cost reviewer"
+  ],
+  "applicabilityGate": [
+    "Use only when one or more stated or observable constraints materially limit the solution space.",
+    "Treat a constraint as false-fixed or reversible only when evidence supports both its controlling effect and its mutability.",
+    "Exclude safety, legal, ethical, authority, and objective-defining constraints from reversal candidates."
+  ],
+  "solExecutionContract": [
+    "Inventory explicit and implicit constraints, cite their source or observation, and classify each as necessary, objective-bound, conventional, inherited, convenient, unsupported, reversible, or potentially useful.",
+    "For every proposed false-fixed constraint, show evidence that it materially controls the outcome, can be changed, and is not a safety, legal, ethical, authority, or objective-defining boundary.",
+    "Run a no-constraint discovery test before ideation; if no material reversible false-fixed constraint is evidenced, return NO_REVERSIBLE_CONSTRAINT_FOUND with the tested boundary and strongest conventional solution rather than forcing a reversal.",
+    "For supported candidates, compare preserve, remove, reverse, combine, exploit, and architectural-elimination mechanisms, translating speculative ideas back into explicit feasible conditions.",
+    "Test whether benefits survive reality, where costs and risks move, which dependencies are introduced, and whether necessary constraints can be restored without destroying the mechanism.",
+    "Return the evidenced false-fixed constraint, selected reversal, complete solution, feasibility evidence, introduced risks, restoration conditions, and strongest conventional alternative."
+  ],
+  "observableOutputContract": [
+    "Constraint ledger with provenance, evidence, materiality, and classification",
+    "No-constraint discovery test with an explicit result",
+    "Reversal candidate table covering mechanism, feasibility, transferred cost, risk, and restoration",
+    "Selected reversal plus conventional baseline, or a NO_REVERSIBLE_CONSTRAINT_FOUND packet"
+  ],
+  "failureAndAdversarialChecklist": [
+    "Reject requirement loss, unsupported claims, fabricated evidence, or unapproved authority expansion.",
+    "Test boundary cases, counterexamples, failure modes, and the strongest plausible rejected alternative.",
+    "Require observable acceptance evidence and state unresolved uncertainty explicitly.",
+    "Do not reverse safety, legal, ethical, or objective-defining constraints."
+  ],
+  "profileAdaptations": {
+    "single": "One Sol agent owns synthesis and uses independent internal passes without claiming nonexistent agents.",
+    "multi": "Delegate only genuinely independent bounded workstreams; preserve provenance, handoffs, integration tests, and root synthesis.",
+    "ultra": "Production Ultra uses full_approved_capsule semantics only after a signed and verified native capability attestation and user authorization bind the canonical capsule, complete budget, kill switch, and lease policy plus branch termination and root acceptance; proof_only is a development and validation mode, never the production default."
+  },
+  "sharedControlVersion": "solforge-origin-controls-v1",
+  "promotion": {
+    "status": "production",
+    "promotedAt": "2026-07-15T12:00:00.000Z",
+    "receiptPath": "promotion-receipt.json",
+    "rollbackTarget": "candidate-1.1.0"
+  }
+}

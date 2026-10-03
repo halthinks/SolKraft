@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Software Refactor'
+  short_description: Produce or execute a behavior-preserving, test-gated, reversi.
+  default_prompt: Use $solforge-workflow-software-refactor for this task with native
+    tools and verify the result.
+policy:
+  allow_implicit_invocation: true

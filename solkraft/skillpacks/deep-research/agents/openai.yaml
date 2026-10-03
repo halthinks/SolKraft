@@ -1,0 +1,4 @@
+interface:
+  display_name: "Deep Research"
+  short_description: "Create source-backed research dossiers."
+  default_prompt: "Do deep research on this topic and produce a cited dossier."

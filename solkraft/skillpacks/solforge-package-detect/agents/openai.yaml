@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge Package Detect
+  short_description: Inspect a repository for runtimes, entrypoints, build systems.
+  default_prompt: Use $solforge-package-detect for this task with native tools and
+    verify the result.
+policy:
+  allow_implicit_invocation: true

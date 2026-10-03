@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge Run Multi
+  short_description: Execute an authorized multi-agent plan with bounded ownership.
+  default_prompt: Use $solforge-run-multi for this task with native tools and verify
+    the result.
+policy:
+  allow_implicit_invocation: true

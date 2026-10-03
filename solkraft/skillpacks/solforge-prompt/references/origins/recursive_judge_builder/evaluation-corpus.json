@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "1.0",
+  "originId": "recursive_judge_builder",
+  "originVersion": "1.0.0",
+  "status": "accepted",
+  "cases": [
+    {
+      "id": "recursive_judge_builder-1",
+      "objective": "Produce a rigorous production software result with explicit constraints, evidence, falsification, and acceptance criteria.",
+      "intendedOrigin": "recursive_judge_builder",
+      "acceptableSecondaryOrigins": [
+        "closed_world_grand_challenge"
+      ],
+      "disallowedOrigins": [],
+      "rationale": "Recursive Judge-and-Builder directly matches the production software operating mode.",
+      "difficulty": "medium",
+      "ambiguity": "low"
+    },
+    {
+      "id": "recursive_judge_builder-2",
+      "objective": "Produce a rigorous engineering design result with explicit constraints, evidence, falsification, and acceptance criteria.",
+      "intendedOrigin": "recursive_judge_builder",
+      "acceptableSecondaryOrigins": [
+        "closed_world_grand_challenge"
+      ],
+      "disallowedOrigins": [],
+      "rationale": "Recursive Judge-and-Builder directly matches the engineering design operating mode.",
+      "difficulty": "medium",
+      "ambiguity": "medium"
+    },
+    {
+      "id": "recursive_judge_builder-3",
+      "objective": "Produce a rigorous scientific solutions result with explicit constraints, evidence, falsification, and acceptance criteria.",
+      "intendedOrigin": "recursive_judge_builder",
+      "acceptableSecondaryOrigins": [
+        "closed_world_grand_challenge"
+      ],
+      "disallowedOrigins": [],
+      "rationale": "Recursive Judge-and-Builder directly matches the scientific solutions operating mode.",
+      "difficulty": "hard",
+      "ambiguity": "low"
+    }
+  ]
+}

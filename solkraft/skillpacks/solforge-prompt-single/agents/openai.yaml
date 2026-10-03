@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge Prompt Single
+  short_description: Write a single-agent execution prompt preserving the objectiv.
+  default_prompt: Use $solforge-prompt-single for this task with native tools and
+    verify the result.
+policy:
+  allow_implicit_invocation: true

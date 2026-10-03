@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Math Solve'
+  short_description: Develop a rigorous solution or derivation with checked assump.
+  default_prompt: Use $solforge-workflow-math-solve for this task with native tools
+    and verify the result.
+policy:
+  allow_implicit_invocation: true

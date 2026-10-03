@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge Cross Build
+  short_description: Configure target toolchains and build reproducible cross-plat.
+  default_prompt: Use $solforge-cross-build for this task with native tools and verify
+    the result.
+policy:
+  allow_implicit_invocation: true

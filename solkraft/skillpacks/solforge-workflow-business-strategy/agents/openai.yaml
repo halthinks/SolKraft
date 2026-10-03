@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Business Strategy'
+  short_description: Translate evidence into options, tradeoffs, sequencing, metri.
+  default_prompt: Use $solforge-workflow-business-strategy for this task with native
+    tools and verify the result.
+policy:
+  allow_implicit_invocation: true

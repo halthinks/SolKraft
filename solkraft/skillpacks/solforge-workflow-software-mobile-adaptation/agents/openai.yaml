@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Software Mobile Adaptation'
+  short_description: Implement a honest mobile redesign with platform lifecycle, i.
+  default_prompt: Use $solforge-workflow-software-mobile-adaptation for this task
+    with native tools and verify the result.
+policy:
+  allow_implicit_invocation: true

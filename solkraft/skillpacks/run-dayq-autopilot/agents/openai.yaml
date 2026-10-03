@@ -1,0 +1,4 @@
+interface:
+  display_name: "Run DayQ Autopilot"
+  short_description: "Build DayQ fast through playable vertical slices"
+  default_prompt: "Use $run-dayq-autopilot to build DayQ in fast, playable, dependency-ordered production cycles."

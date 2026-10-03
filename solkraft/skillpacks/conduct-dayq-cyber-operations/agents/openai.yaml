@@ -1,0 +1,4 @@
+interface:
+  display_name: "Conduct DayQ Cyber Operations"
+  short_description: "Implement abstract in-game cyber operations"
+  default_prompt: "Use conduct-dayq-cyber-operations to execute its DayQ contract without replacing existing authoritative owners."

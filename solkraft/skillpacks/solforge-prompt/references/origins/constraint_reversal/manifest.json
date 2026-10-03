@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "1.0",
+  "originId": "constraint_reversal",
+  "version": "1.1.0",
+  "status": "production",
+  "sharedControlVersion": "solforge-origin-controls-v1",
+  "files": {
+    "origin.json": "8cd4e312f3c95718670402081ba9cb17aa9b1dbd43414b0412eda51233caf17c",
+    "source-prompt.md": "1d134c578f010cadccac65be98b71e2e7f7f293f8f14b5e60b995854e5bf2004",
+    "evaluation-corpus.json": "0116afbbd264bdaa0fb60eecf266a33d6aed3b456423bd0a3371bd460ab1066a"
+  },
+  "rollbackTarget": "candidate-1.1.0",
+  "manifestHash": "5e4b47e45281032b38bbc6dd531eb6564b32d126e05c868105a54ef5824d9931",
+  "sharedControlSha256": "6b5f508cac80442753e25f943b6889ed9a7eb344a5504e8e976f17bd6a7b4376"
+}

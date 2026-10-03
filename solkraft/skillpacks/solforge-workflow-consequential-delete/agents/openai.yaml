@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Consequential Delete'
+  short_description: Carry out an explicitly authorized delete action for its exac.
+  default_prompt: Use $solforge-workflow-consequential-delete for this task with native
+    tools and verify the result.
+policy:
+  allow_implicit_invocation: true

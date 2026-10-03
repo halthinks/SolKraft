@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1.0",
+  "originId": "constraint_reversal",
+  "version": "1.1.0",
+  "decision": "promote",
+  "evidence": "AUTO routing and protected prompt-contract benchmark gates passed; promotion does not claim universal downstream model superiority.",
+  "decidedAt": "2026-07-15T12:00:00.000Z",
+  "manifestHash": "5e4b47e45281032b38bbc6dd531eb6564b32d126e05c868105a54ef5824d9931",
+  "benchmarkSha256": "c2d07b4858e0d7eb1afac2d5974d5e35ba7cc970c04dff030052782068e17aac",
+  "evaluationPackageSha256": "32c5255178771da736febecc6662749a4f2929d1c7a061ab108c30d0108dc2eb",
+  "rollbackTarget": "candidate-1.1.0",
+  "receiptHash": "f65d31c8e49921211fd4e72028fddeabeb9bda6a4dbf7b1cded45bff6ea146b3"
+}

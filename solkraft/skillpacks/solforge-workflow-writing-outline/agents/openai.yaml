@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Writing Outline'
+  short_description: Create a source-aware argument and section architecture match.
+  default_prompt: Use $solforge-workflow-writing-outline for this task with native
+    tools and verify the result.
+policy:
+  allow_implicit_invocation: true

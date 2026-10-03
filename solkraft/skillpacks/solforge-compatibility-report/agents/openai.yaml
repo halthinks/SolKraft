@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge Compatibility Report
+  short_description: Report verified platform compatibility, unsupported targets.
+  default_prompt: Use $solforge-compatibility-report for this task with native tools
+    and verify the result.
+policy:
+  allow_implicit_invocation: true

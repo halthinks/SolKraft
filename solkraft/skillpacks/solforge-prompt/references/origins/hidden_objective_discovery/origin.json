@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "1.0",
+  "id": "hidden_objective_discovery",
+  "displayName": "Hidden-Objective Discovery",
+  "version": "1.1.0",
+  "status": "production",
+  "selectable": true,
+  "flagship": false,
+  "operatingIdea": "Separate value, objective, requirement, metric, and method before solving.",
+  "bestFor": "A technically answerable request that may optimize a proxy, inherited method, or mistaken formulation instead of real value.",
+  "useCases": [
+    "Product strategy",
+    "KPI design",
+    "Automation decisions",
+    "Organizational change"
+  ],
+  "produces": "A defensible objective hierarchy, Goodhart audit, minimally corrected formulation, guardrails, and solution tied to actual outcomes.",
+  "antiUseCases": [
+    "Do not silently replace explicit user values or non-negotiable requirements with inferred preferences."
+  ],
+  "representativeRequest": "Use Hidden-Objective Discovery to product strategy with explicit evidence and acceptance gates.",
+  "downstreamLineage": [
+    "Origin-locked objective",
+    "Single, Multi, or Ultra profile",
+    "Effort contract",
+    "Exact hardened prompt",
+    "Hash-bound capsule",
+    "Approval and native Goal",
+    "Contextual workflow tree",
+    "Governed execution and deliverable"
+  ],
+  "priority": 20,
+  "routingSignals": [
+    {
+      "pattern": "\\b(kpi|metric|objective|outcome|strategy|stakeholder|incentive)\\b",
+      "flags": "iu",
+      "weight": 7
+    },
+    {
+      "pattern": "\\b(why are we|real problem|value|goodhart|proxy)\\b",
+      "flags": "iu",
+      "weight": 5
+    },
+    {
+      "pattern": "\\b(product|business|organization|automation)\\b",
+      "flags": "iu",
+      "weight": 3
+    }
+  ],
+  "requiredReasoningRoles": [
+    "value-model analyst",
+    "Goodhart auditor",
+    "stakeholder boundary reviewer",
+    "outcome verifier"
+  ],
+  "applicabilityGate": [
+    "Use only when evidence suggests the stated metric, method, or proxy may diverge materially from the desired outcome.",
+    "Require a meaningful objective, stakeholder, value, or incentive ambiguity that can be tested rather than merely imagined.",
+    "Keep explicit user values, the literal objective, and non-negotiable requirements binding unless the user or evidence validates a change."
+  ],
+  "solExecutionContract": [
+    "Record the user's literal objective, explicit values, authority, and non-negotiable constraints as the controlling objective binding before proposing alternatives.",
+    "Separate ultimate value, supporting objectives, operational requirements, relevant proxy metrics, proposed methods, and inherited assumptions.",
+    "Represent each hidden-objective candidate as a hypothesis tagged explicit, evidenced inference, stakeholder claim, or assumption, with provenance, confidence, contradictory evidence, and validation needed.",
+    "Ask what would make the literal request technically successful but practically worthless, whose outcomes or risks are omitted, and audit only metrics that could materially distort the bound objective.",
+    "Do not silently correct the objective: adopt a minimally changed formulation only after user or evidence validation; otherwise retain and solve the literal objective while presenting any divergence warning or confirmation question as optional.",
+    "Return the validated objective decision, solution, direct outcome measures, guardrails, update triggers, and strongest evidence that the literal formulation should remain controlling."
+  ],
+  "observableOutputContract": [
+    "Literal objective binding record with explicit values and non-negotiables",
+    "Provenance-tagged objective hierarchy and hypothesis ledger",
+    "Relevant proxy and Goodhart failure table with contradictory evidence",
+    "Validation decision and minimally corrected formulation, or retained literal objective, followed by measures and guardrails"
+  ],
+  "failureAndAdversarialChecklist": [
+    "Reject requirement loss, unsupported claims, fabricated evidence, or unapproved authority expansion.",
+    "Test boundary cases, counterexamples, failure modes, and the strongest plausible rejected alternative.",
+    "Require observable acceptance evidence and state unresolved uncertainty explicitly.",
+    "Do not silently replace explicit user values or non-negotiable requirements with inferred preferences."
+  ],
+  "profileAdaptations": {
+    "single": "One Sol agent owns synthesis and uses independent internal passes without claiming nonexistent agents.",
+    "multi": "Delegate only genuinely independent bounded workstreams; preserve provenance, handoffs, integration tests, and root synthesis.",
+    "ultra": "Production Ultra uses full_approved_capsule semantics only after a signed and verified native capability attestation and user authorization bind the canonical capsule, complete budget, kill switch, and lease policy plus branch termination and root acceptance; proof_only is a development and validation mode, never the production default."
+  },
+  "sharedControlVersion": "solforge-origin-controls-v1",
+  "promotion": {
+    "status": "production",
+    "promotedAt": "2026-07-15T12:00:00.000Z",
+    "receiptPath": "promotion-receipt.json",
+    "rollbackTarget": "candidate-1.1.0"
+  }
+}

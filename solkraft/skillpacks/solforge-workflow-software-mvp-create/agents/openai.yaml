@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Software MVP Create'
+  short_description: Turn a product brief or selected research into a PRD, archite.
+  default_prompt: Use $solforge-workflow-software-mvp-create for this task with native
+    tools and verify the result.
+policy:
+  allow_implicit_invocation: true

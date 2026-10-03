@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "1.0",
+  "originId": "product_systems_masterplan",
+  "version": "1.1.0",
+  "status": "production",
+  "sharedControlVersion": "solforge-origin-controls-v1",
+  "files": {
+    "origin.json": "d9670faafb149f3bdad047604c558a01abe5c626c6adb3a9863595cae08951c1",
+    "source-prompt.md": "c7bc23e1e808288b2c1df0f6131ae8c960d1127820a42c4a6e9b7e5b8e74e3e9",
+    "evaluation-corpus.json": "fb80d07985f0795f10bd39c3ec7827e58ad2e6d3ffabdab424213188d9441000"
+  },
+  "rollbackTarget": "candidate-1.1.0",
+  "manifestHash": "63be1e66e35a8db8009258be626d49f068f4f0486611e17c618f116363c1c359",
+  "sharedControlSha256": "6b5f508cac80442753e25f943b6889ed9a7eb344a5504e8e976f17bd6a7b4376"
+}

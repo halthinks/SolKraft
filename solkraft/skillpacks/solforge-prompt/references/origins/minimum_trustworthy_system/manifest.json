@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "1.0",
+  "originId": "minimum_trustworthy_system",
+  "version": "1.1.0",
+  "status": "production",
+  "sharedControlVersion": "solforge-origin-controls-v1",
+  "files": {
+    "origin.json": "4a7220864a2cd6c8d83f646f77906baf25694d689f7bf9e94f96ee51921cc377",
+    "source-prompt.md": "3a91dbdc9c84c7a9d101e75d77b9cf9c0354b146113c24798cb077ca83cb23f8",
+    "evaluation-corpus.json": "be8bd1bff55c7f60395160eb3a714630db9fd9073db3ab83fb1b16321be03d2f"
+  },
+  "rollbackTarget": "candidate-1.1.0",
+  "manifestHash": "d5c7c94d7dc85f4dcc300dfd1f6afc076e3577d435fe1e38d5fafc253db1f667",
+  "sharedControlSha256": "6b5f508cac80442753e25f943b6889ed9a7eb344a5504e8e976f17bd6a7b4376"
+}

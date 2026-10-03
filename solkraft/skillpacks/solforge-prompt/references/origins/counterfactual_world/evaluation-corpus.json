@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "1.0",
+  "originId": "counterfactual_world",
+  "originVersion": "1.0.0",
+  "status": "accepted",
+  "cases": [
+    {
+      "id": "counterfactual_world-1",
+      "objective": "Produce a rigorous long-term strategy result with explicit constraints, evidence, falsification, and acceptance criteria.",
+      "intendedOrigin": "counterfactual_world",
+      "acceptableSecondaryOrigins": [
+        "closed_world_grand_challenge"
+      ],
+      "disallowedOrigins": [],
+      "rationale": "Counterfactual World directly matches the long-term strategy operating mode.",
+      "difficulty": "medium",
+      "ambiguity": "low"
+    },
+    {
+      "id": "counterfactual_world-2",
+      "objective": "Produce a rigorous emerging technology result with explicit constraints, evidence, falsification, and acceptance criteria.",
+      "intendedOrigin": "counterfactual_world",
+      "acceptableSecondaryOrigins": [
+        "closed_world_grand_challenge"
+      ],
+      "disallowedOrigins": [],
+      "rationale": "Counterfactual World directly matches the emerging technology operating mode.",
+      "difficulty": "medium",
+      "ambiguity": "medium"
+    },
+    {
+      "id": "counterfactual_world-3",
+      "objective": "Produce a rigorous investment thesis result with explicit constraints, evidence, falsification, and acceptance criteria.",
+      "intendedOrigin": "counterfactual_world",
+      "acceptableSecondaryOrigins": [
+        "closed_world_grand_challenge"
+      ],
+      "disallowedOrigins": [],
+      "rationale": "Counterfactual World directly matches the investment thesis operating mode.",
+      "difficulty": "hard",
+      "ambiguity": "low"
+    }
+  ]
+}

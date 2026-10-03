@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge Plugin Development
+  short_description: Maintain SolForge-owned skill tooling, routing, packaging, or.
+  default_prompt: Use $solforge-plugin-development for this task with native tools
+    and verify the result.
+policy:
+  allow_implicit_invocation: true

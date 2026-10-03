@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge Package Build
+  short_description: Build reproducible installer and package artifacts for specif.
+  default_prompt: Use $solforge-package-build for this task with native tools and
+    verify the result.
+policy:
+  allow_implicit_invocation: true

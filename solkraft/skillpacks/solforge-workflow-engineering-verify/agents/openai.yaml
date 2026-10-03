@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Engineering Verify'
+  short_description: Test requirements, tolerances, failure modes, safety assumpti.
+  default_prompt: Use $solforge-workflow-engineering-verify for this task with native
+    tools and verify the result.
+policy:
+  allow_implicit_invocation: true

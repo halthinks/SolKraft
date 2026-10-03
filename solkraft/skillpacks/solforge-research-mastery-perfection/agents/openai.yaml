@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge Research Mastery Perfection
+  short_description: Coordinate research, implementation, and user-journey verific.
+  default_prompt: Use $solforge-research-mastery-perfection for this task with native
+    tools and verify the result.
+policy:
+  allow_implicit_invocation: true

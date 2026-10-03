@@ -1,0 +1,4 @@
+interface:
+  display_name: "Secure DayQ Agent Systems"
+  short_description: "Secure and govern DayQ agent infrastructure"
+  default_prompt: "Use secure-dayq-agent-systems to execute its DayQ contract without replacing existing authoritative owners."

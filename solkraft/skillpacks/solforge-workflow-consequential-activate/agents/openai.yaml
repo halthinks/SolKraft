@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Consequential Activate'
+  short_description: Carry out an explicitly authorized activate action for its ex.
+  default_prompt: Use $solforge-workflow-consequential-activate for this task with
+    native tools and verify the result.
+policy:
+  allow_implicit_invocation: true

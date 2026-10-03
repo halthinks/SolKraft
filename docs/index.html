@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090d13">
+  <meta name="description" content="Discover, compose, and retrieve agent skills through SolKraft.">
+  <title>SolKraft — Skill OS for agents</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+  <script defer src="assets/app.js"></script>
+</head>
+<body>
+  <div class="noise"></div>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="SolKraft home"><span class="brand-mark">S<span>✳</span></span><span>SOLKRAFT</span><small>SKILL OS</small></a>
+    <nav><a href="#explore">Explore</a><a href="https://github.com/halthinks/SolKraft" target="_blank" rel="noreferrer">GitHub ↗</a><a href="https://github.com/halthinks/SolKraft/issues/new/choose" target="_blank" rel="noreferrer">Issues ↗</a></nav>
+    <span id="connection" class="connection"><i></i> Not connected</span>
+  </header>
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="pulse"></span> OPEN SKILL INFRASTRUCTURE <b>·</b> v0.1</div>
+        <h1>Give every task<br>the <em>right skills.</em></h1>
+        <p class="lead">A callable skill catalog and routing layer for agents. Find the procedure, fetch only what you need, keep the decisions yours.</p>
+        <div class="hero-actions"><a class="button primary" href="#explore">Explore the catalog <span>↓</span></a><a class="button quiet" href="https://github.com/halthinks/SolKraft" target="_blank" rel="noreferrer">View source ↗</a></div>
+        <div class="hero-note"><span class="dot"></span> Read-only by design <span class="slash">/</span> REST + MCP <span class="slash">/</span> Open source</div>
+      </div>
+      <div class="hero-art" aria-hidden="true"><div class="orbit orbit-a"></div><div class="orbit orbit-b"></div><div class="orbit orbit-c"></div><div class="core"><span>SK</span><small>ROUTE<br>·<br>RETRIEVE</small></div><span class="node node-one">SEARCH</span><span class="node node-two">COMPOSE</span><span class="node node-three">MCP</span><span class="node node-four">REST</span><span class="spark s1">✳</span><span class="spark s2">·</span></div>
+    </section>
+
+    <section class="connect-strip" aria-label="Connect to your SolKraft API">
+      <div><span class="micro-label">YOUR API</span><strong>Connect to a SolKraft server</strong><small>Local or hosted · your key stays in this tab</small></div>
+      <label class="field endpoint"><span>Endpoint</span><input id="api-url" type="url" placeholder="https://your-service.onrender.com" autocomplete="url"></label>
+      <label class="field key"><span>Bearer key</span><input id="api-key" type="password" placeholder="Paste your API key" autocomplete="off"></label>
+      <button id="connect-btn" class="button connect-btn">Connect <span>→</span></button>
+    </section>
+
+    <section id="explore" class="workspace">
+      <div class="section-heading"><div><div class="eyebrow">THE WORKSPACE</div><h2>What are you working on?</h2></div><div id="catalog-count" class="count-pill">Connect to load catalog</div></div>
+      <div class="tabs" role="tablist"><button class="tab active" role="tab" aria-selected="true" data-panel="search-panel">Discover skills <span>01</span></button><button class="tab" role="tab" aria-selected="false" data-panel="route-panel">Compose a route <span>02</span></button></div>
+      <div id="search-panel" class="panel active" role="tabpanel">
+        <div class="searchbar"><span class="search-icon">⌕</span><input id="search-input" type="search" placeholder="Try “test a software release” or “compare market options”" autocomplete="off"><kbd>ENTER</kbd></div>
+        <div class="results-head"><span id="result-label">POPULAR SKILLS</span><span>SELECT TO INSPECT</span></div>
+        <div id="results" class="results"><div class="empty-state"><span class="empty-orbit">✳</span><strong>Your skill catalog is ready when you are.</strong><p>Connect to an API endpoint above, then search by the task you need done.</p></div></div>
+      </div>
+      <div id="route-panel" class="panel" role="tabpanel" hidden>
+        <div class="route-intro"><div><div class="eyebrow">ADVISORY ROUTING</div><h3>Describe the outcome. Get a sequence.</h3><p>SolKraft suggests up to 50 skills in stage order. It does not run them.</p></div><div class="route-glyph">↗</div></div>
+        <label class="route-field"><span>YOUR TASK</span><textarea id="route-input" rows="4" maxlength="20000" placeholder="Example: inspect the codebase, fix the bug, add a regression test, and verify the release build"></textarea></label>
+        <div class="route-controls"><label>Maximum skills <select id="max-skills"><option>5</option><option selected>10</option><option>20</option><option>50</option></select></label><button id="route-btn" class="button primary">Build my route <span>→</span></button></div>
+        <div id="route-results" class="route-results"></div>
+      </div>
+    </section>
+
+    <section class="lower-grid"><article class="feature-card"><div class="card-icon">⌘</div><div class="eyebrow">BUILT FOR AGENTS</div><h3>Small context.<br>Full capability.</h3><p>Search compact descriptions first. Pull the full instructions only when a skill earns its place in the workflow.</p><a href="https://github.com/halthinks/SolKraft/blob/main/AGENTS.md" target="_blank" rel="noreferrer">Read the agent guide ↗</a></article><article class="feature-card accent-card"><div class="card-icon">⟡</div><div class="eyebrow">ONE INTERFACE</div><h3>REST for apps.<br>MCP for agents.</h3><p>One catalog serves a clean API and five read-only MCP tools. Routing never grants execution authority.</p><a href="https://github.com/halthinks/SolKraft#run-the-api" target="_blank" rel="noreferrer">Connect your client ↗</a></article><article class="feature-card status-card"><div class="status-top"><span class="eyebrow">PROJECT STATUS</span><span class="live-tag"><i></i> COMMUNITY BUILT</span></div><h3>Early, open,<br>ready to shape.</h3><p>Bring a skill, a bug report, or a better idea for how agents find their tools.</p><a href="https://github.com/halthinks/SolKraft/issues/new/choose" target="_blank" rel="noreferrer">Help build SolKraft ↗</a></article></section>
+  </main>
+  <footer><a class="brand footer-brand" href="#top"><span class="brand-mark">S<span>✳</span></span><span>SOLKRAFT</span></a><span>Skill infrastructure, in the open.</span><div><a href="https://github.com/halthinks/SolKraft/blob/main/LICENSE">MIT License</a><a href="https://github.com/halthinks/SolKraft/issues">Issues</a></div></footer>
+  <dialog id="skill-dialog" class="skill-dialog"><form method="dialog"><button class="dialog-close" aria-label="Close">×</button></form><div id="skill-detail"></div></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

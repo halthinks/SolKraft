@@ -1,0 +1,4 @@
+interface:
+  display_name: "DayQ Economy Modeling"
+  short_description: "Model scarcity and progression"
+  default_prompt: "Use $model-dayq-economy-progression to simulate and balance the requested DayQ economy or progression change."

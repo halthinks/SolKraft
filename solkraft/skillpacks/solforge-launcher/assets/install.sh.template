@@ -1,0 +1,6 @@
+#!/bin/sh
+set -eu
+# Render only from a hash-bound release manifest. Download to a temporary file,
+# verify SHA-256, then execute or install. Never make remote piping the only path.
+ARTIFACT_URL="{{ARTIFACT_URL}}"
+ARTIFACT_SHA256="{{ARTIFACT_SHA256}}"

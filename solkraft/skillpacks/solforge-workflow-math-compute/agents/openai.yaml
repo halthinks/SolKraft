@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Math Compute'
+  short_description: Design reproducible symbolic or numerical experiments that in.
+  default_prompt: Use $solforge-workflow-math-compute for this task with native tools
+    and verify the result.
+policy:
+  allow_implicit_invocation: true

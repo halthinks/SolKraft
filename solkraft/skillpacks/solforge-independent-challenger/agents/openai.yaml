@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge Independent Challenger
+  short_description: Challenge consequential plans or results for missing evidence.
+  default_prompt: Use $solforge-independent-challenger for this task with native tools
+    and verify the result.
+policy:
+  allow_implicit_invocation: true

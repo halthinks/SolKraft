@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "1.0",
+  "originId": "hidden_objective_discovery",
+  "version": "1.1.0",
+  "status": "production",
+  "sharedControlVersion": "solforge-origin-controls-v1",
+  "files": {
+    "origin.json": "303d637dea180ffd2ac34aecdb2b38cb6914c1d1f2c7d21c69cbe8dde9d47e7a",
+    "source-prompt.md": "1fa1d9e4f21d47ec3c14e2cfea580eb008e468f1d193482049e0ebe92c0295be",
+    "evaluation-corpus.json": "b0e03d5d18604d2e784a751bf43b9a5898afa6953c97838d2b25f88cb9358908"
+  },
+  "rollbackTarget": "candidate-1.1.0",
+  "manifestHash": "9699df0151e48203221996055dd180931b1f86ba9ec54924cd5ba5a26033ce43",
+  "sharedControlSha256": "6b5f508cac80442753e25f943b6889ed9a7eb344a5504e8e976f17bd6a7b4376"
+}

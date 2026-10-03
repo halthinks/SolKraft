@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge Prompt Multi
+  short_description: Write a coordinated multi-agent execution prompt with ownersh.
+  default_prompt: Use $solforge-prompt-multi for this task with native tools and verify
+    the result.
+policy:
+  allow_implicit_invocation: true

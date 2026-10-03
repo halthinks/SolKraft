@@ -1,0 +1,4 @@
+interface:
+  display_name: "DayQ Body and Locomotion Director"
+  short_description: "Direct DayQ body and locomotion architecture"
+  default_prompt: "Use $direct-dayq-body-locomotion to define or reconcile DayQ body and movement architecture."

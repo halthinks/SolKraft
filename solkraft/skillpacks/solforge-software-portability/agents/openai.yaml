@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge Software Portability
+  short_description: Audit, implement, build, and verify software portability acro.
+  default_prompt: Use $solforge-software-portability for this task with native tools
+    and verify the result.
+policy:
+  allow_implicit_invocation: true

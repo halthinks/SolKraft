@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "1.0",
+  "originId": "closed_world_grand_challenge",
+  "originVersion": "1.0.0",
+  "status": "accepted",
+  "cases": [
+    {
+      "id": "closed_world_grand_challenge-1",
+      "objective": "Produce a rigorous mathematical proof result with explicit constraints, evidence, falsification, and acceptance criteria.",
+      "intendedOrigin": "closed_world_grand_challenge",
+      "acceptableSecondaryOrigins": [],
+      "disallowedOrigins": [],
+      "rationale": "Closed-World Grand Challenge directly matches the mathematical proof operating mode.",
+      "difficulty": "medium",
+      "ambiguity": "low"
+    },
+    {
+      "id": "closed_world_grand_challenge-2",
+      "objective": "Produce a rigorous algorithmic resolution result with explicit constraints, evidence, falsification, and acceptance criteria.",
+      "intendedOrigin": "closed_world_grand_challenge",
+      "acceptableSecondaryOrigins": [],
+      "disallowedOrigins": [],
+      "rationale": "Closed-World Grand Challenge directly matches the algorithmic resolution operating mode.",
+      "difficulty": "medium",
+      "ambiguity": "medium"
+    },
+    {
+      "id": "closed_world_grand_challenge-3",
+      "objective": "Produce a rigorous theoretical science result with explicit constraints, evidence, falsification, and acceptance criteria.",
+      "intendedOrigin": "closed_world_grand_challenge",
+      "acceptableSecondaryOrigins": [],
+      "disallowedOrigins": [],
+      "rationale": "Closed-World Grand Challenge directly matches the theoretical science operating mode.",
+      "difficulty": "hard",
+      "ambiguity": "low"
+    }
+  ]
+}

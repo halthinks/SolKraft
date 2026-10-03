@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge Context Curator
+  short_description: Select the requirements, sources, skills, and evidence needed.
+  default_prompt: Use $solforge-context-curator for this task with native tools and
+    verify the result.
+policy:
+  allow_implicit_invocation: true

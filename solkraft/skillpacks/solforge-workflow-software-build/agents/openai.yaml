@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Software Build'
+  short_description: Create a bounded implementation with explicit writes, tests.
+  default_prompt: Use $solforge-workflow-software-build for this task with native
+    tools and verify the result.
+policy:
+  allow_implicit_invocation: true

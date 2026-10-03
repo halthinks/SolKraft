@@ -1,0 +1,4 @@
+interface:
+  display_name: "Manufacture DayQ Drones"
+  short_description: "Manufacture repair and salvage DayQ drones"
+  default_prompt: "Use manufacture-dayq-drones to execute its DayQ contract without replacing existing authoritative owners."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Preserve Engineering Selections"
+  short_description: "Carry evidence-backed part choices through realization"
+  default_prompt: "Use $preserve-engineering-selections to preserve selected real parts and their engineering rationale while closing downstream design, firmware, PCB, CAD, and validation gaps."

@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Software Compare'
+  short_description: Inspect implementations symmetrically against explicit criter.
+  default_prompt: Use $solforge-workflow-software-compare for this task with native
+    tools and verify the result.
+policy:
+  allow_implicit_invocation: true

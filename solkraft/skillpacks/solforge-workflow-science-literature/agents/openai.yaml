@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Science Literature'
+  short_description: Run a reproducible source search, evidence table, disagreemen.
+  default_prompt: Use $solforge-workflow-science-literature for this task with native
+    tools and verify the result.
+policy:
+  allow_implicit_invocation: true

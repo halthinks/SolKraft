@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Legal Risk'
+  short_description: Identify obligations, exposure, controls, evidence gaps, and.
+  default_prompt: Use $solforge-workflow-legal-risk for this task with native tools
+    and verify the result.
+policy:
+  allow_implicit_invocation: true

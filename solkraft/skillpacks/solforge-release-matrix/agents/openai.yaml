@@ -1,0 +1,7 @@
+interface:
+  display_name: SolForge Release Matrix
+  short_description: Reconcile platform artifacts, signing, provenance, update sup.
+  default_prompt: Use $solforge-release-matrix for this task with native tools and
+    verify the result.
+policy:
+  allow_implicit_invocation: true

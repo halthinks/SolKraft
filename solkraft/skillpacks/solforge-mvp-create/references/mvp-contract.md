@@ -1,0 +1,7 @@
+# MVP execution contract
+
+Fix these fields before execution: original intent, exact prompt result, product shape, target user, problem, value hypothesis, primary journeys, required and excluded capabilities, success metrics, acceptance criteria, repository, mutation authority, delivery target, iteration ceiling, validation gates, and execution-quality contract.
+
+Required outputs are `docs/PRD.md`, `docs/ARCHITECTURE.md`, a working vertical slice, a clean local Git repository with an intentional baseline commit, and a concise final handoff. The PRD must cover problem, users, jobs, scope/non-scope, flows, functional and nonfunctional requirements, metrics, risks, acceptance, and roadmap. Architecture must cover context, components, data/control flows, interfaces and schemas, state/storage, security boundaries, deployment path, observability, failure modes, tradeoffs, and production evolution.
+
+Accept only after a clean reproducible install, valid dependency tree, security audit with zero unresolved shipped-dependency vulnerabilities at every severity, lint/format, applicable static typecheck, focused tests, production build, runtime smoke for every public page and core action, stale-name/secret/placeholder/generated-artifact scan, `git diff --check`, at least one intentional commit, and empty `git status --porcelain`. External-service simulations must be visibly labelled. Local or staging readiness never authorizes push, production activation, external publication, purchasing, credential changes, destructive replacement, or permission expansion.

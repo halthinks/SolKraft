@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Data Validate'
+  short_description: Audit completeness, quality, leakage, calculations, provenanc.
+  default_prompt: Use $solforge-workflow-data-validate for this task with native tools
+    and verify the result.
+policy:
+  allow_implicit_invocation: true

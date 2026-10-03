@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Science Report'
+  short_description: Produce a configured scientific package with methods, results.
+  default_prompt: Use $solforge-workflow-science-report for this task with native
+    tools and verify the result.
+policy:
+  allow_implicit_invocation: true

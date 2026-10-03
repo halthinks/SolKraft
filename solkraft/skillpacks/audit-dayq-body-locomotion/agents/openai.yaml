@@ -1,0 +1,4 @@
+interface:
+  display_name: "DayQ Body and Locomotion Audit"
+  short_description: "Audit movement body physics and evidence"
+  default_prompt: "Use $audit-dayq-body-locomotion to audit the complete DayQ body and movement stack."

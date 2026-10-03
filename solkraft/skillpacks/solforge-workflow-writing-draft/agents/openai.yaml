@@ -1,0 +1,7 @@
+interface:
+  display_name: 'SolForge Workflow: Writing Draft'
+  short_description: Produce the selected document package with evidence, visuals.
+  default_prompt: Use $solforge-workflow-writing-draft for this task with native tools
+    and verify the result.
+policy:
+  allow_implicit_invocation: true

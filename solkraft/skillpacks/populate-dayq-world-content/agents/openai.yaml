@@ -1,0 +1,4 @@
+interface:
+  display_name: "Populate DayQ World Content"
+  short_description: "Place causal assets, loot, and populations in DayQ regions."
+  default_prompt: "Use $populate-dayq-world-content to create causal world dressing, loot, and population plans for a DayQ location."

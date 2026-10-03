@@ -1,0 +1,4 @@
+interface:
+  display_name: "Populate DayQ Storage Loot"
+  short_description: "Create causal container placement and stocking profiles."
+  default_prompt: "Use $populate-dayq-storage-loot to populate a DayQ location with plausible storage and contents."
