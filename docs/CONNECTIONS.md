@@ -87,3 +87,6 @@ python -m scripts.local_ci
 The gate runs Python/router tests, syntax and setup behavior checks, generates the console and plugin ZIP, builds a wheel, installs it in a temporary environment, verifies the installed catalog outside the checkout, and calls the ZIP plugin's five tools over real MCP. It stops on a failed step and records `build/local-ci.json`; the built wheel is in `dist/`. Temporary environments reuse existing dependencies, so this is not a clean dependency-resolution or offline-install test.
 
 Automatic GitHub build/test runs are disabled; the verification workflow remains manually available. Pages only uploads already generated static files. Run the gate and review generated changes before pushing. A passing Windows run does not establish WSL/Omarchy qualification; run the same gate in those environments when release support requires it.
+# More guided paths
+
+Follow [Connect your hosted library to an agent](REMOTE_MCP.md) for copyable Codex settings, the ChatGPT authentication check, tool discovery, first requests, and troubleshooting. Follow [Add a skill the system can actually use](SKILL_CONTRIBUTIONS.md) to contribute the skill, routing integration, tests, and generated system files together. Both are animated paths in the website's connection walkthrough.

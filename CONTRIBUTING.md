@@ -2,6 +2,8 @@
 
 Thanks for contributing. Keep changes focused and add tests for behavior changes.
 
+Start with [Add a skill the system can actually use](docs/SKILL_CONTRIBUTIONS.md). It includes a copyable agent task, exact file/graph parameters, an executable manifest example, and the local full gate. Submit the complete integration, including routing and generated catalog changes, rather than only a skill file. The website's **Contribute a skill** walkthrough explains each step for first-time contributors.
+
 ## Skill contribution provenance
 
 A skill contribution must include:

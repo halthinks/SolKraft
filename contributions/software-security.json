@@ -1,0 +1,29 @@
+{
+  "schema": "solkraft/contribution/v1",
+  "skill": "solforge-workflow-software-security",
+  "provenance": {
+    "author": "SolKraft contributors",
+    "license": "MIT",
+    "source": "https://github.com/halthinks/SolKraft"
+  },
+  "cases": [
+    {
+      "objective": "Audit software security trust boundaries and unsafe input handling",
+      "selected": [
+        "solforge-workflow-software-security"
+      ]
+    },
+    {
+      "objective": "Do not audit software security",
+      "selected": []
+    },
+    {
+      "objective": "Audit software security tomorrow",
+      "selected": []
+    },
+    {
+      "objective": "Explain this quotation: \"audit software security\"",
+      "selected": []
+    }
+  ]
+}

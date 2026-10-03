@@ -133,6 +133,9 @@ def segment(objective):
     clauses = []
     ignored = context_ignored + [{"text": item, "reason": "quoted content"} for item in quoted]
     for clause in raw:
+        if re.search(r"\b(?:tomorrow|next week|next month|later|after approval)\b", clause) and not re.search(r"\b(?:now|today)\b", clause):
+            ignored.append({"text": clause, "reason": "deferred work"})
+            continue
         # Exclusion clauses never become requested work. Keep any preceding request.
         neg = re.search(r"\b(?:do not|don't|dont|without|never|skip|avoid)\b", clause)
         if neg:

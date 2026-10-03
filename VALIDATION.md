@@ -1,6 +1,6 @@
 # Validation evidence
 
-The current local release gate passed **75 Python regression tests**, three Node setup behavior tests, and a separate real MCP integration test against the built wheel and packaged plugin. Earlier validation evidence below records previous revisions and test counts.
+The current local release gate passed **78 Python regression tests**, four Node setup behavior tests, and a separate real MCP integration test against the built wheel and packaged plugin. Earlier validation evidence below records previous revisions and test counts.
 
 Run the same suite:
 
@@ -65,3 +65,19 @@ The connection walkthrough has three paths: Render (five steps), API/MCP (five),
 Executed `python -m scripts.local_ci` on Windows with Python 3.11.9: 75 Python/router tests, three Node behavior tests, compilation and JavaScript syntax checks, static generation, plugin packaging, wheel construction, isolated wheel installation, outside-checkout catalog inspection, and one real packaged-plugin MCP integration test all passed. The gate writes an ignored machine receipt at `build/local-ci.json`. Artifact environments reuse installed dependencies; this does not prove fresh dependency resolution. No WSL or Omarchy execution is claimed.
 
 Browser checks exercised all three setup paths, Windows/Linux instruction switching, copy feedback, automatic sequence completion at step five, manual step selection, keyboard arrow selection, endpoint handoff to the real console, authenticated local API connection, and real three-stage routing. The 390px mobile layout exposed an initial grid overflow; the repaired layout measured 375px document width and 275px scene width, with 28px scene titles and no horizontal page overflow. Browser error/warning logs were empty. No Render deployment was performed; hosted setup steps are based on the repository Blueprint and current Render documentation.
+
+## Remote connection and complete skill contribution gate
+
+The current console has five interactive setup paths and 27 steps. The new remote-agent path explains hosted Codex configuration, environment-based bearer authentication, tool discovery, first use, and troubleshooting. ChatGPT instructions explicitly depend on account eligibility and authentication compatibility: this server does not supply OAuth, and a client that cannot send its bearer key cannot connect directly. Browser checks covered the remote configuration, contribution command, all five path selectors, and a 390px viewport without horizontal overflow.
+
+The contribution guide and AGENTS.md require a complete integration: skill instructions and resources, semantic graph node and rules, meaningful vocabulary and dependencies, authored positive and negative routing cases, provenance, generated catalog/site/plugin artifacts, and relevant procedure tests. The executable manifest checker rejects catalog-only contributions without semantic rules and mismatched route expectations. Tests failed before implementation. A deferred-work case then exposed a composer bug: a request to audit security tomorrow was selected immediately. The composer now preserves that deferral, and the test passes.
+
+Executed on Windows:
+
+```sh
+python -m scripts.check_contribution contributions/software-security.json --full
+```
+
+The gate passed 104 unique targeted cases and contextual variants, the full 100,000-request routing regression (10,000 per domain), 78 Python/router tests, four Node behavior tests, compilation, static and plugin generation, wheel build and installation, outside-checkout catalog verification, and a real packaged-plugin MCP test. The ignored receipt is `build/contributions/latest.json` with status `passed`; `build/local-ci.json` records the artifact checks. The installed catalog contains 173 entries. The wheel SHA-256 is `a352edc7692029161ae1ba1817f0252f0f7b0e12ca4c99f8cdd5f9cda49a9e65`.
+
+The targeted variants and 100,000 regression requests test routing, not 100,000 independently authored intentions or successful execution of every skill. Contributors must supply relevant helper tests, simulations, or real task evidence separately. No new externally hosted API deployment or remote ChatGPT connection was executed in this change.

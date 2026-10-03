@@ -9,9 +9,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/style.css?v=5aed21a8777b">
+  <link rel="stylesheet" href="assets/style.css?v=b1a0ce874a52">
   <script defer src="assets/flow.js?v=5c9299226bcc"></script>
-  <script defer src="assets/setup.js?v=c93e7e4b4427"></script>
+  <script defer src="assets/setup.js?v=cd04ce4db711"></script>
   <script defer src="assets/app.js?v=14cc3a1da9c7"></script>
 </head>
 <body>
@@ -76,7 +76,7 @@
         <article><span class="step-number">CODEX · LOCAL</span><h3>Install the runtime + plugin</h3><pre><code>python -m pip install "git+https://github.com/halthinks/SolKraft.git"
 codex plugin marketplace add halthinks/SolKraft --sparse .agents/plugins --sparse plugins/solkraft
 codex plugin add solkraft@solkraft</code></pre><p>Python 3.11+ must be installed so <code>solkraft</code> is on Codex’s PATH. Use the same environment for installation and launch.</p><a href="https://github.com/halthinks/SolKraft/blob/main/docs/PLUGIN.md">Installation and troubleshooting ↗</a></article>
-        <article><span class="step-number">CHATGPT · WEB</span><h3>Connect a remote service</h3><p>ChatGPT web cannot launch this local Python server. Deploy a SolKraft API, then use its HTTPS <code>/mcp/</code> endpoint in a supported custom MCP app. Plan, workspace policy, and authentication support apply.</p><p>Or inspect a skill here and paste its instructions alongside your request. No server required for manual use.</p><a href="https://github.com/halthinks/SolKraft/blob/main/docs/CLIENTS.md">ChatGPT connection details ↗</a></article>
+        <article><span class="step-number">REMOTE AGENTS</span><h3>Connect your hosted library</h3><p>Run your library on Render, then connect your agent to its MCP address. The guided steps explain the address, private key, tool scan, and first useful request. Codex supports a direct connection; ChatGPT needs compatible login support.</p><p>You can also copy a skill here and paste it into your chat. That needs no server.</p><a href="#setup-lab" data-start-path="remote">Show me the connection steps →</a></article>
         <article><span class="step-number">THEN JUST ASK</span><h3>“Fix this bug and test it.”</h3><p>The agent searches or routes the request, retrieves useful procedures, then edits and tests with its existing tools. For a release gate, pass that context so “draft PR” routes to software testing.</p><p>This page is an explorer and setup console. It does not run your repository or claim to have fixed anything.</p><a href="downloads/solkraft-plugin.zip" download>Download the plugin ZIP ↓</a></article>
       </div>
       <details class="parser-explanation"><summary>How it compares with other projects</summary><p><a href="https://skills.sh/docs">skills.sh</a> focuses on discovering and installing skills. <a href="https://github.com/obra/superpowers">Superpowers</a> supplies an opinionated development methodology and agent workflows. SolKraft combines a multi-domain catalog, deterministic compound-request routing, inspectable relationships, and selective retrieval through REST and MCP. These approaches can coexist; there is no measured claim here that SolKraft beats either project.</p></details>
@@ -90,6 +90,8 @@ codex plugin add solkraft@solkraft</code></pre><p>Python 3.11+ must be installed
         <button role="tab" aria-selected="true" data-setup-path="render"><span>01 / HOST</span><strong>Render</strong><small>A remote service for apps and agents</small></button>
         <button role="tab" aria-selected="false" data-setup-path="api"><span>02 / CONNECT</span><strong>API + MCP</strong><small>Understand the requests and responses</small></button>
         <button role="tab" aria-selected="false" data-setup-path="plugin"><span>03 / INSTALL</span><strong>Local plugin</strong><small>Let Codex retrieve skills naturally</small></button>
+        <button role="tab" aria-selected="false" data-setup-path="remote"><span>04 / REMOTE</span><strong>Connect your agent</strong><small>Hosted MCP · Codex and ChatGPT paths</small></button>
+        <button role="tab" aria-selected="false" data-setup-path="contribute"><span>05 / CREATE</span><strong>Contribute a skill</strong><small>Teach the whole system a useful method</small></button>
       </div>
       <div class="setup-options"><label>YOUR PLATFORM<select id="setup-platform" aria-label="Your platform"><option value="windows">Windows · PowerShell</option><option value="linux">Linux · WSL · Omarchy</option></select></label><label>YOUR SERVICE BASE URL<input id="setup-endpoint" type="url" aria-label="Your service base URL" placeholder="https://your-service.onrender.com" autocomplete="off"></label><button id="setup-use" class="button quiet">Use this endpoint ↗</button></div>
       <p id="setup-error" class="setup-feedback" role="status" aria-live="polite"></p>

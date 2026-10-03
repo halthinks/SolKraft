@@ -53,6 +53,8 @@ For the complete local installed catalog, add `--installed` to the CLI invocatio
 
 ## ChatGPT web
 
+Follow the [step-by-step remote connection guide](REMOTE_MCP.md) and the website's **Connect your agent** walkthrough. They include a direct bearer-authenticated Codex path and the ChatGPT authentication compatibility check.
+
 The local Codex plugin does not install a remote service into browser ChatGPT. For manual use, inspect and copy a selected skill in the console, then paste it alongside your task. For MCP use, deploy the API and connect its reachable HTTPS `/mcp/` endpoint using a supported custom app. Follow OpenAI’s [current developer-mode documentation](https://help.openai.com/en/articles/12584461-developer-mode-and-full-mcp-connectors-in-chatgpt) for plan eligibility and workspace controls; these vary by account and change over time.
 
 The API currently accepts operator bearer keys, not OAuth. A remote client must support the required Authorization header, or the operator must supply a trusted gateway with the authentication mechanism that client supports. SolKraft does not ship a ChatGPT OAuth registration or a universally usable hosted endpoint. Do not disable authentication just to make a connector work. GitHub Pages serves the explorer and downloadable plugin; it cannot run Python or host MCP.

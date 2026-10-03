@@ -3,7 +3,7 @@ const assert = require('node:assert/strict');
 const { paths, normalizeEndpoint, stepAt, commandFor } = require('../docs/assets/setup.js');
 
 test('each setup path is complete and navigation stays bounded', () => {
-  for (const id of ['render', 'api', 'plugin']) {
+  for (const id of ['render', 'api', 'plugin', 'remote', 'contribute']) {
     assert.ok(paths[id].steps.length >= 4);
     assert.equal(stepAt(id, -1), 0);
     assert.equal(stepAt(id, 999), paths[id].steps.length - 1);
@@ -23,4 +23,13 @@ test('platform commands use the correct environment and never embed a real key',
   assert.match(commandFor('plugin', 0, 'linux', ''), /bin\/activate/);
   assert.match(commandFor('api', 1, 'linux', 'https://example.onrender.com'), /https:\/\/example.onrender.com\/v1\/skills/);
   assert.match(commandFor('render', 1, 'linux', ''), /token_urlsafe/);
+});
+
+test('remote setup connects to the supplied host and references a key variable', () => {
+  const config = commandFor('remote', 2, 'windows', 'https://my-library.onrender.com/');
+  assert.match(config, /url = "https:\/\/my-library\.onrender\.com\/mcp\/"/);
+  assert.match(config, /bearer_token_env_var = "SOLKRAFT_API_KEY"/);
+  assert.match(commandFor('remote', 3, 'windows', ''), /\$env:SOLKRAFT_API_KEY/);
+  assert.match(commandFor('remote', 3, 'linux', ''), /export SOLKRAFT_API_KEY/);
+  assert.match(commandFor('contribute', 4, 'linux', ''), /check_contribution.*--full/);
 });

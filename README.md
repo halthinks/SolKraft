@@ -1,5 +1,7 @@
 # SolKraft
 
+New here? Follow [Connect your agent](docs/REMOTE_MCP.md). Want to teach it a new method? Follow [the complete skill contribution process](docs/SKILL_CONTRIBUTIONS.md), including graph registration, automatic-selection examples, the 100,000-request regression, and local package/MCP verification. Both have animated walkthroughs in the console.
+
 Explore the [interactive connection walkthrough](https://halthinks.github.io/SolKraft/#setup-lab) or read [the complete Render, API, MCP, plugin, and platform guide](docs/CONNECTIONS.md). Build and verify before publishing with `python -m scripts.local_ci`; automatic GitHub build/test runs are disabled, and Pages uploads the locally generated console.
 
 **An open skill OS for agents.** Find the right procedure, compose multi-step work, and retrieve only the instructions needed for the next step. SolKraft provides a searchable catalog, advisory router, REST API, and Model Context Protocol (MCP) server.

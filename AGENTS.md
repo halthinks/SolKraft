@@ -93,6 +93,8 @@ Extra skill roots are an operator-controlled trust boundary. Never point a publi
 
 ## Skill contributions
 
+For any new or changed skill integration, follow the complete [skill contribution contract](docs/SKILL_CONTRIBUTIONS.md). A skill-only submission is incomplete: include semantic-core registration, discriminating rules/vocabulary, justified relationships, authored automatic-routing cases, provenance, procedure/helper evidence, necessary parser changes, and generated catalog/UI artifacts. Run `python -m scripts.check_contribution contributions/<manifest>.json --full` after the final source changes. Require targeted cases, the complete 100,000-request routing regression, and installed package/plugin checks to pass. Do not force the skill ID to conceal selection failures or equate routing simulations with task execution quality.
+
 A proposed skill should describe a distinct user intent, recognizable cues, prerequisites, procedure, output, stop conditions, safety boundaries, and relation to existing skills. Keep instructions composable and concise enough to load when relevant, but complete enough to perform the work reliably. Include tests/examples for when routing should and should not select it. Review authorship, license, attribution, and redistribution rights before bundling.
 
 ## Pull request checklist
