@@ -1,0 +1,5 @@
+{
+  "mcpServers": {
+    "solkraft": {"command": "solkraft", "args": ["mcp"]}
+  }
+}

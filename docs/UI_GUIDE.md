@@ -33,3 +33,5 @@ A human can copy a procedure, or an agent can retrieve it through REST or the fi
 The host agent applies capability-preserving execution for substantial work: preserve inputs and scope, map dependencies, batch safe independent operations, keep successful evidence, retry only invalidated work, and inspect the real result. Product-specific and repository contracts remain authoritative. A selected route is advisory and never authorizes publishing, deployment, deletion, sending, or any other effect.
 
 The static site requires no key for browsing, inspection, or the worked example. A custom request requires a running SolKraft server with the applicable API key and CORS configuration. The key stays in the current tab. See [client setup](CLIENTS.md).
+
+The current walkthrough uses large vertical HTML cards. Cards reveal in order once when entering view, and a light pulse travels along each connector before the next stage appears. There is no pause control or continuously looping diagram; reduced-motion users see the complete static flow.

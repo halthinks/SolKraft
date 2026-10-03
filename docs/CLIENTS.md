@@ -49,3 +49,16 @@ Read `selected`, ordered `stages`, `selection_trace`, and `unselected_requested_
 Connecting a service does not install these behavioral instructions into every existing agent session. The host must load `AGENTS.md` or equivalent instructions. Long-running hosts should retain them and reassess relevant skills as the work changes stage.
 
 For the complete local installed catalog, add `--installed` to the CLI invocation, including MCP stdio arguments `["-m", "solkraft", "mcp", "--installed"]`. This scans the standard Codex, agent, and plugin skill roots while preserving stable bundled workflow IDs.
+
+
+## ChatGPT web
+
+The local Codex plugin does not install a remote service into browser ChatGPT. For manual use, inspect and copy a selected skill in the console, then paste it alongside your task. For MCP use, deploy the API and connect its reachable HTTPS `/mcp/` endpoint using a supported custom app. Follow OpenAI’s [current developer-mode documentation](https://help.openai.com/en/articles/12584461-developer-mode-and-full-mcp-connectors-in-chatgpt) for plan eligibility and workspace controls; these vary by account and change over time.
+
+The API currently accepts operator bearer keys, not OAuth. A remote client must support the required Authorization header, or the operator must supply a trusted gateway with the authentication mechanism that client supports. SolKraft does not ship a ChatGPT OAuth registration or a universally usable hosted endpoint. Do not disable authentication just to make a connector work. GitHub Pages serves the explorer and downloadable plugin; it cannot run Python or host MCP.
+
+## Why use this rather than a prompt library?
+
+A prompt library asks the user to choose and paste instructions. SolKraft adds selective agent retrieval, context-aware routing of compound work, and inspectable relationships. Only the selected bodies enter the conversation. This can reduce unnecessary context, but this release does not establish a numerical token or task-quality improvement.
+
+[skills.sh](https://skills.sh/docs/cli) provides skill discovery and installation. [Superpowers](https://github.com/obra/superpowers) provides an opinionated software development methodology through agent skills and integrations. SolKraft’s focus is a multi-domain catalog with a deterministic router and a callable REST/MCP retrieval layer. They can complement each other; no superiority benchmark is claimed.

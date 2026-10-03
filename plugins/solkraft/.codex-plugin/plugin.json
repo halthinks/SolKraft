@@ -1,0 +1,20 @@
+{
+  "name": "solkraft",
+  "version": "0.1.0",
+  "description": "Find useful procedures, compose compound requests, and retrieve just the skills your agent needs.",
+  "author": {"name": "SolKraft contributors"},
+  "homepage": "https://halthinks.github.io/SolKraft/",
+  "repository": "https://github.com/halthinks/SolKraft",
+  "license": "MIT",
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "SolKraft",
+    "shortDescription": "The right procedure for your next step",
+    "longDescription": "A local skill catalog, advisory semantic router, and five read-only MCP tools. Requires Python 3.11+ with SolKraft installed. Your host agent applies the retrieved procedures using its own tools.",
+    "developerName": "SolKraft contributors",
+    "category": "Developer Tools",
+    "brandColor": "#B3F77C",
+    "defaultPrompt": ["Fix this bug and verify the release using relevant skills", "Find a useful procedure for my task"]
+  }
+}

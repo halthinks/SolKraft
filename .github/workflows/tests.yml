@@ -13,3 +13,5 @@ jobs:
         env:
           SOLFORGE_TEST_ROOT: solkraft/skillpacks
       - run: node --check docs/assets/app.js
+      - run: node --check docs/assets/flow.js
+      - run: python scripts/package_plugin.py

@@ -9,8 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/style.css?v=9c96e0631785">
-  <script defer src="assets/flow.js?v=a253bed95d0e"></script>
+  <link rel="stylesheet" href="assets/style.css?v=74f53185ff1e">
+  <script defer src="assets/flow.js?v=5c9299226bcc"></script>
   <script defer src="assets/app.js?v=14cc3a1da9c7"></script>
 </head>
 <body>
@@ -26,10 +26,17 @@
         <div class="eyebrow"><span class="pulse"></span> OPEN SKILL INFRASTRUCTURE <b>·</b> v0.1</div>
         <h1>Give every task<br>the <em>right skills.</em></h1>
         <p class="lead">Find reusable instructions for your AI agent. SolKraft turns a task into an ordered set of skills, explains the selection, and retrieves the procedures your agent needs to do the work.</p>
-        <div class="hero-actions"><a class="button primary" href="#explore">Explore the catalog <span>↓</span></a><a class="button quiet" href="https://github.com/halthinks/SolKraft" target="_blank" rel="noreferrer">View source ↗</a></div>
+        <div class="hero-actions"><a class="button primary" href="#explore">Explore the catalog <span>↓</span></a><a class="button quiet" href="#install">Install the plugin ↗</a></div>
         <div class="hero-note"><span class="dot"></span> Read-only by design <span class="slash">/</span> REST + MCP <span class="slash">/</span> Open source</div>
       </div>
-      <div class="hero-art" aria-hidden="true"><div class="orbit orbit-a"></div><div class="orbit orbit-b"></div><div class="orbit orbit-c"></div><div class="core"><span>SK</span><small>ROUTE<br>·<br>RETRIEVE</small></div><span class="node node-one">SEARCH</span><span class="node node-two">COMPOSE</span><span class="node node-three">MCP</span><span class="node node-four">REST</span><span class="spark s1">✳</span><span class="spark s2">·</span></div>
+      <div class="request-machine flow-track" aria-label="Illustrated request walkthrough">
+        <div class="machine-heading"><span>ONE REQUEST. A USEFUL METHOD.</span><b>ILLUSTRATION</b></div>
+        <article class="phase" style="--step:0"><span class="phase-index">01</span><div><small>YOU ASK</small><h3>“Fix it. Test it. Prove it.”</h3><p>A normal request. No skill IDs to memorize.</p></div></article>
+        <div class="phase-wire" style="--step:0"><i></i></div>
+        <article class="phase" style="--step:1"><span class="phase-index">02</span><div><small>SOLKRAFT ROUTES</small><h3>The right skills, in order.</h3><p>Investigate → build → test. Load only what helps.</p></div></article>
+        <div class="phase-wire" style="--step:1"><i></i></div>
+        <article class="phase phase-result" style="--step:2"><span class="phase-index">03</span><div><small>YOUR AGENT ACTS</small><h3>Real work. Checked results.</h3><p>The host applies the method using its own tools.</p></div></article>
+      </div>
     </section>
 
 
@@ -38,9 +45,20 @@
       <h2>Your agent does the work. SolKraft supplies the method.</h2>
       <p class="guide-lead">A skill is a reusable procedure with instructions and supporting resources. The <strong>solforge</strong> skill contains the orchestration and semantic routing machinery; it is also a node in the selection graph. Specialist skills supply the methods for research, building, testing, writing, and engineering. <strong>Capability-preserving execution</strong> supplies the adaptive execution loop: frame the outcome, map dependencies, schedule safe work, preserve evidence, repair failures, and verify completion. It is an instruction-based execution layer, not a hidden Python scheduler.</p>
       <div class="core-skill-actions"><button class="inspect-btn" data-inspect-skill="solforge">Inspect SolForge and its Python files →</button> <button class="inspect-btn" data-inspect-skill="capability-preserving-execution">Inspect capability-preserving execution →</button></div>
-      <div class="flow-heading"><span>FOLLOW THE REQUEST</span><button id="motion-toggle" class="inspect-btn" aria-pressed="false">Pause animation</button></div>
-      <div id="workflow-diagram" class="workflow-diagram" role="img" aria-label="Your request goes to the SolForge semantic parser, which uses the selection graph to suggest ordered skills. Selected instructions are retrieved, then your host agent applies them and verifies its work."><p>Your request → semantic parser + selection graph → ordered skills → selected instructions → your agent → verified result</p></div>
-      <p class="muted">The animated arrows show information moving between stages, not a running job. The host agent owns tools, execution, and verification.</p>
+      <div class="flow-heading"><span>FOLLOW THE REQUEST · A WALKTHROUGH, NOT A LIVE JOB</span></div>
+      <div id="workflow-diagram" class="flow-track journey" aria-label="How a request becomes work">
+        <article class="phase" style="--step:0"><span class="phase-index">01</span><div><small>YOUR INTENT</small><h3>Describe the outcome.</h3><p>“Inspect the codebase, fix the bug, add a regression test, and verify the release build.”</p></div></article>
+        <div class="phase-wire" style="--step:0"><i></i></div>
+        <article class="phase" style="--step:1"><span class="phase-index">02</span><div><small>SEMANTIC ROUTING</small><h3>Turn language into a route.</h3><p>SolForge reads actions, context, and exclusions. The selection graph supplies workflow relationships.</p></div></article>
+        <div class="phase-wire" style="--step:1"><i></i></div>
+        <article class="phase" style="--step:2"><span class="phase-index">03</span><div><small>SELECTED PROCEDURES</small><h3>Choose methods that matter.</h3><p>Codebase investigation → software build → software test. The agent checks the route against your actual intent.</p></div></article>
+        <div class="phase-wire" style="--step:2"><i></i></div>
+        <article class="phase" style="--step:3"><span class="phase-index">04</span><div><small>CONTEXT ON DEMAND</small><h3>Retrieve just the next skill.</h3><p>MCP or REST returns the selected instructions and needed references. The entire catalog stays out of the conversation.</p></div></article>
+        <div class="phase-wire" style="--step:3"><i></i></div>
+        <article class="phase" style="--step:4"><span class="phase-index">05</span><div><small>CAPABILITY-PRESERVING EXECUTION</small><h3>Your agent does the work.</h3><p>The host preserves requirements, follows dependencies, applies the specialist procedure, and adapts when evidence changes.</p></div></article>
+        <div class="phase-wire" style="--step:4"><i></i></div>
+        <article class="phase" style="--step:5"><span class="phase-index">06</span><div><small>VERIFICATION</small><h3>Show what actually holds.</h3><p>The agent runs relevant checks, repairs failures, and reports evidence and remaining limits. SolKraft does not certify the result.</p></div></article>
+      </div>
       <div class="guide-grid">
         <article><span class="step-number">01</span><h3>Discover a procedure</h3><p>Browse the paginated catalog or search names and descriptions. Inspect a skill, then copy its instructions into your agent. This works here without an account or API key.</p></article>
         <article><span class="step-number">02</span><h3>Understand the route</h3><p>Try the worked example below. For your own request, connect a SolKraft API and use Compose a route. The result shows stages, selected skills, reasons, and unresolved work.</p></article>
@@ -48,6 +66,19 @@
       </div>
       <div class="worked-example"><div class="eyebrow">TRY IT · NO CONNECTION NEEDED</div><h3>A bug fix with a release check</h3><blockquote>Inspect the codebase, fix the bug, add a regression test, and verify the release build. Do not deploy or publish anything.</blockquote><p>See the actual parser output generated from this request, inspect its selected procedures, and copy the request for your agent.</p><button id="example-btn" class="button primary">Walk through this example →</button></div>
       <details class="parser-explanation"><summary>How the semantic parser and graph actually work</summary><div class="guide-grid"><article><h3>Read the requested actions</h3><p>The deterministic parser uses scoped rules, concept aliases, domain context, and lexical ranking. It separates requested stages while treating quoted instructions, exclusions, and recognised completed or deferred work as context.</p></article><article><h3>Select and order skills</h3><p>The tested semantic core matches stages to workflow nodes. Conditional graph edges describe when a supporting procedure is useful. Explicit skill IDs support direct selection. Recognised unmatched stages can use catalog matching; ambiguity can remain unresolved.</p></article><article><h3>Keep the limits visible</h3><p>This is a heuristic parser, not an LLM call. Rule scores are relative rankings, not probability estimates. The graph includes catalog-only skills without inventing dependencies. A proposed route never grants permission or executes a job.</p></article></div><p>Catalog search on this static site is keyword filtering. Custom semantic composition runs in your connected server. The example is real, precomputed parser output and is labelled separately from a live response.</p><a href="https://github.com/halthinks/SolKraft/blob/main/solkraft/skillpacks/solforge/SKILL.md">Read the orchestration skill ↗</a> · <a href="https://github.com/halthinks/SolKraft/blob/main/docs/CLIENTS.md">Set up REST or MCP ↗</a></details>
+    </section>
+
+    <section id="install" class="guide workspace install-guide">
+      <div class="eyebrow">PUT IT TO WORK</div><h2>Install once. Ask normally.</h2>
+      <p>The plugin gives a compatible local agent five MCP tools and a small skill that explains when to use them. The Python package supplies the complete bundled catalog and router. Start a new session after installation.</p>
+      <div class="guide-grid">
+        <article><span class="step-number">CODEX · LOCAL</span><h3>Install the runtime + plugin</h3><pre><code>python -m pip install "git+https://github.com/halthinks/SolKraft.git"
+codex plugin marketplace add halthinks/SolKraft
+codex plugin add solkraft@solkraft</code></pre><p>Python 3.11+ must be installed so <code>solkraft</code> is on Codex’s PATH. Use the same environment for installation and launch.</p><a href="https://github.com/halthinks/SolKraft/blob/main/docs/PLUGIN.md">Installation and troubleshooting ↗</a></article>
+        <article><span class="step-number">CHATGPT · WEB</span><h3>Connect a remote service</h3><p>ChatGPT web cannot launch this local Python server. Deploy a SolKraft API, then use its HTTPS <code>/mcp/</code> endpoint in a supported custom MCP app. Plan, workspace policy, and authentication support apply.</p><p>Or inspect a skill here and paste its instructions alongside your request. No server required for manual use.</p><a href="https://github.com/halthinks/SolKraft/blob/main/docs/CLIENTS.md">ChatGPT connection details ↗</a></article>
+        <article><span class="step-number">THEN JUST ASK</span><h3>“Fix this bug and test it.”</h3><p>The agent searches or routes the request, retrieves useful procedures, then edits and tests with its existing tools. For a release gate, pass that context so “draft PR” routes to software testing.</p><p>This page is an explorer and setup console. It does not run your repository or claim to have fixed anything.</p><a href="downloads/solkraft-plugin.zip" download>Download the plugin ZIP ↓</a></article>
+      </div>
+      <details class="parser-explanation"><summary>How it compares with other projects</summary><p><a href="https://skills.sh/docs">skills.sh</a> focuses on discovering and installing skills. <a href="https://github.com/obra/superpowers">Superpowers</a> supplies an opinionated development methodology and agent workflows. SolKraft combines a multi-domain catalog, deterministic compound-request routing, inspectable relationships, and selective retrieval through REST and MCP. These approaches can coexist; there is no measured claim here that SolKraft beats either project.</p></details>
     </section>
 
     <section class="connect-strip" aria-label="Connect to your SolKraft API">

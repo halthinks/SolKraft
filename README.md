@@ -15,6 +15,18 @@ SolKraft indexes ordinary `SKILL.md` folders. Search and routing return compact 
 
 This release bundles **173 owner-contributed and licensed skills** across software, research, science, data, business, engineering, writing, and general workflows. The live API can additionally scan skill roots you choose.
 
+## Install the Codex plugin
+
+Requires Python 3.11+ and a Codex client with plugin support:
+
+```sh
+python -m pip install "git+https://github.com/halthinks/SolKraft.git"
+codex plugin marketplace add halthinks/SolKraft
+codex plugin add solkraft@solkraft
+```
+
+Start a new session in the same environment, with `solkraft` on PATH. The plugin supplies the MCP connection and compact guidance for natural skill use. The host chooses useful procedures, retrieves them, and does the work using its existing tools. See [plugin installation and verification](docs/PLUGIN.md), [ChatGPT and other clients](docs/CLIENTS.md), and [the downloadable plugin](https://halthinks.github.io/SolKraft/downloads/solkraft-plugin.zip).
+
 ## Try it locally
 
 Requires Python 3.11 or newer.

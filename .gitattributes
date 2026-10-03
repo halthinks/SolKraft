@@ -1,2 +1,1 @@
-# Preserve the upstream distribution bytes and omit generated minified diffs.
-docs/assets/vendor/mermaid.min.js -text -diff
+docs/downloads/*.zip -text -diff

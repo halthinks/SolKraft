@@ -1,0 +1,10 @@
+{
+  "name": "solkraft",
+  "interface": {"displayName": "SolKraft"},
+  "plugins": [{
+    "name": "solkraft",
+    "source": {"source": "local", "path": "./plugins/solkraft"},
+    "policy": {"installation": "AVAILABLE", "authentication": "ON_INSTALL"},
+    "category": "Developer Tools"
+  }]
+}
