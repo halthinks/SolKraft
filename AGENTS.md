@@ -72,6 +72,8 @@ Review findings must point to the concrete boundary, competing authority, invari
 4. Inspect `git diff --check`, the full diff, and `git status --short`. Review scope, compatibility, privacy, skill provenance, and direct evidence before calling work complete.
 5. Distinguish source integration, test execution, release readiness, and a live hosted deployment. A passing local suite does not prove production availability.
 
+Before publishing source/UI changes, run `python -m scripts.local_ci` in an environment with the development dependencies and Node.js installed. It generates the console and plugin archive, builds and exercises the installed wheel, and writes `build/local-ci.json`. Review and commit the generated static files. Automatic GitHub build/test runs are disabled; Pages uploads these files, and the verification workflow is manual. Use the same gate on Windows and Linux; only claim platforms actually executed.
+
 Useful commands:
 
 ```sh

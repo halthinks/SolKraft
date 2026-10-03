@@ -1,6 +1,6 @@
 # Validation evidence
 
-The service and bundled parser have 73 passing regression tests. These cover intentional abstention, release-gate context, explicit skill selection, catalog-wide graph visibility, supporting resource containment, authentication, and real mounted MCP initialization and routing.
+The current local release gate passed **75 Python regression tests**, three Node setup behavior tests, and a separate real MCP integration test against the built wheel and packaged plugin. Earlier validation evidence below records previous revisions and test counts.
 
 Run the same suite:
 
@@ -24,7 +24,7 @@ Its checked-in receipt is `scripts/results-routing-100000.json`: 100,000 passing
 
 These are systematically generated combinations of stage phrases and context variants. They provide regression coverage, not a statistically representative sample of unrestricted human requests, proof of universal understanding, or a measured twofold improvement. The suite does not establish correctness of every engineering procedure or completion of work performed by a host agent.
 
-The console was exercised in a browser for disconnected catalog browsing, pagination through the final five-item page, page-size changes, empty search, lazy skill retrieval, resource inspection, request copying, and the three-stage worked example. The Mermaid SVG rendered with seven animated edges, readable labels, and a functioning pause control. These checks validate the static walkthrough; they do not establish availability of an external API. GitHub Actions runs the regression suite and deploys the static console. A hosted API requires an operator deployment and key; successful local MCP tests do not establish external availability.
+The earlier console revision was exercised in a browser for disconnected catalog browsing, pagination through the final five-item page, page-size changes, empty search, lazy skill retrieval, resource inspection, request copying, and the three-stage worked example. That revision used Mermaid and a pause control; both were subsequently replaced by vertical HTML cards. Earlier GitHub verification runs passed. Current builds and tests run locally; Pages only uploads generated static files. A hosted API requires an operator deployment and key; successful local MCP tests do not establish external availability.
 
 
 ## Plugin and vertical walkthrough verification
@@ -52,8 +52,16 @@ python -m scripts.build_console
 python scripts/package_plugin.py
 ```
 
-The complete suite passed **74 tests**. The integration environment reused installed dependencies; a clean dependency download was not part of that local wheel check. GitHub CI independently installs declared dependencies on Linux.
+That implementation revision's complete suite passed **74 tests**. The integration environment reused installed dependencies; a clean dependency download was not part of that local wheel check. Its GitHub verification run independently installed declared dependencies on Linux. Current automatic GitHub test runs are disabled.
 
 Browser checks confirmed large vertical cards (29px headings on desktop), sequential delays from 0 to 9 seconds, connector pulses preceding the next card, and no pause button or Mermaid renderer. The walkthrough is an illustration, not execution telemetry. Reduced-motion settings reveal the complete static flow. The static catalog and precomputed example remain available without a server.
 
 Remote GitHub marketplace installation also succeeded with `--sparse .agents/plugins --sparse plugins/solkraft`. An initial full checkout failed on Windows path lengths in the nested test profile; the documented sparse install avoids that failure. The remote installed copy passed the same real stdio test. Browser-to-local-API connection and live three-stage routing passed; the 390px layout had 25px headings without horizontal overflow. GitHub verification and Pages deployment passed for the implementation commit.
+
+## Interactive setup and local gate
+
+The connection walkthrough has three paths: Render (five steps), API/MCP (five), and local plugin (four). Step navigation is bounded; platform selection changes installation and REST commands; endpoint validation rejects insecure remote URLs, credential/query-bearing URLs, endpoint paths, and shell metacharacters in hostnames. Behavior tests were written before implementation and observed failing, then passing. A separate red/green test establishes that the local gate records a nonzero build step and raises rather than proceeding as success.
+
+Executed `python -m scripts.local_ci` on Windows with Python 3.11.9: 75 Python/router tests, three Node behavior tests, compilation and JavaScript syntax checks, static generation, plugin packaging, wheel construction, isolated wheel installation, outside-checkout catalog inspection, and one real packaged-plugin MCP integration test all passed. The gate writes an ignored machine receipt at `build/local-ci.json`. Artifact environments reuse installed dependencies; this does not prove fresh dependency resolution. No WSL or Omarchy execution is claimed.
+
+Browser checks exercised all three setup paths, Windows/Linux instruction switching, copy feedback, automatic sequence completion at step five, manual step selection, keyboard arrow selection, endpoint handoff to the real console, authenticated local API connection, and real three-stage routing. The 390px mobile layout exposed an initial grid overflow; the repaired layout measured 375px document width and 275px scene width, with 28px scene titles and no horizontal page overflow. Browser error/warning logs were empty. No Render deployment was performed; hosted setup steps are based on the repository Blueprint and current Render documentation.

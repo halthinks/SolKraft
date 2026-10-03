@@ -1,5 +1,5 @@
 name: Verify SolKraft
-on: [push, pull_request]
+on: [workflow_dispatch]
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -9,9 +9,4 @@ jobs:
         with:
           python-version: '3.11'
       - run: pip install -e ".[dev]"
-      - run: python -m pytest -q tests solkraft/skillpacks/solforge/tests
-        env:
-          SOLFORGE_TEST_ROOT: solkraft/skillpacks
-      - run: node --check docs/assets/app.js
-      - run: node --check docs/assets/flow.js
-      - run: python scripts/package_plugin.py
+      - run: python -m scripts.local_ci

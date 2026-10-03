@@ -1,0 +1,99 @@
+/* Shared setup model: browser UI and Node contract tests use the same authority. */
+(() => {
+  const paths = {
+    render: { label: 'Host on Render', subtitle: 'Give remote clients a reachable service.', steps: [
+      { title: 'Deploy your own service.', body: 'Open Render’s Blueprint setup with this repository. Render reads render.yaml: a Python web service, pip install . for the build, python -m solkraft api for startup, and /healthz for health checks. Choose the Free plan when it fits your use.', result: 'A server process on Render — separate from this static website.', visual: ['GitHub repository', 'render.yaml', 'Python service'], link: 'https://render.com/deploy?repo=https://github.com/halthinks/SolKraft', linkLabel: 'Open Render Blueprint ↗' },
+      { title: 'Set a private operator key.', body: 'Generate a random key locally and enter it as SOLKRAFT_API_KEY in Render. Keep SOLKRAFT_CORS_ORIGINS set to https://halthinks.github.io for this console. Never paste the key into an issue, repository, or URL. If you serve your own console, add its exact origin.', result: 'Protected REST and MCP endpoints. CORS allows the selected browser origin; it does not replace authentication.', visual: ['SOLKRAFT_API_KEY · private', 'CORS · allowed origin', 'Bearer authentication'] },
+      { title: 'Wait for a healthy deployment.', body: 'Deploy the Blueprint. Read the Render logs, then open your service URL followed by /healthz. A successful response contains status: ok. Render supplies PORT and SolKraft binds to it automatically. A free service can sleep after 15 minutes without traffic and take time to wake.', result: 'A reachable HTTPS service. A health check proves liveness, not authenticated routing.', visual: ['Build package', 'Start service', 'GET /healthz → ok'], template: '{base}/healthz' },
+      { title: 'Connect this explorer.', body: 'Enter your service’s base URL below. Use “Use this endpoint” to place it in the console connection field. Enter the operator key in the existing Bearer key field and click Connect. The console fetches the protected catalog; then Compose a route can process your own request.', result: 'Real API connection feedback appears in the top status badge. This walkthrough never creates a fake connected state.', visual: ['HTTPS base URL', 'Bearer key in console', 'Catalog → custom routes'] },
+      { title: 'Connect your agent when useful.', body: 'Use the same service’s /mcp/ URL in a client supporting Streamable HTTP and Authorization headers. For ChatGPT, check current custom-app eligibility and authentication support. SolKraft uses operator bearer keys, not OAuth; a compatible trusted gateway may be required. Local Codex users can use the plugin instead, with no Render service.', result: 'Remote skill retrieval for compatible agents. The agent still performs and verifies the work.', visual: ['Agent client', 'HTTPS /mcp/', 'Five retrieval tools'], template: '{base}/mcp/', link: 'https://github.com/halthinks/SolKraft/blob/main/docs/CLIENTS.md', linkLabel: 'Client and authentication details ↗' }
+    ] },
+    api: { label: 'Use API / MCP', subtitle: 'Choose the interface your client understands.', steps: [
+      { title: 'One service. Two interfaces.', body: 'An API is a contract software calls. SolKraft’s REST API accepts HTTP requests and returns JSON. MCP means Model Context Protocol: an agent client discovers named tools and calls them through a standard protocol. Both interfaces use the same catalog and router. Neither runs your shell or edits your project.', result: 'REST is convenient for apps and scripts. MCP makes retrieval tools discoverable to compatible agents.', visual: ['App → REST /v1/', 'Shared catalog + router', 'Agent → MCP'] },
+      { title: 'Search with REST.', body: 'Send GET /v1/skills?q=software%20test with Authorization: Bearer followed by your key. The response contains count, total, and items. GET /v1/skills/{id} retrieves a full entrypoint; GET /v1/skills/{id}/resources/{path} retrieves a reference. Use REST for your own UI, automation, or agent integration.', result: 'Small search results first; full instructions only after you choose a relevant skill.', visual: ['GET /v1/skills', 'Metadata results', 'GET selected skill'], template: 'curl "{base}/v1/skills?q=software%20test" -H "Authorization: Bearer YOUR_KEY"' },
+      { title: 'Compose an ordered route.', body: 'POST /v1/route with objective, max_skills, and optional context or explicit skill IDs. SolForge’s heuristic parser identifies stages and uses graph relationships to propose procedures. Read selected, stages, selection_trace, and unresolved requests. Relative scores are rankings, not confidence probabilities.', result: 'An advisory plan of methods, with execution_authorized: false. Your host checks the selection.', visual: ['Objective + context', 'Parser + graph', 'Ordered stages'], template: 'curl "{base}/v1/route" -H "Authorization: Bearer YOUR_KEY" -H "Content-Type: application/json" --data \'{"objective":"Inspect the codebase, fix the bug, and test the release","max_skills":10,"context":{"domain":"software"}}\'' },
+      { title: 'Let MCP expose the tools.', body: 'A local client starts solkraft mcp over stdio; a remote client connects to /mcp/ over Streamable HTTP. The client initializes the protocol and lists tool schemas. It can call search_skills, route_request, get_skill, get_skill_resource, and get_selection_graph. SolKraft returns metadata, instructions, references, and relationships — not a finished task.', result: 'MCP is the communication layer. The skill is the procedure. The host agent is the worker.', visual: ['Initialize + list tools', 'Call route_request', 'Retrieve instructions'], template: '{base}/mcp/' },
+      { title: 'Apply the method and verify.', body: 'For “fix this bug and test it,” the agent retrieves investigation, implementation, and test procedures as needed. It uses its existing repository tools, preserves the task’s requirements, and runs real checks. A tool response does not install behavior into all sessions, authorize deployment, or certify the output.', result: 'Useful instructions become concrete work only when the host reads and applies them.', visual: ['Selected skill', 'Host edits + tests', 'Evidence + limits'] }
+    ] },
+    plugin: { label: 'Install local plugin', subtitle: 'Natural retrieval in a compatible Codex session.', steps: [
+      { title: 'Install the Python runtime.', body: 'Use Python 3.11+ and Git. Create a virtual environment, activate it, then install SolKraft. Windows uses Scripts; Linux, WSL, and Omarchy use bin. Keep the environment active when launching Codex so the solkraft command is on PATH. The package contains the public catalog and router.', result: 'The same Python package serves Windows and Linux. No desktop executable is required.', visual: ['Python environment', 'Install package', 'solkraft on PATH'] },
+      { title: 'Install the Codex plugin.', body: 'Add the repository marketplace with a sparse checkout, then install solkraft@solkraft. The plugin includes a manifest, MCP launch configuration, and an integration skill explaining when retrieval is useful. It starts the installed runtime; the plugin ZIP alone does not contain Python or dependencies.', result: 'A configured local MCP server and natural-use instructions, not a second catalog copy.', visual: ['Marketplace', 'Plugin configuration', 'Local MCP server'] },
+      { title: 'Start a new session.', body: 'Launch or restart Codex from the activated environment. Existing running sessions do not automatically gain newly installed tools. Check the client’s MCP status if tools are missing. The solkraft command must be available to the process that starts the MCP server.', result: 'The compatible host can discover the five SolKraft tools.', visual: ['Active environment', 'New Codex session', 'Discover tools'], template: 'solkraft search "software test"' },
+      { title: 'Ask for your real outcome.', body: 'Ask normally: “Inspect this codebase, fix the bug, and verify the release build.” The integration skill guides the agent to search clear requests or route compound ones, retrieve only useful procedures, and apply them using its existing tools. Model selection can vary; installation does not guarantee every turn uses a skill.', result: 'You ask for work. The host selects useful methods and keeps evidence of what it did.', visual: ['Normal request', 'Relevant procedures', 'Host performs work'] }
+    ] }
+  };
+  function normalizeEndpoint(value) {
+    const url = new URL(value.trim());
+    const local = ['localhost', '127.0.0.1', '[::1]'].includes(url.hostname);
+    if (!local && !/^[a-z0-9.-]+$/i.test(url.hostname)) throw new Error('Use a valid DNS hostname for the service.');
+    if ((url.protocol !== 'https:' && !(local && url.protocol === 'http:')) || url.username || url.password || url.search || url.hash || !['', '/'].includes(url.pathname)) throw new Error('Use an HTTPS base URL without a path, credentials, query, or fragment. Localhost HTTP is allowed.');
+    return url.origin;
+  }
+  function stepAt(path, index) {
+    if (!paths[path]) throw new Error('Unknown setup path');
+    return Math.max(0, Math.min(paths[path].steps.length - 1, index));
+  }
+  function commandFor(path, index, platform, endpoint) {
+    const base = endpoint ? normalizeEndpoint(endpoint) : 'https://YOUR-SERVICE.onrender.com';
+    if (path === 'render' && index === 1) return 'python -c "import secrets; print(secrets.token_urlsafe(32))"';
+    if (path === 'plugin' && index === 0) return platform === 'windows' ? 'py -3 -m venv .venv\n.\\.venv\\Scripts\\Activate.ps1\npython -m pip install "git+https://github.com/halthinks/SolKraft.git"' : 'python3 -m venv .venv\nsource .venv/bin/activate\npython -m pip install "git+https://github.com/halthinks/SolKraft.git"';
+    if (path === 'plugin' && index === 1) return 'codex plugin marketplace add halthinks/SolKraft --sparse .agents/plugins --sparse plugins/solkraft\ncodex plugin add solkraft@solkraft';
+    let command = paths[path].steps[index].template?.replaceAll('{base}', base) || '';
+    if (platform === 'windows' && path === 'api' && index === 1) command = `$headers = @{ Authorization = 'Bearer YOUR_KEY' }\nInvoke-RestMethod -Uri '${base}/v1/skills?q=software%20test' -Headers $headers`;
+    if (platform === 'windows' && path === 'api' && index === 2) command = `$headers = @{ Authorization = 'Bearer YOUR_KEY' }\n$body = @{ objective = 'Inspect the codebase, fix the bug, and test the release'; max_skills = 10; context = @{ domain = 'software' } } | ConvertTo-Json\nInvoke-RestMethod -Uri '${base}/v1/route' -Method Post -Headers $headers -ContentType 'application/json' -Body $body`;
+    return command;
+  }
+  if (typeof module !== 'undefined' && module.exports) { module.exports = { paths, normalizeEndpoint, stepAt, commandFor }; return; }
+  const root = document.querySelector('#setup-lab');
+  if (!root) return;
+  let path = 'render', index = 0, timer;
+  const $ = selector => root.querySelector(selector);
+  function el(tag, text, className) { const node = document.createElement(tag); node.textContent = text; if (className) node.className = className; return node; }
+  function stopSequence() { clearTimeout(timer); timer = undefined; $('#setup-play').textContent = 'Watch the sequence ↗'; }
+  function render() {
+    const route = paths[path], step = route.steps[index];
+    root.dataset.path = path;
+    root.querySelectorAll('[data-setup-path]').forEach(button => { const active = button.dataset.setupPath === path; button.setAttribute('aria-selected', String(active)); button.setAttribute('aria-controls', 'setup-scene'); button.tabIndex = active ? 0 : -1; button.classList.toggle('active', active); });
+    $('#setup-subtitle').textContent = route.subtitle;
+    const rail = $('#setup-steps'); rail.replaceChildren();
+    route.steps.forEach((item, i) => { const button = el('button', `${String(i + 1).padStart(2, '0')}  ${item.title}`, i === index ? 'setup-step active' : 'setup-step'); button.type = 'button'; button.setAttribute('aria-current', i === index ? 'step' : 'false'); button.onclick = () => { stopSequence(); index = i; render(); }; rail.append(button); });
+    $('#setup-count').textContent = `Step ${index + 1} of ${route.steps.length}`;
+    $('#setup-meter').style.width = `${(index + 1) / route.steps.length * 100}%`;
+    const card = $('#setup-scene'); card.replaceChildren();
+    card.append(el('span', `${path.toUpperCase()} / ${String(index + 1).padStart(2, '0')}`, 'setup-kicker'), el('h3', step.title), el('p', step.body));
+    const visual = el('div', '', 'setup-signal'); visual.setAttribute('aria-label', 'Illustration of this step');
+    step.visual.forEach((text, i) => { const node = el('div', text, 'signal-node'); node.style.setProperty('--signal-index', i); visual.append(node); if (i < step.visual.length - 1) visual.append(el('span', '↓', 'signal-link')); }); card.append(visual);
+    const result = el('div', '', 'setup-result'); result.append(el('small', 'WHAT YOU GET'), el('p', step.result)); card.append(result);
+    let command;
+    try { command = commandFor(path, index, $('#setup-platform').value, $('#setup-endpoint').value); $('#setup-error').textContent = ''; } catch (error) { $('#setup-error').textContent = error.message; }
+    if (command) { const pre = el('pre', command); const copy = el('button', 'Copy command / URL', 'button quiet'); copy.type = 'button'; copy.onclick = async () => { try { await navigator.clipboard.writeText(command); copy.textContent = 'Copied ✓'; } catch { copy.textContent = 'Select text to copy'; } }; card.append(pre, copy); }
+    if (step.link) { const link = el('a', step.linkLabel, 'setup-doc-link'); link.href = step.link; link.target = '_blank'; link.rel = 'noreferrer'; card.append(link); }
+    card.classList.remove('scene-enter'); void card.offsetWidth; card.classList.add('scene-enter');
+    $('#setup-prev').disabled = index === 0; $('#setup-next').disabled = index === route.steps.length - 1;
+  }
+  root.querySelectorAll('[data-setup-path]').forEach(button => button.onclick = () => { stopSequence(); path = button.dataset.setupPath; index = 0; render(); });
+  root.querySelector('.setup-paths').onkeydown = event => {
+    const keys = Object.keys(paths), current = keys.indexOf(path);
+    if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+    event.preventDefault(); stopSequence();
+    path = keys[event.key === 'Home' ? 0 : event.key === 'End' ? keys.length - 1 : (current + (event.key === 'ArrowRight' ? 1 : -1) + keys.length) % keys.length];
+    index = 0; render(); root.querySelector(`[data-setup-path="${path}"]`).focus();
+  };
+  $('#setup-prev').onclick = () => { stopSequence(); index = stepAt(path, index - 1); render(); };
+  $('#setup-next').onclick = () => { stopSequence(); index = stepAt(path, index + 1); render(); };
+  $('#setup-platform').onchange = render;
+  $('#setup-endpoint').onchange = render;
+  $('#setup-use').onclick = () => {
+    try { const base = normalizeEndpoint($('#setup-endpoint').value); document.querySelector('#api-url').value = base; $('#setup-error').textContent = 'Endpoint placed in the console. Enter your Bearer key there, then click Connect.'; document.querySelector('#api-key').focus(); }
+    catch (error) { $('#setup-error').textContent = error.message; }
+  };
+  $('#setup-play').onclick = () => {
+    stopSequence(); index = 0; render();
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { $('#setup-error').textContent = 'Reduced motion is enabled. Use Next or select any step.'; return; }
+    $('#setup-play').textContent = 'Sequence playing · select a step to explore';
+    const advance = () => { if (index >= paths[path].steps.length - 1) { stopSequence(); return; } index++; render(); timer = setTimeout(advance, 7000); };
+    timer = setTimeout(advance, 7000);
+  };
+  document.addEventListener('visibilitychange', () => { if (document.hidden) stopSequence(); });
+  render();
+})();
