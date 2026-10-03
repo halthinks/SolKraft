@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css?v=b1a0ce874a52">
   <script defer src="assets/flow.js?v=5c9299226bcc"></script>
-  <script defer src="assets/setup.js?v=cd04ce4db711"></script>
+  <script defer src="assets/setup.js?v=04f1f51298e6"></script>
   <script defer src="assets/app.js?v=14cc3a1da9c7"></script>
 </head>
 <body>
@@ -76,7 +76,7 @@
         <article><span class="step-number">CODEX · LOCAL</span><h3>Install the runtime + plugin</h3><pre><code>python -m pip install "git+https://github.com/halthinks/SolKraft.git"
 codex plugin marketplace add halthinks/SolKraft --sparse .agents/plugins --sparse plugins/solkraft
 codex plugin add solkraft@solkraft</code></pre><p>Python 3.11+ must be installed so <code>solkraft</code> is on Codex’s PATH. Use the same environment for installation and launch.</p><a href="https://github.com/halthinks/SolKraft/blob/main/docs/PLUGIN.md">Installation and troubleshooting ↗</a></article>
-        <article><span class="step-number">REMOTE AGENTS</span><h3>Connect your hosted library</h3><p>Run your library on Render, then connect your agent to its MCP address. The guided steps explain the address, private key, tool scan, and first useful request. Codex supports a direct connection; ChatGPT needs compatible login support.</p><p>You can also copy a skill here and paste it into your chat. That needs no server.</p><a href="#setup-lab" data-start-path="remote">Show me the connection steps →</a></article>
+        <article><span class="step-number">REMOTE AGENTS</span><h3>Connect your hosted library</h3><p>Run your library on Render, then connect your agent to its MCP address. The guided steps explain the address, private key, tool scan, and first useful request. Connect Codex using your private API key. Direct ChatGPT connection has not been tested yet. To use a skill in ChatGPT today, copy its instructions here and paste them into your chat.</p><p>You can also copy a skill here and paste it into your chat. That needs no server.</p><a href="#setup-lab" data-start-path="remote">Show me the connection steps →</a></article>
         <article><span class="step-number">THEN JUST ASK</span><h3>“Fix this bug and test it.”</h3><p>The agent searches or routes the request, retrieves useful procedures, then edits and tests with its existing tools. For a release gate, pass that context so “draft PR” routes to software testing.</p><p>This page is an explorer and setup console. It does not run your repository or claim to have fixed anything.</p><a href="downloads/solkraft-plugin.zip" download>Download the plugin ZIP ↓</a></article>
       </div>
       <details class="parser-explanation"><summary>How it compares with other projects</summary><p><a href="https://skills.sh/docs">skills.sh</a> focuses on discovering and installing skills. <a href="https://github.com/obra/superpowers">Superpowers</a> supplies an opinionated development methodology and agent workflows. SolKraft combines a multi-domain catalog, deterministic compound-request routing, inspectable relationships, and selective retrieval through REST and MCP. These approaches can coexist; there is no measured claim here that SolKraft beats either project.</p></details>
