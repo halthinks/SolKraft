@@ -124,7 +124,8 @@
     if (!apiBase) {
       const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
       const rows = offlineSkills.filter(skill => terms.every(term => `${skill.name} ${skill.description}`.toLowerCase().includes(term)));
-      renderSkills(rows.slice(0, query ? 50 : 12));
+      renderSkills(rows);
+      $('#result-label').textContent = query ? `${rows.length} MATCHING SKILLS` : `ALL ${rows.length} BUNDLED SKILLS`;
       countPill.textContent = `${offlineSkills.length} bundled skills`;
       return;
     }
