@@ -1,17 +1,16 @@
 """Advisory intent routing over the bundled SolForge graph and mounted skills."""
 from __future__ import annotations
 
+import hashlib
 import json
 from functools import lru_cache
 from pathlib import Path
 import re
 
 from .catalog import SkillCatalog
-from .contract_loader import load_skill_contract
 from .contract_policy import RoutePolicy, evaluate_graph
 from .dataflow import resolve_required_inputs
 from .route_validation import validate_route
-from .trust import resolve_trust
 from .audit import route_audit_event
 
 
@@ -307,14 +306,36 @@ def get_graph() -> dict:
     return json.loads(GRAPH_PATH.read_text(encoding="utf-8"))
 
 
-def catalog_graph(catalog: SkillCatalog) -> dict:
-    """Expose mounted skills with compact contract metadata, never authority."""
+def graph_generation(graph: dict | None = None) -> str:
+    graph = graph or get_graph()
+    payload = json.dumps(
+        {"nodes": graph.get("nodes", {}), "edges": graph.get("edges", [])},
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+    )
+    return "sha256:" + hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
+def contract_index(catalog: SkillCatalog):
     core = get_graph()
+    return catalog.contract_index(
+        legacy_nodes=core.get("nodes", {}),
+        graph_generation=graph_generation(core),
+    )
+
+
+def catalog_graph(catalog: SkillCatalog) -> dict:
+    """Expose mounted skills with compact indexed contract metadata."""
+    core = get_graph()
+    index = contract_index(catalog)
+    entries = {item["id"]: item for item in index.entries()}
+    records = {record.id: record for record in catalog.records()}
     nodes = {}
-    for record in catalog.records():
-        legacy_node = core["nodes"].get(record.id)
+    for skill_id, record in records.items():
+        legacy_node = core["nodes"].get(skill_id)
         base = dict(legacy_node or {
-            "id": record.id,
+            "id": skill_id,
             "description": record.public()["description"],
             "domain": "general",
             "effect": None,
@@ -322,24 +343,18 @@ def catalog_graph(catalog: SkillCatalog) -> dict:
             "inputs": ["user objective", "applicable skill prerequisites"],
             "outputs": ["skill-defined deliverable"],
         })
-        contract = load_skill_contract(
-            record.entrypoint,
-            legacy_node=legacy_node,
-            expected_skill_id=record.name,
-        )
+        contract = entries[skill_id]
         base["contract_status"] = contract["status"]
         base["contract_source"] = contract.get("source")
         base["contract_validation_errors"] = contract.get("validation_errors", [])
-        base["side_effects"] = contract["side_effects"]
-        base["effects"] = contract["side_effects"]
-        base["auth_scope"] = contract["auth_scope"]
-        base["test_contract"] = contract["test_contract"]
+        base["side_effects"] = contract.get("effects")
+        base["effects"] = contract.get("effects")
         base["contract_digest"] = contract.get("contract_digest")
         base["entrypoint_digest"] = contract.get("entrypoint_digest")
         base["verification"] = contract.get("verification", {})
         base["risk"] = contract.get("risk", {})
         base["provenance"] = contract.get("provenance", {})
-        base["trust"] = resolve_trust(record.id, contract)
+        base["trust"] = contract.get("trust", {})
         if contract.get("source") == "sidecar" and contract.get("status") == "declared":
             base["inputs"] = contract.get("inputs", [])
             base["outputs"] = contract.get("outputs", [])
@@ -347,17 +362,12 @@ def catalog_graph(catalog: SkillCatalog) -> dict:
             base["schema_version"] = contract["schema_version"]
         if contract.get("contract_revision") is not None:
             base["contract_revision"] = contract["contract_revision"]
-        if (
-            contract.get("capabilities")
-            or contract.get("resources")
-            or contract.get("auth_scope") is not None
-        ):
+        if contract.get("capabilities") or contract.get("resources"):
             base["authority"] = {
                 "capabilities": contract.get("capabilities", []),
                 "resources": contract.get("resources", []),
-                "legacy_scope": contract.get("auth_scope"),
             }
-        nodes[record.id] = base
+        nodes[skill_id] = base
 
     edges = [
         dict(edge) for edge in core["edges"]
@@ -369,4 +379,5 @@ def catalog_graph(catalog: SkillCatalog) -> dict:
         "edges": edges,
         "semantic_core_count": len(core["nodes"]),
         "catalog_count": len(nodes),
+        "contract_index_generation": index.generation,
     }
