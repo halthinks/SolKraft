@@ -5,6 +5,8 @@ impactDescription: 5-10x faster RLS queries with proper patterns
 tags: rls, performance, security, optimization
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 ## Optimize RLS Policies for Performance
 
 Poorly written RLS policies can cause severe performance issues. Use subqueries and indexes strategically.
