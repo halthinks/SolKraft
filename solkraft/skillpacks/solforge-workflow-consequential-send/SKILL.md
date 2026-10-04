@@ -3,6 +3,8 @@ name: solforge-workflow-consequential-send
 description: Carry out an explicitly authorized send action for its exact target and verify the resulting effect.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Execute an authorized send
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
@@ -14,3 +16,14 @@ Confirm reversibility and blast radius before acting. A delivered email, message
 Perform exactly the authorized send, then verify the resulting effect from the channel's own signals. Capture delivery evidence such as a message ID, timestamp, and provider acceptance response, and distinguish acceptance from actual delivery or receipt; a queued message, a saved draft, or a silent API response is not proof the send happened. If the outcome is ambiguous — a timeout, an unclear error, a dropped connection — reconcile whether the first attempt landed before retrying, since a blind retry produces duplicates.
 
 Report the action performed, the exact target, the authorization evidence, and the observed effect, with any unreconciled uncertainty stated plainly. Use [result validation](../solforge-result-validator/SKILL.md) when the delivery claim needs acceptance beyond the observed send evidence itself.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- This procedure is selected by SolKraft's contract-aware router; selection does not authorize execution.
+- Public routing defaults to hardened policy; opaque or contract-inadmissible capabilities fail closed.
+- When `contract.yaml` exists, compact metadata is evaluated before this full instruction body is loaded.
+- Runtime authority stays with the host; SolKraft keeps `execution_authorized: false`.
+- Current local acceptance covers 100,000 unique 250-word requests, 100 ask families per skill, and 100% eligible target recall. See repository `VALIDATION.md`.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

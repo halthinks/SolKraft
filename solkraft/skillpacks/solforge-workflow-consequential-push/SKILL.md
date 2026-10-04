@@ -3,6 +3,8 @@ name: solforge-workflow-consequential-push
 description: Carry out an explicitly authorized push action for its exact target and verify the resulting effect.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Push an authorized change to its target
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
@@ -14,3 +16,14 @@ Confirm reversibility and blast radius before acting. Determine whether the push
 Verify the effect on the destination itself, not from the push command's exit status alone: read back the remote ref, query the registry, queue, or device, and compare against the intended state. A successful local command is not evidence of a remote effect, and an "up to date" or silent no-op is not a completed push. When the outcome is uncertain — timeout, partial or missing response — reconcile the actual destination state before any retry; blindly retrying a push whose first attempt may have landed can duplicate or reorder effects.
 
 Record the push evidence: the action, the exact target, the basis of authorization, the observed pre- and post-push state, and the verification performed. Report what landed, how it was confirmed, and any divergence or remaining uncertainty. Use [solforge-build](../solforge-build/SKILL.md) when the push depends on an underlying build or change procedure that must be completed or re-run first.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- This procedure is selected by SolKraft's contract-aware router; selection does not authorize execution.
+- Public routing defaults to hardened policy; opaque or contract-inadmissible capabilities fail closed.
+- When `contract.yaml` exists, compact metadata is evaluated before this full instruction body is loaded.
+- Runtime authority stays with the host; SolKraft keeps `execution_authorized: false`.
+- Current local acceptance covers 100,000 unique 250-word requests, 100 ask families per skill, and 100% eligible target recall. See repository `VALIDATION.md`.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

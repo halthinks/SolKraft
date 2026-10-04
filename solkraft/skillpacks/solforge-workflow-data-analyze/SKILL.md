@@ -3,6 +3,8 @@ name: solforge-workflow-data-analyze
 description: Execute a reproducible analysis with grain, definitions, assumptions, uncertainty, and decision implications.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Analyze data reproducibly
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
@@ -14,3 +16,14 @@ Profile before aggregating: distributions, missingness, duplicates, outliers, an
 Verify the headline numbers before reporting them. Recompute at least the load-bearing figure with an independent query or path, and reconcile aggregates against known totals or prior reports; a result that cannot be recomputed from the recorded steps is not a finding. State uncertainty honestly: sample size, sensitivity to definition and window choices, and plausible alternative explanations. Named anti-patterns: aggregates over silently dropped nulls, percentage changes on tiny bases, cherry-picked date windows, and p-hacked slices presented as the original question.
 
 Report the question, data window and grain, metric definitions, method, results with uncertainty, limitations, and the decision implications — keeping facts, inferences, and recommendations distinct. Deliver the reproducible notebook or script alongside the report when requested. Use [data validation](../solforge-workflow-data-validate/SKILL.md) when source quality itself is unverified and the conclusions would rest on it.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- This procedure is selected by SolKraft's contract-aware router; selection does not authorize execution.
+- Public routing defaults to hardened policy; opaque or contract-inadmissible capabilities fail closed.
+- When `contract.yaml` exists, compact metadata is evaluated before this full instruction body is loaded.
+- Runtime authority stays with the host; SolKraft keeps `execution_authorized: false`.
+- Current local acceptance covers 100,000 unique 250-word requests, 100 ask families per skill, and 100% eligible target recall. See repository `VALIDATION.md`.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->
