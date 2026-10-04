@@ -25,11 +25,27 @@ def _configured_roots(include_installed: bool = False) -> list[Path]:
     return roots
 
 
+class RoutePolicyBody(BaseModel):
+    denied_effects: list[str] = Field(default_factory=list, max_length=100)
+    granted_capabilities: list[str] | None = None
+    legacy_auth_scope: str | None = None
+    contract_mode: str = "legacy"
+
+
 class RouteBody(BaseModel):
     objective: str = Field(min_length=1, max_length=20_000)
     max_skills: int = Field(default=10, ge=1, le=50)
     skills: list[str] = Field(default_factory=list, max_length=50)
     context: dict[str, str] | None = None
+    policy: RoutePolicyBody | None = None
+
+
+def _policy_payload(policy: RoutePolicyBody | None):
+    if policy is None:
+        return None
+    if hasattr(policy, "model_dump"):
+        return policy.model_dump(exclude_none=True)
+    return policy.dict(exclude_none=True)
 
 
 def create_app(catalog: SkillCatalog | None = None, *, api_key: str | None = None, require_api_key: bool = True) -> FastAPI:
@@ -81,7 +97,14 @@ def create_app(catalog: SkillCatalog | None = None, *, api_key: str | None = Non
     @app.post("/v1/route")
     async def route(body: RouteBody):
         try:
-            return route_request(catalog, body.objective, body.max_skills, explicit=body.skills, context=body.context)
+            return route_request(
+                catalog,
+                body.objective,
+                body.max_skills,
+                explicit=body.skills,
+                context=body.context,
+                policy=_policy_payload(body.policy),
+            )
         except ValueError as exc:
             raise HTTPException(status_code=422, detail=str(exc)) from exc
 
