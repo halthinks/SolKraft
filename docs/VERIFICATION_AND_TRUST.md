@@ -83,3 +83,10 @@ Verification receipts additionally bind the evidence digest and declarative chec
 Core SolKraft intentionally has no executable verifier runner. `solkraft.sandbox` defines the requirements any future independently trusted host adapter must enforce: bounded timeout, network off by default, no inherited secrets, bounded output/processes, and explicit mounts.
 
 Adding an executable adapter later must not turn a contract string into a shell command inside core SolKraft.
+
+
+## Hardened public defaults
+
+REST, MCP, and the CLI now default to the `hardened` contract mode. Hardened mode rejects opaque contracts while continuing to expose legacy-inferred bundled contracts as warnings so existing proven routing remains usable. The Python library keeps legacy-compatible defaults unless the caller explicitly supplies a stricter policy.
+
+This is different from claiming every bundled procedure has been reviewed. The CI receipt `build/hardening.json` reports digest-bound reviewed coverage separately. A generated or inferred sidecar never counts as reviewed, and hardened public routing does not fabricate that evidence.

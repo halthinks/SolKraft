@@ -1,19 +1,16 @@
-"""Compact skill contracts used as selection constraints."""
+"""Compact skill contract normalization.
+
+The module intentionally contains no route filtering. Admissibility belongs to
+contract_policy and route_validation; this file only normalizes declarations.
+"""
 from __future__ import annotations
 
-from .constraint_parser import excluded_effects
-from .effects import effect_matches, normalize_effects
+from .capabilities import LEGACY_AUTH_SCOPES
+from .effects import normalize_effects
 
 
-AUTH_ORDER = ("none", "read", "write-local", "network", "external-effect")
 CONTRACT_STATUSES = ("declared", "legacy", "opaque", "unsupported", "invalid")
 SUPPORTED_SCHEMA_MAJOR = 1
-
-
-def _auth_rank(scope: str | None) -> int | None:
-    if scope not in AUTH_ORDER:
-        return None
-    return AUTH_ORDER.index(scope)
 
 
 def _schema_major(value) -> int | None:
@@ -66,7 +63,7 @@ def contract_from_node(node: dict | None) -> dict:
         auth = authority.get("legacy_scope")
     if auth is None and node.get("effect") is False and forced_status != "declared":
         auth = "none"
-    if auth is not None and auth not in AUTH_ORDER:
+    if auth is not None and auth not in LEGACY_AUTH_SCOPES:
         status = "invalid"
         auth = None
 
@@ -84,17 +81,19 @@ def contract_from_node(node: dict | None) -> dict:
         resources = list(authority.get("resources") or [])
 
     if status is None:
+        legacy_contract = any(key in node for key in ("effect", "exit_evidence"))
         explicit_contract = any(
             key in node for key in (
-                "schema_version", "side_effects", "effects", "auth_scope",
+                "schema_version", "side_effects", "effects",
                 "test_contract", "verification", "authority",
             )
         )
-        legacy_contract = any(key in node for key in ("effect", "exit_evidence"))
-        if explicit_contract:
-            status = "declared"
-        elif legacy_contract:
+        # Pre-v1 graph metadata stays legacy even when it also carried the old
+        # auth_scope field. A v1 sidecar is identified by versioned metadata.
+        if legacy_contract and schema_version is None:
             status = "legacy"
+        elif explicit_contract:
+            status = "declared"
         else:
             status = "opaque"
 
@@ -117,82 +116,3 @@ def contract_from_node(node: dict | None) -> dict:
         "entrypoint_digest": node.get("entrypoint_digest"),
         "declared": status in {"declared", "legacy"},
     }
-
-
-def _rejection(skill: str, contract: dict, reasons: list[str]) -> dict:
-    return {"id": skill, "reasons": reasons, "contract": contract}
-
-
-def violates(contract: dict, excluded: set[str], allowed_auth: str | None) -> list[str]:
-    reasons = []
-    denied = normalize_effects(excluded)
-    effects = contract["side_effects"]
-    if effects is None and denied:
-        reasons.append("undeclared side effects conflict with an effect exclusion")
-    else:
-        for effect in effects or []:
-            for pattern in denied:
-                if effect_matches(pattern, effect):
-                    reasons.append(f"side effect excluded: {effect}")
-                    break
-
-    allowed_rank = _auth_rank(allowed_auth)
-    skill_rank = _auth_rank(contract["auth_scope"])
-    if allowed_rank is not None and skill_rank is not None and skill_rank > allowed_rank:
-        reasons.append(f"auth scope {contract['auth_scope']} exceeds {allowed_auth}")
-    if allowed_rank is not None and contract["auth_scope"] is None:
-        reasons.append("undeclared auth scope exceeds an explicit allowance")
-    return reasons
-
-
-def apply_contracts(
-    result: dict,
-    graph: dict,
-    objective: str,
-    allowed_auth: str | None = None,
-) -> dict:
-    if allowed_auth is not None and allowed_auth not in AUTH_ORDER:
-        raise ValueError("Unknown auth scope: " + str(allowed_auth))
-    excluded = set(excluded_effects(objective))
-    nodes = graph.get("nodes", {})
-    rejected = []
-    selected = []
-    contracts = {}
-
-    for skill in result.get("selected", []):
-        contract = contract_from_node(nodes.get(skill, {}))
-        reasons = violates(contract, excluded, allowed_auth)
-        if reasons:
-            rejected.append(_rejection(skill, contract, reasons))
-            continue
-        selected.append(skill)
-        contracts[skill] = contract
-
-    rejected_ids = {item["id"] for item in rejected}
-    blocked_stages = []
-    for stage in result.get("stages", []):
-        before = list(stage.get("selected", []))
-        stage["selected"] = [skill for skill in before if skill not in rejected_ids]
-        removed = [skill for skill in before if skill in rejected_ids]
-        if before and not stage["selected"] and removed:
-            blocked_stages.append({
-                "stage": stage.get("stage"),
-                "text": stage.get("text"),
-                "reason": "all selected skills rejected by contract constraints",
-                "rejected": removed,
-            })
-
-    if "skills" in result:
-        result["skills"] = [item for item in result["skills"] if item.get("id") in contracts]
-    result["selected"] = selected
-    result["contracts"] = contracts
-    result["contract_rejections"] = rejected
-    result["blocked_stages"] = blocked_stages
-    result["excluded_effects"] = normalize_effects(excluded)
-
-    if blocked_stages or (rejected and not selected):
-        result["selection_status"] = "partially_blocked" if selected else "blocked"
-    else:
-        result["selection_status"] = "matched" if selected else "abstained"
-    result["execution_authorized"] = False
-    return result

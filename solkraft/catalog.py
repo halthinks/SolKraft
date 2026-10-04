@@ -12,6 +12,8 @@ from typing import Iterable
 
 import yaml
 
+from .contract_index import ContractIndex
+
 
 RETIRED_SKILLS = frozenset(json.loads((Path(__file__).parent / 'retired-skills.json').read_text(encoding='utf-8'))['skills'])
 MAX_ENTRYPOINT_BYTES = 128_000
@@ -59,6 +61,7 @@ class SkillCatalog:
         self.roots = tuple(Path(root).expanduser() for root in roots)
         self.preferred_root = preferred_root.resolve() if preferred_root else None
         self._records: dict[str, SkillRecord] = {}
+        self._contract_index = ContractIndex()
         self.refresh()
 
     def refresh(self) -> int:
@@ -196,6 +199,33 @@ class SkillCatalog:
         except (OSError, RuntimeError, ValueError, UnicodeError) as exc:
             raise SkillNotFound(resource) from exc
         return {"skill_id": skill_id, "resource": resource, "content": content}
+
+    def contract_index(
+        self,
+        *,
+        legacy_nodes: dict | None = None,
+        graph_generation: str | None = None,
+    ) -> ContractIndex:
+        self._contract_index.refresh(
+            self.records(),
+            legacy_nodes=legacy_nodes,
+            graph_generation=graph_generation,
+        )
+        return self._contract_index
+
+    def contract_summary(
+        self,
+        skill_id: str,
+        *,
+        legacy_nodes: dict | None = None,
+        graph_generation: str | None = None,
+    ) -> dict:
+        if skill_id not in self._records:
+            raise SkillNotFound(skill_id)
+        return self.contract_index(
+            legacy_nodes=legacy_nodes,
+            graph_generation=graph_generation,
+        ).get(skill_id)
 
     def records(self) -> tuple[SkillRecord, ...]:
         return tuple(self._records.values())
