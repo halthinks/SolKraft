@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Native SolForge execution contract
 
 These are general user-designed workflows, independent of hardware project and any MCP service. Execute with tools actually available in the current host. Read this contract once per task; subsequent nodes inherit it.
