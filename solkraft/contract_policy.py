@@ -27,7 +27,7 @@ class RoutePolicy:
     denied_effects: tuple[str, ...] = ()
     grant: CapabilityGrant | None = None
     legacy_auth_scope: str | None = None
-    contract_mode: str = "hardened"
+    contract_mode: str = "legacy"
 
     @property
     def granted_capabilities(self):
@@ -80,7 +80,7 @@ def normalize_policy(policy: dict | RoutePolicy | None, objective: str) -> Route
         value = policy or {}
         if not isinstance(value, dict):
             raise ValueError("policy must be an object")
-        mode = value.get("contract_mode", "hardened")
+        mode = value.get("contract_mode", "legacy")
         if mode not in CONTRACT_MODES:
             raise ValueError("policy.contract_mode must be legacy, warn, strict, or hardened")
         legacy_auth = value.get("legacy_auth_scope")
