@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Writing Guidelines for Postgres References
 
 This document provides guidelines for creating effective Postgres best

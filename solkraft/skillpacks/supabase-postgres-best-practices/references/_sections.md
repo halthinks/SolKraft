@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Section Definitions
 
 This file defines the rule categories for Postgres best practices. Rules are automatically assigned to sections based on their filename prefix.
