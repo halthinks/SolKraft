@@ -5,6 +5,8 @@ impactDescription: 2-10x better query plans with accurate statistics
 tags: vacuum, analyze, statistics, maintenance, autovacuum
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 ## Maintain Table Statistics with VACUUM and ANALYZE
 
 Outdated statistics cause the query planner to make poor decisions. VACUUM reclaims space, ANALYZE updates statistics.

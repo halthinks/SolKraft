@@ -5,6 +5,8 @@ impactDescription: 3-5x throughput improvement, fewer deadlocks
 tags: transactions, locking, contention, performance
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 ## Keep Transactions Short to Reduce Lock Contention
 
 Long-running transactions hold locks that block other queries. Keep transactions as short as possible.

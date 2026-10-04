@@ -5,6 +5,8 @@ impactDescription: 2-5x faster queries by eliminating heap fetches
 tags: indexes, covering-index, include, index-only-scan
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 ## Use Covering Indexes to Avoid Table Lookups
 
 Covering indexes include all columns needed by a query, enabling index-only scans that skip the table entirely.

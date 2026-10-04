@@ -5,6 +5,8 @@ impactDescription: Efficient coordination without row-level lock overhead
 tags: advisory-locks, coordination, application-locks
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 ## Use Advisory Locks for Application-Level Locking
 
 Advisory locks provide application-level coordination without requiring database rows to lock.

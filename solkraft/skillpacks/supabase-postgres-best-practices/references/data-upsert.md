@@ -5,6 +5,8 @@ impactDescription: Atomic operation, eliminates race conditions
 tags: upsert, on-conflict, insert, update
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 ## Use UPSERT for Insert-or-Update Operations
 
 Using separate SELECT-then-INSERT/UPDATE creates race conditions. Use INSERT ... ON CONFLICT for atomic upserts.
