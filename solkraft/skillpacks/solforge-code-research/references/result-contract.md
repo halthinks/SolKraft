@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Code Research result contract
 
 Bind the result to the inspected source identity, accepted scope, requirements, and evidence. Use structured output when requested; no service-generated plan or graph receipt is required.

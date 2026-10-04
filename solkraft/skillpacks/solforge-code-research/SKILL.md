@@ -3,6 +3,8 @@ name: solforge-code-research
 description: Audit a whole codebase or ecosystem for intended architecture, hidden capabilities, inconsistencies, and completion gaps.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # SolForge Code Research
 
 Audit a whole codebase or ecosystem for intended architecture, hidden capabilities, inconsistencies, and completion gaps.
@@ -22,3 +24,14 @@ For a substantial repository investigation, apply the evidence and coverage cont
 When an implementation handoff is requested, use the result contract: [result-contract.md](references/result-contract.md).
 
 When findings will drive a later repair, use the verification and handoff guidance: [forward-use.md](references/forward-use.md).
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- This procedure is selected by SolKraft's contract-aware router; selection does not authorize execution.
+- Public routing defaults to hardened policy; opaque or contract-inadmissible capabilities fail closed.
+- When `contract.yaml` exists, compact metadata is evaluated before this full instruction body is loaded.
+- Runtime authority stays with the host; SolKraft keeps `execution_authorized: false`.
+- Current local acceptance covers 100,000 unique 250-word requests, 100 ask families per skill, and 100% eligible target recall. See repository `VALIDATION.md`.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

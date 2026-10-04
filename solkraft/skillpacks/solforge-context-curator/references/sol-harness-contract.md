@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Sol Harness semantic contract
 
 This installed reference preserves the routing and authority semantics of the SolForge autonomous-work whitepaper, source SHA-256 `16f9a9c4db799c4523f00dec8493cfd22c829d81ef7bf3f4e0d8c4a681f337a5`.

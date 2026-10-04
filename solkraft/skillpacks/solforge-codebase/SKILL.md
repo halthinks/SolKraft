@@ -3,6 +3,8 @@ name: solforge-codebase
 description: "Understand how an existing repository works: trace behavior, architecture, ownership, and history at specific files and revisions."
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Investigate a repository
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
@@ -14,3 +16,14 @@ Distinguish code that exists from code registered, called, reachable, and exerci
 For competing explanations, state the discriminating observation and collect it. Prefer a small reproduction or existing relevant test when it can resolve uncertainty. Inspection alone does not establish runtime behavior.
 
 Answer with the finding, concrete file/function evidence, relevant dependency path, and unresolved uncertainty. If changes were requested, carry the evidence into implementation; otherwise deliver the investigation without starting a repair.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- This procedure is selected by SolKraft's contract-aware router; selection does not authorize execution.
+- Public routing defaults to hardened policy; opaque or contract-inadmissible capabilities fail closed.
+- When `contract.yaml` exists, compact metadata is evaluated before this full instruction body is loaded.
+- Runtime authority stays with the host; SolKraft keeps `execution_authorized: false`.
+- Current local acceptance covers 100,000 unique 250-word requests, 100 ask families per skill, and 100% eligible target recall. See repository `VALIDATION.md`.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->
