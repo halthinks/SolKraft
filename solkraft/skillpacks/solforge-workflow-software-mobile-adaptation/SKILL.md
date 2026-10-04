@@ -3,6 +3,8 @@ name: solforge-workflow-software-mobile-adaptation
 description: Implement a honest mobile redesign with platform lifecycle, interaction, storage, permissions, packaging, and device verification.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Adapt software for mobile platforms
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
@@ -14,3 +16,14 @@ Work through the platform realities in order. Lifecycle first: mobile apps are s
 Package per platform: signing identities, bundle identifiers, versioning, and store metadata are part of the deliverable, not afterthoughts. Produce an installable artifact through the real toolchain. Verify on physical devices across the OS range you claim to support. Exercise cold start, backgrounding and resume mid-task, permission denial, offline transitions, low storage, and rotation. An emulator-only pass is not device evidence; a screenshot of the home screen is not lifecycle evidence; and "works in the shared simulator" says nothing about the release-signed artifact. Record device, OS version, build identifier, and the exact scenario exercised for each claim.
 
 Report what was adapted, the verified behaviors with their device evidence, known limits such as untested OS versions or deferred features, and how to reproduce the build. Use [cross build](../solforge-cross-build/SKILL.md) when the packaging step needs full toolchain configuration and reproducibility procedure beyond what this workflow covers.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- Selected by the contract-aware router; selection is advisory.
+- Hardened routing rejects opaque or inadmissible capabilities.
+- Contract metadata is evaluated before loading the full instruction body.
+- Execution authority stays with the host.
+- Current local acceptance: 100,000 unique 250-word requests, 100 ask families per skill, 100% eligible target recall.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

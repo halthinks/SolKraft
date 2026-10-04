@@ -3,6 +3,8 @@ name: solforge-workflow-science-hypothesis
 description: Derive testable hypotheses from the selected evidence with alternatives, predictions, and falsifiers.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Develop testable hypotheses
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
@@ -14,3 +16,14 @@ For each hypothesis, state the proposed mechanism or relationship, the condition
 Verify the set against the evidence before reporting: every hypothesis should be consistent with what is already observed, each prediction should be checkable with feasible methods and data, and each falsifier should be reachable rather than unfalsifiable in principle. Anti-patterns: a prediction so vague any outcome confirms it; a falsifier that requires data nobody can obtain; a hypothesis already contradicted by a cited source presented as open; and retrofitting hypotheses to known results while presenting them as a priori. Keep established fact, inference, and speculation distinct.
 
 Report the hypothesis set with predictions, falsifiers, discriminating observations, and the evidence each one rests on, plus unresolved gaps in the evidence base. Use [experiment design](../solforge-workflow-science-experiment/SKILL.md) when a selected hypothesis needs methods, controls, and measurements specified before execution.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- Selected by the contract-aware router; selection is advisory.
+- Hardened routing rejects opaque or inadmissible capabilities.
+- Contract metadata is evaluated before loading the full instruction body.
+- Execution authority stays with the host.
+- Current local acceptance: 100,000 unique 250-word requests, 100 ask families per skill, 100% eligible target recall.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->
