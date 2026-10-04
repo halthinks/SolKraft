@@ -27,6 +27,21 @@ def test_api_lists_routes_and_returns_selected_skill_only(tmp_path):
     folder = root / "data-chart"
     folder.mkdir(parents=True)
     (folder / "SKILL.md").write_text("---\nname: data-chart\ndescription: Build charts from customer data.\n---\n\n# Data chart skill\n", encoding="utf-8")
+    (folder / "contract.yaml").write_text(
+        """
+schema_version: "1.0"
+skill_id: data-chart
+contract_revision: 1
+effects: []
+verification:
+  mode: declarative
+  checks:
+    - id: chart-present
+      type: field_present
+      field: result
+""".strip() + "\n",
+        encoding="utf-8",
+    )
     app = create_app(SkillCatalog([root]), api_key="test-key", require_api_key=True)
     client = TestClient(app)
     headers = {"Authorization": "Bearer test-key"}
