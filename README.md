@@ -96,6 +96,7 @@ Cozy’s contribution helped push the project from descriptive skill metadata to
 ![5-star SolKraft contributor badge](docs/assets/contributor-badge-5.svg)
 
 [See the full Contributors page →](https://halthinks.github.io/SolKraft/contributors.html) ·
+[Badge legend →](https://halthinks.github.io/SolKraft/contributors.html#badge-legend) ·
 [Contributions showcase →](https://halthinks.github.io/SolKraft/contributions.html) ·
 [Public nominations archive →](https://halthinks.github.io/SolKraft/nominations.html) ·
 [Nominate a contributor →](https://github.com/halthinks/SolKraft/issues/new?template=contributor_nomination.yml)
@@ -113,7 +114,7 @@ Cozy’s contribution helped push the project from descriptive skill metadata to
 | [`VALIDATION.md`](VALIDATION.md) | What has actually been tested and what it means |
 | [Live Console](https://halthinks.github.io/SolKraft/) | Browse, inspect, connect, and replay validation |
 | [Contributors](https://halthinks.github.io/SolKraft/contributors.html) | Community impact and recognition |
-| [Contributions Showcase](https://halthinks.github.io/SolKraft/contributions.html) | High-level outcomes contributors helped create |
+| [Contributions Showcase](https://halthinks.github.io/SolKraft/contributions.html) | Filterable high-level outcomes contributors helped create |
 | [Nominations Archive](https://halthinks.github.io/SolKraft/nominations.html) | Public nomination and recognition history |
 | [Support](https://github.com/halthinks/SolKraft/issues/new?template=support_request.yml) | Setup, routing, usage, docs, or bug help |
 

@@ -42,7 +42,19 @@
     .rubric-row span{color:#9ba9b4;font-size:11px;line-height:1.6}
     .nominate p{color:#9ba9b4;font-size:12px;line-height:1.75}
     .nominate .button{margin-top:8px}
-    @media(max-width:700px){.contributor-card{grid-template-columns:1fr}.rating{min-width:0}.contributors-hero{padding-top:48px}.recognition-tools{grid-template-columns:1fr}.rubric-row{grid-template-columns:76px 1fr}}
+    .badge-legend{margin-top:28px;border:1px solid #2b3943;border-radius:12px;background:#0d151b;padding:22px}
+    .badge-legend h3{font-size:21px;margin:9px 0 6px}
+    .badge-legend>p{color:#94a2ae;font-size:12px;line-height:1.75;max-width:830px}
+    .badge-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:18px}
+    .badge-level{border:1px solid #263640;border-radius:10px;padding:16px;background:#101820}
+    .badge-level img{width:100%;max-width:360px;display:block;margin-bottom:12px}
+    .badge-level h4{font-size:14px;margin:4px 0 8px}
+    .badge-level p{color:#8e9ca8;font-size:11px;line-height:1.65;margin:0}
+    .impact-legend{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}
+    .impact-key{border:1px solid #344451;border-radius:999px;padding:7px 10px;font:9px var(--mono);color:#aab7c1;background:#101820}
+    .impact-key strong{color:var(--mint);font-weight:500}
+    .legend-note{margin-top:16px;padding:14px 16px;border-left:2px solid var(--mint);background:#101a15;color:#9fb0a6;font-size:11px;line-height:1.7}
+    @media(max-width:700px){.contributor-card{grid-template-columns:1fr}.rating{min-width:0}.contributors-hero{padding-top:48px}.recognition-tools{grid-template-columns:1fr}.rubric-row{grid-template-columns:76px 1fr}.badge-grid{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
@@ -102,6 +114,32 @@
       </article>
 
       <div class="recognition-note"><strong>How recognition works:</strong> SolKraft recognizes contributions by impact, not only by merged code. Future contributors may be recognized for code, research, design, testing, documentation, issue discovery, community support, or high-impact ideas. Ratings apply to the contribution being recognized—not to the person as a whole or everything they publish elsewhere.</div>
+
+      <section class="badge-legend" id="badge-legend" aria-labelledby="badge-legend-heading">
+        <div class="contributor-kicker">CONTRIBUTOR BADGE LEGEND</div>
+        <h3 id="badge-legend-heading">What the badges mean</h3>
+        <p>The star badge is earned for the impact of a specific contribution. Additional impact tags explain the kind of contribution or the part of SolKraft it changed. Badges are attribution and recognition—not identity verification, employment status, or a blanket endorsement.</p>
+        <div class="badge-grid">
+          <article class="badge-level"><img src="assets/contributor-badge-1.svg" alt="1-star Useful SolKraft contributor badge"><h4>★ 1/5 · Useful</h4><p>A concrete contribution that helped the project or community in a real, reviewable way.</p></article>
+          <article class="badge-level"><img src="assets/contributor-badge-2.svg" alt="2-star Meaningful SolKraft contributor badge"><h4>★★ 2/5 · Meaningful</h4><p>Visible value beyond a small one-off correction, with a clear beneficial outcome.</p></article>
+          <article class="badge-level"><img src="assets/contributor-badge-3.svg" alt="3-star Substantial SolKraft contributor badge"><h4>★★★ 3/5 · Substantial</h4><p>Material improvement to capability, quality, testing, documentation, design, or community outcomes.</p></article>
+          <article class="badge-level"><img src="assets/contributor-badge-4.svg" alt="4-star Major SolKraft contributor badge"><h4>★★★★ 4/5 · Major</h4><p>High-impact work that changes an important project area, solves a difficult problem, or unlocks significant new capability.</p></article>
+          <article class="badge-level"><img src="assets/contributor-badge-5.svg" alt="5-star Project-Shaping SolKraft contributor badge"><h4>★★★★★ 5/5 · Project-Shaping</h4><p>The highest level: exceptional work or ideas with direct, durable architectural or project-level impact.</p></article>
+          <article class="badge-level"><h4>Impact tags</h4><p>Tags describe what kind of impact the recognized contribution had. They can evolve as the contributor program grows.</p>
+            <div class="impact-legend">
+              <span class="impact-key"><strong>Idea Architect</strong> · project-shaping concept</span>
+              <span class="impact-key"><strong>Executable Contracts</strong> · contract architecture</span>
+              <span class="impact-key"><strong>CI Impact</strong> · validation/regression improvement</span>
+              <span class="impact-key"><strong>Code</strong> · implementation</span>
+              <span class="impact-key"><strong>Research</strong> · evidence/discovery</span>
+              <span class="impact-key"><strong>Docs</strong> · documentation</span>
+              <span class="impact-key"><strong>Testing</strong> · test/verification work</span>
+              <span class="impact-key"><strong>Community</strong> · support/ecosystem impact</span>
+            </div>
+          </article>
+        </div>
+        <div class="legend-note"><strong>Contributor 001</strong> is an ordinal recognition ID, not a rating. Cozy is Contributor 001 and separately holds the ★★★★★ Project-Shaping badge for the executable-contract contribution recognized above.</div>
+      </section>
 
       <div class="recognition-tools">
         <section class="rubric" aria-labelledby="rating-rubric">
