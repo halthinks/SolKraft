@@ -3,6 +3,8 @@ name: solforge-now
 description: Coordinate an authorized objective across research, implementation, verification, and delivery without a separate planning checkpoint.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # SolForge Now
 
 Coordinate an authorized objective across research, implementation, verification, and delivery without a separate planning checkpoint.
@@ -16,3 +18,14 @@ Select one primary procedure per stage, with support only for distinct constrain
 Challenge the proposed route or result with concrete missing requirements, stale evidence, failure modes, and unnecessary work. Replan only affected dependencies; use delegation only when separately authorized and useful.
 
 Return the requested route, proposal, context, review, or correction and continue already authorized work. Pause and Stop end new task dispatch; Resume begins at the first unverified unit. No widget cursor or extra confirmation ceremony is required.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- This procedure is selected by SolKraft's contract-aware router; selection does not authorize execution.
+- Public routing defaults to hardened policy; opaque or contract-inadmissible capabilities fail closed.
+- When `contract.yaml` exists, compact metadata is evaluated before this full instruction body is loaded.
+- Runtime authority stays with the host; SolKraft keeps `execution_authorized: false`.
+- Current local acceptance covers 100,000 unique 250-word requests, 100 ask families per skill, and 100% eligible target recall. See repository `VALIDATION.md`.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->
