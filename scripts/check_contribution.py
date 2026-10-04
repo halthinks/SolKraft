@@ -9,6 +9,8 @@ import subprocess
 import sys
 
 from solkraft.catalog import SkillCatalog
+from solkraft.contract_loader import load_skill_contract
+from solkraft.trust import resolve_trust
 from solkraft.routing import BUNDLE_ROOT, GRAPH_PATH, get_graph, route_request
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -21,7 +23,8 @@ def validate(data, graph, catalog):
         errors.append('Use schema solkraft/contribution/v1.')
     if not re.fullmatch(r'[a-z0-9][a-z0-9-]{0,63}', skill):
         errors.append('Skill ID must use lowercase letters, digits and hyphens; maximum 64 characters.')
-    records = {r.id for r in catalog.records()}
+    record_map = {r.id: r for r in catalog.records()}
+    records = set(record_map)
     if skill not in records:
         errors.append('Skill must be published in the bounded catalog.')
     node = graph['nodes'].get(skill)
@@ -65,6 +68,17 @@ def validate(data, graph, catalog):
             errors.append('Cases need a nonempty objective and exact ordered selected list.')
         elif set(case['selected']) - records:
             errors.append('Case expects an unavailable skill.')
+    if skill in record_map:
+        contract = load_skill_contract(
+            record_map[skill].entrypoint,
+            legacy_node=graph["nodes"].get(skill),
+            expected_skill_id=record_map[skill].name,
+        )
+        if contract.get("source") == "sidecar" and contract.get("status") in {"invalid", "unsupported"}:
+            errors.append("contract.yaml must be a supported valid Contract v1 sidecar.")
+        verification = contract.get("verification") or {}
+        if contract.get("source") == "sidecar" and not verification.get("checks"):
+            errors.append("Contract v1 sidecars must declare at least one declarative verification check.")
     return errors
 
 
@@ -110,9 +124,25 @@ def main():
     data = json.loads(args.manifest.read_text(encoding='utf-8'))
     catalog = SkillCatalog([BUNDLE_ROOT])
     errors = validate(data, get_graph(), catalog)
+    record = next((r for r in catalog.records() if r.id == data.get('skill')), None)
+    contract = (
+        load_skill_contract(
+            record.entrypoint,
+            legacy_node=get_graph()["nodes"].get(record.id),
+            expected_skill_id=record.name,
+        )
+        if record else {}
+    )
     receipt = {'schema': 'solkraft/contribution-result/v1', 'skill': data.get('skill'),
                'source_sha256': source_digest(), 'manifest_sha256': hashlib.sha256(args.manifest.read_bytes()).hexdigest(),
-               'status': 'failed', 'errors': errors, 'full_regression': 'not_run'}
+               'status': 'failed', 'errors': errors, 'full_regression': 'not_run',
+               'contract': {
+                   'status': contract.get('status'),
+                   'source': contract.get('source'),
+                   'contract_digest': contract.get('contract_digest'),
+                   'entrypoint_digest': contract.get('entrypoint_digest'),
+                   'trust': resolve_trust(data.get('skill'), contract) if contract else None,
+               }}
     try:
         if errors:
             raise ValueError('\n'.join(errors))
