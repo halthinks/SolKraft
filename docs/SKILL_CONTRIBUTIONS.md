@@ -13,7 +13,7 @@
 - Reusable CI and pre-PR contribution validation share contract/schema, routing, packaging, installed-MCP, index/hardening, and evidence gates.
 - Latest local acceptance: **100,000 / 100,000** unique 250-word requests passed with **100 ask families per skill**, **100% eligible target recall**, **100% hardened blocking**, and **100% consequential-boundary correctness**; no explicit skill IDs were injected.
 - The public Validation display is a clearly labeled **recorded reenactment**, not live browser CI.
-- Declared Contract v1 sidecars require supported declarative verification checks; run `python -m scripts.preflight_contribution contributions/<skill>.json` before opening a PR.
+- Declared Contract v1 sidecars require supported declarative verification checks plus executable positive, negative, and policy-boundary fixtures; CI runs those fixtures against the production router and policy evaluator.
 
 <!-- END SOLKRAFT CURRENT SYSTEM -->
 
@@ -34,6 +34,7 @@ New to GitHub? Fork this repository (make your own copy), create a branch (a sep
 4. Add a rule referencing that node. Required fields are `id`, `all` (all regexes must match), `unless` (any match excludes the rule), `lane`, and numeric `priority`. Use specific action and subject vocabulary from realistic requests. Inspect neighboring rules before choosing a lane or priority; raising priority to win every task is not a fix. Aliases, when justified, belong in the graph's matcher data. JSON regex backslashes must be escaped.
 5. Add an edge only for a real relationship: `from`, `to`, `type`, and a meaningful `condition`. Both nodes must exist. Do not invent dependencies just to make the graph look connected.
 6. Add authored request cases and task tests. The manifest's `cases` each contain `objective`, optional `context`, and an exact ordered `selected` list. Do not use an explicit skill list to force selection. Include different positive phrases, close neighboring intents, exclusions, quoted instructions, deferred work, compound requests, and relevant conflicts. The automated checker requires positive, excluded, quoted and deferred examples; reviewers require meaningful breadth beyond that minimum.
+7. Keep the Contract v1 sidecar executable. Declare typed inputs/outputs, namespaced side effects, and required host authority through `authority.capabilities` / `authority.resources`. Do **not** treat those requirements as execution permission: host grants are compared during routing and `execution_authorized` remains false. Add compact `fixtures.selection` assertions for at least one positive and one negative routing case, plus a `fixtures.policy` boundary case. CI executes these against the production router/policy code so contract drift becomes a visible failure.
 
 The composer contains some specialist mappings before the graph matcher. A new graph rule can therefore be overshadowed by an existing mapping. Test through the public `route_request` boundary. If it fails, make a focused failing test and repair the existing parser/graph boundary compatibly; do not bolt on a second independent selector. Change `DOMAIN_PATTERNS` or action segmentation only when real cases demonstrate the need.
 
@@ -127,9 +128,9 @@ You can run the same gate in GitHub **before opening a PR**. Push the candidate 
 
 The reusable implementation lives in `.github/workflows/reusable-ci.yml`. Normal repository pull requests call the same workflow through `.github/workflows/tests.yml`; the manual pre-PR wrapper is `.github/workflows/contribution-preflight.yml`. There is one validation path, not a weaker preflight and a stronger PR gate.
 
-## Verification and trust
+## Verification, executable fixtures, and trust
 
-A Contract v1 sidecar must describe how its result can be checked using declarative evidence. New sidecars should include at least one supported check such as `artifact_exists`, `field_present`, `field_equals`, `check_equals`, or `observed_effects_subset`. Core SolKraft does not run contract-provided commands.
+A Contract v1 sidecar must describe how its result can be checked using declarative evidence. New sidecars should include at least one supported check such as `artifact_exists`, `field_present`, `field_equals`, `check_equals`, or `observed_effects_subset`. Declared contracts also need executable fixtures: a positive selection case, a negative/neighbor case, and a policy boundary case. These fixtures call SolKraft's router and policy evaluator only; they never execute a skill, shell command, external effect, or credential. Core SolKraft does not run contract-provided commands.
 
 Skill-authored provenance describes origin only. It cannot make a skill reviewed or trusted. Trust is resolved from `solkraft/trust-bindings.json`, whose entries bind an external trust state to the exact contract and `SKILL.md` SHA-256 digests. If either file changes, the binding no longer matches and the skill becomes unreviewed again.
 
