@@ -122,6 +122,11 @@ def validate_route(
         candidate = unresolved.get("candidate")
         if candidate:
             touched.add(candidate)
+    for repair in result.get("selection_trace", {}).get("contract_repair", {}).get("repaired", []):
+        if repair.get("rejected"):
+            touched.add(repair["rejected"])
+        if repair.get("replacement"):
+            touched.add(repair["replacement"])
     result["contract_decisions"] = {
         skill: decisions[skill] for skill in sorted(touched)
         if skill in decisions
