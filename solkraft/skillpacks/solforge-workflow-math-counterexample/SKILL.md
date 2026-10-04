@@ -3,6 +3,8 @@ name: solforge-workflow-math-counterexample
 description: Stress the statement across boundary cases, constructions, computation, and known obstruction families.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Falsify a mathematical statement
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
@@ -14,3 +16,14 @@ Probe the places where such statements characteristically break: degenerate and 
 Verify every candidate before reporting it: recheck that it satisfies each hypothesis exactly as stated and that the conclusion genuinely fails, recomputing with exact arithmetic where floating point could manufacture the violation. A candidate that quietly violates one hypothesis is not a counterexample; a numerical violation inside rounding error is not a counterexample; a refutation of a misquoted or strengthened version refutes nothing. Equally, failing to find one is not a proof — report the space actually searched, not a verdict the search cannot support.
 
 Report the verified counterexample with its construction and hypothesis check, or the falsification search actually performed: cases and families covered, computational bounds reached, and where the statement survived. Use [solforge-run-research](../solforge-run-research/SKILL.md) when locating prior counterexamples or the domain's known obstruction families requires a tracked literature search.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- Selected by the contract-aware router; selection is advisory.
+- Hardened routing rejects opaque or inadmissible capabilities.
+- Contract metadata is evaluated before loading the full instruction body.
+- Execution authority stays with the host.
+- Current local acceptance: 100,000 unique 250-word requests, 100 ask families per skill, 100% eligible target recall.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

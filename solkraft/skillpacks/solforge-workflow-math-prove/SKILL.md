@@ -3,6 +3,8 @@ name: solforge-workflow-math-prove
 description: Construct and audit a proof using independent approaches, lemma tracking, and adversarial counterexample checks.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Prove a mathematical statement
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
@@ -14,3 +16,14 @@ Choose the strategy from the statement's shape: induction for claims over natura
 Audit the finished argument adversarially. Probe boundary and degenerate cases the hypotheses allow — empty structures, n = 0, zero divisors, coincident points, divergence at the limit — and actively search for counterexamples to each lemma, not only to the headline claim. A step justified as "clearly" or "obviously," a cited theorem whose side conditions go unchecked, a case split with an unexamined overlap, or verification limited to the example that motivated the conjecture is weak evidence. Numeric or symbolic computation over finitely many instances corroborates but does not prove a universal claim unless the reduction to those instances is itself proven.
 
 Report the proof or proof program, the status of every lemma, the independent checks applied and their outcomes, and any remaining gap, extra assumption, or excluded case stated plainly. Use [proof verification](../solforge-workflow-math-verify/SKILL.md) for a dedicated audit of a finished argument or when a found gap needs a bounded repair.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- Selected by the contract-aware router; selection is advisory.
+- Hardened routing rejects opaque or inadmissible capabilities.
+- Contract metadata is evaluated before loading the full instruction body.
+- Execution authority stays with the host.
+- Current local acceptance: 100,000 unique 250-word requests, 100 ask families per skill, 100% eligible target recall.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

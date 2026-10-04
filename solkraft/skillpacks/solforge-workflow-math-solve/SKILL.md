@@ -3,6 +3,8 @@ name: solforge-workflow-math-solve
 description: Develop a rigorous solution or derivation with checked assumptions, intermediate results, and explicit limits.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Solve a mathematical problem
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
@@ -14,3 +16,14 @@ Classify the problem and reduce it to a structure with a known method before cal
 Verify the result independently of the derivation that produced it. Back-substitute candidates into the original statement and discard extraneous roots. Test boundary and degenerate cases: zero or limiting parameters, n = 0, empty or unbounded domains. Cross-check by a second method, a magnitude estimate, or a numerical spot check against the analytic form. Numerical agreement at a few points is not proof of a general identity, and computer-algebra output is evidence only after its branch and domain assumptions match the problem's.
 
 Report the solution with its derivation, the condition attached to each key step, the checks performed, and the explicit limits of validity — parameter ranges, undischarged assumptions, or cases left open. Use [math verification](../solforge-workflow-math-verify/SKILL.md) when the result needs a line-by-line audit of inferences and hidden assumptions beyond the solver's own checks.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- Selected by the contract-aware router; selection is advisory.
+- Hardened routing rejects opaque or inadmissible capabilities.
+- Contract metadata is evaluated before loading the full instruction body.
+- Execution authority stays with the host.
+- Current local acceptance: 100,000 unique 250-word requests, 100 ask families per skill, 100% eligible target recall.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->
