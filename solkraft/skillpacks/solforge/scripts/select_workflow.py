@@ -121,8 +121,27 @@ def delivery_intent(clause, context):
     return None
 
 
+def _binding_text(value):
+    if isinstance(value, str):
+        return value
+    if isinstance(value, dict):
+        return ' '.join(
+            part for part in (value.get('name'), value.get('description'))
+            if isinstance(part, str) and part
+        )
+    return ''
+
+
 def lexical_index(nodes):
-    documents = {k: Counter(tokens(' '.join([n['id'], n['description'], n.get('domain', ''), *n.get('outputs', [])]))) for k, n in nodes.items()}
+    documents = {
+        k: Counter(tokens(' '.join([
+            n['id'],
+            n['description'],
+            n.get('domain', ''),
+            *[_binding_text(item) for item in n.get('outputs', [])],
+        ])))
+        for k, n in nodes.items()
+    }
     df = Counter(t for d in documents.values() for t in d)
     avg = sum(sum(d.values()) for d in documents.values()) / max(1, len(documents))
     return documents, df, avg
