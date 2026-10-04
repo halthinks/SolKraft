@@ -9,8 +9,8 @@ def normalize_binding(binding, *, direction: str) -> dict:
     if isinstance(binding, str):
         return {
             "name": binding,
-            "required": True,
-            "source": "user" if direction == "input" else None,
+            "required": False,
+            "source": "legacy",
             "schema": {},
             "legacy": True,
         }
