@@ -36,9 +36,9 @@ The service adapters live separately in `solkraft/catalog.py`, `routing.py`, `ap
 
 ## How the semantic parser works
 
-The native Python engine is deterministic. It uses scoped clauses, action rules, concept aliases, domain context, and lexical ranking rather than an LLM call. It separates requested stages from recognised exclusions, completed or deferred work, and quoted instructions. Context helps resolve subject matter and established work stages; it does not invent a requested action.
+The native Python engine is deterministic rather than an LLM call. It still parses scoped clauses, action rules, concept aliases, domain context, exclusions, quoted instructions, and completed or deferred work, but current routing adds a capability-identity matcher over published capability descriptions and distinctive/unique signatures. A high-confidence whole-request identity can survive multi-stage decomposition so a generic stage match does not displace the capability the request is actually about.
 
-The selector matches eligible workflows in the semantic core. The composer preserves requested stage order and bounds selection to the requested maximum, up to 50 skills. The service checks selected IDs against the mounted catalog and can adapt recognised unmatched active stages through catalog matching. It retains unresolved stages when the request cannot be confidently matched. Explicit IDs provide direct selection.
+Under hardened routing, the compact ContractIndex prefilters candidates before composition using declared contract state, effects, capabilities/resources, typed inputs/outputs, trust, and policy. The composer then preserves requested stage order and bounds selection to the requested maximum, up to 50 skills. After composition, whole-route validation checks contract admissibility, dependencies, and typed dataflow; bounded repair can recompose or repair broken dataflow while retaining unresolved stages when a safe route cannot be formed. Explicit IDs remain available for direct selection.
 
 Graph relationships recommend supporting methods or subsequent work only when their conditions apply. The graph does not grant authority, execute tools, or create a background hook into an agent's internal skill picker. Scores are relative rankings, not confidence probabilities. Complex unfamiliar wording may require review or explicit selection.
 
@@ -46,7 +46,7 @@ For example, “draft pull request” is ambiguous by itself. A request to verif
 
 ## From selection to execution
 
-A human can copy a procedure, or an agent can retrieve it through REST or the five MCP tools: search, route, get skill, get resource, and graph. Retrieve supporting references only when their conditions apply. A copied entrypoint does not magically include its linked files; install the skill pack or retrieve those resources when needed.
+A human can copy a procedure, or an agent can retrieve it through REST or the seven read-only MCP tools: search, route, get skill, get resource, graph, get skill contract, and get contract index. Retrieve supporting references only when their conditions apply. A copied entrypoint does not magically include its linked files; install the skill pack or retrieve those resources when needed.
 
 The host agent applies capability-preserving execution for substantial work: preserve inputs and scope, map dependencies, batch safe independent operations, keep successful evidence, retry only invalidated work, and inspect the real result. Product-specific and repository contracts remain authoritative. A selected route is advisory and never authorizes publishing, deployment, deletion, sending, or any other effect.
 
