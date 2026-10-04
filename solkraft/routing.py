@@ -65,13 +65,16 @@ def _decision_allows(decisions: dict, skill: str) -> bool:
 
 
 def _repair_candidate(catalog, decisions, text, selected):
+    denied_candidate = None
     for row in catalog.search(text, limit=6):
         skill = row["id"]
         if "consequential" in skill or skill in selected:
             continue
         if _decision_allows(decisions, skill):
-            return skill
-    return None
+            return skill, denied_candidate
+        if denied_candidate is None:
+            denied_candidate = skill
+    return None, denied_candidate
 
 
 def route_request(
@@ -124,8 +127,17 @@ def route_request(
             if skill in known and _decision_allows(decisions, skill)
         ]
         if not available:
-            candidate = _repair_candidate(catalog, decisions, stage["text"], selected)
+            candidate, denied_candidate = _repair_candidate(
+                catalog, decisions, stage["text"], selected
+            )
             available = [candidate] if candidate else []
+            if not candidate and denied_candidate:
+                result["unselected_requested_stages"].append({
+                    "stage": stage.get("stage"),
+                    "text": stage.get("text"),
+                    "candidate": denied_candidate,
+                    "reason": "candidate inadmissible by contract policy",
+                })
         stage["selected"] = available
         for skill in available:
             if skill not in selected and len(selected) < max_skills:
@@ -148,7 +160,7 @@ def route_request(
             and _ACTIVE_STAGE_RE.match(stage_text)
             and len(selected) < max_skills
         ):
-            skill = _repair_candidate(catalog, decisions, stage_text, selected)
+            skill, _ = _repair_candidate(catalog, decisions, stage_text, selected)
             if skill:
                 selected.append(skill)
                 result["stages"].append({
