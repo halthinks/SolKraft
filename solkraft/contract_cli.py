@@ -8,6 +8,7 @@ import yaml
 
 from .contract_schema import load_contract_schema, validate_v1_document
 from .contract_verify import SUPPORTED_CHECKS
+from .interchange import export_portable_contract, import_portable_contract
 
 
 def _contract_path(target: str | Path) -> Path:
@@ -108,3 +109,14 @@ def migrate_contracts(*, write: bool = False, report: str | Path | None = None) 
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
     return result
+
+
+
+def export_contract_document(entry: dict) -> dict:
+    return export_portable_contract(entry)
+
+
+def import_contract_document(target: str | Path) -> dict:
+    path = Path(target).expanduser()
+    data = json.loads(path.read_text(encoding="utf-8"))
+    return import_portable_contract(data)

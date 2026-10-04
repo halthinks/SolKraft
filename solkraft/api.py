@@ -13,6 +13,7 @@ from pydantic import BaseModel, Field
 from .catalog import SkillCatalog, SkillNotFound
 from .mcp_server import build_mcp_server
 from .contract_schema import load_contract_schema, validate_v1_document
+from .interchange import export_portable_contract, import_portable_contract
 from .routing import BUNDLE_ROOT, route_request, get_graph, catalog_graph, contract_index
 
 
@@ -32,11 +33,15 @@ class RoutePolicyBody(BaseModel):
     granted_resources: list[str] | None = None
     grant: dict | None = None
     legacy_auth_scope: str | None = None
-    contract_mode: str = "legacy"
+    contract_mode: str = "hardened"
 
 
 class ContractValidationBody(BaseModel):
     contract: dict
+
+
+class PortableContractBody(BaseModel):
+    document: dict
 
 
 class RouteBody(BaseModel):
@@ -49,7 +54,7 @@ class RouteBody(BaseModel):
 
 def _policy_payload(policy: RoutePolicyBody | None):
     if policy is None:
-        return None
+        return {"contract_mode": "hardened"}
     if hasattr(policy, "model_dump"):
         return policy.model_dump(exclude_none=True)
     return policy.dict(exclude_none=True)
@@ -116,6 +121,22 @@ def create_app(catalog: SkillCatalog | None = None, *, api_key: str | None = Non
     async def validate_contract(body: ContractValidationBody):
         errors = validate_v1_document(body.contract)
         return {"valid": not errors, "errors": errors}
+
+    @app.get("/v1/skills/{skill_id}/contract/export")
+    async def export_contract(skill_id: str):
+        try:
+            return export_portable_contract(contract_index(catalog).get(skill_id))
+        except KeyError as exc:
+            raise HTTPException(status_code=404, detail="Skill contract not found") from exc
+        except ValueError as exc:
+            raise HTTPException(status_code=422, detail=str(exc)) from exc
+
+    @app.post("/v1/contracts/import")
+    async def import_contract(body: PortableContractBody):
+        try:
+            return import_portable_contract(body.document)
+        except ValueError as exc:
+            raise HTTPException(status_code=422, detail=str(exc)) from exc
 
     @app.get("/v1/contracts")
     async def list_contracts(

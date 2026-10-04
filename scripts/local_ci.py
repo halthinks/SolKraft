@@ -52,6 +52,7 @@ def main():
         run('Contract migration report', [sys.executable, '-m', 'scripts.migrate_contracts',
                                          '--report', 'build/contracts-migration.json'])
         run('Contract schema and index gate', [sys.executable, '-m', 'scripts.check_contracts'])
+        run('Hardening invariants', [sys.executable, '-m', 'scripts.check_hardening'])
         for asset in ('app.js', 'flow.js', 'setup.js', 'static-data.js'):
             run(f'{asset} syntax', [node, '--check', f'docs/assets/{asset}'])
         run('Setup behavior tests', [node, '--test', 'tests/setup.test.cjs'])

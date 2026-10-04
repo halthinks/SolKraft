@@ -6,13 +6,20 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from .capabilities import CapabilityGrant, missing_capabilities, missing_resources, normalize_grant
+from .capabilities import (
+    LEGACY_AUTH_SCOPES,
+    CapabilityGrant,
+    legacy_scope_allows,
+    missing_capabilities,
+    missing_resources,
+    normalize_grant,
+)
 from .constraint_parser import excluded_effects
-from .contracts import AUTH_ORDER, contract_from_node
+from .contracts import contract_from_node
 from .effects import effect_matches, normalize_effects
 
 
-CONTRACT_MODES = {"legacy", "warn", "strict"}
+CONTRACT_MODES = {"legacy", "warn", "strict", "hardened"}
 
 
 @dataclass(frozen=True)
@@ -45,12 +52,6 @@ class RoutePolicy:
         }
 
 
-def _auth_rank(scope: str | None) -> int | None:
-    if scope not in AUTH_ORDER:
-        return None
-    return AUTH_ORDER.index(scope)
-
-
 def _flat_grant(value: dict) -> CapabilityGrant | None:
     capabilities = value.get("granted_capabilities")
     resources = value.get("granted_resources")
@@ -81,9 +82,9 @@ def normalize_policy(policy: dict | RoutePolicy | None, objective: str) -> Route
             raise ValueError("policy must be an object")
         mode = value.get("contract_mode", "legacy")
         if mode not in CONTRACT_MODES:
-            raise ValueError("policy.contract_mode must be legacy, warn, or strict")
+            raise ValueError("policy.contract_mode must be legacy, warn, strict, or hardened")
         legacy_auth = value.get("legacy_auth_scope")
-        if legacy_auth is not None and legacy_auth not in AUTH_ORDER:
+        if legacy_auth is not None and legacy_auth not in LEGACY_AUTH_SCOPES:
             raise ValueError("policy.legacy_auth_scope is invalid")
         denied = value.get("denied_effects", [])
         if not isinstance(denied, list) or not all(
@@ -130,8 +131,8 @@ def evaluate_contract(contract: dict, policy: RoutePolicy) -> dict:
 
     if status in {"invalid", "unsupported"}:
         reasons.append(f"contract status {status}")
-    elif status == "opaque" and policy.contract_mode == "strict":
-        reasons.append("opaque contract rejected by strict policy")
+    elif status == "opaque" and policy.contract_mode in {"strict", "hardened"}:
+        reasons.append(f"opaque contract rejected by {policy.contract_mode} policy")
 
     if effects is None and policy.denied_effects:
         reasons.append("undeclared side effects conflict with denied effects")
@@ -158,20 +159,19 @@ def evaluate_contract(contract: dict, policy: RoutePolicy) -> dict:
         if missing_res:
             reasons.append("resources not granted: " + ", ".join(missing_res))
 
-    allowed_rank = _auth_rank(policy.legacy_auth_scope)
-    skill_rank = _auth_rank(contract.get("auth_scope"))
-    if allowed_rank is not None:
-        if skill_rank is None:
-            reasons.append("undeclared legacy auth scope exceeds explicit allowance")
-        elif skill_rank > allowed_rank:
+    # Scalar auth is compatibility-only. Declared Contract v1 skills are
+    # governed by capability/resource sets and never by the legacy ladder.
+    if policy.legacy_auth_scope is not None and status == "legacy":
+        required_scope = contract.get("auth_scope")
+        if not legacy_scope_allows(policy.legacy_auth_scope, required_scope):
             reasons.append(
-                f"auth scope {contract.get('auth_scope')} exceeds {policy.legacy_auth_scope}"
+                f"legacy auth scope {required_scope} is not allowed by {policy.legacy_auth_scope}"
             )
 
     decision_status = "denied" if reasons else "allowed"
     if not reasons and status == "opaque":
         decision_status = "opaque"
-    elif not reasons and status == "legacy" and policy.contract_mode == "warn":
+    elif not reasons and status == "legacy" and policy.contract_mode in {"warn", "hardened"}:
         decision_status = "legacy-warning"
 
     return {
