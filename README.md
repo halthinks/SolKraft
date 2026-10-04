@@ -4,7 +4,7 @@ New here? Follow [Connect your agent](docs/REMOTE_MCP.md). Want to teach it a ne
 
 Explore the [interactive connection walkthrough](https://halthinks.github.io/SolKraft/#setup-lab) or read [the complete Render, API, MCP, plugin, and platform guide](docs/CONNECTIONS.md). Build and verify before publishing with `python -m scripts.local_ci`; automatic GitHub build/test runs are disabled, and Pages uploads the locally generated console.
 
-[Skill-contract architecture roadmap](docs/SKILL_CONTRACT_ROADMAP.md) · [Machine-readable implementation backlog](roadmap/skill-contracts-v1.json)
+[Skill-contract architecture roadmap](docs/SKILL_CONTRACT_ROADMAP.md) · [6-sprint implementation plan](docs/SKILL_CONTRACT_6_SPRINT_PLAN.md) · [Machine-readable roadmap](roadmap/skill-contracts-v1.json) · [Machine-readable sprint plan](roadmap/skill-contract-sprints-v1.json)
 
 **An open skill OS for agents.** Find the right procedure, compose multi-step work, and retrieve only the instructions needed for the next step. SolKraft provides a searchable catalog, advisory router, REST API, and Model Context Protocol (MCP) server.
 
