@@ -59,4 +59,5 @@ def test_mcp_http_initializes_and_calls_router():
         import json
         result = json.loads(response.json()["result"]["content"][0]["text"])
         assert result["selected"] == []
+        assert result["execution_authorized"] is False
         assert client.post("/mcp/", json={}).status_code == 401
