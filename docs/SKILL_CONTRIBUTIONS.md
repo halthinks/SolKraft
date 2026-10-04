@@ -55,6 +55,27 @@ The full result must show `status: passed`, all targeted cases passing, and exac
 
 **What 100,000 means:** this is a synthetic regression battery across ten domains. It checks routing and scope behavior on long requests. It does not contain 100,000 independent skill intents, does not evaluate the new procedure's usefulness, and does not execute an agent or hardware simulation. New-skill cases add the missing targeted coverage. Domain-specific simulations, helper tests, and realistic task demonstrations must be supplied separately where the skill needs them.
 
+## Pre-build the contribution before opening a PR
+
+After the local targeted cases are passing, run the reusable full preflight instead of waiting for a pull request to discover packaging or regression failures:
+
+```text
+python -m scripts.preflight_contribution contributions/your-skill.json
+```
+
+That command calls the canonical `scripts.check_contribution ... --full` gate. It therefore runs the authored routing cases, the 100,000-request regression, `scripts.local_ci`, static console generation, plugin packaging, wheel build/install verification, and installed MCP checks. It then creates a review bundle at:
+
+```text
+build/preflight/<skill>/preflight.json
+build/preflight/<skill>-preflight.zip
+```
+
+The bundle includes the contribution manifest, candidate `SKILL.md`, `contract.yaml` when present, contribution/local-CI receipts, the 100,000-route result, built wheel, and plugin archive with SHA-256 hashes.
+
+You can run the same gate in GitHub **before opening a PR**. Push the candidate branch, open **Actions → Skill Contribution Preflight**, choose that branch, enter the manifest path such as `contributions/your-skill.json`, and run the workflow. Download the `solkraft-ci-<sha>` artifact and attach or cite its receipts when you later open the PR.
+
+The reusable implementation lives in `.github/workflows/reusable-ci.yml`. Normal repository pull requests call the same workflow through `.github/workflows/tests.yml`; the manual pre-PR wrapper is `.github/workflows/contribution-preflight.yml`. There is one validation path, not a weaker preflight and a stronger PR gate.
+
 ## Submit all affected layers together
 
 Include the entrypoint/resources, provenance/notices, graph node/rules/edges, necessary parser changes, manifest, meaningful tests, and regenerated `docs/assets` files and plugin archive. Search API, MCP retrieval and the static console derive from the same catalog; preserve that single authority. For new dependencies, document installation, portability and failure behavior. General skill contributions should not need new REST endpoints or MCP tools.
