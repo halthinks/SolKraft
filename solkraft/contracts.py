@@ -81,17 +81,19 @@ def contract_from_node(node: dict | None) -> dict:
         resources = list(authority.get("resources") or [])
 
     if status is None:
+        legacy_contract = any(key in node for key in ("effect", "exit_evidence"))
         explicit_contract = any(
             key in node for key in (
-                "schema_version", "side_effects", "effects", "auth_scope",
+                "schema_version", "side_effects", "effects",
                 "test_contract", "verification", "authority",
             )
         )
-        legacy_contract = any(key in node for key in ("effect", "exit_evidence"))
-        if explicit_contract:
-            status = "declared"
-        elif legacy_contract:
+        # Pre-v1 graph metadata stays legacy even when it also carried the old
+        # auth_scope field. A v1 sidecar is identified by versioned metadata.
+        if legacy_contract and schema_version is None:
             status = "legacy"
+        elif explicit_contract:
+            status = "declared"
         else:
             status = "opaque"
 
