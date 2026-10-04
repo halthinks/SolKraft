@@ -58,6 +58,7 @@ def build_bundle(manifest: Path) -> dict:
         (ROOT / "build" / "contributions" / "latest.json", "receipts/contribution.json"),
         (ROOT / "build" / "local-ci.json", "receipts/local-ci.json"),
         (ROOT / "scripts" / "results-routing-100000.json", "receipts/routing-100000.json"),
+        (ROOT / "build" / "contracts-migration.json", "receipts/contracts-migration.json"),
         (ROOT / "docs" / "downloads" / "solkraft-plugin.zip", "artifacts/solkraft-plugin.zip"),
     ]
     for source, relative in candidates:
