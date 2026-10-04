@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # netlify.toml Configuration Reference
 
 Configuration file for Netlify builds and deployments.
