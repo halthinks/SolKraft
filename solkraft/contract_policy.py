@@ -183,6 +183,7 @@ def evaluate_contract(contract: dict, policy: RoutePolicy) -> dict:
         "resources": sorted(required_resources),
         "grant_checked": policy.grant is not None,
         "grant_id": policy.grant.grant_id if policy.grant else None,
+        "trust": dict(contract.get("trust") or {}),
         "contract_digest": contract.get("contract_digest"),
         "entrypoint_digest": contract.get("entrypoint_digest"),
     }
