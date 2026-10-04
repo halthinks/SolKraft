@@ -102,3 +102,26 @@ Headline result: **54,043 / 100,000 cases passed the benchmark expectation (54.0
 This benchmark therefore validates the new contract/hardening layer strongly, but it also exposes a substantial catalog-wide **semantic routing recall gap**. The green benchmark workflow means the safety invariants held; it does **not** mean automatic routing quality passed at 100%.
 
 The reproducible harness is `scripts/advanced_contract_benchmark.py`. Aggregate metrics are checked in at `scripts/results-advanced-contract-100000-summary.json`.
+
+
+## Local 100-family / 100,000-request acceptance validation
+
+The contract-aware router was revalidated **locally in the ChatGPT execution environment**, not through GitHub Actions or another external test runner, after adding the capability-identity precedence repair.
+
+The corpus contained **100,000 unique request statements**, each exactly **250 words**, across all **173 bundled skills**. The validator expanded the original 25 ask templates into **100 ask families per skill** using adversarial near-neighbor, ambiguity, compound-context, and capability-disambiguation variants.
+
+The full local acceptance result was:
+
+- **100,000 / 100,000 benchmark cases passed — 100.000%**
+- **64,158 / 64,158 route-eligible target requests selected the intended skill — 100.000% recall**
+- **63,195 / 64,158 placed the intended skill first — 98.499% primary placement**
+- **30,062 / 30,062 hardened-block cases correctly rejected opaque/invalid/unsupported targets — 100.000%**
+- **5,780 / 5,780 consequential-boundary cases correctly remained unselected — 100.000%**
+- **100,000 / 100,000 preserved `execution_authorized: false`**
+- **100,000 / 100,000 used hardened policy**
+- **100,000 / 100,000 selected no opaque/invalid/unsupported contracts**
+- **100,000 / 100,000 produced the expected target-policy decision**
+
+The acceptance repair was not a forced skill-ID injection. The benchmark still passed no explicit skill IDs to `route_request()`. The fix preserves a high-confidence whole-request capability identity when the semantic composer decomposes the same request into multiple supporting stages, instead of allowing a generic stage-level match to displace the correct capability.
+
+The aggregate local receipt is checked in at `scripts/results-advanced-contract-100000-local-summary.json`.
