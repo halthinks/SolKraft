@@ -50,6 +50,8 @@ solkraft contract lint path/to/skill/contract.yaml
 solkraft contract show your-skill-id
 solkraft contract schema
 solkraft contract migrate --report build/contracts-migration.json
+solkraft contract export your-skill-id
+solkraft contract import path/to/portable-contract.json
 ```
 
 Routing policy has matching CLI flags:
@@ -63,6 +65,12 @@ solkraft route "Inspect the repository" \
 ```
 
 These flags constrain selection only. The CLI still returns `execution_authorized: false`; grant snapshots describe host authority available for comparison and are never executable credentials.
+
+## External metadata adapters
+
+SolKraft can translate MCP tool annotations and OpenAPI operation metadata into compact contract declarations through `solkraft.adapters`. These adapters are conservative: read-only MCP tools and safe HTTP methods can declare an empty effect set, while uncertain mutating tools remain `opaque`. Imported metadata is always `local-unreviewed`; it never creates a host grant, trusted status, or execution authorization.
+
+Portable contract export/import follows the same rule. Export refuses an opaque contract whose effects are unknown rather than converting unknown into `effects: []`.
 
 ## Run the checks locally
 
