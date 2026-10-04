@@ -3,6 +3,8 @@ name: realize-cad-bound-product
 description: Convert a hardware product concept or existing iteration into a physically credible, dimensionally closed, CAD-bound product realization. Use for modular product architecture, selected supplier geometry, electronics packaging, power and thermal paths, mechanical interfaces, collision and balance analysis, photoreal renders that preserve CAD silhouette, BOM and evidence ledgers, and reusable product-line development without inventing received measurements or fabrication readiness.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Realize a CAD-bound product
 
 Own the design work. Use orchestration only to expose alternatives or validate evidence; never let it replace product judgment.
@@ -61,3 +63,14 @@ python scripts/validate_realization.py <realization-root>
 ```
 
 Fix every error. Warnings may remain only when they identify explicit physical or supplier gates rather than missing digital work.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- This procedure is selected by SolKraft's contract-aware router; selection does not authorize execution.
+- Public routing defaults to hardened policy; opaque or contract-inadmissible capabilities fail closed.
+- When `contract.yaml` exists, compact metadata is evaluated before this full instruction body is loaded.
+- Runtime authority stays with the host; SolKraft keeps `execution_authorized: false`.
+- Current local acceptance covers 100,000 unique 250-word requests, 100 ask families per skill, and 100% eligible target recall. See repository `VALIDATION.md`.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

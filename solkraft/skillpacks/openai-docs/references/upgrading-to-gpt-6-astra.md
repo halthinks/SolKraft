@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Upgrading to GPT-6 Astra
 
 Use this guide when the user asks to migrate an existing OpenAI API integration, repository, prompt stack, agent, model router, or model picker to GPT-6 Astra.
