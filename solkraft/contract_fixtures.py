@@ -17,47 +17,70 @@ def run_contract_fixtures(catalog, skill_id: str, contract: dict) -> dict:
 
     for fixture in selection:
         objective = fixture["objective"]
-        routed = route_request(
-            catalog,
-            objective,
-            max_skills=fixture.get("max_skills", 50),
-            context=fixture.get("context"),
-            policy=fixture.get("policy"),
-        )
         expected = fixture["expected_selected"]
-        passed = (
-            routed.get("selected") == expected
-            and routed.get("execution_authorized") is False
-        )
-        results.append({
-            "id": fixture["id"],
-            "kind": "selection",
-            "passed": passed,
-            "expected_selected": expected,
-            "actual_selected": routed.get("selected"),
-            "execution_authorized": routed.get("execution_authorized"),
-        })
+        try:
+            routed = route_request(
+                catalog,
+                objective,
+                max_skills=fixture.get("max_skills", 50),
+                context=fixture.get("context"),
+                policy=fixture.get("policy"),
+            )
+            passed = (
+                routed.get("selected") == expected
+                and routed.get("execution_authorized") is False
+            )
+            results.append({
+                "id": fixture["id"],
+                "kind": "selection",
+                "passed": passed,
+                "expected_selected": expected,
+                "actual_selected": routed.get("selected"),
+                "execution_authorized": routed.get("execution_authorized"),
+            })
+        except Exception as exc:
+            results.append({
+                "id": fixture["id"],
+                "kind": "selection",
+                "passed": False,
+                "expected_selected": expected,
+                "actual_selected": None,
+                "execution_authorized": None,
+                "error": f"{type(exc).__name__}: {exc}",
+            })
 
     for fixture in policy:
         objective = fixture.get("objective") or "Evaluate contract policy."
-        normalized = normalize_policy(fixture.get("policy"), objective)
-        decision = evaluate_contract(contract, normalized)
         expected_status = fixture["expected_status"]
         needle = fixture.get("reason_contains")
-        reason_ok = (
-            True if not needle
-            else any(needle in reason for reason in decision.get("reasons") or [])
-        )
-        passed = decision.get("status") == expected_status and reason_ok
-        results.append({
-            "id": fixture["id"],
-            "kind": "policy",
-            "passed": passed,
-            "expected_status": expected_status,
-            "actual_status": decision.get("status"),
-            "reason_contains": needle,
-            "reasons": decision.get("reasons") or [],
-        })
+        try:
+            normalized = normalize_policy(fixture.get("policy"), objective)
+            decision = evaluate_contract(contract, normalized)
+            reason_ok = (
+                True if not needle
+                else any(needle in reason for reason in decision.get("reasons") or [])
+            )
+            passed = decision.get("status") == expected_status and reason_ok
+            results.append({
+                "id": fixture["id"],
+                "kind": "policy",
+                "passed": passed,
+                "expected_status": expected_status,
+                "actual_status": decision.get("status"),
+                "reason_contains": needle,
+                "reasons": decision.get("reasons") or [],
+            })
+        except Exception as exc:
+            results.append({
+                "id": fixture["id"],
+                "kind": "policy",
+                "passed": False,
+                "expected_status": expected_status,
+                "actual_status": None,
+                "reason_contains": needle,
+                "reasons": [],
+                "error": f"{type(exc).__name__}: {exc}",
+            })
 
     return {
         "skill_id": skill_id,
