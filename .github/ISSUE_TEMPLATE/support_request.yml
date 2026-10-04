@@ -1,0 +1,105 @@
+name: Support request
+description: Get help with SolKraft setup, connections, routing behavior, or usage
+title: "[Support]: "
+labels: [support]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Before you submit
+
+        Use this **support issue** when you need help, have a question, hit a setup/connection problem, or can describe unexpected SolKraft behavior but are **not submitting a finished repository change**.
+
+        Open a **pull request instead** when you already have a concrete code, documentation, test, contract, routing, or skill contribution ready for review.
+
+        **Good support issues include**
+        - installation or plugin setup problems
+        - REST/MCP/CLI connection problems
+        - routing behavior that looks wrong or confusing
+        - documentation questions
+        - reproducible bugs or regressions
+        - help understanding expected behavior
+
+        **Do not use a support issue for**
+        - a finished code/docs/skill change — submit a PR
+        - security vulnerabilities — use GitHub Security Advisories
+        - API keys, tokens, passwords, private skill content, customer data, proprietary code, or other secrets
+        - large private logs or local files containing sensitive data
+
+        Sanitize logs, paths, screenshots, prompts, and reproduction data before posting. Use a minimal synthetic example whenever possible.
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What do you need help with?
+      options:
+        - Installation or local plugin
+        - Remote MCP connection
+        - REST API
+        - CLI
+        - Routing or skill selection
+        - Skill contracts or verification
+        - Documentation or website
+        - Bug or regression
+        - General usage question
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: goal
+    attributes:
+      label: What are you trying to do?
+      description: Describe the outcome you want, not just the error message.
+      placeholder: I am trying to...
+    validations:
+      required: true
+
+  - type: textarea
+    id: happened
+    attributes:
+      label: What happened?
+      description: Include the exact behavior you observed and what you expected instead.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Minimal reproduction or steps
+      description: Use synthetic data. Remove secrets, private repository content, personal data, and unnecessary local paths.
+      placeholder: |
+        1. Installed...
+        2. Ran...
+        3. Saw...
+    validations:
+      required: false
+
+  - type: input
+    id: version
+    attributes:
+      label: SolKraft version or commit
+      placeholder: v0.1.0 or commit SHA
+    validations:
+      required: false
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, Python version, client/agent, and connection type if relevant. Do not include credentials.
+      placeholder: Windows 11, Python 3.11, Codex local plugin...
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Submission check
+      options:
+        - label: I removed API keys, tokens, passwords, private data, proprietary code, and other secrets.
+          required: true
+        - label: I understand that a finished code/docs/skill change belongs in a pull request rather than a support issue.
+          required: true
+        - label: I will use GitHub Security Advisories instead if this report describes a security vulnerability.
+          required: true
