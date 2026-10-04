@@ -3,6 +3,8 @@ name: solforge-workflow-business-compare
 description: Compare named alternatives using explicit criteria, evidence parity, sensitivity, and decision implications.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Compare business alternatives
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
@@ -14,3 +16,14 @@ Gather evidence to parity: each alternative gets the same depth of sourcing, the
 Score each option against the criteria in a visible scorecard, then stress the result: vary the two or three most load-bearing weights and assumptions until the ranking flips, and record those break-even points. A recommendation that survives only a narrow band of assumptions is fragile and must say so. Separate decisive differentiators from noise, and name the conditions under which the second-ranked option would win.
 
 Report the scorecard with per-criterion evidence, the sensitivity results, explicit decision implications, and unresolved gaps. Use [run comparison](../solforge-run-comparison/SKILL.md) when the underlying comparison procedure is missing or the alternatives span evidence sets beyond business options.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- This procedure is selected by SolKraft's contract-aware router; selection does not authorize execution.
+- Public routing defaults to hardened policy; opaque or contract-inadmissible capabilities fail closed.
+- When `contract.yaml` exists, compact metadata is evaluated before this full instruction body is loaded.
+- Runtime authority stays with the host; SolKraft keeps `execution_authorized: false`.
+- Current local acceptance covers 100,000 unique 250-word requests, 100 ask families per skill, and 100% eligible target recall. See repository `VALIDATION.md`.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

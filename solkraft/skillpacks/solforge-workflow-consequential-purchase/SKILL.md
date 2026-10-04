@@ -3,6 +3,8 @@ name: solforge-workflow-consequential-purchase
 description: Carry out an explicitly authorized purchase action for its exact target and verify the resulting effect.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Execute an authorized purchase
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
@@ -14,3 +16,14 @@ Confirm reversibility and blast radius before committing: whether the order can 
 After submitting, verify the actual effect rather than the attempt. Capture the order confirmation, transaction identifier, charged amount, and the resulting state of the account or delivery target, and reconcile them against the authorized terms. A screenshot of a filled cart is not evidence of purchase, and a bare success message without a verifiable confirmation is weak evidence. If the outcome is uncertain — timeout, ambiguous error, possible duplicate submission — reconcile through the merchant's order history or account statement before any retry; a blind resubmit is a second irreversible effect.
 
 Report the authorization basis, the exact action taken, observed confirmation and charge evidence, any deviation from the authorized terms, and the reversal path (cancellation or refund). If the purchase failed or was declined, report that plainly without inventing an order. Use [result validation](../solforge-result-validator/SKILL.md) for acceptance beyond the purchase evidence record itself.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- This procedure is selected by SolKraft's contract-aware router; selection does not authorize execution.
+- Public routing defaults to hardened policy; opaque or contract-inadmissible capabilities fail closed.
+- When `contract.yaml` exists, compact metadata is evaluated before this full instruction body is loaded.
+- Runtime authority stays with the host; SolKraft keeps `execution_authorized: false`.
+- Current local acceptance covers 100,000 unique 250-word requests, 100 ask families per skill, and 100% eligible target recall. See repository `VALIDATION.md`.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

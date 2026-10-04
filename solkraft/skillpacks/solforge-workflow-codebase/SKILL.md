@@ -3,6 +3,8 @@ name: solforge-workflow-codebase
 description: "Investigate a repository to answer how a feature works, where behavior lives, or what a change depends on. Use for focused code understanding."
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Investigate a codebase
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
@@ -14,3 +16,14 @@ Anchor the search at the user-visible surface — a route, command, public funct
 Support every material claim with evidence at a concrete file, function, or revision. Search hits and directory names are leads, not findings — read the code before citing it. When explanations compete, name the discriminating observation and collect it; a small reproduction or an existing test resolves uncertainty that reading cannot. Inspection alone does not establish runtime behavior, and history explains why code changed, not what it does now. Do not present a plausible call chain as confirmed when a registration or wiring step was never checked.
 
 Report the finding with its evidence chain, the relevant dependency path, and unresolved uncertainty. When the question feeds a requested change, carry the evidence forward as a scoped patch plan instead of starting the repair unasked. Use [repository investigation](../solforge-codebase/SKILL.md) when the tracing method itself needs deeper guidance.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- This procedure is selected by SolKraft's contract-aware router; selection does not authorize execution.
+- Public routing defaults to hardened policy; opaque or contract-inadmissible capabilities fail closed.
+- When `contract.yaml` exists, compact metadata is evaluated before this full instruction body is loaded.
+- Runtime authority stays with the host; SolKraft keeps `execution_authorized: false`.
+- Current local acceptance covers 100,000 unique 250-word requests, 100 ask families per skill, and 100% eligible target recall. See repository `VALIDATION.md`.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

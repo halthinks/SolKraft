@@ -3,6 +3,8 @@ name: solforge-workflow-consequential-activate
 description: Carry out an explicitly authorized activate action for its exact target and verify the resulting effect.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Activate an authorized target
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
@@ -14,3 +16,14 @@ Capture the pre-state and assess reversibility and blast radius before enabling.
 Execute through the real control plane — the actual API, console, CLI, or scheduler — never by simulating or announcing it. Then observe the effect on the exact target: query its state directly, confirm it reports active, and exercise one real behavior the activation was meant to enable. An accepted API response or a checked console box is not evidence of the effect; a scheduled job is active when it is confirmed scheduled or has run, not when the schedule was saved. Reconcile any uncertain outcome — timeout, ambiguous status, partial activation — before any retry, because retrying an already-applied activation can double-provision or double-bill.
 
 Return an activation evidence record: the authorization evidence, exact target identifier, pre- and post-state observations, the verification performed, and rollback status or remaining limits. If activation exposes a defect that requires changing code or configuration before the target can safely stay live, use [SolForge Build](../solforge-build/SKILL.md) for the correction, then re-obtain authorization for the reattempt.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- This procedure is selected by SolKraft's contract-aware router; selection does not authorize execution.
+- Public routing defaults to hardened policy; opaque or contract-inadmissible capabilities fail closed.
+- When `contract.yaml` exists, compact metadata is evaluated before this full instruction body is loaded.
+- Runtime authority stays with the host; SolKraft keeps `execution_authorized: false`.
+- Current local acceptance covers 100,000 unique 250-word requests, 100 ask families per skill, and 100% eligible target recall. See repository `VALIDATION.md`.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->
