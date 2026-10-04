@@ -153,3 +153,65 @@ verification:
     assert route["required_resources"] == ["repo:example/project"]
     assert route["dataflow"]["inputs"]["consumer:dataset"]["status"] == "available"
     assert route["execution_authorized"] is False
+
+
+
+def test_contract_api_surface(tmp_path):
+    folder = tmp_path / "demo"
+    folder.mkdir()
+    (folder / "SKILL.md").write_text(
+        "---\nname: demo\ndescription: Inspect a demo repository.\n---\n",
+        encoding="utf-8",
+    )
+    (folder / "contract.yaml").write_text(
+        """
+schema_version: "1.0"
+skill_id: demo
+contract_revision: 1
+inputs: []
+outputs: []
+effects: []
+authority:
+  capabilities:
+    - repo.read
+  resources:
+    - repo:demo
+verification:
+  mode: declarative
+  checks:
+    - id: report
+      type: field_present
+      field: result
+""".strip() + "\n",
+        encoding="utf-8",
+    )
+    app = create_app(SkillCatalog([tmp_path]), api_key="test-key", require_api_key=True)
+    client = TestClient(app)
+    headers = {"Authorization": "Bearer test-key"}
+
+    contract = client.get("/v1/skills/demo/contract", headers=headers)
+    assert contract.status_code == 200
+    assert contract.json()["status"] == "declared"
+    assert contract.json()["capabilities"] == ["repo.read"]
+
+    schema = client.get("/v1/contract-schema", headers=headers)
+    assert schema.status_code == 200
+    assert schema.json()["title"] == "SolKraft Skill Contract v1"
+
+    valid = client.post(
+        "/v1/contracts/validate",
+        headers=headers,
+        json={"contract": {
+            "schema_version": "1.0",
+            "skill_id": "x",
+            "contract_revision": 1,
+        }},
+    )
+    assert valid.json()["valid"] is True
+
+    filtered = client.get(
+        "/v1/contracts?capability=repo.read",
+        headers=headers,
+    ).json()
+    assert filtered["count"] == 1
+    assert filtered["items"][0]["id"] == "demo"
