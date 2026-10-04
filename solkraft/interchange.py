@@ -16,7 +16,9 @@ PORTABLE_SCHEMA = "solkraft/portable-contract/v1"
 
 
 def export_portable_contract(entry: dict) -> dict:
-    """Export compact contract metadata without a SKILL.md body."""
+    """Export compact Contract v1 metadata without a SKILL.md body."""
+    if entry.get("effects") is None:
+        raise ValueError("opaque/unknown effects cannot be exported as a Contract v1 declaration")
     return {
         "schema": PORTABLE_SCHEMA,
         "skill_id": entry.get("id") or entry.get("skill_id"),
@@ -26,7 +28,7 @@ def export_portable_contract(entry: dict) -> dict:
             "contract_revision": entry.get("contract_revision") or 1,
             "inputs": copy.deepcopy(entry.get("inputs") or []),
             "outputs": copy.deepcopy(entry.get("outputs") or []),
-            "effects": copy.deepcopy(entry.get("effects") or []),
+            "effects": copy.deepcopy(entry.get("effects")),
             "authority": {
                 "capabilities": copy.deepcopy(entry.get("capabilities") or []),
                 "resources": copy.deepcopy(entry.get("resources") or []),
