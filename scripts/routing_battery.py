@@ -1,4 +1,9 @@
-"""Exercise ten broadly useful domains on 100,000 long requests."""
+"""Supplemental deterministic smoke/regression battery: ten fixed domains, 100,000 long requests.
+
+This is intentionally not the canonical catalog-wide acceptance validator. See
+scripts/advanced_contract_benchmark.py and VALIDATION.md for the 173-skill,
+100-family, exact-250-word acceptance suite.
+"""
 from __future__ import annotations
 import importlib.util, json, re
 from pathlib import Path
