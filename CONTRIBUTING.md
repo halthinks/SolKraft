@@ -20,6 +20,14 @@
 
 Thanks for contributing. Keep changes focused and add tests for behavior changes.
 
+## Issue or pull request?
+
+Open a **support issue** when you need help, have a setup or connection problem, have a question, or can report reproducible unexpected behavior but are not submitting a finished repository change. Use the site's Support link or the repository's Support request issue form.
+
+Open a **pull request** when you already have a concrete code, documentation, test, contract, routing, or skill change ready for review. A PR should include the implementation and the evidence needed to review it; do not open a support issue merely to hold finished contribution work.
+
+Security vulnerabilities belong in GitHub Security Advisories, not public issues or PR descriptions. Never submit API keys, tokens, passwords, private skill content, customer data, proprietary code, or other secrets. Sanitize logs, screenshots, paths, prompts, and reproductions before posting.
+
 Start with [Add a skill the system can actually use](docs/SKILL_CONTRIBUTIONS.md). It includes a copyable agent task, exact file/graph parameters, an executable manifest example, and the local full gate. Submit the complete integration, including routing and generated catalog changes, rather than only a skill file. The website's **Contribute a skill** walkthrough explains each step for first-time contributors.
 
 ## Skill contribution provenance
