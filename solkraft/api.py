@@ -32,7 +32,7 @@ class RoutePolicyBody(BaseModel):
     granted_resources: list[str] | None = None
     grant: dict | None = None
     legacy_auth_scope: str | None = None
-    contract_mode: str = "legacy"
+    contract_mode: str = "hardened"
 
 
 class ContractValidationBody(BaseModel):
