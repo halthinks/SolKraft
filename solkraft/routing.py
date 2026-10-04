@@ -86,7 +86,6 @@ def route_request(catalog: SkillCatalog, objective: str, max_skills: int = 10,
 
 
 @lru_cache(maxsize=1)
-
 def get_graph() -> dict:
     """Return portable selection relationships, never host filesystem paths."""
     return json.loads(GRAPH_PATH.read_text(encoding="utf-8"))
