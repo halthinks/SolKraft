@@ -10,6 +10,8 @@ import uvicorn
 from .api import _configured_roots, app, create_app
 from .catalog import SkillCatalog
 from .contract_cli import (
+    export_contract_document,
+    import_contract_document,
     init_contract,
     migrate_contracts,
     schema_document,
@@ -20,7 +22,7 @@ from .routing import BUNDLE_ROOT, catalog_graph, contract_index, route_request
 
 
 def _route_policy(args) -> dict | None:
-    mode = "strict" if args.strict_contracts else "warn" if args.warn_contracts else "legacy"
+    mode = "strict" if args.strict_contracts else "warn" if args.warn_contracts else "hardened"
     grant = None
     if args.grant_capability or args.grant_resource or args.grant_id or args.grant_identity or args.grant_expires_at:
         grant = {
@@ -88,6 +90,15 @@ def main() -> None:
             result = schema_document()
         elif action == "migrate":
             result = migrate_contracts(write=args.write, report=args.report)
+        elif action == "export":
+            if not args.resource_path:
+                parser.error("contract export requires a skill ID")
+            catalog = SkillCatalog(_configured_roots(args.installed), preferred_root=BUNDLE_ROOT)
+            result = export_contract_document(contract_index(catalog).get(args.resource_path))
+        elif action == "import":
+            if not args.resource_path:
+                parser.error("contract import requires a portable JSON path")
+            result = import_contract_document(args.resource_path)
         elif action == "show":
             if not args.resource_path:
                 parser.error("contract show requires a skill ID")
@@ -97,7 +108,7 @@ def main() -> None:
             except KeyError as exc:
                 parser.error(f"unknown skill: {args.resource_path}")
         else:
-            parser.error("contract action must be init, validate, lint, show, schema, or migrate")
+            parser.error("contract action must be init, validate, lint, show, schema, migrate, export, or import")
         print(json.dumps(result, ensure_ascii=False, indent=2))
         return
 
