@@ -6,7 +6,7 @@ from pathlib import Path
 
 from solkraft.catalog import SkillCatalog
 from solkraft.contract_verify import SUPPORTED_CHECKS
-from solkraft.routing import BUNDLE_ROOT, contract_index
+from solkraft.routing import BUNDLE_ROOT, contract_index, get_graph, graph_generation
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -16,10 +16,11 @@ def main():
     catalog = SkillCatalog([BUNDLE_ROOT], preferred_root=BUNDLE_ROOT)
     index = contract_index(catalog)
     first = index.public()
+    graph = get_graph()
     second_refresh = index.refresh(
         catalog.records(),
-        legacy_nodes={},
-        graph_generation=None,
+        legacy_nodes=graph.get("nodes", {}),
+        graph_generation=graph_generation(graph),
     )
 
     errors = []
@@ -42,6 +43,10 @@ def main():
         "count": first["count"],
         "last_refresh": first["last_refresh"],
         "second_refresh": second_refresh,
+        "incremental_cache_reused_all": (
+            not second_refresh["changed"]
+            and len(second_refresh["reused"]) == first["count"]
+        ),
         "index_counts": {
             name: len(values)
             for name, values in first["indexes"].items()
@@ -51,6 +56,8 @@ def main():
     target.parent.mkdir(exist_ok=True)
     target.write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(receipt, indent=2))
+    if not receipt["incremental_cache_reused_all"]:
+        raise SystemExit("contract index did not reuse unchanged entries")
     if errors:
         raise SystemExit(1)
 
