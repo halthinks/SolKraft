@@ -5,6 +5,8 @@ impactDescription: 10-100x faster JOINs and CASCADE operations
 tags: foreign-key, indexes, joins, schema
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 ## Index Foreign Key Columns
 
 Postgres does not automatically index foreign key columns. Missing indexes cause slow JOINs and CASCADE operations.

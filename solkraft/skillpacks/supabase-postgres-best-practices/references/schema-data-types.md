@@ -5,6 +5,8 @@ impactDescription: 50% storage reduction, faster comparisons
 tags: data-types, schema, storage, performance
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 ## Choose Appropriate Data Types
 
 Using the right data types reduces storage, improves query performance, and prevents bugs.
