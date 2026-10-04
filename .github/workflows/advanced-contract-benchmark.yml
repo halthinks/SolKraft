@@ -1,0 +1,41 @@
+name: Advanced Contract Benchmark
+
+on:
+  pull_request:
+    paths:
+      - "scripts/advanced_contract_benchmark.py"
+      - ".github/workflows/advanced-contract-benchmark.yml"
+      - "solkraft/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Check out candidate
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install SolKraft
+        run: python -m pip install -e ".[dev]"
+
+      - name: Run 100,000-request advanced contract benchmark
+        run: python -m scripts.advanced_contract_benchmark
+
+      - name: Upload benchmark receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: advanced-contract-benchmark-${{ github.sha }}
+          if-no-files-found: error
+          retention-days: 30
+          path: scripts/results-advanced-contract-100000.json
