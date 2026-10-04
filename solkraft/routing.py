@@ -207,13 +207,13 @@ def route_request(
                 item for item in raw_available if isinstance(item, str) and item
             ]
 
-    dataflow = resolve_required_inputs(
+    dataflow_plan = resolve_required_inputs(
         expanded,
         selected,
         available_inputs=available_inputs,
         allowed_skills=allowed_skills,
     )
-    for addition in dataflow["additions"]:
+    for addition in dataflow_plan["additions"]:
         producer = addition["producer"]
         consumer = addition["consumer"]
         if producer in selected or producer not in known or len(selected) >= max_skills:
@@ -234,6 +234,7 @@ def route_request(
         allowed_skills=allowed_skills,
     )
     result["selected"] = selected
+    dataflow["additions"] = dataflow_plan["additions"]
     result["dataflow"] = dataflow
     blocked_inputs = []
     for key, status in dataflow["inputs"].items():
@@ -255,7 +256,7 @@ def route_request(
         result.setdefault("blocked_stages", []).extend(blocked_inputs)
 
     result.setdefault("selection_trace", {})["dataflow"] = {
-        "added_producers": dataflow["additions"],
+        "added_producers": dataflow_plan["additions"],
         "explanations": dataflow["explanations"],
         "available_inputs": available_inputs,
     }
