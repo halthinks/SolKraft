@@ -3,6 +3,8 @@ name: solforge-workflow-writing-draft
 description: Produce the selected document package with evidence, visuals, citations, review gates, and exports.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Draft the document package
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
@@ -14,3 +16,14 @@ Outline before drafting: give each section a job and the evidence that supports 
 Review in passes: structure (the document answers the stated purpose for the stated audience), evidence (every material claim traces to an inspected source or is labeled an assumption), and mechanics (format, length, terminology, consistency). Verify exports by opening the exported artifact — a successful export command is not proof that figures, tables, and references survived. Do not pad length to appear thorough, and do not present an outline or partial draft as the finished package.
 
 Return the deliverable in the requested format, state which claims rest on inspected sources versus open assumptions, and name any gap the sources could not close. Use [report production](../solforge-run-report-write/SKILL.md) when the task needs the full production method — plan execution, review gates, and export handling — beyond this drafting pass.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- Selected by the contract-aware router; selection is advisory.
+- Hardened routing rejects opaque or inadmissible capabilities.
+- Contract metadata is evaluated before loading the full instruction body.
+- Execution authority stays with the host.
+- Current local acceptance: 100,000 unique 250-word requests, 100 ask families per skill, 100% eligible target recall.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

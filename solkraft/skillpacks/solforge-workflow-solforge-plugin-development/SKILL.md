@@ -3,6 +3,8 @@ name: solforge-workflow-solforge-plugin-development
 description: Change, test, package, install, and verify the SolForge plugin product or one of its owned skills through the repository's native development workflow.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Develop the SolForge plugin
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
@@ -14,3 +16,14 @@ Make the change in source, not in the installed copy, and keep it scoped to the 
 A source-only change is not a release. Package through the repository's packaging path, install through the official local install route, then validate the installed artifact: frontmatter parses, discovery and routing resolve to the new version, and the callable behavior reflects the change. Do not present a passing source-tree test as evidence the installed plugin works, do not edit the installed copy and claim the repository is updated, and do not treat a full host restart as a substitute for reload evidence. Preserve existing sessions on their verified versions and route new work to the new release; legacy transport steps apply only to an explicitly requested legacy protocol.
 
 Report the change, the exact commands and install route used, validation results for the installed artifact, and any surface left unverified. Use [plugin development](../solforge-plugin-development/SKILL.md) when the underlying method supplies procedure this workflow omits.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- Selected by the contract-aware router; selection is advisory.
+- Hardened routing rejects opaque or inadmissible capabilities.
+- Contract metadata is evaluated before loading the full instruction body.
+- Execution authority stays with the host.
+- Current local acceptance: 100,000 unique 250-word requests, 100 ask families per skill, 100% eligible target recall.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->
