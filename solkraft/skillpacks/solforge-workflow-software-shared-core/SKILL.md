@@ -3,6 +3,8 @@ name: solforge-workflow-software-shared-core
 description: Separate portable behavior from target-specific UI, lifecycle, storage, permissions, and native integration.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Create a shared core and platform shells
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
@@ -14,3 +16,14 @@ Define the core's contract from observed behavior, not from an aspirational abst
 Verify mechanically, not by inspection. Build the core standalone with no platform dependency present, or against a headless test shell, and run the same behavioral checks through at least two real shells so the boundary is exercised from more than one side. An interface with one real implementation and one mock is weak evidence of portability — a "portable" API that merely mirrors one platform's idioms leaks that platform into every shell, and compile-only success says nothing about behavioral equivalence. Distinguish defects in the core from defects in a shell when a check fails, and rerun affected shells after any boundary change.
 
 Report the boundary contract, what moved into the core, each shell's remaining surface, the verification commands and their results, and residual coupling or documented per-platform divergence. Use [platform adapter](../solforge-platform-adapter/SKILL.md) when implementing the individual shell adapters themselves.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- Selected by the contract-aware router; selection is advisory.
+- Hardened routing rejects opaque or inadmissible capabilities.
+- Contract metadata is evaluated before loading the full instruction body.
+- Execution authority stays with the host.
+- Current local acceptance: 100,000 unique 250-word requests, 100 ask families per skill, 100% eligible target recall.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

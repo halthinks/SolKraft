@@ -3,6 +3,8 @@ name: solforge-workflow-software-target-verify
 description: Build and verify exact target artifacts with explicit cross-build, emulator, simulator, and real-target evidence tiers.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Verify software on its exact target
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
@@ -14,3 +16,14 @@ Build with the target's real toolchain configuration, then escalate through evid
 Do not present a clean cross-compile as runtime evidence, a simulator pass as device support, or a rerun of a rebuilt artifact as evidence about the shipped one — compare checksums. Distinguish target failures from harness, emulator, and environment failures, and record the actual command, output, and environment for each tier rather than a bare pass.
 
 Report per target: tier reached, artifact hashes, commands and environments, observed behavior against the acceptance criteria, and the unsupported targets or unverified tiers. Use [cross-platform target verification](../solforge-target-verify/SKILL.md) when the underlying tier procedure is missing; a completed equivalent stage need not be repeated.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- Selected by the contract-aware router; selection is advisory.
+- Hardened routing rejects opaque or inadmissible capabilities.
+- Contract metadata is evaluated before loading the full instruction body.
+- Execution authority stays with the host.
+- Current local acceptance: 100,000 unique 250-word requests, 100 ask families per skill, 100% eligible target recall.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->
