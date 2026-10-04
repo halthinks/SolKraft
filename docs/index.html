@@ -19,7 +19,7 @@
   <div class="noise"></div>
   <header class="topbar">
     <a class="brand" href="#top" aria-label="SolKraft home"><span class="brand-mark">S<span>✳</span></span><span>SOLKRAFT</span><small>SKILL OS</small></a>
-    <nav><a href="#how-it-works">How it works</a><a href="#setup-lab">Connect</a><a href="#explore">Explore</a><a href="https://github.com/halthinks/SolKraft" target="_blank" rel="noreferrer">GitHub ↗</a><a href="https://github.com/halthinks/SolKraft/issues/new/choose" target="_blank" rel="noreferrer">Issues ↗</a></nav>
+    <nav><a href="#whats-new">What changed</a><a href="#how-it-works">How it works</a><a href="#setup-lab">Connect</a><a href="#explore">Explore</a><a href="https://github.com/halthinks/SolKraft" target="_blank" rel="noreferrer">GitHub ↗</a><a href="https://github.com/halthinks/SolKraft/issues/new/choose" target="_blank" rel="noreferrer">Issues ↗</a></nav>
     <span id="connection" class="connection"><i></i> Not connected</span>
   </header>
   <main id="top">
@@ -27,9 +27,9 @@
       <div class="hero-copy">
         <div class="eyebrow"><span class="pulse"></span> OPEN SKILL INFRASTRUCTURE <b>·</b> v0.1</div>
         <h1>Give every task<br>the <em>right skills.</em></h1>
-        <p class="lead">Find reusable instructions for your AI agent. SolKraft turns a task into an ordered set of skills, explains the selection, and retrieves the procedures your agent needs to do the work.</p>
+        <p class="lead">Find reusable procedures for your AI agent. SolKraft now routes by semantic fit <em>and</em> machine-readable skill contracts: inputs, effects, capability requirements, trust, typed dataflow, and verification evidence—while execution stays with your host agent.</p>
         <div class="hero-actions"><a class="button primary" href="#setup-lab" data-start-path="plugin">Install the included plugin</a><a class="button quiet" href="#explore">Browse the skills</a></div>
-        <div class="hero-note"><span class="dot"></span> Read-only by design <span class="slash">/</span> REST + MCP <span class="slash">/</span> Open source</div>
+        <div class="hero-note"><span class="dot"></span> Read-only by design <span class="slash">/</span> Contract-aware routing <span class="slash">/</span> REST + MCP + CLI <span class="slash">/</span> Open source</div>
       </div>
       <div class="request-machine flow-track" aria-label="Illustrated request walkthrough">
         <div class="machine-heading"><span>ONE REQUEST. A USEFUL METHOD.</span><b>ILLUSTRATION</b></div>
@@ -38,6 +38,27 @@
         <article class="phase" style="--step:1"><span class="phase-index">02</span><div><small>SOLKRAFT ROUTES</small><h3>The right skills, in order.</h3><p>Investigate → build → test. Load only what helps.</p></div></article>
         <div class="phase-wire" style="--step:1"><i></i></div>
         <article class="phase phase-result" style="--step:2"><span class="phase-index">03</span><div><small>YOUR AGENT ACTS</small><h3>Real work. Checked results.</h3><p>The host applies the method using its own tools.</p></div></article>
+      </div>
+    </section>
+
+    <section id="whats-new" class="workspace release-section">
+      <div class="release-head">
+        <div><div class="eyebrow">WHAT CHANGED · CONTRACT ARCHITECTURE</div><h2>Skills are no longer opaque superpowers.</h2></div>
+        <a class="button quiet" href="https://github.com/halthinks/SolKraft/blob/main/docs/SKILL_CONTRACT_ROADMAP.md" target="_blank" rel="noreferrer">Read the architecture ↗</a>
+      </div>
+      <p class="release-lead">SolKraft now treats each skill as a compact, inspectable capability contract. The router can reason about what a skill needs, what it may affect, what authority a host would need, how skills connect through typed inputs and outputs, and what evidence would verify success—before loading the full procedure.</p>
+      <div class="release-grid">
+        <article><span class="release-kicker">01 · CONTRACTS</span><h3>Inputs, outputs, effects, verification.</h3><p>Skills can carry typed <code>contract.yaml</code> sidecars with namespaced effects, capability/resource requirements, declarative checks, digests, provenance, and trust state.</p></article>
+        <article><span class="release-kicker">02 · ROUTING</span><h3>Admissibility before composition.</h3><p>Known-inadmissible skills are filtered before they shape a route. Whole routes are validated, broken dependencies are exposed, and one bounded repair pass can substitute a safe alternative.</p></article>
+        <article><span class="release-kicker">03 · DATAFLOW</span><h3>Capabilities can compose by type.</h3><p>Typed outputs can satisfy downstream inputs. A unique compatible producer can be inserted automatically; missing or ambiguous inputs remain visible instead of being guessed.</p></article>
+        <article><span class="release-kicker">04 · TRUST</span><h3>Verification is evidence-bound.</h3><p>Execution evidence is bound to exact contract and <code>SKILL.md</code> digests. Trust comes from external digest-bound review, never from a skill declaring itself trusted.</p></article>
+        <article><span class="release-kicker">05 · INTEROP</span><h3>REST, MCP, CLI, OpenAPI.</h3><p>Contract metadata is available over REST, MCP and CLI. Portable import/export and conservative MCP/OpenAPI adapters carry declarations only—never authority.</p></article>
+        <article><span class="release-kicker">06 · CI</span><h3>Pre-build a skill before the PR.</h3><p>Contributors can run the same reusable full gate locally or from GitHub before opening a PR, including the 100,000-route regression, packaging, installed MCP checks, contract indexing, and hardening receipts.</p></article>
+      </div>
+      <div class="release-strip">
+        <span><b>Hardened public defaults</b> Opaque skills fail closed over REST, MCP, and CLI.</span>
+        <span><b>Lazy by design</b> The route/index hot path still avoids loading full skill bodies.</span>
+        <span><b>Execution stays external</b> <code>execution_authorized</code> remains false.</span>
       </div>
     </section>
 
