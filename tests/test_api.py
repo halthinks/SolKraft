@@ -215,3 +215,83 @@ verification:
     ).json()
     assert filtered["count"] == 1
     assert filtered["items"][0]["id"] == "demo"
+
+
+
+def test_api_defaults_to_hardened_policy(tmp_path):
+    folder = tmp_path / "opaque"
+    folder.mkdir()
+    (folder / "SKILL.md").write_text(
+        "---\nname: opaque\ndescription: Inspect an opaque thing.\n---\n",
+        encoding="utf-8",
+    )
+    app = create_app(SkillCatalog([tmp_path]), api_key="test-key", require_api_key=True)
+    client = TestClient(app)
+    route = client.post(
+        "/v1/route",
+        headers={"Authorization": "Bearer test-key"},
+        json={"objective": "Inspect the opaque thing.", "skills": ["opaque"]},
+    ).json()
+    assert route["route_policy"]["contract_mode"] == "hardened"
+    assert route["selection_status"] == "blocked"
+    assert route["contract_decisions"]["opaque"]["status"] == "denied"
+
+
+def test_portable_contract_api_roundtrip(tmp_path):
+    folder = tmp_path / "demo"
+    folder.mkdir()
+    (folder / "SKILL.md").write_text(
+        "---\nname: demo\ndescription: Inspect a demo.\n---\n",
+        encoding="utf-8",
+    )
+    (folder / "contract.yaml").write_text(
+        """
+schema_version: "1.0"
+skill_id: demo
+contract_revision: 1
+inputs: []
+outputs: []
+effects: []
+authority:
+  capabilities:
+    - repo.read
+  resources: []
+verification:
+  mode: declarative
+  checks:
+    - id: report
+      type: field_present
+      field: result
+""".strip() + "\n",
+        encoding="utf-8",
+    )
+    app = create_app(SkillCatalog([tmp_path]), api_key="test-key", require_api_key=True)
+    client = TestClient(app)
+    headers = {"Authorization": "Bearer test-key"}
+    exported = client.get("/v1/skills/demo/contract/export", headers=headers)
+    assert exported.status_code == 200
+    assert exported.json()["execution_authorized"] is False
+    imported = client.post(
+        "/v1/contracts/import",
+        headers=headers,
+        json={"document": exported.json()},
+    )
+    assert imported.status_code == 200
+    assert imported.json()["trust"]["trusted"] is False
+    assert imported.json()["authority_granted"] is False
+
+
+def test_opaque_contract_cannot_be_exported_as_safe(tmp_path):
+    folder = tmp_path / "opaque"
+    folder.mkdir()
+    (folder / "SKILL.md").write_text(
+        "---\nname: opaque\ndescription: Unknown effects.\n---\n",
+        encoding="utf-8",
+    )
+    app = create_app(SkillCatalog([tmp_path]), api_key="test-key", require_api_key=True)
+    client = TestClient(app)
+    response = client.get(
+        "/v1/skills/opaque/contract/export",
+        headers={"Authorization": "Bearer test-key"},
+    )
+    assert response.status_code == 422
