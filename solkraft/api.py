@@ -28,6 +28,8 @@ def _configured_roots(include_installed: bool = False) -> list[Path]:
 class RoutePolicyBody(BaseModel):
     denied_effects: list[str] = Field(default_factory=list, max_length=100)
     granted_capabilities: list[str] | None = None
+    granted_resources: list[str] | None = None
+    grant: dict | None = None
     legacy_auth_scope: str | None = None
     contract_mode: str = "legacy"
 
@@ -36,7 +38,7 @@ class RouteBody(BaseModel):
     objective: str = Field(min_length=1, max_length=20_000)
     max_skills: int = Field(default=10, ge=1, le=50)
     skills: list[str] = Field(default_factory=list, max_length=50)
-    context: dict[str, str] | None = None
+    context: dict[str, object] | None = None
     policy: RoutePolicyBody | None = None
 
 
