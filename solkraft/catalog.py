@@ -142,6 +142,7 @@ class SkillCatalog:
             profiles[skill_id] = {
                 "description_norm": " ".join(record.description.casefold().split()),
                 "description_tokens": tuple(desc_tokens),
+                "signature_phrase": " ".join(desc_tokens[: min(14, len(desc_tokens))]),
                 "name_tokens": tuple(name_tokens),
             }
 
@@ -189,6 +190,24 @@ class SkillCatalog:
                 "margin": 2.0,
                 "reason": "exact published capability description",
             }
+
+        tokenized_query = " ".join(TOKEN_RE.findall(normalized))
+        signature_hits = []
+        for skill_id, profile in self._identity_profiles.items():
+            signature = profile["signature_phrase"]
+            if len(signature.split()) >= 5 and signature in tokenized_query:
+                signature_hits.append((len(signature.split()), skill_id))
+        if signature_hits:
+            signature_hits.sort(key=lambda row: (-row[0], row[1].casefold()))
+            longest = signature_hits[0][0]
+            winners = [skill_id for size, skill_id in signature_hits if size == longest]
+            if len(winners) == 1:
+                return {
+                    "id": winners[0],
+                    "score": 1.8,
+                    "margin": 1.8,
+                    "reason": "unique published capability signature",
+                }
 
         query_tokens = set(
             token for token in TOKEN_RE.findall(normalized)
