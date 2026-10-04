@@ -3,6 +3,8 @@ name: brainstorming
 description: Explore product requirements and design alternatives when the user requests design help or material design decisions remain unresolved.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Brainstorming Ideas Into Designs
 
 Develop a design that resolves the user's material product choices and is concrete enough to implement.
@@ -18,3 +20,14 @@ Save a reusable spec when requested or when the implementation needs a durable h
 Use a visual when it clarifies a real design decision. For the optional browser companion, obtain any required consent and read [visual-companion.md](visual-companion.md) before starting it.
 
 Use the writing-plans skill when an implementation plan would resolve dependencies or the user asks for one. Do not force a separate planning phase for a fully specified small change.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- This procedure is selected by SolKraft's contract-aware router; selection does not authorize execution.
+- Public routing defaults to hardened policy; opaque or contract-inadmissible capabilities fail closed.
+- When `contract.yaml` exists, compact metadata is evaluated before this full instruction body is loaded.
+- Runtime authority stays with the host; SolKraft keeps `execution_authorized: false`.
+- Current local acceptance covers 100,000 unique 250-word requests, 100 ask families per skill, and 100% eligible target recall. See repository `VALIDATION.md`.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

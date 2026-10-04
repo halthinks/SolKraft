@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Interactive State Sync Patterns
 
 Use this reference when building ChatGPT apps with long-lived widget state, repeated interactions, or component-initiated tool calls (for example: games, boards, maps, dashboards, editors, or realtime-ish UIs).

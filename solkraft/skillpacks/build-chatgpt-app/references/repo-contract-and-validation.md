@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Repo Contract And Validation
 
 Load this reference when scaffolding or reviewing a generated ChatGPT app repo.

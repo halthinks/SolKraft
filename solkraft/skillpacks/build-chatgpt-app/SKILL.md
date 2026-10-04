@@ -3,6 +3,8 @@ name: build-chatgpt-app
 description: Build or troubleshoot ChatGPT Apps SDK applications combining an MCP server and widget UI.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Build ChatGPT App
 
 ## Overview
@@ -318,3 +320,14 @@ When using this skill to scaffold code, produce output in this order unless the 
 - `references/upstream-example-workflow.md` for choosing between official examples, ext-apps examples, and the local fallback scaffold
 - `references/window-openai-patterns.md` for ChatGPT-specific extensions, wrapper API translation, and React helper patterns
 - `scripts/scaffold_node_ext_apps.mjs` for a minimal Node + `@modelcontextprotocol/ext-apps` fallback starter scaffold
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- This procedure is selected by SolKraft's contract-aware router; selection does not authorize execution.
+- Public routing defaults to hardened policy; opaque or contract-inadmissible capabilities fail closed.
+- When `contract.yaml` exists, compact metadata is evaluated before this full instruction body is loaded.
+- Runtime authority stays with the host; SolKraft keeps `execution_authorized: false`.
+- Current local acceptance covers 100,000 unique 250-word requests, 100 ask families per skill, and 100% eligible target recall. See repository `VALIDATION.md`.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

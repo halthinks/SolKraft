@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Upstream Example Workflow
 
 Load this reference when starting a greenfield ChatGPT app or when deciding whether to adapt an upstream example or use the local fallback scaffold.

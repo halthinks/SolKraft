@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Search And Fetch Standard
 
 Load this reference when the app is connector-like, data-only, sync-oriented, or meant to work well with company knowledge or deep research.
