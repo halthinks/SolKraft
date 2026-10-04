@@ -51,7 +51,7 @@ codex mcp list
 codex
 ```
 
-4. Start a fresh session. In the terminal app use `/mcp` and check that the server offers five tools. `codex mcp list` checks saved configuration; listing and calling tools checks the connection. For the desktop app, the process starting the connection must also have the environment variable; changing a separate terminal does not update an already-running app.
+4. Start a fresh session. In the terminal app use `/mcp` and check that the server offers seven read-only tools: `search_skills`, `route_request`, `get_skill`, `get_skill_resource`, `get_selection_graph`, `get_skill_contract`, and `get_contract_index`. `codex mcp list` checks saved configuration; listing and calling tools checks the connection. For the desktop app, the process starting the connection must also have the environment variable; changing a separate terminal does not update an already-running app.
 5. Ask: “Use SolKraft to choose methods for inspecting this codebase, fixing a bug, and testing the release. Retrieve the useful procedures and apply them within my task.” Check that the agent retrieves skills and then uses its own tools. A saved server address alone does not prove that happened.
 
 The local plugin is another option. It starts a local library process and needs no hosted service. Choose one connection for the same library to avoid redundant tools. These remote configuration fields are documented in [Codex MCP setup](https://developers.openai.com/codex/mcp).
