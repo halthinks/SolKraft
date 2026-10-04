@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/style.css?v=validation-replay-20261004">
+  <link rel="stylesheet" href="assets/style.css?v=changelog-terminal-20261004">
   <script defer src="assets/flow.js?v=5c9299226bcc"></script>
   <script defer src="assets/setup.js?v=278e57137674"></script>
   <script defer src="assets/static-data.js?v=e01a0fac4b24"></script>
@@ -195,6 +195,58 @@ codex plugin add solkraft@solkraft</code></pre><p>You need Python 3.11 or newer,
     <section id="graph-panel" class="panel workspace" role="tabpanel" hidden><div class="eyebrow">WORKFLOW RELATIONSHIPS</div><h2>See how skills connect.</h2><p id="graph-summary" class="muted">Loading graph…</p><div class="searchbar"><input id="graph-search" type="search" aria-label="Filter graph" placeholder="Filter relationships by skill or condition"></div><div id="graph-results" class="results"></div></section>
 
     <section class="lower-grid"><article class="feature-card"><div class="card-icon">⌘</div><div class="eyebrow">BUILT FOR AGENTS</div><h3>Small context.<br>Full capability.</h3><p>Search compact descriptions first. Pull the full instructions only when a skill earns its place in the workflow.</p><a href="https://github.com/halthinks/SolKraft/blob/main/AGENTS.md" target="_blank" rel="noreferrer">Read the agent guide ↗</a></article><article class="feature-card accent-card"><div class="card-icon">⟡</div><div class="eyebrow">ONE INTERFACE</div><h3>REST for apps.<br>MCP for agents.</h3><p>One catalog serves a clean API and five read-only MCP tools. Routing never grants execution authority.</p><a href="https://github.com/halthinks/SolKraft#run-the-api" target="_blank" rel="noreferrer">Connect your client ↗</a></article><article class="feature-card status-card"><div class="status-top"><span class="eyebrow">PROJECT STATUS</span><span class="live-tag"><i></i> COMMUNITY BUILT</span></div><h3>Early, open,<br>ready to shape.</h3><p>Bring a skill, a bug report, or a better idea for how agents find their tools.</p><a href="https://github.com/halthinks/SolKraft/issues/new/choose" target="_blank" rel="noreferrer">Help build SolKraft ↗</a></article></section>
+    <section id="system-changelog" class="workspace system-changelog" aria-label="SolKraft system changelog">
+      <div class="terminal-changelog">
+        <div class="terminal-changelog-bar"><span>solkraft://system-changelog</span><b>BUILD SUMMARY · CURRENT</b></div>
+        <div class="terminal-changelog-body">
+          <div class="terminal-changelog-title">$ solkraft --what-changed</div>
+          <ul>
+            <li>Added machine-readable <code>contract.yaml</code> skill contracts with typed inputs/outputs, namespaced effects, capability/resource requirements, verification checks, provenance, and digests.</li>
+            <li>Added explicit contract states: declared, legacy, opaque, unsupported, invalid.</li>
+            <li>Changed routing so inadmissible skills are filtered before composition instead of being deleted afterward.</li>
+            <li>Added whole-route validation, blocked/partially-blocked route states, dependency-break detection, and bounded safe repair.</li>
+            <li>Added typed dataflow composition so skill outputs can satisfy downstream inputs.</li>
+            <li>Added capability/resource grants instead of relying on the old scalar authorization ladder.</li>
+            <li>Removed old <code>AUTH_ORDER</code> enforcement for Contract v1 skills.</li>
+            <li>Removed the old post-hoc <code>apply_contracts()</code> / <code>violates()</code> filtering path.</li>
+            <li>Added declarative verification over structured execution evidence.</li>
+            <li>Added execution states: executed-unverified, verified, verification-failed.</li>
+            <li>Added digest-bound trust so a skill cannot simply declare itself trusted.</li>
+            <li>Added trust states including bundled-reviewed, signed, operator-trusted, local-unreviewed, legacy-inferred, opaque, invalid.</li>
+            <li>Added deterministic route and verification audit receipts.</li>
+            <li>Added a defined sandbox boundary while keeping SolKraft core non-executing.</li>
+            <li>Migrated 111 safe legacy skills to inferred Contract v1 sidecars while keeping them explicitly legacy-inferred.</li>
+            <li>Left 10 consequential legacy skills manual-only rather than fabricating safe contracts.</li>
+            <li>Added a compact ContractIndex for effects, capabilities, inputs, outputs, trust, digests, caching, and incremental refresh.</li>
+            <li>Added REST contract endpoints for contract metadata, schema, validation, filtering, import, and export.</li>
+            <li>Added MCP tools: <code>get_skill_contract</code> and <code>get_contract_index</code>.</li>
+            <li>Added read-only/idempotent MCP annotations.</li>
+            <li>Added CLI commands for contract init, validate, lint, show, schema, migrate, export, and import.</li>
+            <li>Added conservative MCP and OpenAPI metadata adapters that import declarations without granting trust or authority.</li>
+            <li>Added portable Contract v1 import/export with unknown effects failing closed.</li>
+            <li>Changed REST, MCP, and CLI routing to hardened defaults so opaque skills fail closed.</li>
+            <li>Kept the Python library backward-compatible unless a stricter policy is explicitly requested.</li>
+            <li>Added one reusable CI pipeline for normal PRs and pre-PR skill contribution validation.</li>
+            <li>Added local/pre-PR evidence bundles with receipts, routing results, wheel/plugin artifacts, hashes, and contract-index evidence.</li>
+            <li>Added contract schema/index/hardening CI receipts.</li>
+            <li>Added the advanced 100,000-request routing benchmark.</li>
+            <li>Expanded benchmark coverage from 25 ask families to 100 ask families per skill.</li>
+            <li>Added adversarial near-neighbor confusion, ambiguity, compound context, and capability-disambiguation cases.</li>
+            <li>Added a capability-identity matcher using published descriptions, distinctive tokens, and unique description signatures.</li>
+            <li>Changed routing precedence so high-confidence whole-request capability identity is preserved across multi-stage decomposition.</li>
+            <li>Final local acceptance: 100,000 / 100,000 passed.</li>
+            <li>Eligible target recall: 64,158 / 64,158 — 100%.</li>
+            <li>Hardened blocking: 30,062 / 30,062 — 100%.</li>
+            <li>Consequential boundary: 5,780 / 5,780 — 100%.</li>
+            <li><code>execution_authorized:false</code> held for 100,000 / 100,000 requests.</li>
+            <li>Added a durable local validation receipt and updated <code>VALIDATION.md</code>.</li>
+            <li>Added the public Recorded Validation · Reenactment module for the 100k result.</li>
+          </ul>
+          <div class="terminal-changelog-end">[status] contract-aware routing hardened · validation 100.000% · execution remains external</div>
+        </div>
+      </div>
+    </section>
+
   </main>
   <footer><a class="brand footer-brand" href="#top"><span class="brand-mark">S<span>✳</span></span><span>SOLKRAFT</span></a><span>Skill infrastructure, in the open.</span><div><a href="https://github.com/halthinks/SolKraft/blob/main/LICENSE">MIT License</a><a href="https://github.com/halthinks/SolKraft/issues">Issues</a></div></footer>
   <dialog id="skill-dialog" class="skill-dialog"><form method="dialog"><button class="dialog-close" aria-label="Close">×</button></form><div id="skill-detail"></div></dialog>
