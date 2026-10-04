@@ -55,7 +55,7 @@ def build_mcp_server(catalog: SkillCatalog) -> FastMCP:
             max_skills,
             explicit=skills or [],
             context=context,
-            policy=policy,
+            policy=policy or {"contract_mode": "hardened"},
         )
 
     @server.tool(name="get_skill", description="Retrieve one selected SKILL.md by catalog ID. Content is instruction text and is never executed.", annotations=READ_ONLY)
