@@ -1,7 +1,6 @@
 name: Contributor nomination
 description: Nominate someone for recognition on the SolKraft Contributors page
 title: "[Contributor nomination]: "
-labels: [community, recognition]
 body:
   - type: markdown
     attributes:
