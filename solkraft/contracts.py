@@ -1,12 +1,8 @@
-"""Compact skill contracts used as selection constraints.
-
-Contracts describe a skill. They never grant execution authority. Missing or
-unsupported metadata stays explicit so SolKraft cannot accidentally turn
-unknown into safe.
-"""
+"""Compact skill contracts used as selection constraints."""
 from __future__ import annotations
 
 from .constraint_parser import excluded_effects
+from .effects import effect_matches, normalize_effects
 
 
 AUTH_ORDER = ("none", "read", "write-local", "network", "external-effect")
@@ -33,7 +29,6 @@ def _schema_major(value) -> int | None:
 
 
 def contract_from_node(node: dict | None) -> dict:
-    """Normalize graph or sidecar metadata into one compact contract view."""
     node = node if isinstance(node, dict) else {}
     forced_status = node.get("contract_status")
     if forced_status not in CONTRACT_STATUSES:
@@ -58,15 +53,17 @@ def contract_from_node(node: dict | None) -> dict:
     if side is not None and not isinstance(side, list):
         status = "invalid"
         side = None
-    if isinstance(side, list) and not all(isinstance(item, str) and item for item in side):
-        status = "invalid"
-        side = None
+    if isinstance(side, list):
+        if not all(isinstance(item, str) and item for item in side):
+            status = "invalid"
+            side = None
+        else:
+            side = normalize_effects(side)
 
     auth = node.get("auth_scope")
-    if auth is None:
-        authority = node.get("authority")
-        if isinstance(authority, dict):
-            auth = authority.get("legacy_scope")
+    authority = node.get("authority")
+    if auth is None and isinstance(authority, dict):
+        auth = authority.get("legacy_scope")
     if auth is None and node.get("effect") is False:
         auth = "none"
     if auth is not None and auth not in AUTH_ORDER:
@@ -80,11 +77,8 @@ def contract_from_node(node: dict | None) -> dict:
         if not test and verification.get("checks"):
             test = "Declarative verification checks are present."
 
-    inputs = list(node.get("inputs") or [])
-    outputs = list(node.get("outputs") or [])
     capabilities = []
     resources = []
-    authority = node.get("authority")
     if isinstance(authority, dict):
         capabilities = list(authority.get("capabilities") or [])
         resources = list(authority.get("resources") or [])
@@ -104,19 +98,22 @@ def contract_from_node(node: dict | None) -> dict:
         else:
             status = "opaque"
 
-    declared = status in {"declared", "legacy"}
     return {
         "status": status,
         "schema_version": schema_version,
         "contract_revision": node.get("contract_revision"),
-        "inputs": inputs,
-        "outputs": outputs,
+        "inputs": list(node.get("inputs") or []),
+        "outputs": list(node.get("outputs") or []),
         "side_effects": list(side) if side is not None else None,
         "auth_scope": auth,
         "capabilities": capabilities,
         "resources": resources,
         "test_contract": test,
-        "declared": declared,
+        "verification": dict(verification) if isinstance(verification, dict) else {},
+        "risk": dict(node.get("risk") or {}) if isinstance(node.get("risk"), dict) else {},
+        "contract_digest": node.get("contract_digest"),
+        "entrypoint_digest": node.get("entrypoint_digest"),
+        "declared": status in {"declared", "legacy"},
     }
 
 
@@ -126,11 +123,17 @@ def _rejection(skill: str, contract: dict, reasons: list[str]) -> dict:
 
 def violates(contract: dict, excluded: set[str], allowed_auth: str | None) -> list[str]:
     reasons = []
-    declared_effects = set(contract["side_effects"] or [])
-    if declared_effects & excluded:
-        reasons.append("side effect excluded: " + ", ".join(sorted(declared_effects & excluded)))
-    if contract["side_effects"] is None and excluded:
+    denied = normalize_effects(excluded)
+    effects = contract["side_effects"]
+    if effects is None and denied:
         reasons.append("undeclared side effects conflict with an effect exclusion")
+    else:
+        for effect in effects or []:
+            for pattern in denied:
+                if effect_matches(pattern, effect):
+                    reasons.append(f"side effect excluded: {effect}")
+                    break
+
     allowed_rank = _auth_rank(allowed_auth)
     skill_rank = _auth_rank(contract["auth_scope"])
     if allowed_rank is not None and skill_rank is not None and skill_rank > allowed_rank:
@@ -146,7 +149,6 @@ def apply_contracts(
     objective: str,
     allowed_auth: str | None = None,
 ) -> dict:
-    """Filter conflicting skills and make route breakage explicit."""
     if allowed_auth is not None and allowed_auth not in AUTH_ORDER:
         raise ValueError("Unknown auth scope: " + str(allowed_auth))
     excluded = set(excluded_effects(objective))
@@ -184,7 +186,7 @@ def apply_contracts(
     result["contracts"] = contracts
     result["contract_rejections"] = rejected
     result["blocked_stages"] = blocked_stages
-    result["excluded_effects"] = sorted(excluded)
+    result["excluded_effects"] = normalize_effects(excluded)
 
     if blocked_stages or (rejected and not selected):
         result["selection_status"] = "partially_blocked" if selected else "blocked"
