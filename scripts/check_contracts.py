@@ -5,6 +5,8 @@ import json
 from pathlib import Path
 
 from solkraft.catalog import SkillCatalog
+from solkraft.contract_fixtures import run_contract_fixtures
+from solkraft.contract_loader import load_skill_contract
 from solkraft.contract_verify import SUPPORTED_CHECKS
 from solkraft.routing import BUNDLE_ROOT, contract_index, get_graph, graph_generation
 
@@ -24,6 +26,8 @@ def main():
     )
 
     errors = []
+    fixture_receipts = []
+    records = {record.id: record for record in catalog.records()}
     for entry in first["entries"]:
         if entry["status"] in {"invalid", "unsupported"}:
             errors.append(f"{entry['id']}: contract status {entry['status']}")
@@ -34,6 +38,29 @@ def main():
             for check in checks:
                 if check.get("type") not in SUPPORTED_CHECKS:
                     errors.append(f"{entry['id']}: unsupported verification type {check.get('type')}")
+
+            record = records[entry["id"]]
+            contract = load_skill_contract(
+                record.entrypoint,
+                legacy_node=graph.get("nodes", {}).get(entry["id"]),
+                expected_skill_id=record.name,
+            )
+            fixtures = contract.get("fixtures") or {}
+            selection = fixtures.get("selection") or []
+            policy = fixtures.get("policy") or []
+            if not any(entry["id"] in item.get("expected_selected", []) for item in selection):
+                errors.append(f"{entry['id']}: declared contract lacks a positive selection fixture")
+            if not any(entry["id"] not in item.get("expected_selected", []) for item in selection):
+                errors.append(f"{entry['id']}: declared contract lacks a negative selection fixture")
+            if not policy:
+                errors.append(f"{entry['id']}: declared contract lacks a policy boundary fixture")
+            if selection and policy:
+                fixture_receipt = run_contract_fixtures(catalog, entry["id"], contract)
+                fixture_receipts.append(fixture_receipt)
+                if fixture_receipt["failed"]:
+                    errors.append(
+                        f"{entry['id']}: {fixture_receipt['failed']} executable contract fixture(s) failed"
+                    )
 
     receipt = {
         "schema": "solkraft/contract-index-check/v1",
@@ -51,6 +78,7 @@ def main():
             name: len(values)
             for name, values in first["indexes"].items()
         },
+        "fixture_receipts": fixture_receipts,
     }
     target = ROOT / "build" / "contract-index.json"
     target.parent.mkdir(exist_ok=True)
