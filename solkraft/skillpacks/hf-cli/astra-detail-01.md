@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 ### `hf auth` — Manage authentication (login, logout, etc.).
 
 - `hf auth list` — List all stored access tokens. `[--format [auto|human|agent|json|quiet]]`
