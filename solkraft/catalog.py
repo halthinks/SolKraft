@@ -5,6 +5,7 @@ from collections import Counter
 from dataclasses import dataclass
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
 import re
@@ -62,6 +63,8 @@ class SkillCatalog:
         self.preferred_root = preferred_root.resolve() if preferred_root else None
         self._records: dict[str, SkillRecord] = {}
         self._contract_index = ContractIndex()
+        self._identity_profiles: dict[str, dict] = {}
+        self._identity_idf: dict[str, float] = {}
         self.refresh()
 
     def refresh(self) -> int:
@@ -118,7 +121,110 @@ class SkillCatalog:
                 continue
             records[skill_id] = SkillRecord(skill_id, description, root, entrypoint, name)
         self._records = dict(sorted(records.items(), key=lambda pair: pair[0].casefold()))
+        self._build_identity_index()
         return len(self._records)
+
+    def _build_identity_index(self) -> None:
+        """Build compact semantic identity profiles from public skill metadata."""
+        token_sets = {}
+        profiles = {}
+        for skill_id, record in self._records.items():
+            desc_tokens = [
+                token for token in TOKEN_RE.findall(record.description.casefold())
+                if len(token) > 2
+            ]
+            name_tokens = [
+                token for token in TOKEN_RE.findall(record.name.casefold())
+                if len(token) > 1
+            ]
+            token_set = set(desc_tokens) | set(name_tokens)
+            token_sets[skill_id] = token_set
+            profiles[skill_id] = {
+                "description_norm": " ".join(record.description.casefold().split()),
+                "description_tokens": tuple(desc_tokens),
+                "name_tokens": tuple(name_tokens),
+            }
+
+        document_frequency = Counter()
+        for token_set in token_sets.values():
+            document_frequency.update(token_set)
+        total = max(len(token_sets), 1)
+        self._identity_idf = {
+            token: math.log((total + 1.0) / (count + 1.0)) + 1.0
+            for token, count in document_frequency.items()
+        }
+
+        for skill_id, profile in profiles.items():
+            distinct = set(profile["description_tokens"]) | set(profile["name_tokens"])
+            profile["weight"] = sum(self._identity_idf.get(token, 1.0) for token in distinct) or 1.0
+        self._identity_profiles = profiles
+
+    def identity_match(
+        self,
+        query: str,
+        *,
+        min_score: float = 0.58,
+        min_margin: float = 0.08,
+    ) -> dict | None:
+        """Return a high-confidence capability identity match, if one exists.
+
+        Exact published-description matches are authoritative for identity only;
+        route policy still decides whether that capability is admissible.
+        Paraphrase matching uses IDF-weighted coverage and requires a clear
+        margin over the next candidate.
+        """
+        normalized = " ".join(query.casefold().split())
+        if not normalized:
+            return None
+
+        exact = []
+        for skill_id, profile in self._identity_profiles.items():
+            phrase = profile["description_norm"]
+            if len(phrase) >= 24 and phrase in normalized:
+                exact.append(skill_id)
+        if len(exact) == 1:
+            return {
+                "id": exact[0],
+                "score": 2.0,
+                "margin": 2.0,
+                "reason": "exact published capability description",
+            }
+
+        query_tokens = set(
+            token for token in TOKEN_RE.findall(normalized)
+            if len(token) > 2
+        )
+        if not query_tokens:
+            return None
+
+        scored = []
+        for skill_id, profile in self._identity_profiles.items():
+            desc = set(profile["description_tokens"])
+            names = set(profile["name_tokens"])
+            overlap = desc & query_tokens
+            if not overlap:
+                continue
+            weighted_overlap = sum(self._identity_idf.get(token, 1.0) for token in overlap)
+            coverage = weighted_overlap / profile["weight"]
+            name_hits = len(names & query_tokens) / max(len(names), 1)
+            score = coverage + 0.18 * name_hits
+            if score > 0:
+                scored.append((score, skill_id))
+
+        if not scored:
+            return None
+        scored.sort(key=lambda row: (-row[0], row[1].casefold()))
+        best_score, best_id = scored[0]
+        second_score = scored[1][0] if len(scored) > 1 else 0.0
+        margin = best_score - second_score
+        if best_score < min_score or margin < min_margin:
+            return None
+        return {
+            "id": best_id,
+            "score": round(best_score, 6),
+            "margin": round(margin, 6),
+            "reason": "distinctive capability identity tokens",
+        }
 
     @staticmethod
     def _entrypoints(root: Path):
