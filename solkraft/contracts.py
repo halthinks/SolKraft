@@ -111,6 +111,8 @@ def contract_from_node(node: dict | None) -> dict:
         "test_contract": test,
         "verification": dict(verification) if isinstance(verification, dict) else {},
         "risk": dict(node.get("risk") or {}) if isinstance(node.get("risk"), dict) else {},
+        "provenance": dict(node.get("provenance") or {}) if isinstance(node.get("provenance"), dict) else {},
+        "trust": dict(node.get("trust") or {}) if isinstance(node.get("trust"), dict) else {},
         "contract_digest": node.get("contract_digest"),
         "entrypoint_digest": node.get("entrypoint_digest"),
         "declared": status in {"declared", "legacy"},
