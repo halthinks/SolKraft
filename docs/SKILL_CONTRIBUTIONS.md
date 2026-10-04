@@ -76,6 +76,23 @@ You can run the same gate in GitHub **before opening a PR**. Push the candidate 
 
 The reusable implementation lives in `.github/workflows/reusable-ci.yml`. Normal repository pull requests call the same workflow through `.github/workflows/tests.yml`; the manual pre-PR wrapper is `.github/workflows/contribution-preflight.yml`. There is one validation path, not a weaker preflight and a stronger PR gate.
 
+## Verification and trust
+
+A Contract v1 sidecar must describe how its result can be checked using declarative evidence. New sidecars should include at least one supported check such as `artifact_exists`, `field_present`, `field_equals`, `check_equals`, or `observed_effects_subset`. Core SolKraft does not run contract-provided commands.
+
+Skill-authored provenance describes origin only. It cannot make a skill reviewed or trusted. Trust is resolved from `solkraft/trust-bindings.json`, whose entries bind an external trust state to the exact contract and `SKILL.md` SHA-256 digests. If either file changes, the binding no longer matches and the skill becomes unreviewed again.
+
+Legacy graph metadata can be converted into typed sidecars with:
+
+```text
+python -m scripts.migrate_contracts --report build/contracts-migration.json
+python -m scripts.migrate_contracts --write --report build/contracts-migration.json
+```
+
+The migration tool never overwrites an existing sidecar and only infers an empty effect set when the legacy graph explicitly says `effect: false`. Generated sidecars carry `provenance.inferred: true` and remain `legacy-inferred`; generation is not review.
+
+See [Verification and trust](VERIFICATION_AND_TRUST.md) for the evidence envelope, result states, trust binding model, audit receipts, and sandbox boundary.
+
 ## Submit all affected layers together
 
 Include the entrypoint/resources, provenance/notices, graph node/rules/edges, necessary parser changes, manifest, meaningful tests, and regenerated `docs/assets` files and plugin archive. Search API, MCP retrieval and the static console derive from the same catalog; preserve that single authority. For new dependencies, document installation, portability and failure behavior. General skill contributions should not need new REST endpoints or MCP tools.
