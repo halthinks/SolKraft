@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 ### `hf papers` — Interact with papers on the Hub.
 
 - `hf papers info PAPER_ID` — Get info about a paper on the Hub. `[--format [auto|human|agent|json|quiet]]`

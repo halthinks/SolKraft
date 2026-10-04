@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 ### `hf skills` — Manage skills for AI assistants.
 
 - `hf skills add` — Install a Hugging Face skill for an AI assistant. `[--claude --global --dest PATH --force --format [auto|human|agent|json|quiet]]`
