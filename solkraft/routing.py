@@ -320,7 +320,7 @@ def catalog_graph(catalog: SkillCatalog) -> dict:
         base["risk"] = contract.get("risk", {})
         base["provenance"] = contract.get("provenance", {})
         base["trust"] = resolve_trust(record.id, contract)
-        if contract.get("source") == "sidecar":
+        if contract.get("source") == "sidecar" and contract.get("status") == "declared":
             base["inputs"] = contract.get("inputs", [])
             base["outputs"] = contract.get("outputs", [])
         if contract.get("schema_version") is not None:
