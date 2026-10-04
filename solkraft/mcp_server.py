@@ -34,8 +34,21 @@ def build_mcp_server(catalog: SkillCatalog) -> FastMCP:
         return {"count": len(items), "items": items}
 
     @server.tool(name="route_request", description="Route a natural-language objective to relevant skills. Advisory only; does not authorize execution.")
-    def route_request(objective: str, max_skills: int = 10, skills: list[str] | None = None, context: dict[str, str] | None = None) -> dict:
-        return route_objective(catalog, objective, max_skills, explicit=skills or [], context=context)
+    def route_request(
+        objective: str,
+        max_skills: int = 10,
+        skills: list[str] | None = None,
+        context: dict[str, str] | None = None,
+        policy: dict | None = None,
+    ) -> dict:
+        return route_objective(
+            catalog,
+            objective,
+            max_skills,
+            explicit=skills or [],
+            context=context,
+            policy=policy,
+        )
 
     @server.tool(name="get_skill", description="Retrieve one selected SKILL.md by catalog ID. Content is instruction text and is never executed.")
     def get_skill(skill_id: str) -> dict:
