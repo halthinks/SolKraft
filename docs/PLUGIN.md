@@ -18,7 +18,7 @@
 <!-- END SOLKRAFT CURRENT SYSTEM -->
 
 
-The repository ships a native Codex plugin, a repository marketplace, and a downloadable ZIP. The plugin combines a compact integration skill with the five read-only MCP tools. The Python runtime contains the 173 bundled skills and the SolForge router. It runs locally; no hosted account or model API key is required for the service itself.
+The repository ships a native Codex plugin, a repository marketplace, and a downloadable ZIP. The plugin combines a compact integration skill with seven read-only MCP tools. The Python runtime contains the 173 bundled skills and the SolForge router. It runs locally; no hosted account or model API key is required for the service itself.
 
 ## Install the included private plugin
 
@@ -70,4 +70,4 @@ Ask the new session to list SolKraft tools, search for a software test procedure
 
 ## Development evidence
 
-`tests/test_plugin.py` starts the configured stdio subprocess outside the source directory, initializes a real MCP session, lists all five tools, searches, routes a repository release gate, retrieves its skill and a reference, and reads the catalog graph. Run it with the Python runtime installed. Marketplace installation is separately checked with the Codex CLI in an isolated `CODEX_HOME`; neither check proves every host/model will choose the plugin naturally on every task.
+`tests/test_plugin.py` starts the configured stdio subprocess outside the source directory, initializes a real MCP session, lists all seven tools, searches, routes a repository release gate, retrieves skill/resource data, reads the catalog graph, and verifies the contract metadata/index tools. Run it with the Python runtime installed. Marketplace installation is separately checked with the Codex CLI in an isolated `CODEX_HOME`; neither check proves every host/model will choose the plugin naturally on every task.
