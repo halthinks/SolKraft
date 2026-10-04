@@ -23,7 +23,13 @@ def test_plugin_routes_and_retrieves_over_real_stdio(tmp_path):
                 await session.initialize()
                 tools = await session.list_tools()
                 assert {t.name for t in tools.tools} == {
-                    "search_skills", "route_request", "get_skill", "get_skill_resource", "get_selection_graph"
+                    "search_skills",
+                    "route_request",
+                    "get_skill",
+                    "get_skill_resource",
+                    "get_selection_graph",
+                    "get_skill_contract",
+                    "get_contract_index",
                 }
                 async def call(name, arguments):
                     result = await session.call_tool(name, arguments)

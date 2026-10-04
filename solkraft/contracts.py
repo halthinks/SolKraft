@@ -1,129 +1,118 @@
-"""Compact skill contracts used as selection constraints.
+"""Compact skill contract normalization.
 
-A contract is metadata: inputs, side effects, auth scope, and a test contract.
-It is never loaded as a procedure and never grants execution authority.
-Undeclared skills stay selectable but are marked opaque. Declared conflicts
-are rejected before the host fetches a SKILL.md body.
+The module intentionally contains no route filtering. Admissibility belongs to
+contract_policy and route_validation; this file only normalizes declarations.
 """
 from __future__ import annotations
 
-import re
+from .capabilities import LEGACY_AUTH_SCOPES
+from .effects import normalize_effects
 
 
-EFFECTS = (
-    "merge", "publish", "deploy", "send", "purchase",
-    "fabricate", "delete", "revoke", "rotate", "push",
-)
-# Ordered from least to most authority. A route may allow a scope and every
-# scope below it. External effects are never implied by a lower scope.
-AUTH_ORDER = ("none", "read", "write-local", "network", "external-effect")
-_EFFECT_FORMS = {
-    "merge": r"merg(?:e|ing|ed)?",
-    "publish": r"publish(?:ing|ed|es)?",
-    "deploy": r"deploy(?:ing|ed|s)?",
-    "send": r"send|sending|sent",
-    "purchase": r"purchas(?:e|ing|ed)",
-    "fabricate": r"fabricat(?:e|ing|ed|ion)?",
-    "delete": r"delet(?:e|ing|ed)",
-    "revoke": r"revok(?:e|ing|ed)",
-    "rotate": r"rotat(?:e|ing|ed)",
-    "push": r"push(?:ing|ed|es)?",
-}
+CONTRACT_STATUSES = ("declared", "legacy", "opaque", "unsupported", "invalid")
+SUPPORTED_SCHEMA_MAJOR = 1
 
 
-def excluded_effects(objective: str) -> list[str]:
-    """Return effects the objective explicitly forbids. Quotes stay inert."""
-    visible = re.sub(r"```[\s\S]*?```|`[^`\n]*`|\"[^\"\n]*\"|'[^'\n]*'", " ", objective.casefold())
-    found = []
-    for effect, form in _EFFECT_FORMS.items():
-        pattern = rf"\b(?:do not|don't|dont|without|never|skip|avoid)\b[^.;\n]{{0,70}}\b(?:{form})\b"
-        match = re.search(pattern, visible)
-        if match:
-            found.append((match.start(), effect))
-    return [effect for _, effect in sorted(found)]
-
-
-def _auth_rank(scope: str | None) -> int | None:
-    if scope not in AUTH_ORDER:
+def _schema_major(value) -> int | None:
+    if value is None:
         return None
-    return AUTH_ORDER.index(scope)
+    if isinstance(value, int) and not isinstance(value, bool):
+        return value
+    if isinstance(value, str):
+        head = value.strip().split(".", 1)[0]
+        if head.isdigit():
+            return int(head)
+    return None
 
 
-def contract_from_node(node: dict) -> dict:
-    """Read a contract from graph metadata. Missing fields stay undeclared."""
+def contract_from_node(node: dict | None) -> dict:
+    node = node if isinstance(node, dict) else {}
+    forced_status = node.get("contract_status")
+    if forced_status not in CONTRACT_STATUSES:
+        forced_status = None
+
+    schema_version = node.get("schema_version")
+    major = _schema_major(schema_version)
+    if schema_version is not None and major is None:
+        status = "invalid"
+    elif major is not None and major != SUPPORTED_SCHEMA_MAJOR:
+        status = "unsupported"
+    else:
+        status = forced_status
+
     side = node.get("side_effects")
+    if side is None and "effects" in node:
+        side = node.get("effects")
     if side is None and node.get("effect") is False:
         side = []
     if isinstance(side, str):
         side = [side]
+    if side is not None and not isinstance(side, list):
+        status = "invalid"
+        side = None
+    if isinstance(side, list):
+        if not all(isinstance(item, str) and item for item in side):
+            status = "invalid"
+            side = None
+        else:
+            side = normalize_effects(side)
+
     auth = node.get("auth_scope")
-    if auth is None and node.get("effect") is False:
+    authority = node.get("authority")
+    if auth is None and isinstance(authority, dict):
+        auth = authority.get("legacy_scope")
+    if auth is None and node.get("effect") is False and forced_status != "declared":
         auth = "none"
+    if auth is not None and auth not in LEGACY_AUTH_SCOPES:
+        status = "invalid"
+        auth = None
+
     test = node.get("test_contract") or node.get("exit_evidence")
-    inputs = list(node.get("inputs") or [])
-    declared = side is not None and auth in AUTH_ORDER and bool(test)
+    verification = node.get("verification")
+    if not test and isinstance(verification, dict):
+        test = verification.get("description")
+        if not test and verification.get("checks"):
+            test = "Declarative verification checks are present."
+
+    capabilities = []
+    resources = []
+    if isinstance(authority, dict):
+        capabilities = list(authority.get("capabilities") or [])
+        resources = list(authority.get("resources") or [])
+
+    if status is None:
+        legacy_contract = any(key in node for key in ("effect", "exit_evidence"))
+        explicit_contract = any(
+            key in node for key in (
+                "schema_version", "side_effects", "effects",
+                "test_contract", "verification", "authority",
+            )
+        )
+        # Pre-v1 graph metadata stays legacy even when it also carried the old
+        # auth_scope field. A v1 sidecar is identified by versioned metadata.
+        if legacy_contract and schema_version is None:
+            status = "legacy"
+        elif explicit_contract:
+            status = "declared"
+        else:
+            status = "opaque"
+
     return {
-        "inputs": inputs,
+        "status": status,
+        "schema_version": schema_version,
+        "contract_revision": node.get("contract_revision"),
+        "inputs": list(node.get("inputs") or []),
+        "outputs": list(node.get("outputs") or []),
         "side_effects": list(side) if side is not None else None,
-        "auth_scope": auth if auth in AUTH_ORDER else None,
+        "auth_scope": auth,
+        "capabilities": capabilities,
+        "resources": resources,
         "test_contract": test,
-        "declared": declared,
+        "verification": dict(verification) if isinstance(verification, dict) else {},
+        "risk": dict(node.get("risk") or {}) if isinstance(node.get("risk"), dict) else {},
+        "provenance": dict(node.get("provenance") or {}) if isinstance(node.get("provenance"), dict) else {},
+        "trust": dict(node.get("trust") or {}) if isinstance(node.get("trust"), dict) else {},
+        "contract_digest": node.get("contract_digest"),
+        "entrypoint_digest": node.get("entrypoint_digest"),
+        "declared": status in {"declared", "legacy"},
     }
-
-
-def _rejection(skill: str, contract: dict, reasons: list[str]) -> dict:
-    return {"id": skill, "reasons": reasons, "contract": contract}
-
-
-def violates(contract: dict, excluded: set[str], allowed_auth: str | None) -> list[str]:
-    reasons = []
-    declared_effects = set(contract["side_effects"] or [])
-    if declared_effects & excluded:
-        reasons.append("side effect excluded: " + ", ".join(sorted(declared_effects & excluded)))
-    if contract["auth_scope"] == "external-effect" and excluded:
-        reasons.append("external-effect scope conflicts with an effect exclusion")
-    if contract["side_effects"] is None and excluded:
-        reasons.append("undeclared side effects conflict with an effect exclusion")
-    allowed_rank = _auth_rank(allowed_auth)
-    skill_rank = _auth_rank(contract["auth_scope"])
-    if allowed_rank is not None and skill_rank is not None and skill_rank > allowed_rank:
-        reasons.append(f"auth scope {contract['auth_scope']} exceeds {allowed_auth}")
-    if allowed_rank is not None and contract["auth_scope"] is None:
-        reasons.append("undeclared auth scope exceeds an explicit allowance")
-    return reasons
-
-
-def apply_contracts(result: dict, graph: dict, objective: str, allowed_auth: str | None = None) -> dict:
-    """Drop selected skills whose declared contract conflicts with the request.
-
-    The composer still chooses order and method. This pass only removes skills
-    that cannot legally sit on the route, and attaches the test contract so the
-    host can verify a stage without loading the procedure body.
-    """
-    if allowed_auth is not None and allowed_auth not in AUTH_ORDER:
-        raise ValueError("Unknown auth scope: " + str(allowed_auth))
-    excluded = set(excluded_effects(objective))
-    nodes = graph.get("nodes", {})
-    rejected = []
-    selected = []
-    contracts = {}
-    for skill in result.get("selected", []):
-        contract = contract_from_node(nodes.get(skill, {}))
-        reasons = violates(contract, excluded, allowed_auth)
-        if reasons:
-            rejected.append(_rejection(skill, contract, reasons))
-            continue
-        selected.append(skill)
-        contracts[skill] = contract
-    rejected_ids = {item["id"] for item in rejected}
-    for stage in result.get("stages", []):
-        stage["selected"] = [skill for skill in stage.get("selected", []) if skill not in rejected_ids]
-    if "skills" in result:
-        result["skills"] = [item for item in result["skills"] if item.get("id") in contracts]
-    result["selected"] = selected
-    result["contracts"] = contracts
-    result["contract_rejections"] = rejected
-    result["excluded_effects"] = sorted(excluded)
-    result["selection_status"] = "matched" if selected else "abstained"
-    result["execution_authorized"] = False
-    return result

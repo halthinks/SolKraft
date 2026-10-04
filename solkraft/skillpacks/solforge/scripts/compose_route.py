@@ -12,6 +12,12 @@ import importlib.util
 from pathlib import Path
 import re
 
+from solkraft.constraint_parser import (
+    effect_exclusion_start as _effect_exclusion_start,
+    excluded_effects as _excluded_effects,
+    hide_quotes as _hide_quotes,
+)
+
 
 _ROOT = Path(__file__).resolve().parent.parent
 _SELECTOR_SPEC = importlib.util.spec_from_file_location(
@@ -22,63 +28,6 @@ assert _SELECTOR_SPEC.loader is not None
 _SELECTOR_SPEC.loader.exec_module(selector)
 
 _ACTION = r"research|compare|draft|write|compose|create|prepare|inspect|review|diagnose|investigate|debug|implement|fix|build|refactor|run|test|verify|validate|generate|audit|analyze|summarize|derive|design|perform|conduct|reproduce|replicate|hand\s+off|train|tune|optimize|model|evaluate|plan|formulate|solve|prove|compute|explain|check|package|install|release|visualize|factcheck|outline|find|assess"
-_EFFECTS = {
-    "merge": r"merg(?:e|ing|ed)?",
-    "publish": r"publish(?:ing|ed|es)?",
-    "deploy": r"deploy(?:ing|ed|s)?",
-    "send": r"send|sending|sent",
-    "purchase": r"purchas(?:e|ing|ed)",
-    "fabricate": r"fabricat(?:e|ing|ed|ion)?",
-    "delete": r"delet(?:e|ing|ed)",
-    "revoke": r"revok(?:e|ing|ed)",
-    "rotate": r"rotat(?:e|ing|ed)",
-    "push": r"push(?:ing|ed|es)?",
-}
-
-
-def _hide_quotes(text):
-    quoted = []
-
-    def replace(match):
-        quoted.append(match.group(0))
-        return " "
-
-    visible = re.sub(r"```[\s\S]*?```|`[^`\n]*`|\"[^\"\n]*\"|'[^'\n]*'", replace, text)
-    return visible, quoted
-
-
-def _excluded_effects(text):
-    lowered, _ = _hide_quotes(text.casefold())
-    context_start = re.search(r"\bcontext notes\s*:", lowered)
-    if context_start:
-        tail = lowered[context_start.start():]
-        exclusion_start = _effect_exclusion_start(tail)
-        lowered = (
-            lowered[:context_start.start()] + " " + tail[exclusion_start:]
-            if exclusion_start is not None else lowered[:context_start.start()]
-        )
-    found = []
-    for effect, form in _EFFECTS.items():
-        pattern = rf"\b(?:do not|don't|dont|without|never|skip|avoid)\b[^.;\n]{{0,70}}\b(?:{form})\b"
-        match = re.search(pattern, lowered)
-        if match:
-            found.append((match.start(), effect))
-    return [effect for _, effect in sorted(found)]
-
-
-def _effect_exclusion_start(text):
-    """Return the first explicit effect exclusion that closes a context block."""
-    matches = []
-    for form in _EFFECTS.values():
-        match = re.search(
-            rf"\b(?:do not|don't|dont|without|never)\b[^.;\n]{{0,70}}\b(?:{form})\b",
-            text,
-        )
-        if match:
-            matches.append(match.start())
-    return min(matches) if matches else None
-
-
 def _is_constraint_context(clause):
     """Keep delivery constraints and candidate identifiers out of the route."""
     return bool(re.match(
@@ -290,7 +239,7 @@ def _fallback_skill(graph, clause, context):
     return result["selected"][0] if result["selected"] else None
 
 
-def compose_route(graph, objective, explicit=(), context=None, max_skills=10):
+def compose_route(graph, objective, explicit=(), context=None, max_skills=10, blocked_skills=()):
     """Compose up to fifty ordered skills for a compound request.
 
     ``max_skills`` is a strict ceiling. Explicit skills are preserved first,
@@ -313,9 +262,13 @@ def compose_route(graph, objective, explicit=(), context=None, max_skills=10):
     selected = []
     stages = []
     unselected = []
+    blocked = set(blocked_skills or ())
 
     def add(skill, stage, reason, confidence="high"):
         if skill is None or skill not in nodes or nodes[skill]["effect"] or skill in selected:
+            return False
+        if skill in blocked:
+            unselected.append({"stage": stage + 1, "text": clauses[stage], "candidate": skill, "reason": "candidate inadmissible by contract policy"})
             return False
         if len(selected) >= max_skills:
             unselected.append({"stage": stage, "text": clauses[stage], "candidate": skill, "reason": "skill limit"})
@@ -325,7 +278,9 @@ def compose_route(graph, objective, explicit=(), context=None, max_skills=10):
         return True
 
     for skill in explicit:
-        if len(selected) >= max_skills:
+        if skill in blocked:
+            unselected.append({"stage": None, "text": skill, "candidate": skill, "reason": "candidate inadmissible by contract policy"})
+        elif len(selected) >= max_skills:
             unselected.append({"stage": None, "text": skill, "candidate": skill, "reason": "skill limit"})
         elif not nodes[skill]["effect"]:
             selected.append(skill)

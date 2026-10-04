@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0",
+  "skill_id": "solforge-workflow-legal-draft",
+  "contract_revision": 1,
+  "inputs": [
+    {
+      "name": "jurisdiction-and-effective-date",
+      "required": true,
+      "source": "user",
+      "description": "jurisdiction and effective date",
+      "schema": {}
+    },
+    {
+      "name": "question-and-controlling-sources",
+      "required": true,
+      "source": "user",
+      "description": "question and controlling sources",
+      "schema": {}
+    },
+    {
+      "name": "user-scope-and-acceptance-criteria",
+      "required": true,
+      "source": "user",
+      "description": "user scope and acceptance criteria",
+      "schema": {}
+    }
+  ],
+  "outputs": [
+    {
+      "name": "policy-draft",
+      "description": "policy_draft",
+      "schema": {}
+    },
+    {
+      "name": "document-draft",
+      "description": "document_draft",
+      "schema": {}
+    }
+  ],
+  "effects": [],
+  "authority": {
+    "capabilities": [],
+    "resources": [],
+    "legacy_scope": "none"
+  },
+  "risk": {
+    "external": false,
+    "destructive": false,
+    "open_world": false
+  },
+  "verification": {
+    "mode": "declarative",
+    "description": "The requested policy_draft, document_draft is supported by inspected sources or observed behavior; unresolved limits are stated.",
+    "checks": []
+  },
+  "provenance": {
+    "migration": "legacy-graph",
+    "inferred": true
+  },
+  "extensions": {
+    "legacy_graph": {
+      "domain": "legal_policy",
+      "selection": "automatic or explicit",
+      "path": "../solforge-workflow-legal-draft/SKILL.md"
+    }
+  }
+}
