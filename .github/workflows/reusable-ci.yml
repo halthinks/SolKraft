@@ -61,6 +61,7 @@ jobs:
           retention-days: 14
           path: |
             build/local-ci.json
+            build/contracts-migration.json
             build/contributions/latest.json
             build/preflight/**
             scripts/results-routing-100000.json
