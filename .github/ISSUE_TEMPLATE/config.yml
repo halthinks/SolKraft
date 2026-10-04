@@ -1,5 +1,8 @@
 blank_issues_enabled: false
 contact_links:
+  - name: Contribute a code, docs, test, contract, routing, or skill change
+    url: https://github.com/halthinks/SolKraft/compare
+    about: Use a pull request when you already have a concrete repository change ready for review.
   - name: Security vulnerability
     url: https://github.com/halthinks/SolKraft/security/advisories/new
-    about: Report a vulnerability privately. Do not include API keys in public issues.
+    about: Report a vulnerability privately. Do not include API keys, tokens, private data, or exploit details in public issues.
