@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Native matcher maintenance
 
 Run `python scripts/select_workflow.py --objective "requested outcome" --compact`. Add `--explain` only when inspecting a match. The selector uses local rules, scoped clauses, domain context, concept aliases, and lexical ranking; it needs no model call, network, plugin, or MCP service.

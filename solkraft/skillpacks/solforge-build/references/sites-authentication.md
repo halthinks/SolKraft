@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Sites Source Authentication
 
 When `.openai/hosting.json` exists or a Git remote resolves to `git.chatgpt-team.site`, never run a plain `git push`, `git fetch`, `git ls-remote`, or another authenticated remote command.

@@ -3,6 +3,8 @@ name: solforge-workflow-consequential-revoke
 description: Carry out an explicitly authorized revoke action for its exact target and verify the resulting effect.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Revoke a credential or access grant
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
@@ -14,3 +16,14 @@ Confirm reversibility and blast radius before the call. Determine whether revoca
 Execute the revoke once against the exact target, then verify the effect from the enforcing system's own state rather than from the API's success response: attempt an operation with the revoked credential and observe the denial, or list the grant and confirm it is absent or marked revoked. An acknowledgment without an observed denial is weak evidence, a cached or offline rejection is not proof of server-side revocation, and revoking one token does not establish that the principal's other tokens or live sessions are invalid. Never retry an uncertain outcome without first reconciling whether the first attempt already took effect.
 
 Record a revocation evidence record: who authorized the action, the exact target, the time, the call made, and the observed post-revocation denial. Report what was revoked, the supporting evidence, residual access still held by the principal, and any follow-on. Use [rotate](../solforge-workflow-consequential-rotate/SKILL.md) when a replacement credential must be issued — that is a separate effect requiring its own authorization.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- This procedure is selected by SolKraft's contract-aware router; selection does not authorize execution.
+- Public routing defaults to hardened policy; opaque or contract-inadmissible capabilities fail closed.
+- When `contract.yaml` exists, compact metadata is evaluated before this full instruction body is loaded.
+- Runtime authority stays with the host; SolKraft keeps `execution_authorized: false`.
+- Current local acceptance covers 100,000 unique 250-word requests, 100 ask families per skill, and 100% eligible target recall. See repository `VALIDATION.md`.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

@@ -3,6 +3,8 @@ name: solforge-workflow-launcher-release-readiness
 description: Reconcile artifacts, checksums, SBOM, provenance, signing readiness, CI, documentation, updates, and support into a truthful release matrix.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Assess launcher release readiness
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
@@ -14,3 +16,14 @@ Build the matrix one row per platform or channel. For each, confirm the artifact
 Assess signing readiness without performing the signature: signing identity available, tooling configured, and a test signature verifiable if the channel permits one. Distinguish "can be signed" from "is signed" and record which applies. Verify the update path — feed configuration, version metadata, and rollback or support statements — matches the artifacts actually being released, and that user-facing documentation names the correct version, platforms, and known limits. A ready cell asserted from configuration intent rather than an inspected artifact is weak evidence.
 
 Report the matrix with each cell marked ready, blocked, or not applicable, the evidence behind each ready claim, and the specific gap behind each blocked one. Publishing, uploading, or signing for distribution is a separate effect requiring its own authorization. Use [signing and provenance](../solforge-sign-and-prove/SKILL.md) when missing checksums, SBOMs, or signing evidence must be produced before the matrix can be completed.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- Selected by SolKraft's contract-aware router; selection is advisory and does not grant execution authority.
+- Hardened routing rejects opaque or contract-inadmissible capabilities.
+- Contract metadata is evaluated before full skill instructions are loaded.
+- Runtime authority stays with the host; `execution_authorized` remains `false`.
+- Current local acceptance: 100,000 unique 250-word requests, 100 ask families per skill, and 100% eligible target recall. See `VALIDATION.md`.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

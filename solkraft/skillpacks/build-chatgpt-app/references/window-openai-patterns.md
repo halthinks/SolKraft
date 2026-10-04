@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Window.openai Patterns
 
 Load this reference when a task needs ChatGPT-only widget features, when translating older examples that use an `app` wrapper, or when a React widget should read host globals safely.

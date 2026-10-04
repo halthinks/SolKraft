@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Apps SDK Docs Workflow
 
 Use this reference to keep code generation aligned with current OpenAI Apps SDK docs.

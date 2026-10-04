@@ -3,6 +3,8 @@ name: hf-cli
 description: Manage Hugging Face Hub resources with the hf CLI, including authentication, repositories, models, datasets, Spaces, jobs, and cache.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 Install: `curl -LsSf https://hf.co/cli/install.sh | bash -s`.
 
 The Hugging Face Hub CLI tool `hf` is available. IMPORTANT: The `hf` command replaces the deprecated `huggingface-cli` command.
@@ -120,3 +122,14 @@ Read [Mounting repos as local filesystems](astra-detail-17.md) when mounting Hub
 - Use `hf <command> --help` for full options, descriptions, usage, and real-world examples
 - Authenticate with `HF_TOKEN` env var (recommended) or with `--token`
 - Update the CLI with `hf update` (uses the correct command for the detected install method)
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- This procedure is selected by SolKraft's contract-aware router; selection does not authorize execution.
+- Public routing defaults to hardened policy; opaque or contract-inadmissible capabilities fail closed.
+- When `contract.yaml` exists, compact metadata is evaluated before this full instruction body is loaded.
+- Runtime authority stays with the host; SolKraft keeps `execution_authorized: false`.
+- Current local acceptance covers 100,000 unique 250-word requests, 100 ask families per skill, and 100% eligible target recall. See repository `VALIDATION.md`.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

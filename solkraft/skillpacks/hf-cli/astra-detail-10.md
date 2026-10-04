@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 ### `hf models` — Interact with models on the Hub.
 
 - `hf models card MODEL_ID` — Get the model card (README) for a model on the Hub. `[--metadata --text --format [auto|human|agent|json|quiet]]`

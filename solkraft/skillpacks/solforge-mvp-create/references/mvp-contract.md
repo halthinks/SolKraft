@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # MVP execution contract
 
 Fix these fields before execution: original intent, exact prompt result, product shape, target user, problem, value hypothesis, primary journeys, required and excluded capabilities, success metrics, acceptance criteria, repository, mutation authority, delivery target, iteration ceiling, validation gates, and execution-quality contract.

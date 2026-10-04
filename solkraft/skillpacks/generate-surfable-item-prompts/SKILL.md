@@ -3,6 +3,8 @@ name: generate-surfable-item-prompts
 description: Write Blender and engine prompts for rideable objects in a massive-wave surfing game, preserving shape-derived handling.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Surfable Item Prompt Generator
 
 Convert even a minimal request such as "make a couch" into one implementation-ready production prompt. Preserve the object's real physical identity; never produce a surfboard reskin.
@@ -38,3 +40,14 @@ Read [surfable-item-contract.md](references/surfable-item-contract.md) whenever 
 ## Quality baseline
 
 For a worn three-seat couch, require plausible full-size dimensions and mass; frame, cushion, upholstery, and water-absorption behavior; crude underside planing; high drag; poor yaw; delayed steering; cushion waterlogging; rider and hand/foot sockets; leash/tow points; compound collision; multiple buoyancy regions; wet/dry/soaked/damaged/foam-contact states; LODs; hydrodynamics metadata; and inspection, waterline, planing, crash, and performance evidence. Match or exceed that specificity for every item.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- This procedure is selected by SolKraft's contract-aware router; selection does not authorize execution.
+- Public routing defaults to hardened policy; opaque or contract-inadmissible capabilities fail closed.
+- When `contract.yaml` exists, compact metadata is evaluated before this full instruction body is loaded.
+- Runtime authority stays with the host; SolKraft keeps `execution_authorized: false`.
+- Current local acceptance covers 100,000 unique 250-word requests, 100 ask families per skill, and 100% eligible target recall. See repository `VALIDATION.md`.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

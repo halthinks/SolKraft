@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # User-Uploaded Images Pipeline
 
 Compose Netlify Functions (upload handler) + Netlify Blobs (storage) + Image CDN (serving/transforming) to build a complete user-uploaded image pipeline.

@@ -3,6 +3,8 @@ name: preserve-engineering-selections
 description: Preserve evidence-backed real-part selections, engineering rationale, constraints, and validation gates while carrying a hardware product through requirements, BOM, schematic, PCB, firmware, CAD, prototype, and release. Use when substantial engineering work already selected components or architecture for reasons; when closing design gaps without arbitrary substitutions; when reconciling supplier STEP, pinouts, ECAD, MCAD, code, and physical evidence; or when a project risks treating selected parts as generic TBD fields.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Preserve Engineering Selections
 
 Treat prior engineering choices as a design baseline, not blank fields. Accept new decisions from `$select-and-validate-hardware-parts`; hand preserved selections to `$build-selected-hardware-product`.
@@ -99,3 +101,14 @@ Passing tests validate only what they execute. A placeholder ECAD/CAD file is no
 Finish only when every selection is traceable through all layers required by the claimed readiness level, all replacements have explicit lineage, all remaining gaps are visible with terminal disposition, and BOM, ECAD, PCB, firmware, CAD, renders, prototype evidence, and release claims agree.
 
 Report both preserved progress and remaining gaps. Do not describe legitimate source-bound selection work as random assignments merely because later realization is incomplete.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- This procedure is selected by SolKraft's contract-aware router; selection does not authorize execution.
+- Public routing defaults to hardened policy; opaque or contract-inadmissible capabilities fail closed.
+- When `contract.yaml` exists, compact metadata is evaluated before this full instruction body is loaded.
+- Runtime authority stays with the host; SolKraft keeps `execution_authorized: false`.
+- Current local acceptance covers 100,000 unique 250-word requests, 100 ask families per skill, and 100% eligible target recall. See repository `VALIDATION.md`.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

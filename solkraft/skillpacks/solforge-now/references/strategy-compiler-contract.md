@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Native strategy composition
 
 Use the user objective, applicable contracts, observed source state, and available tools to choose work. Select one primary procedure per stage, add distinct support only when useful, and preserve required inputs and exclusions.

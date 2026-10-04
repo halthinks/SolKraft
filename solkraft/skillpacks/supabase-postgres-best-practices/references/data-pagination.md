@@ -5,6 +5,8 @@ impactDescription: Consistent O(1) performance regardless of page depth
 tags: pagination, cursor, keyset, offset, performance
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 ## Use Cursor-Based Pagination Instead of OFFSET
 
 OFFSET-based pagination scans all skipped rows, getting slower on deeper pages. Cursor pagination is O(1).

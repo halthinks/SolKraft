@@ -5,6 +5,8 @@ impactDescription: Better index locality, reduced fragmentation
 tags: primary-key, identity, uuid, serial, schema
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 ## Select Optimal Primary Key Strategy
 
 Primary key choice affects insert performance, index size, and replication

@@ -3,6 +3,24 @@ name: solkraft
 description: Find and apply useful procedures for research, coding, testing, engineering, writing, data, science, and business tasks. Use when a reusable method would improve the work or a compound request needs an ordered skill route.
 ---
 
+<!-- BEGIN SOLKRAFT CURRENT SYSTEM -->
+## Current SolKraft system — October 2026
+
+- Contract-aware routing uses semantic capability identity plus machine-readable `contract.yaml` metadata for typed inputs/outputs, namespaced effects, capability/resource requirements, declarative verification, provenance, trust, and exact digests.
+- Public REST, MCP, and CLI routing default to **hardened** policy. Opaque or otherwise inadmissible capabilities fail closed; the Python library stays compatibility-oriented unless stricter policy is requested.
+- SolKraft is advisory and non-executing. Runtime authority remains with the host and `execution_authorized` remains `false`.
+- The compact `ContractIndex` supplies routing/API/MCP/docs metadata without loading every full `SKILL.md` body into the hot path.
+- Read-only MCP tools: `search_skills`, `route_request`, `get_skill`, `get_skill_resource`, `get_selection_graph`, `get_skill_contract`, and `get_contract_index`.
+- Reusable CI and pre-PR contribution validation share contract/schema, routing, packaging, installed-MCP, index/hardening, and evidence gates.
+- Latest local acceptance: **100,000 / 100,000** unique 250-word requests passed with **100 ask families per skill**, **100% eligible target recall**, **100% hardened blocking**, and **100% consequential-boundary correctness**; no explicit skill IDs were injected.
+- The public Validation display is a clearly labeled **recorded reenactment**, not live browser CI.
+- The plugin exposes metadata/search/routing/retrieval only; it does not add a skill-execution MCP tool.
+
+<!-- END SOLKRAFT CURRENT SYSTEM -->
+
+
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # SolKraft in normal work
 
 Assess useful skills at task start and when the work changes stage. For a clear specialist task, call SolKraft `search_skills` with a short description of the actual deliverable. For a compound or ambiguous task, call `route_request` with the user's full objective and relevant context (especially the current stage). A repository release gate is software testing even if the wording says “draft PR.”
@@ -14,3 +32,14 @@ For substantial multi-step work, retrieve `capability-preserving-execution` as t
 Continue through authorized work without making the user choose internal skill IDs. Retain loaded procedures across goal continuations; reassess on a material stage change. Repository instructions and the user's intent remain authoritative. A route grants no permission to publish, send, delete, purchase, or deploy.
 
 If MCP is unavailable, report the connection failure plainly. Check that Python 3.11+ and the SolKraft package are installed in the environment used by the plugin. Do not pretend the tools ran. A local MCP plugin works in compatible local hosts; browser ChatGPT requires a reachable remote MCP service or copying selected instructions manually.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- This procedure is selected by SolKraft's contract-aware router; selection does not authorize execution.
+- Public routing defaults to hardened policy; opaque or contract-inadmissible capabilities fail closed.
+- When `contract.yaml` exists, compact metadata is evaluated before this full instruction body is loaded.
+- Runtime authority stays with the host; SolKraft keeps `execution_authorized: false`.
+- Current local acceptance covers 100,000 unique 250-word requests, 100 ask families per skill, and 100% eligible target recall. See repository `VALIDATION.md`.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # App Archetypes
 
 Load this reference before choosing a starting point for a new ChatGPT app. The goal is to keep the skill inside a small number of supported app shapes instead of inventing a custom structure for every prompt.

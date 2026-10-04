@@ -3,6 +3,8 @@ name: solforge-workflow-software-compare
 description: Inspect implementations symmetrically against explicit criteria, evidence parity, and decision sensitivity.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Compare software implementations
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
@@ -14,3 +16,14 @@ Apply every criterion symmetrically. Run candidates against the same workload, h
 Distinguish functional equivalence from non-functional difference: two implementations can produce identical outputs yet differ sharply in complexity, error handling, dependency risk, or operational cost. Then test decision sensitivity — identify which criteria dominate the ranking and whether the outcome flips under plausible changes in weights or workload. A ranking that inverts under small weight changes is a tie with stated conditions, not a winner.
 
 Report the criteria, the evidence per candidate per criterion with its provenance, the recommendation with its sensitivity, and unresolved gaps where parity could not be achieved. Use [comparison execution](../solforge-run-comparison/SKILL.md) when the underlying comparison method needs more procedure than this stage supplies.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- Selected by the contract-aware router; selection is advisory.
+- Hardened routing rejects opaque or inadmissible capabilities.
+- Contract metadata is evaluated before loading the full instruction body.
+- Execution authority stays with the host.
+- Current local acceptance: 100,000 unique 250-word requests, 100 ask families per skill, 100% eligible target recall.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

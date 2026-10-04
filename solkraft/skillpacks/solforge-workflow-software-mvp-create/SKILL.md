@@ -3,6 +3,8 @@ name: solforge-workflow-software-mvp-create
 description: Turn a product brief or selected research into a PRD, architecture, and working vertical slice.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Build a software MVP
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
@@ -16,3 +18,14 @@ Build the slice as one runnable path from entry to result: real data in, real pe
 Verify by building and running the actual artifact from a clean state: install, start, and execute the core flow as the target user would. Confirm each PRD acceptance check against observed behavior, not against code that looks like it should work. Named anti-patterns: a PRD without a runnable slice, a slice that only works in the developer's existing environment, seeded or hardcoded data presented as real end-to-end behavior, and a mock or stub presented as evidence for an integration never exercised. Distinguish what genuinely runs from what is stubbed, deferred, or untested.
 
 Report what was built and verified, the PRD and architecture decisions with their rationale, deferred scope, open risks, and what the next slice should address. Use [solforge-mvp-create](../solforge-mvp-create/SKILL.md) for the underlying method when it supplies missing procedure.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- Selected by the contract-aware router; selection is advisory.
+- Hardened routing rejects opaque or inadmissible capabilities.
+- Contract metadata is evaluated before loading the full instruction body.
+- Execution authority stays with the host.
+- Current local acceptance: 100,000 unique 250-word requests, 100 ask families per skill, 100% eligible target recall.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Code Quality Reviewer Prompt Template
 
 Use this template when dispatching a code quality reviewer subagent.

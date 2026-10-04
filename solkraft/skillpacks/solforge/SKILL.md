@@ -3,6 +3,8 @@ name: solforge
 description: "Compose relevant skills when a task spans research, implementation, verification, or reporting and the next workflow is unclear. Directly use an obvious specialist without routing overhead."
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # SolForge native workflow selection
 
 Select the next useful workflow from the user's outcome. These are regular local skills with native execution; no plugin activation or MCP service is required. Select skills naturally from the requested outcome and their descriptions; the user need not name SolForge. For a clearly named or obvious specialist, load it directly. Use one primary procedure per stage and add another only for distinct guidance. For a simple answer or small self-contained edit, do the task without graph overhead.
@@ -47,3 +49,14 @@ Matcher maintenance and regression checks: [matcher guide](references/matcher-gu
 Interpret the requested operation and current stage before matching isolated words. A draft pull request is a software artifact state; "draft" alone does not make it a writing task. Repository release gates, pre-merge checks, and CI validation use `solforge-workflow-software-test`; failing checks needing a cause use software diagnosis. Reviewing the code diff uses codebase investigation. Writing or revising the PR title, body, or description uses the corresponding writing procedure. Preserve independently requested stages in order.
 
 For a short follow-up whose established stage is the repository release gate, pass `--context-stage repository-release-gate`, or `"context":{"domain":"software","stage":"repository-release-gate"}` in a request file. Do not infer a stage from the word "draft". Explicit text deliverables override this contextual hint. A bare "draft PR" without an established operation abstains; selection never opens, pushes, merges, or publishes a PR.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- Selected by the contract-aware router; selection is advisory.
+- Hardened routing rejects opaque or inadmissible capabilities.
+- Contract metadata is evaluated before loading the full instruction body.
+- Execution authority stays with the host.
+- Current local acceptance: 100,000 unique 250-word requests, 100 ask families per skill, 100% eligible target recall.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

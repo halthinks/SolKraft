@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Academic Test: Systematic Debugging Skill
 
 You have access to the systematic debugging skill at skills/debugging/systematic-debugging

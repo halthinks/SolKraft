@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Model selection
 
 Use this route for model recommendations, comparisons, and latest/current/default choices when the user is not requesting a migration or prompting guidance.

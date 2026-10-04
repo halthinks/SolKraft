@@ -3,6 +3,8 @@ name: solforge-workflow-software-portability-audit
 description: Inventory platform coupling and build an evidence-bound compatibility matrix before making target claims.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Audit software portability
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
@@ -14,3 +16,14 @@ Inventory coupling systematically rather than sampling: operating-system APIs an
 Build the compatibility matrix with an evidence class per cell: verified by a build, test run, or observed execution on that target; claimed by dependency or upstream documentation; inferred from source inspection; or unknown. A green compile is not evidence of correct runtime behavior, a pass on one distribution or version is not evidence for the whole family, and an emulation or translation layer is not native support — label it as such. Do not mark a target supported from source inspection alone, and do not generalize a result past the environment that produced it.
 
 Report the coupling inventory with locations, the matrix with its evidence classes, per-target gaps ranked by remediation cost, and the unknowns that block a claim. Use the [portability audit method](../solforge-portability-audit/SKILL.md) when the audit needs fuller domain criteria than this procedure supplies.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- Selected by the contract-aware router; selection is advisory.
+- Hardened routing rejects opaque or inadmissible capabilities.
+- Contract metadata is evaluated before loading the full instruction body.
+- Execution authority stays with the host.
+- Current local acceptance: 100,000 unique 250-word requests, 100 ask families per skill, 100% eligible target recall.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

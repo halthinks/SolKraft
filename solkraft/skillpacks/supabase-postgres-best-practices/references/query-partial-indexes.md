@@ -5,6 +5,8 @@ impactDescription: 5-20x smaller indexes, faster writes and queries
 tags: indexes, partial-index, query-optimization, storage
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 ## Use Partial Indexes for Filtered Queries
 
 Partial indexes only include rows matching a WHERE condition, making them smaller and faster when queries consistently filter on the same condition.

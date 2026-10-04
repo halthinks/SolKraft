@@ -3,6 +3,8 @@ name: solforge-workflow-implementation
 description: Apply the selected Single, Multi, or Ultra runner to a bounded implementation task with explicit writes, tests, rollback, and verification.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Implement a bounded change
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
@@ -14,3 +16,14 @@ Read the code, configuration, and existing test commands you intend to touch bef
 Verify against the intended checkout and configuration using the repository's own build and test commands, and inspect the real output or artifact when tests alone do not establish the requested behavior. A written plan, a plausible diff, or a dry run is not evidence of a working change, and a green run against the wrong checkout or a stale artifact proves nothing. Record the actual commands, results, and environment; rerun any checks invalidated by later edits.
 
 Report what changed, the verification evidence, the rollback path, and any remaining limits or follow-up. Use [solforge-build](../solforge-build/SKILL.md) when the task is a concrete feature or fix in working code that needs no runner orchestration.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- This procedure is selected by SolKraft's contract-aware router; selection does not authorize execution.
+- Public routing defaults to hardened policy; opaque or contract-inadmissible capabilities fail closed.
+- When `contract.yaml` exists, compact metadata is evaluated before this full instruction body is loaded.
+- Runtime authority stays with the host; SolKraft keeps `execution_authorized: false`.
+- Current local acceptance covers 100,000 unique 250-word requests, 100 ask families per skill, and 100% eligible target recall. See repository `VALIDATION.md`.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

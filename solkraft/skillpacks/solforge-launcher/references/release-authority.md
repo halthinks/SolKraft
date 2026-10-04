@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Release authority
 
 Local inspection, generation, builds, tests, checksums, local signatures with user-supplied test keys, SBOMs, provenance drafts, and release previews are local actions.

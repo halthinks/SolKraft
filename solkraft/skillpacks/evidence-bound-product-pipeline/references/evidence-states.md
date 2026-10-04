@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Evidence states
 
 Use these states consistently. Add project-specific states only when their meaning is equally unambiguous.

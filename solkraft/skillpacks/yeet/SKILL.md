@@ -3,6 +3,8 @@ name: yeet
 description: Commit and push scoped local changes and open a draft GitHub pull request when publication is requested.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # GitHub Publish Changes
 
 ## Overview
@@ -68,3 +70,14 @@ The PR description should use real Markdown prose and cover:
 - the user or developer impact
 - the root cause when the PR is a fix
 - the checks used to validate it
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- Selected by the contract-aware router; selection is advisory.
+- Hardened routing rejects opaque or inadmissible capabilities.
+- Contract metadata is evaluated before loading the full instruction body.
+- Execution authority stays with the host.
+- Current local acceptance: 100,000 unique 250-word requests, 100 ask families per skill, 100% eligible target recall.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

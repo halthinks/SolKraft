@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Visual Companion Guide
 
 Browser-based visual brainstorming companion for showing mockups, diagrams, and options.

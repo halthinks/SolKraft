@@ -5,6 +5,8 @@ impactDescription: 10x throughput for worker queues
 tags: skip-locked, queue, workers, concurrency
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 ## Use SKIP LOCKED for Non-Blocking Queue Processing
 
 When multiple workers process a queue, SKIP LOCKED allows workers to process different rows without waiting.

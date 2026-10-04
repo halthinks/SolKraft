@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 ### `hf discussions` — Manage discussions and pull requests on the Hub.
 
 - `hf discussions close REPO_ID NUM` — Close a discussion or pull request. `[--comment TEXT --yes --type [model|dataset|space] --format [auto|human|agent|json|quiet]]`

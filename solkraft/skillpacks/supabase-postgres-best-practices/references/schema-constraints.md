@@ -5,6 +5,8 @@ impactDescription: Prevents migration failures and enables idempotent schema cha
 tags: constraints, migrations, schema, alter-table
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 ## Add Constraints Safely in Migrations
 
 PostgreSQL does not support `ADD CONSTRAINT IF NOT EXISTS`. Migrations using this syntax will fail.

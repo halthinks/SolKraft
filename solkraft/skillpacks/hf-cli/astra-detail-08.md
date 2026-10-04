@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 ### `hf extensions` — Manage hf CLI extensions.
 
 - `hf extensions exec NAME` — Execute an installed extension.

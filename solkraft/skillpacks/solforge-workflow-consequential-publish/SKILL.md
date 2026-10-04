@@ -3,6 +3,8 @@ name: solforge-workflow-consequential-publish
 description: Carry out an explicitly authorized publish action for its exact target and verify the resulting effect.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Publish an authorized artifact
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
@@ -14,3 +16,14 @@ Confirm the artifact to publish is exactly the one authorized: check its identit
 Execute the authorized publish once, exactly as scoped: no broader visibility, no additional targets, no bundled side actions. Treat an ambiguous submission response as an uncertain state rather than a failure to retry — re-query the target before resubmitting, because a blind retry can double-publish. A queued, scheduled, or accepted-for-processing status is not publication.
 
 Verify the effect at the target itself: retrieve or observe the published artifact as its audience would and confirm identity, version, and visibility match the authorization. An API success response without an observable artifact is weak evidence. Report the action and exact target, the authorization basis, the observed effect with its evidence, the rollback or retraction path if one exists, and any divergence from what was authorized. Use [report production](../solforge-report/SKILL.md) when the artifact to publish is itself a report still to be produced; generating it is a separate stage from publishing it.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- This procedure is selected by SolKraft's contract-aware router; selection does not authorize execution.
+- Public routing defaults to hardened policy; opaque or contract-inadmissible capabilities fail closed.
+- When `contract.yaml` exists, compact metadata is evaluated before this full instruction body is loaded.
+- Runtime authority stays with the host; SolKraft keeps `execution_authorized: false`.
+- Current local acceptance covers 100,000 unique 250-word requests, 100 ask families per skill, and 100% eligible target recall. See repository `VALIDATION.md`.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

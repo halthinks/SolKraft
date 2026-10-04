@@ -5,6 +5,8 @@ impactDescription: Identify top resource-consuming queries
 tags: pg-stat-statements, monitoring, statistics, performance
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 ## Enable pg_stat_statements for Query Analysis
 
 pg_stat_statements tracks execution statistics for all queries, helping identify slow and frequent queries.

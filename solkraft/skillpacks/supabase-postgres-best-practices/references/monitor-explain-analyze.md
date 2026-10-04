@@ -5,6 +5,8 @@ impactDescription: Identify exact bottlenecks in query execution
 tags: explain, analyze, diagnostics, query-plan
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 ## Use EXPLAIN ANALYZE to Diagnose Slow Queries
 
 EXPLAIN ANALYZE executes the query and shows actual timings, revealing the true performance bottlenecks.

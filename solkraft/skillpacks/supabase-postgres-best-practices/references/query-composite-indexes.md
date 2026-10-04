@@ -5,6 +5,8 @@ impactDescription: 5-10x faster multi-column queries
 tags: indexes, composite-index, multi-column, query-optimization
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 ## Create Composite Indexes for Multi-Column Queries
 
 When queries filter on multiple columns, a composite index is more efficient than separate single-column indexes.

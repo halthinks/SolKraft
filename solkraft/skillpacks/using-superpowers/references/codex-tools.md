@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Codex Tool Mapping
 
 Skills use Claude Code tool names. When you encounter these in a skill, use your platform equivalent:

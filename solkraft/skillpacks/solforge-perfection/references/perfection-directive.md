@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 > **Superseded:** the fixed 30-loop quota in this legacy directive no longer applies. The live skill and native execution contract govern — there is no fixed loop quota.
 
 # Perfection Phase Directive

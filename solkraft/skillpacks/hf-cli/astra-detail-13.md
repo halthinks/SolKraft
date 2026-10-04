@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 ### `hf sandbox` — Run and manage sandboxes on Hugging Face Jobs.
 
 - `hf sandbox cp SRC DST` — Copy a file between the local machine and a sandbox (docker-style). `[--namespace TEXT --format [auto|human|agent|json|quiet]]`

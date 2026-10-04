@@ -3,6 +3,8 @@ name: solforge-workflow-business-diligence
 description: Test the investment or operating thesis against source quality, red flags, counterevidence, and uncertainty.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Stress-test an investment or operating thesis
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
@@ -14,3 +16,14 @@ Triangulate every material claim. Separate primary sources (audited financials, 
 Actively hunt counterevidence rather than cataloging confirmations. A finding sourced only to company-supplied material is weak evidence; absence of discovered red flags is not absence of risk — state what was not inspectable (unaudited periods, withheld contracts, unreachable references) as a limit on the conclusion, not as clearance. Keep facts, inferences, and unknowns distinct, and do not upgrade a plausible explanation into a verified one without the supporting record.
 
 Report the verdict on each claim as supported, undermined, or unresolved, with the evidence behind it; a risk register ranked by severity and likelihood; and the specific evidence that would change the conclusion. Use [run research](../solforge-run-research/SKILL.md) when the diligence plan needs reproducible source tracking or deeper evidence gathering beyond the supplied materials.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- This procedure is selected by SolKraft's contract-aware router; selection does not authorize execution.
+- Public routing defaults to hardened policy; opaque or contract-inadmissible capabilities fail closed.
+- When `contract.yaml` exists, compact metadata is evaluated before this full instruction body is loaded.
+- Runtime authority stays with the host; SolKraft keeps `execution_authorized: false`.
+- Current local acceptance covers 100,000 unique 250-word requests, 100 ask families per skill, and 100% eligible target recall. See repository `VALIDATION.md`.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

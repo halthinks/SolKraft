@@ -3,6 +3,8 @@ name: solforge-workflow-finish
 description: Explicitly accept the completed result as the final deliverable without creating another execution or report work bundle.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Accept the completed result
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
@@ -14,3 +16,14 @@ Inspect the actual deliverable before accepting it. Spot-check its material clai
 Acceptance is a decision, not another stage of work. Do not manufacture a new execution, report, or packaging bundle as a condition of finishing, and do not re-run verification whose results already cover this artifact. If inspection reveals a real gap, name it and either resolve it within the current scope or carry it as an explicit limit — do not widen the task or route into a new workflow just to avoid stating the gap.
 
 Report what was accepted, the evidence inspected, and any remaining limits or unsupported claims. Use [finalize](../solforge-finalize/SKILL.md) when the deliverable still needs its verification evidence assembled or requested handoff artifacts produced before acceptance.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- This procedure is selected by SolKraft's contract-aware router; selection does not authorize execution.
+- Public routing defaults to hardened policy; opaque or contract-inadmissible capabilities fail closed.
+- When `contract.yaml` exists, compact metadata is evaluated before this full instruction body is loaded.
+- Runtime authority stays with the host; SolKraft keeps `execution_authorized: false`.
+- Current local acceptance covers 100,000 unique 250-word requests, 100 ask families per skill, and 100% eligible target recall. See repository `VALIDATION.md`.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

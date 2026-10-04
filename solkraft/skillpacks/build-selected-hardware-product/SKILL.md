@@ -3,6 +3,8 @@ name: build-selected-hardware-product
 description: Build an evidence-backed hardware product from preserved real-part and architecture selections, carrying them through exact BOM, supplier geometry, pinouts, schematics, routed PCB, target firmware, CAD, enclosure, assembly, first article, measurements, renders, and release evidence. Use when Codex must turn an established engineering baseline into procurement-, fabrication-, prototype-, integration-, or release-ready deliverables without losing selection rationale or substituting parts merely to close gaps.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Build Selected Hardware Product
 
 Use `$select-and-validate-hardware-parts` to create new decisions and `$preserve-engineering-selections` whenever a prior selection baseline exists. Treat their register and authority decisions as build inputs.
@@ -89,3 +91,14 @@ Reconcile requirements, selection register, BOM, schematic, PCB, firmware, CAD, 
 ## Definition of built
 
 Call the product built only at the declared readiness level and only when every mandatory matrix cell for that level is closed with an artifact and evidence record, quantities and identities reconcile across all layers, native checks pass, deviations are dispositioned, and no claim exceeds observation.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- This procedure is selected by SolKraft's contract-aware router; selection does not authorize execution.
+- Public routing defaults to hardened policy; opaque or contract-inadmissible capabilities fail closed.
+- When `contract.yaml` exists, compact metadata is evaluated before this full instruction body is loaded.
+- Runtime authority stays with the host; SolKraft keeps `execution_authorized: false`.
+- Current local acceptance covers 100,000 unique 250-word requests, 100 ask families per skill, and 100% eligible target recall. See repository `VALIDATION.md`.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

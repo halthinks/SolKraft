@@ -5,6 +5,8 @@ impactDescription: 10-100x fewer database round trips
 tags: n-plus-one, batch, performance, queries
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 ## Eliminate N+1 Queries with Batch Loading
 
 N+1 queries execute one query per item in a loop. Batch them into a single query using arrays or JOINs.

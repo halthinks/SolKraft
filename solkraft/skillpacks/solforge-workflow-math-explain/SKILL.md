@@ -3,6 +3,8 @@ name: solforge-workflow-math-explain
 description: Produce a level-appropriate explanation with intuition, formal steps, examples, diagrams, and limitations.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Explain a mathematical result
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
@@ -14,3 +16,14 @@ Order the explanation motivation before mechanism. Give the intuition that makes
 Verify the explanation, not just its polish. Recompute every worked example independently, check each cited fact against a source or derivation, and audit that no step silently uses a stronger assumption than stated. Named anti-patterns: an example covering only the trivial case is weak evidence of understanding; a plausible heuristic presented as the reason a theorem holds is not a proof; a numerical check does not establish a general statement; "clearly" marking the step that actually needs justification hides the gap. Distinguish intuition, proof, and conjecture explicitly.
 
 Return the explanation with its assumed level, verified examples, and stated limitations or open subtleties. Use [report production](../solforge-run-report-write/SKILL.md) when the explanation must be assembled, reviewed, and exported as a larger document beyond the explanation itself.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- Selected by the contract-aware router; selection is advisory.
+- Hardened routing rejects opaque or inadmissible capabilities.
+- Contract metadata is evaluated before loading the full instruction body.
+- Execution authority stays with the host.
+- Current local acceptance: 100,000 unique 250-word requests, 100 ask families per skill, 100% eligible target recall.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

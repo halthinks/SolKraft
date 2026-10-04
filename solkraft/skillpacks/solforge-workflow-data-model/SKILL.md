@@ -3,6 +3,8 @@ name: solforge-workflow-data-model
 description: Build and validate a transparent model with baselines, holdouts, sensitivity, drift, and limitations.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Model data
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
@@ -14,3 +16,14 @@ Fit a simple baseline first (naive persistence, historical mean, or a linear mod
 Report performance with the metric tied to the decision, plus sensitivity: how the result moves across hyperparameter choices, segments, and reasonable data perturbations. For forecasts, give intervals, not point values alone. Check drift between training and serving distributions, and state the range where the model should not be trusted. A single aggregate metric is weak evidence — show per-segment or per-horizon breakdowns where failure would concentrate, and do not present cross-validation scores as evidence about future data when the split was random over time.
 
 Deliver the model package with its training data version, features, parameters, and scores so the result is reproducible. Report what was verified, the margin over baseline, known limitations, and where the model degrades. Use [data validation](../solforge-workflow-data-validate/SKILL.md) first when the input dataset's quality has not been established.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- This procedure is selected by SolKraft's contract-aware router; selection does not authorize execution.
+- Public routing defaults to hardened policy; opaque or contract-inadmissible capabilities fail closed.
+- When `contract.yaml` exists, compact metadata is evaluated before this full instruction body is loaded.
+- Runtime authority stays with the host; SolKraft keeps `execution_authorized: false`.
+- Current local acceptance covers 100,000 unique 250-word requests, 100 ask families per skill, and 100% eligible target recall. See repository `VALIDATION.md`.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

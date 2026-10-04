@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Implementer Subagent Prompt Template
 
 Use this template when dispatching an implementer subagent.

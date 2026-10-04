@@ -3,6 +3,8 @@ name: solforge-workflow-writing-outline
 description: Create a source-aware argument and section architecture matched to audience, purpose, and evidence.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Outline a document
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
@@ -14,3 +16,14 @@ Derive the argument before the sections. State the central claim in one sentence
 Verify the outline as a machine for producing the document: every section carries a claim with named evidence or an explicit gap marker, every supplied source that bears on the thesis has a home, and transitions follow the dependency of claims. Flag claims with no supporting source instead of writing them in as settled. Anti-patterns: topic-label headings with no claim ("Background", "Analysis") that give the drafter nothing to assert; evidence assigned to a section it does not support because it was convenient; a conclusion section promising findings the evidence plan cannot deliver.
 
 Report the outline with per-section purpose, claim, evidence assignments, and word budget, plus unresolved evidence gaps and any places where the available sources do not support the requested angle. Use [drafting](../solforge-workflow-writing-draft/SKILL.md) when the approved outline must become the document itself.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- Selected by the contract-aware router; selection is advisory.
+- Hardened routing rejects opaque or inadmissible capabilities.
+- Contract metadata is evaluated before loading the full instruction body.
+- Execution authority stays with the host.
+- Current local acceptance: 100,000 unique 250-word requests, 100 ask families per skill, 100% eligible target recall.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

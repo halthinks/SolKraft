@@ -3,6 +3,8 @@ name: solforge-result-validator
 description: "Check that a deliverable actually meets the requested outcome using inspected artifacts and observed behavior. Use before consequential completion claims."
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Validate the requested result
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
@@ -14,3 +16,14 @@ Evaluate evidence at the level of the claim: source inspection establishes code 
 Look specifically for omitted requirements, stale evidence after edits, mocks standing in for required dependencies, inaccessible outputs, and tests that cannot distinguish success from the original defect. Reuse valid checks rather than repeat them for ceremony. Independence means challenging the proposed conclusion with evidence; it does not require spawning an agent.
 
 If a gap is fixable within the authorized task, resolve it and repeat only the affected validation. Otherwise state the unmet condition and the evidence or external action needed. Report completion only to the extent demonstrated, with remaining limitations alongside the affected claim.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- This procedure is selected by SolKraft's contract-aware router; selection does not authorize execution.
+- Public routing defaults to hardened policy; opaque or contract-inadmissible capabilities fail closed.
+- When `contract.yaml` exists, compact metadata is evaluated before this full instruction body is loaded.
+- Runtime authority stays with the host; SolKraft keeps `execution_authorized: false`.
+- Current local acceptance covers 100,000 unique 250-word requests, 100 ask families per skill, and 100% eligible target recall. See repository `VALIDATION.md`.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Proposal contract
 
 The proposal capsule binds the original Prompt capsule, exact prompt result, Codebase capsule, repository fingerprint, codebase-result hash, evidence-ledger hash, user-selected proposal direction, steering history, capsule-proposal receipt, capsule-creation receipt, and the complete execution-quality contract.

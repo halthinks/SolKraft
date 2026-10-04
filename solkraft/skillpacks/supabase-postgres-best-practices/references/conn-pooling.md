@@ -5,6 +5,8 @@ impactDescription: Handle 10-100x more concurrent users
 tags: connection-pooling, pgbouncer, performance, scalability
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 ## Use Connection Pooling for All Applications
 
 Postgres connections are expensive (1-3MB RAM each). Without pooling, applications exhaust connections under load.

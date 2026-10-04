@@ -3,6 +3,8 @@ name: solforge-workflow-report
 description: Turn the exact result and evidence into a separately configured Concise, Handoff, Collegiate, or Scientific report package.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Report results and evidence
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
@@ -14,3 +16,14 @@ Structure each section for what its format implies: what was done and what resul
 Verify every material claim against inspected evidence before shipping. Numbers, paths, versions, and quoted results must match their sources exactly. Do not present planned, partial, or queued work as completed, do not pad weak sections by restating the request, and do not cite evidence that was never examined — a claim supported only by an earlier claim in the same document is circular. State unresolved limits plainly where they occur.
 
 Return the configured package directly, noting any claim that remains unsupported and why. Write the report to a file only when requested or required by the repository. Use [report writing](../solforge-report-writer/SKILL.md) when turning raw evidence into supported conclusions needs the fuller underlying method; a completed equivalent stage need not be repeated.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- Selected by the contract-aware router; selection is advisory.
+- Hardened routing rejects opaque or inadmissible capabilities.
+- Contract metadata is evaluated before loading the full instruction body.
+- Execution authority stays with the host.
+- Current local acceptance: 100,000 unique 250-word requests, 100 ask families per skill, 100% eligible target recall.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

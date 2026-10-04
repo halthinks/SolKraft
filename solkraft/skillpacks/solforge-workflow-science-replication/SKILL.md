@@ -3,6 +3,8 @@ name: solforge-workflow-science-replication
 description: Reproduce claims independently, compare conditions, quantify divergence, and record unresolved causes.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Replicate scientific claims
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
@@ -14,3 +16,14 @@ Run an independent execution rather than re-reading the claim. Distinguish re-ru
 Classify every divergence before assigning blame: transcription or unit error, environment or version drift, stochastic variance within a seed sweep, underspecified method details, or a genuine failure of the claim. A single differing run is not a falsification — test whether the divergence exceeds the claim's own uncertainty band first. Do not tune parameters until the claim reproduces and then report success; do not average away failures across seeds, and do not present a positive control failure as evidence about the claim itself.
 
 Report the claim, the conditions established and the gaps, the replicated versus reported values with divergence quantified, the classification of each unresolved divergence, and what remains unverifiable. Use [run research](../solforge-run-research/SKILL.md) for source tracking and reproducible search procedure beyond the replication runs themselves.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- Selected by the contract-aware router; selection is advisory.
+- Hardened routing rejects opaque or inadmissible capabilities.
+- Contract metadata is evaluated before loading the full instruction body.
+- Execution authority stays with the host.
+- Current local acceptance: 100,000 unique 250-word requests, 100 ask families per skill, 100% eligible target recall.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

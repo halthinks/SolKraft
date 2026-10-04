@@ -3,6 +3,8 @@ name: solforge-workflow-software-native-port
 description: Port shared behavior through explicit native platform adapters and verified target builds.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Port software to native platforms
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
@@ -14,3 +16,14 @@ Define or extend an explicit adapter interface at each seam, keep the shared log
 Verify behavior per target, not per build. A green compile or a test pass on one operating system is not evidence of parity on another; run the behavior checks that exercise each adapter on the real target, and do not present a mock or shim of a platform API as evidence for behavior on that platform. Where the same input produces legitimately different output per target, record the difference as intentional with its reason; treat unexplained differences as port defects. Follow repository build and test requirements and rerun invalidated checks after adapter changes.
 
 Report the ported adapters, per-target build commands and toolchains, verified behavior with its evidence, intentional divergences, and any target that remains unbuilt or unverified. Use [platform adapter](../solforge-platform-adapter/SKILL.md) for the underlying adapter implementation detail when the port needs it.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- Selected by the contract-aware router; selection is advisory.
+- Hardened routing rejects opaque or inadmissible capabilities.
+- Contract metadata is evaluated before loading the full instruction body.
+- Execution authority stays with the host.
+- Current local acceptance: 100,000 unique 250-word requests, 100 ask families per skill, 100% eligible target recall.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

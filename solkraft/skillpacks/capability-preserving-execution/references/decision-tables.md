@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Decision Tables
 
 Use these tables when the correct orchestration choice is not already obvious. No row establishes authority or a maximum effort level.

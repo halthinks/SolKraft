@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Model upgrade guidance
 
 Use this file only as a bundled routing fallback when the live migration guide cannot be fetched.

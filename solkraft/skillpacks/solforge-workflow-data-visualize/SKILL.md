@@ -3,6 +3,8 @@ name: solforge-workflow-data-visualize
 description: Build evidence-linked charts and an explanatory narrative matched to audience and decision use.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Visualize data for a decision
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
@@ -14,3 +16,14 @@ Select each chart from the comparison being made: trends over time as lines, dis
 Verify the numbers behind the pixels: recompute spot-checked aggregates with independent queries against the source and compare them to the plotted values, then confirm labels, units, legends, and time ranges against the data actually used. A chart that renders is not evidence that its numbers are correct; do not smooth, interpolate, or filter silently, and do not present a dashboard spec or static mock as a verified deliverable without rendering it against the real data. Distinguish data-quality limits (gaps, skew, small samples) from visualization choices in the accompanying narrative, and keep claims, inferences, and unknowns distinct.
 
 Report the deliverables produced (visual_analysis, dashboard_spec), the source and grain used, the verification checks performed, and any unresolved data limits. Use [report writing](../solforge-run-report-write/SKILL.md) when the visuals must be delivered inside a reviewed report or a requested export.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- This procedure is selected by SolKraft's contract-aware router; selection does not authorize execution.
+- Public routing defaults to hardened policy; opaque or contract-inadmissible capabilities fail closed.
+- When `contract.yaml` exists, compact metadata is evaluated before this full instruction body is loaded.
+- Runtime authority stays with the host; SolKraft keeps `execution_authorized: false`.
+- Current local acceptance covers 100,000 unique 250-word requests, 100 ask families per skill, and 100% eligible target recall. See repository `VALIDATION.md`.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

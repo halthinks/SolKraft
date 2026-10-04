@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Skill provenance
 
 Owner-contributed workflows are supplied for this open-source project. Additional bundled skills retain upstream licenses and copyright notices in their individual folders. The [license manifest](skill-provenance.json) identifies the 38 licensed additions: GitHub, Netlify, OpenAI developer tools, Android emulator QA, and system skills under Apache-2.0; Superpowers and Supabase skills under MIT.

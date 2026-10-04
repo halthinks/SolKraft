@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Netlify Deployment Patterns
 
 Common deployment scenarios and best practices for the Netlify skill.

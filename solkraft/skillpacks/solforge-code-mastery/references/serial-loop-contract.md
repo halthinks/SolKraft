@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Bounded research and repair continuation
 
 Investigate the current source and the requested outcome before changing it. Separate observations, proposed changes, executed changes, and verified results. Use research to resolve uncertain design facts, implementation to repair demonstrated gaps, and focused review to challenge the result. These are stages, not mandatory separate workers or fixed iteration quotas.

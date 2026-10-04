@@ -3,6 +3,8 @@ name: evidence-bound-product-pipeline
 description: Realize or audit a hardware/software product line that needs source-bound requirements, exact supplier geometry and pinouts, PCB mapping, CAD, renders, BOMs, and physical validation. Use for product recovery, first-article planning, hardware selection, power/thermal/mechanical closure, or release claims where proxy geometry, generated imagery, documentation, and test plans must not be confused with fabricated or measured evidence.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Evidence-Bound Product Pipeline
 
 Use this workflow to turn a product concept or fragmented repository into a traceable, repeatable realization package. Preserve historical work; classify it before adopting it.
@@ -60,3 +62,14 @@ At every handoff, report three things separately:
 3. Physical, supplier, fabrication, instrumented, and received-article gates still open.
 
 Never mark a product physically verified, prototype-ready, or release-ready from plans, software tests, source PDFs, CAD, BOMs, simulated benchmarks, or generated renders alone.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- This procedure is selected by SolKraft's contract-aware router; selection does not authorize execution.
+- Public routing defaults to hardened policy; opaque or contract-inadmissible capabilities fail closed.
+- When `contract.yaml` exists, compact metadata is evaluated before this full instruction body is loaded.
+- Runtime authority stays with the host; SolKraft keeps `execution_authorized: false`.
+- Current local acceptance covers 100,000 unique 250-word requests, 100 ask families per skill, and 100% eligible target recall. See repository `VALIDATION.md`.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

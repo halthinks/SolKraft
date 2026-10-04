@@ -6,6 +6,8 @@ metadata:
   version: "0.1.2"
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Supabase
 
 ## Core Principles
@@ -133,3 +135,14 @@ Do NOT use `apply_migration` to change a local database schema — it writes a m
 
 - **Skill Feedback** → [references/skill-feedback.md](references/skill-feedback.md)
   **MUST read when** the user reports that this skill gave incorrect guidance or is missing information.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- Selected by the contract-aware router; selection is advisory.
+- Hardened routing rejects opaque or inadmissible capabilities.
+- Contract metadata is evaluated before loading the full instruction body.
+- Execution authority stays with the host.
+- Current local acceptance: 100,000 unique 250-word requests, 100 ask families per skill, 100% eligible target recall.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

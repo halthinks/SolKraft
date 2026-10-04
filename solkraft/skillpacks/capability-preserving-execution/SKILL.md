@@ -3,6 +3,8 @@ name: capability-preserving-execution
 description: Orchestrate substantial multi-step coding, debugging, research, migration, and validation work with dependency-aware waves, selective recovery, and evidence-based completion while preserving capability. Use when a task spans multiple tools, files, systems, hypotheses, implementation stages, or validation layers. Do not use for simple explanations, rewrites, calculations, or tiny isolated edits unless explicitly invoked. Yield to specialized skills and repository workflows.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Capability-Preserving Execution
 
 ## Purpose
@@ -124,3 +126,14 @@ Report the delivered outcome, important changes, observed validation, direct ins
 
 - Read [decision-tables.md](references/decision-tables.md) when batching, context, validation breadth, or delegation is ambiguous.
 - Read [playbooks.md](references/playbooks.md) for task-specific execution patterns.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- This procedure is selected by SolKraft's contract-aware router; selection does not authorize execution.
+- Public routing defaults to hardened policy; opaque or contract-inadmissible capabilities fail closed.
+- When `contract.yaml` exists, compact metadata is evaluated before this full instruction body is loaded.
+- Runtime authority stays with the host; SolKraft keeps `execution_authorized: false`.
+- Current local acceptance covers 100,000 unique 250-word requests, 100 ask families per skill, and 100% eligible target recall. See repository `VALIDATION.md`.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

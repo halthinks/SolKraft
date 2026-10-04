@@ -5,6 +5,8 @@ impactDescription: 10-100x improvement with correct index type
 tags: indexes, btree, gin, gist, brin, hash, index-types
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 ## Choose the Right Index Type for Your Data
 
 Different index types excel at different query patterns. The default B-tree isn't always optimal.

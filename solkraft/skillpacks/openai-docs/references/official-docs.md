@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Official documentation, API references, and ChatGPT Work
 
 Use this route for OpenAI product or API documentation, examples, citations, ChatGPT Work, learning content, mixed Chat/Work/Codex comparisons, and narrow Codex product documentation. Follow the root skill's official-source order and credential boundary.
