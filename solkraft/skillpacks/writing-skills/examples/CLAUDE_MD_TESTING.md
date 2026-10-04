@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Testing CLAUDE.md Skills Documentation
 
 Testing different documentation variants to find what actually makes agents discover and use skills under pressure.
