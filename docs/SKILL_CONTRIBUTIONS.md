@@ -39,6 +39,31 @@ Start from [the executable security example](../contributions/software-security.
 
 This shape is a starting point, not a completed contribution. Replace every placeholder and add realistic neighboring and compound cases. Use exact expected routes, including existing skills when they belong in the answer.
 
+## Contract authoring CLI
+
+The contract layer can be authored and inspected without loading or executing skill bodies:
+
+```text
+solkraft contract init path/to/skill
+solkraft contract validate path/to/skill/contract.yaml
+solkraft contract lint path/to/skill/contract.yaml
+solkraft contract show your-skill-id
+solkraft contract schema
+solkraft contract migrate --report build/contracts-migration.json
+```
+
+Routing policy has matching CLI flags:
+
+```text
+solkraft route "Inspect the repository" \
+  --strict-contracts \
+  --deny-effect deployment.* \
+  --grant-capability repo.read \
+  --grant-resource repo:example/project
+```
+
+These flags constrain selection only. The CLI still returns `execution_authorized: false`; grant snapshots describe host authority available for comparison and are never executable credentials.
+
 ## Run the checks locally
 
 Install Python 3.11+, Git and Node.js. Activate your Python environment, then:
