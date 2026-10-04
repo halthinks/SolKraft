@@ -54,10 +54,40 @@ def test_mcp_http_initializes_and_calls_router():
         response = client.post("/mcp/", headers=headers, json={"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {"protocolVersion": "2025-03-26", "capabilities": {}, "clientInfo": {"name": "integration", "version": "1"}}})
         assert response.status_code == 200
         assert response.json()["result"]["serverInfo"]["name"] == "SolKraft"
-        response = client.post("/mcp/", headers=headers, json={"jsonrpc": "2.0", "id": 2, "method": "tools/call", "params": {"name": "route_request", "arguments": {"objective": "Do not deploy or delete anything."}}})
+        response = client.post("/mcp/", headers=headers, json={"jsonrpc": "2.0", "id": 2, "method": "tools/call", "params": {"name": "route_request", "arguments": {"objective": "Do not deploy or delete anything.", "policy": {"contract_mode": "strict"}}}})
         assert response.status_code == 200
         import json
         result = json.loads(response.json()["result"]["content"][0]["text"])
         assert result["selected"] == []
         assert result["execution_authorized"] is False
+        assert result["route_policy"]["contract_mode"] == "strict"
         assert client.post("/mcp/", json={}).status_code == 401
+
+
+
+def test_api_separates_policy_from_semantic_context(tmp_path):
+    folder = tmp_path / "mystery"
+    folder.mkdir()
+    (folder / "SKILL.md").write_text(
+        "---\nname: mystery\ndescription: Inspect a mystery repository.\n---\n",
+        encoding="utf-8",
+    )
+    app = create_app(SkillCatalog([tmp_path]), api_key="test-key", require_api_key=True)
+    client = TestClient(app)
+    headers = {"Authorization": "Bearer test-key"}
+    response = client.post(
+        "/v1/route",
+        headers=headers,
+        json={
+            "objective": "Inspect the mystery repository.",
+            "skills": ["mystery"],
+            "context": {"stage": "inspect"},
+            "policy": {"contract_mode": "strict"},
+        },
+    )
+    assert response.status_code == 200
+    route = response.json()
+    assert route["selection_status"] == "blocked"
+    assert route["contract_decisions"]["mystery"]["status"] == "denied"
+    assert route["route_policy"]["contract_mode"] == "strict"
+    assert route["execution_authorized"] is False
