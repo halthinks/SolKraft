@@ -60,11 +60,11 @@ def contract_from_node(node: dict) -> dict:
     if auth is None and node.get("effect") is False:
         auth = "none"
     test = node.get("test_contract") or node.get("exit_evidence")
-    inputs = node.get("inputs") or []
+    inputs = list(node.get("inputs") or [])
     declared = side is not None and auth in AUTH_ORDER and bool(test)
     return {
-        "inputs": list(inputs),
-        "side_effects": list(side or []),
+        "inputs": inputs,
+        "side_effects": list(side) if side is not None else None,
         "auth_scope": auth if auth in AUTH_ORDER else None,
         "test_contract": test,
         "declared": declared,
@@ -72,23 +72,17 @@ def contract_from_node(node: dict) -> dict:
 
 
 def _rejection(skill: str, contract: dict, reasons: list[str]) -> dict:
-    return {"id": skill, "reasons": reasons, "contract": {
-        "inputs": contract["inputs"],
-        "side_effects": contract["side_effects"],
-        "auth_scope": contract["auth_scope"],
-        "test_contract": contract["test_contract"],
-        "declared": contract["declared"],
-    }}
+    return {"id": skill, "reasons": reasons, "contract": contract}
 
 
 def violates(contract: dict, excluded: set[str], allowed_auth: str | None) -> list[str]:
     reasons = []
-    declared_effects = set(contract["side_effects"])
+    declared_effects = set(contract["side_effects"] or [])
     if declared_effects & excluded:
         reasons.append("side effect excluded: " + ", ".join(sorted(declared_effects & excluded)))
     if contract["auth_scope"] == "external-effect" and excluded:
         reasons.append("external-effect scope conflicts with an effect exclusion")
-    if not contract["declared"] and excluded and contract["side_effects"] is None:
+    if contract["side_effects"] is None and excluded:
         reasons.append("undeclared side effects conflict with an effect exclusion")
     allowed_rank = _auth_rank(allowed_auth)
     skill_rank = _auth_rank(contract["auth_scope"])
@@ -116,16 +110,18 @@ def apply_contracts(result: dict, graph: dict, objective: str, allowed_auth: str
     for skill in result.get("selected", []):
         contract = contract_from_node(nodes.get(skill, {}))
         reasons = violates(contract, excluded, allowed_auth)
-        contracts[skill] = contract
         if reasons:
             rejected.append(_rejection(skill, contract, reasons))
             continue
         selected.append(skill)
+        contracts[skill] = contract
     rejected_ids = {item["id"] for item in rejected}
     for stage in result.get("stages", []):
         stage["selected"] = [skill for skill in stage.get("selected", []) if skill not in rejected_ids]
+    if "skills" in result:
+        result["skills"] = [item for item in result["skills"] if item.get("id") in contracts]
     result["selected"] = selected
-    result["contracts"] = {skill: contracts[skill] for skill in selected}
+    result["contracts"] = contracts
     result["contract_rejections"] = rejected
     result["excluded_effects"] = sorted(excluded)
     result["selection_status"] = "matched" if selected else "abstained"
