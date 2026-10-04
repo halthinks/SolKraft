@@ -139,10 +139,11 @@ class SkillCatalog:
             ]
             token_set = set(desc_tokens) | set(name_tokens)
             token_sets[skill_id] = token_set
+            all_desc_tokens = TOKEN_RE.findall(record.description.casefold())
             profiles[skill_id] = {
                 "description_norm": " ".join(record.description.casefold().split()),
                 "description_tokens": tuple(desc_tokens),
-                "signature_phrase": " ".join(desc_tokens[: min(14, len(desc_tokens))]),
+                "signature_phrase": " ".join(all_desc_tokens[: min(14, len(all_desc_tokens))]),
                 "name_tokens": tuple(name_tokens),
             }
 
