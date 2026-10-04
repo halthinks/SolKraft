@@ -56,3 +56,19 @@ section[id]{scroll-margin-top:24px}
 @media(max-width:700px){.connection-explainer .guide-grid{grid-template-columns:minmax(0,1fr)}.connection-explainer article{padding:22px}.connection-explainer article h3{font-size:23px}}
 /* Keep motion preferences authoritative even for rules declared later in this file. */
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+
+.release-section{margin:58px 0 78px;padding:32px;border:1px solid #26333e;border-radius:12px;background:linear-gradient(145deg,#111a21,#0c1218);scroll-margin-top:28px}
+.release-head{display:flex;justify-content:space-between;gap:24px;align-items:end;margin-bottom:14px}
+.release-head h2{font-size:34px;letter-spacing:-.05em;margin:8px 0 0}
+.release-lead{max-width:930px;color:#9eabb6;font-size:13px;line-height:1.8;margin:0 0 25px}
+.release-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.release-grid article{border:1px solid #26323d;background:#0d141b;border-radius:8px;padding:18px;min-height:176px}
+.release-grid h3{font-size:16px;line-height:1.3;letter-spacing:-.025em;margin:9px 0}
+.release-grid p{font-size:11px;line-height:1.7;color:#8997a4;margin:0}
+.release-grid code,.release-strip code{font:10px var(--mono);color:#c5efaa}
+.release-kicker{font:9px var(--mono);letter-spacing:.09em;color:var(--mint)}
+.release-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:16px;border:1px solid #29343e;border-radius:8px;overflow:hidden;background:#29343e}
+.release-strip span{background:#111820;padding:13px 15px;color:#8e9ca8;font-size:10px;line-height:1.55}
+.release-strip b{display:block;color:#dce6e9;font-size:11px;margin-bottom:3px}
+@media(max-width:850px){.release-grid{grid-template-columns:1fr 1fr}.release-strip{grid-template-columns:1fr}.release-head{align-items:flex-start;flex-direction:column}}
+@media(max-width:580px){.release-section{padding:21px;margin:42px 0 58px}.release-grid{grid-template-columns:1fr}.release-head h2{font-size:27px}}
