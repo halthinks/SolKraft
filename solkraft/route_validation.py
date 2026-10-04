@@ -14,6 +14,16 @@ def _selected_in_stages(result: dict) -> list[str]:
     return ordered
 
 
+def _append_blocked(blocked_stages, item):
+    key = (item.get("stage"), item.get("text"), tuple(item.get("rejected") or ()))
+    existing = {
+        (row.get("stage"), row.get("text"), tuple(row.get("rejected") or ()))
+        for row in blocked_stages
+    }
+    if key not in existing:
+        blocked_stages.append(item)
+
+
 def validate_route(
     result: dict,
     graph: dict,
@@ -22,7 +32,7 @@ def validate_route(
     policy_public: dict,
     original_selected: list[str] | None = None,
 ) -> dict:
-    """Apply decisions to a composed route and make broken routes explicit."""
+    """Apply route policy and report any route that is no longer complete."""
     original_selected = list(original_selected or result.get("selected", []))
     denied = {
         skill for skill in original_selected
@@ -36,13 +46,30 @@ def validate_route(
         removed = [skill for skill in before if skill in denied]
         stage["selected"] = kept
         if before and not kept and removed:
-            blocked_stages.append({
+            _append_blocked(blocked_stages, {
                 "stage": stage.get("stage"),
                 "text": stage.get("text"),
                 "reason": "all selected skills denied by route policy",
                 "rejected": removed,
             })
 
+    # A prefiltered mapped candidate that could not be repaired is an explicit
+    # blocked stage, not an ordinary abstention.
+    for unresolved in result.get("unselected_requested_stages", []):
+        candidate = unresolved.get("candidate")
+        if (
+            unresolved.get("reason") == "candidate inadmissible by contract policy"
+            and candidate
+        ):
+            _append_blocked(blocked_stages, {
+                "stage": unresolved.get("stage"),
+                "text": unresolved.get("text"),
+                "reason": "candidate denied by route policy and no admissible replacement was found",
+                "rejected": [candidate],
+            })
+
+    # Dependency invalidation is conservative: it applies only where both
+    # endpoints were actually members of this composed route.
     broken_dependencies = []
     route_members = set(original_selected)
     newly_blocked = set(denied)
@@ -73,7 +100,7 @@ def validate_route(
             removed = [skill for skill in before if skill in newly_blocked]
             stage["selected"] = [skill for skill in before if skill not in newly_blocked]
             if before and not stage["selected"] and removed:
-                blocked_stages.append({
+                _append_blocked(blocked_stages, {
                     "stage": stage.get("stage"),
                     "text": stage.get("text"),
                     "reason": "selected dependency was denied by route policy",
@@ -88,6 +115,7 @@ def validate_route(
     result["blocked_stages"] = blocked_stages
     result["broken_dependencies"] = broken_dependencies
     result["route_policy"] = policy_public
+    result["denied_effects"] = list(policy_public.get("denied_effects") or [])
 
     touched = set(selected) | newly_blocked
     for unresolved in result.get("unselected_requested_stages", []):
