@@ -36,7 +36,7 @@ Install SolKraft in a Python environment. Clients supporting MCP stdio can use t
 
 Use the Python executable from the environment where SolKraft is installed. Configuration filenames and field placement vary by client; this is a server definition, not a claim that every client uses the same settings path.
 
-For a hosted instance, use the Streamable HTTP URL `https://YOUR-SERVICE.onrender.com/mcp/` and the `Authorization: Bearer <your-key>` header. The five tools are `search_skills`, `route_request`, `get_skill`, `get_skill_resource`, and `get_selection_graph`.
+For a hosted instance, use the Streamable HTTP URL `https://YOUR-SERVICE.onrender.com/mcp/` and the `Authorization: Bearer <your-key>` header. The seven read-only tools are `search_skills`, `route_request`, `get_skill`, `get_skill_resource`, `get_selection_graph`, `get_skill_contract`, and `get_contract_index`.
 
 ## CLI and API access
 
