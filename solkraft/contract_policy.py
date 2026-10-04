@@ -6,6 +6,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
+from .capabilities import CapabilityGrant, missing_capabilities, missing_resources, normalize_grant
 from .constraint_parser import excluded_effects
 from .contracts import AUTH_ORDER, contract_from_node
 from .effects import effect_matches, normalize_effects
@@ -17,16 +18,27 @@ CONTRACT_MODES = {"legacy", "warn", "strict"}
 @dataclass(frozen=True)
 class RoutePolicy:
     denied_effects: tuple[str, ...] = ()
-    granted_capabilities: frozenset[str] | None = None
+    grant: CapabilityGrant | None = None
     legacy_auth_scope: str | None = None
     contract_mode: str = "legacy"
+
+    @property
+    def granted_capabilities(self):
+        return self.grant.capabilities if self.grant else None
+
+    @property
+    def granted_resources(self):
+        return self.grant.resources if self.grant else None
 
     def public(self) -> dict:
         return {
             "denied_effects": list(self.denied_effects),
+            "grant": self.grant.public() if self.grant else None,
             "granted_capabilities": (
-                sorted(self.granted_capabilities)
-                if self.granted_capabilities is not None else None
+                sorted(self.grant.capabilities) if self.grant else None
+            ),
+            "granted_resources": (
+                sorted(self.grant.resources) if self.grant else None
             ),
             "legacy_auth_scope": self.legacy_auth_scope,
             "contract_mode": self.contract_mode,
@@ -37,6 +49,27 @@ def _auth_rank(scope: str | None) -> int | None:
     if scope not in AUTH_ORDER:
         return None
     return AUTH_ORDER.index(scope)
+
+
+def _flat_grant(value: dict) -> CapabilityGrant | None:
+    capabilities = value.get("granted_capabilities")
+    resources = value.get("granted_resources")
+    if capabilities is None and resources is None:
+        return None
+    capabilities = capabilities or []
+    resources = resources or []
+    if not isinstance(capabilities, list) or not all(
+        isinstance(item, str) and item for item in capabilities
+    ):
+        raise ValueError("policy.granted_capabilities must be a list of strings")
+    if not isinstance(resources, list) or not all(
+        isinstance(item, str) and item for item in resources
+    ):
+        raise ValueError("policy.granted_resources must be a list of strings")
+    return CapabilityGrant(
+        capabilities=frozenset(capabilities),
+        resources=frozenset(resources),
+    )
 
 
 def normalize_policy(policy: dict | RoutePolicy | None, objective: str) -> RoutePolicy:
@@ -52,21 +85,30 @@ def normalize_policy(policy: dict | RoutePolicy | None, objective: str) -> Route
         legacy_auth = value.get("legacy_auth_scope")
         if legacy_auth is not None and legacy_auth not in AUTH_ORDER:
             raise ValueError("policy.legacy_auth_scope is invalid")
-        grants = value.get("granted_capabilities")
-        if grants is not None:
-            if not isinstance(grants, list) or not all(
-                isinstance(item, str) and item for item in grants
-            ):
-                raise ValueError("policy.granted_capabilities must be a list of strings")
-            grants = frozenset(grants)
         denied = value.get("denied_effects", [])
         if not isinstance(denied, list) or not all(
             isinstance(item, str) and item for item in denied
         ):
             raise ValueError("policy.denied_effects must be a list of strings")
+
+        explicit_grant = normalize_grant(value.get("grant"))
+        flat_grant = _flat_grant(value)
+        if explicit_grant and flat_grant:
+            explicit_grant = CapabilityGrant(
+                capabilities=frozenset(
+                    set(explicit_grant.capabilities) | set(flat_grant.capabilities)
+                ),
+                resources=frozenset(
+                    set(explicit_grant.resources) | set(flat_grant.resources)
+                ),
+                grant_id=explicit_grant.grant_id,
+                identity=explicit_grant.identity,
+                expires_at=explicit_grant.expires_at,
+            )
+        grant = explicit_grant or flat_grant
         base = RoutePolicy(
             denied_effects=tuple(normalize_effects(denied)),
-            granted_capabilities=grants,
+            grant=grant,
             legacy_auth_scope=legacy_auth,
             contract_mode=mode,
         )
@@ -75,7 +117,7 @@ def normalize_policy(policy: dict | RoutePolicy | None, objective: str) -> Route
     denied = tuple(dict.fromkeys([*base.denied_effects, *inferred]))
     return RoutePolicy(
         denied_effects=denied,
-        granted_capabilities=base.granted_capabilities,
+        grant=base.grant,
         legacy_auth_scope=base.legacy_auth_scope,
         contract_mode=base.contract_mode,
     )
@@ -100,11 +142,21 @@ def evaluate_contract(contract: dict, policy: RoutePolicy) -> dict:
                     reasons.append(f"effect {effect} denied by policy {denied}")
                     break
 
-    required = set(contract.get("capabilities") or [])
-    if policy.granted_capabilities is not None:
-        missing = sorted(required - policy.granted_capabilities)
-        if missing:
-            reasons.append("capabilities not granted: " + ", ".join(missing))
+    required_capabilities = set(contract.get("capabilities") or [])
+    required_resources = set(contract.get("resources") or [])
+    if policy.grant is not None:
+        if policy.grant.expired():
+            reasons.append("host grant expired")
+        missing_caps = missing_capabilities(
+            required_capabilities, policy.grant.capabilities
+        )
+        missing_res = missing_resources(
+            required_resources, policy.grant.resources
+        )
+        if missing_caps:
+            reasons.append("capabilities not granted: " + ", ".join(missing_caps))
+        if missing_res:
+            reasons.append("resources not granted: " + ", ".join(missing_res))
 
     allowed_rank = _auth_rank(policy.legacy_auth_scope)
     skill_rank = _auth_rank(contract.get("auth_scope"))
@@ -127,8 +179,10 @@ def evaluate_contract(contract: dict, policy: RoutePolicy) -> dict:
         "contract_status": status,
         "reasons": reasons,
         "effects": list(effects) if effects is not None else None,
-        "capabilities": sorted(required),
-        "resources": list(contract.get("resources") or []),
+        "capabilities": sorted(required_capabilities),
+        "resources": sorted(required_resources),
+        "grant_checked": policy.grant is not None,
+        "grant_id": policy.grant.grant_id if policy.grant else None,
         "contract_digest": contract.get("contract_digest"),
         "entrypoint_digest": contract.get("entrypoint_digest"),
     }
