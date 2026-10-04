@@ -32,17 +32,21 @@ python -m compileall -q solkraft
 
 On PowerShell, set `$env:SOLFORGE_TEST_ROOT = 'solkraft/skillpacks'` before pytest.
 
-The reproducible routing battery runs through the public Python routing interface:
+### Supplemental deterministic routing battery
+
+`scripts/routing_battery.py` is retained as a supplemental deterministic regression/smoke battery through the public Python routing interface:
 
 ```sh
 python -m scripts.routing_battery
 ```
 
-Its checked-in receipt is `scripts/results-routing-100000.json`: 100,000 passing requests across ten domains, 10,000 per domain. Every prompt contains at least 200 words. Each domain checks prompt uniqueness, expected ordered skills, retained effect exclusions, absence of unresolved requested stages, and advisory authority.
+Its checked-in receipt is `scripts/results-routing-100000.json`: 100,000 passing requests across ten fixed domains, 10,000 per domain, with prompts of at least 200 words. It checks prompt uniqueness, expected ordered skills, retained effect exclusions, unresolved-stage handling, and advisory authority. It is **not** the canonical catalog-wide acceptance validator.
 
-These are systematically generated combinations of stage phrases and context variants. They provide regression coverage, not a statistically representative sample of unrestricted human requests, proof of universal understanding, or a measured twofold improvement. The suite does not establish correctness of every engineering procedure or completion of work performed by a host agent.
+The canonical acceptance validator is `scripts/advanced_contract_benchmark.py`, exercised across all 173 bundled skills with 100,000 globally unique requests of exactly 250 words, 100 ask families per skill, no explicit skill IDs, hardened contract assertions, and catalog-wide target-recall checks. The current acceptance receipt is `scripts/results-advanced-contract-100000-local-summary.json`.
 
-The earlier console revision was exercised in a browser for disconnected catalog browsing, pagination through the final five-item page, page-size changes, empty search, lazy skill retrieval, resource inspection, request copying, and the three-stage worked example. That revision used Mermaid and a pause control; both were subsequently replaced by vertical HTML cards. Earlier GitHub verification runs passed. Current builds and tests run locally; Pages only uploads generated static files. A hosted API requires an operator deployment and key; successful local MCP tests do not establish external availability.
+The ten-domain battery uses systematically generated combinations of stage phrases and context variants. It provides stable smoke/regression coverage, not a statistically representative sample of unrestricted human requests, proof of universal understanding, or completion of work performed by a host agent.
+
+The earlier console revision was exercised in a browser for disconnected catalog browsing, pagination through the final five-item page, page-size changes, empty search, lazy skill retrieval, resource inspection, request copying, and the three-stage worked example. That revision used Mermaid and a pause control; both were subsequently replaced by vertical HTML cards. Reusable GitHub PR CI now runs the shared verification gates automatically for pull requests, while the local gate remains available before submission. Pages uploads generated static files. A hosted API requires an operator deployment and key; successful local MCP tests do not establish external availability.
 
 
 ## Plugin and vertical walkthrough verification
@@ -70,7 +74,7 @@ python -m scripts.build_console
 python scripts/package_plugin.py
 ```
 
-That implementation revision's complete suite passed **74 tests**. The integration environment reused installed dependencies; a clean dependency download was not part of that local wheel check. Its GitHub verification run independently installed declared dependencies on Linux. Current automatic GitHub test runs are disabled.
+That implementation revision's complete suite passed **74 tests**. The integration environment reused installed dependencies; a clean dependency download was not part of that local wheel check. Its GitHub verification run independently installed declared dependencies on Linux. This paragraph records that earlier revision; current pull requests use the reusable GitHub CI pipeline described above.
 
 Browser checks confirmed large vertical cards (29px headings on desktop), sequential delays from 0 to 9 seconds, connector pulses preceding the next card, and no pause button or Mermaid renderer. The walkthrough is an illustration, not execution telemetry. Reduced-motion settings reveal the complete static flow. The static catalog and precomputed example remain available without a server.
 
@@ -101,9 +105,9 @@ The gate passed 104 unique targeted cases and contextual variants, the full 100,
 The targeted variants and 100,000 regression requests test routing, not 100,000 independently authored intentions or successful execution of every skill. Contributors must supply relevant helper tests, simulations, or real task evidence separately. No new externally hosted API deployment or remote ChatGPT connection was executed in this change.
 
 
-## Advanced 100,000-request contract-aware benchmark
+## Pre-fix benchmark — historical failure evidence
 
-A new benchmark was executed against the hardened contract-aware routing system in GitHub Actions run **37190064589**. The benchmark generated **100,000 globally unique request statements of exactly 250 words each** across all **173 bundled skills**. Every skill received either 578 or 579 requests and all **25 distinct ask families**. No explicit skill IDs were passed to `route_request`.
+This historical benchmark was executed against the hardened contract-aware routing system in GitHub Actions run **37190064589**, before the capability-identity routing repair. It is retained as failure evidence and must not be read as current routing performance. The current accepted result follows immediately in the next section. The benchmark generated **100,000 globally unique request statements of exactly 250 words each** across all **173 bundled skills**. Every skill received either 578 or 579 requests and all **25 distinct ask families**. No explicit skill IDs were passed to `route_request`.
 
 The full benchmark receipt was uploaded as Actions artifact **11299011088** with artifact digest `sha256:bcd0a646e3649e420dd2bc06b75c61dfd786b7d56b53d8aada5cb0c244c38e60`. The deterministic request corpus digest is `f52605833486f915af8b479bc4e88ec38edd755c16789d4ca4817df8c8febe88`.
 
@@ -117,7 +121,7 @@ Headline result: **54,043 / 100,000 cases passed the benchmark expectation (54.0
 - **Route completeness:** 91,570 / 100,000 requests had no unresolved requested stages (**91.57%**). This means the router often produced a confident alternative route rather than abstaining when it missed the intended skill.
 - **Throughput:** 100,000 routes completed in **415.813 seconds**, approximately **240.49 requests/second**, with immutable catalog/graph/contract metadata frozen once while every request still executed the production `route_request()` path.
 
-This benchmark therefore validates the new contract/hardening layer strongly, but it also exposes a substantial catalog-wide **semantic routing recall gap**. The green benchmark workflow means the safety invariants held; it does **not** mean automatic routing quality passed at 100%.
+At that pre-fix revision, the benchmark validated the contract/hardening layer while exposing the catalog-wide **semantic routing recall gap** that triggered the capability-identity repair. The green workflow meant the safety invariants held; it did **not** mean routing quality passed. This result is historical and is superseded for current routing acceptance by the 100,000 / 100,000 result below.
 
 The reproducible harness is `scripts/advanced_contract_benchmark.py`. Aggregate metrics are checked in at `scripts/results-advanced-contract-100000-summary.json`.
 
