@@ -2,7 +2,7 @@
 
 New here? Follow [Connect your agent](docs/REMOTE_MCP.md). Want to teach it a new method? Follow [the complete skill contribution process](docs/SKILL_CONTRIBUTIONS.md), including graph registration, automatic-selection examples, the 100,000-request regression, and local package/MCP verification. Both have animated walkthroughs in the console.
 
-Explore the [interactive connection walkthrough](https://halthinks.github.io/SolKraft/#setup-lab) or read [the complete Render, API, MCP, plugin, and platform guide](docs/CONNECTIONS.md). Build and verify before publishing with `python -m scripts.local_ci`; automatic GitHub build/test runs are disabled, and Pages uploads the locally generated console.
+Explore the [interactive connection walkthrough](https://halthinks.github.io/SolKraft/#setup-lab) or read [the complete Render, API, MCP, plugin, and platform guide](docs/CONNECTIONS.md). Build and verify locally with `python -m scripts.local_ci`; pull requests use the same reusable GitHub CI gate, and skill contributors can run the full preflight workflow before opening a PR.
 
 [Skill-contract architecture roadmap](docs/SKILL_CONTRACT_ROADMAP.md) · [6-sprint implementation plan](docs/SKILL_CONTRACT_6_SPRINT_PLAN.md) · [Machine-readable roadmap](roadmap/skill-contracts-v1.json) · [Machine-readable sprint plan](roadmap/skill-contract-sprints-v1.json)
 
@@ -12,10 +12,12 @@ Explore the [interactive connection walkthrough](https://halthinks.github.io/Sol
 
 ## What it does
 
-SolKraft indexes ordinary `SKILL.md` folders. Search and routing return compact metadata; agents can fetch a selected skill when useful. It never executes a skill, starts a workflow, runs shell commands, or grants authority. The host agent remains in control.
+SolKraft indexes ordinary `SKILL.md` folders plus optional machine-readable `contract.yaml` sidecars. Search and routing use compact metadata for semantic fit, inputs/outputs, effects, capability/resource requirements, trust, typed dataflow, and verification contracts; agents fetch a selected skill body only when useful. SolKraft never executes a skill or grants authority. The host agent remains in control.
 
-- **REST API:** authenticated search, retrieve, refresh and route endpoints.
-- **MCP:** the same read-only capabilities through tools including `search_skills`, `route_request`, `get_skill`.
+- **REST API:** authenticated search, routing, contract schema/validation, contract metadata, portable contract import/export, retrieve, and refresh endpoints.
+- **MCP:** read-only search, routing, skill retrieval, contract metadata, and compact contract-index tools with standard read-only/idempotent annotations.
+- **Contracts:** typed inputs/outputs, namespaced effects, capability/resource requirements, declarative verification checks, provenance, trust, and digest binding.
+- **Reusable CI:** one local/GitHub validation path for ordinary PRs and pre-PR skill contribution builds.
 - **GitHub Pages console:** browse and inspect the full bundled catalog offline, then connect an API to compose routes. API keys stay in memory and are never saved.
 - **Local-first:** run it on your machine or deploy a free API instance yourself.
 
@@ -56,8 +58,14 @@ Every `/v1/*` and `/mcp` request needs `Authorization: Bearer <key>`. `/healthz`
 | `GET /healthz` | Liveness check |
 | `GET /v1/skills?q=...&limit=20` | Search skill metadata |
 | `GET /v1/skills/{id}` | Fetch one selected `SKILL.md` |
-| `POST /v1/route` | Return an ordered advisory route; `max_skills` 1–50 |
-| `POST /v1/refresh` | Re-index configured roots |
+| `GET /v1/skills/{id}/contract` | Fetch compact contract metadata without loading the skill body |
+| `GET /v1/contracts` | Filter compact contracts by effect, capability, I/O, or trust |
+| `GET /v1/contract-schema` | Fetch the portable Contract v1 JSON Schema |
+| `POST /v1/contracts/validate` | Validate Contract v1 metadata |
+| `GET /v1/skills/{id}/contract/export` | Export a portable declaration when effects are known |
+| `POST /v1/contracts/import` | Validate a portable declaration as untrusted metadata |
+| `POST /v1/route` | Return an ordered advisory route; public surfaces default to hardened contract policy |
+| `POST /v1/refresh` | Re-index configured roots and incrementally refresh contract metadata |
 | `/mcp` | MCP Streamable HTTP transport |
 
 Example:
@@ -67,7 +75,7 @@ curl -H "Authorization: Bearer $SOLKRAFT_API_KEY" \
   "https://YOUR-SERVICE.onrender.com/v1/skills?q=repository%20test"
 ```
 
-The default route uses the included SolForge graph and preserves intentional abstention and adapts recognized active stages to mounted skills. Results explicitly carry `execution_authorized: false`; routing is a suggestion, not an agent-policy hook. It does not silently alter Codex or another agent's native skill picker.
+The route uses the included SolForge graph plus compact contracts. Public REST, MCP, and CLI routing default to hardened mode: opaque skills fail closed, known-inadmissible candidates are filtered before composition, whole routes are validated, typed producer/consumer relationships can participate in composition, and unresolved requirements remain visible. Results explicitly carry `execution_authorized: false`; routing is a suggestion, not an agent-policy hook.
 
 ## Free hosting
 
@@ -85,7 +93,10 @@ See [AGENTS.md](AGENTS.md) for the full architecture, contracts, safety boundari
 
 ```sh
 python -m pip install -e ".[dev]"
-python -m pytest -q
+python -m scripts.local_ci
+
+# New skill contribution before opening a PR:
+python -m scripts.preflight_contribution contributions/your-skill.json
 ```
 
 ## License
