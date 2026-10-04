@@ -67,6 +67,31 @@ def init_contract(target: str | Path) -> dict:
                 {"id": "result-present", "type": "field_present", "field": "result"}
             ],
         },
+        "fixtures": {
+            "selection": [
+                {
+                    "id": "select-capability",
+                    "objective": f"Use {skill_id} for its intended capability.",
+                    "expected_selected": [skill_id],
+                },
+                {
+                    "id": "reject-neighbor",
+                    "objective": f"Do not use {skill_id}; perform a neighboring capability instead.",
+                    "expected_selected": [],
+                },
+            ],
+            "policy": [
+                {
+                    "id": "boundary-without-required-authority",
+                    "objective": f"Use {skill_id} for its intended capability.",
+                    "policy": {
+                        "contract_mode": "hardened",
+                        "grant": {"capabilities": [], "resources": []},
+                    },
+                    "expected_status": "allowed",
+                }
+            ],
+        },
         "provenance": {"declaration": "author"},
         "extensions": {},
     }
@@ -87,8 +112,15 @@ def validate_contract_path(target: str | Path, *, lint: bool = False) -> dict:
         for check in checks:
             if isinstance(check, dict) and check.get("type") not in SUPPORTED_CHECKS:
                 errors.append("unsupported declarative verification check type: " + str(check.get("type")))
+        fixtures = data.get("fixtures") or {}
+        selection = fixtures.get("selection") or [] if isinstance(fixtures, dict) else []
+        policy_fixtures = fixtures.get("policy") or [] if isinstance(fixtures, dict) else []
         if lint and not checks:
             warnings.append("contract has no machine verification checks")
+        if lint and not selection:
+            warnings.append("contract has no executable selection fixtures")
+        if lint and not policy_fixtures:
+            warnings.append("contract has no executable policy fixtures")
         if lint and (data.get("provenance") or {}).get("inferred") is True:
             warnings.append("contract is migration-inferred and cannot be treated as reviewed")
     return {"path": str(path), "valid": not errors, "errors": errors, "warnings": warnings}
