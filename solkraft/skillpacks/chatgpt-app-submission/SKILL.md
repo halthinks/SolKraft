@@ -3,6 +3,8 @@ name: chatgpt-app-submission
 description: Prepare chatgpt-app-submission.json and review MCP tool metadata, schemas, and test cases for submission.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # ChatGPT App Submission
 
 Use this skill when a developer needs a `chatgpt-app-submission.json` file for a ChatGPT Apps submission. The file is uploaded in the Apps submission form to fill out parts of App Info, MCP Server, and Testing.
@@ -109,3 +111,14 @@ For each finding, explain the practical next step: update source, update submiss
 ## Final Response
 
 After writing the file, summarize the app info fields generated, number of tools covered, positive test case count, and negative test case count. Then include a `Review findings` section with any sensitive data solicitation, tool data use, tool naming, weak CSP findings, or missing `outputSchema` warnings and what to do with each one. If generation is blocked, lead with the exact missing hints or source ambiguity.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- This procedure is selected by SolKraft's contract-aware router; selection does not authorize execution.
+- Public routing defaults to hardened policy; opaque or contract-inadmissible capabilities fail closed.
+- When `contract.yaml` exists, compact metadata is evaluated before this full instruction body is loaded.
+- Runtime authority stays with the host; SolKraft keeps `execution_authorized: false`.
+- Current local acceptance covers 100,000 unique 250-word requests, 100 ask families per skill, and 100% eligible target recall. See repository `VALIDATION.md`.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

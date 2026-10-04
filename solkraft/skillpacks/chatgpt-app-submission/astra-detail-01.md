@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Output Contract — code or schema reference
 
 Paths and commands use the skill root as their context.

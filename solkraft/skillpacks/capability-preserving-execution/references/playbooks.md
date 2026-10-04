@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Execution Playbooks
 
 Adapt these patterns to the governing workflow. Omit irrelevant steps and add any work required by the mission.
