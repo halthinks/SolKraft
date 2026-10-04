@@ -80,6 +80,23 @@ def _repair_candidate(catalog, decisions, text, selected):
     return None, denied_candidate
 
 
+def _enforce_dataflow_order(selected, additions):
+    """Keep every typed producer before the consumer it satisfies."""
+    ordered = list(selected)
+    for addition in additions or ():
+        producer = addition.get("producer")
+        consumer = addition.get("consumer")
+        if producer not in ordered or consumer not in ordered:
+            continue
+        producer_index = ordered.index(producer)
+        consumer_index = ordered.index(consumer)
+        if producer_index > consumer_index:
+            ordered.pop(producer_index)
+            consumer_index = ordered.index(consumer)
+            ordered.insert(consumer_index, producer)
+    return ordered
+
+
 def route_request(
     catalog: SkillCatalog,
     objective: str,
@@ -270,6 +287,9 @@ def route_request(
         decisions,
         policy_public=normalized_policy.public(),
         original_selected=original_selected,
+    )
+    result["selected"] = _enforce_dataflow_order(
+        result["selected"], dataflow_plan["additions"]
     )
     result["skills"] = [
         known[skill].public() for skill in result["selected"]
