@@ -19,6 +19,8 @@ def test_reusable_ci_and_preflight_workflows_exist():
     assert "pull_request:" in tests
     assert "uses: ./.github/workflows/reusable-ci.yml" in tests
     assert "build/contracts-migration.json" in reusable
+    assert "build/contract-index.json" in reusable
+    assert "docs/assets/contracts.json" in reusable
 
 
 def test_workflow_yaml_parses():
