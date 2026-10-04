@@ -114,7 +114,7 @@ Cozy’s contribution helped push the project from descriptive skill metadata to
 | [`VALIDATION.md`](VALIDATION.md) | What has actually been tested and what it means |
 | [Live Console](https://halthinks.github.io/SolKraft/) | Browse, inspect, connect, and replay validation |
 | [Contributors](https://halthinks.github.io/SolKraft/contributors.html) | Community impact and recognition |
-| [Contributions Showcase](https://halthinks.github.io/SolKraft/contributions.html) | Filterable high-level outcomes contributors helped create |
+| [Contributions Showcase](https://halthinks.github.io/SolKraft/contributions.html) | Filterable outcomes plus contributor profile cards and public impact links |
 | [Nominations Archive](https://halthinks.github.io/SolKraft/nominations.html) | Public nomination and recognition history |
 | [Support](https://github.com/halthinks/SolKraft/issues/new?template=support_request.yml) | Setup, routing, usage, docs, or bug help |
 
