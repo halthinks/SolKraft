@@ -11,7 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css?v=showcase-20261004">
 <style>
-.page-head{padding:70px 0 38px;border-bottom:1px solid #1b242e}.page-head h1{font-size:clamp(42px,6vw,68px);letter-spacing:-.055em;margin:16px 0}.page-head em{font-style:normal;color:var(--mint)}.showcase{padding:36px 0 82px}.impact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.impact{border:1px solid #293743;background:linear-gradient(145deg,#101923,#0d141b);border-radius:12px;padding:20px}.impact b{color:var(--mint);font:10px var(--mono);letter-spacing:.1em}.impact h3{font-size:18px;margin:10px 0}.impact p{color:#94a2ae;line-height:1.7}.featured{margin-top:26px;border:1px solid #6e5d2c;background:linear-gradient(135deg,#1c1a10,#111820);border-radius:14px;padding:26px}.featured-head{display:flex;justify-content:space-between;gap:18px;align-items:start}.stars{color:#f2cb5c;font-size:22px;letter-spacing:.08em}.quote{margin:16px 0;padding:15px 18px;border-left:2px solid #f2cb5c;background:#16170f;color:#d9ddd6;font:12px/1.8 var(--mono)}.badges{display:flex;gap:9px;flex-wrap:wrap;margin:16px 0}.pill{border:1px solid #3c4d59;border-radius:999px;padding:6px 9px;font:9px var(--mono);color:#b8c5ce;background:#111a21}.pill.gold{border-color:#796329;color:#f2cb5c}.cta{margin-top:26px;display:flex;gap:12px;flex-wrap:wrap}@media(max-width:760px){.impact-grid{grid-template-columns:1fr}.featured-head{display:block}}
+.page-head{padding:70px 0 38px;border-bottom:1px solid #1b242e}.page-head h1{font-size:clamp(42px,6vw,68px);letter-spacing:-.055em;margin:16px 0}.page-head em{font-style:normal;color:var(--mint)}.showcase{padding:36px 0 82px}.filters{display:flex;gap:9px;flex-wrap:wrap;margin:0 0 22px}.filter-btn{border:1px solid #34424f;background:#101820;color:#99a8b4;border-radius:999px;padding:8px 12px;font:10px var(--mono);cursor:pointer}.filter-btn:hover,.filter-btn.active{border-color:var(--mint);color:var(--mint);background:#152019}.filter-count{opacity:.7;margin-left:5px}.impact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.impact{border:1px solid #293743;background:linear-gradient(145deg,#101923,#0d141b);border-radius:12px;padding:20px;transition:opacity .18s,transform .18s}.impact[hidden]{display:none}.impact.filtered-in{animation:impact-in .18s ease-out}.impact-meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}.impact-tag{border:1px solid #334451;border-radius:999px;padding:4px 7px;font:9px var(--mono);color:#8ea0ad}.filter-summary{font:10px var(--mono);color:#7f8e9b;margin:-10px 0 20px}@keyframes impact-in{from{opacity:.35;transform:translateY(5px)}to{opacity:1;transform:none}}.impact b{color:var(--mint);font:10px var(--mono);letter-spacing:.1em}.impact h3{font-size:18px;margin:10px 0}.impact p{color:#94a2ae;line-height:1.7}.featured{margin-top:26px;border:1px solid #6e5d2c;background:linear-gradient(135deg,#1c1a10,#111820);border-radius:14px;padding:26px}.featured-head{display:flex;justify-content:space-between;gap:18px;align-items:start}.stars{color:#f2cb5c;font-size:22px;letter-spacing:.08em}.quote{margin:16px 0;padding:15px 18px;border-left:2px solid #f2cb5c;background:#16170f;color:#d9ddd6;font:12px/1.8 var(--mono)}.badges{display:flex;gap:9px;flex-wrap:wrap;margin:16px 0}.pill{border:1px solid #3c4d59;border-radius:999px;padding:6px 9px;font:9px var(--mono);color:#b8c5ce;background:#111a21}.pill.gold{border-color:#796329;color:#f2cb5c}.cta{margin-top:26px;display:flex;gap:12px;flex-wrap:wrap}@media(max-width:760px){.impact-grid{grid-template-columns:1fr}.featured-head{display:block}}
 </style>
 </head>
 <body>
@@ -27,13 +27,24 @@
 <p style="max-width:820px;color:#a6b2bd;font-size:14px;line-height:1.8">SolKraft recognizes the different ways an open-source system gets better. Code matters. So do architecture ideas, testing, research, issue discovery, documentation, design, and community help. This showcase records the high-level outcomes contributors helped create.</p>
 </section>
 <section class="showcase">
-<div class="impact-grid">
-<article class="impact"><b>ARCHITECTURE</b><h3>Executable capability contracts</h3><p>Skills can declare typed inputs/outputs, effects, capability/resource requirements, verification, and executable fixtures.</p></article>
-<article class="impact"><b>ROUTING</b><h3>Safer capability selection</h3><p>Contract-aware admissibility, whole-route validation, typed dataflow, and explicit blocked states make selection easier to inspect.</p></article>
-<article class="impact"><b>VERIFICATION</b><h3>Regressions become visible</h3><p>Reusable CI runs contract checks, fixture assertions, packaging, installed MCP verification, and broad routing regression suites.</p></article>
-<article class="impact"><b>COMMUNITY</b><h3>Ideas count as contribution</h3><p>Recognition is based on project impact, not whether the contribution arrived as a pull request.</p></article>
-<article class="impact"><b>SUPPORT</b><h3>Clear support and contribution paths</h3><p>Users can submit guided support issues, nominate contributors, and distinguish help requests from code contributions.</p></article>
-<article class="impact"><b>OPEN SOURCE</b><h3>Public evidence and attribution</h3><p>Contributors, ratings, nominations, changelog entries, and validation receipts are visible and reviewable.</p></article>
+<div class="eyebrow">FILTER THE SHOWCASE</div>
+<div class="filters" role="group" aria-label="Filter contributions showcase">
+<button class="filter-btn active" type="button" data-filter="all">All <span class="filter-count">6</span></button>
+<button class="filter-btn" type="button" data-filter="architecture">Architecture</button>
+<button class="filter-btn" type="button" data-filter="routing">Routing</button>
+<button class="filter-btn" type="button" data-filter="verification">Verification</button>
+<button class="filter-btn" type="button" data-filter="community">Community</button>
+<button class="filter-btn" type="button" data-filter="support">Support</button>
+<button class="filter-btn" type="button" data-filter="open-source">Open source</button>
+</div>
+<div id="filter-summary" class="filter-summary" role="status" aria-live="polite">Showing all 6 contribution areas.</div>
+<div class="impact-grid" id="impact-grid">
+<article class="impact" data-category="architecture verification"><b>ARCHITECTURE</b><h3>Executable capability contracts</h3><p>Skills can declare typed inputs/outputs, effects, capability/resource requirements, verification, and executable fixtures.</p><div class="impact-meta"><span class="impact-tag">architecture</span><span class="impact-tag">verification</span></div></article>
+<article class="impact" data-category="routing architecture"><b>ROUTING</b><h3>Safer capability selection</h3><p>Contract-aware admissibility, whole-route validation, typed dataflow, and explicit blocked states make selection easier to inspect.</p><div class="impact-meta"><span class="impact-tag">routing</span><span class="impact-tag">architecture</span></div></article>
+<article class="impact" data-category="verification routing"><b>VERIFICATION</b><h3>Regressions become visible</h3><p>Reusable CI runs contract checks, fixture assertions, packaging, installed MCP verification, and broad routing regression suites.</p><div class="impact-meta"><span class="impact-tag">verification</span><span class="impact-tag">routing</span></div></article>
+<article class="impact" data-category="community open-source"><b>COMMUNITY</b><h3>Ideas count as contribution</h3><p>Recognition is based on project impact, not whether the contribution arrived as a pull request.</p><div class="impact-meta"><span class="impact-tag">community</span><span class="impact-tag">open source</span></div></article>
+<article class="impact" data-category="support community"><b>SUPPORT</b><h3>Clear support and contribution paths</h3><p>Users can submit guided support issues, nominate contributors, and distinguish help requests from code contributions.</p><div class="impact-meta"><span class="impact-tag">support</span><span class="impact-tag">community</span></div></article>
+<article class="impact" data-category="open-source community verification"><b>OPEN SOURCE</b><h3>Public evidence and attribution</h3><p>Contributors, ratings, nominations, changelog entries, and validation receipts are visible and reviewable.</p><div class="impact-meta"><span class="impact-tag">open source</span><span class="impact-tag">community</span><span class="impact-tag">verification</span></div></article>
 </div>
 
 <article class="featured">
@@ -49,5 +60,36 @@
 </section>
 </main>
 <footer><a class="brand footer-brand" href="index.html"><span class="brand-mark">S<span>✳</span></span><span>SOLKRAFT</span></a><span>Build more capable things, together.</span><div><a href="contributors.html">Contributors</a><a href="contributions.html">Showcase</a><a href="nominations.html">Nominations</a></div></footer>
+<script>
+(()=>{
+ const buttons=[...document.querySelectorAll('.filter-btn')];
+ const cards=[...document.querySelectorAll('.impact[data-category]')];
+ const summary=document.getElementById('filter-summary');
+ const labels={
+   all:'all',architecture:'Architecture',routing:'Routing',verification:'Verification',
+   community:'Community',support:'Support','open-source':'Open source'
+ };
+ function apply(filter){
+   let visible=0;
+   cards.forEach(card=>{
+     const categories=(card.dataset.category||'').split(/\s+/);
+     const show=filter==='all'||categories.includes(filter);
+     card.hidden=!show;
+     card.classList.toggle('filtered-in',show);
+     if(show) visible++;
+   });
+   buttons.forEach(button=>{
+     const active=button.dataset.filter===filter;
+     button.classList.toggle('active',active);
+     button.setAttribute('aria-pressed',active?'true':'false');
+   });
+   summary.textContent=filter==='all'
+     ? 'Showing all '+visible+' contribution areas.'
+     : 'Showing '+visible+' area'+(visible===1?'':'s')+' tagged '+labels[filter]+'.';
+ }
+ buttons.forEach(button=>button.addEventListener('click',()=>apply(button.dataset.filter)));
+ apply('all');
+})();
+</script>
 </body>
 </html>
