@@ -3,6 +3,8 @@ name: audit-git-worktrees
 description: Produce a deterministic, evidence-bound, read-only inventory of every Git worktree registered to a canonical repository, including existence, HEAD, branch or detached state, lock/prune metadata, dirty-row count and sample, and whether each HEAD is an ancestor of canonical HEAD. Use when auditing parallel-agent or multi-worktree development, reconciling abandoned or Grok/Codex-created worktrees, deciding what must be preserved before cleanup, or verifying repository topology without modifying worktrees.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Audit Git Worktrees
 
 Preserve the hardware project post-Grok worktree-audit process as a reusable, fail-closed skill.
@@ -74,3 +76,14 @@ Then run the skill-package validator:
 ```powershell
 python <skill-creator-dir>\scripts\quick_validate.py <skill-dir>
 ```
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- This procedure is selected by SolKraft's contract-aware router; selection does not authorize execution.
+- Public routing defaults to hardened policy; opaque or contract-inadmissible capabilities fail closed.
+- When `contract.yaml` exists, compact metadata is evaluated before this full instruction body is loaded.
+- Runtime authority stays with the host; SolKraft keeps `execution_authorized: false`.
+- Current local acceptance covers 100,000 unique 250-word requests, 100 ask families per skill, and 100% eligible target recall. See repository `VALIDATION.md`.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->
