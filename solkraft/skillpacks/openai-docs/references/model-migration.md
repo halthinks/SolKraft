@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Model migration and prompting
 
 Use this route for model upgrades, migration planning, model-specific prompting, or latest/current/default prompting guidance. First search current official OpenAI documentation for the exact requested topic and model, then open or fetch the relevant official page using an available documentation or official-domain web capability. Do not run a resolver, open bundled references, or rely on a guide URL before completing that official search and actual page fetch.

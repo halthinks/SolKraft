@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Codex self-knowledge
 
 Use this manual-first route only for genuinely broad Codex setup, orientation, customization, troubleshooting, local-state guidance, or system-map synthesis across skills, plugins, MCP, hooks, `AGENTS.md`, automations, and product surfaces. Mixed Chat/Work/Codex comparisons belong to `official-docs.md` instead.

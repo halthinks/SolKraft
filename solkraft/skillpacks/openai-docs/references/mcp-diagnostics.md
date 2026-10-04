@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Local documentation MCP setup and diagnostics
 
 Use this route only when the user explicitly asks to configure or troubleshoot the official OpenAI documentation MCP server in a supported **local Codex client**. A missing documentation tool during an ordinary documentation request is not a setup request: answer with the root skill's official-domain web fallback without installation, sandbox escalation, configuration changes, or restart.
