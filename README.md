@@ -94,6 +94,21 @@ Cozy’s contribution helped push the project from descriptive skill metadata to
 [See the full Contributors page →](https://halthinks.github.io/SolKraft/contributors.html) ·
 [Nominate a contributor →](https://github.com/halthinks/SolKraft/issues/new?template=contributor_nomination.yml)
 
+## 🗺️ Project map
+
+| Go here | For |
+|---|---|
+| [`solkraft/routing.py`](solkraft/routing.py) | Advisory request → route orchestration |
+| [`solkraft/contract_schema.py`](solkraft/contract_schema.py) | Contract v1 validation rules |
+| [`solkraft/contract_fixtures.py`](solkraft/contract_fixtures.py) | Executable selection + policy fixtures |
+| [`solkraft/contract_index.py`](solkraft/contract_index.py) | Compact capability metadata and indexes |
+| [`solkraft/skillpacks/`](solkraft/skillpacks) | The bundled skill operating layer |
+| [`scripts/local_ci.py`](scripts/local_ci.py) | Canonical local/reusable verification gate |
+| [`VALIDATION.md`](VALIDATION.md) | What has actually been tested and what it means |
+| [Live Console](https://halthinks.github.io/SolKraft/) | Browse, inspect, connect, and replay validation |
+| [Contributors](https://halthinks.github.io/SolKraft/contributors.html) | Community impact and recognition |
+| [Support](https://github.com/halthinks/SolKraft/issues/new?template=support_request.yml) | Setup, routing, usage, docs, or bug help |
+
 ---
 
 
@@ -106,7 +121,7 @@ Explore the [interactive connection walkthrough](https://halthinks.github.io/Sol
 
 **An open skill OS for agents.** Find the right procedure, compose multi-step work, and retrieve only the instructions needed for the next step. SolKraft provides a searchable catalog, advisory router, REST API, and Model Context Protocol (MCP) server.
 
-[Open the console](https://halthinks.github.io/SolKraft/) · [Browse skills](solkraft/skillpacks) · [Report a bug](https://github.com/halthinks/SolKraft/issues/new/choose) · [API quickstart](#run-the-api)
+[Open the console](https://halthinks.github.io/SolKraft/) · [Browse skills](solkraft/skillpacks) · [Get support](https://github.com/halthinks/SolKraft/issues/new?template=support_request.yml) · [Nominate a contributor](https://github.com/halthinks/SolKraft/issues/new?template=contributor_nomination.yml) · [API quickstart](#run-the-api)
 
 ## What it does
 
