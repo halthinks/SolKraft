@@ -9,6 +9,7 @@ import re
 from .catalog import SkillCatalog
 from .contract_loader import load_skill_contract
 from .contract_policy import RoutePolicy, evaluate_graph
+from .dataflow import resolve_required_inputs
 from .route_validation import validate_route
 
 
@@ -192,6 +193,71 @@ def route_request(
         ) or bool(repaired),
         "repaired": repaired,
         "bounded_passes": 1,
+    }
+
+    allowed_skills = {
+        skill for skill, decision in decisions.items()
+        if decision.get("status") != "denied"
+    }
+    available_inputs = []
+    if isinstance(context, dict):
+        raw_available = context.get("available_inputs", [])
+        if isinstance(raw_available, list):
+            available_inputs = [
+                item for item in raw_available if isinstance(item, str) and item
+            ]
+
+    dataflow = resolve_required_inputs(
+        expanded,
+        selected,
+        available_inputs=available_inputs,
+        allowed_skills=allowed_skills,
+    )
+    for addition in dataflow["additions"]:
+        producer = addition["producer"]
+        consumer = addition["consumer"]
+        if producer in selected or producer not in known or len(selected) >= max_skills:
+            continue
+        try:
+            index = selected.index(consumer)
+        except ValueError:
+            index = len(selected)
+        selected.insert(index, producer)
+        if producer not in graph["nodes"] and producer in expanded["nodes"]:
+            graph["nodes"][producer] = expanded["nodes"][producer]
+
+    # Re-evaluate input status after any unique producer additions.
+    dataflow = resolve_required_inputs(
+        expanded,
+        selected,
+        available_inputs=available_inputs,
+        allowed_skills=allowed_skills,
+    )
+    result["selected"] = selected
+    result["dataflow"] = dataflow
+    blocked_inputs = []
+    for key, status in dataflow["inputs"].items():
+        if status.get("status") in {"elicitable", "unavailable"}:
+            consumer, input_name = key.split(":", 1)
+            blocked_inputs.append({
+                "stage": None,
+                "text": consumer,
+                "reason": (
+                    "required input requires elicitation"
+                    if status["status"] == "elicitable"
+                    else "required input unavailable"
+                ),
+                "rejected": [],
+                "input": input_name,
+                "input_status": status,
+            })
+    if blocked_inputs:
+        result.setdefault("blocked_stages", []).extend(blocked_inputs)
+
+    result.setdefault("selection_trace", {})["dataflow"] = {
+        "added_producers": dataflow["additions"],
+        "explanations": dataflow["explanations"],
+        "available_inputs": available_inputs,
     }
 
     original_selected = list(selected)
