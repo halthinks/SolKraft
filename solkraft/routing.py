@@ -152,16 +152,21 @@ def route_request(
     known = {record.id: record for record in catalog.records()}
     selected = [skill for skill in result["selected"] if skill in known]
 
-    objective_identity_skill = None
-    objective_identity = None
-    if len(result.get("stages") or []) == 1:
-        objective_identity_skill, objective_identity = _identity_candidate(
-            catalog, expanded, decisions, objective
-        )
+    objective_identity_skill, objective_identity = _identity_candidate(
+        catalog, expanded, decisions, objective
+    )
+    if objective_identity_skill and objective_identity_skill not in selected:
+        selected.insert(0, objective_identity_skill)
 
-    # Prefer a high-confidence catalog capability identity over a generic
-    # workflow mapping. Contract policy still decides admissibility.
+    # Preserve high-confidence whole-request identity even when SolForge
+    # decomposes the request into multiple supporting stages.
     identity_trace = []
+    if objective_identity:
+        identity_trace.append({
+            "stage": None,
+            "text": objective,
+            **objective_identity,
+        })
     for stage in result["stages"]:
         identity_skill, identity = _identity_candidate(
             catalog, expanded, decisions, stage["text"]
