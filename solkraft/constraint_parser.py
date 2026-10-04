@@ -38,7 +38,7 @@ def effect_exclusion_start(text: str) -> int | None:
     matches = []
     for form in EFFECT_FORMS.values():
         match = re.search(
-            rf"\b(?:do not|don't|dont|without|never|skip|avoid)\b[^.;\n]{{0,70}}\b(?:{form})\b",
+            rf"\b(?:do not|don't|dont|without|never)\b[^.;\n]{{0,70}}\b(?:{form})\b",
             text,
         )
         if match:

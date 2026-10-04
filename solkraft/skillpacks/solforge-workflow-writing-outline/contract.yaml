@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0",
+  "skill_id": "solforge-workflow-writing-outline",
+  "contract_revision": 1,
+  "inputs": [
+    {
+      "name": "audience-purpose-and-format",
+      "required": true,
+      "source": "user",
+      "description": "audience, purpose, and format",
+      "schema": {}
+    },
+    {
+      "name": "source-material-and-claim-evidence",
+      "required": true,
+      "source": "user",
+      "description": "source material and claim evidence",
+      "schema": {}
+    },
+    {
+      "name": "user-scope-and-acceptance-criteria",
+      "required": true,
+      "source": "user",
+      "description": "user scope and acceptance criteria",
+      "schema": {}
+    }
+  ],
+  "outputs": [
+    {
+      "name": "annotated-outline",
+      "description": "annotated_outline",
+      "schema": {}
+    },
+    {
+      "name": "argument-map",
+      "description": "argument_map",
+      "schema": {}
+    }
+  ],
+  "effects": [],
+  "authority": {
+    "capabilities": [],
+    "resources": [],
+    "legacy_scope": "none"
+  },
+  "risk": {
+    "external": false,
+    "destructive": false,
+    "open_world": false
+  },
+  "verification": {
+    "mode": "declarative",
+    "description": "The requested annotated_outline, argument_map is supported by inspected sources or observed behavior; unresolved limits are stated.",
+    "checks": []
+  },
+  "provenance": {
+    "migration": "legacy-graph",
+    "inferred": true
+  },
+  "extensions": {
+    "legacy_graph": {
+      "domain": "writing",
+      "selection": "automatic or explicit",
+      "path": "../solforge-workflow-writing-outline/SKILL.md"
+    }
+  }
+}

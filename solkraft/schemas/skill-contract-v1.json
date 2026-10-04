@@ -9,13 +9,70 @@
     "skill_id",
     "contract_revision"
   ],
+  "$defs": {
+    "binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "schema"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "required": {
+          "type": "boolean",
+          "default": true
+        },
+        "description": {
+          "type": "string"
+        },
+        "sensitive": {
+          "type": "boolean",
+          "default": false
+        },
+        "source": {
+          "enum": [
+            "user",
+            "context",
+            "artifact",
+            "skill-output",
+            "host"
+          ]
+        },
+        "schema": {
+          "type": "object"
+        }
+      }
+    },
+    "check": {
+      "type": "object",
+      "required": [
+        "id",
+        "type"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    }
+  },
   "properties": {
     "schema_version": {
       "type": [
         "string",
         "integer"
       ],
-      "pattern": "^1(?:\\\\.[0-9]+)?$"
+      "pattern": "^1(?:\\.[0-9]+)?$"
     },
     "skill_id": {
       "type": "string",
@@ -28,20 +85,14 @@
     "inputs": {
       "type": "array",
       "items": {
-        "type": [
-          "object",
-          "string"
-        ]
+        "$ref": "#/$defs/binding"
       },
       "default": []
     },
     "outputs": {
       "type": "array",
       "items": {
-        "type": [
-          "object",
-          "string"
-        ]
+        "$ref": "#/$defs/binding"
       },
       "default": []
     },
@@ -49,8 +100,9 @@
       "type": "array",
       "items": {
         "type": "string",
-        "minLength": 1
+        "pattern": "^[a-z][a-z0-9-]*(?:\\.[a-z][a-z0-9-]*)+$"
       },
+      "uniqueItems": true,
       "default": []
     },
     "authority": {
@@ -61,8 +113,9 @@
           "type": "array",
           "items": {
             "type": "string",
-            "minLength": 1
+            "pattern": "^[a-z][a-z0-9-]*(?:\\.[a-z][a-z0-9-]*)+$"
           },
+          "uniqueItems": true,
           "default": []
         },
         "resources": {
@@ -71,6 +124,7 @@
             "type": "string",
             "minLength": 1
           },
+          "uniqueItems": true,
           "default": []
         },
         "legacy_scope": {
@@ -86,7 +140,24 @@
     },
     "risk": {
       "type": "object",
-      "additionalProperties": true
+      "additionalProperties": false,
+      "properties": {
+        "external": {
+          "type": "boolean"
+        },
+        "destructive": {
+          "type": "boolean"
+        },
+        "idempotent": {
+          "type": "boolean"
+        },
+        "reversible": {
+          "type": "boolean"
+        },
+        "open_world": {
+          "type": "boolean"
+        }
+      }
     },
     "verification": {
       "type": "object",
@@ -96,12 +167,14 @@
           "type": "string"
         },
         "mode": {
-          "type": "string"
+          "enum": [
+            "declarative"
+          ]
         },
         "checks": {
           "type": "array",
           "items": {
-            "type": "object"
+            "$ref": "#/$defs/check"
           },
           "default": []
         }

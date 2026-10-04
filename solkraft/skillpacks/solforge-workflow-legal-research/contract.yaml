@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0",
+  "skill_id": "solforge-workflow-legal-research",
+  "contract_revision": 1,
+  "inputs": [
+    {
+      "name": "jurisdiction-and-effective-date",
+      "required": true,
+      "source": "user",
+      "description": "jurisdiction and effective date",
+      "schema": {}
+    },
+    {
+      "name": "question-and-controlling-sources",
+      "required": true,
+      "source": "user",
+      "description": "question and controlling sources",
+      "schema": {}
+    },
+    {
+      "name": "user-scope-and-acceptance-criteria",
+      "required": true,
+      "source": "user",
+      "description": "user scope and acceptance criteria",
+      "schema": {}
+    }
+  ],
+  "outputs": [
+    {
+      "name": "legal-research-memo",
+      "description": "legal_research_memo",
+      "schema": {}
+    },
+    {
+      "name": "user-scope-map",
+      "description": "user_scope_map",
+      "schema": {}
+    }
+  ],
+  "effects": [],
+  "authority": {
+    "capabilities": [],
+    "resources": [],
+    "legacy_scope": "none"
+  },
+  "risk": {
+    "external": false,
+    "destructive": false,
+    "open_world": false
+  },
+  "verification": {
+    "mode": "declarative",
+    "description": "The requested legal_research_memo, user_scope_map is supported by inspected sources or observed behavior; unresolved limits are stated.",
+    "checks": []
+  },
+  "provenance": {
+    "migration": "legacy-graph",
+    "inferred": true
+  },
+  "extensions": {
+    "legacy_graph": {
+      "domain": "legal_policy",
+      "selection": "automatic or explicit",
+      "path": "../solforge-workflow-legal-research/SKILL.md"
+    }
+  }
+}

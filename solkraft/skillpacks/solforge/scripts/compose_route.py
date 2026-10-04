@@ -239,7 +239,7 @@ def _fallback_skill(graph, clause, context):
     return result["selected"][0] if result["selected"] else None
 
 
-def compose_route(graph, objective, explicit=(), context=None, max_skills=10):
+def compose_route(graph, objective, explicit=(), context=None, max_skills=10, blocked_skills=()):
     """Compose up to fifty ordered skills for a compound request.
 
     ``max_skills`` is a strict ceiling. Explicit skills are preserved first,
@@ -262,9 +262,13 @@ def compose_route(graph, objective, explicit=(), context=None, max_skills=10):
     selected = []
     stages = []
     unselected = []
+    blocked = set(blocked_skills or ())
 
     def add(skill, stage, reason, confidence="high"):
         if skill is None or skill not in nodes or nodes[skill]["effect"] or skill in selected:
+            return False
+        if skill in blocked:
+            unselected.append({"stage": stage + 1, "text": clauses[stage], "candidate": skill, "reason": "candidate inadmissible by contract policy"})
             return False
         if len(selected) >= max_skills:
             unselected.append({"stage": stage, "text": clauses[stage], "candidate": skill, "reason": "skill limit"})
@@ -274,7 +278,9 @@ def compose_route(graph, objective, explicit=(), context=None, max_skills=10):
         return True
 
     for skill in explicit:
-        if len(selected) >= max_skills:
+        if skill in blocked:
+            unselected.append({"stage": None, "text": skill, "candidate": skill, "reason": "candidate inadmissible by contract policy"})
+        elif len(selected) >= max_skills:
             unselected.append({"stage": None, "text": skill, "candidate": skill, "reason": "skill limit"})
         elif not nodes[skill]["effect"]:
             selected.append(skill)

@@ -1,0 +1,84 @@
+{
+  "schema_version": "1.0",
+  "skill_id": "solforge-workflow-code-research",
+  "contract_revision": 1,
+  "inputs": [
+    {
+      "name": "repository-and-revision",
+      "required": true,
+      "source": "user",
+      "description": "repository and revision",
+      "schema": {}
+    },
+    {
+      "name": "relevant-behavior-or-failure",
+      "required": true,
+      "source": "user",
+      "description": "relevant behavior or failure",
+      "schema": {}
+    },
+    {
+      "name": "requested-change-boundaries",
+      "required": true,
+      "source": "user",
+      "description": "requested change boundaries",
+      "schema": {}
+    },
+    {
+      "name": "user-scope-and-acceptance-criteria",
+      "required": true,
+      "source": "user",
+      "description": "user scope and acceptance criteria",
+      "schema": {}
+    }
+  ],
+  "outputs": [
+    {
+      "name": "code-research-package",
+      "description": "code_research_package",
+      "schema": {}
+    },
+    {
+      "name": "design-envelope",
+      "description": "design_envelope",
+      "schema": {}
+    },
+    {
+      "name": "completion-gap-matrix",
+      "description": "completion_gap_matrix",
+      "schema": {}
+    },
+    {
+      "name": "remediation-master-plan",
+      "description": "remediation_master_plan",
+      "schema": {}
+    }
+  ],
+  "effects": [],
+  "authority": {
+    "capabilities": [],
+    "resources": [],
+    "legacy_scope": "none"
+  },
+  "risk": {
+    "external": false,
+    "destructive": false,
+    "open_world": false
+  },
+  "verification": {
+    "mode": "declarative",
+    "description": "The requested code_research_package, design_envelope, completion_gap_matrix, remediation_master_plan is supported by inspected sources or observed behavior; unresolved limits are stated.",
+    "checks": []
+  },
+  "provenance": {
+    "migration": "legacy-graph",
+    "inferred": true
+  },
+  "extensions": {
+    "legacy_graph": {
+      "domain": "software",
+      "selection": "automatic or explicit",
+      "path": "../solforge-workflow-code-research/SKILL.md"
+    }
+  }
+}

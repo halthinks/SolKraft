@@ -1,23 +1,16 @@
-"""Compact skill contracts used as selection constraints.
+"""Compact skill contract normalization.
 
-Contracts describe a skill. They never grant execution authority. Missing or
-unsupported metadata stays explicit so SolKraft cannot accidentally turn
-unknown into safe.
+The module intentionally contains no route filtering. Admissibility belongs to
+contract_policy and route_validation; this file only normalizes declarations.
 """
 from __future__ import annotations
 
-from .constraint_parser import excluded_effects
+from .capabilities import LEGACY_AUTH_SCOPES
+from .effects import normalize_effects
 
 
-AUTH_ORDER = ("none", "read", "write-local", "network", "external-effect")
 CONTRACT_STATUSES = ("declared", "legacy", "opaque", "unsupported", "invalid")
 SUPPORTED_SCHEMA_MAJOR = 1
-
-
-def _auth_rank(scope: str | None) -> int | None:
-    if scope not in AUTH_ORDER:
-        return None
-    return AUTH_ORDER.index(scope)
 
 
 def _schema_major(value) -> int | None:
@@ -33,7 +26,6 @@ def _schema_major(value) -> int | None:
 
 
 def contract_from_node(node: dict | None) -> dict:
-    """Normalize graph or sidecar metadata into one compact contract view."""
     node = node if isinstance(node, dict) else {}
     forced_status = node.get("contract_status")
     if forced_status not in CONTRACT_STATUSES:
@@ -58,18 +50,20 @@ def contract_from_node(node: dict | None) -> dict:
     if side is not None and not isinstance(side, list):
         status = "invalid"
         side = None
-    if isinstance(side, list) and not all(isinstance(item, str) and item for item in side):
-        status = "invalid"
-        side = None
+    if isinstance(side, list):
+        if not all(isinstance(item, str) and item for item in side):
+            status = "invalid"
+            side = None
+        else:
+            side = normalize_effects(side)
 
     auth = node.get("auth_scope")
-    if auth is None:
-        authority = node.get("authority")
-        if isinstance(authority, dict):
-            auth = authority.get("legacy_scope")
-    if auth is None and node.get("effect") is False:
+    authority = node.get("authority")
+    if auth is None and isinstance(authority, dict):
+        auth = authority.get("legacy_scope")
+    if auth is None and node.get("effect") is False and forced_status != "declared":
         auth = "none"
-    if auth is not None and auth not in AUTH_ORDER:
+    if auth is not None and auth not in LEGACY_AUTH_SCOPES:
         status = "invalid"
         auth = None
 
@@ -80,115 +74,45 @@ def contract_from_node(node: dict | None) -> dict:
         if not test and verification.get("checks"):
             test = "Declarative verification checks are present."
 
-    inputs = list(node.get("inputs") or [])
-    outputs = list(node.get("outputs") or [])
     capabilities = []
     resources = []
-    authority = node.get("authority")
     if isinstance(authority, dict):
         capabilities = list(authority.get("capabilities") or [])
         resources = list(authority.get("resources") or [])
 
     if status is None:
+        legacy_contract = any(key in node for key in ("effect", "exit_evidence"))
         explicit_contract = any(
             key in node for key in (
-                "schema_version", "side_effects", "effects", "auth_scope",
+                "schema_version", "side_effects", "effects",
                 "test_contract", "verification", "authority",
             )
         )
-        legacy_contract = any(key in node for key in ("effect", "exit_evidence"))
-        if explicit_contract:
-            status = "declared"
-        elif legacy_contract:
+        # Pre-v1 graph metadata stays legacy even when it also carried the old
+        # auth_scope field. A v1 sidecar is identified by versioned metadata.
+        if legacy_contract and schema_version is None:
             status = "legacy"
+        elif explicit_contract:
+            status = "declared"
         else:
             status = "opaque"
 
-    declared = status in {"declared", "legacy"}
     return {
         "status": status,
         "schema_version": schema_version,
         "contract_revision": node.get("contract_revision"),
-        "inputs": inputs,
-        "outputs": outputs,
+        "inputs": list(node.get("inputs") or []),
+        "outputs": list(node.get("outputs") or []),
         "side_effects": list(side) if side is not None else None,
         "auth_scope": auth,
         "capabilities": capabilities,
         "resources": resources,
         "test_contract": test,
-        "declared": declared,
+        "verification": dict(verification) if isinstance(verification, dict) else {},
+        "risk": dict(node.get("risk") or {}) if isinstance(node.get("risk"), dict) else {},
+        "provenance": dict(node.get("provenance") or {}) if isinstance(node.get("provenance"), dict) else {},
+        "trust": dict(node.get("trust") or {}) if isinstance(node.get("trust"), dict) else {},
+        "contract_digest": node.get("contract_digest"),
+        "entrypoint_digest": node.get("entrypoint_digest"),
+        "declared": status in {"declared", "legacy"},
     }
-
-
-def _rejection(skill: str, contract: dict, reasons: list[str]) -> dict:
-    return {"id": skill, "reasons": reasons, "contract": contract}
-
-
-def violates(contract: dict, excluded: set[str], allowed_auth: str | None) -> list[str]:
-    reasons = []
-    declared_effects = set(contract["side_effects"] or [])
-    if declared_effects & excluded:
-        reasons.append("side effect excluded: " + ", ".join(sorted(declared_effects & excluded)))
-    if contract["side_effects"] is None and excluded:
-        reasons.append("undeclared side effects conflict with an effect exclusion")
-    allowed_rank = _auth_rank(allowed_auth)
-    skill_rank = _auth_rank(contract["auth_scope"])
-    if allowed_rank is not None and skill_rank is not None and skill_rank > allowed_rank:
-        reasons.append(f"auth scope {contract['auth_scope']} exceeds {allowed_auth}")
-    if allowed_rank is not None and contract["auth_scope"] is None:
-        reasons.append("undeclared auth scope exceeds an explicit allowance")
-    return reasons
-
-
-def apply_contracts(
-    result: dict,
-    graph: dict,
-    objective: str,
-    allowed_auth: str | None = None,
-) -> dict:
-    """Filter conflicting skills and make route breakage explicit."""
-    if allowed_auth is not None and allowed_auth not in AUTH_ORDER:
-        raise ValueError("Unknown auth scope: " + str(allowed_auth))
-    excluded = set(excluded_effects(objective))
-    nodes = graph.get("nodes", {})
-    rejected = []
-    selected = []
-    contracts = {}
-
-    for skill in result.get("selected", []):
-        contract = contract_from_node(nodes.get(skill, {}))
-        reasons = violates(contract, excluded, allowed_auth)
-        if reasons:
-            rejected.append(_rejection(skill, contract, reasons))
-            continue
-        selected.append(skill)
-        contracts[skill] = contract
-
-    rejected_ids = {item["id"] for item in rejected}
-    blocked_stages = []
-    for stage in result.get("stages", []):
-        before = list(stage.get("selected", []))
-        stage["selected"] = [skill for skill in before if skill not in rejected_ids]
-        removed = [skill for skill in before if skill in rejected_ids]
-        if before and not stage["selected"] and removed:
-            blocked_stages.append({
-                "stage": stage.get("stage"),
-                "text": stage.get("text"),
-                "reason": "all selected skills rejected by contract constraints",
-                "rejected": removed,
-            })
-
-    if "skills" in result:
-        result["skills"] = [item for item in result["skills"] if item.get("id") in contracts]
-    result["selected"] = selected
-    result["contracts"] = contracts
-    result["contract_rejections"] = rejected
-    result["blocked_stages"] = blocked_stages
-    result["excluded_effects"] = sorted(excluded)
-
-    if blocked_stages or (rejected and not selected):
-        result["selection_status"] = "partially_blocked" if selected else "blocked"
-    else:
-        result["selection_status"] = "matched" if selected else "abstained"
-    result["execution_authorized"] = False
-    return result

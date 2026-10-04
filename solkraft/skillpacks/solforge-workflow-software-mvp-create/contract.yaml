@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0",
+  "skill_id": "solforge-workflow-software-mvp-create",
+  "contract_revision": 1,
+  "inputs": [
+    {
+      "name": "repository-and-revision",
+      "required": true,
+      "source": "user",
+      "description": "repository and revision",
+      "schema": {}
+    },
+    {
+      "name": "relevant-behavior-or-failure",
+      "required": true,
+      "source": "user",
+      "description": "relevant behavior or failure",
+      "schema": {}
+    },
+    {
+      "name": "requested-change-boundaries",
+      "required": true,
+      "source": "user",
+      "description": "requested change boundaries",
+      "schema": {}
+    },
+    {
+      "name": "user-scope-and-acceptance-criteria",
+      "required": true,
+      "source": "user",
+      "description": "user scope and acceptance criteria",
+      "schema": {}
+    }
+  ],
+  "outputs": [
+    {
+      "name": "working-mvp-repository",
+      "description": "working_mvp_repository",
+      "schema": {}
+    }
+  ],
+  "effects": [],
+  "authority": {
+    "capabilities": [],
+    "resources": [],
+    "legacy_scope": "none"
+  },
+  "risk": {
+    "external": false,
+    "destructive": false,
+    "open_world": false
+  },
+  "verification": {
+    "mode": "declarative",
+    "description": "The requested working_mvp_repository is supported by inspected sources or observed behavior; unresolved limits are stated.",
+    "checks": []
+  },
+  "provenance": {
+    "migration": "legacy-graph",
+    "inferred": true
+  },
+  "extensions": {
+    "legacy_graph": {
+      "domain": "software",
+      "selection": "automatic or explicit",
+      "path": "../solforge-workflow-software-mvp-create/SKILL.md"
+    }
+  }
+}

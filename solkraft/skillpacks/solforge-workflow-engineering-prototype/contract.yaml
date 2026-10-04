@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0",
+  "skill_id": "solforge-workflow-engineering-prototype",
+  "contract_revision": 1,
+  "inputs": [
+    {
+      "name": "requirements-constraints-and-interfaces",
+      "required": true,
+      "source": "user",
+      "description": "requirements, constraints, and interfaces",
+      "schema": {}
+    },
+    {
+      "name": "model-design-or-measured-evidence",
+      "required": true,
+      "source": "user",
+      "description": "model, design, or measured evidence",
+      "schema": {}
+    },
+    {
+      "name": "user-scope-and-acceptance-criteria",
+      "required": true,
+      "source": "user",
+      "description": "user scope and acceptance criteria",
+      "schema": {}
+    }
+  ],
+  "outputs": [
+    {
+      "name": "prototype-plan",
+      "description": "prototype_plan",
+      "schema": {}
+    },
+    {
+      "name": "verified-prototype",
+      "description": "verified_prototype",
+      "schema": {}
+    }
+  ],
+  "effects": [],
+  "authority": {
+    "capabilities": [],
+    "resources": [],
+    "legacy_scope": "none"
+  },
+  "risk": {
+    "external": false,
+    "destructive": false,
+    "open_world": false
+  },
+  "verification": {
+    "mode": "declarative",
+    "description": "The requested prototype_plan, verified_prototype is supported by inspected sources or observed behavior; unresolved limits are stated.",
+    "checks": []
+  },
+  "provenance": {
+    "migration": "legacy-graph",
+    "inferred": true
+  },
+  "extensions": {
+    "legacy_graph": {
+      "domain": "engineering",
+      "selection": "automatic or explicit",
+      "path": "../solforge-workflow-engineering-prototype/SKILL.md"
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0",
+  "skill_id": "solforge-workflow-math-solve",
+  "contract_revision": 1,
+  "inputs": [
+    {
+      "name": "statement-and-assumptions",
+      "required": true,
+      "source": "user",
+      "description": "statement and assumptions",
+      "schema": {}
+    },
+    {
+      "name": "definitions-and-allowed-methods",
+      "required": true,
+      "source": "user",
+      "description": "definitions and allowed methods",
+      "schema": {}
+    },
+    {
+      "name": "user-scope-and-acceptance-criteria",
+      "required": true,
+      "source": "user",
+      "description": "user scope and acceptance criteria",
+      "schema": {}
+    }
+  ],
+  "outputs": [
+    {
+      "name": "rigorous-solution",
+      "description": "rigorous_solution",
+      "schema": {}
+    },
+    {
+      "name": "derivation",
+      "description": "derivation",
+      "schema": {}
+    }
+  ],
+  "effects": [],
+  "authority": {
+    "capabilities": [],
+    "resources": [],
+    "legacy_scope": "none"
+  },
+  "risk": {
+    "external": false,
+    "destructive": false,
+    "open_world": false
+  },
+  "verification": {
+    "mode": "declarative",
+    "description": "The requested rigorous_solution, derivation is supported by inspected sources or observed behavior; unresolved limits are stated.",
+    "checks": []
+  },
+  "provenance": {
+    "migration": "legacy-graph",
+    "inferred": true
+  },
+  "extensions": {
+    "legacy_graph": {
+      "domain": "mathematics",
+      "selection": "automatic or explicit",
+      "path": "../solforge-workflow-math-solve/SKILL.md"
+    }
+  }
+}
