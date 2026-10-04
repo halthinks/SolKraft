@@ -1,0 +1,24 @@
+name: Skill Contribution Preflight
+
+on:
+  workflow_dispatch:
+    inputs:
+      contribution_manifest:
+        description: Contribution manifest, for example contributions/my-skill.json
+        required: true
+        type: string
+      variants:
+        description: Context variants per authored routing case
+        required: false
+        default: '25'
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  preflight:
+    uses: ./.github/workflows/reusable-ci.yml
+    with:
+      contribution_manifest: ${{ inputs.contribution_manifest }}
+      variants: ${{ fromJSON(inputs.variants) }}

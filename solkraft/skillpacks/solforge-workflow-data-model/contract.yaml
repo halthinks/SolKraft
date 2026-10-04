@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.0",
+  "skill_id": "solforge-workflow-data-model",
+  "contract_revision": 1,
+  "inputs": [
+    {
+      "name": "dataset-and-grain",
+      "required": true,
+      "source": "user",
+      "description": "dataset and grain",
+      "schema": {}
+    },
+    {
+      "name": "metric-definitions",
+      "required": true,
+      "source": "user",
+      "description": "metric definitions",
+      "schema": {}
+    },
+    {
+      "name": "analysis-question",
+      "required": true,
+      "source": "user",
+      "description": "analysis question",
+      "schema": {}
+    },
+    {
+      "name": "user-scope-and-acceptance-criteria",
+      "required": true,
+      "source": "user",
+      "description": "user scope and acceptance criteria",
+      "schema": {}
+    }
+  ],
+  "outputs": [
+    {
+      "name": "model-package",
+      "description": "model_package",
+      "schema": {}
+    },
+    {
+      "name": "forecast",
+      "description": "forecast",
+      "schema": {}
+    }
+  ],
+  "effects": [],
+  "authority": {
+    "capabilities": [],
+    "resources": [],
+    "legacy_scope": "none"
+  },
+  "risk": {
+    "external": false,
+    "destructive": false,
+    "open_world": false
+  },
+  "verification": {
+    "mode": "declarative",
+    "description": "The requested model_package, forecast is supported by inspected sources or observed behavior; unresolved limits are stated.",
+    "checks": []
+  },
+  "provenance": {
+    "migration": "legacy-graph",
+    "inferred": true
+  },
+  "extensions": {
+    "legacy_graph": {
+      "domain": "data",
+      "selection": "automatic or explicit",
+      "path": "../solforge-workflow-data-model/SKILL.md"
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0",
+  "skill_id": "solforge-workflow-writing-factcheck",
+  "contract_revision": 1,
+  "inputs": [
+    {
+      "name": "audience-purpose-and-format",
+      "required": true,
+      "source": "user",
+      "description": "audience, purpose, and format",
+      "schema": {}
+    },
+    {
+      "name": "source-material-and-claim-evidence",
+      "required": true,
+      "source": "user",
+      "description": "source material and claim evidence",
+      "schema": {}
+    },
+    {
+      "name": "user-scope-and-acceptance-criteria",
+      "required": true,
+      "source": "user",
+      "description": "user scope and acceptance criteria",
+      "schema": {}
+    }
+  ],
+  "outputs": [
+    {
+      "name": "fact-check-ledger",
+      "description": "fact_check_ledger",
+      "schema": {}
+    },
+    {
+      "name": "corrected-draft",
+      "description": "corrected_draft",
+      "schema": {}
+    }
+  ],
+  "effects": [],
+  "authority": {
+    "capabilities": [],
+    "resources": [],
+    "legacy_scope": "none"
+  },
+  "risk": {
+    "external": false,
+    "destructive": false,
+    "open_world": false
+  },
+  "verification": {
+    "mode": "declarative",
+    "description": "The requested fact_check_ledger, corrected_draft is supported by inspected sources or observed behavior; unresolved limits are stated.",
+    "checks": []
+  },
+  "provenance": {
+    "migration": "legacy-graph",
+    "inferred": true
+  },
+  "extensions": {
+    "legacy_graph": {
+      "domain": "writing",
+      "selection": "automatic or explicit",
+      "path": "../solforge-workflow-writing-factcheck/SKILL.md"
+    }
+  }
+}

@@ -39,6 +39,39 @@ Start from [the executable security example](../contributions/software-security.
 
 This shape is a starting point, not a completed contribution. Replace every placeholder and add realistic neighboring and compound cases. Use exact expected routes, including existing skills when they belong in the answer.
 
+## Contract authoring CLI
+
+The contract layer can be authored and inspected without loading or executing skill bodies:
+
+```text
+solkraft contract init path/to/skill
+solkraft contract validate path/to/skill/contract.yaml
+solkraft contract lint path/to/skill/contract.yaml
+solkraft contract show your-skill-id
+solkraft contract schema
+solkraft contract migrate --report build/contracts-migration.json
+solkraft contract export your-skill-id
+solkraft contract import path/to/portable-contract.json
+```
+
+Routing policy has matching CLI flags:
+
+```text
+solkraft route "Inspect the repository" \
+  --strict-contracts \
+  --deny-effect deployment.* \
+  --grant-capability repo.read \
+  --grant-resource repo:example/project
+```
+
+These flags constrain selection only. The CLI still returns `execution_authorized: false`; grant snapshots describe host authority available for comparison and are never executable credentials.
+
+## External metadata adapters
+
+SolKraft can translate MCP tool annotations and OpenAPI operation metadata into compact contract declarations through `solkraft.adapters`. These adapters are conservative: read-only MCP tools and safe HTTP methods can declare an empty effect set, while uncertain mutating tools remain `opaque`. Imported metadata is always `local-unreviewed`; it never creates a host grant, trusted status, or execution authorization.
+
+Portable contract export/import follows the same rule. Export refuses an opaque contract whose effects are unknown rather than converting unknown into `effects: []`.
+
 ## Run the checks locally
 
 Install Python 3.11+, Git and Node.js. Activate your Python environment, then:
@@ -54,6 +87,44 @@ For your new skill, substitute your manifest filename. The first command after i
 The full result must show `status: passed`, all targeted cases passing, and exactly 100,000/100,000 regression requests. `targeted_passed` alone is not full acceptance. The receipt includes source and manifest SHA-256 hashes; rerun after source or routing changes. Do not reuse an old receipt for a different candidate.
 
 **What 100,000 means:** this is a synthetic regression battery across ten domains. It checks routing and scope behavior on long requests. It does not contain 100,000 independent skill intents, does not evaluate the new procedure's usefulness, and does not execute an agent or hardware simulation. New-skill cases add the missing targeted coverage. Domain-specific simulations, helper tests, and realistic task demonstrations must be supplied separately where the skill needs them.
+
+## Pre-build the contribution before opening a PR
+
+After the local targeted cases are passing, run the reusable full preflight instead of waiting for a pull request to discover packaging or regression failures:
+
+```text
+python -m scripts.preflight_contribution contributions/your-skill.json
+```
+
+That command calls the canonical `scripts.check_contribution ... --full` gate. It therefore runs the authored routing cases, the 100,000-request regression, `scripts.local_ci`, static console generation, plugin packaging, wheel build/install verification, and installed MCP checks. It then creates a review bundle at:
+
+```text
+build/preflight/<skill>/preflight.json
+build/preflight/<skill>-preflight.zip
+```
+
+The bundle includes the contribution manifest, candidate `SKILL.md`, `contract.yaml` when present, contribution/local-CI receipts, the 100,000-route result, built wheel, and plugin archive with SHA-256 hashes.
+
+You can run the same gate in GitHub **before opening a PR**. Push the candidate branch, open **Actions → Skill Contribution Preflight**, choose that branch, enter the manifest path such as `contributions/your-skill.json`, and run the workflow. Download the `solkraft-ci-<sha>` artifact and attach or cite its receipts when you later open the PR.
+
+The reusable implementation lives in `.github/workflows/reusable-ci.yml`. Normal repository pull requests call the same workflow through `.github/workflows/tests.yml`; the manual pre-PR wrapper is `.github/workflows/contribution-preflight.yml`. There is one validation path, not a weaker preflight and a stronger PR gate.
+
+## Verification and trust
+
+A Contract v1 sidecar must describe how its result can be checked using declarative evidence. New sidecars should include at least one supported check such as `artifact_exists`, `field_present`, `field_equals`, `check_equals`, or `observed_effects_subset`. Core SolKraft does not run contract-provided commands.
+
+Skill-authored provenance describes origin only. It cannot make a skill reviewed or trusted. Trust is resolved from `solkraft/trust-bindings.json`, whose entries bind an external trust state to the exact contract and `SKILL.md` SHA-256 digests. If either file changes, the binding no longer matches and the skill becomes unreviewed again.
+
+Legacy graph metadata can be converted into typed sidecars with:
+
+```text
+python -m scripts.migrate_contracts --report build/contracts-migration.json
+python -m scripts.migrate_contracts --write --report build/contracts-migration.json
+```
+
+The migration tool never overwrites an existing sidecar and only infers an empty effect set when the legacy graph explicitly says `effect: false`. Generated sidecars carry `provenance.inferred: true` and remain `legacy-inferred`; generation is not review.
+
+See [Verification and trust](VERIFICATION_AND_TRUST.md) for the evidence envelope, result states, trust binding model, audit receipts, and sandbox boundary.
 
 ## Submit all affected layers together
 

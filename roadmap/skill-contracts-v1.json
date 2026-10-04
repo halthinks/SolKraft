@@ -1,0 +1,1641 @@
+{
+  "schema": "solkraft/roadmap/v1",
+  "id": "skill-contract-architecture",
+  "title": "Machine-readable skill contracts",
+  "source": "Deep research review of PR #1 and current SolKraft architecture",
+  "status": "planned",
+  "invariants": [
+    "semantic relevance, admissibility, execution authority, and verification remain separate",
+    "missing metadata means unknown, never safe",
+    "contracts describe required authority but never grant it",
+    "SKILL.md remains lazily loaded after selection",
+    "core contract verification is declarative and non-executable",
+    "structured policy overrides natural-language inference",
+    "execution_authorized remains false at the SolKraft boundary"
+  ],
+  "milestones": [
+    {
+      "id": "M0",
+      "title": "Correct the prototype",
+      "goal": "Remove misleading safety assumptions and make route status truthful."
+    },
+    {
+      "id": "M1",
+      "title": "Contract v1",
+      "goal": "Create a stable, portable, versioned contract data product."
+    },
+    {
+      "id": "M2",
+      "title": "Contract-aware routing",
+      "goal": "Use admissibility before composition and route validation after composition."
+    },
+    {
+      "id": "M3",
+      "title": "Capability model",
+      "goal": "Replace scalar auth enforcement with capability/resource requirements."
+    },
+    {
+      "id": "M4",
+      "title": "Typed dataflow",
+      "goal": "Use typed inputs and outputs to improve composition."
+    },
+    {
+      "id": "M5",
+      "title": "Verification and trust",
+      "goal": "Verify outcomes from evidence and expose provenance/trust."
+    },
+    {
+      "id": "M6",
+      "title": "Interfaces and CI",
+      "goal": "Make contracts ordinary across API, CLI, MCP, contributions, docs, and CI."
+    },
+    {
+      "id": "M7",
+      "title": "Scale and interoperability",
+      "goal": "Keep routing efficient at thousands of skills and interoperate with external metadata."
+    },
+    {
+      "id": "M8",
+      "title": "Migration and cleanup",
+      "goal": "Migrate bundled skills and retire prototype shortcuts only after parity is proven."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "SC-001",
+      "milestone": "M0",
+      "priority": "critical",
+      "title": "Make unknown mounted skills opaque",
+      "depends_on": [],
+      "files": [
+        "solkraft/routing.py",
+        "solkraft/contracts.py",
+        "tests/test_contracts.py"
+      ],
+      "acceptance": [
+        "catalog_graph does not synthesize side_effects=[] or auth_scope=none for graph-unknown skills",
+        "unknown skill status is opaque"
+      ],
+      "evidence": [
+        "unit test through catalog_graph",
+        "public route regression"
+      ]
+    },
+    {
+      "id": "SC-002",
+      "milestone": "M0",
+      "priority": "critical",
+      "title": "Add explicit contract status model",
+      "depends_on": [
+        "SC-001"
+      ],
+      "files": [
+        "solkraft/contracts.py",
+        "solkraft/catalog.py"
+      ],
+      "acceptance": [
+        "statuses include declared, legacy, opaque, unsupported, invalid",
+        "status is exposed in compact metadata"
+      ],
+      "evidence": [
+        "schema/status unit tests"
+      ]
+    },
+    {
+      "id": "SC-003",
+      "milestone": "M0",
+      "priority": "critical",
+      "title": "Remove coarse external-effect exclusion rule",
+      "depends_on": [],
+      "files": [
+        "solkraft/contracts.py",
+        "tests/test_contracts.py"
+      ],
+      "acceptance": [
+        "do not deploy only rejects matching deployment effects unless broader policy says otherwise"
+      ],
+      "evidence": [
+        "negative and neighboring-effect tests"
+      ]
+    },
+    {
+      "id": "SC-004",
+      "milestone": "M0",
+      "priority": "high",
+      "title": "Centralize constraint parsing",
+      "depends_on": [],
+      "files": [
+        "solkraft/contracts.py",
+        "solkraft/skillpacks/solforge/scripts/compose_route.py",
+        "solkraft/constraint_parser.py"
+      ],
+      "acceptance": [
+        "one normalized parser owns effect exclusion recognition",
+        "quoted/code/deferred text behavior remains compatible"
+      ],
+      "evidence": [
+        "shared parser test matrix"
+      ]
+    },
+    {
+      "id": "SC-005",
+      "milestone": "M0",
+      "priority": "critical",
+      "title": "Add blocked route semantics",
+      "depends_on": [
+        "SC-001"
+      ],
+      "files": [
+        "solkraft/routing.py",
+        "tests"
+      ],
+      "acceptance": [
+        "required stage emptied by contract rejection cannot remain matched",
+        "blocked and partially_blocked statuses are representable"
+      ],
+      "evidence": [
+        "public route tests"
+      ]
+    },
+    {
+      "id": "SC-006",
+      "milestone": "M0",
+      "priority": "critical",
+      "title": "Enforce execution_authorized false across interfaces",
+      "depends_on": [],
+      "files": [
+        "solkraft/routing.py",
+        "solkraft/api.py",
+        "solkraft/mcp_server.py",
+        "solkraft/__main__.py",
+        "tests"
+      ],
+      "acceptance": [
+        "Python REST MCP CLI all preserve advisory boundary"
+      ],
+      "evidence": [
+        "boundary parity tests"
+      ]
+    },
+    {
+      "id": "SC-010",
+      "milestone": "M1",
+      "priority": "critical",
+      "title": "Define Contract v1 JSON Schema",
+      "depends_on": [
+        "SC-002"
+      ],
+      "files": [
+        "solkraft/schemas/skill-contract-v1.json",
+        "solkraft/contract_schema.py"
+      ],
+      "acceptance": [
+        "portable JSON Schema exists",
+        "unknown core fields fail except extensions",
+        "schema_version 1.0 validated"
+      ],
+      "evidence": [
+        "schema fixtures"
+      ]
+    },
+    {
+      "id": "SC-011",
+      "milestone": "M1",
+      "priority": "high",
+      "title": "Add typed inputs and outputs",
+      "depends_on": [
+        "SC-010"
+      ],
+      "files": [
+        "solkraft/contract_schema.py"
+      ],
+      "acceptance": [
+        "required/optional typed inputs supported",
+        "typed outputs supported"
+      ],
+      "evidence": [
+        "schema/unit tests"
+      ]
+    },
+    {
+      "id": "SC-012",
+      "milestone": "M1",
+      "priority": "critical",
+      "title": "Introduce namespaced effect model",
+      "depends_on": [
+        "SC-010",
+        "SC-004"
+      ],
+      "files": [
+        "solkraft/effects.py",
+        "solkraft/contract_schema.py"
+      ],
+      "acceptance": [
+        "effect IDs support namespace hierarchy",
+        "risk attributes external/destructive/reversible/idempotent/open-world supported"
+      ],
+      "evidence": [
+        "effect registry tests"
+      ]
+    },
+    {
+      "id": "SC-013",
+      "milestone": "M1",
+      "priority": "critical",
+      "title": "Add capability and resource requirements",
+      "depends_on": [
+        "SC-010"
+      ],
+      "files": [
+        "solkraft/contract_schema.py",
+        "solkraft/capabilities.py"
+      ],
+      "acceptance": [
+        "contracts declare capability names and resource selectors",
+        "declarations do not create grants"
+      ],
+      "evidence": [
+        "schema tests"
+      ]
+    },
+    {
+      "id": "SC-014",
+      "milestone": "M1",
+      "priority": "high",
+      "title": "Define declarative verification schema",
+      "depends_on": [
+        "SC-010"
+      ],
+      "files": [
+        "solkraft/contract_schema.py"
+      ],
+      "acceptance": [
+        "structured checks supported",
+        "arbitrary commands excluded from core schema"
+      ],
+      "evidence": [
+        "valid/invalid verification fixtures"
+      ]
+    },
+    {
+      "id": "SC-015",
+      "milestone": "M1",
+      "priority": "high",
+      "title": "Separate schema version from contract revision",
+      "depends_on": [
+        "SC-010"
+      ],
+      "files": [
+        "solkraft/contract_schema.py",
+        "solkraft/contract_loader.py"
+      ],
+      "acceptance": [
+        "unknown major becomes unsupported",
+        "newer compatible minor can be preserved according to policy"
+      ],
+      "evidence": [
+        "version compatibility tests"
+      ]
+    },
+    {
+      "id": "SC-016",
+      "milestone": "M1",
+      "priority": "critical",
+      "title": "Bind contracts to procedure digests",
+      "depends_on": [
+        "SC-010"
+      ],
+      "files": [
+        "solkraft/contract_loader.py"
+      ],
+      "acceptance": [
+        "entrypoint and normalized contract SHA-256 available",
+        "procedure drift invalidates reviewed binding"
+      ],
+      "evidence": [
+        "digest drift test"
+      ]
+    },
+    {
+      "id": "SC-017",
+      "milestone": "M1",
+      "priority": "high",
+      "title": "Add sidecar loader and legacy adapter",
+      "depends_on": [
+        "SC-010",
+        "SC-015"
+      ],
+      "files": [
+        "solkraft/contract_loader.py",
+        "solkraft/contracts.py",
+        "solkraft/catalog.py"
+      ],
+      "acceptance": [
+        "contract.yaml discovered by convention",
+        "legacy graph metadata normalized without being promoted to reviewed"
+      ],
+      "evidence": [
+        "loader and migration tests"
+      ]
+    },
+    {
+      "id": "SC-020",
+      "milestone": "M2",
+      "priority": "critical",
+      "title": "Split semantic context from route policy",
+      "depends_on": [
+        "SC-017"
+      ],
+      "files": [
+        "solkraft/routing.py",
+        "solkraft/api.py",
+        "solkraft/mcp_server.py"
+      ],
+      "acceptance": [
+        "domain/stage remain semantic context",
+        "authority/effect constraints live in typed policy"
+      ],
+      "evidence": [
+        "API model tests"
+      ]
+    },
+    {
+      "id": "SC-021",
+      "milestone": "M2",
+      "priority": "critical",
+      "title": "Add structured policy model",
+      "depends_on": [
+        "SC-020",
+        "SC-013"
+      ],
+      "files": [
+        "solkraft/contract_policy.py"
+      ],
+      "acceptance": [
+        "granted capabilities, denied effects, opaque policy supported",
+        "structured policy has precedence over NLP inference"
+      ],
+      "evidence": [
+        "policy precedence tests"
+      ]
+    },
+    {
+      "id": "SC-022",
+      "milestone": "M2",
+      "priority": "critical",
+      "title": "Pre-filter inadmissible candidates before composition",
+      "depends_on": [
+        "SC-021"
+      ],
+      "files": [
+        "solkraft/routing.py",
+        "solkraft/contract_policy.py"
+      ],
+      "acceptance": [
+        "known-denied skills do not influence composition"
+      ],
+      "evidence": [
+        "composer boundary tests"
+      ]
+    },
+    {
+      "id": "SC-023",
+      "milestone": "M2",
+      "priority": "critical",
+      "title": "Validate complete composed route",
+      "depends_on": [
+        "SC-022"
+      ],
+      "files": [
+        "solkraft/route_validation.py",
+        "solkraft/routing.py"
+      ],
+      "acceptance": [
+        "aggregate effects, capabilities, dependencies, resource constraints and verification obligations checked"
+      ],
+      "evidence": [
+        "route validation tests"
+      ]
+    },
+    {
+      "id": "SC-024",
+      "milestone": "M2",
+      "priority": "critical",
+      "title": "Detect producer/consumer breakage",
+      "depends_on": [
+        "SC-023",
+        "SC-011"
+      ],
+      "files": [
+        "solkraft/route_validation.py"
+      ],
+      "acceptance": [
+        "removed producer invalidates dependent consumer"
+      ],
+      "evidence": [
+        "dependency break test"
+      ]
+    },
+    {
+      "id": "SC-025",
+      "milestone": "M2",
+      "priority": "high",
+      "title": "Bounded repair and recomposition",
+      "depends_on": [
+        "SC-023"
+      ],
+      "files": [
+        "solkraft/routing.py",
+        "solkraft/route_validation.py"
+      ],
+      "acceptance": [
+        "safe alternative can replace denied skill",
+        "recomposition is bounded and deterministic enough for regression"
+      ],
+      "evidence": [
+        "alternative-route tests"
+      ]
+    },
+    {
+      "id": "SC-026",
+      "milestone": "M2",
+      "priority": "critical",
+      "title": "Report blocked stages explicitly",
+      "depends_on": [
+        "SC-025"
+      ],
+      "files": [
+        "solkraft/routing.py",
+        "solkraft/api.py",
+        "solkraft/mcp_server.py"
+      ],
+      "acceptance": [
+        "no replacement produces blocked stage with reason",
+        "selection_status is truthful"
+      ],
+      "evidence": [
+        "public boundary fixtures"
+      ]
+    },
+    {
+      "id": "SC-027",
+      "milestone": "M2",
+      "priority": "high",
+      "title": "Add structured decision trace",
+      "depends_on": [
+        "SC-021"
+      ],
+      "files": [
+        "solkraft/routing.py",
+        "solkraft/audit.py"
+      ],
+      "acceptance": [
+        "each candidate can expose allowed/denied/opaque status and reasons",
+        "contract digest included"
+      ],
+      "evidence": [
+        "trace snapshot tests"
+      ]
+    },
+    {
+      "id": "SC-028",
+      "milestone": "M2",
+      "priority": "critical",
+      "title": "Make explicit policy authoritative",
+      "depends_on": [
+        "SC-004",
+        "SC-021"
+      ],
+      "files": [
+        "solkraft/constraint_parser.py",
+        "solkraft/contract_policy.py"
+      ],
+      "acceptance": [
+        "objective text cannot relax explicit deny",
+        "explicit grant does not automatically create runtime authority"
+      ],
+      "evidence": [
+        "adversarial text tests"
+      ]
+    },
+    {
+      "id": "SC-030",
+      "milestone": "M3",
+      "priority": "critical",
+      "title": "Create capability model",
+      "depends_on": [
+        "SC-013"
+      ],
+      "files": [
+        "solkraft/capabilities.py"
+      ],
+      "acceptance": [
+        "capability-set operations are first-class"
+      ],
+      "evidence": [
+        "unit tests"
+      ]
+    },
+    {
+      "id": "SC-031",
+      "milestone": "M3",
+      "priority": "high",
+      "title": "Define core capability namespace",
+      "depends_on": [
+        "SC-030"
+      ],
+      "files": [
+        "solkraft/capabilities.py",
+        "docs/SKILL_CONTRACT_ROADMAP.md"
+      ],
+      "acceptance": [
+        "small documented core exists",
+        "extensions remain namespaced"
+      ],
+      "evidence": [
+        "registry tests"
+      ]
+    },
+    {
+      "id": "SC-032",
+      "milestone": "M3",
+      "priority": "critical",
+      "title": "Implement resource selectors",
+      "depends_on": [
+        "SC-030"
+      ],
+      "files": [
+        "solkraft/capabilities.py"
+      ],
+      "acceptance": [
+        "repo/host/environment selectors can be matched safely"
+      ],
+      "evidence": [
+        "resource mismatch tests"
+      ]
+    },
+    {
+      "id": "SC-033",
+      "milestone": "M3",
+      "priority": "high",
+      "title": "Aggregate route capability requirements",
+      "depends_on": [
+        "SC-023",
+        "SC-030"
+      ],
+      "files": [
+        "solkraft/route_validation.py",
+        "solkraft/routing.py"
+      ],
+      "acceptance": [
+        "route exposes union of required capabilities/resources"
+      ],
+      "evidence": [
+        "route summary tests"
+      ]
+    },
+    {
+      "id": "SC-034",
+      "milestone": "M3",
+      "priority": "high",
+      "title": "Demote AUTH_ORDER to legacy adapter",
+      "depends_on": [
+        "SC-030"
+      ],
+      "files": [
+        "solkraft/contracts.py",
+        "solkraft/capabilities.py"
+      ],
+      "acceptance": [
+        "new v1 contracts never rely on scalar ordering",
+        "legacy scope mapping remains compatibility-only"
+      ],
+      "evidence": [
+        "legacy adapter tests"
+      ]
+    },
+    {
+      "id": "SC-035",
+      "milestone": "M3",
+      "priority": "high",
+      "title": "Define host capability grant format",
+      "depends_on": [
+        "SC-030",
+        "SC-032"
+      ],
+      "files": [
+        "solkraft/capabilities.py",
+        "docs"
+      ],
+      "acceptance": [
+        "grant has capabilities resources identity/expiry metadata",
+        "grant remains external to SolKraft execution"
+      ],
+      "evidence": [
+        "grant schema tests"
+      ]
+    },
+    {
+      "id": "SC-036",
+      "milestone": "M3",
+      "priority": "critical",
+      "title": "Model runtime mediation boundary",
+      "depends_on": [
+        "SC-035"
+      ],
+      "files": [
+        "docs",
+        "tests"
+      ],
+      "acceptance": [
+        "route decision cannot be reused as runtime permission",
+        "stale/revoked grants are expected to be rechecked by host"
+      ],
+      "evidence": [
+        "boundary contract tests"
+      ]
+    },
+    {
+      "id": "SC-040",
+      "milestone": "M4",
+      "priority": "high",
+      "title": "Normalize input contracts",
+      "depends_on": [
+        "SC-011"
+      ],
+      "files": [
+        "solkraft/contract_schema.py",
+        "solkraft/catalog.py"
+      ],
+      "acceptance": [
+        "input name/type/required/sensitivity/source/binding can be represented"
+      ],
+      "evidence": [
+        "input fixtures"
+      ]
+    },
+    {
+      "id": "SC-041",
+      "milestone": "M4",
+      "priority": "high",
+      "title": "Normalize output contracts",
+      "depends_on": [
+        "SC-011"
+      ],
+      "files": [
+        "solkraft/contract_schema.py",
+        "solkraft/catalog.py"
+      ],
+      "acceptance": [
+        "output artifact schemas are indexable"
+      ],
+      "evidence": [
+        "output fixtures"
+      ]
+    },
+    {
+      "id": "SC-042",
+      "milestone": "M4",
+      "priority": "high",
+      "title": "Add producer-consumer compatibility",
+      "depends_on": [
+        "SC-040",
+        "SC-041"
+      ],
+      "files": [
+        "solkraft/route_validation.py"
+      ],
+      "acceptance": [
+        "output can satisfy downstream input by compatible schema/type"
+      ],
+      "evidence": [
+        "compatibility tests"
+      ]
+    },
+    {
+      "id": "SC-043",
+      "milestone": "M4",
+      "priority": "high",
+      "title": "Compose using typed dataflow",
+      "depends_on": [
+        "SC-042"
+      ],
+      "files": [
+        "solkraft/routing.py",
+        "SolForge composer integration"
+      ],
+      "acceptance": [
+        "typed compatibility can contribute to candidate ordering/composition without replacing semantic graph"
+      ],
+      "evidence": [
+        "novel chain integration tests"
+      ]
+    },
+    {
+      "id": "SC-044",
+      "milestone": "M4",
+      "priority": "high",
+      "title": "Distinguish missing input from irrelevant skill",
+      "depends_on": [
+        "SC-040"
+      ],
+      "files": [
+        "solkraft/routing.py"
+      ],
+      "acceptance": [
+        "route explains missing prerequisites separately from low semantic relevance"
+      ],
+      "evidence": [
+        "route reason tests"
+      ]
+    },
+    {
+      "id": "SC-045",
+      "milestone": "M4",
+      "priority": "medium",
+      "title": "Represent available/elicitable/unavailable inputs",
+      "depends_on": [
+        "SC-040"
+      ],
+      "files": [
+        "solkraft/routing.py",
+        "solkraft/api.py"
+      ],
+      "acceptance": [
+        "router can mark required user input without pretending execution readiness"
+      ],
+      "evidence": [
+        "elicitation status tests"
+      ]
+    },
+    {
+      "id": "SC-046",
+      "milestone": "M4",
+      "priority": "high",
+      "title": "Augment rather than replace graph relationships",
+      "depends_on": [
+        "SC-043"
+      ],
+      "files": [
+        "selection graph",
+        "SolForge composer integration"
+      ],
+      "acceptance": [
+        "manual semantic/dependency edges remain authoritative evidence",
+        "typed dataflow adds compatibility, not fabricated dependency truth"
+      ],
+      "evidence": [
+        "graph regression battery"
+      ]
+    },
+    {
+      "id": "SC-047",
+      "milestone": "M4",
+      "priority": "medium",
+      "title": "Explain dataflow selection",
+      "depends_on": [
+        "SC-042"
+      ],
+      "files": [
+        "solkraft/routing.py"
+      ],
+      "acceptance": [
+        "decision trace identifies producer/output that satisfies each downstream input"
+      ],
+      "evidence": [
+        "explanation snapshots"
+      ]
+    },
+    {
+      "id": "SC-050",
+      "milestone": "M5",
+      "priority": "critical",
+      "title": "Implement declarative verifier",
+      "depends_on": [
+        "SC-014"
+      ],
+      "files": [
+        "solkraft/contract_verify.py"
+      ],
+      "acceptance": [
+        "core verifier evaluates evidence only",
+        "unsupported checks fail safely"
+      ],
+      "evidence": [
+        "verification unit suite"
+      ]
+    },
+    {
+      "id": "SC-051",
+      "milestone": "M5",
+      "priority": "medium",
+      "title": "Preserve human verification descriptions",
+      "depends_on": [
+        "SC-050"
+      ],
+      "files": [
+        "solkraft/contract_schema.py"
+      ],
+      "acceptance": [
+        "machine checks and explanatory prose coexist"
+      ],
+      "evidence": [
+        "schema fixtures"
+      ]
+    },
+    {
+      "id": "SC-052",
+      "milestone": "M5",
+      "priority": "critical",
+      "title": "Define structured evidence bundle",
+      "depends_on": [
+        "SC-050",
+        "SC-016"
+      ],
+      "files": [
+        "solkraft/evidence.py"
+      ],
+      "acceptance": [
+        "skill id, contract digest, artifacts, observed effects representable"
+      ],
+      "evidence": [
+        "evidence schema tests"
+      ]
+    },
+    {
+      "id": "SC-053",
+      "milestone": "M5",
+      "priority": "high",
+      "title": "Add execution/verification result states",
+      "depends_on": [
+        "SC-052"
+      ],
+      "files": [
+        "solkraft/evidence.py",
+        "solkraft/routing.py"
+      ],
+      "acceptance": [
+        "selected blocked executed-unverified verified verification-failed distinct"
+      ],
+      "evidence": [
+        "state transition tests"
+      ]
+    },
+    {
+      "id": "SC-054",
+      "milestone": "M5",
+      "priority": "high",
+      "title": "Record observed effects",
+      "depends_on": [
+        "SC-052",
+        "SC-012"
+      ],
+      "files": [
+        "solkraft/evidence.py",
+        "solkraft/contract_verify.py"
+      ],
+      "acceptance": [
+        "observed effects can be compared with contract and policy"
+      ],
+      "evidence": [
+        "effects_subset tests"
+      ]
+    },
+    {
+      "id": "SC-055",
+      "milestone": "M5",
+      "priority": "critical",
+      "title": "Add trust/provenance states",
+      "depends_on": [
+        "SC-016"
+      ],
+      "files": [
+        "solkraft/contract_loader.py",
+        "solkraft/catalog.py"
+      ],
+      "acceptance": [
+        "bundled-reviewed signed operator-trusted local-unreviewed legacy-inferred opaque invalid states visible"
+      ],
+      "evidence": [
+        "trust transition tests"
+      ]
+    },
+    {
+      "id": "SC-056",
+      "milestone": "M5",
+      "priority": "critical",
+      "title": "Bind trust to digests",
+      "depends_on": [
+        "SC-016",
+        "SC-055"
+      ],
+      "files": [
+        "solkraft/contract_loader.py"
+      ],
+      "acceptance": [
+        "body or contract change invalidates prior reviewed binding"
+      ],
+      "evidence": [
+        "drift tests"
+      ]
+    },
+    {
+      "id": "SC-057",
+      "milestone": "M5",
+      "priority": "high",
+      "title": "Add audit events",
+      "depends_on": [
+        "SC-027",
+        "SC-052",
+        "SC-055"
+      ],
+      "files": [
+        "solkraft/audit.py"
+      ],
+      "acceptance": [
+        "route policy contract grant and evidence digests can be recorded"
+      ],
+      "evidence": [
+        "deterministic audit serialization tests"
+      ]
+    },
+    {
+      "id": "SC-058",
+      "milestone": "M5",
+      "priority": "critical",
+      "title": "Prevent trust self-elevation",
+      "depends_on": [
+        "SC-055",
+        "SC-021"
+      ],
+      "files": [
+        "solkraft/contract_policy.py"
+      ],
+      "acceptance": [
+        "skill-authored declarations cannot relax operator policy or assign trusted status"
+      ],
+      "evidence": [
+        "malicious contract fixtures"
+      ]
+    },
+    {
+      "id": "SC-059",
+      "milestone": "M5",
+      "priority": "critical",
+      "title": "Define sandbox verifier interface only",
+      "depends_on": [
+        "SC-050"
+      ],
+      "files": [
+        "solkraft/sandbox.py"
+      ],
+      "acceptance": [
+        "core never executes contract-provided command",
+        "future executable adapter requires independent host trust"
+      ],
+      "evidence": [
+        "no-subprocess boundary tests"
+      ]
+    },
+    {
+      "id": "SC-060",
+      "milestone": "M5",
+      "priority": "high",
+      "title": "Specify executable verifier sandbox requirements",
+      "depends_on": [
+        "SC-059"
+      ],
+      "files": [
+        "solkraft/sandbox.py",
+        "docs"
+      ],
+      "acceptance": [
+        "timeout mounts network output cap process cap and secret isolation are explicit"
+      ],
+      "evidence": [
+        "adapter conformance fixtures"
+      ]
+    },
+    {
+      "id": "SC-070",
+      "milestone": "M6",
+      "priority": "high",
+      "title": "Add policy to route API",
+      "depends_on": [
+        "SC-020",
+        "SC-021"
+      ],
+      "files": [
+        "solkraft/api.py"
+      ],
+      "acceptance": [
+        "POST /v1/route accepts typed policy separate from context"
+      ],
+      "evidence": [
+        "API tests"
+      ]
+    },
+    {
+      "id": "SC-071",
+      "milestone": "M6",
+      "priority": "medium",
+      "title": "Expose skill contract endpoint",
+      "depends_on": [
+        "SC-017"
+      ],
+      "files": [
+        "solkraft/api.py"
+      ],
+      "acceptance": [
+        "GET /v1/skills/{id}/contract returns metadata without procedure execution"
+      ],
+      "evidence": [
+        "API test"
+      ]
+    },
+    {
+      "id": "SC-072",
+      "milestone": "M6",
+      "priority": "medium",
+      "title": "Expose contract validation endpoint",
+      "depends_on": [
+        "SC-010"
+      ],
+      "files": [
+        "solkraft/api.py"
+      ],
+      "acceptance": [
+        "validation is metadata-only"
+      ],
+      "evidence": [
+        "API test"
+      ]
+    },
+    {
+      "id": "SC-073",
+      "milestone": "M6",
+      "priority": "medium",
+      "title": "Expose contract schema endpoint",
+      "depends_on": [
+        "SC-010"
+      ],
+      "files": [
+        "solkraft/api.py"
+      ],
+      "acceptance": [
+        "clients can retrieve canonical schema"
+      ],
+      "evidence": [
+        "API test"
+      ]
+    },
+    {
+      "id": "SC-074",
+      "milestone": "M6",
+      "priority": "medium",
+      "title": "Add contract init CLI",
+      "depends_on": [
+        "SC-010"
+      ],
+      "files": [
+        "solkraft/__main__.py"
+      ],
+      "acceptance": [
+        "generates valid starter sidecar"
+      ],
+      "evidence": [
+        "CLI test"
+      ]
+    },
+    {
+      "id": "SC-075",
+      "milestone": "M6",
+      "priority": "high",
+      "title": "Add validate lint show schema migrate CLI",
+      "depends_on": [
+        "SC-017"
+      ],
+      "files": [
+        "solkraft/__main__.py"
+      ],
+      "acceptance": [
+        "authors can inspect and migrate locally"
+      ],
+      "evidence": [
+        "CLI integration tests"
+      ]
+    },
+    {
+      "id": "SC-076",
+      "milestone": "M6",
+      "priority": "high",
+      "title": "Add route grant/deny/strict flags",
+      "depends_on": [
+        "SC-021"
+      ],
+      "files": [
+        "solkraft/__main__.py"
+      ],
+      "acceptance": [
+        "CLI policy semantics match API"
+      ],
+      "evidence": [
+        "boundary parity tests"
+      ]
+    },
+    {
+      "id": "SC-077",
+      "milestone": "M6",
+      "priority": "high",
+      "title": "Return contract summaries over MCP",
+      "depends_on": [
+        "SC-027"
+      ],
+      "files": [
+        "solkraft/mcp_server.py"
+      ],
+      "acceptance": [
+        "compact summaries and decision trace are structured",
+        "full body remains lazy"
+      ],
+      "evidence": [
+        "installed MCP tests"
+      ]
+    },
+    {
+      "id": "SC-078",
+      "milestone": "M6",
+      "priority": "medium",
+      "title": "Publish accurate MCP risk annotations",
+      "depends_on": [],
+      "files": [
+        "solkraft/mcp_server.py"
+      ],
+      "acceptance": [
+        "SolKraft tools accurately advertise read-only behavior where SDK supports it"
+      ],
+      "evidence": [
+        "MCP schema inspection"
+      ]
+    },
+    {
+      "id": "SC-079",
+      "milestone": "M6",
+      "priority": "critical",
+      "title": "Preserve read-only MCP boundary",
+      "depends_on": [
+        "SC-077"
+      ],
+      "files": [
+        "solkraft/mcp_server.py",
+        "tests"
+      ],
+      "acceptance": [
+        "no skill execution tool is introduced"
+      ],
+      "evidence": [
+        "MCP surface test"
+      ]
+    },
+    {
+      "id": "SC-080",
+      "milestone": "M6",
+      "priority": "high",
+      "title": "Extend contribution checker with contract cases",
+      "depends_on": [
+        "SC-010",
+        "SC-021"
+      ],
+      "files": [
+        "scripts/check_contribution.py",
+        "contributions"
+      ],
+      "acceptance": [
+        "targeted contract-policy cases run with ordinary skill contribution gate"
+      ],
+      "evidence": [
+        "sample manifest receipt"
+      ]
+    },
+    {
+      "id": "SC-081",
+      "milestone": "M6",
+      "priority": "high",
+      "title": "Update skill contribution documentation",
+      "depends_on": [
+        "SC-080"
+      ],
+      "files": [
+        "docs/SKILL_CONTRIBUTIONS.md"
+      ],
+      "acceptance": [
+        "contract authoring/provenance/testing process documented"
+      ],
+      "evidence": [
+        "docs review"
+      ]
+    },
+    {
+      "id": "SC-082",
+      "milestone": "M6",
+      "priority": "high",
+      "title": "Add contract checks to local CI",
+      "depends_on": [
+        "SC-080"
+      ],
+      "files": [
+        "scripts/local_ci.py"
+      ],
+      "acceptance": [
+        "schema drift/invalid contract fails local gate"
+      ],
+      "evidence": [
+        "local CI receipt"
+      ]
+    },
+    {
+      "id": "SC-083",
+      "milestone": "M6",
+      "priority": "high",
+      "title": "Enable PR CI for contract/schema changes",
+      "depends_on": [
+        "SC-082"
+      ],
+      "files": [
+        ".github/workflows/tests.yml"
+      ],
+      "acceptance": [
+        "pull_request trigger runs relevant gate",
+        "manual dispatch remains optional"
+      ],
+      "evidence": [
+        "GitHub workflow run"
+      ]
+    },
+    {
+      "id": "SC-084",
+      "milestone": "M6",
+      "priority": "medium",
+      "title": "Generate contract metadata in skill docs",
+      "depends_on": [
+        "SC-017"
+      ],
+      "files": [
+        "docs/assets generation scripts"
+      ],
+      "acceptance": [
+        "generated pages show inputs outputs effects capabilities risk trust verification separately from procedure"
+      ],
+      "evidence": [
+        "generated artifact diff + UI test"
+      ]
+    },
+    {
+      "id": "SC-090",
+      "milestone": "M7",
+      "priority": "medium",
+      "title": "Build compact contract index",
+      "depends_on": [
+        "SC-017"
+      ],
+      "files": [
+        "solkraft/catalog.py"
+      ],
+      "acceptance": [
+        "routing fields indexed without SKILL body"
+      ],
+      "evidence": [
+        "performance test"
+      ]
+    },
+    {
+      "id": "SC-091",
+      "milestone": "M7",
+      "priority": "medium",
+      "title": "Index effects",
+      "depends_on": [
+        "SC-012",
+        "SC-090"
+      ],
+      "files": [
+        "solkraft/catalog.py"
+      ],
+      "acceptance": [
+        "effect filters avoid full-catalog scans"
+      ],
+      "evidence": [
+        "benchmark"
+      ]
+    },
+    {
+      "id": "SC-092",
+      "milestone": "M7",
+      "priority": "medium",
+      "title": "Index capabilities",
+      "depends_on": [
+        "SC-030",
+        "SC-090"
+      ],
+      "files": [
+        "solkraft/catalog.py"
+      ],
+      "acceptance": [
+        "capability filters avoid full-catalog scans"
+      ],
+      "evidence": [
+        "benchmark"
+      ]
+    },
+    {
+      "id": "SC-093",
+      "milestone": "M7",
+      "priority": "medium",
+      "title": "Index input/output types",
+      "depends_on": [
+        "SC-040",
+        "SC-041",
+        "SC-090"
+      ],
+      "files": [
+        "solkraft/catalog.py"
+      ],
+      "acceptance": [
+        "dataflow candidate retrieval uses compact metadata"
+      ],
+      "evidence": [
+        "benchmark"
+      ]
+    },
+    {
+      "id": "SC-094",
+      "milestone": "M7",
+      "priority": "medium",
+      "title": "Index trust state",
+      "depends_on": [
+        "SC-055",
+        "SC-090"
+      ],
+      "files": [
+        "solkraft/catalog.py"
+      ],
+      "acceptance": [
+        "policy can efficiently exclude untrusted/opaque candidates"
+      ],
+      "evidence": [
+        "benchmark"
+      ]
+    },
+    {
+      "id": "SC-095",
+      "milestone": "M7",
+      "priority": "medium",
+      "title": "Cache by contract digest and graph generation",
+      "depends_on": [
+        "SC-016",
+        "SC-090"
+      ],
+      "files": [
+        "solkraft/catalog.py",
+        "solkraft/routing.py"
+      ],
+      "acceptance": [
+        "unchanged contracts avoid repeated parsing"
+      ],
+      "evidence": [
+        "cache tests"
+      ]
+    },
+    {
+      "id": "SC-096",
+      "milestone": "M7",
+      "priority": "medium",
+      "title": "Incremental refresh",
+      "depends_on": [
+        "SC-095"
+      ],
+      "files": [
+        "solkraft/catalog.py"
+      ],
+      "acceptance": [
+        "only changed skills/contracts are reindexed"
+      ],
+      "evidence": [
+        "refresh tests"
+      ]
+    },
+    {
+      "id": "SC-097",
+      "milestone": "M7",
+      "priority": "medium",
+      "title": "Add compact contract export/import",
+      "depends_on": [
+        "SC-090"
+      ],
+      "files": [
+        "solkraft/api.py",
+        "solkraft/catalog.py"
+      ],
+      "acceptance": [
+        "metadata can move across services without procedure bodies"
+      ],
+      "evidence": [
+        "roundtrip tests"
+      ]
+    },
+    {
+      "id": "SC-098",
+      "milestone": "M7",
+      "priority": "medium",
+      "title": "Interoperate with MCP/OpenAPI/tool metadata",
+      "depends_on": [
+        "SC-012",
+        "SC-030"
+      ],
+      "files": [
+        "solkraft adapters"
+      ],
+      "acceptance": [
+        "supported external schemas map into declarations only",
+        "untrusted annotations never become authority"
+      ],
+      "evidence": [
+        "adapter fixtures"
+      ]
+    },
+    {
+      "id": "SC-100",
+      "milestone": "M8",
+      "priority": "high",
+      "title": "Generate initial bundled sidecars",
+      "depends_on": [
+        "SC-017"
+      ],
+      "files": [
+        "solkraft/skillpacks"
+      ],
+      "acceptance": [
+        "defensible fields migrated from graph metadata",
+        "inferred status remains legacy-inferred"
+      ],
+      "evidence": [
+        "migration report"
+      ]
+    },
+    {
+      "id": "SC-101",
+      "milestone": "M8",
+      "priority": "critical",
+      "title": "Never promote inferred contracts to reviewed automatically",
+      "depends_on": [
+        "SC-100",
+        "SC-055"
+      ],
+      "files": [
+        "solkraft/contract_loader.py"
+      ],
+      "acceptance": [
+        "review/trust requires explicit review provenance"
+      ],
+      "evidence": [
+        "trust tests"
+      ]
+    },
+    {
+      "id": "SC-102",
+      "milestone": "M8",
+      "priority": "high",
+      "title": "Add migration report tooling",
+      "depends_on": [
+        "SC-100"
+      ],
+      "files": [
+        "solkraft/__main__.py",
+        "scripts"
+      ],
+      "acceptance": [
+        "all bundled skills categorized with missing-field report"
+      ],
+      "evidence": [
+        "checked-in or generated migration receipt"
+      ]
+    },
+    {
+      "id": "SC-103",
+      "milestone": "M8",
+      "priority": "high",
+      "title": "Remove duplicate effect parsing",
+      "depends_on": [
+        "SC-004",
+        "SC-012"
+      ],
+      "files": [
+        "solkraft/contracts.py",
+        "SolForge composer"
+      ],
+      "acceptance": [
+        "one normalized constraint parser remains"
+      ],
+      "evidence": [
+        "regression battery"
+      ]
+    },
+    {
+      "id": "SC-104",
+      "milestone": "M8",
+      "priority": "high",
+      "title": "Remove AUTH_ORDER from new-contract enforcement",
+      "depends_on": [
+        "SC-034"
+      ],
+      "files": [
+        "solkraft/contracts.py"
+      ],
+      "acceptance": [
+        "all v1 enforcement uses capability sets"
+      ],
+      "evidence": [
+        "compatibility suite"
+      ]
+    },
+    {
+      "id": "SC-105",
+      "milestone": "M8",
+      "priority": "critical",
+      "title": "Remove harmless defaults permanently",
+      "depends_on": [
+        "SC-001",
+        "SC-100"
+      ],
+      "files": [
+        "solkraft/routing.py"
+      ],
+      "acceptance": [
+        "opaque is the only unknown default"
+      ],
+      "evidence": [
+        "catalog regression"
+      ]
+    },
+    {
+      "id": "SC-106",
+      "milestone": "M8",
+      "priority": "critical",
+      "title": "Retire post-hoc-only filter path",
+      "depends_on": [
+        "SC-022",
+        "SC-023",
+        "SC-025"
+      ],
+      "files": [
+        "solkraft/contracts.py",
+        "solkraft/routing.py"
+      ],
+      "acceptance": [
+        "hybrid routing is sole contract-aware path"
+      ],
+      "evidence": [
+        "full routing regression"
+      ]
+    },
+    {
+      "id": "SC-107",
+      "milestone": "M8",
+      "priority": "high",
+      "title": "Adopt hardened default after coverage",
+      "depends_on": [
+        "SC-100",
+        "SC-102",
+        "SC-105"
+      ],
+      "files": [
+        "configuration",
+        "docs"
+      ],
+      "acceptance": [
+        "reviewed bundled skills have valid v1 contracts",
+        "untrusted mounted skills default opaque"
+      ],
+      "evidence": [
+        "coverage report",
+        "full local CI and routing battery"
+      ]
+    }
+  ],
+  "program_acceptance": [
+    "every discovered skill has an explicit contract state",
+    "unknown metadata never becomes a no-effect assertion",
+    "Contract v1 is portable, versioned, digest-bound, and JSON-Schema validated",
+    "routing performs pre-admissibility, composition, full-route validation, and bounded repair/recomposition",
+    "new contracts use capability/resource sets rather than scalar auth",
+    "typed inputs/outputs participate in composition",
+    "effects are namespaced and extensible",
+    "verification is declarative by default and consumes structured evidence",
+    "trust and provenance are visible and cannot be self-elevated",
+    "Python, REST, CLI, MCP, contribution tooling, generated docs, and CI share semantics",
+    "existing 100000-request routing regression remains passing",
+    "SKILL.md lazy loading is preserved",
+    "runtime execution remains outside SolKraft",
+    "execution_authorized remains false",
+    "prototype shortcuts are removed only after tested replacements exist"
+  ]
+}

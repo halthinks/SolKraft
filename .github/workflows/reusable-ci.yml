@@ -1,0 +1,74 @@
+name: Reusable SolKraft CI
+
+on:
+  workflow_call:
+    inputs:
+      contribution_manifest:
+        description: Optional contribution manifest path. When set, run the complete preflight gate.
+        required: false
+        type: string
+        default: ''
+      python_version:
+        description: Python version for the reusable gate.
+        required: false
+        type: string
+        default: '3.11'
+      variants:
+        description: Context variants per authored contribution case.
+        required: false
+        type: number
+        default: 25
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Check out candidate
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ inputs.python_version }}
+          cache: pip
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install SolKraft development dependencies
+        run: python -m pip install -e ".[dev]"
+
+      - name: Run repository gate
+        if: ${{ inputs.contribution_manifest == '' }}
+        run: python -m scripts.local_ci
+
+      - name: Pre-build contribution before PR
+        if: ${{ inputs.contribution_manifest != '' }}
+        run: python -m scripts.preflight_contribution "${{ inputs.contribution_manifest }}" --variants "${{ inputs.variants }}"
+
+      - name: Upload CI evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: solkraft-ci-${{ github.sha }}
+          if-no-files-found: ignore
+          retention-days: 14
+          path: |
+            build/local-ci.json
+            build/contracts-migration.json
+            build/contract-index.json
+            build/hardening.json
+            build/contributions/latest.json
+            build/preflight/**
+            scripts/results-routing-100000.json
+            dist/*.whl
+            docs/downloads/solkraft-plugin.zip
+            docs/assets/contracts.json
+            docs/assets/contract-index.json
+            docs/assets/contract-schema.json
