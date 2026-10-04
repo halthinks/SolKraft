@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="560" viewBox="0 0 1400 560" role="img" aria-labelledby="title desc">
+<title id="title">SolKraft — the open skill OS for agents</title>
+<desc id="desc">A dark visual showing a request moving through semantic routing, executable contracts, skill composition, host execution, and verification.</desc>
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#08101a"/><stop offset=".52" stop-color="#0d1622"/><stop offset="1" stop-color="#101b20"/></linearGradient>
+  <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#6b9cff"/><stop offset=".5" stop-color="#b3f77c"/><stop offset="1" stop-color="#75e3a0"/></linearGradient>
+  <filter id="glow"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect width="1400" height="560" rx="28" fill="url(#bg)"/>
+<circle cx="1160" cy="80" r="190" fill="#6b9cff" opacity=".08"/>
+<circle cx="170" cy="500" r="210" fill="#b3f77c" opacity=".06"/>
+<g font-family="Arial,Helvetica,sans-serif">
+  <text x="80" y="88" fill="#b3f77c" font-size="18" font-weight="700" letter-spacing="3">SOLKRAFT · OPEN SKILL INFRASTRUCTURE</text>
+  <text x="80" y="155" fill="#eef4f6" font-size="62" font-weight="800">Give every task the right skills.</text>
+  <text x="80" y="198" fill="#9eabb8" font-size="22">Semantic routing · executable contracts · typed composition · CI-visible verification</text>
+
+  <g transform="translate(80 258)">
+    <g>
+      <rect x="0" y="0" width="190" height="120" rx="18" fill="#101923" stroke="#314254"/>
+      <text x="24" y="38" fill="#6b9cff" font-size="16" font-weight="700">01 · REQUEST</text>
+      <text x="24" y="72" fill="#eef4f6" font-size="18" font-weight="700">Ask normally</text>
+      <text x="24" y="98" fill="#8d9aaa" font-size="14">No skill IDs required</text>
+    </g>
+    <path d="M198 60 H236" stroke="#75e3a0" stroke-width="4" stroke-linecap="round"/><path d="M228 52 l12 8-12 8" fill="none" stroke="#75e3a0" stroke-width="4"/>
+    <g transform="translate(244 0)">
+      <rect x="0" y="0" width="190" height="120" rx="18" fill="#101923" stroke="#314254"/>
+      <text x="24" y="38" fill="#6b9cff" font-size="16" font-weight="700">02 · ROUTER</text>
+      <text x="24" y="72" fill="#eef4f6" font-size="18" font-weight="700">Find capability</text>
+      <text x="24" y="98" fill="#8d9aaa" font-size="14">Identity + intent</text>
+    </g>
+    <path d="M442 60 H480" stroke="#75e3a0" stroke-width="4" stroke-linecap="round"/><path d="M472 52 l12 8-12 8" fill="none" stroke="#75e3a0" stroke-width="4"/>
+    <g transform="translate(488 0)">
+      <rect x="0" y="0" width="210" height="120" rx="18" fill="#132018" stroke="#4c6a43"/>
+      <text x="24" y="38" fill="#b3f77c" font-size="16" font-weight="700">03 · CONTRACT</text>
+      <text x="24" y="72" fill="#eef4f6" font-size="18" font-weight="700">Check boundaries</text>
+      <text x="24" y="98" fill="#9caf9a" font-size="14">I/O · effects · auth · fixtures</text>
+    </g>
+    <path d="M706 60 H744" stroke="#75e3a0" stroke-width="4" stroke-linecap="round"/><path d="M736 52 l12 8-12 8" fill="none" stroke="#75e3a0" stroke-width="4"/>
+    <g transform="translate(752 0)">
+      <rect x="0" y="0" width="190" height="120" rx="18" fill="#101923" stroke="#314254"/>
+      <text x="24" y="38" fill="#6b9cff" font-size="16" font-weight="700">04 · COMPOSE</text>
+      <text x="24" y="72" fill="#eef4f6" font-size="18" font-weight="700">Connect skills</text>
+      <text x="24" y="98" fill="#8d9aaa" font-size="14">Typed dataflow</text>
+    </g>
+    <path d="M950 60 H988" stroke="#75e3a0" stroke-width="4" stroke-linecap="round"/><path d="M980 52 l12 8-12 8" fill="none" stroke="#75e3a0" stroke-width="4"/>
+    <g transform="translate(996 0)">
+      <rect x="0" y="0" width="190" height="120" rx="18" fill="#101923" stroke="#314254"/>
+      <text x="24" y="38" fill="#6b9cff" font-size="16" font-weight="700">05 · VERIFY</text>
+      <text x="24" y="72" fill="#eef4f6" font-size="18" font-weight="700">Make proof visible</text>
+      <text x="24" y="98" fill="#8d9aaa" font-size="14">Fixtures + CI receipts</text>
+    </g>
+  </g>
+
+  <g transform="translate(80 420)">
+    <rect width="1240" height="74" rx="16" fill="#0d151b" stroke="#26313e"/>
+    <text x="28" y="31" fill="#8d9aaa" font-size="14">173 bundled skills</text>
+    <text x="210" y="31" fill="#8d9aaa" font-size="14">7 read-only MCP tools</text>
+    <text x="445" y="31" fill="#8d9aaa" font-size="14">100k routing benchmark</text>
+    <text x="710" y="31" fill="#8d9aaa" font-size="14">execution_authorized: false</text>
+    <text x="1000" y="31" fill="#8d9aaa" font-size="14">community-built</text>
+    <rect x="28" y="46" width="1184" height="4" rx="2" fill="#1e2a34"/>
+    <rect x="28" y="46" width="1184" height="4" rx="2" fill="url(#accent)" filter="url(#glow)"/>
+  </g>
+</g>
+</svg>
