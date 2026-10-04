@@ -26,7 +26,7 @@ def hide_quotes(text: str) -> tuple[str, list[str]]:
         return " "
 
     visible = re.sub(
-        r"\x60\x60\x60[\\s\\S]*?\x60\x60\x60|\x60[^\x60\\n]*\x60|\"[^\"\\n]*\"|'[^'\\n]*'",
+        r"\x60\x60\x60[\s\S]*?\x60\x60\x60|\x60[^\x60\n]*\x60|\"[^\"\n]*\"|'[^'\n]*'",
         replace,
         text,
     )
@@ -38,7 +38,7 @@ def effect_exclusion_start(text: str) -> int | None:
     matches = []
     for form in EFFECT_FORMS.values():
         match = re.search(
-            rf"\\b(?:do not|don't|dont|without|never|skip|avoid)\\b[^.;\\n]{{0,70}}\\b(?:{form})\\b",
+            rf"\b(?:do not|don't|dont|without|never|skip|avoid)\b[^.;\n]{{0,70}}\b(?:{form})\b",
             text,
         )
         if match:
@@ -49,7 +49,7 @@ def effect_exclusion_start(text: str) -> int | None:
 def excluded_effects(text: str) -> list[str]:
     """Return explicitly forbidden effects while keeping quotes inert."""
     lowered, _ = hide_quotes(text.casefold())
-    context_start = re.search(r"\\bcontext notes\\s*:", lowered)
+    context_start = re.search(r"\bcontext notes\s*:", lowered)
     if context_start:
         tail = lowered[context_start.start():]
         exclusion_start = effect_exclusion_start(tail)
@@ -61,7 +61,7 @@ def excluded_effects(text: str) -> list[str]:
 
     found = []
     for effect, form in EFFECT_FORMS.items():
-        pattern = rf"\\b(?:do not|don't|dont|without|never|skip|avoid)\\b[^.;\\n]{{0,70}}\\b(?:{form})\\b"
+        pattern = rf"\b(?:do not|don't|dont|without|never|skip|avoid)\b[^.;\n]{{0,70}}\b(?:{form})\b"
         match = re.search(pattern, lowered)
         if match:
             found.append((match.start(), effect))
