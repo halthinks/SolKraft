@@ -1,4 +1,4 @@
-"""Advisory intent routing over the bundled SolForge graph and mounted skills."""
+"""Advisory intent routing over the bundled graph and mounted skills."""
 from __future__ import annotations
 
 import json
@@ -23,11 +23,14 @@ def _load_composer():
 
 
 def _composer_context(context):
-    """Keep composer context limited to fields it already validates."""
     if not isinstance(context, dict):
         return context
     allowed = {key: context[key] for key in ("domain", "stage") if key in context}
     return allowed or None
+
+
+def _frontmatter(catalog: SkillCatalog) -> dict:
+    return {record.id: record.contract for record in catalog.records()}
 
 
 def route_request(catalog: SkillCatalog, objective: str, max_skills: int = 10,
@@ -50,11 +53,8 @@ def route_request(catalog: SkillCatalog, objective: str, max_skills: int = 10,
     for stage in result["stages"]:
         available = [skill for skill in stage["selected"] if skill in known]
         if not available:
-            # Adapt a recognized active stage to a mounted catalog. Never search
-            # excluded clauses or overwrite an intentional parser abstention.
-            candidates = catalog.search(stage["text"], limit=3)
-            available = [row["id"] for row in candidates
-                         if "consequential" not in row["id"]][:1]
+            candidates = catalog.search(stage["text"], limit=3, declared_only=True)
+            available = [row["id"] for row in candidates if "consequential" not in row["id"]][:1]
         stage["selected"] = available
         for skill in available:
             if skill not in selected and len(selected) < max_skills:
@@ -64,14 +64,14 @@ def route_request(catalog: SkillCatalog, objective: str, max_skills: int = 10,
         text = unresolved["text"]
         if (unresolved["reason"] == "no confident specialist match"
                 and re.match(r"(?:build|create|design|implement|inspect|review|test|verify|analyze|research)\b", text)):
-            candidates = catalog.search(text, limit=3)
+            candidates = catalog.search(text, limit=3, declared_only=True)
             candidates = [row for row in candidates if "consequential" not in row["id"]]
             if candidates and len(selected) < max_skills:
                 skill = candidates[0]["id"]
                 if skill not in selected:
                     selected.append(skill)
                 result["stages"].append({"stage": unresolved["stage"], "text": text,
-                    "selected": [skill], "reason": "active-stage catalog match", "confidence": "moderate"})
+                    "selected": [skill], "reason": "declared-contract match", "confidence": "moderate"})
                 continue
         remaining.append(unresolved)
     result['unselected_requested_stages'] = remaining
@@ -79,8 +79,11 @@ def route_request(catalog: SkillCatalog, objective: str, max_skills: int = 10,
     result["selected"] = selected
     result["skills"] = [known[skill].public() for skill in selected]
     allowed_auth = context.get("auth_scope") if isinstance(context, dict) else None
-    result = apply_contracts(result, graph, objective, allowed_auth=allowed_auth)
+    result = apply_contracts(result, graph, objective, allowed_auth=allowed_auth,
+                             frontmatter=_frontmatter(catalog), explicit=explicit)
     result["skills"] = [known[skill].public() for skill in result["selected"] if skill in known]
+    for item in result["skills"]:
+        item["contract"] = result["contracts"].get(item["id"], item.get("contract"))
     result["execution_authorized"] = False
     return result
 
@@ -92,12 +95,7 @@ def get_graph() -> dict:
 
 
 def catalog_graph(catalog: SkillCatalog) -> dict:
-    """Expose every mounted skill without inventing workflow dependencies.
-
-    The tested semantic core remains the automatic composer's authority.
-    Additional catalog nodes support discovery and explicit selection.
-    Mounted skills without a graph node are read-only until they declare more.
-    """
+    """Expose mounted skills without inventing a contract they did not state."""
     core = get_graph()
     nodes = {}
     for record in catalog.records():
@@ -105,11 +103,11 @@ def catalog_graph(catalog: SkillCatalog) -> dict:
             'id': record.id, 'description': record.public()['description'],
             'domain': 'general', 'effect': False,
             'selection': 'catalog discovery or explicit',
-            'inputs': ['user objective', 'applicable skill prerequisites'],
+            'inputs': record.contract.get('inputs') or None,
+            'side_effects': record.contract.get('side_effects'),
+            'auth_scope': record.contract.get('auth_scope'),
+            'test_contract': record.contract.get('test_contract'),
             'outputs': ['skill-defined deliverable'],
-            'side_effects': [],
-            'auth_scope': 'none',
-            'test_contract': 'Host verifies the skill-defined deliverable against the objective; unresolved limits are stated.',
         }))
     edges = [dict(edge) for edge in core['edges']
              if edge.get('from') in nodes and edge.get('to') in nodes]
