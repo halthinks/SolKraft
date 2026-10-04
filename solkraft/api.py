@@ -12,7 +12,8 @@ from pydantic import BaseModel, Field
 
 from .catalog import SkillCatalog, SkillNotFound
 from .mcp_server import build_mcp_server
-from .routing import BUNDLE_ROOT, route_request, get_graph, catalog_graph
+from .contract_schema import load_contract_schema, validate_v1_document
+from .routing import BUNDLE_ROOT, route_request, get_graph, catalog_graph, contract_index
 
 
 def _configured_roots(include_installed: bool = False) -> list[Path]:
@@ -32,6 +33,10 @@ class RoutePolicyBody(BaseModel):
     grant: dict | None = None
     legacy_auth_scope: str | None = None
     contract_mode: str = "legacy"
+
+
+class ContractValidationBody(BaseModel):
+    contract: dict
 
 
 class RouteBody(BaseModel):
@@ -96,6 +101,40 @@ def create_app(catalog: SkillCatalog | None = None, *, api_key: str | None = Non
         except SkillNotFound as exc:
             raise HTTPException(status_code=404, detail="Skill not found") from exc
 
+    @app.get("/v1/skills/{skill_id}/contract")
+    async def get_skill_contract(skill_id: str):
+        try:
+            return contract_index(catalog).get(skill_id)
+        except KeyError as exc:
+            raise HTTPException(status_code=404, detail="Skill contract not found") from exc
+
+    @app.get("/v1/contract-schema")
+    async def get_contract_schema():
+        return load_contract_schema()
+
+    @app.post("/v1/contracts/validate")
+    async def validate_contract(body: ContractValidationBody):
+        errors = validate_v1_document(body.contract)
+        return {"valid": not errors, "errors": errors}
+
+    @app.get("/v1/contracts")
+    async def list_contracts(
+        effect: str | None = None,
+        capability: str | None = None,
+        input_name: str | None = None,
+        output_name: str | None = None,
+        trust: str | None = None,
+    ):
+        index = contract_index(catalog)
+        items = index.filter(
+            effect=effect,
+            capability=capability,
+            input_name=input_name,
+            output_name=output_name,
+            trust=trust,
+        )
+        return {"count": len(items), "generation": index.generation, "items": items}
+
     @app.post("/v1/route")
     async def route(body: RouteBody):
         try:
@@ -119,7 +158,16 @@ def create_app(catalog: SkillCatalog | None = None, *, api_key: str | None = Non
 
     @app.post("/v1/refresh")
     async def refresh():
-        return {"count": catalog.refresh(), "status": "refreshed"}
+        count = catalog.refresh()
+        index = contract_index(catalog)
+        return {
+            "count": count,
+            "status": "refreshed",
+            "contract_index": {
+                "generation": index.generation,
+                **index.last_refresh,
+            },
+        }
 
     app.mount("/mcp", mcp.streamable_http_app())
     app.state.skill_catalog = catalog
