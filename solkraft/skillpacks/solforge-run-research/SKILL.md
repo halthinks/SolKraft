@@ -3,6 +3,8 @@ name: solforge-run-research
 description: Execute a research plan with source tracking, contradictions, reproducible searches, and uncertainty.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # SolForge Run Research
 
 Execute a research plan with source tracking, contradictions, reproducible searches, and uncertainty.
@@ -16,3 +18,14 @@ Trace material claims to concrete evidence. Search competing explanations and co
 Compare alternatives on symmetric criteria. Order remediation recommendations by dependencies and decisive acceptance checks; research or comparison does not itself authorize implementation or merging.
 
 Return the requested synthesis with source locators, uncertainties, scope limits, and practical consequences. Stop when the question is supported or the remaining evidence is genuinely unavailable.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- This procedure is selected by SolKraft's contract-aware router; selection does not authorize execution.
+- Public routing defaults to hardened policy; opaque or contract-inadmissible capabilities fail closed.
+- When `contract.yaml` exists, compact metadata is evaluated before this full instruction body is loaded.
+- Runtime authority stays with the host; SolKraft keeps `execution_authorized: false`.
+- Current local acceptance covers 100,000 unique 250-word requests, 100 ask families per skill, and 100% eligible target recall. See repository `VALIDATION.md`.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

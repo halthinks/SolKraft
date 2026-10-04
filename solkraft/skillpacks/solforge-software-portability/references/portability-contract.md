@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Portability contract
 
 Preserve a tested behavioral baseline before changing platform boundaries. Record every coupling by component, kind, source platform, target platform, and evidence.
