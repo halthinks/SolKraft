@@ -10,6 +10,7 @@ import sys
 
 from solkraft.catalog import SkillCatalog
 from solkraft.contract_loader import load_skill_contract
+from solkraft.contract_verify import SUPPORTED_CHECKS
 from solkraft.trust import resolve_trust
 from solkraft.routing import BUNDLE_ROOT, GRAPH_PATH, get_graph, route_request
 
@@ -79,6 +80,9 @@ def validate(data, graph, catalog):
         verification = contract.get("verification") or {}
         if contract.get("source") == "sidecar" and not verification.get("checks"):
             errors.append("Contract v1 sidecars must declare at least one declarative verification check.")
+        for check in verification.get("checks") or []:
+            if check.get("type") not in SUPPORTED_CHECKS:
+                errors.append("Unsupported declarative verification check type: " + str(check.get("type")))
     return errors
 
 
