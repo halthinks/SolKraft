@@ -27,7 +27,7 @@ solkraft = "solkraft.__main__:main"
 include = ["solkraft*"]
 
 [tool.setuptools.package-data]
-solkraft = ["skillpacks/**/*", "schemas/*.json", "retired-skills.json"]
+solkraft = ["skillpacks/**/*", "schemas/*.json", "retired-skills.json", "trust-bindings.json"]
 
 [tool.setuptools.exclude-package-data]
 "*" = ["**/__pycache__/*", "__pycache__/*", "**/*.pyc", "*.pyc"]
