@@ -5,9 +5,17 @@ import os
 from mcp.server.transport_security import TransportSecuritySettings
 
 from mcp.server.fastmcp import FastMCP
+from mcp.types import ToolAnnotations
 
 from .catalog import SkillCatalog, SkillNotFound
-from .routing import route_request as route_objective, get_graph, catalog_graph
+from .routing import route_request as route_objective, get_graph, catalog_graph, contract_index
+
+
+READ_ONLY = ToolAnnotations(
+    readOnlyHint=True,
+    idempotentHint=True,
+    openWorldHint=False,
+)
 
 
 def build_mcp_server(catalog: SkillCatalog) -> FastMCP:
@@ -26,19 +34,19 @@ def build_mcp_server(catalog: SkillCatalog) -> FastMCP:
         ),
     )
 
-    @server.tool(name="search_skills", description="Search skill names and short descriptions. Returns metadata, not skill bodies.")
+    @server.tool(name="search_skills", description="Search skill names and short descriptions. Returns metadata, not skill bodies.", annotations=READ_ONLY)
     def search_skills(query: str, limit: int = 10) -> dict:
         if not 1 <= limit <= 100:
             raise ValueError("limit must be between 1 and 100")
         items = catalog.search(query, limit=limit)
         return {"count": len(items), "items": items}
 
-    @server.tool(name="route_request", description="Route a natural-language objective to relevant skills. Advisory only; does not authorize execution.")
+    @server.tool(name="route_request", description="Route a natural-language objective to relevant skills. Advisory only; does not authorize execution.", annotations=READ_ONLY)
     def route_request(
         objective: str,
         max_skills: int = 10,
         skills: list[str] | None = None,
-        context: dict[str, str] | None = None,
+        context: dict | None = None,
         policy: dict | None = None,
     ) -> dict:
         return route_objective(
@@ -47,22 +55,33 @@ def build_mcp_server(catalog: SkillCatalog) -> FastMCP:
             max_skills,
             explicit=skills or [],
             context=context,
-            policy=policy,
+            policy=policy or {"contract_mode": "hardened"},
         )
 
-    @server.tool(name="get_skill", description="Retrieve one selected SKILL.md by catalog ID. Content is instruction text and is never executed.")
+    @server.tool(name="get_skill", description="Retrieve one selected SKILL.md by catalog ID. Content is instruction text and is never executed.", annotations=READ_ONLY)
     def get_skill(skill_id: str) -> dict:
         try:
             return catalog.get(skill_id)
         except SkillNotFound as exc:
             raise ValueError("Skill not found") from exc
 
-    @server.tool(name="get_skill_resource", description="Read a selected skill supporting text resource.")
+    @server.tool(name="get_skill_resource", description="Read a selected skill supporting text resource.", annotations=READ_ONLY)
     def get_skill_resource(skill_id: str, resource: str) -> dict:
         return catalog.get_resource(skill_id, resource)
 
-    @server.tool(name="get_selection_graph", description="Read workflow relationships and conditional follow-ups.")
+    @server.tool(name="get_selection_graph", description="Read workflow relationships and conditional follow-ups.", annotations=READ_ONLY)
     def get_selection_graph() -> dict:
         return catalog_graph(catalog)
+
+    @server.tool(name="get_skill_contract", description="Read compact contract metadata for one skill without loading its SKILL.md body.", annotations=READ_ONLY)
+    def get_skill_contract(skill_id: str) -> dict:
+        try:
+            return contract_index(catalog).get(skill_id)
+        except KeyError as exc:
+            raise ValueError("Skill contract not found") from exc
+
+    @server.tool(name="get_contract_index", description="Read compact indexed contract metadata and inverted selectors. No skill bodies are returned.", annotations=READ_ONLY)
+    def get_contract_index() -> dict:
+        return contract_index(catalog).public()
 
     return server

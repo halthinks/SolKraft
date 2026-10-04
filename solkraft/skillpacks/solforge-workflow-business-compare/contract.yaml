@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0",
+  "skill_id": "solforge-workflow-business-compare",
+  "contract_revision": 1,
+  "inputs": [
+    {
+      "name": "decision-market-and-alternatives",
+      "required": true,
+      "source": "user",
+      "description": "decision, market, and alternatives",
+      "schema": {}
+    },
+    {
+      "name": "evidence-and-economic-assumptions",
+      "required": true,
+      "source": "user",
+      "description": "evidence and economic assumptions",
+      "schema": {}
+    },
+    {
+      "name": "user-scope-and-acceptance-criteria",
+      "required": true,
+      "source": "user",
+      "description": "user scope and acceptance criteria",
+      "schema": {}
+    }
+  ],
+  "outputs": [
+    {
+      "name": "competitive-comparison",
+      "description": "competitive_comparison",
+      "schema": {}
+    },
+    {
+      "name": "option-scorecard",
+      "description": "option_scorecard",
+      "schema": {}
+    }
+  ],
+  "effects": [],
+  "authority": {
+    "capabilities": [],
+    "resources": [],
+    "legacy_scope": "none"
+  },
+  "risk": {
+    "external": false,
+    "destructive": false,
+    "open_world": false
+  },
+  "verification": {
+    "mode": "declarative",
+    "description": "The requested competitive_comparison, option_scorecard is supported by inspected sources or observed behavior; unresolved limits are stated.",
+    "checks": []
+  },
+  "provenance": {
+    "migration": "legacy-graph",
+    "inferred": true
+  },
+  "extensions": {
+    "legacy_graph": {
+      "domain": "business",
+      "selection": "automatic or explicit",
+      "path": "../solforge-workflow-business-compare/SKILL.md"
+    }
+  }
+}

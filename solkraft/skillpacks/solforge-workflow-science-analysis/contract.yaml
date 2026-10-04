@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0",
+  "skill_id": "solforge-workflow-science-analysis",
+  "contract_revision": 1,
+  "inputs": [
+    {
+      "name": "research-question-or-hypothesis",
+      "required": true,
+      "source": "user",
+      "description": "research question or hypothesis",
+      "schema": {}
+    },
+    {
+      "name": "papers-data-methods-and-conditions",
+      "required": true,
+      "source": "user",
+      "description": "papers, data, methods, and conditions",
+      "schema": {}
+    },
+    {
+      "name": "user-scope-and-acceptance-criteria",
+      "required": true,
+      "source": "user",
+      "description": "user scope and acceptance criteria",
+      "schema": {}
+    }
+  ],
+  "outputs": [
+    {
+      "name": "analysis-package",
+      "description": "analysis_package",
+      "schema": {}
+    },
+    {
+      "name": "results-memo",
+      "description": "results_memo",
+      "schema": {}
+    }
+  ],
+  "effects": [],
+  "authority": {
+    "capabilities": [],
+    "resources": [],
+    "legacy_scope": "none"
+  },
+  "risk": {
+    "external": false,
+    "destructive": false,
+    "open_world": false
+  },
+  "verification": {
+    "mode": "declarative",
+    "description": "The requested analysis_package, results_memo is supported by inspected sources or observed behavior; unresolved limits are stated.",
+    "checks": []
+  },
+  "provenance": {
+    "migration": "legacy-graph",
+    "inferred": true
+  },
+  "extensions": {
+    "legacy_graph": {
+      "domain": "science",
+      "selection": "automatic or explicit",
+      "path": "../solforge-workflow-science-analysis/SKILL.md"
+    }
+  }
+}

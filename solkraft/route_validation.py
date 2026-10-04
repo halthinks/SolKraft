@@ -4,13 +4,13 @@ from __future__ import annotations
 
 def _selected_in_stages(result: dict) -> list[str]:
     ordered = []
+    for skill in result.get("selected", []):
+        if skill not in ordered:
+            ordered.append(skill)
     for stage in result.get("stages", []):
         for skill in stage.get("selected", []):
             if skill not in ordered:
                 ordered.append(skill)
-    for skill in result.get("selected", []):
-        if skill not in ordered:
-            ordered.append(skill)
     return ordered
 
 
