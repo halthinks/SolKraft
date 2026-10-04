@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Independent Research and Mastery loop contract
 
 Each outer cycle has separately inspectable sovereign worker records:
