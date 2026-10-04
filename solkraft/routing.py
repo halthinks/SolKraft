@@ -290,10 +290,16 @@ def route_request(
     result["selected"] = _enforce_dataflow_order(
         result["selected"], dataflow["explanations"]
     )
+    index = contract_index(catalog)
     result["skills"] = [
         known[skill].public() for skill in result["selected"]
         if skill in known
     ]
+    result["selected_contracts"] = {
+        skill: index.get(skill)
+        for skill in result["selected"]
+        if skill in known
+    }
     result["excluded_effects"] = list(normalized_policy.denied_effects)
     result["execution_authorized"] = False
     result["audit"] = route_audit_event(result)
