@@ -355,6 +355,8 @@ def catalog_graph(catalog: SkillCatalog) -> dict:
         base["contract_validation_errors"] = contract.get("validation_errors", [])
         base["side_effects"] = contract.get("effects")
         base["effects"] = contract.get("effects")
+        base["auth_scope"] = contract.get("auth_scope")
+        base["test_contract"] = contract.get("test_contract")
         base["contract_digest"] = contract.get("contract_digest")
         base["entrypoint_digest"] = contract.get("entrypoint_digest")
         base["verification"] = contract.get("verification", {})
