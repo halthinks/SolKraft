@@ -38,7 +38,7 @@ def build_mcp_server(catalog: SkillCatalog) -> FastMCP:
         objective: str,
         max_skills: int = 10,
         skills: list[str] | None = None,
-        context: dict[str, str] | None = None,
+        context: dict | None = None,
         policy: dict | None = None,
     ) -> dict:
         return route_objective(
