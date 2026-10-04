@@ -128,6 +128,8 @@ def create_app(catalog: SkillCatalog | None = None, *, api_key: str | None = Non
             return export_portable_contract(contract_index(catalog).get(skill_id))
         except KeyError as exc:
             raise HTTPException(status_code=404, detail="Skill contract not found") from exc
+        except ValueError as exc:
+            raise HTTPException(status_code=422, detail=str(exc)) from exc
 
     @app.post("/v1/contracts/import")
     async def import_contract(body: PortableContractBody):
