@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0",
+  "skill_id": "sol-search",
+  "contract_revision": 1,
+  "inputs": [
+    {
+      "name": "exact-question",
+      "required": true,
+      "source": "user",
+      "description": "exact question",
+      "schema": {}
+    },
+    {
+      "name": "required-sources-and-freshness",
+      "required": true,
+      "source": "user",
+      "description": "required sources and freshness",
+      "schema": {}
+    },
+    {
+      "name": "user-scope-and-acceptance-criteria",
+      "required": true,
+      "source": "user",
+      "description": "user scope and acceptance criteria",
+      "schema": {}
+    }
+  ],
+  "outputs": [
+    {
+      "name": "source-and-claim-evidence",
+      "description": "source and claim evidence",
+      "schema": {}
+    },
+    {
+      "name": "bounded-answer",
+      "description": "bounded answer",
+      "schema": {}
+    }
+  ],
+  "effects": [],
+  "authority": {
+    "capabilities": [],
+    "resources": [],
+    "legacy_scope": "none"
+  },
+  "risk": {
+    "external": false,
+    "destructive": false,
+    "open_world": false
+  },
+  "verification": {
+    "mode": "declarative",
+    "description": "The requested source and claim evidence, bounded answer is supported by inspected sources or observed behavior; unresolved limits are stated.",
+    "checks": []
+  },
+  "provenance": {
+    "migration": "legacy-graph",
+    "inferred": true
+  },
+  "extensions": {
+    "legacy_graph": {
+      "domain": "research",
+      "selection": "automatic or explicit",
+      "path": "../sol-search/SKILL.md"
+    }
+  }
+}
