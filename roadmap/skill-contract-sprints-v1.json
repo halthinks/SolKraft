@@ -1,0 +1,263 @@
+{
+  "schema": "solkraft/sprint-plan/v1",
+  "program": "skill-contract-architecture",
+  "source_roadmap": "roadmap/skill-contracts-v1.json",
+  "task_count": 81,
+  "owner_roles": {
+    "contract-core": "Contract Core",
+    "router-solforge": "Router / SolForge",
+    "capability-policy": "Capability & Policy",
+    "verification-trust": "Verification & Trust",
+    "interfaces": "Interfaces",
+    "catalog-ci": "Catalog / CI"
+  },
+  "sprints": [
+    {
+      "id": "S1",
+      "title": "Make contracts truthful",
+      "primary_owners": [
+        "contract-core",
+        "router-solforge"
+      ],
+      "supporting_owners": [
+        "interfaces"
+      ],
+      "tasks": [
+        "SC-001",
+        "SC-002",
+        "SC-003",
+        "SC-004",
+        "SC-005",
+        "SC-006",
+        "SC-010",
+        "SC-015",
+        "SC-017"
+      ],
+      "exit": [
+        "unknown mounted skills are opaque, never synthesized harmless",
+        "explicit contract states are exposed",
+        "unknown major versions fail closed",
+        "blocked/partially_blocked route semantics are truthful",
+        "one normalized constraint parser preserves quoted/code/deferred behavior",
+        "execution_authorized is false across Python REST CLI MCP"
+      ]
+    },
+    {
+      "id": "S2",
+      "title": "Build Contract v1 and policy-aware routing",
+      "primary_owners": [
+        "contract-core",
+        "capability-policy",
+        "router-solforge"
+      ],
+      "tasks": [
+        "SC-011",
+        "SC-012",
+        "SC-013",
+        "SC-014",
+        "SC-016",
+        "SC-020",
+        "SC-021",
+        "SC-022",
+        "SC-023",
+        "SC-024",
+        "SC-025",
+        "SC-026",
+        "SC-027",
+        "SC-028"
+      ],
+      "exit": [
+        "typed inputs/outputs, namespaced effects, capability/resource requirements, verification schema and digests are available",
+        "semantic context and policy are separate",
+        "explicit policy outranks prose inference",
+        "inadmissible candidates are filtered before composition",
+        "whole routes are validated and repaired/recomposed",
+        "blocked stages and structured decision traces are exposed"
+      ]
+    },
+    {
+      "id": "S3",
+      "title": "Replace scalar auth and add typed composition",
+      "primary_owners": [
+        "capability-policy",
+        "router-solforge"
+      ],
+      "supporting_owners": [
+        "contract-core"
+      ],
+      "tasks": [
+        "SC-030",
+        "SC-031",
+        "SC-032",
+        "SC-033",
+        "SC-034",
+        "SC-035",
+        "SC-036",
+        "SC-040",
+        "SC-041",
+        "SC-042",
+        "SC-043",
+        "SC-044",
+        "SC-045",
+        "SC-046",
+        "SC-047"
+      ],
+      "exit": [
+        "new contracts use capability/resource sets rather than scalar auth ordering",
+        "route requirements aggregate capabilities and resources",
+        "host grants are described but never minted",
+        "typed producer-consumer composition works",
+        "missing prerequisites block or elicit",
+        "semantic graph remains authoritative evidence and typed dataflow augments it",
+        "100000-route regression remains passing"
+      ]
+    },
+    {
+      "id": "S4",
+      "title": "Make outcomes verifiable and trust explicit",
+      "primary_owners": [
+        "verification-trust"
+      ],
+      "supporting_owners": [
+        "contract-core",
+        "catalog-ci"
+      ],
+      "tasks": [
+        "SC-050",
+        "SC-051",
+        "SC-052",
+        "SC-053",
+        "SC-054",
+        "SC-055",
+        "SC-056",
+        "SC-057",
+        "SC-058",
+        "SC-059",
+        "SC-060",
+        "SC-100",
+        "SC-101",
+        "SC-102"
+      ],
+      "exit": [
+        "core verification consumes evidence and executes no contract-provided code",
+        "verification result states are distinct",
+        "observed effects can be compared with declarations",
+        "trust is visible and bound to contract and procedure digests",
+        "trust cannot self-elevate",
+        "bundled migration distinguishes legacy-inferred from reviewed",
+        "sandbox requirements are explicit while execution remains external"
+      ]
+    },
+    {
+      "id": "S5",
+      "title": "Productize and enforce in CI",
+      "primary_owners": [
+        "interfaces",
+        "catalog-ci"
+      ],
+      "supporting_owners": [
+        "contract-core",
+        "router-solforge",
+        "capability-policy",
+        "verification-trust"
+      ],
+      "parallel_lanes": {
+        "api-cli": [
+          "SC-070",
+          "SC-071",
+          "SC-072",
+          "SC-073",
+          "SC-074",
+          "SC-075",
+          "SC-076"
+        ],
+        "mcp-docs": [
+          "SC-077",
+          "SC-078",
+          "SC-079",
+          "SC-084"
+        ],
+        "contribution-ci": [
+          "SC-080",
+          "SC-081",
+          "SC-082",
+          "SC-083"
+        ],
+        "index-performance": [
+          "SC-090",
+          "SC-091",
+          "SC-092",
+          "SC-093",
+          "SC-094",
+          "SC-095",
+          "SC-096"
+        ]
+      },
+      "tasks": [
+        "SC-070",
+        "SC-071",
+        "SC-072",
+        "SC-073",
+        "SC-074",
+        "SC-075",
+        "SC-076",
+        "SC-077",
+        "SC-078",
+        "SC-079",
+        "SC-080",
+        "SC-081",
+        "SC-082",
+        "SC-083",
+        "SC-084",
+        "SC-090",
+        "SC-091",
+        "SC-092",
+        "SC-093",
+        "SC-094",
+        "SC-095",
+        "SC-096"
+      ],
+      "exit": [
+        "Python REST CLI MCP share contract and policy semantics",
+        "MCP remains read-only",
+        "contribution gates include contract policy cases",
+        "local and PR CI enforce contract/schema validity",
+        "generated docs expose contract metadata",
+        "compact indexes and incremental refresh preserve lazy body loading",
+        "full CI installed MCP and routing regression pass together"
+      ]
+    },
+    {
+      "id": "S6",
+      "title": "Interoperate harden and remove prototype shortcuts",
+      "primary_owners": [
+        "catalog-ci",
+        "contract-core",
+        "router-solforge"
+      ],
+      "supporting_owners": [
+        "interfaces",
+        "capability-policy",
+        "verification-trust"
+      ],
+      "tasks": [
+        "SC-097",
+        "SC-098",
+        "SC-103",
+        "SC-104",
+        "SC-105",
+        "SC-106",
+        "SC-107"
+      ],
+      "exit": [
+        "portable export/import and external metadata adapters work as declarations only",
+        "duplicate effect parsing is removed",
+        "AUTH_ORDER is gone from new-contract enforcement",
+        "manufactured harmless defaults are gone",
+        "post-hoc-only filtering is retired",
+        "hardened default is enabled only after migration and reviewed coverage",
+        "all program definition-of-done conditions pass"
+      ]
+    }
+  ]
+}
