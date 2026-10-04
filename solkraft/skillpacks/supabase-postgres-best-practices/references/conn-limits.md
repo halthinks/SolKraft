@@ -5,6 +5,8 @@ impactDescription: Prevent database crashes and memory exhaustion
 tags: connections, max-connections, limits, stability
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 ## Set Appropriate Connection Limits
 
 Too many connections exhaust memory and degrade performance. Set limits based on available resources.

@@ -5,6 +5,8 @@ impactDescription: 10-50x faster bulk inserts
 tags: batch, insert, bulk, performance, copy
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 ## Batch INSERT Statements for Bulk Data
 
 Individual INSERT statements have high overhead. Batch multiple rows in single statements or use COPY.

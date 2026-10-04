@@ -5,6 +5,8 @@ impactDescription: 5-20x query speedup for filtered queries
 tags: indexes, query-optimization, performance
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 ## [Rule Title]
 
 [1-2 sentence explanation of the problem and why it matters. Focus on performance impact.]

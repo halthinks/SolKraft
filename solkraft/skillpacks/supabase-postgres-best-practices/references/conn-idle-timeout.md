@@ -5,6 +5,8 @@ impactDescription: Reclaim 30-50% of connection slots from idle clients
 tags: connections, timeout, idle, resource-management
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 ## Configure Idle Connection Timeouts
 
 Idle connections waste resources. Configure timeouts to automatically reclaim them.
