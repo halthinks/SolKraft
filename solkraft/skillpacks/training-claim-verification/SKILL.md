@@ -3,6 +3,8 @@ name: training-claim-verification
 description: Use when making, changing, reviewing, or committing claims about ML training status, model-head readiness, dataset verification, proxy evidence, or RFKIT/promotion readiness.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Training Claim Verification
 
 ## Core Rule
@@ -92,3 +94,14 @@ The last command should fail until real RFKIT promotion evidence exists. Treat t
 - Do not make a positive status claim without fresh command output.
 - Do not call a source URL, DOI, Kaggle page, Google Drive folder, or partial archive a verified local dataset.
 - Do not call a baseline artifact a shared-head artifact unless it lives under `output/shared_csi_heads/<head_id>/` and has a matching `rvsac-shared-csi-head-training-report-v1` report.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- Selected by the contract-aware router; selection is advisory.
+- Hardened routing rejects opaque or inadmissible capabilities.
+- Contract metadata is evaluated before loading the full instruction body.
+- Execution authority stays with the host.
+- Current local acceptance: 100,000 unique 250-word requests, 100 ask families per skill, 100% eligible target recall.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

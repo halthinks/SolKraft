@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Testing Anti-Patterns
 
 **Load this reference when:** writing or changing tests, adding mocks, or tempted to add test-only methods to production code.

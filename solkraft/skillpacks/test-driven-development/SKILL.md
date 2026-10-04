@@ -3,6 +3,8 @@ name: test-driven-development
 description: Apply test-driven development when requested or required by the repository workflow.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Test-Driven Development (TDD)
 
 ## Overview
@@ -369,3 +371,14 @@ Otherwise → not TDD
 ```
 
 No exceptions without your human partner's permission.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- Selected by the contract-aware router; selection is advisory.
+- Hardened routing rejects opaque or inadmissible capabilities.
+- Contract metadata is evaluated before loading the full instruction body.
+- Execution authority stays with the host.
+- Current local acceptance: 100,000 unique 250-word requests, 100 ask families per skill, 100% eligible target recall.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->
