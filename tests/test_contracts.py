@@ -142,7 +142,7 @@ schema_version: "1.0"
 skill_id: sidecar-skill
 contract_revision: 1
 effects:
-  - deploy
+  - deployment.release
 authority:
   capabilities: []
   resources: []
@@ -154,8 +154,10 @@ verification:
     )
     contract = load_skill_contract(entrypoint, expected_skill_id="sidecar-skill")
     assert contract["status"] == "declared"
-    assert contract["side_effects"] == ["deploy"]
+    assert contract["side_effects"] == ["deployment.release"]
     assert contract["auth_scope"] == "external-effect"
+    assert contract["contract_digest"].startswith("sha256:")
+    assert contract["entrypoint_digest"].startswith("sha256:")
 
 
 def test_unsupported_sidecar_major_fails_closed(tmp_path):
