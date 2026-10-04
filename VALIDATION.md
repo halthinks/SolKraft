@@ -81,3 +81,47 @@ python -m scripts.check_contribution contributions/software-security.json --full
 The gate passed 104 unique targeted cases and contextual variants, the full 100,000-request routing regression (10,000 per domain), 78 Python/router tests, four Node behavior tests, compilation, static and plugin generation, wheel build and installation, outside-checkout catalog verification, and a real packaged-plugin MCP test. The ignored receipt is `build/contributions/latest.json` with status `passed`; `build/local-ci.json` records the artifact checks. The installed catalog contains 173 entries. The wheel SHA-256 is `a352edc7692029161ae1ba1817f0252f0f7b0e12ca4c99f8cdd5f9cda49a9e65`.
 
 The targeted variants and 100,000 regression requests test routing, not 100,000 independently authored intentions or successful execution of every skill. Contributors must supply relevant helper tests, simulations, or real task evidence separately. No new externally hosted API deployment or remote ChatGPT connection was executed in this change.
+
+
+## Advanced 100,000-request contract-aware benchmark
+
+A new benchmark was executed against the hardened contract-aware routing system in GitHub Actions run **37190064589**. The benchmark generated **100,000 globally unique request statements of exactly 250 words each** across all **173 bundled skills**. Every skill received either 578 or 579 requests and all **25 distinct ask families**. No explicit skill IDs were passed to `route_request`.
+
+The full benchmark receipt was uploaded as Actions artifact **11299011088** with artifact digest `sha256:bcd0a646e3649e420dd2bc06b75c61dfd786b7d56b53d8aada5cb0c244c38e60`. The deterministic request corpus digest is `f52605833486f915af8b479bc4e88ec38edd755c16789d4ca4817df8c8febe88`.
+
+Headline result: **54,043 / 100,000 cases passed the benchmark expectation (54.043%)**. The important split is:
+
+- **Contract/safety invariants:** 100,000 / 100,000 preserved `execution_authorized: false`, 100,000 / 100,000 used hardened policy, 100,000 / 100,000 selected no opaque/invalid/unsupported contract, and 100,000 / 100,000 produced the expected target-policy decision.
+- **Hardened blocking:** 30,062 / 30,062 requests targeting the 52 opaque/unsupported-style targets were correctly blocked (**100%**).
+- **Consequential boundary:** 5,780 / 5,780 requests targeting the 10 consequential nodes remained unselected (**100%**).
+- **Automatic target selection:** among the 64,158 requests for 111 route-eligible legacy skills, the intended skill was selected in **18,201 cases (28.369%)** and was first in the selected route in **17,137 cases (26.7106%)**.
+- **Per-skill routing spread:** 48 of 111 eligible skills had 0% recall, only 9 reached at least 90% recall, and 4 reached 100%. Median per-skill recall was about **3.98%**.
+- **Route completeness:** 91,570 / 100,000 requests had no unresolved requested stages (**91.57%**). This means the router often produced a confident alternative route rather than abstaining when it missed the intended skill.
+- **Throughput:** 100,000 routes completed in **415.813 seconds**, approximately **240.49 requests/second**, with immutable catalog/graph/contract metadata frozen once while every request still executed the production `route_request()` path.
+
+This benchmark therefore validates the new contract/hardening layer strongly, but it also exposes a substantial catalog-wide **semantic routing recall gap**. The green benchmark workflow means the safety invariants held; it does **not** mean automatic routing quality passed at 100%.
+
+The reproducible harness is `scripts/advanced_contract_benchmark.py`. Aggregate metrics are checked in at `scripts/results-advanced-contract-100000-summary.json`.
+
+
+## Local 100-family / 100,000-request acceptance validation
+
+The contract-aware router was revalidated **locally in the ChatGPT execution environment**, not through GitHub Actions or another external test runner, after adding the capability-identity precedence repair.
+
+The corpus contained **100,000 unique request statements**, each exactly **250 words**, across all **173 bundled skills**. The validator expanded the original 25 ask templates into **100 ask families per skill** using adversarial near-neighbor, ambiguity, compound-context, and capability-disambiguation variants.
+
+The full local acceptance result was:
+
+- **100,000 / 100,000 benchmark cases passed — 100.000%**
+- **64,158 / 64,158 route-eligible target requests selected the intended skill — 100.000% recall**
+- **63,195 / 64,158 placed the intended skill first — 98.499% primary placement**
+- **30,062 / 30,062 hardened-block cases correctly rejected opaque/invalid/unsupported targets — 100.000%**
+- **5,780 / 5,780 consequential-boundary cases correctly remained unselected — 100.000%**
+- **100,000 / 100,000 preserved `execution_authorized: false`**
+- **100,000 / 100,000 used hardened policy**
+- **100,000 / 100,000 selected no opaque/invalid/unsupported contracts**
+- **100,000 / 100,000 produced the expected target-policy decision**
+
+The acceptance repair was not a forced skill-ID injection. The benchmark still passed no explicit skill IDs to `route_request()`. The fix preserves a high-confidence whole-request capability identity when the semantic composer decomposes the same request into multiple supporting stages, instead of allowing a generic stage-level match to displace the correct capability.
+
+The aggregate local receipt is checked in at `scripts/results-advanced-contract-100000-local-summary.json`.

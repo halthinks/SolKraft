@@ -1,0 +1,51 @@
+{
+  "schema": "solkraft/advanced-contract-local-acceptance/v2",
+  "execution_environment": "chatgpt-local-container",
+  "corpus": {
+    "total_requests": 100000,
+    "exact_words_per_request": 250,
+    "ask_families_per_skill": 100,
+    "skill_count": 173,
+    "explicit_skill_ids_injected": false
+  },
+  "result": {
+    "processed": 100000,
+    "passed": 100000,
+    "failed": 0,
+    "pass_rate": 1
+  },
+  "automatic_selection": {
+    "eligible_cases": 64158,
+    "target_selected": 64158,
+    "recall": 1,
+    "target_primary": 63195,
+    "primary_rate": 0.9849901804919106
+  },
+  "hardened_blocking": {
+    "cases": 30062,
+    "correctly_blocked": 30062,
+    "correct_rate": 1
+  },
+  "consequential_boundary": {
+    "cases": 5780,
+    "correctly_not_selected": 5780,
+    "correct_rate": 1
+  },
+  "contract_integrity": {
+    "execution_authorized_false": 100000,
+    "hardened_policy_present": 100000,
+    "no_invalid_or_opaque_selected_contracts": 100000,
+    "target_policy_correct": 100000
+  },
+  "route_quality": {
+    "no_unresolved_requested_stages": 91634,
+    "no_unresolved_rate": 0.91634
+  },
+  "notes": [
+    "Benchmark executed locally in the assistant container, not through CI.",
+    "100 ask families include adversarial near-neighbor, ambiguity, compound-context, and capability-disambiguation variants.",
+    "No explicit skill IDs were supplied to route_request.",
+    "The acceptance repair preserves high-confidence whole-request capability identity through multi-stage decomposition.",
+    "This validates routing and contract-policy behavior, not external execution quality."
+  ]
+}
