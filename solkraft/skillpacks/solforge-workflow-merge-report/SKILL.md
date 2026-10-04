@@ -3,6 +3,8 @@ name: solforge-workflow-merge-report
 description: Inspect candidate and target repositories at real revisions, prove capabilities from implementation evidence, and recommend adoption across architecture, runtime, dependencies, evidence quality, licensing, and risk without mutating code.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Report on repository adoption
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
@@ -14,3 +16,14 @@ Prove each claimed capability from implementation evidence, not from its documen
 Keep the comparison at equal footing: same revision discipline and inspection depth on both sides. Treat popularity metrics as context, never as capability evidence. Do not execute candidate code against the target environment as a "proof" — running code is an effect this report does not authorize. Mark what could not be inspected (private dependencies, generated code without sources, undocumented behavior) as an unknown rather than a pass.
 
 Report the recommendation with its evidence chain: capability findings with file-level pointers, integration cost and risk, the license determination, and the explicit limits of the inspection. A well-supported "do not adopt" is a successful report. Read [sol-merge-report](../sol-merge-report/SKILL.md) when the comparison needs more method than this node carries; a completed equivalent assessment need not be repeated.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- Selected by the contract-aware router; selection is advisory.
+- Hardened routing rejects opaque or inadmissible capabilities.
+- Contract metadata is evaluated before loading the full instruction body.
+- Execution authority stays with the host.
+- Current local acceptance: 100,000 unique 250-word requests, 100 ask families per skill, 100% eligible target recall.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

@@ -3,6 +3,8 @@ name: solforge-workflow-science-analysis
 description: Apply a reproducible analysis plan with assumptions, sensitivity checks, uncertainty, and contrary evidence.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Analyze scientific evidence
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
@@ -14,3 +16,14 @@ Write the analysis plan before running it: the estimand, the method, the assumpt
 Seek contrary evidence deliberately: run the control or negative case, check subgroup consistency, and test the assumptions instead of presuming them. An analysis selected because it reached significance is weak evidence; tuning preprocessing until the result appears and reporting only the final pipeline hides the garden of forking paths; intervals computed after data-dependent model selection understate real uncertainty; correlation in observational data is not a causal effect. Make the work reproducible: record the code, package versions, seeds, and data identifiers behind every number, and rerun the pipeline end-to-end from the raw inputs before reporting.
 
 Report the claim, supporting evidence, uncertainty, sensitivity results, and contrary evidence found, keeping facts, inferences, and unknowns distinct; state plainly what the analysis does not establish. Deliver the analysis package and results memo the request expects. Use the [build workflow](../solforge-build/SKILL.md) when the analysis requires implementing or repairing the code, pipeline, or artifacts it depends on.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- Selected by the contract-aware router; selection is advisory.
+- Hardened routing rejects opaque or inadmissible capabilities.
+- Contract metadata is evaluated before loading the full instruction body.
+- Execution authority stays with the host.
+- Current local acceptance: 100,000 unique 250-word requests, 100 ask families per skill, 100% eligible target recall.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

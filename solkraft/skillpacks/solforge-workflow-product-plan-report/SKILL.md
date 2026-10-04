@@ -3,6 +3,8 @@ name: solforge-workflow-product-plan-report
 description: "Router-selected SolForge workflow node: study supplied sources and develop a source-bound product research, MVP, architecture, and design-plan report."
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Develop a source-bound product plan report
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
@@ -14,3 +16,14 @@ Structure the report around the decisions it must support: research findings, th
 Keep facts, inferences, and recommendations visibly distinct throughout. Maintain a claim ledger in working notes: every material claim in the report traces to an inspected source, or is labeled as inference or an open question. A report that cites sources never opened is fabrication, not research; a plausible-sounding market or technical assertion without a source is weak evidence; an architecture section contradicting a studied repository signals the sources were skimmed. Do not present a generated outline or a restatement of the request as a studied plan.
 
 Deliver the report as the requested artifact, then report source coverage (what was studied, what was not), the decisions made and their basis, and unresolved questions or limits. Read [product plan report](../solforge-product-plan-report/SKILL.md) for the full staged procedure and its capability detail when the requested scope needs more than the core method above.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- Selected by the contract-aware router; selection is advisory.
+- Hardened routing rejects opaque or inadmissible capabilities.
+- Contract metadata is evaluated before loading the full instruction body.
+- Execution authority stays with the host.
+- Current local acceptance: 100,000 unique 250-word requests, 100 ask families per skill, 100% eligible target recall.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

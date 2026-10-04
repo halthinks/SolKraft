@@ -3,6 +3,8 @@ name: solforge-workflow-science-experiment
 description: Specify methods, controls, measurements, power assumptions, risks, and verification before execution.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Design a scientific experiment
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
@@ -14,3 +16,14 @@ Choose the design that isolates the claimed effect: comparison structure (parall
 Assess risks to validity and to the work itself: confounds the design cannot rule out, instrument drift, selection effects, and safety or ethics constraints on execution. Distinguish the confirmatory analysis from exploratory follow-up; unplanned subgroup claims and data-dependent stopping without correction are not confirmation. Where feasible, validate the protocol with a dry run or pilot on the measurement path only, and record any deviations from the written protocol rather than silently revising it.
 
 Return the experimental protocol and methods plan with power assumptions, risks, and verification steps, noting unresolved limits. Use [hypothesis derivation](../solforge-workflow-science-hypothesis/SKILL.md) when the prediction or its falsifiers are not yet established.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- Selected by the contract-aware router; selection is advisory.
+- Hardened routing rejects opaque or inadmissible capabilities.
+- Contract metadata is evaluated before loading the full instruction body.
+- Execution authority stays with the host.
+- Current local acceptance: 100,000 unique 250-word requests, 100 ask families per skill, 100% eligible target recall.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->
