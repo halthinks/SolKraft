@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "skill_id": "solforge-workflow-software-security",
-  "contract_revision": 1,
+  "contract_revision": 2,
   "inputs": [
     {
       "name": "repository-and-revision",
@@ -46,7 +46,9 @@
   ],
   "effects": [],
   "authority": {
-    "capabilities": [],
+    "capabilities": [
+      "repo.read"
+    ],
     "resources": [],
     "legacy_scope": "none"
   },
@@ -58,11 +60,18 @@
   "verification": {
     "mode": "declarative",
     "description": "The requested security_audit, remediation_plan is supported by inspected sources or observed behavior; unresolved limits are stated.",
-    "checks": []
+    "checks": [
+      {
+        "id": "no-unexpected-effects",
+        "type": "observed_effects_subset"
+      }
+    ]
   },
   "provenance": {
-    "migration": "legacy-graph",
-    "inferred": true
+    "author": "SolKraft contributors",
+    "source": "https://github.com/halthinks/SolKraft",
+    "license": "MIT",
+    "authored_contract": true
   },
   "extensions": {
     "legacy_graph": {
@@ -70,5 +79,36 @@
       "selection": "automatic or explicit",
       "path": "../solforge-workflow-software-security/SKILL.md"
     }
+  },
+  "fixtures": {
+    "selection": [
+      {
+        "id": "select-security-audit",
+        "objective": "Audit software security trust boundaries and unsafe input handling",
+        "expected_selected": [
+          "solforge-workflow-software-security"
+        ]
+      },
+      {
+        "id": "reject-deferred-security-audit",
+        "objective": "Audit software security tomorrow",
+        "expected_selected": []
+      }
+    ],
+    "policy": [
+      {
+        "id": "deny-without-repo-read",
+        "objective": "Audit software security trust boundaries and unsafe input handling",
+        "policy": {
+          "contract_mode": "hardened",
+          "grant": {
+            "capabilities": [],
+            "resources": []
+          }
+        },
+        "expected_status": "denied",
+        "reason_contains": "capabilities not granted: repo.read"
+      }
+    ]
   }
 }

@@ -123,6 +123,7 @@ def load_skill_contract(
     result["validation_errors"] = []
     result["source"] = "sidecar"
     result["verification"] = verification
+    result["fixtures"] = dict(data.get("fixtures") or {})
     result["risk"] = dict(data.get("risk") or {})
     result["provenance"] = dict(data.get("provenance") or {})
     result["extensions"] = dict(data.get("extensions") or {})

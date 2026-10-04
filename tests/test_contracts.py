@@ -4,6 +4,7 @@ import sys
 from solkraft.__main__ import main
 from solkraft.catalog import SkillCatalog
 from solkraft.constraint_parser import excluded_effects
+from solkraft.contract_fixtures import run_contract_fixtures
 from solkraft.contract_loader import load_skill_contract
 from solkraft.contract_policy import evaluate_contract, normalize_policy
 from solkraft.contract_schema import validate_v1_document
@@ -181,3 +182,58 @@ def test_cli_route_defaults_to_hardened_policy(monkeypatch, capsys):
     result = json.loads(capsys.readouterr().out)
     assert result["route_policy"]["contract_mode"] == "hardened"
     assert result["execution_authorized"] is False
+
+
+def test_contract_v1_validates_executable_fixture_shape():
+    errors = validate_v1_document({
+        "schema_version": "1.0",
+        "skill_id": "demo",
+        "contract_revision": 1,
+        "fixtures": {
+            "selection": [
+                {
+                    "id": "select-demo",
+                    "objective": "Use the demo capability.",
+                    "expected_selected": ["demo"],
+                }
+            ],
+            "policy": [
+                {
+                    "id": "deny-demo",
+                    "policy": {"contract_mode": "hardened"},
+                    "expected_status": "denied",
+                }
+            ],
+        },
+    })
+    assert errors == []
+
+
+def test_contract_v1_rejects_malformed_fixture():
+    errors = validate_v1_document({
+        "schema_version": "1.0",
+        "skill_id": "demo",
+        "contract_revision": 1,
+        "fixtures": {
+            "selection": [{"id": "bad", "objective": "", "expected_selected": "demo"}],
+        },
+    })
+    assert "fixtures.selection[0].objective must be a non-empty string" in errors
+    assert "fixtures.selection[0].expected_selected must be a list of skill IDs" in errors
+
+
+def test_bundled_declared_contract_fixtures_execute():
+    catalog = SkillCatalog([__import__("solkraft.routing", fromlist=["BUNDLE_ROOT"]).BUNDLE_ROOT])
+    record = next(
+        item for item in catalog.records()
+        if item.id == "solforge-workflow-software-security"
+    )
+    contract = load_skill_contract(
+        record.entrypoint,
+        legacy_node=catalog_graph(catalog)["nodes"].get(record.id),
+        expected_skill_id=record.name,
+    )
+    assert contract["status"] == "declared"
+    receipt = run_contract_fixtures(catalog, record.id, contract)
+    assert receipt["total"] == 3
+    assert receipt["failed"] == 0

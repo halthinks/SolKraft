@@ -9,6 +9,7 @@ import subprocess
 import sys
 
 from solkraft.catalog import SkillCatalog
+from solkraft.contract_fixtures import run_contract_fixtures
 from solkraft.contract_loader import load_skill_contract
 from solkraft.contract_verify import SUPPORTED_CHECKS
 from solkraft.trust import resolve_trust
@@ -84,6 +85,21 @@ def validate(data, graph, catalog):
             for check in verification.get("checks") or []:
                 if check.get("type") not in SUPPORTED_CHECKS:
                     errors.append("Unsupported declarative verification check type: " + str(check.get("type")))
+            fixtures = contract.get("fixtures") or {}
+            selection = fixtures.get("selection") or []
+            policy_fixtures = fixtures.get("policy") or []
+            if not any(skill in fixture.get("expected_selected", []) for fixture in selection):
+                errors.append("Declared Contract v1 sidecars must include a positive selection fixture.")
+            if not any(skill not in fixture.get("expected_selected", []) for fixture in selection):
+                errors.append("Declared Contract v1 sidecars must include a negative selection fixture.")
+            if not policy_fixtures:
+                errors.append("Declared Contract v1 sidecars must include a policy boundary fixture.")
+            if selection and policy_fixtures:
+                fixture_receipt = run_contract_fixtures(catalog, skill, contract)
+                if fixture_receipt["failed"]:
+                    errors.append(
+                        f"Executable contract fixtures failed: {fixture_receipt['failed']} of {fixture_receipt['total']}."
+                    )
     return errors
 
 
