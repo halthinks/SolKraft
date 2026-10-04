@@ -22,6 +22,7 @@ TOP_LEVEL_FIELDS = {
     "authority",
     "risk",
     "verification",
+    "fixtures",
     "provenance",
     "extensions",
 }
@@ -175,6 +176,89 @@ def validate_v1_document(data: object, *, expected_skill_id: str | None = None) 
                     seen_checks.add(check_id)
                 if not isinstance(check_type, str) or not check_type:
                     errors.append(f"verification.checks[{index}].type must be a non-empty string")
+
+    fixtures = data.get("fixtures", {})
+    if not isinstance(fixtures, dict):
+        errors.append("fixtures must be a mapping")
+    else:
+        unknown_fixtures = sorted(set(fixtures) - {"selection", "policy"})
+        if unknown_fixtures:
+            errors.append("fixtures has unknown fields: " + ", ".join(unknown_fixtures))
+
+        selection = fixtures.get("selection", [])
+        if not isinstance(selection, list):
+            errors.append("fixtures.selection must be a list")
+        else:
+            seen_fixture_ids = set()
+            for index, fixture in enumerate(selection):
+                prefix = f"fixtures.selection[{index}]"
+                if not isinstance(fixture, dict):
+                    errors.append(f"{prefix} must be an object")
+                    continue
+                unknown = sorted(set(fixture) - {
+                    "id", "objective", "expected_selected", "context", "policy", "max_skills"
+                })
+                if unknown:
+                    errors.append(f"{prefix} has unknown fields: " + ", ".join(unknown))
+                fixture_id = fixture.get("id")
+                if not isinstance(fixture_id, str) or not fixture_id:
+                    errors.append(f"{prefix}.id must be a non-empty string")
+                elif fixture_id in seen_fixture_ids:
+                    errors.append(f"duplicate fixture id {fixture_id}")
+                else:
+                    seen_fixture_ids.add(fixture_id)
+                if not isinstance(fixture.get("objective"), str) or not fixture.get("objective", "").strip():
+                    errors.append(f"{prefix}.objective must be a non-empty string")
+                expected = fixture.get("expected_selected")
+                if not isinstance(expected, list) or not all(isinstance(item, str) and item for item in expected):
+                    errors.append(f"{prefix}.expected_selected must be a list of skill IDs")
+                if "context" in fixture and not isinstance(fixture["context"], dict):
+                    errors.append(f"{prefix}.context must be a mapping")
+                if "policy" in fixture and not isinstance(fixture["policy"], dict):
+                    errors.append(f"{prefix}.policy must be a mapping")
+                if "max_skills" in fixture and (
+                    not isinstance(fixture["max_skills"], int)
+                    or isinstance(fixture["max_skills"], bool)
+                    or not 1 <= fixture["max_skills"] <= 50
+                ):
+                    errors.append(f"{prefix}.max_skills must be an integer from 1 to 50")
+
+        policy_fixtures = fixtures.get("policy", [])
+        if not isinstance(policy_fixtures, list):
+            errors.append("fixtures.policy must be a list")
+        else:
+            seen_policy_ids = set()
+            for index, fixture in enumerate(policy_fixtures):
+                prefix = f"fixtures.policy[{index}]"
+                if not isinstance(fixture, dict):
+                    errors.append(f"{prefix} must be an object")
+                    continue
+                unknown = sorted(set(fixture) - {
+                    "id", "objective", "policy", "expected_status", "reason_contains"
+                })
+                if unknown:
+                    errors.append(f"{prefix} has unknown fields: " + ", ".join(unknown))
+                fixture_id = fixture.get("id")
+                if not isinstance(fixture_id, str) or not fixture_id:
+                    errors.append(f"{prefix}.id must be a non-empty string")
+                elif fixture_id in seen_policy_ids:
+                    errors.append(f"duplicate fixture id {fixture_id}")
+                else:
+                    seen_policy_ids.add(fixture_id)
+                if "objective" in fixture and (
+                    not isinstance(fixture["objective"], str) or not fixture["objective"].strip()
+                ):
+                    errors.append(f"{prefix}.objective must be a non-empty string")
+                if not isinstance(fixture.get("policy"), dict):
+                    errors.append(f"{prefix}.policy must be a mapping")
+                if fixture.get("expected_status") not in {
+                    "allowed", "denied", "opaque", "legacy-warning"
+                }:
+                    errors.append(f"{prefix}.expected_status is invalid")
+                if "reason_contains" in fixture and (
+                    not isinstance(fixture["reason_contains"], str) or not fixture["reason_contains"]
+                ):
+                    errors.append(f"{prefix}.reason_contains must be a non-empty string")
 
     for field in ("provenance", "extensions"):
         if not isinstance(data.get(field, {}), dict):
