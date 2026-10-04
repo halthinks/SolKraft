@@ -1,0 +1,88 @@
+{
+  "schema": "solkraft/advanced-contract-benchmark-summary/v1",
+  "source_run": {
+    "workflow_run_id": 37190064589,
+    "artifact_id": 11299011088,
+    "artifact_digest": "sha256:bcd0a646e3649e420dd2bc06b75c61dfd786b7d56b53d8aada5cb0c244c38e60",
+    "head_sha": "d65426472aa88e343f27162f4522b2e766edb8d9"
+  },
+  "corpus": {
+    "total_requests": 100000,
+    "words_per_request": 250,
+    "exact_250_word_requests": 100000,
+    "globally_unique_requests": 100000,
+    "request_corpus_sha256": "f52605833486f915af8b479bc4e88ec38edd755c16789d4ca4817df8c8febe88",
+    "explicit_skill_ids_injected": false,
+    "skill_count": 173,
+    "requests_per_skill_min": 578,
+    "requests_per_skill_max": 579,
+    "ask_families_required_per_skill": 25,
+    "ask_families_min_observed": 25
+  },
+  "overall": {
+    "passed": 54043,
+    "failed": 45957,
+    "pass_rate": 0.54043
+  },
+  "automatic_selection": {
+    "eligible_skills": 111,
+    "eligible_cases": 64158,
+    "target_selected": 18201,
+    "recall": 0.28369,
+    "target_primary": 17137,
+    "primary_rate": 0.267106,
+    "median_per_skill_recall": 0.039792387543252594,
+    "zero_recall_skills": 48,
+    "skills_at_or_above_90_percent_recall": 9,
+    "skills_at_100_percent_recall": 4
+  },
+  "hardened_blocking": {
+    "opaque_invalid_unsupported_skills": 52,
+    "cases": 30062,
+    "correctly_blocked": 30062,
+    "correct_block_rate": 1
+  },
+  "consequential_boundary": {
+    "skills": 10,
+    "cases": 5780,
+    "correctly_not_selected": 5780,
+    "correct_rate": 1
+  },
+  "contract_integrity": {
+    "execution_authorized_false": 100000,
+    "hardened_policy_present": 100000,
+    "no_invalid_or_opaque_selected_contracts": 100000,
+    "target_policy_correct": 100000
+  },
+  "route_quality": {
+    "no_unresolved_requested_stages": 91570,
+    "no_unresolved_rate": 0.9157
+  },
+  "performance": {
+    "immutable_metadata_cached": true,
+    "elapsed_seconds": 415.813,
+    "requests_per_second": 240.49
+  },
+  "catalog_state": {
+    "contract_status_counts": {
+      "legacy": 121,
+      "opaque": 52
+    },
+    "trust_state_counts": {
+      "legacy-inferred": 121,
+      "opaque": 52
+    },
+    "expectation_counts": {
+      "select-target": 111,
+      "hardened-block": 52,
+      "consequential-not-selected": 10
+    }
+  },
+  "interpretation": [
+    "Safety and hardening behavior passed 100 percent of cases.",
+    "Automatic target selection across eligible skills was the limiting factor at 28.369 percent recall.",
+    "The benchmark workflow succeeds when core contract/safety invariants hold; its green status does not mean routing-quality pass rate was 100 percent.",
+    "The corpus is deterministic and generated, not a statistically representative sample of human prompts.",
+    "This benchmark evaluates routing and contract-policy behavior, not external execution quality."
+  ]
+}
