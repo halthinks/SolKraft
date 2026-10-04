@@ -104,9 +104,11 @@ def resolve_required_inputs(
     selected: list[str],
     *,
     available_inputs=None,
+    allowed_skills=None,
 ) -> dict:
     """Resolve required inputs and propose unique typed producer additions."""
     available_inputs = set(available_inputs or ())
+    allowed_skills = set(allowed_skills) if allowed_skills is not None else None
     selected_set = set(selected)
     additions = []
     input_status = {}
@@ -138,10 +140,12 @@ def resolve_required_inputs(
             producers = [
                 item for item in candidate_producers(graph, consumer, binding)
                 if item["skill"] not in selected_set
+                and (allowed_skills is None or item["skill"] in allowed_skills)
             ]
             selected_producers = [
                 item for item in candidate_producers(graph, consumer, binding)
                 if item["skill"] in selected_set
+                and (allowed_skills is None or item["skill"] in allowed_skills)
             ]
             if selected_producers:
                 producer = selected_producers[0]
