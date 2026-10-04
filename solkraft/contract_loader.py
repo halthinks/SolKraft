@@ -105,7 +105,10 @@ def load_skill_contract(
     contract_digest = _digest(canonical.encode("utf-8"))
 
     normalized = dict(data)
-    normalized["contract_status"] = "declared"
+    provenance = data.get("provenance") or {}
+    normalized["contract_status"] = (
+        "legacy" if provenance.get("inferred") is True else "declared"
+    )
     normalized["side_effects"] = normalize_effects(data.get("effects") or [])
     authority = data.get("authority") or {}
     normalized["auth_scope"] = authority.get("legacy_scope")

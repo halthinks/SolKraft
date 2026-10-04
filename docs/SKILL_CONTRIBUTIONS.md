@@ -39,6 +39,39 @@ Start from [the executable security example](../contributions/software-security.
 
 This shape is a starting point, not a completed contribution. Replace every placeholder and add realistic neighboring and compound cases. Use exact expected routes, including existing skills when they belong in the answer.
 
+## Contract authoring CLI
+
+The contract layer can be authored and inspected without loading or executing skill bodies:
+
+```text
+solkraft contract init path/to/skill
+solkraft contract validate path/to/skill/contract.yaml
+solkraft contract lint path/to/skill/contract.yaml
+solkraft contract show your-skill-id
+solkraft contract schema
+solkraft contract migrate --report build/contracts-migration.json
+solkraft contract export your-skill-id
+solkraft contract import path/to/portable-contract.json
+```
+
+Routing policy has matching CLI flags:
+
+```text
+solkraft route "Inspect the repository" \
+  --strict-contracts \
+  --deny-effect deployment.* \
+  --grant-capability repo.read \
+  --grant-resource repo:example/project
+```
+
+These flags constrain selection only. The CLI still returns `execution_authorized: false`; grant snapshots describe host authority available for comparison and are never executable credentials.
+
+## External metadata adapters
+
+SolKraft can translate MCP tool annotations and OpenAPI operation metadata into compact contract declarations through `solkraft.adapters`. These adapters are conservative: read-only MCP tools and safe HTTP methods can declare an empty effect set, while uncertain mutating tools remain `opaque`. Imported metadata is always `local-unreviewed`; it never creates a host grant, trusted status, or execution authorization.
+
+Portable contract export/import follows the same rule. Export refuses an opaque contract whose effects are unknown rather than converting unknown into `effects: []`.
+
 ## Run the checks locally
 
 Install Python 3.11+, Git and Node.js. Activate your Python environment, then:
@@ -75,6 +108,23 @@ The bundle includes the contribution manifest, candidate `SKILL.md`, `contract.y
 You can run the same gate in GitHub **before opening a PR**. Push the candidate branch, open **Actions → Skill Contribution Preflight**, choose that branch, enter the manifest path such as `contributions/your-skill.json`, and run the workflow. Download the `solkraft-ci-<sha>` artifact and attach or cite its receipts when you later open the PR.
 
 The reusable implementation lives in `.github/workflows/reusable-ci.yml`. Normal repository pull requests call the same workflow through `.github/workflows/tests.yml`; the manual pre-PR wrapper is `.github/workflows/contribution-preflight.yml`. There is one validation path, not a weaker preflight and a stronger PR gate.
+
+## Verification and trust
+
+A Contract v1 sidecar must describe how its result can be checked using declarative evidence. New sidecars should include at least one supported check such as `artifact_exists`, `field_present`, `field_equals`, `check_equals`, or `observed_effects_subset`. Core SolKraft does not run contract-provided commands.
+
+Skill-authored provenance describes origin only. It cannot make a skill reviewed or trusted. Trust is resolved from `solkraft/trust-bindings.json`, whose entries bind an external trust state to the exact contract and `SKILL.md` SHA-256 digests. If either file changes, the binding no longer matches and the skill becomes unreviewed again.
+
+Legacy graph metadata can be converted into typed sidecars with:
+
+```text
+python -m scripts.migrate_contracts --report build/contracts-migration.json
+python -m scripts.migrate_contracts --write --report build/contracts-migration.json
+```
+
+The migration tool never overwrites an existing sidecar and only infers an empty effect set when the legacy graph explicitly says `effect: false`. Generated sidecars carry `provenance.inferred: true` and remain `legacy-inferred`; generation is not review.
+
+See [Verification and trust](VERIFICATION_AND_TRUST.md) for the evidence envelope, result states, trust binding model, audit receipts, and sandbox boundary.
 
 ## Submit all affected layers together
 

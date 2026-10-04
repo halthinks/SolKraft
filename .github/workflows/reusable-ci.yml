@@ -61,8 +61,14 @@ jobs:
           retention-days: 14
           path: |
             build/local-ci.json
+            build/contracts-migration.json
+            build/contract-index.json
+            build/hardening.json
             build/contributions/latest.json
             build/preflight/**
             scripts/results-routing-100000.json
             dist/*.whl
             docs/downloads/solkraft-plugin.zip
+            docs/assets/contracts.json
+            docs/assets/contract-index.json
+            docs/assets/contract-schema.json

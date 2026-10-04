@@ -1,0 +1,62 @@
+{
+  "schema_version": "1.0",
+  "skill_id": "solforge-product-plan-report",
+  "contract_revision": 1,
+  "inputs": [
+    {
+      "name": "user-objective",
+      "required": true,
+      "source": "user",
+      "description": "user objective",
+      "schema": {}
+    },
+    {
+      "name": "supplied-evidence",
+      "required": true,
+      "source": "user",
+      "description": "supplied evidence",
+      "schema": {}
+    },
+    {
+      "name": "applicable-scope-and-acceptance-criteria",
+      "required": true,
+      "source": "user",
+      "description": "applicable scope and acceptance criteria",
+      "schema": {}
+    }
+  ],
+  "outputs": [
+    {
+      "name": "verified-requested-deliverable",
+      "description": "verified requested deliverable",
+      "schema": {}
+    }
+  ],
+  "effects": [],
+  "authority": {
+    "capabilities": [],
+    "resources": [],
+    "legacy_scope": "none"
+  },
+  "risk": {
+    "external": false,
+    "destructive": false,
+    "open_world": false
+  },
+  "verification": {
+    "mode": "declarative",
+    "description": "The requested verified requested deliverable is supported by inspected sources or observed behavior; unresolved limits are stated.",
+    "checks": []
+  },
+  "provenance": {
+    "migration": "legacy-graph",
+    "inferred": true
+  },
+  "extensions": {
+    "legacy_graph": {
+      "domain": "general",
+      "selection": "automatic or explicit",
+      "path": "../solforge-product-plan-report/SKILL.md"
+    }
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0",
+  "skill_id": "solforge-workflow-implementation",
+  "contract_revision": 1,
+  "inputs": [
+    {
+      "name": "user-objective",
+      "required": true,
+      "source": "user",
+      "description": "user objective",
+      "schema": {}
+    },
+    {
+      "name": "supplied-evidence",
+      "required": true,
+      "source": "user",
+      "description": "supplied evidence",
+      "schema": {}
+    },
+    {
+      "name": "applicable-scope-and-acceptance-criteria",
+      "required": true,
+      "source": "user",
+      "description": "applicable scope and acceptance criteria",
+      "schema": {}
+    }
+  ],
+  "outputs": [
+    {
+      "name": "implementation-plan",
+      "description": "implementation_plan",
+      "schema": {}
+    },
+    {
+      "name": "reviewable-patch",
+      "description": "reviewable_patch",
+      "schema": {}
+    },
+    {
+      "name": "verified-change",
+      "description": "verified_change",
+      "schema": {}
+    },
+    {
+      "name": "operational-artifact",
+      "description": "operational_artifact",
+      "schema": {}
+    }
+  ],
+  "effects": [],
+  "authority": {
+    "capabilities": [],
+    "resources": [],
+    "legacy_scope": "none"
+  },
+  "risk": {
+    "external": false,
+    "destructive": false,
+    "open_world": false
+  },
+  "verification": {
+    "mode": "declarative",
+    "description": "The requested implementation_plan, reviewable_patch, verified_change, operational_artifact is supported by inspected sources or observed behavior; unresolved limits are stated.",
+    "checks": []
+  },
+  "provenance": {
+    "migration": "legacy-graph",
+    "inferred": true
+  },
+  "extensions": {
+    "legacy_graph": {
+      "domain": "general",
+      "selection": "automatic or explicit",
+      "path": "../solforge-workflow-implementation/SKILL.md"
+    }
+  }
+}
