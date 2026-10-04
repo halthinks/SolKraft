@@ -28,6 +28,7 @@
     .rating span{display:block;margin-top:6px;color:#8fa397;font-size:10px;line-height:1.5}
     .thanks{margin-top:18px;padding:18px;border-left:2px solid var(--mint);background:#101a15;color:#cfdec9}
     .profile-note{padding:16px 18px;border:1px solid #28373f;border-radius:9px;background:#0d151b}
+    .profile-note blockquote{margin:14px 0;padding:12px 16px;border-left:2px solid var(--mint);background:#101a15;color:#d8e5d4;font:12px/1.8 var(--mono)}
     .contributor-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
     .recognition-note{margin-top:28px;padding:20px;border:1px solid var(--line);border-radius:10px;background:#0d141b;color:#8e9ba7;font-size:11px;line-height:1.75}
     .recognition-note strong{color:#cbd6dc}
@@ -65,7 +66,13 @@
           <h2>Cozy</h2>
           <div class="contributor-handle">@Cozy2054934 · Berlin, Germany</div>
 
-          <p>Cozy contributed substantial idea work that helped push SolKraft toward executable skill contracts: contracts that declare inputs, side effects, required authority, and pass/fail fixtures that CI can actually run. That contribution came through community discussion rather than a GitHub pull request, and we want to recognize the impact—not just the delivery mechanism.</p>
+          <p><strong>High-level impact:</strong> Cozy helped move SolKraft from descriptive skill metadata toward executable capability contracts—contracts the router can reason about and CI can continuously test. That contribution influenced Contract v1 fixture execution, contribution gates, safer capability selection, and visible regression failures. It came through community discussion rather than a GitHub pull request, and we recognize the impact rather than only the delivery mechanism.</p>
+
+          <div class="profile-note">
+            <p><strong>Cozy’s contribution, in his own words:</strong></p>
+            <blockquote>Nice—keep the skill contract executable: declare inputs, side effects, auth scope, and a few pass/fail fixtures, then run it in CI. That makes capability selection safer and regressions visible.</blockquote>
+            <blockquote>The skill layer is most useful when each skill declares inputs, side effects, auth scope, and a test contract. Then an agent can select capabilities without treating every tool as an opaque superpower</blockquote>
+          </div>
 
           <div class="profile-note">
             <p><strong>What Cozy shares on X:</strong> AI tools that actually save people time, practical daily tips, free tools, and no-hype tech news. If you care about useful AI tooling without the noise, his profile is worth following.</p>

@@ -2,6 +2,31 @@
 
 # SolKraft
 
+<div align="center">
+
+### ✳️ The open skill OS for agents
+
+**Route normal-language requests to the right reusable capabilities — with contract-aware selection, typed composition, and CI-visible verification.**
+
+[![CI](https://github.com/halthinks/SolKraft/actions/workflows/tests.yml/badge.svg)](https://github.com/halthinks/SolKraft/actions/workflows/tests.yml)
+[![Advanced Contract Benchmark](https://github.com/halthinks/SolKraft/actions/workflows/advanced-contract-benchmark.yml/badge.svg)](https://github.com/halthinks/SolKraft/actions/workflows/advanced-contract-benchmark.yml)
+[![GitHub Pages](https://img.shields.io/badge/console-live-b3f77c?logo=github&logoColor=111)](https://halthinks.github.io/SolKraft/)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![MCP](https://img.shields.io/badge/MCP-read--only-6b9cff)](docs/REMOTE_MCP.md)
+[![License: MIT](https://img.shields.io/badge/license-MIT-75e3a0)](LICENSE)
+
+**[Open the Console](https://halthinks.github.io/SolKraft/)** ·
+**[Browse 173 Skills](solkraft/skillpacks)** ·
+**[Connect an Agent](docs/REMOTE_MCP.md)** ·
+**[Contribute](CONTRIBUTING.md)** ·
+**[Contributors](https://halthinks.github.io/SolKraft/contributors.html)** ·
+**[Support](https://github.com/halthinks/SolKraft/issues/new?template=support_request.yml)**
+
+</div>
+
+---
+
+
 <!-- BEGIN SOLKRAFT CURRENT SYSTEM -->
 ## Current SolKraft system — October 2026
 
@@ -16,6 +41,77 @@
 
 <!-- END SOLKRAFT CURRENT SYSTEM -->
 
+## ⚡ One request → the right capability stack
+
+```mermaid
+flowchart LR
+    A["🗣️ Normal request"] --> B["🧭 Semantic router"]
+    B --> C["📦 ContractIndex"]
+    C --> D{"Admissible?"}
+    D -- "No" --> X["⛔ Block / explain"]
+    D -- "Yes" --> E["🧩 Compose skills"]
+    E --> F["🔗 Typed dataflow"]
+    F --> G["📚 Retrieve only what is needed"]
+    G --> H["🤖 Host agent executes"]
+    H --> I["✅ Evidence + verification"]
+    I --> J["🧪 CI catches regressions"]
+```
+
+SolKraft is deliberately **not** another opaque tool bag. It gives agents a compact operating layer for discovering, selecting, composing, and inspecting reusable procedures while keeping runtime authority with the host.
+
+| Layer | What SolKraft adds |
+|---|---|
+| 🧭 **Routing** | Semantic capability identity, compound-request decomposition, exclusions, and whole-route repair |
+| 📜 **Executable contracts** | Typed inputs/outputs, namespaced effects, required capabilities/resources, verification, and pass/fail fixtures |
+| 🧩 **Composition** | Typed producer → consumer relationships and dependency-aware route validation |
+| 🔒 **Boundaries** | Hardened public defaults, explicit blocked states, and `execution_authorized: false` |
+| 🔎 **Selective retrieval** | Compact metadata first; full `SKILL.md` only when a capability earns its place |
+| 🧪 **Evidence** | Reusable CI, contract fixture execution, packaging checks, installed MCP checks, and the 100k routing benchmark |
+
+### 🚀 Why it feels different
+
+- **Ask normally.** No need to memorize skill IDs for ordinary use.
+- **Inspect why.** Routes carry reasons, contracts, requirements, and unresolved work.
+- **Compose safely.** Skills can connect through typed inputs and outputs instead of loose prompt glue.
+- **Keep authority external.** SolKraft recommends capabilities; your host decides what it can actually do.
+- **Make regressions loud.** Contracts and routing expectations run in CI instead of living as prose nobody rechecks.
+- **Grow in public.** Code, testing, research, docs, issue discovery, and project-shaping ideas all count as contribution.
+
+## 🌟 Community spotlight
+
+### Cozy · [@Cozy2054934](https://x.com/Cozy2054934) · ★★★★★
+
+**Contributor 001 · project-shaping idea work**
+
+Cozy’s contribution helped push the project from descriptive skill metadata toward **executable capability contracts**: declarations the router can reason about and CI can continuously test. That idea now shows up in Contract v1 fixture execution, contribution gates, safer capability selection, and visible regression failures.
+
+> Nice—keep the skill contract executable: declare inputs, side effects, auth scope, and a few pass/fail fixtures, then run it in CI. That makes capability selection safer and regressions visible.
+
+> The skill layer is most useful when each skill declares inputs, side effects, auth scope, and a test contract. Then an agent can select capabilities without treating every tool as an opaque superpower
+
+— **Cozy · [@Cozy2054934 on X](https://x.com/Cozy2054934)**
+
+[See the full Contributors page →](https://halthinks.github.io/SolKraft/contributors.html) ·
+[Nominate a contributor →](https://github.com/halthinks/SolKraft/issues/new?template=contributor_nomination.yml)
+
+## 🗺️ Project map
+
+| Go here | For |
+|---|---|
+| [`solkraft/routing.py`](solkraft/routing.py) | Advisory request → route orchestration |
+| [`solkraft/contract_schema.py`](solkraft/contract_schema.py) | Contract v1 validation rules |
+| [`solkraft/contract_fixtures.py`](solkraft/contract_fixtures.py) | Executable selection + policy fixtures |
+| [`solkraft/contract_index.py`](solkraft/contract_index.py) | Compact capability metadata and indexes |
+| [`solkraft/skillpacks/`](solkraft/skillpacks) | The bundled skill operating layer |
+| [`scripts/local_ci.py`](scripts/local_ci.py) | Canonical local/reusable verification gate |
+| [`VALIDATION.md`](VALIDATION.md) | What has actually been tested and what it means |
+| [Live Console](https://halthinks.github.io/SolKraft/) | Browse, inspect, connect, and replay validation |
+| [Contributors](https://halthinks.github.io/SolKraft/contributors.html) | Community impact and recognition |
+| [Support](https://github.com/halthinks/SolKraft/issues/new?template=support_request.yml) | Setup, routing, usage, docs, or bug help |
+
+---
+
+
 
 New here? Follow [Connect your agent](docs/REMOTE_MCP.md). Want to teach it a new method? Follow [the complete skill contribution process](docs/SKILL_CONTRIBUTIONS.md), including graph registration, automatic-selection examples, the 100,000-request regression, and local package/MCP verification. Both have animated walkthroughs in the console.
 
@@ -25,7 +121,7 @@ Explore the [interactive connection walkthrough](https://halthinks.github.io/Sol
 
 **An open skill OS for agents.** Find the right procedure, compose multi-step work, and retrieve only the instructions needed for the next step. SolKraft provides a searchable catalog, advisory router, REST API, and Model Context Protocol (MCP) server.
 
-[Open the console](https://halthinks.github.io/SolKraft/) · [Browse skills](solkraft/skillpacks) · [Report a bug](https://github.com/halthinks/SolKraft/issues/new/choose) · [API quickstart](#run-the-api)
+[Open the console](https://halthinks.github.io/SolKraft/) · [Browse skills](solkraft/skillpacks) · [Get support](https://github.com/halthinks/SolKraft/issues/new?template=support_request.yml) · [Nominate a contributor](https://github.com/halthinks/SolKraft/issues/new?template=contributor_nomination.yml) · [API quickstart](#run-the-api)
 
 ## What it does
 
