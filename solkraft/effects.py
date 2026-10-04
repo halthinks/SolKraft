@@ -60,7 +60,9 @@ def effect_matches(pattern: str, effect: str) -> bool:
 
 
 def validate_effect_id(effect: str) -> bool:
-    return bool(EFFECT_ID_RE.fullmatch(normalize_effect(effect)))
+    if not isinstance(effect, str):
+        return False
+    return bool(EFFECT_ID_RE.fullmatch(effect.strip().casefold()))
 
 
 def effect_attributes(effect: str) -> dict:
