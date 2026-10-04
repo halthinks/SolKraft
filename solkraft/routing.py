@@ -79,6 +79,20 @@ def _repair_candidate(catalog, decisions, text, selected):
     return None, denied_candidate
 
 
+def _identity_candidate(catalog, graph, decisions, text):
+    """Resolve one high-confidence semantic capability identity."""
+    match = catalog.identity_match(text)
+    if not match:
+        return None, None
+    skill = match["id"]
+    node = graph.get("nodes", {}).get(skill, {})
+    if node.get("effect") is True:
+        return None, {**match, "blocked": "consequential effect node"}
+    if not _decision_allows(decisions, skill):
+        return None, {**match, "blocked": "contract policy"}
+    return skill, match
+
+
 def _enforce_dataflow_order(selected, additions):
     """Keep every typed producer before the consumer it satisfies."""
     ordered = list(selected)
@@ -138,13 +152,34 @@ def route_request(
     known = {record.id: record for record in catalog.records()}
     selected = [skill for skill in result["selected"] if skill in known]
 
-    # Adapt selected semantic stages to the mounted catalog without selecting a
-    # contract-denied replacement.
+    # Prefer a high-confidence catalog capability identity over a generic
+    # workflow mapping. Contract policy still decides admissibility.
+    identity_trace = []
     for stage in result["stages"]:
+        identity_skill, identity = _identity_candidate(
+            catalog, expanded, decisions, stage["text"]
+        )
         available = [
             skill for skill in stage["selected"]
             if skill in known and _decision_allows(decisions, skill)
         ]
+        if identity_skill:
+            if identity_skill not in available:
+                available = [identity_skill]
+            stage["reason"] = "catalog capability identity"
+            stage["confidence"] = "high"
+            identity_trace.append({
+                "stage": stage.get("stage"),
+                "text": stage.get("text"),
+                **identity,
+            })
+        elif identity and identity.get("blocked"):
+            identity_trace.append({
+                "stage": stage.get("stage"),
+                "text": stage.get("text"),
+                **identity,
+            })
+
         if not available:
             candidate, denied_candidate = _repair_candidate(
                 catalog, decisions, stage["text"], selected
@@ -212,6 +247,7 @@ def route_request(
         "repaired": repaired,
         "bounded_passes": 1,
     }
+    result["selection_trace"]["capability_identity"] = identity_trace
 
     allowed_skills = {
         skill for skill, decision in decisions.items()
