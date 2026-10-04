@@ -1,0 +1,102 @@
+name: Contributor nomination
+description: Nominate someone for recognition on the SolKraft Contributors page
+title: "[Contributor nomination]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Nominate a contributor
+
+        SolKraft recognizes impact beyond pull requests. You can nominate people for code, research, testing, design, documentation, issue discovery, community support, architecture ideas, or other work that materially improved the project.
+
+        Please nominate using **public, non-sensitive information only**. Do not include private messages, personal contact details, credentials, private repository material, customer data, or anything the nominee would reasonably expect to remain private.
+
+        A nomination starts a review. It does **not** guarantee publication, a specific star rating, or endorsement of everything the nominee posts elsewhere.
+
+  - type: input
+    id: nominee
+    attributes:
+      label: Nominee name or public handle
+      placeholder: Cozy / @Cozy2054934
+    validations:
+      required: true
+
+  - type: input
+    id: profile
+    attributes:
+      label: Public profile or contribution link
+      description: Link to a public profile, issue, PR, discussion, post, document, or other public evidence.
+      placeholder: https://...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: contribution_type
+    attributes:
+      label: Contribution type
+      options:
+        - Code or pull request
+        - Architecture or product idea
+        - Research
+        - Testing or validation
+        - Documentation
+        - Issue discovery or debugging
+        - Design or UX
+        - Community support
+        - Skill contribution
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: What did they contribute?
+      description: Explain the concrete idea, work, finding, or help they provided.
+      placeholder: Describe the contribution and what changed because of it.
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence of impact
+      description: Link or describe public evidence showing how the contribution influenced SolKraft. Avoid private correspondence.
+      placeholder: Public issue/discussion/post/commit/roadmap reference...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: suggested_rating
+    attributes:
+      label: Suggested contribution rating
+      description: Optional suggestion. Maintainers assign the final rating using the public rubric.
+      options:
+        - No suggestion
+        - 1 star — useful contribution
+        - 2 stars — meaningful contribution
+        - 3 stars — substantial contribution
+        - 4 stars — major contribution
+        - 5 stars — exceptional / project-shaping contribution
+    validations:
+      required: true
+
+  - type: textarea
+    id: thank_you
+    attributes:
+      label: Suggested thank-you or recognition note
+      description: Optional wording for why the community should recognize this person.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Submission check
+      options:
+        - label: I used only public, non-sensitive information and did not include private messages, credentials, personal contact details, or private repository data.
+          required: true
+        - label: I understand that maintainers review the evidence and assign the final rating.
+          required: true
+        - label: I understand that recognition is for the specific contribution and is not a blanket endorsement of the nominee or their external content.
+          required: true
