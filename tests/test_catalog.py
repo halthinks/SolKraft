@@ -103,3 +103,36 @@ def test_retired_runtime_skills_cannot_return_through_extra_roots(tmp_path):
     write_skill(tmp_path, 'solforge-run-ultra', 'Retired native Ultra workflow.')
     write_skill(tmp_path, 'usable-helper', 'Useful native workflow.')
     assert {r.name for r in SkillCatalog([tmp_path]).records()} == {'usable-helper'}
+
+
+
+def test_contract_index_refreshes_only_changed_skill(tmp_path):
+    entry = write_skill(tmp_path, "demo", "Inspect a demo.")
+    contract = entry.parent / "contract.yaml"
+    contract.write_text(
+        """
+schema_version: "1.0"
+skill_id: demo
+contract_revision: 1
+effects: []
+verification:
+  mode: declarative
+  checks:
+    - id: report
+      type: field_present
+      field: result
+""".strip() + "\n",
+        encoding="utf-8",
+    )
+    catalog = SkillCatalog([tmp_path])
+    index = catalog.contract_index(legacy_nodes={}, graph_generation="g1")
+    assert index.last_refresh["changed"] == ["demo"]
+
+    same = catalog.contract_index(legacy_nodes={}, graph_generation="g1")
+    assert same.last_refresh["changed"] == []
+    assert same.last_refresh["reused"] == ["demo"]
+
+    contract.write_text(contract.read_text(encoding="utf-8") + "# changed\n", encoding="utf-8")
+    changed = catalog.contract_index(legacy_nodes={}, graph_generation="g1")
+    assert changed.last_refresh["changed"] == ["demo"]
+    assert changed.generation == 2
