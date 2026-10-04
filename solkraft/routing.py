@@ -11,6 +11,8 @@ from .contract_loader import load_skill_contract
 from .contract_policy import RoutePolicy, evaluate_graph
 from .dataflow import resolve_required_inputs
 from .route_validation import validate_route
+from .trust import resolve_trust
+from .audit import route_audit_event
 
 
 BUNDLE_ROOT = Path(__file__).resolve().parent / "skillpacks"
@@ -275,6 +277,7 @@ def route_request(
     ]
     result["excluded_effects"] = list(normalized_policy.denied_effects)
     result["execution_authorized"] = False
+    result["audit"] = route_audit_event(result)
     return result
 
 
@@ -315,6 +318,8 @@ def catalog_graph(catalog: SkillCatalog) -> dict:
         base["entrypoint_digest"] = contract.get("entrypoint_digest")
         base["verification"] = contract.get("verification", {})
         base["risk"] = contract.get("risk", {})
+        base["provenance"] = contract.get("provenance", {})
+        base["trust"] = resolve_trust(record.id, contract)
         if contract.get("source") == "sidecar":
             base["inputs"] = contract.get("inputs", [])
             base["outputs"] = contract.get("outputs", [])
