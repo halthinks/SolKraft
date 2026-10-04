@@ -289,7 +289,7 @@ def route_request(
         original_selected=original_selected,
     )
     result["selected"] = _enforce_dataflow_order(
-        result["selected"], dataflow_plan["additions"]
+        result["selected"], dataflow["explanations"]
     )
     result["skills"] = [
         known[skill].public() for skill in result["selected"]
