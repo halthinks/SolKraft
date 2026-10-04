@@ -3,6 +3,8 @@ name: solforge-workflow-legal-draft
 description: Produce a clearly scoped draft with user scope references, assumptions, review gates, and non-advice boundaries.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Draft legal and policy documents
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
@@ -14,3 +16,14 @@ Draft from the sources, not from genre memory. Define terms once and use them co
 Verify the draft as a document: every legal or factual claim traces to an inspected source, every defined term is used, every cross-reference and section number resolves, and every placeholder is visible rather than silently resolved. A clause copied from a template but presented as tailored is weak evidence of fit; so is a disclaimer standing in for a claim that was never checked. The draft is a work product for review, not legal advice and not an executable instrument — signing, filing, sending, or publishing it is a separate action requiring its own authorization.
 
 Return the draft with its scope statement, the fact and assumption lists, the open questions routed for qualified professional review, and the claims you could not support. Use [legal research](../solforge-workflow-legal-research/SKILL.md) when the controlling sources or authority hierarchy are not yet established well enough to draft against.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- Selected by SolKraft's contract-aware router; selection is advisory and does not grant execution authority.
+- Hardened routing rejects opaque or contract-inadmissible capabilities.
+- Contract metadata is evaluated before full skill instructions are loaded.
+- Runtime authority stays with the host; `execution_authorized` remains `false`.
+- Current local acceptance: 100,000 unique 250-word requests, 100 ask families per skill, and 100% eligible target recall. See `VALIDATION.md`.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

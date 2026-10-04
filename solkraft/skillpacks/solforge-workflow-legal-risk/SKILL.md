@@ -3,6 +3,8 @@ name: solforge-workflow-legal-risk
 description: Identify obligations, exposure, controls, evidence gaps, and questions requiring qualified professional review.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Assess legal and compliance risk
 
 Use the [native execution contract](../solforge/references/native-execution.md) once per task.
@@ -14,3 +16,14 @@ Derive the applicable obligations from controlling sources: statutes and regulat
 Verify every material claim against an inspected source. Do not rely on remembered statute or regulation text without checking its currency — law changes, and an outdated citation is a false control. Do not treat a paraphrase of a clause as the contract language, rate a risk with no identified obligation behind it, or accept a compliance checklist passed by assertion as evidence of conformity. Keep facts, inferences, and open questions distinct.
 
 Report the risk analysis and compliance gap map: obligations with sources, exposure ratings with basis, control adequacy, evidence gaps, and the specific questions reserved for qualified counsel, with jurisdictions and dates not covered stated as limits. Use [legal research](../solforge-workflow-legal-research/SKILL.md) when the controlling sources themselves are not yet identified or authority-ranked.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- Selected by SolKraft's contract-aware router; selection is advisory and does not grant execution authority.
+- Hardened routing rejects opaque or contract-inadmissible capabilities.
+- Contract metadata is evaluated before full skill instructions are loaded.
+- Runtime authority stays with the host; `execution_authorized` remains `false`.
+- Current local acceptance: 100,000 unique 250-word requests, 100 ask families per skill, and 100% eligible target recall. See `VALIDATION.md`.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->
