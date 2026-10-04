@@ -3,6 +3,8 @@ name: requesting-code-review
 description: Prepare a focused code review when requested or when consequential changes need independent review.
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Requesting Code Review
 
 Dispatch a code reviewer subagent to catch issues before they cascade. The reviewer gets precisely crafted context for evaluation — never your session's history. This keeps the reviewer focused on the work product, not your thought process, and preserves your own context for continued work.
@@ -101,3 +103,14 @@ You: [Fix progress indicators]
 - Request clarification
 
 See template at: requesting-code-review/code-reviewer.md
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- This procedure is selected by SolKraft's contract-aware router; selection does not authorize execution.
+- Public routing defaults to hardened policy; opaque or contract-inadmissible capabilities fail closed.
+- When `contract.yaml` exists, compact metadata is evaluated before this full instruction body is loaded.
+- Runtime authority stays with the host; SolKraft keeps `execution_authorized: false`.
+- Current local acceptance covers 100,000 unique 250-word requests, 100 ask families per skill, and 100% eligible target recall. See repository `VALIDATION.md`.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->

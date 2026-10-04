@@ -1,3 +1,5 @@
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Sol Search Research Contract
 
 Use this contract for every substantial `sol-search` run. It defines source and claim quality controls for general research without requiring an external workflow runtime.

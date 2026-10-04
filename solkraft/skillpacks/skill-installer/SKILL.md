@@ -5,6 +5,8 @@ metadata:
   short-description: Install curated skills from openai/skills or other repos
 ---
 
+<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+
 # Skill Installer
 
 Helps install skills. By default these are from https://github.com/openai/skills/tree/main/skills/.curated, but users can also provide other locations. Experimental skills live in https://github.com/openai/skills/tree/main/skills/.experimental and can be installed the same way.
@@ -56,3 +58,14 @@ All of these scripts use network, so when running in the sandbox, request escala
 - Git fallback tries HTTPS first, then SSH.
 - The skills at https://github.com/openai/skills/tree/main/skills/.system are preinstalled, so no need to help users install those. If they ask, just explain this. If they insist, you can download and overwrite.
 - Installed annotations come from `$CODEX_HOME/skills`.
+
+<!-- BEGIN SOLKRAFT SKILL INTEGRATION -->
+## SolKraft integration
+
+- This procedure is selected by SolKraft's contract-aware router; selection does not authorize execution.
+- Public routing defaults to hardened policy; opaque or contract-inadmissible capabilities fail closed.
+- When `contract.yaml` exists, compact metadata is evaluated before this full instruction body is loaded.
+- Runtime authority stays with the host; SolKraft keeps `execution_authorized: false`.
+- Current local acceptance covers 100,000 unique 250-word requests, 100 ask families per skill, and 100% eligible target recall. See repository `VALIDATION.md`.
+
+<!-- END SOLKRAFT SKILL INTEGRATION -->
