@@ -116,6 +116,8 @@ class ContractIndex:
             "effects": contract.get("side_effects"),
             "capabilities": list(contract.get("capabilities") or []),
             "resources": list(contract.get("resources") or []),
+            "auth_scope": contract.get("auth_scope"),
+            "test_contract": contract.get("test_contract"),
             "inputs": list(contract.get("inputs") or []),
             "outputs": list(contract.get("outputs") or []),
             "verification": dict(contract.get("verification") or {}),
