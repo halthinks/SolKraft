@@ -64,7 +64,7 @@ def contract_from_node(node: dict | None) -> dict:
     authority = node.get("authority")
     if auth is None and isinstance(authority, dict):
         auth = authority.get("legacy_scope")
-    if auth is None and node.get("effect") is False:
+    if auth is None and node.get("effect") is False and forced_status != "declared":
         auth = "none"
     if auth is not None and auth not in AUTH_ORDER:
         status = "invalid"
