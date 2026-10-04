@@ -7,6 +7,7 @@ from pathlib import Path
 import re
 
 from .catalog import SkillCatalog
+from .contracts import apply_contracts
 
 
 BUNDLE_ROOT = Path(__file__).resolve().parent / "skillpacks"
@@ -19,6 +20,14 @@ def _load_composer():
         return compose_route
     except (ImportError, ModuleNotFoundError):
         return None
+
+
+def _composer_context(context):
+    """Keep composer context limited to fields it already validates."""
+    if not isinstance(context, dict):
+        return context
+    allowed = {key: context[key] for key in ("domain", "stage") if key in context}
+    return allowed or None
 
 
 def route_request(catalog: SkillCatalog, objective: str, max_skills: int = 10,
@@ -35,7 +44,7 @@ def route_request(catalog: SkillCatalog, objective: str, max_skills: int = 10,
             skill: expanded['nodes'][skill] for skill in explicit
             if skill in expanded['nodes']}}}
     result = composer.compose_route(graph, objective, explicit=explicit,
-                                    context=context, max_skills=max_skills)
+                                    context=_composer_context(context), max_skills=max_skills)
     known = {record.id: record for record in catalog.records()}
     selected = [skill for skill in result["selected"] if skill in known]
     for stage in result["stages"]:
@@ -69,7 +78,9 @@ def route_request(catalog: SkillCatalog, objective: str, max_skills: int = 10,
     result["stages"].sort(key=lambda stage: stage["stage"])
     result["selected"] = selected
     result["skills"] = [known[skill].public() for skill in selected]
-    result["selection_status"] = "matched" if selected else "abstained"
+    allowed_auth = context.get("auth_scope") if isinstance(context, dict) else None
+    result = apply_contracts(result, graph, objective, allowed_auth=allowed_auth)
+    result["skills"] = [known[skill].public() for skill in result["selected"] if skill in known]
     result["execution_authorized"] = False
     return result
 
@@ -85,6 +96,7 @@ def catalog_graph(catalog: SkillCatalog) -> dict:
 
     The tested semantic core remains the automatic composer's authority.
     Additional catalog nodes support discovery and explicit selection.
+    Mounted skills without a graph node are read-only until they declare more.
     """
     core = get_graph()
     nodes = {}
@@ -95,6 +107,9 @@ def catalog_graph(catalog: SkillCatalog) -> dict:
             'selection': 'catalog discovery or explicit',
             'inputs': ['user objective', 'applicable skill prerequisites'],
             'outputs': ['skill-defined deliverable'],
+            'side_effects': [],
+            'auth_scope': 'none',
+            'test_contract': 'Host verifies the skill-defined deliverable against the objective; unresolved limits are stated.',
         }))
     edges = [dict(edge) for edge in core['edges']
              if edge.get('from') in nodes and edge.get('to') in nodes]
