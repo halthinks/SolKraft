@@ -78,11 +78,12 @@ def validate(data, graph, catalog):
         if contract.get("source") == "sidecar" and contract.get("status") in {"invalid", "unsupported"}:
             errors.append("contract.yaml must be a supported valid Contract v1 sidecar.")
         verification = contract.get("verification") or {}
-        if contract.get("source") == "sidecar" and not verification.get("checks"):
-            errors.append("Contract v1 sidecars must declare at least one declarative verification check.")
-        for check in verification.get("checks") or []:
-            if check.get("type") not in SUPPORTED_CHECKS:
-                errors.append("Unsupported declarative verification check type: " + str(check.get("type")))
+        if contract.get("source") == "sidecar" and contract.get("status") == "declared":
+            if not verification.get("checks"):
+                errors.append("Declared Contract v1 sidecars must include at least one declarative verification check.")
+            for check in verification.get("checks") or []:
+                if check.get("type") not in SUPPORTED_CHECKS:
+                    errors.append("Unsupported declarative verification check type: " + str(check.get("type")))
     return errors
 
 
