@@ -12,12 +12,13 @@ from typing import Iterable
 
 import yaml
 
+from .contracts import contract_from_declaration
+
 
 RETIRED_SKILLS = frozenset(json.loads((Path(__file__).parent / 'retired-skills.json').read_text(encoding='utf-8'))['skills'])
 MAX_ENTRYPOINT_BYTES = 128_000
 ID_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.:-]{0,159}$")
 TOKEN_RE = re.compile(r"[a-z0-9]+")
-# Catalog identity constraints use stable fingerprints.
 RESERVED_SKILL_DIGESTS = frozenset({
     '088a975a1b2e13c8b3d25ebf2bfe6a09bf14cab64aad091985157100690a1e61',
     "0495f731a53b6b2bf383ce23195c4fc8e80fdaf772104067c8e61e7433921904",
@@ -44,9 +45,10 @@ class SkillRecord:
     root: Path
     entrypoint: Path
     name: str
+    contract: dict
 
     def public(self, score: float | None = None) -> dict:
-        item = {"id": self.id, "name": self.name, "description": self.description}
+        item = {"id": self.id, "name": self.name, "description": self.description, "contract": self.contract}
         if score is not None:
             item["score"] = round(score, 4)
         return item
@@ -62,7 +64,7 @@ class SkillCatalog:
         self.refresh()
 
     def refresh(self) -> int:
-        candidates: list[tuple[str, str, Path, Path, str]] = []
+        candidates: list[tuple] = []
         seen_contents = set()
         for root in self.roots:
             try:
@@ -99,21 +101,26 @@ class SkillCatalog:
                     if digest in seen_contents:
                         continue
                     seen_contents.add(digest)
-                    candidates.append((name, description, resolved_root, resolved_entry, root.name or "skills"))
+                    contract = contract_from_declaration({
+                        "inputs": metadata.get("inputs"),
+                        "side_effects": metadata.get("side_effects"),
+                        "auth_scope": metadata.get("auth_scope"),
+                        "test_contract": metadata.get("test_contract"),
+                    })
+                    candidates.append((name, description, resolved_root, resolved_entry, root.name or "skills", contract))
             except OSError:
                 continue
 
         counts = Counter(row[0] for row in candidates)
         records: dict[str, SkillRecord] = {}
-        for name, description, root, entrypoint, namespace in candidates:
+        for name, description, root, entrypoint, namespace, contract in candidates:
             skill_id = f"{namespace}:{name}" if counts[name] > 1 and root != self.preferred_root else name
-            # Root names can themselves collide; use a stable relative folder as a second discriminator.
             if skill_id in records:
                 relative_parent = entrypoint.parent.relative_to(root).as_posix().replace("/", ".")
                 skill_id = f"{namespace}.{relative_parent}:{name}"
             if not ID_RE.fullmatch(skill_id):
                 continue
-            records[skill_id] = SkillRecord(skill_id, description, root, entrypoint, name)
+            records[skill_id] = SkillRecord(skill_id, description, root, entrypoint, name, contract)
         self._records = dict(sorted(records.items(), key=lambda pair: pair[0].casefold()))
         return len(self._records)
 
@@ -147,19 +154,23 @@ class SkillCatalog:
         records = list(self._records.values())[offset:offset + limit]
         return [record.public() for record in records]
 
-    def search(self, query: str, limit: int = 10) -> list[dict]:
+    def search(self, query: str, limit: int = 10, *, declared_only: bool = False) -> list[dict]:
         terms = [term for term in TOKEN_RE.findall(query.casefold()) if len(term) > 1]
+        records = [record for record in self._records.values() if not declared_only or record.contract.get("declared")]
         if not terms:
-            return self.list(limit=limit)
+            return [record.public() for record in records[:limit]]
         scored: list[tuple[float, SkillRecord]] = []
-        for record in self._records.values():
-            skill_terms = set(TOKEN_RE.findall((record.id + " " + record.description).casefold()))
+        for record in records:
+            contract_text = " ".join(record.contract.get("inputs") or [])
+            skill_terms = set(TOKEN_RE.findall((record.id + " " + record.description + " " + contract_text).casefold()))
             if not skill_terms:
                 continue
             exact_name = 3.5 * sum(1 for term in terms if term in record.id.casefold())
             overlap = sum(1 for term in terms if term in skill_terms)
             coverage = overlap / max(len(set(terms)), 1)
             score = exact_name + overlap + coverage * 2.0
+            if record.contract.get("declared"):
+                score += 1.0
             if score > 0:
                 scored.append((score, record))
         scored.sort(key=lambda row: (-row[0], row[1].id.casefold()))
