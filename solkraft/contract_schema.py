@@ -102,7 +102,7 @@ def validate_v1_document(data: object, *, expected_skill_id: str | None = None) 
     if not isinstance(effects, list):
         errors.append("effects must be a list")
     else:
-        if len(set(effects)) != len(effects):
+        if all(isinstance(item, str) for item in effects) and len(set(effects)) != len(effects):
             errors.append("effects must not contain duplicates")
         for effect in effects:
             if not isinstance(effect, str) or not validate_effect_id(effect):
@@ -119,7 +119,7 @@ def validate_v1_document(data: object, *, expected_skill_id: str | None = None) 
         if not isinstance(capabilities, list):
             errors.append("authority.capabilities must be a list")
         else:
-            if len(set(capabilities)) != len(capabilities):
+            if all(isinstance(item, str) for item in capabilities) and len(set(capabilities)) != len(capabilities):
                 errors.append("authority.capabilities must not contain duplicates")
             for capability in capabilities:
                 if not isinstance(capability, str) or not CAPABILITY_RE.fullmatch(capability):
