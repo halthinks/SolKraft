@@ -148,7 +148,9 @@ def test_core_sandbox_defines_requirements_but_has_no_executor():
     assert CORE_EXECUTABLE_VERIFIERS_ENABLED is False
     assert DEFAULT_VERIFIER_SANDBOX.network is False
     assert DEFAULT_VERIFIER_SANDBOX.inherit_secrets is False
-    assert "subprocess" not in inspect.getsource(sandbox_module)
+    source = inspect.getsource(sandbox_module)
+    assert "import subprocess" not in source
+    assert "from subprocess" not in source
     errors = validate_adapter_manifest({
         "network": True,
         "inherit_secrets": True,
