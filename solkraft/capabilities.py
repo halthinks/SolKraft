@@ -12,6 +12,26 @@ import re
 
 CAPABILITY_RE = re.compile(r"^[a-z][a-z0-9-]*(?:\.[a-z][a-z0-9-]*)+$")
 
+LEGACY_AUTH_SCOPES = ("none", "read", "write-local", "network", "external-effect")
+LEGACY_SCOPE_ALLOW = {
+    "none": frozenset({"none"}),
+    "read": frozenset({"none", "read"}),
+    "write-local": frozenset({"none", "read", "write-local"}),
+    "network": frozenset({"none", "read", "write-local", "network"}),
+    "external-effect": frozenset(LEGACY_AUTH_SCOPES),
+}
+
+
+def legacy_scope_allows(allowed: str | None, required: str | None) -> bool:
+    """Compatibility adapter for pre-v1 scalar auth metadata only."""
+    if allowed is None:
+        return True
+    if allowed not in LEGACY_SCOPE_ALLOW:
+        raise ValueError("unknown legacy auth scope: " + str(allowed))
+    if required is None:
+        return False
+    return required in LEGACY_SCOPE_ALLOW[allowed]
+
 
 def _matches(pattern: str, value: str, *, separator: str) -> bool:
     if pattern == value:
