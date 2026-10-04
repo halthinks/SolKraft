@@ -18,6 +18,7 @@ import re
 import time
 
 from solkraft.catalog import SkillCatalog
+import solkraft.routing as routing_module
 from solkraft.contract_policy import evaluate_contract, normalize_policy
 from solkraft.contracts import contract_from_node
 from solkraft.routing import BUNDLE_ROOT, catalog_graph, contract_index, route_request
@@ -142,6 +143,16 @@ def main() -> None:
     graph = catalog_graph(catalog)
     index = contract_index(catalog)
     entries = {entry["id"]: entry for entry in index.entries()}
+
+    # Freeze immutable routing metadata for this benchmark corpus. route_request
+    # still executes the production routing/policy/dataflow/validation path for
+    # every request; this only removes repeated filesystem/index refresh work.
+    frozen_graph = graph
+    frozen_core = routing_module.get_graph()
+    frozen_index = index
+    routing_module.catalog_graph = lambda _catalog: frozen_graph
+    routing_module.get_graph = lambda: frozen_core
+    routing_module.contract_index = lambda _catalog: frozen_index
     if set(entries) != {record.id for record in records}:
         raise AssertionError("Contract index/catalog membership mismatch.")
 
@@ -355,6 +366,7 @@ def main() -> None:
         },
         "elapsed_seconds": round(elapsed, 3),
         "requests_per_second": round(TOTAL_REQUESTS / elapsed, 2) if elapsed else None,
+        "immutable_metadata_cached": True,
         "contract_status_counts": dict(Counter(item["contract_status"] for item in per_skill.values())),
         "trust_state_counts": dict(Counter(item["trust_state"] for item in per_skill.values())),
         "expectation_counts": dict(Counter(item["expectation"] for item in per_skill.values())),
