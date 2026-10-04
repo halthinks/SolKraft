@@ -91,3 +91,65 @@ def test_api_separates_policy_from_semantic_context(tmp_path):
     assert route["contract_decisions"]["mystery"]["status"] == "denied"
     assert route["route_policy"]["contract_mode"] == "strict"
     assert route["execution_authorized"] is False
+
+
+
+def test_api_accepts_host_grant_and_available_inputs(tmp_path):
+    folder = tmp_path / "consumer"
+    folder.mkdir()
+    (folder / "SKILL.md").write_text(
+        "---\nname: consumer\ndescription: Analyze a supplied dataset.\n---\n",
+        encoding="utf-8",
+    )
+    (folder / "contract.yaml").write_text(
+        """
+schema_version: "1.0"
+skill_id: consumer
+contract_revision: 1
+inputs:
+  - name: dataset
+    required: true
+    source: user
+    schema:
+      type: object
+effects: []
+authority:
+  capabilities:
+    - repo.read
+  resources:
+    - repo:example/project
+verification:
+  mode: declarative
+  checks:
+    - id: analysis-present
+      type: artifact_exists
+""".strip() + "\n",
+        encoding="utf-8",
+    )
+    app = create_app(SkillCatalog([tmp_path]), api_key="test-key", require_api_key=True)
+    client = TestClient(app)
+    response = client.post(
+        "/v1/route",
+        headers={"Authorization": "Bearer test-key"},
+        json={
+            "objective": "Analyze the supplied dataset.",
+            "skills": ["consumer"],
+            "context": {"available_inputs": ["dataset"]},
+            "policy": {
+                "contract_mode": "strict",
+                "grant": {
+                    "grant_id": "snapshot-api",
+                    "capabilities": ["repo.*"],
+                    "resources": ["repo:example/*"]
+                }
+            }
+        },
+    )
+    assert response.status_code == 200
+    route = response.json()
+    assert route["selection_status"] == "matched"
+    assert route["route_policy"]["grant"]["grant_id"] == "snapshot-api"
+    assert route["required_capabilities"] == ["repo.read"]
+    assert route["required_resources"] == ["repo:example/project"]
+    assert route["dataflow"]["inputs"]["consumer:dataset"]["status"] == "available"
+    assert route["execution_authorized"] is False
