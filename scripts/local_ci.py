@@ -51,6 +51,7 @@ def main():
         run('Python compilation', [sys.executable, '-m', 'compileall', '-q', 'solkraft', 'scripts'])
         run('Contract migration report', [sys.executable, '-m', 'scripts.migrate_contracts',
                                          '--report', 'build/contracts-migration.json'])
+        run('Contract schema and index gate', [sys.executable, '-m', 'scripts.check_contracts'])
         for asset in ('app.js', 'flow.js', 'setup.js', 'static-data.js'):
             run(f'{asset} syntax', [node, '--check', f'docs/assets/{asset}'])
         run('Setup behavior tests', [node, '--test', 'tests/setup.test.cjs'])
