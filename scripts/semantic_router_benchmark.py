@@ -359,6 +359,7 @@ def main():
     digest = hashlib.sha256()
     prompt_hashes = set()
     seen_by_target = defaultdict(set)
+    single_hashes_by_skill = defaultdict(list)
     leakage = Counter()
     single = Counter()
     composition = Counter()
@@ -392,6 +393,7 @@ def main():
             if case_id % args.shard_count != args.shard_index:
                 continue
             prompt = single_prompt(record, profile, profiles, local_case)
+            single_hashes_by_skill[record.id].append(hashlib.sha256(prompt.encode("utf-8")).hexdigest())
             remember_prompt(prompt, [record.id])
             split = "holdout" if local_case >= DEV_PROMPTS_PER_SKILL else "dev"
             route = route_request(catalog, prompt, max_skills=50, policy=policy)
@@ -514,6 +516,7 @@ def main():
         "composition":dict(composition),
         "stability":dict(stability),
         "per_skill":per_skill_result,
+        "single_prompt_hashes_by_skill":{skill_id:hashes for skill_id,hashes in single_hashes_by_skill.items()},
         "confusion":{skill_id:dict(rows.most_common(8)) for skill_id,rows in confusion.items()},
         "sample_failures":failures,
         "performance":{
