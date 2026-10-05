@@ -1,6 +1,6 @@
 ---
 name: "imagegen"
-description: "Generate or edit raster images when the task benefits from AI-created bitmap visuals such as photos, illustrations, textures, sprites, mockups, or transparent-background cutouts. Use when Codex should create a brand-new image, transform an existing image, or derive visual variants from references, and the output should be a bitmap asset rather than repo-native code or vector. Do not use when the task is better handled by editing existing SVG/vector/code-native assets, extending an established icon or logo system, or building the visual directly in HTML/CSS/canvas."
+description: "Generate or edit raster images when the task benefits from AI-created bitmap visuals such as photos, illustrations, textures, sprites, mockups, or transparent-background cutouts. Use when the host should create a brand-new image, transform an existing image, or derive visual variants from references, and the output should be a bitmap asset rather than repo-native code or vector. Do not use when the task is better handled by editing existing SVG/vector/code-native assets, extending an established icon or logo system, or building the visual directly in HTML/CSS/canvas."
 ---
 
 <!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
@@ -33,14 +33,14 @@ Rules:
 - Never modify `scripts/image_gen.py`. If something is missing, ask the user before doing anything else.
 
 Built-in save-path policy:
-- In built-in tool mode, Codex saves generated images under `$CODEX_HOME/*` by default.
+- Built-in image tools are host-provided and may not expose a filesystem destination.
 - Do not describe or rely on OS temp as the default built-in destination.
-- Do not describe or rely on a destination-path argument (if any) on the built-in `image_gen` tool. If a specific location is needed, generate first and then move or copy the selected output from `$CODEX_HOME/generated_images/...`.
+- Do not describe or rely on a destination-path argument (if any) on the built-in `image_gen` tool. If a specific location is needed, generate first and then use the host-provided artifact reference or copy the materialized artifact when the host exposes one.
 - Save-path precedence in built-in mode:
   1. If the user names a destination, move or copy the selected output there.
   2. If the image is meant for the current project, move or copy the final selected image into the workspace before finishing.
-  3. If the image is only for preview or brainstorming, render it inline; the underlying file can remain at the default `$CODEX_HOME/*` path.
-- Never leave a project-referenced asset only at the default `$CODEX_HOME/*` path.
+  3. If the image is only for preview or brainstorming, render it inline; the host-provided artifact reference is sufficient unless the project needs a persisted copy
+- Do not assume a host-specific default filesystem path is durable project storage.
 - Do not overwrite an existing asset unless the user explicitly asked for replacement; otherwise create a sibling versioned filename such as `hero-v2.png` or `item-icon-edited.png`.
 
 Shared prompt guidance for both modes lives in `references/prompting.md` and `references/sample-prompts.md`.
@@ -109,7 +109,7 @@ Assume the user wants a new image unless they clearly ask to change an existing 
 12. Inspect outputs and validate: subject, style, composition, text accuracy, and invariants/avoid items.
 13. Iterate with a single targeted change, then re-check.
 14. For preview-only work, render the image inline; the underlying file may remain at the default `$CODEX_HOME/generated_images/...` path.
-15. For project-bound work, move or copy the selected artifact into the workspace and update any consuming code or references. Never leave a project-referenced asset only at the default `$CODEX_HOME/generated_images/...` path.
+15. For project-bound work, move or copy the selected artifact into the workspace and update any consuming code or references. Persist project-bound assets through the host's available artifact or workspace mechanism.
 16. For batches or multi-asset requests, persist every requested deliverable final in the workspace unless the user explicitly asked to keep outputs preview-only. Discarded variants do not need to be kept unless requested.
 17. If the user explicitly chooses or confirms the CLI fallback, then use the fallback-only docs for model, quality, size, `input_fidelity`, masks, output format, output paths, and network setup.
 18. Always report the final saved path(s) for any workspace-bound asset(s), plus the final prompt or prompt set and whether the built-in tool or fallback CLI mode was used.
