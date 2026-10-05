@@ -380,7 +380,13 @@ def route_request(
     semantic_primary = []
     for stage_index, clause in enumerate(semantic_clauses, 1):
         clause_explicit_anchors = _explicit_query_anchors(clause)
-        graph_ranked = _graph_identity_rank(expanded, clause, limit=32)
+        semantic_index = _graph_semantic_index(expanded)
+        rank_limit = (
+            max(32, len(semantic_index["profiles"]))
+            if clause_explicit_anchors and len(clause_explicit_anchors) <= 1
+            else 32
+        )
+        graph_ranked = _graph_identity_rank(expanded, clause, limit=rank_limit)
         graph_admissible = []
         for row in graph_ranked:
             skill = row["id"]
@@ -404,7 +410,7 @@ def route_request(
                 node = expanded.get("nodes", {}).get(skill, {})
                 if node.get("effect") is True or not _decision_allows(decisions, skill):
                     continue
-                profile_tokens = _graph_semantic_index(expanded)["profiles"][skill]["tokens"]
+                profile_tokens = semantic_index["profiles"][skill]["tokens"]
                 if clause_explicit_anchors.issubset(profile_tokens) and skill not in accepted:
                     accepted.append(skill)
 
