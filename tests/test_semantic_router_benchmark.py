@@ -91,7 +91,9 @@ def test_semantic_router_composition_regression_probe():
             if not coverage or not ordered:
                 failures.append({
                     "case": case_id,
+                    "prompt": prompt,
                     "targets": targets,
+                    "target_anchors": {skill: profiles[skill]["anchors"] for skill in targets},
                     "selected": selected,
                     "semantic_clause_order": route.get("selection_trace", {}).get("semantic_clause_order"),
                     "semantic_rank": route.get("selection_trace", {}).get("semantic_capability_rank"),
