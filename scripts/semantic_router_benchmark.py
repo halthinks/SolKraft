@@ -358,6 +358,7 @@ def main():
 
     digest = hashlib.sha256()
     prompt_hashes = set()
+    seen_by_target = defaultdict(set)
     leakage = Counter()
     single = Counter()
     composition = Counter()
