@@ -13,7 +13,7 @@ Load plan, review critically, execute all tasks, report when complete.
 
 **Announce at start:** "I'm using the executing-plans skill to implement this plan."
 
-**Note:** Tell your human partner that Superpowers works much better with access to subagents. The quality of its work will be significantly higher if run on a platform with subagent support (such as Claude Code or Codex). If subagents are available, use superpowers:subagent-driven-development instead of this skill.
+**Parallelism note:** If the host provides isolated parallel workers, independent tasks may be delegated through the host's worker capability. This skill does not require any named agent runtime; otherwise execute the plan sequentially.
 
 ## The Process
 
