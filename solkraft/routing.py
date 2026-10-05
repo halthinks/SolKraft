@@ -152,6 +152,81 @@ def route_request(
     known = {record.id: record for record in catalog.records()}
     selected = [skill for skill in result["selected"] if skill in known]
 
+    # Augment the rule-based composer with query-centric capability evidence for
+    # each requested clause. This is deliberately additive: existing workflow
+    # matches remain visible, while a strongly supported catalog specialist can
+    # no longer be displaced merely because the request used unfamiliar wording.
+    semantic_trace = []
+    try:
+        semantic_clauses, _ = composer.segment(objective)
+    except (AttributeError, TypeError, ValueError):
+        semantic_clauses = [objective]
+
+    for stage_index, clause in enumerate(semantic_clauses, 1):
+        ranked = catalog.identity_rank(clause, limit=8)
+        admissible = []
+        for row in ranked:
+            skill = row["id"]
+            node = expanded.get("nodes", {}).get(skill, {})
+            if node.get("effect") is True or not _decision_allows(decisions, skill):
+                continue
+            admissible.append(row)
+
+        if not admissible:
+            continue
+
+        best = admissible[0]
+        second_score = admissible[1]["score"] if len(admissible) > 1 else 0.0
+        margin = best["score"] - second_score
+        matched = best.get("matched_tokens") or []
+        strong = (
+            len(matched) >= 2
+            and (
+                best["score"] >= 0.16
+                or best.get("query_precision", 0.0) >= 0.28
+            )
+            and (
+                margin >= 0.015
+                or len(matched) >= 3
+                or best.get("name_score", 0.0) >= 0.5
+            )
+        )
+        semantic_trace.append({
+            "stage": stage_index,
+            "text": clause,
+            "candidate": best["id"],
+            "score": best["score"],
+            "margin": round(margin, 6),
+            "matched_tokens": matched,
+            "accepted": strong,
+        })
+        if not strong:
+            continue
+
+        skill = best["id"]
+        if skill not in selected and len(selected) < max_skills:
+            selected.append(skill)
+
+        existing_stage = next(
+            (
+                stage for stage in result.get("stages", [])
+                if stage.get("stage") == stage_index
+            ),
+            None,
+        )
+        if existing_stage is None:
+            result.setdefault("stages", []).append({
+                "stage": stage_index,
+                "text": clause,
+                "selected": [skill],
+                "reason": "query-centric capability evidence",
+                "confidence": "high",
+            })
+        elif skill not in existing_stage.get("selected", []):
+            existing_stage.setdefault("selected", []).append(skill)
+
+    result.setdefault("selection_trace", {})["semantic_capability_rank"] = semantic_trace
+
     objective_identity_skill, objective_identity = _identity_candidate(
         catalog, expanded, decisions, objective
     )
