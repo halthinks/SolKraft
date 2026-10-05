@@ -1,6 +1,6 @@
 ---
 name: audit-git-worktrees
-description: Produce a deterministic, evidence-bound, read-only inventory of every Git worktree registered to a canonical repository, including existence, HEAD, branch or detached state, lock/prune metadata, dirty-row count and sample, and whether each HEAD is an ancestor of canonical HEAD. Use when auditing parallel-agent or multi-worktree development, reconciling abandoned or Grok/Codex-created worktrees, deciding what must be preserved before cleanup, or verifying repository topology without modifying worktrees.
+description: Produce a deterministic, evidence-bound, read-only inventory of every Git worktree registered to a canonical repository, including existence, HEAD, branch or detached state, lock/prune metadata, dirty-row count and sample, and whether each HEAD is an ancestor of canonical HEAD. Use when auditing parallel-agent or multi-worktree development, reconciling abandoned or externally created worktrees, deciding what must be preserved before cleanup, or verifying repository topology without modifying worktrees.
 ---
 
 <!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
