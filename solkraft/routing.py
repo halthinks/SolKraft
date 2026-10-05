@@ -332,6 +332,46 @@ def route_request(
     semantic_groups = []
     semantic_primary = []
     for stage_index, clause in enumerate(semantic_clauses, 1):
+        graph_ranked = _graph_identity_rank(expanded, clause, limit=8)
+        graph_admissible = []
+        for row in graph_ranked:
+            skill = row["id"]
+            node = expanded.get("nodes", {}).get(skill, {})
+            if node.get("effect") is True or not _decision_allows(decisions, skill):
+                continue
+            matched = row.get("matched_tokens") or []
+            if len(matched) < 2:
+                continue
+            graph_admissible.append(row)
+
+        accepted = []
+        for candidate_index, row in enumerate(graph_admissible[:3]):
+            matched = row.get("matched_tokens") or []
+            next_score = (
+                graph_admissible[candidate_index + 1]["score"]
+                if candidate_index + 1 < len(graph_admissible)
+                else 0.0
+            )
+            margin = row["score"] - next_score
+            strong = (
+                row.get("weighted_overlap", 0.0) >= 4.5
+                and (len(matched) >= 3 or margin >= 0.75)
+            )
+            semantic_trace.append({
+                "stage": stage_index,
+                "text": clause,
+                "candidate": row["id"],
+                "rank": candidate_index + 1,
+                "score": row["score"],
+                "margin_to_next": round(margin, 6),
+                "weighted_overlap": row.get("weighted_overlap"),
+                "matched_tokens": matched,
+                "source": "expanded capability metadata",
+                "accepted": strong,
+            })
+            if strong and row["id"] not in accepted:
+                accepted.append(row["id"])
+
         ranked = catalog.identity_rank(clause, limit=8)
         admissible = []
         for row in ranked:
@@ -344,7 +384,6 @@ def route_request(
                 continue
             admissible.append(row)
 
-        accepted = []
         for candidate_index, row in enumerate(admissible[:4]):
             next_score = admissible[candidate_index + 1]["score"] if candidate_index + 1 < len(admissible) else 0.0
             local_margin = row["score"] - next_score
@@ -366,9 +405,10 @@ def route_request(
                 "score": row["score"],
                 "margin_to_next": round(local_margin, 6),
                 "matched_tokens": matched,
+                "source": "catalog description identity",
                 "accepted": strong,
             })
-            if strong:
+            if strong and row["id"] not in accepted:
                 accepted.append(row["id"])
 
         # Also admit distinctive compound-token identities for this individual
@@ -422,7 +462,10 @@ def route_request(
         catalog, expanded, decisions, objective
     )
     if objective_identity_skill and objective_identity_skill not in selected:
-        selected.insert(0, objective_identity_skill)
+        if ordered_semantic:
+            selected.append(objective_identity_skill)
+        else:
+            selected.insert(0, objective_identity_skill)
 
     # Preserve high-confidence whole-request identity even when SolForge
     # decomposes the request into multiple supporting stages.
