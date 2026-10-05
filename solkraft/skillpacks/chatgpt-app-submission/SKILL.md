@@ -75,7 +75,7 @@ Write exactly one JSON file named `chatgpt-app-submission.json`:
 
 Read the [full code or schema for Output Contract](astra-detail-01.md) when implementing this part of the workflow.
 
-`$schema` identifies the import file shape for editors and importers; Codex does not need to fetch it. `tools` is required. `app_info`, `test_cases`, and `negative_test_cases` are optional in the schema, but generate them whenever the repo contains enough information. Do not include review-check findings in this JSON file.
+`$schema` identifies the import file shape for editors and importers; the executor does not need to fetch it. `tools` is required. `app_info`, `test_cases`, and `negative_test_cases` are optional in the schema, but generate them whenever the repo contains enough information. Do not include review-check findings in this JSON file.
 
 ## Writing Justifications
 
