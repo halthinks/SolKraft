@@ -40,6 +40,7 @@ complex difficult real world correct appropriate relevant published bundled
 user objective supplied applicable scope acceptance criteria verified requested deliverable input inputs output outputs general
 """.split())
 _GRAPH_SEMANTIC_CACHE = {}
+_SPARSE_EXPLICIT_ANCHOR_CAP = 64
 
 
 def _explicit_query_anchors(query: str) -> frozenset[str]:
@@ -513,7 +514,11 @@ def route_request(
             if skill not in accepted:
                 accepted.append(skill)
 
-        accepted = accepted[:16] if len(clause_explicit_anchors) <= 1 else accepted[:8]
+        accepted = (
+            accepted[:_SPARSE_EXPLICIT_ANCHOR_CAP]
+            if len(clause_explicit_anchors) <= 1
+            else accepted[:8]
+        )
         if accepted:
             semantic_groups.append((stage_index, accepted))
             semantic_primary.append(accepted[0])
