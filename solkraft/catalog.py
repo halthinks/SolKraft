@@ -223,6 +223,73 @@ class SkillCatalog:
 
         ranked.sort(key=lambda row: (-row["score"], row["id"].casefold()))
         return ranked[:max(1, int(limit))]
+    def identity_matches(
+        self,
+        query: str,
+        *,
+        min_overlap: int = 3,
+        min_weighted_overlap: float = 5.0,
+        limit: int = 12,
+    ) -> list[dict]:
+        """Return multiple high-confidence capability identities in query order.
+
+        This is for compound requests where several distinct capabilities can be
+        expressed in one objective. A candidate must match several distinctive
+        public-metadata tokens; generic one- or two-token overlaps are ignored.
+        Results are ordered by the earliest matched token in the request, then
+        by semantic strength.
+        """
+        normalized = " ".join(query.casefold().split())
+        query_sequence = [
+            token for token in TOKEN_RE.findall(normalized)
+            if len(token) > 2
+        ]
+        if not query_sequence:
+            return []
+
+        query_tokens = set(query_sequence)
+        first_position = {}
+        for index, token in enumerate(query_sequence):
+            first_position.setdefault(token, index)
+
+        matches = []
+        for skill_id, profile in self._identity_profiles.items():
+            desc = set(profile["description_tokens"])
+            names = set(profile["name_tokens"])
+            overlap = desc & query_tokens
+            if len(overlap) < min_overlap:
+                continue
+
+            weighted_overlap = sum(
+                self._identity_idf.get(token, 1.0)
+                for token in overlap
+            )
+            if weighted_overlap < min_weighted_overlap:
+                continue
+
+            coverage = weighted_overlap / profile["weight"]
+            name_hits = len(names & query_tokens) / max(len(names), 1)
+            score = coverage + 0.18 * name_hits
+            earliest = min(first_position[token] for token in overlap)
+            matches.append({
+                "id": skill_id,
+                "score": round(score, 6),
+                "overlap": len(overlap),
+                "weighted_overlap": round(weighted_overlap, 6),
+                "first_token_index": earliest,
+                "reason": "compound distinctive capability tokens",
+            })
+
+        matches.sort(
+            key=lambda row: (
+                row["first_token_index"],
+                -row["weighted_overlap"],
+                -row["score"],
+                row["id"].casefold(),
+            )
+        )
+        return matches[:max(limit, 0)]
+
     def identity_match(
         self,
         query: str,
