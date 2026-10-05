@@ -108,7 +108,7 @@ Assume the user wants a new image unless they clearly ask to change an existing 
 11. For transparent-output requests, ask built-in `image_gen` for a transparent background and preserve the generated alpha channel.
 12. Inspect outputs and validate: subject, style, composition, text accuracy, and invariants/avoid items.
 13. Iterate with a single targeted change, then re-check.
-14. For preview-only work, render the image inline; the underlying file may remain at the default `$CODEX_HOME/generated_images/...` path.
+14. For preview-only work, render the image inline; the underlying file may remain at the default `a host-provided generated-image artifact` path.
 15. For project-bound work, move or copy the selected artifact into the workspace and update any consuming code or references. Persist project-bound assets through the host's available artifact or workspace mechanism.
 16. For batches or multi-asset requests, persist every requested deliverable final in the workspace unless the user explicitly asked to keep outputs preview-only. Discarded variants do not need to be kept unless requested.
 17. If the user explicitly chooses or confirms the CLI fallback, then use the fallback-only docs for model, quality, size, `input_fidelity`, masks, output format, output paths, and network setup.
