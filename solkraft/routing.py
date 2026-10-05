@@ -23,6 +23,18 @@ _ACTIVE_STAGE_RE = re.compile(
     r"diagnose|investigate|debug|draft|write|compare|validate|audit)\b"
 )
 _SEMANTIC_TOKEN_RE = re.compile(r"[a-z0-9]+(?:'[a-z0-9]+)?")
+_SEMANTIC_STOPWORDS = frozenset("""
+a an and are as at be been being by can could did do does for from had has have
+how i if in into is it its may might more most must my no not of on or our should
+so than that the their them then there these they this those to under up use using
+was we were what when where which while who why will with would you your
+ability about after again against all also any because before between both but
+during each few further here hers herself himself itself just me myself once only
+other ours ourselves out over own same she some such themselves through too very
+capability capabilities skill skills procedure procedures method methods request
+requests task tasks work working result results evidence specialist specialized
+complex difficult real world correct appropriate relevant published bundled
+""".split())
 _GRAPH_SEMANTIC_CACHE = {}
 
 
@@ -49,7 +61,7 @@ def _graph_semantic_index(graph: dict) -> dict:
         token_set = frozenset(
             token
             for token in _SEMANTIC_TOKEN_RE.findall(_semantic_node_text(node).casefold())
-            if len(token) > 2
+            if len(token) > 2 and token not in _SEMANTIC_STOPWORDS
         )
         token_sets[skill_id] = token_set
         profiles[skill_id] = {"tokens": token_set}
@@ -151,6 +163,38 @@ def _graph_identity_rank(graph: dict, query: str, *, limit: int = 8) -> list[dic
     return ranked[:max(1, int(limit))]
 
 
+def _semantic_clause_segments(objective: str, composer) -> list[str]:
+    """Return stable intent-sized clauses for semantic capability routing.
+
+    The legacy composer is still consulted, but sentence boundaries are kept
+    when they expose additional user asks. This prevents a compound request
+    from collapsing into one lexical bucket while remaining deterministic for
+    ordinary prose.
+    """
+    try:
+        composer_clauses, _ = composer.segment(objective)
+        composer_clauses = [
+            str(clause).strip() for clause in composer_clauses
+            if str(clause).strip()
+        ]
+    except (AttributeError, TypeError, ValueError):
+        composer_clauses = []
+
+    sentence_clauses = [
+        clause.strip()
+        for clause in re.split(r"(?<=[.!?])\s+", objective.strip())
+        if clause.strip()
+    ]
+    if len(sentence_clauses) > len(composer_clauses):
+        clauses = sentence_clauses
+    else:
+        clauses = composer_clauses or sentence_clauses or [objective]
+
+    deduped = []
+    for clause in clauses:
+        if clause not in deduped:
+            deduped.append(clause)
+    return deduped
 
 
 def _load_composer():
@@ -310,10 +354,7 @@ def route_request(
     # clause. Whole-objective matching is intentionally reserved for a single
     # clause; on compound requests it can flood the route with cross-clause
     # false positives and exhaust the skill ceiling before later stages.
-    try:
-        semantic_clauses, _ = composer.segment(objective)
-    except (AttributeError, TypeError, ValueError):
-        semantic_clauses = [objective]
+    semantic_clauses = _semantic_clause_segments(objective, composer)
 
     compound_identity_trace = []
     if len(semantic_clauses) <= 1:
@@ -470,6 +511,13 @@ def route_request(
     # preserving each clause's order and retaining any additional support
     # skills afterwards. This makes compound route order reflect user intent.
     ordered_semantic = []
+    # Put one strongest identity from each clause first, in the user's clause
+    # order. Secondary candidates follow afterwards. This keeps multi-ask
+    # routing ordered by intent instead of by whichever support candidate was
+    # lexically strongest inside an earlier clause.
+    for skill in semantic_primary:
+        if skill not in ordered_semantic:
+            ordered_semantic.append(skill)
     for _, group in semantic_groups:
         for skill in group:
             if skill not in ordered_semantic:
