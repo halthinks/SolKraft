@@ -175,7 +175,7 @@ def build_profiles(records, graph):
 
         profiles[skill_id] = {
             "anchors": unique[:18],
-            "domain": str(node.get("domain") or "general"),
+            "domain": " ".join(tokens(str(node.get("domain") or "general"))) or "general",
             "description_norm": normalized(record.description),
             "id_norm": normalized(record.id),
         }
