@@ -316,27 +316,27 @@ def compose_route(graph, objective, explicit=(), context=None, max_skills=10, bl
         if skill and add(skill, index, reason, "high" if mapped else "moderate"):
             stage_selected.append(skill)
 
-        # General semantic fallback: add a small, ranked set of lexical
-        # candidates for every clause. This lets catalog skills without a
-        # hand-written intent rule participate in routing and also preserves
-        # specialist candidates when a generic mapped workflow fires first.
-        semantic = selector.semantic_candidates(
-            nodes,
-            clause,
-            limit=3,
-            blocked=blocked,
-        )
-        for candidate in semantic:
-            candidate_id = candidate["id"]
-            if candidate_id in stage_selected or candidate_id in selected:
-                continue
-            if add(
-                candidate_id,
-                index,
-                f"semantic catalog match ({candidate['score']})",
-                "moderate",
-            ):
-                stage_selected.append(candidate_id)
+        # Only use lexical catalog discovery when the rule/fallback composer
+        # could not select a stage. Adding several lexical neighbors beside an
+        # already matched capability inflates compound routes and destroys
+        # precision. The higher-level router may still replace this provisional
+        # choice with stronger query-centric identity evidence.
+        if not stage_selected:
+            semantic = selector.semantic_candidates(
+                nodes,
+                clause,
+                limit=1,
+                blocked=blocked,
+            )
+            if semantic:
+                candidate = semantic[0]
+                if add(
+                    candidate["id"],
+                    index,
+                    f"semantic catalog fallback ({candidate['score']})",
+                    "moderate",
+                ):
+                    stage_selected.append(candidate["id"])
 
         if not stage_selected:
             unselected.append({
