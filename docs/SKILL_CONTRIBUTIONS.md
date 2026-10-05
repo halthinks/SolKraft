@@ -145,6 +145,35 @@ The migration tool never overwrites an existing sidecar and only infers an empty
 
 See [Verification and trust](VERIFICATION_AND_TRUST.md) for the evidence envelope, result states, trust binding model, audit receipts, and sandbox boundary.
 
+## Free CI with Floot and automatic semantic-proof updates
+
+Contributors do not need paid CI to prove a skill. A free Floot project VM can run the same repository commands in an isolated Linux environment. Floot's generic VM does not include Git or pip by default, so download the public branch archive with `curl`, bootstrap pip when necessary, install `.[dev]`, and run the canonical repository commands below. Do not put repository or service tokens into test prompts or contribution files.
+
+The normal contribution path is:
+
+```text
+python -m pip install -e ".[dev]"
+python -m scripts.prepare_skill_contribution contributions/your-skill.json
+python -m scripts.preflight_contribution contributions/your-skill.json
+python -m pytest -q tests/test_semantic_router_benchmark.py
+```
+
+`prepare_skill_contribution` is deliberately catalog-driven. It detects the contributed skill through its manifest and the production `SkillCatalog`, rebuilds semantic profiles from the updated selection graph, computes the smallest admissible-skill anchor conjunction that uniquely identifies the new capability, and records shared-anchor neighbors. If the new skill is not uniquely identifiable from observable semantic evidence, it is classified for ambiguity coverage instead of manufacturing a hidden-label exact-recall expectation.
+
+No contributor edits a central list of benchmark phrases. Once the skill, graph metadata, contract and contribution manifest are present, the semantic benchmark sees the expanded catalog automatically and generates the new subject-area corpus from that skill's description, domain, inputs and outputs. The proof generates 1,000 distinct single-skill prompts per catalog skill plus the composition and stability corpus; exact-recall prompts use uniquely identifying anchor sets, while shared-anchor prompts exercise ambiguity behavior.
+
+`preflight_contribution` now runs the semantic proof planner before the canonical full contribution gate. A clean PR therefore carries the skill implementation, provenance, contract, graph/routing integration, authored fixtures, generated semantic-proof plan and full CI receipts together. If adding the skill exposes a real router collision, fix the shared production router/graph and its regression tests in the same PR; do not add a contribution-only selector or hand-author benchmark phrases merely to force a pass.
+
+For Floot or another time-limited free VM, run semantic proof shards independently rather than one monolithic process:
+
+```text
+python -m scripts.semantic_router_benchmark --shard-index 0 --shard-count 16 --output benchmark-results/results-semantic-router-proof-shard-0-of-16.json
+# repeat shard-index 1 through 15
+python -m scripts.aggregate_semantic_router_benchmark --input benchmark-results --output build/semantic-router-proof-summary.json
+```
+
+A contribution is ready only when targeted fixtures, full contribution preflight, semantic corpus invariants, every completed semantic shard, and the aggregate gates pass. A timeout is not a pass; rerun that shard on a sufficiently long worker or subdivide execution without changing the corpus semantics.
+
 ## Submit all affected layers together
 
 Include the entrypoint/resources, provenance/notices, graph node/rules/edges, necessary parser changes, manifest, meaningful tests, and regenerated `docs/assets` files and plugin archive. Search API, MCP retrieval and the static console derive from the same catalog; preserve that single authority. For new dependencies, document installation, portability and failure behavior. General skill contributions should not need new REST endpoints or MCP tools.
