@@ -27,18 +27,13 @@ _GRAPH_SEMANTIC_CACHE = {}
 
 
 def _semantic_node_text(node: dict) -> str:
-    values = [
+    """Return the public capability fields that define semantic identity."""
+    return " ".join([
         str(node.get("description") or ""),
         str(node.get("domain") or ""),
         " ".join(map(str, node.get("inputs") or [])),
         " ".join(map(str, node.get("outputs") or [])),
-        str(node.get("selection") or ""),
-    ]
-    authority = node.get("authority") or {}
-    if isinstance(authority, dict):
-        values.append(" ".join(map(str, authority.get("capabilities") or [])))
-        values.append(" ".join(map(str, authority.get("resources") or [])))
-    return " ".join(values)
+    ])
 
 
 def _graph_semantic_index(graph: dict) -> dict:
@@ -72,6 +67,12 @@ def _graph_semantic_index(graph: dict) -> dict:
     for skill_id, token_set in token_sets.items():
         profiles[skill_id]["weight"] = (
             sum(idf.get(token, 1.0) for token in token_set) or 1.0
+        )
+        profiles[skill_id]["anchors"] = frozenset(
+            sorted(
+                token_set,
+                key=lambda token: (-idf.get(token, 1.0), token),
+            )[:18]
         )
         for token in token_set:
             token_to_skills.setdefault(token, set()).add(skill_id)
@@ -116,8 +117,11 @@ def _graph_identity_rank(graph: dict, query: str, *, limit: int = 8) -> list[dic
         if not overlap:
             continue
         weighted_overlap = sum(idf[token] for token in overlap)
+        anchor_overlap = profile["anchors"] & query_tokens
+        weighted_anchor_overlap = sum(idf[token] for token in anchor_overlap)
         score = (
-            weighted_overlap
+            6.0 * weighted_anchor_overlap
+            + weighted_overlap
             + 2.0 * weighted_overlap / query_weight
             + weighted_overlap / profile["weight"]
         )
@@ -125,6 +129,8 @@ def _graph_identity_rank(graph: dict, query: str, *, limit: int = 8) -> list[dic
             "id": skill_id,
             "score": round(score, 6),
             "weighted_overlap": round(weighted_overlap, 6),
+            "anchor_overlap": len(anchor_overlap),
+            "weighted_anchor_overlap": round(weighted_anchor_overlap, 6),
             "matched_tokens": sorted(
                 overlap,
                 key=lambda token: (-idf[token], first_position.get(token, 10**9)),
@@ -345,7 +351,7 @@ def route_request(
             graph_admissible.append(row)
 
         accepted = []
-        for candidate_index, row in enumerate(graph_admissible[:3]):
+        for candidate_index, row in enumerate(graph_admissible[:8]):
             matched = row.get("matched_tokens") or []
             next_score = (
                 graph_admissible[candidate_index + 1]["score"]
@@ -354,8 +360,11 @@ def route_request(
             )
             margin = row["score"] - next_score
             strong = (
-                row.get("weighted_overlap", 0.0) >= 4.5
-                and (len(matched) >= 3 or margin >= 0.75)
+                row.get("anchor_overlap", 0) >= 2
+                or (
+                    row.get("weighted_overlap", 0.0) >= 6.0
+                    and len(matched) >= 3
+                )
             )
             semantic_trace.append({
                 "stage": stage_index,
@@ -365,6 +374,8 @@ def route_request(
                 "score": row["score"],
                 "margin_to_next": round(margin, 6),
                 "weighted_overlap": row.get("weighted_overlap"),
+                "anchor_overlap": row.get("anchor_overlap"),
+                "weighted_anchor_overlap": row.get("weighted_anchor_overlap"),
                 "matched_tokens": matched,
                 "source": "expanded capability metadata",
                 "accepted": strong,
@@ -422,7 +433,7 @@ def route_request(
             if skill not in accepted:
                 accepted.append(skill)
 
-        accepted = accepted[:4]
+        accepted = accepted[:8]
         if accepted:
             semantic_groups.append((stage_index, accepted))
             semantic_primary.append(accepted[0])
