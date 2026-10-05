@@ -227,8 +227,17 @@ def anchor_phrase(
     picked = []
     if require_distinguishing:
         distinctive = profile.get("distinguishing_anchors") or []
+        # Exact-recall cases carry at least two selective anchors when the
+        # profile has them. One rare-but-generic token (for example
+        # "execution") is not enough evidence to identify a specific skill.
+        # Rotate the pair so the 1,000-case corpus still exercises the profile
+        # rather than hard-coding one phrase.
         if distinctive:
-            picked.append(distinctive[case_index % len(distinctive)])
+            start = case_index % len(distinctive)
+            for offset in range(min(2, len(distinctive))):
+                token = distinctive[(start + offset) % len(distinctive)]
+                if token not in picked:
+                    picked.append(token)
     cursor = (case_index * 7 + 3) % len(anchors)
     for offset in range(max(width * 4, len(anchors))):
         token = anchors[(cursor + offset * 5) % len(anchors)]
