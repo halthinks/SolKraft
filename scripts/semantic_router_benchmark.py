@@ -33,7 +33,7 @@ COMPOSITION_CASES = 100_000
 STABILITY_BASE_CASES = 10_000
 STABILITY_REPEATS = 10
 
-WORD_RE = re.compile(r"[a-z0-9][a-z0-9'-]*", re.I)
+WORD_RE = re.compile(r"[a-z0-9]+(?:'[a-z0-9]+)?", re.I)
 RESULT_TEMPLATE = "results-semantic-router-proof-shard-{shard:02d}-of-{count:02d}.json"
 
 STOPWORDS = frozenset("""
