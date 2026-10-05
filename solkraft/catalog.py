@@ -159,6 +159,15 @@ class SkillCatalog:
         for skill_id, profile in profiles.items():
             distinct = set(profile["description_tokens"]) | set(profile["name_tokens"])
             profile["weight"] = sum(self._identity_idf.get(token, 1.0) for token in distinct) or 1.0
+            ranked = sorted(
+                distinct,
+                key=lambda token: (-self._identity_idf.get(token, 1.0), token),
+            )
+            profile["anchors"] = tuple(ranked[:12])
+            profile["anchor_weight"] = (
+                sum(self._identity_idf.get(token, 1.0) for token in profile["anchors"])
+                or 1.0
+            )
         self._identity_profiles = profiles
 
     def identity_match(
@@ -227,7 +236,27 @@ class SkillCatalog:
             weighted_overlap = sum(self._identity_idf.get(token, 1.0) for token in overlap)
             coverage = weighted_overlap / profile["weight"]
             name_hits = len(names & query_tokens) / max(len(names), 1)
-            score = coverage + 0.18 * name_hits
+
+            anchors = set(profile.get("anchors") or ())
+            anchor_overlap = anchors & query_tokens
+            anchor_weight = sum(
+                self._identity_idf.get(token, 1.0) for token in anchor_overlap
+            )
+            anchor_coverage = anchor_weight / profile.get("anchor_weight", 1.0)
+            anchor_hits = len(anchor_overlap)
+
+            # Long natural-language requests often express a capability through
+            # only a handful of its most distinctive terms. Score those rare
+            # anchors directly instead of requiring broad overlap with every
+            # word in the published description.
+            anchor_signal = 0.0
+            if anchor_hits >= 2:
+                anchor_signal = anchor_coverage * 1.35 + min(anchor_hits, 5) * 0.055
+
+            score = max(
+                coverage + 0.18 * name_hits,
+                anchor_signal + 0.08 * name_hits,
+            )
             if score > 0:
                 scored.append((score, skill_id))
 
@@ -237,7 +266,17 @@ class SkillCatalog:
         best_score, best_id = scored[0]
         second_score = scored[1][0] if len(scored) > 1 else 0.0
         margin = best_score - second_score
-        if best_score < min_score or margin < min_margin:
+        best_profile = self._identity_profiles[best_id]
+        best_anchor_hits = len(set(best_profile.get("anchors") or ()) & query_tokens)
+        adaptive_min = min_score
+        adaptive_margin = min_margin
+        if best_anchor_hits >= 4:
+            adaptive_min = min(adaptive_min, 0.42)
+            adaptive_margin = min(adaptive_margin, 0.055)
+        elif best_anchor_hits >= 3:
+            adaptive_min = min(adaptive_min, 0.48)
+            adaptive_margin = min(adaptive_margin, 0.065)
+        if best_score < adaptive_min or margin < adaptive_margin:
             return None
         return {
             "id": best_id,
