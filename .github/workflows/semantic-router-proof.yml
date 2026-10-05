@@ -4,7 +4,7 @@ name: Semantic Router Proof
 
 on:
   push:
-    branches: [main]
+    branches: [semantic-proof-lock]
     paths:
       - "scripts/semantic_router_benchmark.py"
       - "scripts/aggregate_semantic_router_benchmark.py"
@@ -17,10 +17,8 @@ permissions:
   contents: read
 
 concurrency:
-  # Push proofs collapse to the newest main commit, but an explicitly dispatched
-  # proof is isolated so later pushes cannot kill a long-running validation.
-  group: semantic-router-proof-${{ github.event_name == 'workflow_dispatch' && github.run_id || github.ref }}
-  cancel-in-progress: ${{ github.event_name != 'workflow_dispatch' }}
+  group: semantic-router-proof-lock
+  cancel-in-progress: false
 
 jobs:
   semantic-preflight:
