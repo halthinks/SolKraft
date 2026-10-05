@@ -54,7 +54,7 @@ def segment(objective):
     # Preserve object lists joined by ``and``; split only where a new action starts.
     boundary = (
         rf"[;\n]+|[.!?](?:\s+(?:next,?\s*)?|$)|\b(?:then|after that|finally|otherwise)\b|"
-        rf",\s*(?=(?:then\s+)?(?:{_ACTION})\b)|\band\s+(?=(?:{_ACTION})\b)"
+        rf"\band\s+(?=(?:{_ACTION})\b)"
     )
     raw = [part.strip(" ,:") for part in re.split(boundary, text) if part.strip(" ,:")]
     # ``write and run focused tests`` is one verification request. The first
