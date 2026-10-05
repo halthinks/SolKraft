@@ -175,6 +175,28 @@ def route_request(
     known = {record.id: record for record in catalog.records()}
     selected = [skill for skill in result["selected"] if skill in known]
 
+    compound_identity_trace = []
+    compound_identity_skills = []
+    for match in catalog.identity_matches(objective, limit=max_skills):
+        skill = match["id"]
+        node = expanded.get("nodes", {}).get(skill, {})
+        if node.get("effect") is True:
+            compound_identity_trace.append({**match, "blocked": "consequential effect node"})
+            continue
+        if not _decision_allows(decisions, skill):
+            compound_identity_trace.append({**match, "blocked": "contract policy"})
+            continue
+        compound_identity_trace.append(match)
+        if skill not in compound_identity_skills:
+            compound_identity_skills.append(skill)
+
+    if compound_identity_skills:
+        selected = [
+            *compound_identity_skills,
+            *[skill for skill in selected if skill not in compound_identity_skills],
+        ][:max_skills]
+        result.setdefault("selection_trace", {})["compound_capability_identity"] = compound_identity_trace
+
     # Augment the rule-based composer with query-centric capability evidence for
     # each requested clause. This is deliberately additive: existing workflow
     # matches remain visible, while a strongly supported catalog specialist can
