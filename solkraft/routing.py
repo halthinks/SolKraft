@@ -577,7 +577,14 @@ def route_request(
     selected = [
         *ordered_semantic,
         *[skill for skill in selected if skill not in ordered_semantic],
-    ][:max_skills]
+    ]
+    # max_skills is a composer target, not permission to discard explicit
+    # semantic evidence. A sparse user-provided anchor can legitimately map to
+    # more candidates than the default route width; retain those candidates so
+    # downstream selection can disambiguate instead of creating false-negative
+    # capability recall.
+    semantic_floor = len(ordered_semantic)
+    selected = selected[:max(max_skills, semantic_floor)]
     result.setdefault("selection_trace", {})["semantic_capability_rank"] = semantic_trace
     result["selection_trace"]["semantic_clause_order"] = ordered_semantic
     objective_identity_skill, objective_identity = _identity_candidate(
