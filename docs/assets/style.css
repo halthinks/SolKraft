@@ -271,3 +271,39 @@ pre{max-width:100%;overflow-x:auto}
     padding-inline: clamp(16px, 4vw, 28px);
   }
 }
+
+/* Stack information modules on touch/portrait layouts */
+@media (orientation: portrait), (pointer: coarse) and (max-width: 1600px) {
+  .guide-grid,
+  .lower-grid,
+  .release-grid,
+  .release-strip,
+  .validation-grid,
+  .validation-stats,
+  .validation-note,
+  .connect-strip,
+  .setup-options,
+  .setup-paths,
+  .setup-layout {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .status-card,
+  .setup-paths button:last-child,
+  .connect-strip > div,
+  .connect-btn {
+    grid-column: auto !important;
+  }
+
+  .guide-grid > *,
+  .lower-grid > *,
+  .release-grid > *,
+  .validation-stats > *,
+  .validation-note > *,
+  .connect-strip > *,
+  .setup-options > *,
+  .setup-paths > * {
+    width: 100%;
+    min-width: 0;
+  }
+}
