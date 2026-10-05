@@ -129,6 +129,7 @@ def _graph_identity_rank(graph: dict, query: str, *, limit: int = 8) -> list[dic
         return []
 
     query_tokens = set(query_sequence)
+    explicit_query_anchors = _explicit_query_anchors(query)
     first_position = {}
     for position, token in enumerate(query_sequence):
         first_position.setdefault(token, position)
