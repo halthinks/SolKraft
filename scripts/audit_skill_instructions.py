@@ -12,6 +12,9 @@ HOST_RUNTIME_PATTERNS = (
     ("codex", re.compile(r"\bCodex\b")),
     ("claude-code", re.compile(r"\bClaude Code\b")),
 )
+# These terms can be legitimate domain content (for example, a plan may forbid
+# TODO/TBD placeholders). Treat them as informational rather than integrity
+# failures unless a referenced file or executable is actually missing.
 PLACEHOLDER_RE = re.compile(r"\b(?:TODO|TBD|coming soon)\b", re.I)
 
 def main() -> int:
