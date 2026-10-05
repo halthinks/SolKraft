@@ -176,6 +176,8 @@ def _graph_identity_rank(graph: dict, query: str, *, limit: int = 8) -> list[dic
 
     ranked.sort(
         key=lambda row: (
+            -row.get("explicit_anchor_overlap", 0),
+            -row.get("weighted_explicit_anchor_overlap", 0.0),
             -row.get("anchor_overlap", 0),
             -row.get("weighted_anchor_overlap", 0.0),
             -row["score"],
