@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/style.css?v=blue-accent-20261004">
+  <link rel="stylesheet" href="assets/style.css?v=semantic-proof-copy-20261004">
   <script defer src="assets/flow.js?v=5c9299226bcc"></script>
   <script defer src="assets/setup.js?v=278e57137674"></script>
   <script defer src="assets/static-data.js?v=e01a0fac4b24"></script>
@@ -67,19 +67,19 @@
     <section id="validation-replay" class="workspace validation-replay" aria-label="Recorded benchmark reenactment">
       <div class="validation-head">
         <div>
-          <div class="eyebrow"><span class="pulse"></span> RECORDED VALIDATION · REENACTMENT</div>
-          <h2>100,000 requests.<br><em>Watch the router clear them.</em></h2>
-          <p>This is a sped-up replay of a real recorded local validation run. It is <strong>not</strong> a live CI job and does not run tests in your browser.</p>
+          <div class="eyebrow"><span class="pulse"></span> RECORDED CONTRACT VALIDATION · HISTORICAL REPLAY</div>
+          <h2>100,000 contract checks.<br><em>Watch the historical replay.</em></h2>
+          <p>This is a recorded replay of the historical 100k contract/hardening run. It is <strong>not</strong> the new broad-semantic proof and does not run tests in your browser.</p>
         </div>
       </div>
       <div class="validation-grid">
         <div class="validation-terminal">
-          <div class="terminal-bar"><span>solkraft://validation-replay</span><b>RECORDED · 100-FAMILY CORPUS</b></div>
+          <div class="terminal-bar"><span>solkraft://validation-replay</span><b>RECORDED · LEGACY CONTRACT CORPUS</b></div>
           <div id="validation-stream" class="validation-stream" aria-live="polite"></div>
           <div class="validation-progress"><i id="validation-progress"></i></div>
         </div>
         <div class="validation-stats">
-          <article><small>REQUESTS</small><strong id="validation-count">100,000</strong><span>exactly 250 words each</span></article>
+          <article><small>REQUESTS</small><strong id="validation-count">100,000</strong><span>historical generated corpus</span></article>
           <article><small>OVERALL PASS</small><strong>100.000%</strong><span>100,000 / 100,000</span></article>
           <article><small>TARGET RECALL</small><strong>100.000%</strong><span>64,158 / 64,158 eligible cases</span></article>
           <article><small>HARDENED BLOCKS</small><strong>100.000%</strong><span>30,062 / 30,062</span></article>
@@ -88,9 +88,9 @@
         </div>
       </div>
       <div class="validation-note">
-        <span><b>Recorded locally</b> Five local shards in the assistant execution environment; no GitHub Actions or remote test runner.</span>
-        <span><b>100 ask families per skill</b> Near-neighbor confusion, ambiguity, compound context, and capability-disambiguation variants.</span>
-        <span><b>Replay only</b> Browser animation is intentionally much faster than the real validation run.</span>
+        <span><b>Historical contract replay</b> Retained to show hardened policy, blocking, boundaries, and advisory execution behavior.</span>
+        <span><b>New semantic proof</b> 1,000 distinct prompts per skill + 100,000 multi-skill compositions + 100,000 stability executions.</span>
+        <span><b>Proof gate</b> New semantic results are only treated as proven when the aggregate CI receipt passes its thresholds.</span>
       </div>
     </section>
 
