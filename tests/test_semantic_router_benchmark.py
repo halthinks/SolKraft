@@ -142,6 +142,7 @@ def test_semantic_router_low_skill_rate_regression_probe():
     records_by_id = {record.id: record for record in records}
     graph = catalog_graph(catalog)
     index = contract_index(catalog)
+    entries = {entry["id"]: entry for entry in index.entries()}
     profiles = build_profiles(records, graph)
     exact_anchor_sets = assign_exact_recall_anchor_sets(records, graph, entries)
 
