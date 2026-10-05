@@ -298,6 +298,10 @@ class SkillCatalog:
                 "overlap": len(overlap),
                 "weighted_overlap": round(weighted_overlap, 6),
                 "first_token_index": earliest,
+                "matched_tokens": sorted(
+                    overlap,
+                    key=lambda token: (first_position.get(token, 10**9), token),
+                ),
                 "reason": "compound distinctive capability tokens",
             })
 
