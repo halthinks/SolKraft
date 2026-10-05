@@ -47,6 +47,7 @@ other ours ourselves out over own same she some such themselves through too very
 capability capabilities skill skills procedure procedures method methods request
 requests task tasks work working result results evidence specialist specialized
 complex difficult real world correct appropriate relevant published bundled
+user objective supplied applicable scope acceptance criteria verified requested deliverable input inputs output outputs general
 """.split())
 
 ACTION_OPENERS = (
