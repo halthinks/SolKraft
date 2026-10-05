@@ -11,7 +11,7 @@
 - The compact `ContractIndex` supplies routing/API/MCP/docs metadata without loading every full `SKILL.md` body into the hot path.
 - Read-only MCP tools: `search_skills`, `route_request`, `get_skill`, `get_skill_resource`, `get_selection_graph`, `get_skill_contract`, and `get_contract_index`.
 - Reusable CI and pre-PR contribution validation share contract/schema, routing, packaging, installed-MCP, index/hardening, and evidence gates.
-- Latest local acceptance: **100,000 / 100,000** unique 250-word requests passed with **100 ask families per skill**, **100% eligible target recall**, **100% hardened blocking**, and **100% consequential-boundary correctness**; no explicit skill IDs were injected.
+- Historical local contract acceptance recorded **100,000 / 100,000** generated cases. That run remains useful for hardened contract-policy and boundary behavior, but it is not the acceptance proof for broad semantic language coverage. The stronger semantic proof is defined in [docs/SEMANTIC_ROUTER_PROOF.md](docs/SEMANTIC_ROUTER_PROOF.md).
 - The public Validation display is a clearly labeled **recorded reenactment**, not live browser CI.
 - Canonical local acceptance receipt: `scripts/results-advanced-contract-100000-local-summary.json`.
 
@@ -42,7 +42,7 @@ python -m scripts.routing_battery
 
 Its checked-in receipt is `scripts/results-routing-100000.json`: 100,000 passing requests across ten fixed domains, 10,000 per domain, with prompts of at least 200 words. It checks prompt uniqueness, expected ordered skills, retained effect exclusions, unresolved-stage handling, and advisory authority. It is **not** the canonical catalog-wide acceptance validator.
 
-The canonical acceptance validator is `scripts/advanced_contract_benchmark.py`, exercised across all 173 bundled skills with 100,000 globally unique requests of exactly 250 words, 100 ask families per skill, no explicit skill IDs, hardened contract assertions, and catalog-wide target-recall checks. The current acceptance receipt is `scripts/results-advanced-contract-100000-local-summary.json`.
+The historical contract acceptance validator is `scripts/advanced_contract_benchmark.py`, exercised across all 173 bundled skills with 100,000 generated requests, hardened contract assertions, and catalog-wide target-recall checks. Its current local receipt is `scripts/results-advanced-contract-100000-local-summary.json`. Broad semantic acceptance is now governed separately by `scripts/semantic_router_benchmark.py` and the aggregate semantic proof gate.
 
 The ten-domain battery uses systematically generated combinations of stage phrases and context variants. It provides stable smoke/regression coverage, not a statistically representative sample of unrestricted human requests, proof of universal understanding, or completion of work performed by a host agent.
 
@@ -104,6 +104,22 @@ The gate passed 104 unique targeted cases and contextual variants, the full 100,
 
 The targeted variants and 100,000 regression requests test routing, not 100,000 independently authored intentions or successful execution of every skill. Contributors must supply relevant helper tests, simulations, or real task evidence separately. No new externally hosted API deployment or remote ChatGPT connection was executed in this change.
 
+
+## Semantic router proof — current acceptance model
+
+The semantic proof suite addresses a weakness in the earlier 100k generated benchmark: string uniqueness and repeated ask templates are not the same as broad semantic coverage.
+
+The current proof runs three independent surfaces:
+
+- **1,000 distinct prompts per skill**: 800 development cases plus a locked 200-case holdout for every bundled skill. Prompts vary framing, context, tone, deliverable wording, semantic anchors, and nearest-neighbor distractors.
+- **100,000 multi-skill composition requests**: each request requires two to five selectable skills, measuring complete target coverage, exact target sets, route order, unresolved stages, and extras.
+- **100,000 stability executions**: 10,000 difficult base prompts routed ten times each, with route fingerprints compared for deterministic stability.
+
+With the current 173-skill catalog this is **373,000 routing executions**. The suite forbids literal structured skill IDs, full published descriptions, and copied eight-word description spans in generated prompts.
+
+The aggregate gate requires >=95% global and holdout single-skill behavior, >=90% on every individual skill, >=90% multi-skill target coverage, >=95% route-order preservation, 100% repeat stability, and zero metadata leakage. A shard cannot declare success by itself; only the aggregate receipt may set `proof_passed: true`.
+
+See [docs/SEMANTIC_ROUTER_PROOF.md](docs/SEMANTIC_ROUTER_PROOF.md) and `.github/workflows/semantic-router-proof.yml`.
 
 ## Pre-fix benchmark — historical failure evidence
 
