@@ -378,6 +378,7 @@ def route_request(
     semantic_groups = []
     semantic_primary = []
     for stage_index, clause in enumerate(semantic_clauses, 1):
+        clause_explicit_anchors = _explicit_query_anchors(clause)
         graph_ranked = _graph_identity_rank(expanded, clause, limit=32)
         graph_admissible = []
         for row in graph_ranked:
@@ -386,11 +387,16 @@ def route_request(
             if node.get("effect") is True or not _decision_allows(decisions, skill):
                 continue
             matched = row.get("matched_tokens") or []
-            if len(matched) < 2:
+            explicit_overlap = row.get("explicit_anchor_overlap", 0)
+            if len(matched) < 2 and explicit_overlap < 1:
                 continue
             graph_admissible.append(row)
 
         accepted = []
+        max_explicit_overlap = max(
+            (row.get("explicit_anchor_overlap", 0) for row in graph_admissible),
+            default=0,
+        )
         max_anchor_overlap = max(
             (row.get("anchor_overlap", 0) for row in graph_admissible),
             default=0,
@@ -404,11 +410,19 @@ def route_request(
             )
             margin = row["score"] - next_score
             anchor_overlap = row.get("anchor_overlap", 0)
+            explicit_overlap = row.get("explicit_anchor_overlap", 0)
+            explicit_budget = 8 if len(clause_explicit_anchors) <= 1 else 4
             strong = (
-                max_anchor_overlap >= 2
+                max_explicit_overlap > 0
+                and explicit_overlap == max_explicit_overlap
+                and candidate_index < explicit_budget
+            ) or (
+                max_explicit_overlap == 0
+                and max_anchor_overlap >= 2
                 and anchor_overlap == max_anchor_overlap
             ) or (
-                max_anchor_overlap < 2
+                max_explicit_overlap == 0
+                and max_anchor_overlap < 2
                 and row.get("weighted_overlap", 0.0) >= 6.0
                 and len(matched) >= 3
                 and candidate_index == 0
@@ -423,13 +437,16 @@ def route_request(
                 "weighted_overlap": row.get("weighted_overlap"),
                 "anchor_overlap": anchor_overlap,
                 "weighted_anchor_overlap": row.get("weighted_anchor_overlap"),
+                "explicit_anchor_overlap": explicit_overlap,
+                "weighted_explicit_anchor_overlap": row.get("weighted_explicit_anchor_overlap"),
                 "matched_tokens": matched,
                 "source": "expanded capability metadata",
                 "accepted": strong,
             })
             if strong and row["id"] not in accepted:
                 accepted.append(row["id"])
-            if len(accepted) >= 3:
+            graph_accept_cap = 8 if len(clause_explicit_anchors) <= 1 else 4
+            if len(accepted) >= graph_accept_cap:
                 break
 
         ranked = catalog.identity_rank(clause, limit=8)
