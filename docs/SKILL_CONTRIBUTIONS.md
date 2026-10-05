@@ -174,6 +174,21 @@ python -m scripts.aggregate_semantic_router_benchmark --input benchmark-results 
 
 A contribution is ready only when targeted fixtures, full contribution preflight, semantic corpus invariants, every completed semantic shard, and the aggregate gates pass. A timeout is not a pass; rerun that shard on a sufficiently long worker or subdivide execution without changing the corpus semantics.
 
+## Pull request completeness checklist
+
+Before opening the PR, verify the candidate contains all of the following. The PR is the integration unit; do not submit a skill file and leave router or proof repair for a maintainer.
+
+- [ ] `solkraft/skillpacks/<skill>/SKILL.md` has focused purpose, prerequisites, procedure, boundaries, stop conditions and observable completion evidence.
+- [ ] `contract.yaml` declares typed I/O, effects, authority requirements, verification and positive/negative/policy fixtures.
+- [ ] `contributions/<skill>.json` records provenance/license/source and realistic positive, exclusion, quoted, deferred, neighboring and compound cases.
+- [ ] The production selection graph contains the node, justified rules and only real edges; no contribution-only selector was added.
+- [ ] `python -m scripts.prepare_skill_contribution contributions/<skill>.json` sees the new skill and reports meaningful exact-recall anchors or ambiguity coverage. Generic schema/metadata words are excluded from semantic anchors.
+- [ ] Router/parser changes exposed by the new capability include focused regression tests and preserve existing routes.
+- [ ] `python -m scripts.preflight_contribution contributions/<skill>.json` passes and produces fresh receipts/bundle hashes for the candidate.
+- [ ] Semantic corpus invariants pass; all full proof shards complete (timeouts are rerun, never counted as passes); aggregate semantic gates pass.
+- [ ] Generated console/catalog/plugin artifacts required by `scripts.local_ci` are regenerated and included.
+- [ ] The PR description states representative requests/exclusions, test commands and actual results, limitations, provenance/redistribution rights, and receipt hashes.
+
 ## Submit all affected layers together
 
 Include the entrypoint/resources, provenance/notices, graph node/rules/edges, necessary parser changes, manifest, meaningful tests, and regenerated `docs/assets` files and plugin archive. Search API, MCP retrieval and the static console derive from the same catalog; preserve that single authority. For new dependencies, document installation, portability and failure behavior. General skill contributions should not need new REST endpoints or MCP tools.
