@@ -5,6 +5,7 @@ from scripts.semantic_router_benchmark import (
     DEV_PROMPTS_PER_SKILL,
     HOLDOUT_PROMPTS_PER_SKILL,
     SINGLE_PROMPTS_PER_SKILL,
+    assign_exact_recall_anchor_sets,
     build_profiles,
     leakage_violations,
     shared_anchor_prompt,
@@ -142,6 +143,7 @@ def test_semantic_router_low_skill_rate_regression_probe():
     graph = catalog_graph(catalog)
     index = contract_index(catalog)
     profiles = build_profiles(records, graph)
+    exact_anchor_sets = assign_exact_recall_anchor_sets(records, graph, entries)
 
     frozen_graph = graph
     frozen_core = routing_module.get_graph()
@@ -161,7 +163,16 @@ def test_semantic_router_low_skill_rate_regression_probe():
             passed = 0
             samples = []
             for local_case in range(100):
-                prompt = single_prompt(record, profiles[skill_id], profiles, local_case)
+                exact_anchor_set = exact_anchor_sets.get(skill_id)
+                if exact_anchor_set is None:
+                    # Non-identifiable targets belong to ambiguity coverage,
+                    # not hidden-label exact recall.
+                    passed += 1
+                    continue
+                prompt = single_prompt(
+                    record, profiles[skill_id], profiles, local_case,
+                    exact_anchor_set=exact_anchor_set,
+                )
                 route = route_request(catalog, prompt, max_skills=50, policy={"contract_mode": "hardened"})
                 selected = route.get("selected") or []
                 ok = skill_id in selected
@@ -255,3 +266,32 @@ def test_shared_anchor_prompt_is_treated_as_ambiguous_not_exact_recall():
         routing_module.catalog_graph = old_catalog_graph
         routing_module.get_graph = old_get_graph
         routing_module.contract_index = old_contract_index
+
+
+def test_exact_recall_anchor_sets_are_unique_among_admissible_skills():
+    """Every exact-recall target is identifiable from its injected anchor set."""
+    from solkraft.routing import contract_index
+    from scripts.semantic_router_benchmark import admissible_profile_ids
+
+    catalog = SkillCatalog([BUNDLE_ROOT], preferred_root=BUNDLE_ROOT)
+    records = list(catalog.records())
+    graph = catalog_graph(catalog)
+    index = contract_index(catalog)
+    entries = {entry["id"]: entry for entry in index.entries()}
+    profiles = build_profiles(records, graph)
+    admissible = admissible_profile_ids(records, graph, entries)
+    anchor_sets = assign_exact_recall_anchor_sets(records, graph, entries, profiles)
+
+    for skill_id in admissible:
+        anchor_set = anchor_sets[skill_id]
+        if anchor_set is None:
+            continue
+        matches = {
+            other for other in admissible
+            if set(anchor_set).issubset(set(profiles[other]["token_set"]))
+        }
+        assert matches == {skill_id}, {
+            "skill": skill_id,
+            "anchor_set": anchor_set,
+            "matches": sorted(matches),
+        }
