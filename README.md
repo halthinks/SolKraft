@@ -11,7 +11,7 @@
 **Route normal-language requests to the right reusable capabilities — with contract-aware selection, typed composition, and CI-visible verification.**
 
 [![CI](https://github.com/halthinks/SolKraft/actions/workflows/tests.yml/badge.svg)](https://github.com/halthinks/SolKraft/actions/workflows/tests.yml)
-[![Advanced Contract Benchmark](https://github.com/halthinks/SolKraft/actions/workflows/advanced-contract-benchmark.yml/badge.svg)](https://github.com/halthinks/SolKraft/actions/workflows/advanced-contract-benchmark.yml)
+[![Advanced Contract Benchmark](https://github.com/halthinks/SolKraft/actions/workflows/advanced-contract-benchmark.yml/badge.svg)](https://github.com/halthinks/SolKraft/actions/workflows/advanced-contract-benchmark.yml)\n[![Semantic Router Proof](https://github.com/halthinks/SolKraft/actions/workflows/semantic-router-proof.yml/badge.svg)](https://github.com/halthinks/SolKraft/actions/workflows/semantic-router-proof.yml)
 [![GitHub Pages](https://img.shields.io/badge/console-live-b3f77c?logo=github&logoColor=111)](https://halthinks.github.io/SolKraft/)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![MCP](https://img.shields.io/badge/MCP-read--only-6b9cff)](docs/REMOTE_MCP.md)
@@ -38,7 +38,7 @@
 - The compact `ContractIndex` supplies routing/API/MCP/docs metadata without loading every full `SKILL.md` body into the hot path.
 - Read-only MCP tools: `search_skills`, `route_request`, `get_skill`, `get_skill_resource`, `get_selection_graph`, `get_skill_contract`, and `get_contract_index`.
 - Reusable CI and pre-PR contribution validation share contract/schema, routing, packaging, installed-MCP, index/hardening, and evidence gates.
-- Latest local acceptance: **100,000 / 100,000** unique 250-word requests passed with **100 ask families per skill**, **100% eligible target recall**, **100% hardened blocking**, and **100% consequential-boundary correctness**; no explicit skill IDs were injected.
+- Historical local contract acceptance recorded **100,000 / 100,000** generated cases with hardened policy and boundary checks. That run is retained as contract/hardening evidence, not as proof of broad natural-language diversity. The stronger [Semantic Router Proof](docs/SEMANTIC_ROUTER_PROOF.md) now requires **1,000 distinct prompts per skill**, **100,000 multi-skill composition requests**, and **100,000 stability executions** before semantic routing is treated as proven.
 - The public Validation display is a clearly labeled **recorded reenactment**, not live browser CI.
 
 <!-- END SOLKRAFT CURRENT SYSTEM -->
@@ -68,7 +68,7 @@ SolKraft is deliberately **not** another opaque tool bag. It gives agents a comp
 | 🧩 **Composition** | Typed producer → consumer relationships and dependency-aware route validation |
 | 🔒 **Boundaries** | Hardened public defaults, explicit blocked states, and `execution_authorized: false` |
 | 🔎 **Selective retrieval** | Compact metadata first; full `SKILL.md` only when a capability earns its place |
-| 🧪 **Evidence** | Reusable CI, contract fixture execution, packaging checks, installed MCP checks, and the 100k routing benchmark |
+| 🧪 **Evidence** | Reusable CI, contract fixtures, packaging/MCP checks, the historical 100k contract regression, and the 373k-class semantic router proof |
 
 ### 🚀 Why it feels different
 
@@ -122,7 +122,7 @@ Cozy’s contribution helped push the project from descriptive skill metadata to
 
 
 
-New here? Follow [Connect your agent](docs/REMOTE_MCP.md). Want to teach it a new method? Follow [the complete skill contribution process](docs/SKILL_CONTRIBUTIONS.md), including graph registration, automatic-selection examples, the 100,000-request regression, and local package/MCP verification. Both have animated walkthroughs in the console.
+New here? Follow [Connect your agent](docs/REMOTE_MCP.md). Want to teach it a new method? Follow [the complete skill contribution process](docs/SKILL_CONTRIBUTIONS.md), including graph registration, automatic-selection examples, the contract regression, semantic router proof coverage, and local package/MCP verification. Both have animated walkthroughs in the console.
 
 Explore the [interactive connection walkthrough](https://halthinks.github.io/SolKraft/#setup-lab) or read [the complete Render, API, MCP, plugin, and platform guide](docs/CONNECTIONS.md). Build and verify locally with `python -m scripts.local_ci`; pull requests use the same reusable GitHub CI gate, and skill contributors can run the full preflight workflow before opening a PR.
 
