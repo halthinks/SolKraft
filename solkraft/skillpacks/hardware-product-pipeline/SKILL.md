@@ -37,7 +37,7 @@ Run the named skill at that stage. This skill only checks handoffs.
 
 ```text
 <product-root>/
-  pipeline.json
+  # optional product metadata file; not created or required by this skill
   authority/decision-log.json
   authority/evidence-index.json
   requirements.json
@@ -52,8 +52,7 @@ Run the named skill at that stage. This skill only checks handoffs.
   pipeline-status.json
 ```
 
-`pipeline.json` names the product, profile, revision, claimed stage, and
-claimed closure. It does not prove any of those claims.
+Product identity, profile, revision, claimed stage, and claimed closure are inputs to the pipeline runner and resulting status artifacts. Do not require an undeclared `pipeline.json`; if a host/project supplies equivalent metadata, treat it as input rather than proof.
 
 ## Stage rules
 
