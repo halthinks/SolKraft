@@ -85,7 +85,14 @@ def segment(objective):
         if re.search(r"\b(?:tomorrow|next week|next month|later|after approval)\b", clause) and not re.search(r"\b(?:now|today)\b", clause):
             ignored.append({"text": clause, "reason": "deferred work"})
             continue
-        # Exclusion clauses never become requested work. Keep any preceding request.
+        # Exclusion clauses never become requested work. Keep any preceding
+        # request. A continuity connector such as "without losing that context"
+        # is not an exclusion and must not erase the requested stage.
+        clause = re.sub(
+            r"^without losing (?:that|this|the) context\s*,?\s*",
+            "",
+            clause,
+        )
         neg = re.search(r"\b(?:do not|don't|dont|without|never|skip|avoid)\b", clause)
         if neg:
             ignored.append({"text": clause[neg.start():], "reason": "excluded scope"})
