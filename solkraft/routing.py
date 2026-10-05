@@ -42,6 +42,18 @@ user objective supplied applicable scope acceptance criteria verified requested 
 _GRAPH_SEMANTIC_CACHE = {}
 
 
+def _explicit_query_anchors(query: str) -> frozenset[str]:
+    match = re.search(
+        r"\\b(?:centered on|involving)\\s+([a-z0-9'-]+)"
+        r"(?:\\s*,\\s*([a-z0-9'-]+))?"
+        r"(?:\\s*,\\s*([a-z0-9'-]+))?",
+        query.casefold(),
+    )
+    if not match:
+        return frozenset()
+    return frozenset(token for token in match.groups() if token)
+
+
 def _semantic_node_text(node: dict) -> str:
     """Return the public capability fields that define semantic identity."""
     return " ".join([
