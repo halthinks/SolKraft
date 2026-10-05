@@ -138,7 +138,11 @@ def lexical_index(nodes):
             n['id'],
             n['description'],
             n.get('domain', ''),
+            str(n.get('selection', '') or ''),
+            *[_binding_text(item) for item in n.get('inputs', [])],
             *[_binding_text(item) for item in n.get('outputs', [])],
+            *[_binding_text(item) for item in ((n.get('authority') or {}).get('capabilities') or [])],
+            *[_binding_text(item) for item in ((n.get('authority') or {}).get('resources') or [])],
         ])))
         for k, n in nodes.items()
     }
@@ -171,6 +175,36 @@ def lexical_score(node_id, query, index):
             idf = math.log(1 + (len(docs) - df[term] + .5) / (df[term] + .5))
             score += idf * f * 2.2 / (f + 1.2 * (.25 + .75 * length / max(avg, 1)))
     return score
+
+
+
+def semantic_candidates(nodes, query, *, limit=3, blocked=()):
+    """Return bounded lexical semantic candidates over every advisory node.
+
+    This is the general fallback for skills that do not have a hand-written
+    intent rule. Ranking is local, deterministic, and based on public indexed
+    skill metadata. A relative floor prevents weak incidental overlap from
+    flooding a route.
+    """
+    blocked = set(blocked or ())
+    index = cached_lexical_index(nodes)
+    scored = []
+    for node_id, node in nodes.items():
+        if node.get('effect') or node_id in blocked:
+            continue
+        score = lexical_score(node_id, query, index)
+        if score > 0:
+            scored.append((score, node_id))
+    if not scored:
+        return []
+    scored.sort(key=lambda row: (-row[0], row[1].casefold()))
+    best = scored[0][0]
+    floor = max(1.25, best * 0.42)
+    return [
+        {'id': node_id, 'score': round(score, 3)}
+        for score, node_id in scored
+        if score >= floor
+    ][:limit]
 
 
 def route(graph, objective, explicit=(), context=None):
