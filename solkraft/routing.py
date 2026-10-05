@@ -540,6 +540,31 @@ def route_request(
             if skill not in existing_stage.setdefault("selected", []):
                 existing_stage["selected"].append(skill)
 
+    # Explicit semantic groups are authoritative route evidence. Mirror every
+    # accepted candidate into its stage before final validation so validation
+    # cannot reconstruct a narrower route from the composer's original stage
+    # selections and silently drop recovered capabilities.
+    stage_by_number = {
+        stage.get("stage"): stage for stage in result.get("stages", [])
+        if stage.get("stage") is not None
+    }
+    for stage_index, group in semantic_groups:
+        stage = stage_by_number.get(stage_index)
+        if stage is None:
+            stage = {
+                "stage": stage_index,
+                "text": semantic_clauses[stage_index - 1],
+                "selected": [],
+                "reason": "query-centric capability evidence",
+                "confidence": "high",
+            }
+            result.setdefault("stages", []).append(stage)
+            stage_by_number[stage_index] = stage
+        stage["selected"] = [
+            *group,
+            *[skill for skill in stage.get("selected", []) if skill not in group],
+        ]
+
     # Put exactly one primary semantic capability per clause first, in user
     # request order. Secondary candidates are useful supporting evidence, but
     # they must never jump ahead of a later clause's primary capability: doing
