@@ -23,7 +23,7 @@ Select the skill that changes how the current task should be handled:
 
 Read the selected skill, then only references needed by the task. Do not load skills merely because a keyword overlaps, force a workflow before ordinary answers, or repeat evidence for reassurance.
 
-Use the environment's supported skill-loading mechanism. For an actual tool-name mismatch, consult [Codex mappings](references/codex-tools.md) or [Copilot mappings](references/copilot-tools.md) as appropriate.
+Use the environment's supported skill-loading mechanism. For an actual tool-name mismatch, consult a host-specific mapping reference only when that host is actually in use; otherwise follow the environment's native tool names.
 
 Follow the host instruction hierarchy, user scope, and repository contracts. Skills do not override system or developer instructions, grant external-action permission, authorize delegation, or add approval steps to work already authorized.
 
