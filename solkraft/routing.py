@@ -481,14 +481,24 @@ def route_request(
             if skill not in existing_stage.setdefault("selected", []):
                 existing_stage["selected"].append(skill)
 
-    # Put semantic clause groups ahead of generic composer fallbacks while
-    # preserving each clause's order and retaining any additional support
-    # skills afterwards. This makes compound route order reflect user intent.
-    ordered_semantic = []
+    # Put exactly one primary semantic capability per clause first, in user
+    # request order. Secondary candidates are useful supporting evidence, but
+    # they must never jump ahead of a later clause's primary capability: doing
+    # so can make a correct compound route look out of order simply because an
+    # earlier clause happened to share generic metadata with a later target.
+    ordered_primary = []
+    for skill in semantic_primary:
+        if skill not in ordered_primary:
+            ordered_primary.append(skill)
+
+    semantic_support = []
+    primary_set = set(ordered_primary)
     for _, group in semantic_groups:
-        for skill in group:
-            if skill not in ordered_semantic:
-                ordered_semantic.append(skill)
+        for skill in group[1:]:
+            if skill not in primary_set and skill not in semantic_support:
+                semantic_support.append(skill)
+
+    ordered_semantic = [*ordered_primary, *semantic_support]
     selected = [
         *ordered_semantic,
         *[skill for skill in selected if skill not in ordered_semantic],
