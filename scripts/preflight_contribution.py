@@ -133,6 +133,18 @@ def main():
         [
             sys.executable,
             "-m",
+            "scripts.prepare_skill_contribution",
+            str(args.manifest),
+            "--output",
+            "build/skill-proof-plan.json",
+        ],
+        cwd=ROOT,
+        check=True,
+    )
+    subprocess.run(
+        [
+            sys.executable,
+            "-m",
             "scripts.check_contribution",
             str(args.manifest),
             "--full",
