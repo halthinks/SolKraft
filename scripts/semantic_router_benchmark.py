@@ -49,6 +49,8 @@ capability capabilities skill skills procedure procedures method methods request
 requests task tasks work working result results evidence specialist specialized
 complex difficult real world correct appropriate relevant published bundled
 user objective supplied applicable scope acceptance criteria verified requested deliverable input inputs output outputs general
+description descriptions schema metadata field fields value values required optional type types
+name names identifier identifiers id ids version versions configuration config property properties
 """.split())
 
 ACTION_OPENERS = (
