@@ -174,10 +174,24 @@ def build_profiles(records, graph):
         if not unique:
             unique = ["domain", "workflow", "verification", "output"]
 
+        # Exact-recall prompts need anchors that are genuinely selective,
+        # not merely "not present in every skill". Prefer tokens carried by at
+        # most 10% of the catalog; fall back progressively only for unusually
+        # generic skills.
         distinguishing = [
             token for token in unique
-            if df[token] < total
+            if df[token] <= max(2, math.ceil(total * 0.10))
         ]
+        if not distinguishing:
+            distinguishing = [
+                token for token in unique
+                if df[token] <= max(3, math.ceil(total * 0.25))
+            ]
+        if not distinguishing:
+            distinguishing = [
+                token for token in unique
+                if df[token] < total
+            ]
         profiles[skill_id] = {
             "anchors": unique[:18],
             "distinguishing_anchors": distinguishing[:18],
