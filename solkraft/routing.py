@@ -23,6 +23,21 @@ _ACTIVE_STAGE_RE = re.compile(
     r"diagnose|investigate|debug|draft|write|compare|validate|audit)\b"
 )
 _SEMANTIC_TOKEN_RE = re.compile(r"[a-z0-9]+(?:'[a-z0-9]+)?")
+# Keep semantic identity anchors focused on domain-bearing terms. This mirrors
+# the benchmark corpus generator and prevents generic routing prose from
+# displacing the distinctive capability tokens used in natural requests.
+_SEMANTIC_STOPWORDS = frozenset("""
+a an and are as at be been being by can could did do does for from had has have
+how i if in into is it its may might more most must my no not of on or our should
+so than that the their them then there these they this those to under up use using
+was we were what when where which while who why will with would you your
+ability about after again against all also any because before between both but
+during each few further here hers herself himself itself just me myself once only
+other ours ourselves out over own same she some such themselves through too very
+capability capabilities skill skills procedure procedures method methods request
+requests task tasks work working result results evidence specialist specialized
+complex difficult real world correct appropriate relevant published bundled
+""".split())
 _GRAPH_SEMANTIC_CACHE = {}
 
 
@@ -49,7 +64,7 @@ def _graph_semantic_index(graph: dict) -> dict:
         token_set = frozenset(
             token
             for token in _SEMANTIC_TOKEN_RE.findall(_semantic_node_text(node).casefold())
-            if len(token) > 2
+            if len(token) > 2 and token not in _SEMANTIC_STOPWORDS and not token.isdigit()
         )
         token_sets[skill_id] = token_set
         profiles[skill_id] = {"tokens": token_set}
@@ -734,6 +749,10 @@ def catalog_graph(catalog: SkillCatalog) -> dict:
             "inputs": ["user objective", "applicable skill prerequisites"],
             "outputs": ["skill-defined deliverable"],
         })
+        # The mounted skill record is the canonical public semantic description.
+        # Legacy graph nodes still provide topology/domain/effect metadata, but
+        # their older prose must not override the current capability identity.
+        base["description"] = record.public()["description"]
         contract = entries[skill_id]
         base["contract_status"] = contract["status"]
         base["contract_source"] = contract.get("source")
