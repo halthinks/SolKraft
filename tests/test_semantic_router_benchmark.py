@@ -108,3 +108,75 @@ def test_semantic_router_composition_regression_probe():
         routing_module.catalog_graph = old_catalog_graph
         routing_module.get_graph = old_get_graph
         routing_module.contract_index = old_contract_index
+
+
+def test_semantic_router_low_skill_rate_regression_probe():
+    """Fast sample for skills that were below the full-proof 0.90 gate."""
+    import json
+    import solkraft.routing as routing_module
+    from solkraft.routing import contract_index, route_request
+
+    watched = [
+        "solforge-mvp-create",
+        "solforge-code-mastery",
+        "solforge-prompt",
+        "solforge-finalize",
+        "solforge-plugin-skill-release",
+        "solforge-report",
+        "solforge-package-build",
+        "solforge-release-matrix",
+        "solforge-portability-audit",
+        "solforge-run-refactor",
+        "solforge-target-verify",
+        "solforge-propose",
+        "solforge-run-single",
+        "solforge-research-mastery-perfection",
+        "solforge-cross-build",
+    ]
+
+    catalog = SkillCatalog([BUNDLE_ROOT], preferred_root=BUNDLE_ROOT)
+    records = list(catalog.records())
+    records_by_id = {record.id: record for record in records}
+    graph = catalog_graph(catalog)
+    index = contract_index(catalog)
+    profiles = build_profiles(records, graph)
+
+    frozen_graph = graph
+    frozen_core = routing_module.get_graph()
+    frozen_index = index
+    old_catalog_graph = routing_module.catalog_graph
+    old_get_graph = routing_module.get_graph
+    old_contract_index = routing_module.contract_index
+    routing_module.catalog_graph = lambda _catalog: frozen_graph
+    routing_module.get_graph = lambda: frozen_core
+    routing_module.contract_index = lambda _catalog: frozen_index
+    try:
+        failures = {}
+        for skill_id in watched:
+            if skill_id not in records_by_id:
+                continue
+            record = records_by_id[skill_id]
+            passed = 0
+            samples = []
+            for local_case in range(100):
+                prompt = single_prompt(record, profiles[skill_id], profiles, local_case)
+                route = route_request(catalog, prompt, max_skills=50, policy={"contract_mode": "hardened"})
+                selected = route.get("selected") or []
+                ok = skill_id in selected
+                passed += int(ok)
+                if not ok and len(samples) < 3:
+                    samples.append({
+                        "case": local_case,
+                        "prompt": prompt,
+                        "anchors": profiles[skill_id]["anchors"],
+                        "selected": selected[:20],
+                        "semantic_rank": route.get("selection_trace", {}).get("semantic_capability_rank"),
+                    })
+            rate = passed / 100
+            if rate < 0.90:
+                failures[skill_id] = {"rate": rate, "samples": samples}
+        assert not failures, json.dumps(failures, indent=2, sort_keys=True)
+    finally:
+        routing_module.catalog_graph = old_catalog_graph
+        routing_module.get_graph = old_get_graph
+        routing_module.contract_index = old_contract_index
