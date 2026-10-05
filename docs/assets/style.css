@@ -134,3 +134,140 @@ section[id]{scroll-margin-top:24px}
 }
 img,svg,video,canvas{max-width:100%;height:auto}
 pre{max-width:100%;overflow-x:auto}
+
+/* Portrait / desktop-site phone hardening */
+@media (orientation: portrait), (pointer: coarse) and (max-width: 1600px) {
+  html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
+  .topbar {
+    width: 100%;
+    height: auto;
+    min-height: 72px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas:
+      "brand . connection"
+      "nav nav nav";
+    gap: 10px 14px;
+    padding: 10px clamp(14px, 3vw, 24px);
+  }
+
+  .topbar .brand {
+    grid-area: brand;
+    min-width: 0;
+  }
+
+  .topbar .brand small {
+    display: none;
+  }
+
+  .topbar nav {
+    grid-area: nav;
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    display: flex;
+    gap: 18px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+  }
+
+  .topbar nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .topbar nav a {
+    flex: 0 0 auto;
+    font-size: 11px;
+  }
+
+  .topbar .connection {
+    grid-area: connection;
+    justify-self: end;
+    flex: 0 0 auto;
+  }
+
+  main {
+    width: 100%;
+    max-width: 100%;
+    padding-inline: clamp(16px, 4vw, 28px);
+  }
+
+  .hero {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    display: block;
+  }
+
+  .hero-copy {
+    width: 100%;
+    max-width: 760px;
+    min-width: 0;
+    padding: clamp(34px, 6vw, 64px) 0 18px;
+  }
+
+  .hero h1 {
+    max-width: 12ch;
+    font-size: clamp(44px, 9vw, 68px);
+  }
+
+  .lead {
+    width: 100%;
+    max-width: 68ch;
+    font-size: clamp(15px, 2.4vw, 18px);
+    line-height: 1.72;
+  }
+
+  .hero-actions {
+    flex-wrap: wrap;
+  }
+
+  .hero-note {
+    max-width: 72ch;
+    overflow-wrap: anywhere;
+  }
+
+  .request-machine {
+    width: 100%;
+    max-width: 760px;
+    min-width: 0;
+    margin: 28px 0 48px;
+    padding: clamp(16px, 3vw, 24px);
+    justify-self: auto;
+  }
+
+  .request-machine .phase,
+  .request-machine .phase > div {
+    min-width: 0;
+  }
+
+  .request-machine .phase h3,
+  .request-machine .phase p {
+    overflow-wrap: anywhere;
+  }
+
+  .guide,
+  .setup-lab,
+  .release-section,
+  .validation-replay,
+  .workspace,
+  .connect-strip,
+  .lower-grid {
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  footer {
+    width: 100%;
+    max-width: 100%;
+    padding-inline: clamp(16px, 4vw, 28px);
+  }
+}
