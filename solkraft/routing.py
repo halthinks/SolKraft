@@ -3,6 +3,8 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
+from collections import Counter
 from functools import lru_cache
 from pathlib import Path
 import re
@@ -20,6 +22,127 @@ _ACTIVE_STAGE_RE = re.compile(
     r"(?:build|create|design|implement|inspect|review|test|verify|analyze|research|"
     r"diagnose|investigate|debug|draft|write|compare|validate|audit)\b"
 )
+_SEMANTIC_TOKEN_RE = re.compile(r"[a-z0-9]+(?:'[a-z0-9]+)?")
+_GRAPH_SEMANTIC_CACHE = {}
+
+
+def _semantic_node_text(node: dict) -> str:
+    values = [
+        str(node.get("description") or ""),
+        str(node.get("domain") or ""),
+        " ".join(map(str, node.get("inputs") or [])),
+        " ".join(map(str, node.get("outputs") or [])),
+        str(node.get("selection") or ""),
+    ]
+    authority = node.get("authority") or {}
+    if isinstance(authority, dict):
+        values.append(" ".join(map(str, authority.get("capabilities") or [])))
+        values.append(" ".join(map(str, authority.get("resources") or [])))
+    return " ".join(values)
+
+
+def _graph_semantic_index(graph: dict) -> dict:
+    nodes = graph.get("nodes", {})
+    cache_key = (id(graph), len(nodes))
+    cached = _GRAPH_SEMANTIC_CACHE.get(cache_key)
+    if cached is not None:
+        return cached
+
+    profiles = {}
+    token_sets = {}
+    for skill_id, node in nodes.items():
+        token_set = frozenset(
+            token
+            for token in _SEMANTIC_TOKEN_RE.findall(_semantic_node_text(node).casefold())
+            if len(token) > 2
+        )
+        token_sets[skill_id] = token_set
+        profiles[skill_id] = {"tokens": token_set}
+
+    df = Counter()
+    for token_set in token_sets.values():
+        df.update(token_set)
+    total = max(len(token_sets), 1)
+    idf = {
+        token: math.log((total + 1.0) / (count + 1.0)) + 1.0
+        for token, count in df.items()
+    }
+
+    token_to_skills = {}
+    for skill_id, token_set in token_sets.items():
+        profiles[skill_id]["weight"] = (
+            sum(idf.get(token, 1.0) for token in token_set) or 1.0
+        )
+        for token in token_set:
+            token_to_skills.setdefault(token, set()).add(skill_id)
+
+    index = {
+        "profiles": profiles,
+        "idf": idf,
+        "token_to_skills": {
+            token: frozenset(skill_ids)
+            for token, skill_ids in token_to_skills.items()
+        },
+    }
+    _GRAPH_SEMANTIC_CACHE.clear()
+    _GRAPH_SEMANTIC_CACHE[cache_key] = index
+    return index
+
+
+def _graph_identity_rank(graph: dict, query: str, *, limit: int = 8) -> list[dict]:
+    index = _graph_semantic_index(graph)
+    idf = index["idf"]
+    query_sequence = [
+        token for token in _SEMANTIC_TOKEN_RE.findall(query.casefold())
+        if len(token) > 2 and token in idf
+    ]
+    if not query_sequence:
+        return []
+
+    query_tokens = set(query_sequence)
+    first_position = {}
+    for position, token in enumerate(query_sequence):
+        first_position.setdefault(token, position)
+
+    candidate_ids = set()
+    for token in query_tokens:
+        candidate_ids.update(index["token_to_skills"].get(token, ()))
+
+    query_weight = sum(idf[token] for token in query_tokens) or 1.0
+    ranked = []
+    for skill_id in candidate_ids:
+        profile = index["profiles"][skill_id]
+        overlap = profile["tokens"] & query_tokens
+        if not overlap:
+            continue
+        weighted_overlap = sum(idf[token] for token in overlap)
+        score = (
+            weighted_overlap
+            + 2.0 * weighted_overlap / query_weight
+            + weighted_overlap / profile["weight"]
+        )
+        ranked.append({
+            "id": skill_id,
+            "score": round(score, 6),
+            "weighted_overlap": round(weighted_overlap, 6),
+            "matched_tokens": sorted(
+                overlap,
+                key=lambda token: (-idf[token], first_position.get(token, 10**9)),
+            ),
+            "first_token_index": min(first_position[token] for token in overlap),
+        })
+
+    ranked.sort(
+        key=lambda row: (
+            -row["score"],
+            -row["weighted_overlap"],
+            row["first_token_index"],
+            row["id"].casefold(),
+        )
+    )
+    return ranked[:max(1, int(limit))]
+
+
 
 
 def _load_composer():
