@@ -311,10 +311,40 @@ def compose_route(graph, objective, explicit=(), context=None, max_skills=10, bl
         else:
             skill = _fallback_skill(graph, clause, context)
             reason = "existing matcher fallback" if skill else "no confident specialist match"
-        if skill:
-            add(skill, index, reason, "high" if mapped else "moderate")
-        else:
-            unselected.append({"stage": index + 1, "text": clause, "candidate": None, "reason": reason})
+
+        stage_selected = []
+        if skill and add(skill, index, reason, "high" if mapped else "moderate"):
+            stage_selected.append(skill)
+
+        # General semantic fallback: add a small, ranked set of lexical
+        # candidates for every clause. This lets catalog skills without a
+        # hand-written intent rule participate in routing and also preserves
+        # specialist candidates when a generic mapped workflow fires first.
+        semantic = selector.semantic_candidates(
+            nodes,
+            clause,
+            limit=3,
+            blocked=blocked,
+        )
+        for candidate in semantic:
+            candidate_id = candidate["id"]
+            if candidate_id in stage_selected or candidate_id in selected:
+                continue
+            if add(
+                candidate_id,
+                index,
+                f"semantic catalog match ({candidate['score']})",
+                "moderate",
+            ):
+                stage_selected.append(candidate_id)
+
+        if not stage_selected:
+            unselected.append({
+                "stage": index + 1,
+                "text": clause,
+                "candidate": None,
+                "reason": reason,
+            })
 
     skills = []
     for skill in selected:
