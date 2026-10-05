@@ -226,8 +226,14 @@ def test_shared_anchor_prompt_is_treated_as_ambiguous_not_exact_recall():
     routing_module.get_graph = lambda: frozen_core
     routing_module.contract_index = lambda _catalog: frozen_index
     try:
+        entries = {entry["id"]: entry for entry in index.entries()}
+        selectable = {
+            record.id for record in records
+            if graph["nodes"][record.id].get("effect") is not True
+            and entries[record.id].get("status") not in {"opaque", "invalid", "unsupported"}
+        }
         shared = [
-            (anchor, shared_anchor_skills(profiles, anchor))
+            (anchor, [skill for skill in shared_anchor_skills(profiles, anchor) if skill in selectable])
             for anchor in sorted({a for p in profiles.values() for a in p["anchors"]})
         ]
         shared = [(anchor, skills) for anchor, skills in shared if len(skills) >= 3][:12]
@@ -237,7 +243,8 @@ def test_shared_anchor_prompt_is_treated_as_ambiguous_not_exact_recall():
             route = route_request(catalog, prompt, max_skills=50, policy={"contract_mode": "hardened"})
             selected = set(route.get("selected") or [])
             # Ambiguity succeeds when routing preserves more than one plausible
-            # shared-anchor candidate; no single hidden skill is required.
+            # *admissible* shared-anchor candidate. Consequential/blocked skills
+            # are intentionally excluded from the ambiguity expectation.
             assert len(selected & set(candidates)) >= 2, {
                 "anchor": anchor,
                 "candidates": candidates,
