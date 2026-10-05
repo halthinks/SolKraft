@@ -510,18 +510,32 @@ def route_request(
     # so can make a correct compound route look out of order simply because an
     # earlier clause happened to share generic metadata with a later target.
     ordered_primary = []
-    for skill in semantic_primary:
+    primary_stage = {}
+    for stage_index, group in semantic_groups:
+        if not group:
+            continue
+        skill = group[0]
+        primary_stage.setdefault(skill, stage_index)
         if skill not in ordered_primary:
             ordered_primary.append(skill)
 
-    semantic_support = []
-    primary_set = set(ordered_primary)
-    for _, group in semantic_groups:
+    # Interleave each clause's non-primary support immediately after that
+    # clause, except when the same skill is the primary of a later clause.
+    # This preserves plausible early-clause alternatives without stealing the
+    # position of a later requested capability.
+    ordered_semantic = []
+    for stage_index, group in semantic_groups:
+        if not group:
+            continue
+        primary = group[0]
+        if primary not in ordered_semantic:
+            ordered_semantic.append(primary)
         for skill in group[1:]:
-            if skill not in primary_set and skill not in semantic_support:
-                semantic_support.append(skill)
-
-    ordered_semantic = [*ordered_primary, *semantic_support]
+            later_primary_stage = primary_stage.get(skill)
+            if later_primary_stage is not None and later_primary_stage > stage_index:
+                continue
+            if skill not in ordered_semantic:
+                ordered_semantic.append(skill)
     selected = [
         *ordered_semantic,
         *[skill for skill in selected if skill not in ordered_semantic],
