@@ -1,6 +1,6 @@
 ---
 name: build-selected-hardware-product
-description: Build an evidence-backed hardware product from preserved real-part and architecture selections, carrying them through exact BOM, supplier geometry, pinouts, schematics, routed PCB, target firmware, CAD, enclosure, assembly, first article, measurements, renders, and release evidence. Use when Codex must turn an established engineering baseline into procurement-, fabrication-, prototype-, integration-, or release-ready deliverables without losing selection rationale or substituting parts merely to close gaps.
+description: Build an evidence-backed hardware product from preserved real-part and architecture selections, carrying them through exact BOM, supplier geometry, pinouts, schematics, routed PCB, target firmware, CAD, enclosure, assembly, first article, measurements, renders, and release evidence. Use when the host must turn an established engineering baseline into procurement-, fabrication-, prototype-, integration-, or release-ready deliverables without losing selection rationale or substituting parts merely to close gaps.
 ---
 
 <!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
