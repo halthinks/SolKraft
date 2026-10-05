@@ -8,14 +8,14 @@ ROOT = Path(__file__).resolve().parents[1]
 SKILLS = ROOT / "solkraft" / "skillpacks"
 LINK_RE = re.compile(r"\[[^\]]+\]\(([^)]+)\)")
 CODE_RE = re.compile(r"`([^`\n]+)`")
-HOST_RUNTIME_PATTERNS = (
-    ("codex", re.compile(r"\bCodex\b")),
-    ("claude-code", re.compile(r"\bClaude Code\b")),
+STALE_RUNTIME_PATTERNS = (
+    ("codex-home", re.compile(r"\$CODEX_HOME|~/\.codex/skills")),
+    ("claude-home", re.compile(r"~/\.claude/skills")),
+    ("claude-code-runtime", re.compile(r"\bIn Claude Code\b")),
+    ("todowrite-tool", re.compile(r"\bTodoWrite\b")),
 )
-# These terms can be legitimate domain content (for example, a plan may forbid
-# TODO/TBD placeholders). Treat them as informational rather than integrity
-# failures unless a referenced file or executable is actually missing.
-PLACEHOLDER_RE = re.compile(r"\b(?:TODO|TBD|coming soon)\b", re.I)
+# Placeholder words are legitimate when a skill discusses or forbids them.
+# Only executable ghost references are integrity failures.
 
 def main() -> int:
     failures: list[str] = []
@@ -35,11 +35,9 @@ def main() -> int:
                 continue
             if not resolved.exists():
                 failures.append(f"{skill.relative_to(ROOT)}: missing reference: {target}")
-        for label, pattern in HOST_RUNTIME_PATTERNS:
+        for label, pattern in STALE_RUNTIME_PATTERNS:
             if pattern.search(text):
-                warnings.append(f"{skill.relative_to(ROOT)}: named runtime wording: {label}")
-        if PLACEHOLDER_RE.search(text):
-            warnings.append(f"{skill.relative_to(ROOT)}: unresolved TODO/TBD/coming-soon wording")
+                failures.append(f"{skill.relative_to(ROOT)}: stale runtime-specific instruction: {label}")
         for code in CODE_RE.findall(text):
             if "<path-to-skill>" in code:
                 continue
