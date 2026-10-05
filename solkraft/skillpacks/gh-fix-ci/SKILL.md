@@ -12,17 +12,17 @@ description: Diagnose and fix GitHub Actions checks on a pull request using chec
 
 Use this skill when the task is specifically about failing GitHub Actions checks on a pull request. This workflow is hybrid by design:
 
-- Use the GitHub app from this plugin for PR metadata, changed files, and review context.
-- Use `gh` for GitHub Actions checks and logs because the connector does not expose that workflow end to end.
+- Prefer a connected GitHub capability for PR metadata, changed files, checks, workflow jobs, and logs when the host exposes those operations.
+- Use the bundled `gh` CLI path only as a fallback when connector-native Actions inspection is unavailable.
 - Summarize the root cause first, propose a focused fix plan, and implement only after explicit approval.
 
-Prereq: authenticate with GitHub CLI once, then confirm with `gh auth status`. Repo and workflow scopes are typically required for Actions inspection.
+CLI fallback prerequisite only: an authenticated `gh` installation with permission to inspect the repository and Actions runs. Connector-native execution does not require an interactive `gh auth login`.
 
 ## Inputs
 
 - `repo`: path inside the repo (default `.`)
 - `pr`: PR number or URL (optional; defaults to current branch PR)
-- `gh` authentication for the repo host
+- GitHub connector access, or `gh` authentication when using the CLI fallback
 
 ## Quick start
 
@@ -31,9 +31,9 @@ Prereq: authenticate with GitHub CLI once, then confirm with `gh auth status`. R
 
 ## Workflow
 
-1. Verify gh authentication.
-   - Run `gh auth status` in the repo.
-   - If unauthenticated, ask the user to run `gh auth login` (ensuring repo + workflow scopes) before proceeding.
+1. Select the available GitHub transport.
+   - Prefer host-provided GitHub operations for workflow runs, jobs, logs, PR metadata, and patches.
+   - If those operations are unavailable and the CLI fallback is authorized, run `gh auth status`; only then request CLI authentication if needed.
 2. Resolve the PR.
    - If the user provides a PR number or URL, use that directly.
    - Otherwise prefer the current branch PR with `gh pr view --json number,url`.
@@ -78,7 +78,7 @@ Usage examples:
 
 ## Guardrails
 
-- Do not imply that the GitHub app can replace `gh` for Actions log retrieval.
+- Do not require `gh` when the host already exposes equivalent GitHub Actions run, job, and log operations.
 - Treat non-GitHub Actions providers as report-only unless the user explicitly wants a separate investigation path.
 - If the failure is clearly unrelated to the local diff, say so before proposing code changes.
 
