@@ -165,6 +165,8 @@ def _graph_identity_rank(graph: dict, query: str, *, limit: int = 8) -> list[dic
             "weighted_overlap": round(weighted_overlap, 6),
             "anchor_overlap": len(anchor_overlap),
             "weighted_anchor_overlap": round(weighted_anchor_overlap, 6),
+            "explicit_anchor_overlap": len(explicit_anchor_overlap),
+            "weighted_explicit_anchor_overlap": round(weighted_explicit_anchor_overlap, 6),
             "matched_tokens": sorted(
                 overlap,
                 key=lambda token: (-idf[token], first_position.get(token, 10**9)),
