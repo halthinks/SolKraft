@@ -22,7 +22,7 @@ The prompt generator varies request framing, context, tone, deliverable language
 semantic anchors, and ambiguity. A subset deliberately includes the skill's
 nearest semantic neighbors as distractors.
 
-The harness rejects corpus leakage:
+The aggregate receipt also merges the single-skill prompt hashes from every shard and requires exactly **1,000 unique prompt hashes for every skill**.\n\nThe harness rejects corpus leakage:
 
 - no literal structured skill IDs;
 - no full published descriptions;
