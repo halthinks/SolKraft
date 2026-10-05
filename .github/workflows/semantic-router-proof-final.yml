@@ -1,0 +1,139 @@
+name: Semantic Router Proof Final
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/semantic_router_benchmark.py"
+      - "scripts/aggregate_semantic_router_benchmark.py"
+      - "tests/test_semantic_router_benchmark.py"
+      - ".github/workflows/semantic-router-proof-final.yml"
+      - "solkraft/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: semantic-router-proof-final-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  semantic-preflight:
+    name: Final semantic proof preflight
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out candidate
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install SolKraft
+        run: python -m pip install -e ".[dev]"
+
+      - name: Compile proof harness
+        run: python -m py_compile scripts/semantic_router_benchmark.py scripts/aggregate_semantic_router_benchmark.py
+
+      - name: Test corpus invariants
+        run: python -m pytest -q tests/test_semantic_router_benchmark.py
+
+      - name: Run miniature end-to-end proof
+        run: |
+          python -m scripts.semantic_router_benchmark \
+            --single-per-skill 10 \
+            --composition-cases 100 \
+            --stability-base-cases 10 \
+            --stability-repeats 2 \
+            --output /tmp/semantic-proof-smoke.json
+
+  benchmark:
+    name: Final proof shard ${{ matrix.shard }}/16
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    needs: semantic-preflight
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+
+    steps:
+      - name: Check out candidate
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install SolKraft
+        run: python -m pip install -e ".[dev]"
+
+      - name: Run full semantic proof shard
+        run: |
+          python -m scripts.semantic_router_benchmark \
+            --shard-index ${{ matrix.shard }} \
+            --shard-count 16 \
+            --output "benchmark-results/results-semantic-router-proof-shard-${{ matrix.shard }}-of-16.json"
+
+      - name: Upload shard receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: semantic-router-final-${{ matrix.shard }}-${{ github.sha }}
+          if-no-files-found: warn
+          retention-days: 30
+          path: benchmark-results/results-semantic-router-proof-shard-*.json
+
+  aggregate:
+    name: Final aggregate semantic proof
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: benchmark
+    if: always()
+
+    steps:
+      - name: Check out candidate
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Download shard receipts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: semantic-router-final-*-${{ github.sha }}
+          path: benchmark-shards
+          merge-multiple: true
+
+      - name: Aggregate and evaluate proof gates
+        id: aggregate
+        shell: bash
+        run: |
+          set +e
+          python -m scripts.aggregate_semantic_router_benchmark \
+            --input benchmark-shards \
+            --output scripts/results-semantic-router-proof-summary.json
+          code=$?
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Upload aggregate proof receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: semantic-router-final-summary-${{ github.sha }}
+          if-no-files-found: error
+          retention-days: 30
+          path: scripts/results-semantic-router-proof-summary.json
+
+      - name: Enforce semantic proof threshold
+        if: always()
+        run: test "${{ steps.aggregate.outputs.exit_code }}" = "0"
