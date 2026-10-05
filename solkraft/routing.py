@@ -175,38 +175,39 @@ def route_request(
     known = {record.id: record for record in catalog.records()}
     selected = [skill for skill in result["selected"] if skill in known]
 
-    compound_identity_trace = []
-    compound_identity_skills = []
-    for match in catalog.identity_matches(objective, limit=max_skills):
-        skill = match["id"]
-        node = expanded.get("nodes", {}).get(skill, {})
-        if node.get("effect") is True:
-            compound_identity_trace.append({**match, "blocked": "consequential effect node"})
-            continue
-        if not _decision_allows(decisions, skill):
-            compound_identity_trace.append({**match, "blocked": "contract policy"})
-            continue
-        compound_identity_trace.append(match)
-        if skill not in compound_identity_skills:
-            compound_identity_skills.append(skill)
-
-    if compound_identity_skills:
-        selected = [
-            *compound_identity_skills,
-            *[skill for skill in selected if skill not in compound_identity_skills],
-        ][:max_skills]
-        result.setdefault("selection_trace", {})["compound_capability_identity"] = compound_identity_trace
-
-    # Augment the rule-based composer with query-centric capability evidence for
-    # each requested clause. This is deliberately additive: existing workflow
-    # matches remain visible, while a strongly supported catalog specialist can
-    # no longer be displaced merely because the request used unfamiliar wording.
-    semantic_trace = []
+    # Segment once, then resolve semantic capability evidence per requested
+    # clause. Whole-objective matching is intentionally reserved for a single
+    # clause; on compound requests it can flood the route with cross-clause
+    # false positives and exhaust the skill ceiling before later stages.
     try:
         semantic_clauses, _ = composer.segment(objective)
     except (AttributeError, TypeError, ValueError):
         semantic_clauses = [objective]
 
+    compound_identity_trace = []
+    if len(semantic_clauses) <= 1:
+        for match in catalog.identity_matches(objective, limit=min(max_skills, 8)):
+            skill = match["id"]
+            node = expanded.get("nodes", {}).get(skill, {})
+            if node.get("effect") is True:
+                compound_identity_trace.append({**match, "blocked": "consequential effect node"})
+                continue
+            if not _decision_allows(decisions, skill):
+                compound_identity_trace.append({**match, "blocked": "contract policy"})
+                continue
+            compound_identity_trace.append(match)
+            if skill not in selected and len(selected) < max_skills:
+                selected.append(skill)
+        if compound_identity_trace:
+            result.setdefault("selection_trace", {})["compound_capability_identity"] = compound_identity_trace
+
+    # For each clause, keep a bounded group of strong semantic candidates.
+    # This favors coverage across compound requests without letting one clause
+    # consume the entire route budget. Candidate groups are later placed in
+    # clause order so target-order evidence remains inspectable.
+    semantic_trace = []
+    semantic_groups = []
+    semantic_primary = []
     for stage_index, clause in enumerate(semantic_clauses, 1):
         ranked = catalog.identity_rank(clause, limit=8)
         admissible = []
@@ -215,63 +216,85 @@ def route_request(
             node = expanded.get("nodes", {}).get(skill, {})
             if node.get("effect") is True or not _decision_allows(decisions, skill):
                 continue
+            matched = row.get("matched_tokens") or []
+            if len(matched) < 2:
+                continue
             admissible.append(row)
 
-        if not admissible:
-            continue
-
-        best = admissible[0]
-        second_score = admissible[1]["score"] if len(admissible) > 1 else 0.0
-        margin = best["score"] - second_score
-        matched = best.get("matched_tokens") or []
-        strong = (
-            len(matched) >= 2
-            and (
-                best["score"] >= 0.16
-                or best.get("query_precision", 0.0) >= 0.28
+        accepted = []
+        for candidate_index, row in enumerate(admissible[:4]):
+            next_score = admissible[candidate_index + 1]["score"] if candidate_index + 1 < len(admissible) else 0.0
+            local_margin = row["score"] - next_score
+            matched = row.get("matched_tokens") or []
+            strong = (
+                (row["score"] >= 0.12 or row.get("query_precision", 0.0) >= 0.22)
+                and (
+                    candidate_index == 0
+                    or row["score"] >= 0.16
+                    or row.get("query_precision", 0.0) >= 0.30
+                    or len(matched) >= 4
+                )
             )
-            and (
-                margin >= 0.015
-                or len(matched) >= 3
-                or best.get("name_score", 0.0) >= 0.5
-            )
-        )
-        semantic_trace.append({
-            "stage": stage_index,
-            "text": clause,
-            "candidate": best["id"],
-            "score": best["score"],
-            "margin": round(margin, 6),
-            "matched_tokens": matched,
-            "accepted": strong,
-        })
-        if not strong:
-            continue
-
-        skill = best["id"]
-        if skill not in selected and len(selected) < max_skills:
-            selected.append(skill)
-
-        existing_stage = next(
-            (
-                stage for stage in result.get("stages", [])
-                if stage.get("stage") == stage_index
-            ),
-            None,
-        )
-        if existing_stage is None:
-            result.setdefault("stages", []).append({
+            semantic_trace.append({
                 "stage": stage_index,
                 "text": clause,
-                "selected": [skill],
-                "reason": "query-centric capability evidence",
-                "confidence": "high",
+                "candidate": row["id"],
+                "rank": candidate_index + 1,
+                "score": row["score"],
+                "margin_to_next": round(local_margin, 6),
+                "matched_tokens": matched,
+                "accepted": strong,
             })
-        elif skill not in existing_stage.get("selected", []):
-            existing_stage.setdefault("selected", []).append(skill)
+            if strong:
+                accepted.append(row["id"])
 
+        # Also admit distinctive compound-token identities for this individual
+        # clause. These often recover a specialist that ranks second lexically
+        # behind a generic workflow wrapper.
+        for match in catalog.identity_matches(clause, limit=4):
+            skill = match["id"]
+            node = expanded.get("nodes", {}).get(skill, {})
+            if node.get("effect") is True or not _decision_allows(decisions, skill):
+                continue
+            if skill not in accepted:
+                accepted.append(skill)
+
+        accepted = accepted[:4]
+        if accepted:
+            semantic_groups.append((stage_index, accepted))
+            semantic_primary.append(accepted[0])
+
+        existing_stage = next(
+            (stage for stage in result.get("stages", []) if stage.get("stage") == stage_index),
+            None,
+        )
+        for skill in accepted:
+            if existing_stage is None:
+                existing_stage = {
+                    "stage": stage_index,
+                    "text": clause,
+                    "selected": [],
+                    "reason": "query-centric capability evidence",
+                    "confidence": "high",
+                }
+                result.setdefault("stages", []).append(existing_stage)
+            if skill not in existing_stage.setdefault("selected", []):
+                existing_stage["selected"].append(skill)
+
+    # Put semantic clause groups ahead of generic composer fallbacks while
+    # preserving each clause's order and retaining any additional support
+    # skills afterwards. This makes compound route order reflect user intent.
+    ordered_semantic = []
+    for _, group in semantic_groups:
+        for skill in group:
+            if skill not in ordered_semantic:
+                ordered_semantic.append(skill)
+    selected = [
+        *ordered_semantic,
+        *[skill for skill in selected if skill not in ordered_semantic],
+    ][:max_skills]
     result.setdefault("selection_trace", {})["semantic_capability_rank"] = semantic_trace
-
+    result["selection_trace"]["semantic_clause_order"] = ordered_semantic
     objective_identity_skill, objective_identity = _identity_candidate(
         catalog, expanded, decisions, objective
     )
