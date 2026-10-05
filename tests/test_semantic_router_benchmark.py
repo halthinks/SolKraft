@@ -7,6 +7,8 @@ from scripts.semantic_router_benchmark import (
     SINGLE_PROMPTS_PER_SKILL,
     build_profiles,
     leakage_violations,
+    shared_anchor_prompt,
+    shared_anchor_skills,
     single_prompt,
 )
 
@@ -176,6 +178,72 @@ def test_semantic_router_low_skill_rate_regression_probe():
             if rate < 0.90:
                 failures[skill_id] = {"rate": rate, "samples": samples}
         assert not failures, json.dumps(failures, indent=2, sort_keys=True)
+    finally:
+        routing_module.catalog_graph = old_catalog_graph
+        routing_module.get_graph = old_get_graph
+        routing_module.contract_index = old_contract_index
+
+
+def test_single_skill_prompts_preserve_distinguishing_anchor():
+    """Exact-recall cases must contain evidence that distinguishes the target."""
+    catalog = SkillCatalog([BUNDLE_ROOT], preferred_root=BUNDLE_ROOT)
+    records = list(catalog.records())
+    graph = catalog_graph(catalog)
+    profiles = build_profiles(records, graph)
+
+    for record in records:
+        profile = profiles[record.id]
+        distinctive = set(profile.get("distinguishing_anchors") or ())
+        if not distinctive:
+            continue
+        for case_index in range(100):
+            prompt_tokens = set(prompt.casefold() for prompt in __import__("re").findall(r"[a-z0-9]+(?:'[a-z0-9]+)?", single_prompt(record, profile, profiles, case_index)))
+            assert prompt_tokens & distinctive, {
+                "skill": record.id,
+                "case": case_index,
+                "distinguishing": sorted(distinctive),
+            }
+
+
+def test_shared_anchor_prompt_is_treated_as_ambiguous_not_exact_recall():
+    """Shared-anchor prompts are ambiguity cases, not hidden-label recall cases."""
+    import solkraft.routing as routing_module
+    from solkraft.routing import contract_index, route_request
+
+    catalog = SkillCatalog([BUNDLE_ROOT], preferred_root=BUNDLE_ROOT)
+    records = list(catalog.records())
+    graph = catalog_graph(catalog)
+    index = contract_index(catalog)
+    profiles = build_profiles(records, graph)
+
+    frozen_graph = graph
+    frozen_core = routing_module.get_graph()
+    frozen_index = index
+    old_catalog_graph = routing_module.catalog_graph
+    old_get_graph = routing_module.get_graph
+    old_contract_index = routing_module.contract_index
+    routing_module.catalog_graph = lambda _catalog: frozen_graph
+    routing_module.get_graph = lambda: frozen_core
+    routing_module.contract_index = lambda _catalog: frozen_index
+    try:
+        shared = [
+            (anchor, shared_anchor_skills(profiles, anchor))
+            for anchor in sorted({a for p in profiles.values() for a in p["anchors"]})
+        ]
+        shared = [(anchor, skills) for anchor, skills in shared if len(skills) >= 3][:12]
+        assert shared
+        for case_index, (anchor, candidates) in enumerate(shared):
+            prompt = shared_anchor_prompt(anchor, case_index)
+            route = route_request(catalog, prompt, max_skills=50, policy={"contract_mode": "hardened"})
+            selected = set(route.get("selected") or [])
+            # Ambiguity succeeds when routing preserves more than one plausible
+            # shared-anchor candidate; no single hidden skill is required.
+            assert len(selected & set(candidates)) >= 2, {
+                "anchor": anchor,
+                "candidates": candidates,
+                "selected": route.get("selected") or [],
+                "prompt": prompt,
+            }
     finally:
         routing_module.catalog_graph = old_catalog_graph
         routing_module.get_graph = old_get_graph
