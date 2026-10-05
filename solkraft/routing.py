@@ -393,6 +393,20 @@ def route_request(
             graph_admissible.append(row)
 
         accepted = []
+        # If the explicit anchor list is sparse, recover every admissible skill
+        # whose full semantic profile contains those anchors. This avoids an
+        # arbitrary top-N cutoff when a short natural request uses a token
+        # shared by several SolForge capabilities.
+        if clause_explicit_anchors and len(clause_explicit_anchors) <= 1:
+            for row in graph_ranked:
+                skill = row["id"]
+                node = expanded.get("nodes", {}).get(skill, {})
+                if node.get("effect") is True or not _decision_allows(decisions, skill):
+                    continue
+                profile_tokens = _graph_semantic_index(expanded)["profiles"][skill]["tokens"]
+                if clause_explicit_anchors.issubset(profile_tokens) and skill not in accepted:
+                    accepted.append(skill)
+
         max_explicit_overlap = max(
             (row.get("explicit_anchor_overlap", 0) for row in graph_admissible),
             default=0,
@@ -499,7 +513,7 @@ def route_request(
             if skill not in accepted:
                 accepted.append(skill)
 
-        accepted = accepted[:8]
+        accepted = accepted[:16] if len(clause_explicit_anchors) <= 1 else accepted[:8]
         if accepted:
             semantic_groups.append((stage_index, accepted))
             semantic_primary.append(accepted[0])
