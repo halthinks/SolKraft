@@ -63,3 +63,5 @@ jobs:
               print("SELECTED",route.get("selected"))
               print("SEM_ORDER",route.get("selection_trace",{}).get("semantic_clause_order"))
           PY
+
+# trigger
