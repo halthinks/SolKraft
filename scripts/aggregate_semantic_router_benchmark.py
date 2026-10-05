@@ -25,7 +25,7 @@ def main():
         raise SystemExit('no shard results found')
 
     single=Counter(); composition=Counter(); stability=Counter(); leakage=Counter()
-    per_skill=defaultdict(Counter); confusion=defaultdict(Counter); failures=[]; digests=[]
+    per_skill=defaultdict(Counter); confusion=defaultdict(Counter); single_hashes=defaultdict(set); duplicate_single_hashes=0; failures=[]; digests=[]
     catalog=None; configured=None
     for path in files:
         data=json.loads(path.read_text(encoding='utf-8'))
@@ -36,6 +36,11 @@ def main():
             per_skill[sid].update({k:v for k,v in metrics.items() if isinstance(v,int)})
         for sid, rows in data.get('confusion',{}).items():
             confusion[sid].update(rows)
+        for sid, hashes in data.get('single_prompt_hashes_by_skill',{}).items():
+            for value in hashes:
+                if value in single_hashes[sid]:
+                    duplicate_single_hashes += 1
+                single_hashes[sid].add(value)
         failures.extend(data.get('sample_failures',[])[:3])
         digests.append(data['corpus']['shard_corpus_sha256'])
 
@@ -62,7 +67,16 @@ def main():
     composition_exact=div(composition['exact_target_set'],composition['cases'])
     stability_rate=div(stability['executions']-stability['mismatches'],stability['executions'])
 
+    unique_counts={sid:len(values) for sid,values in single_hashes.items()}
+    unique_min=min(unique_counts.values()) if unique_counts else 0
+    uniqueness_ok=(
+        len(unique_counts) == catalog['skill_count']
+        and duplicate_single_hashes == 0
+        and all(count == configured['single_prompts_per_skill_configured'] for count in unique_counts.values())
+    )
+
     gates={
+        'single_prompt_uniqueness': uniqueness_ok,
         'no_metadata_leakage': sum(leakage.values()) == 0,
         'single_global_rate': single_rate is not None and single_rate >= THRESHOLDS['single_global_rate'],
         'single_holdout_rate': holdout_rate is not None and holdout_rate >= THRESHOLDS['single_holdout_rate'],
@@ -94,6 +108,7 @@ def main():
         'composition':{**dict(composition),'coverage_rate':composition_coverage,'order_rate':composition_order,'exact_set_rate':composition_exact},
         'stability':{**dict(stability),'execution_stability_rate':stability_rate},
         'leakage':dict(leakage),
+        'single_prompt_uniqueness':{'per_skill_min':unique_min,'duplicate_hashes':duplicate_single_hashes,'skills_measured':len(unique_counts)},
         'skills_below_threshold':sorted(below,key=lambda x:(x['rate'],x['skill']))[:50],
         'per_skill':per_skill_out,
         'confusion':{sid:dict(rows.most_common(10)) for sid,rows in confusion.items()},
