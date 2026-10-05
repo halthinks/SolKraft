@@ -16,6 +16,7 @@ from __future__ import annotations
 import argparse
 from collections import Counter, defaultdict
 import hashlib
+import itertools
 import json
 import math
 from pathlib import Path
@@ -203,6 +204,7 @@ def build_profiles(records, graph):
     ids = [record.id for record in records]
     for skill_id in ids:
         own = token_sets[skill_id]
+        profiles[skill_id]["token_set"] = frozenset(own)
         scored = []
         for other in ids:
             if other == skill_id:
@@ -214,6 +216,44 @@ def build_profiles(records, graph):
         scored.sort(key=lambda row: (-row[0], row[1].casefold()))
         profiles[skill_id]["nearest"] = [other for _, other in scored[:5]]
     return profiles
+
+
+def admissible_profile_ids(records, graph, entries) -> set[str]:
+    return {
+        record.id for record in records
+        if expectation(entries[record.id], graph["nodes"][record.id]) == "select-target"
+    }
+
+
+def minimal_unique_anchor_set(
+    skill_id: str,
+    profiles: dict,
+    admissible_ids: set[str],
+    *,
+    max_width: int = 4,
+) -> tuple[str, ...] | None:
+    """Return the smallest semantic anchor conjunction unique to one target."""
+    profile = profiles[skill_id]
+    candidates = list(profile.get("anchors") or ())
+    for width in range(1, min(max_width, len(candidates)) + 1):
+        for combo in itertools.combinations(candidates, width):
+            combo_set = set(combo)
+            matches = [
+                other for other in admissible_ids
+                if combo_set.issubset(set(profiles[other].get("token_set") or ()))
+            ]
+            if matches == [skill_id] or set(matches) == {skill_id}:
+                return tuple(combo)
+    return None
+
+
+def assign_exact_recall_anchor_sets(records, graph, entries, profiles) -> dict[str, tuple[str, ...] | None]:
+    admissible = admissible_profile_ids(records, graph, entries)
+    return {
+        record.id: minimal_unique_anchor_set(record.id, profiles, admissible)
+        if record.id in admissible else None
+        for record in records
+    }
 
 
 def anchor_phrase(
@@ -266,12 +306,27 @@ def leakage_violations(prompt: str, skill_id: str, description: str) -> list[str
     return issues
 
 
-def single_prompt(record, profile: dict, profiles: dict, case_index: int) -> str:
+def single_prompt(
+    record,
+    profile: dict,
+    profiles: dict,
+    case_index: int,
+    *,
+    exact_anchor_set: tuple[str, ...] | None = None,
+) -> str:
     opener_index = case_index % 10
     context_index = (case_index // 10) % 10
     deliverable_index = (case_index // 100) % 10
     tone_index = (case_index * 7 + case_index // 13) % 10
-    anchors = anchor_phrase(profile, case_index, 4, require_distinguishing=True)
+    if exact_anchor_set:
+        required = list(exact_anchor_set)
+        filler = [
+            token for token in anchor_phrase(profile, case_index, 4).split(", ")
+            if token and token not in required
+        ]
+        anchors = ", ".join((required + filler)[:max(4, len(required))])
+    else:
+        anchors = anchor_phrase(profile, case_index, 4, require_distinguishing=True)
     domain = profile["domain"] if profile["domain"] != "general" else DOMAIN_FALLBACKS[case_index % len(DOMAIN_FALLBACKS)]
     prompt = (
         f"{TONE_PREFIXES[tone_index]}{ACTION_OPENERS[opener_index]} a {domain} problem "
@@ -404,6 +459,7 @@ def main():
     entries = {entry["id"]: entry for entry in index.entries()}
     profiles = build_profiles(records, graph)
     selectable = selectable_ids(records, graph, entries)
+    exact_anchor_sets = assign_exact_recall_anchor_sets(records, graph, entries, profiles)
 
     frozen_graph = graph
     frozen_core = routing_module.get_graph()
@@ -448,7 +504,17 @@ def main():
             global_case += 1
             if case_id % args.shard_count != args.shard_index:
                 continue
-            prompt = single_prompt(record, profile, profiles, local_case)
+            exact_anchor_set = exact_anchor_sets.get(record.id)
+            # A selectable skill without a unique semantic anchor conjunction is
+            # not an exact-recall case: the observable prompt cannot determine
+            # one hidden label. It is exercised by the ambiguity suite instead.
+            if expected == "select-target" and exact_anchor_set is None:
+                single["moved_to_ambiguity"] += 1
+                continue
+            prompt = single_prompt(
+                record, profile, profiles, local_case,
+                exact_anchor_set=exact_anchor_set,
+            )
             single_hashes_by_skill[record.id].append(hashlib.sha256(prompt.encode("utf-8")).hexdigest())
             remember_prompt(prompt, [record.id])
             split = "holdout" if local_case >= DEV_PROMPTS_PER_SKILL else "dev"
@@ -510,7 +576,11 @@ def main():
         if base_case % 2 == 0:
             record = records[(base_case * 29 + 7) % len(records)]
             local_case = 800 + ((base_case * 37) % HOLDOUT_PROMPTS_PER_SKILL)
-            prompt = single_prompt(record, profiles[record.id], profiles, local_case)
+            exact_anchor_set = exact_anchor_sets.get(record.id)
+            prompt = single_prompt(
+                record, profiles[record.id], profiles, local_case,
+                exact_anchor_set=exact_anchor_set,
+            )
             targets = [record.id]
         else:
             targets = composition_targets(selectable, base_case * 97)
