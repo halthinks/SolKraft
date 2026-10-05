@@ -80,8 +80,31 @@ def _repair_candidate(catalog, decisions, text, selected):
 
 
 def _identity_candidate(catalog, graph, decisions, text):
-    """Resolve one high-confidence semantic capability identity."""
+    """Resolve one high-confidence semantic capability identity.
+
+    Prefer the strict identity matcher, then fall back to query-centric ranked
+    evidence for natural paraphrases that contain several distinctive capability
+    anchors without copying a published description.
+    """
     match = catalog.identity_match(text)
+    if not match:
+        ranked = catalog.identity_rank(text, limit=3)
+        if ranked:
+            best = ranked[0]
+            second_score = ranked[1]["score"] if len(ranked) > 1 else 0.0
+            margin = best["score"] - second_score
+            matched = best.get("matched_tokens") or []
+            if (
+                (len(matched) >= 3 and best["score"] >= 0.16 and margin >= 0.015)
+                or (len(matched) >= 2 and best["score"] >= 0.24 and margin >= 0.035)
+            ):
+                match = {
+                    "id": best["id"],
+                    "score": best["score"],
+                    "margin": round(margin, 6),
+                    "reason": "query-centric capability identity",
+                    "matched_tokens": matched,
+                }
     if not match:
         return None, None
     skill = match["id"]
