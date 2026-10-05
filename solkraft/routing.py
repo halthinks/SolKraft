@@ -511,6 +511,7 @@ def route_request(
     # earlier clause happened to share generic metadata with a later target.
     ordered_primary = []
     primary_stage = {}
+    candidate_stages = {}
     for stage_index, group in semantic_groups:
         if not group:
             continue
@@ -518,11 +519,13 @@ def route_request(
         primary_stage.setdefault(skill, stage_index)
         if skill not in ordered_primary:
             ordered_primary.append(skill)
+        for candidate in group:
+            candidate_stages.setdefault(candidate, []).append(stage_index)
 
     # Interleave each clause's non-primary support immediately after that
-    # clause, except when the same skill is the primary of a later clause.
-    # This preserves plausible early-clause alternatives without stealing the
-    # position of a later requested capability.
+    # clause, except when the same candidate appears in any later clause.
+    # Deferring later-clause candidates prevents an early ambiguous match from
+    # jumping ahead of the capability requested later in the user's sequence.
     ordered_semantic = []
     for stage_index, group in semantic_groups:
         if not group:
@@ -531,8 +534,7 @@ def route_request(
         if primary not in ordered_semantic:
             ordered_semantic.append(primary)
         for skill in group[1:]:
-            later_primary_stage = primary_stage.get(skill)
-            if later_primary_stage is not None and later_primary_stage > stage_index:
+            if any(later > stage_index for later in candidate_stages.get(skill, ())):
                 continue
             if skill not in ordered_semantic:
                 ordered_semantic.append(skill)
