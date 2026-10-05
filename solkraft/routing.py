@@ -148,8 +148,13 @@ def _graph_identity_rank(graph: dict, query: str, *, limit: int = 8) -> list[dic
         weighted_overlap = sum(idf[token] for token in overlap)
         anchor_overlap = profile["anchors"] & query_tokens
         weighted_anchor_overlap = sum(idf[token] for token in anchor_overlap)
+        explicit_anchor_overlap = profile["anchors"] & explicit_query_anchors
+        weighted_explicit_anchor_overlap = sum(
+            idf.get(token, 1.0) for token in explicit_anchor_overlap
+        )
         score = (
-            6.0 * weighted_anchor_overlap
+            18.0 * weighted_explicit_anchor_overlap
+            + 6.0 * weighted_anchor_overlap
             + weighted_overlap
             + 2.0 * weighted_overlap / query_weight
             + weighted_overlap / profile["weight"]
