@@ -174,8 +174,13 @@ def build_profiles(records, graph):
         if not unique:
             unique = ["domain", "workflow", "verification", "output"]
 
+        distinguishing = [
+            token for token in unique
+            if df[token] < total
+        ]
         profiles[skill_id] = {
             "anchors": unique[:18],
+            "distinguishing_anchors": distinguishing[:18],
             "domain": " ".join(tokens(str(node.get("domain") or "general"))) or "general",
             "description_norm": normalized(record.description),
             "id_norm": normalized(record.id),
@@ -197,11 +202,21 @@ def build_profiles(records, graph):
     return profiles
 
 
-def anchor_phrase(profile: dict, case_index: int, width: int = 4) -> str:
+def anchor_phrase(
+    profile: dict,
+    case_index: int,
+    width: int = 4,
+    *,
+    require_distinguishing: bool = False,
+) -> str:
     anchors = profile["anchors"]
     picked = []
+    if require_distinguishing:
+        distinctive = profile.get("distinguishing_anchors") or []
+        if distinctive:
+            picked.append(distinctive[case_index % len(distinctive)])
     cursor = (case_index * 7 + 3) % len(anchors)
-    for offset in range(width * 4):
+    for offset in range(max(width * 4, len(anchors))):
         token = anchors[(cursor + offset * 5) % len(anchors)]
         if token not in picked:
             picked.append(token)
@@ -233,7 +248,7 @@ def single_prompt(record, profile: dict, profiles: dict, case_index: int) -> str
     context_index = (case_index // 10) % 10
     deliverable_index = (case_index // 100) % 10
     tone_index = (case_index * 7 + case_index // 13) % 10
-    anchors = anchor_phrase(profile, case_index, 4)
+    anchors = anchor_phrase(profile, case_index, 4, require_distinguishing=True)
     domain = profile["domain"] if profile["domain"] != "general" else DOMAIN_FALLBACKS[case_index % len(DOMAIN_FALLBACKS)]
     prompt = (
         f"{TONE_PREFIXES[tone_index]}{ACTION_OPENERS[opener_index]} a {domain} problem "
@@ -254,6 +269,23 @@ def single_prompt(record, profile: dict, profiles: dict, case_index: int) -> str
             f"rather than assuming it is the right route."
         )
     return prompt
+
+
+def shared_anchor_prompt(anchor: str, case_index: int = 0) -> str:
+    """Build a deliberately ambiguous prompt around one shared semantic anchor."""
+    opener = ACTION_OPENERS[case_index % len(ACTION_OPENERS)]
+    context = CONTEXTS[(case_index * 3) % len(CONTEXTS)]
+    return (
+        f"{TONE_PREFIXES[(case_index * 7) % len(TONE_PREFIXES)]}{opener} an analysis problem "
+        f"centered on {anchor} {context}. {DELIVERABLES[(case_index * 5) % len(DELIVERABLES)]}"
+    )
+
+
+def shared_anchor_skills(profiles: dict, anchor: str) -> list[str]:
+    return sorted(
+        skill_id for skill_id, profile in profiles.items()
+        if anchor in set(profile.get("anchors") or ())
+    )
 
 
 def composition_prompt(records_by_id, profiles, target_ids: list[str], case_index: int) -> str:
