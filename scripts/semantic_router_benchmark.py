@@ -212,9 +212,9 @@ def anchor_phrase(profile: dict, case_index: int, width: int = 4) -> str:
 def leakage_violations(prompt: str, skill_id: str, description: str) -> list[str]:
     issues = []
     prompt_norm = normalized(prompt)
-    id_norm = normalized(skill_id)
     desc_norm = normalized(description)
-    if id_norm and len(id_norm) >= 4 and id_norm in prompt_norm:
+    literal_id = skill_id.casefold()
+    if any(sep in literal_id for sep in "-_:./") and literal_id in prompt.casefold():
         issues.append("skill_id")
     if desc_norm and len(desc_norm.split()) >= 5 and desc_norm in prompt_norm:
         issues.append("full_description")
