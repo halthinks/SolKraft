@@ -140,6 +140,8 @@ def _graph_identity_rank(graph: dict, query: str, *, limit: int = 8) -> list[dic
 
     ranked.sort(
         key=lambda row: (
+            -row.get("anchor_overlap", 0),
+            -row.get("weighted_anchor_overlap", 0.0),
             -row["score"],
             -row["weighted_overlap"],
             row["first_token_index"],
@@ -338,7 +340,7 @@ def route_request(
     semantic_groups = []
     semantic_primary = []
     for stage_index, clause in enumerate(semantic_clauses, 1):
-        graph_ranked = _graph_identity_rank(expanded, clause, limit=8)
+        graph_ranked = _graph_identity_rank(expanded, clause, limit=32)
         graph_admissible = []
         for row in graph_ranked:
             skill = row["id"]
@@ -351,7 +353,11 @@ def route_request(
             graph_admissible.append(row)
 
         accepted = []
-        for candidate_index, row in enumerate(graph_admissible[:8]):
+        max_anchor_overlap = max(
+            (row.get("anchor_overlap", 0) for row in graph_admissible),
+            default=0,
+        )
+        for candidate_index, row in enumerate(graph_admissible[:16]):
             matched = row.get("matched_tokens") or []
             next_score = (
                 graph_admissible[candidate_index + 1]["score"]
@@ -359,12 +365,15 @@ def route_request(
                 else 0.0
             )
             margin = row["score"] - next_score
+            anchor_overlap = row.get("anchor_overlap", 0)
             strong = (
-                row.get("anchor_overlap", 0) >= 2
-                or (
-                    row.get("weighted_overlap", 0.0) >= 6.0
-                    and len(matched) >= 3
-                )
+                max_anchor_overlap >= 2
+                and anchor_overlap == max_anchor_overlap
+            ) or (
+                max_anchor_overlap < 2
+                and row.get("weighted_overlap", 0.0) >= 6.0
+                and len(matched) >= 3
+                and candidate_index == 0
             )
             semantic_trace.append({
                 "stage": stage_index,
@@ -374,7 +383,7 @@ def route_request(
                 "score": row["score"],
                 "margin_to_next": round(margin, 6),
                 "weighted_overlap": row.get("weighted_overlap"),
-                "anchor_overlap": row.get("anchor_overlap"),
+                "anchor_overlap": anchor_overlap,
                 "weighted_anchor_overlap": row.get("weighted_anchor_overlap"),
                 "matched_tokens": matched,
                 "source": "expanded capability metadata",
@@ -382,6 +391,8 @@ def route_request(
             })
             if strong and row["id"] not in accepted:
                 accepted.append(row["id"])
+            if len(accepted) >= 3:
+                break
 
         ranked = catalog.identity_rank(clause, limit=8)
         admissible = []
@@ -500,7 +511,10 @@ def route_request(
         ]
         if identity_skill:
             if identity_skill not in available:
-                available = [identity_skill]
+                available = [
+                    identity_skill,
+                    *[skill for skill in available if skill != identity_skill],
+                ][:4]
             stage["reason"] = "catalog capability identity"
             stage["confidence"] = "high"
             identity_trace.append({
