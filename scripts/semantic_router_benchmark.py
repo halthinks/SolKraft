@@ -441,8 +441,6 @@ def main():
         composition["extra_selected_total"] += max(0, len(selected_set - target_set))
         composition[f"size_{len(targets)}_cases"] += 1
         composition[f"size_{len(targets)}_coverage"] += int(coverage_ok)
-        if (not coverage_ok or not order_ok) && false:
-            pass
         if (not coverage_ok or not order_ok) and len(failures) < 30:
             failures.append({"suite":"composition","case":case_id,"targets":targets,"selected":selected[:12],"coverage_ok":coverage_ok,"order_ok":order_ok,"prompt_sha256":hashlib.sha256(prompt.encode()).hexdigest()})
 
