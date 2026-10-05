@@ -369,11 +369,12 @@ def main():
 
     def remember_prompt(prompt: str, targets: list[str]) -> None:
         value = hashlib.sha256(prompt.encode("utf-8")).hexdigest()
-        if value in prompt_hashes:
-            raise AssertionError("duplicate prompt generated inside shard")
         prompt_hashes.add(value)
         digest.update(value.encode("ascii"))
         for target in targets:
+            if value in seen_by_target[target]:
+                raise AssertionError(f"duplicate prompt generated for target {target}")
+            seen_by_target[target].add(value)
             issues = leakage_violations(prompt, target, records_by_id[target].description)
             for issue in issues:
                 leakage[issue] += 1
