@@ -93,10 +93,14 @@ def segment(objective):
             "",
             clause,
         )
-        neg = re.search(r"\b(?:do not|don't|dont|without|never|skip|avoid)\b", clause)
+        # Only treat an explicit leading negation as a clause exclusion.
+        # Negation-like words may legitimately be semantic anchor tokens inside
+        # "involving ..." lists; truncating on any occurrence destroys routing
+        # evidence and can erase a requested capability.
+        neg = re.match(r"^(?:do not|don't|dont|without|never|skip|avoid)\b", clause)
         if neg:
-            ignored.append({"text": clause[neg.start():], "reason": "excluded scope"})
-            clause = clause[:neg.start()].strip(" ,:")
+            ignored.append({"text": clause, "reason": "excluded scope"})
+            clause = ""
         if clause and _is_constraint_context(clause):
             ignored.append({"text": clause, "reason": "constraint or context"})
             continue
