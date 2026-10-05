@@ -171,12 +171,12 @@ class SkillCatalog:
         self._identity_profiles = profiles
 
     def identity_rank(self, query: str, *, limit: int = 5) -> list[dict]:
-        \"\"\"Rank capability identities using query-centric IDF evidence.
+        """Rank capability identities using query-centric IDF evidence.
 
         This is designed for natural-language requests that may mention only
         a few distinctive domain anchors. Scores are relative evidence, not
         probabilities.
-        \"\"\"
+        """
         query_tokens = {
             token for token in TOKEN_RE.findall(query.casefold())
             if len(token) > 2
@@ -191,8 +191,8 @@ class SkillCatalog:
         query_weight = sum(self._identity_idf[token] for token in catalog_tokens) or 1.0
         ranked = []
         for skill_id, profile in self._identity_profiles.items():
-            desc = set(profile[\"description_tokens\"])
-            names = set(profile[\"name_tokens\"])
+            desc = set(profile["description_tokens"])
+            names = set(profile["name_tokens"])
             overlap = desc & catalog_tokens
             name_overlap = names & catalog_tokens
             if not overlap and not name_overlap:
@@ -202,7 +202,7 @@ class SkillCatalog:
                 self._identity_idf.get(token, 1.0) for token in overlap
             )
             query_precision = weighted_overlap / query_weight
-            description_coverage = weighted_overlap / max(profile[\"weight\"], 1.0)
+            description_coverage = weighted_overlap / max(profile["weight"], 1.0)
             name_score = len(name_overlap) / max(len(names), 1)
             score = (
                 0.72 * query_precision
@@ -210,18 +210,18 @@ class SkillCatalog:
                 + 0.12 * name_score
             )
             ranked.append({
-                \"id\": skill_id,
-                \"score\": round(score, 6),
-                \"query_precision\": round(query_precision, 6),
-                \"description_coverage\": round(description_coverage, 6),
-                \"name_score\": round(name_score, 6),
-                \"matched_tokens\": sorted(
+                "id": skill_id,
+                "score": round(score, 6),
+                "query_precision": round(query_precision, 6),
+                "description_coverage": round(description_coverage, 6),
+                "name_score": round(name_score, 6),
+                "matched_tokens": sorted(
                     overlap,
                     key=lambda token: (-self._identity_idf.get(token, 1.0), token),
                 ),
             })
 
-        ranked.sort(key=lambda row: (-row[\"score\"], row[\"id\"].casefold()))
+        ranked.sort(key=lambda row: (-row["score"], row["id"].casefold()))
         return ranked[:max(1, int(limit))]
     def identity_match(
         self,
