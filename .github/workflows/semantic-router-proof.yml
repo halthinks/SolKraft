@@ -17,8 +17,8 @@ permissions:
   contents: read
 
 concurrency:
-  group: semantic-router-proof-${{ github.ref }}
-  cancel-in-progress: true
+  group: semantic-router-proof-${{ github.sha }}
+  cancel-in-progress: false
 
 jobs:
   semantic-preflight:
@@ -54,7 +54,7 @@ jobs:
             --output /tmp/semantic-proof-smoke.json
 
   benchmark:
-    name: Proof shard ${{ matrix.shard }}/15
+    name: Proof shard ${{ matrix.shard }}/16
     runs-on: ubuntu-latest
     timeout-minutes: 60
     needs: semantic-preflight
