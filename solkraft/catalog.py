@@ -65,6 +65,7 @@ class SkillCatalog:
         self._contract_index = ContractIndex()
         self._identity_profiles: dict[str, dict] = {}
         self._identity_idf: dict[str, float] = {}
+        self._identity_token_to_skills: dict[str, frozenset[str]] = {}
         self.refresh()
 
     def refresh(self) -> int:
@@ -143,8 +144,10 @@ class SkillCatalog:
             profiles[skill_id] = {
                 "description_norm": " ".join(record.description.casefold().split()),
                 "description_tokens": tuple(desc_tokens),
+                "description_set": frozenset(desc_tokens),
                 "signature_phrase": " ".join(all_desc_tokens[: min(14, len(all_desc_tokens))]),
                 "name_tokens": tuple(name_tokens),
+                "name_set": frozenset(name_tokens),
             }
 
         document_frequency = Counter()
@@ -168,6 +171,14 @@ class SkillCatalog:
                 sum(self._identity_idf.get(token, 1.0) for token in profile["anchors"])
                 or 1.0
             )
+        token_to_skills = {}
+        for skill_id, token_set in token_sets.items():
+            for token in token_set:
+                token_to_skills.setdefault(token, set()).add(skill_id)
+        self._identity_token_to_skills = {
+            token: frozenset(skill_ids)
+            for token, skill_ids in token_to_skills.items()
+        }
         self._identity_profiles = profiles
 
     def identity_rank(self, query: str, *, limit: int = 5) -> list[dict]:
@@ -189,10 +200,15 @@ class SkillCatalog:
             return []
 
         query_weight = sum(self._identity_idf[token] for token in catalog_tokens) or 1.0
+        candidate_ids = set()
+        for token in catalog_tokens:
+            candidate_ids.update(self._identity_token_to_skills.get(token, ()))
+
         ranked = []
-        for skill_id, profile in self._identity_profiles.items():
-            desc = set(profile["description_tokens"])
-            names = set(profile["name_tokens"])
+        for skill_id in candidate_ids:
+            profile = self._identity_profiles[skill_id]
+            desc = profile["description_set"]
+            names = profile["name_set"]
             overlap = desc & catalog_tokens
             name_overlap = names & catalog_tokens
             if not overlap and not name_overlap:
@@ -252,10 +268,15 @@ class SkillCatalog:
         for index, token in enumerate(query_sequence):
             first_position.setdefault(token, index)
 
+        candidate_ids = set()
+        for token in query_tokens:
+            candidate_ids.update(self._identity_token_to_skills.get(token, ()))
+
         matches = []
-        for skill_id, profile in self._identity_profiles.items():
-            desc = set(profile["description_tokens"])
-            names = set(profile["name_tokens"])
+        for skill_id in candidate_ids:
+            profile = self._identity_profiles[skill_id]
+            desc = profile["description_set"]
+            names = profile["name_set"]
             overlap = desc & query_tokens
             if len(overlap) < min_overlap:
                 continue
