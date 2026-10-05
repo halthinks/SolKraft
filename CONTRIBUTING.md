@@ -42,6 +42,12 @@ A skill contribution must include:
 
 First-party skill contributions must be submitted under the repository license. Do not copy plugin cache content into the repository based only on local availability. Keep contributions within the repository's published scope and follow its agent and engineering contracts.
 
+## One-command skill integration and free CI
+
+A new skill must update the router proof as part of the same contribution. Run `python -m scripts.prepare_skill_contribution contributions/<skill>.json` to verify that the production catalog sees it and to derive its exact-recall or ambiguity coverage automatically. Then run `python -m scripts.preflight_contribution contributions/<skill>.json`; preflight invokes the planner itself, so contributors cannot accidentally omit semantic-proof registration.
+
+The benchmark is catalog-driven: adding a valid skill changes the generated semantic corpus automatically. Contributors do not maintain a separate phrase list. See [the skill contribution guide](docs/SKILL_CONTRIBUTIONS.md#free-ci-with-floot-and-automatic-semantic-proof-updates) for the free Floot runner path, 16-shard proof commands, aggregation, and what must be included in a clean PR.
+
 ## Development checks
 
 ```powershell
