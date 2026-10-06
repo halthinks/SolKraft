@@ -438,9 +438,14 @@ def parse_args():
     parser.add_argument("--stability-base-cases", type=int, default=STABILITY_BASE_CASES)
     parser.add_argument("--stability-repeats", type=int, default=STABILITY_REPEATS)
     parser.add_argument("--output", type=Path)
+    parser.add_argument("--slice-index", type=int, default=0,
+                        help="Subdivide one logical shard into resumable worker slices.")
+    parser.add_argument("--slice-count", type=int, default=1)
     args = parser.parse_args()
     if args.shard_count < 1 or not 0 <= args.shard_index < args.shard_count:
         parser.error("invalid shard configuration")
+    if args.slice_count < 1 or not 0 <= args.slice_index < args.slice_count:
+        parser.error("invalid slice configuration")
     if not 1 <= args.single_per_skill <= SINGLE_PROMPTS_PER_SKILL:
         parser.error(f"--single-per-skill must be 1..{SINGLE_PROMPTS_PER_SKILL}")
     if args.composition_cases < 0 or args.stability_base_cases < 0 or args.stability_repeats < 1:
@@ -505,6 +510,8 @@ def main():
             case_id = global_case
             global_case += 1
             if case_id % args.shard_count != args.shard_index:
+                continue
+            if (case_id // args.shard_count) % args.slice_count != args.slice_index:
                 continue
             exact_anchor_set = exact_anchor_sets.get(record.id)
             # A selectable skill without a unique semantic anchor conjunction is
@@ -575,6 +582,8 @@ def main():
     for base_case in range(args.stability_base_cases):
         if base_case % args.shard_count != args.shard_index:
             continue
+        if (base_case // args.shard_count) % args.slice_count != args.slice_index:
+            continue
         if base_case % 2 == 0:
             record = records[(base_case * 29 + 7) % len(records)]
             local_case = 800 + ((base_case * 37) % HOLDOUT_PROMPTS_PER_SKILL)
@@ -626,6 +635,8 @@ def main():
         "schema":"solkraft/semantic-router-proof-shard/v1",
         "shard_index":args.shard_index,
         "shard_count":args.shard_count,
+        "slice_index":args.slice_index,
+        "slice_count":args.slice_count,
         "catalog":{"skill_count":len(records),"selectable_skill_count":len(selectable)},
         "corpus":{
             "single_prompts_per_skill_configured":args.single_per_skill,
