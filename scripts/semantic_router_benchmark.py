@@ -557,6 +557,8 @@ def main():
     for case_id in range(args.composition_cases):
         if case_id % args.shard_count != args.shard_index:
             continue
+        if (case_id // args.shard_count) % args.slice_count != args.slice_index:
+            continue
         targets = composition_targets(selectable, case_id)
         prompt = composition_prompt(records_by_id, profiles, targets, case_id)
         remember_prompt(prompt, targets)
