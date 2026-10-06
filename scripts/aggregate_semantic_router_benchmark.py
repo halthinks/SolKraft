@@ -27,8 +27,15 @@ def main():
     single=Counter(); composition=Counter(); stability=Counter(); leakage=Counter()
     per_skill=defaultdict(Counter); confusion=defaultdict(Counter); single_hashes=defaultdict(set); duplicate_single_hashes=0; failures=[]; digests=[]
     catalog=None; configured=None
+    shard_slices=set(); shard_counts=set(); slice_counts=set()
     for path in files:
         data=json.loads(path.read_text(encoding='utf-8'))
+        shard=int(data.get('shard_index',0)); shard_count=int(data.get('shard_count',1))
+        slice_index=int(data.get('slice_index',0)); slice_count=int(data.get('slice_count',1))
+        key=(shard,slice_index)
+        if key in shard_slices:
+            raise SystemExit(f'duplicate shard slice receipt: {key}')
+        shard_slices.add(key); shard_counts.add(shard_count); slice_counts.add(slice_count)
         catalog = catalog or data['catalog']
         configured = configured or data['corpus']
         single.update(data.get('single',{})); composition.update(data.get('composition',{})); stability.update(data.get('stability',{})); leakage.update(data.get('leakage',{}))
@@ -43,6 +50,14 @@ def main():
                 single_hashes[sid].add(value)
         failures.extend(data.get('sample_failures',[])[:3])
         digests.append(data['corpus']['shard_corpus_sha256'])
+
+    if len(shard_counts) != 1 or len(slice_counts) != 1:
+        raise SystemExit('inconsistent shard/slice topology')
+    shard_count=next(iter(shard_counts)); slice_count=next(iter(slice_counts))
+    expected_slices={(s,i) for s in range(shard_count) for i in range(slice_count)}
+    missing_slices=sorted(expected_slices-shard_slices)
+    unexpected_slices=sorted(shard_slices-expected_slices)
+    topology_complete=not missing_slices and not unexpected_slices
 
     per_skill_out={}
     min_rate=1.0; min_holdout=1.0; below=[]
@@ -76,6 +91,7 @@ def main():
     )
 
     gates={
+        'complete_shard_slice_topology': topology_complete,
         'single_prompt_uniqueness': uniqueness_ok,
         'no_metadata_leakage': sum(leakage.values()) == 0,
         'single_global_rate': single_rate is not None and single_rate >= THRESHOLDS['single_global_rate'],
@@ -94,6 +110,9 @@ def main():
         'thresholds':THRESHOLDS,
         'gates':gates,
         'catalog':catalog,
+        'execution_topology':{'shard_count':shard_count,'slice_count':slice_count,
+            'expected_receipts':len(expected_slices),'received_receipts':len(shard_slices),
+            'missing_receipts':missing_slices[:50],'unexpected_receipts':unexpected_slices[:50]},
         'corpus':{
             'single_prompts_per_skill':configured['single_prompts_per_skill_configured'],
             'composition_cases':configured['composition_cases_configured'],
