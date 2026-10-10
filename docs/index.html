@@ -4,94 +4,74 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#090d13">
-  <meta name="description" content="Discover, compose, and retrieve agent skills through SolKraft.">
-  <title>SolKraft — Skill OS for agents</title>
+  <meta name="description" content="Turn ordinary requests into inspectable skill routes. Browse 173 procedures, retrieve instructions on demand, and review real local validation evidence.">
+  <title>SolKraft — Your words. A working method.</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/style.css?v=semantic-proof-copy-20261004">
+  <link rel="stylesheet" href="assets/style.css?v=9f57d6c84534">
   <script defer src="assets/flow.js?v=5c9299226bcc"></script>
-  <script defer src="assets/setup.js?v=278e57137674"></script>
-  <script defer src="assets/static-data.js?v=e01a0fac4b24"></script>
-  <script defer src="assets/app.js?v=c463d098d924"></script>
-  <script defer src="assets/validation-replay.js?v=loop-reduced-motion-20261004"></script>
+  <script defer src="assets/setup.js?v=e1002175be8d"></script>
+  <script defer src="assets/static-data.js?v=25db82ccadda"></script>
+  <script defer src="assets/app.js?v=dd57d6c41043"></script>
+  <script defer src="assets/validation.js?v=7303ec4d5080"></script>
 </head>
 <body>
   <div class="noise"></div>
   <header class="topbar">
-    <a class="brand" href="#top" aria-label="SolKraft home"><span class="brand-mark">S<span>✳</span></span><span>SOLKRAFT</span><small>SKILL OS</small></a>
-    <nav><a href="#whats-new">What changed</a><a href="#validation-replay">Validation</a><a href="#how-it-works">How it works</a><a href="#setup-lab">Connect</a><a href="#explore">Explore</a><a href="contributors.html">Contributors</a><a href="contributions.html">Showcase</a><a href="nominations.html">Nominations</a><a href="https://github.com/halthinks/SolKraft" target="_blank" rel="noreferrer">GitHub ↗</a><a href="https://github.com/halthinks/SolKraft/issues/new?template=support_request.yml" target="_blank" rel="noreferrer">Support ↗</a></nav>
+    <a class="brand" href="#top" aria-label="SolKraft home"><span class="brand-mark">S<span>✳</span></span><span>SOLKRAFT</span><small>METHODS FOR AGENTS</small></a>
+<nav aria-label="Main navigation"><a href="#explore">Skills</a><a href="#how-it-works">Routing</a><a href="#validation-replay">Validation</a><a href="#setup-lab">Connect</a><a href="contributors.html">Community</a><a href="https://github.com/halthinks/SolKraft" target="_blank" rel="noreferrer">GitHub ↗</a></nav>
     <span id="connection" class="connection"><i></i> Not connected</span>
   </header>
   <main id="top">
     <section class="hero">
       <div class="hero-copy">
-        <div class="eyebrow"><span class="pulse"></span> OPEN SKILL INFRASTRUCTURE <b>·</b> v0.1</div>
-        <h1>Give every task<br>the <em>right skills.</em></h1>
-        <p class="lead">Find reusable procedures for your AI agent. SolKraft now routes by semantic fit <em>and</em> machine-readable skill contracts: inputs, effects, capability requirements, trust, typed dataflow, and verification evidence—while execution stays with your host agent.</p>
-        <div class="hero-actions"><a class="button primary" href="#setup-lab" data-start-path="plugin">Install the included plugin</a><a class="button quiet" href="#explore">Browse the skills</a></div>
-        <div class="hero-note"><span class="dot"></span> Read-only by design <span class="slash">/</span> Contract-aware routing <span class="slash">/</span> REST + MCP + CLI <span class="slash">/</span> Open source</div>
+        <div class="eyebrow"><span class="pulse"></span> OPEN SOURCE · BUILT FOR YOUR AGENT</div>
+        <h1>Your words.<br><em>A working method.</em></h1>
+        <p class="lead">Describe what you need. SolKraft finds reusable procedures, organizes multi-step requests, and gives your agent the instructions to move forward.</p>
+        <p class="hero-support">Especially useful when one task spans investigation, building, testing, and explaining the result.</p>
+        <div class="hero-actions"><a class="button primary" href="#setup-lab" data-start-path="plugin">Add to your agent <span>↗</span></a><a class="button quiet" href="#validation-replay">See the routing evidence <span>↓</span></a></div>
+        <div class="hero-domains" aria-label="Available workflow domains"><span>Software</span><span>Research</span><span>Data</span><span>Writing</span><span>Business</span><span>Math + engineering</span></div>
+        <div class="hero-note"><span class="dot"></span> Local plugin · REST · MCP · CLI <span class="slash">/</span> Your agent keeps control</div>
       </div>
-      <div class="request-machine flow-track" aria-label="Illustrated request walkthrough">
-        <div class="machine-heading"><span>ONE REQUEST. A USEFUL METHOD.</span><b>ILLUSTRATION</b></div>
-        <article class="phase" style="--step:0"><span class="phase-index">01</span><div><small>YOU ASK</small><h3>“Fix it. Test it. Prove it.”</h3><p>A normal request. No skill IDs to memorize.</p></div></article>
-        <div class="phase-wire" style="--step:0"><i></i></div>
-        <article class="phase" style="--step:1"><span class="phase-index">02</span><div><small>SOLKRAFT ROUTES</small><h3>The right skills, in order.</h3><p>Investigate → build → test. Load only what helps.</p></div></article>
-        <div class="phase-wire" style="--step:1"><i></i></div>
-        <article class="phase phase-result" style="--step:2"><span class="phase-index">03</span><div><small>YOUR AGENT ACTS</small><h3>Real work. Checked results.</h3><p>The host applies the method using its own tools.</p></div></article>
+      <div class="request-machine hero-route" aria-label="Recorded routing example">
+        <div class="machine-heading"><span>FROM INTENT TO INSTRUCTIONS</span><b>REGRESSION EXAMPLE</b></div>
+        <div class="hero-request"><small>YOUR REQUEST</small><p>“Inspect the repository, diagnose the CI failure, implement a fix, run regression tests, and write the PR description.”</p></div>
+        <div class="route-connector"><span>↓</span> ONE REQUEST · FIVE METHODS</div>
+        <ol class="hero-route-list"><li><span>01</span><div><strong>Understand the codebase</strong><small>Trace the source and its boundaries.</small></div><b>↗</b></li><li><span>02</span><div><strong>Diagnose the failure</strong><small>Find the cause before changing behavior.</small></div><b>↗</b></li><li><span>03</span><div><strong>Implement the fix</strong><small>Apply the software build procedure.</small></div><b>↗</b></li><li><span>04</span><div><strong>Test the result</strong><small>Run relevant regression checks.</small></div><b>↗</b></li><li><span>05</span><div><strong>Explain the change</strong><small>Write the pull request description.</small></div><b>↗</b></li></ol>
+        <div class="hero-host"><span class="dot"></span> SOLKRAFT SELECTS <span>→</span> YOUR AGENT EXECUTES</div>
       </div>
     </section>
+    <div class="evidence-ribbon"><div><strong>173</strong><span>bundled procedures</span></div><div><strong>373,000</strong><span>local routing calls completed</span></div><div><strong>7</strong><span>read-only MCP tools</span></div><a href="#validation-replay">Inspect the evidence <span>↗</span></a></div>
 
     <section id="whats-new" class="workspace release-section">
-      <div class="release-head">
-        <div><div class="eyebrow">WHAT CHANGED · CONTRACT ARCHITECTURE</div><h2>Skills are no longer opaque superpowers.</h2></div>
-        <a class="button quiet" href="https://github.com/halthinks/SolKraft/blob/main/docs/SKILL_CONTRACT_ROADMAP.md" target="_blank" rel="noreferrer">Read the architecture ↗</a>
-      </div>
-      <p class="release-lead">SolKraft now treats each skill as a compact, inspectable capability contract. The router can reason about what a skill needs, what it may affect, what authority a host would need, how skills connect through typed inputs and outputs, and what evidence would verify success—before loading the full procedure.</p>
+      <div class="release-head"><div><div class="eyebrow">WHAT IT IS GOOD AT</div><h2>Less hunting for skills.<br>More clarity about the next step.</h2></div><a class="button quiet" href="#explore">Explore the catalog ↗</a></div>
+      <p class="release-lead">A practical layer between your request and your agent’s tools. Discover a method, inspect why it was selected, and retrieve its instructions when they are needed.</p>
       <div class="release-grid">
-        <article><span class="release-kicker">01 · CONTRACTS</span><h3>Inputs, outputs, effects, verification.</h3><p>Skills can carry typed <code>contract.yaml</code> sidecars with namespaced effects, capability/resource requirements, declarative checks, digests, provenance, and trust state.</p></article>
-        <article><span class="release-kicker">02 · ROUTING</span><h3>Admissibility before composition.</h3><p>Known-inadmissible skills are filtered before they shape a route. Whole routes are validated, broken dependencies are exposed, and one bounded repair pass can substitute a safe alternative.</p></article>
-        <article><span class="release-kicker">03 · DATAFLOW</span><h3>Capabilities can compose by type.</h3><p>Typed outputs can satisfy downstream inputs. A unique compatible producer can be inserted automatically; missing or ambiguous inputs remain visible instead of being guessed.</p></article>
-        <article><span class="release-kicker">04 · TRUST</span><h3>Verification is evidence-bound.</h3><p>Execution evidence is bound to exact contract and <code>SKILL.md</code> digests. Trust comes from external digest-bound review, never from a skill declaring itself trusted.</p></article>
-        <article><span class="release-kicker">05 · INTEROP</span><h3>REST, MCP, CLI, OpenAPI.</h3><p>Contract metadata is available over REST, MCP and CLI. Portable import/export and conservative MCP/OpenAPI adapters carry declarations only—never authority.</p></article>
-        <article><span class="release-kicker">06 · CI</span><h3>Pre-build a skill before the PR.</h3><p>Contributors can run the same reusable full gate locally or from GitHub before opening a PR, including the 100,000-route regression, packaging, installed MCP checks, contract indexing, and hardening receipts.</p></article>
+        <article><span class="release-kicker">01 · ORDINARY LANGUAGE</span><h3>Ask for the outcome.</h3><p>Route actions and context without memorizing skill IDs. Scope exclusions, quoted text, deferred work, and delivery requirements are handled separately from active tasks.</p></article>
+        <article><span class="release-kicker">02 · MULTI-STEP WORK</span><h3>Keep the workflow visible.</h3><p>Compose methods across domains, preserve requested order, and expose unresolved stages. Review the proposed route before your agent applies it.</p></article>
+        <article><span class="release-kicker">03 · SELECTIVE RETRIEVAL</span><h3>Load the method you need.</h3><p>Search compact metadata first. Retrieve the selected procedure and supporting resources through REST or MCP, without putting the entire catalog in context.</p></article>
       </div>
-      <div class="release-strip">
-        <span><b>Hardened public defaults</b> Opaque skills fail closed over REST, MCP, and CLI.</span>
-        <span><b>Lazy by design</b> The route/index hot path still avoids loading full skill bodies.</span>
-        <span><b>Execution stays external</b> <code>execution_authorized</code> remains false.</span>
-      </div>
+      <div class="release-strip"><span><b>Inspectable contracts</b> Inputs, outputs, effects, requirements, and trust metadata.</span><span><b>Hardened public routing</b> Inadmissible capabilities are blocked and explained.</span><span><b>Host-controlled execution</b> A route supplies guidance; your agent’s tools and authority govern the work.</span></div>
     </section>
 
-
-    <section id="validation-replay" class="workspace validation-replay" aria-label="Recorded benchmark reenactment">
-      <div class="validation-head">
-        <div>
-          <div class="eyebrow"><span class="pulse"></span> RECORDED CONTRACT VALIDATION · HISTORICAL REPLAY</div>
-          <h2>100,000 contract checks.<br><em>Watch the historical replay.</em></h2>
-          <p>This is a recorded replay of the historical 100k contract/hardening run. It is <strong>not</strong> the new broad-semantic proof and does not run tests in your browser.</p>
-        </div>
+    <section id="validation-replay" class="workspace validation-replay" aria-label="Completed local semantic validation">
+      <div class="validation-head"><div><div class="eyebrow"><span class="proof-check">✓</span> COMPLETED LOCAL VALIDATION</div><h2>Real routes.<br><em>Visible results.</em></h2><p>All 32 slices completed: 173,000 single-skill cases, 100,000 compound requests, and 100,000 stability calls. These are recorded production-router results from a generated corpus, plus independently authored regression requests.</p></div><a class="button quiet" href="assets/semantic-proof.json" download>Download the receipt ↓</a></div>
+      <div class="proof-status-bar"><span id="proof-status" role="status" aria-live="polite">Loading completed receipt…</span><button id="proof-retry" class="button quiet" hidden>Retry loading evidence</button><span>NO BROWSER-SIDE CI</span></div>
+      <div class="validation-stats proof-metrics">
+        <article><small>ROUTING CALLS</small><strong id="validation-count">—</strong><span>complete corpus · all 32 slices</span></article>
+        <article><small>SINGLE-SKILL DECISIONS</small><strong id="proof-single">—</strong><span>selection + policy behavior · 173,000 cases</span></article>
+        <article><small>COMPOUND TARGET COVERAGE</small><strong id="proof-coverage">—</strong><span>expected methods present · 100,000 requests</span></article>
+        <article><small>TARGET ORDER PRESERVED</small><strong id="proof-order">—</strong><span>expected methods in sequence</span></article>
+        <article><small>REPEAT STABILITY</small><strong id="proof-stability">—</strong><span>10,000 base cases × 10 interleaved rounds</span></article>
+        <article class="precision-metric"><small>EXACT COMPOUND SKILL SET</small><strong id="proof-exact">—</strong><span>coverage can include extra selections</span></article>
       </div>
-      <div class="validation-grid">
-        <div class="validation-terminal">
-          <div class="terminal-bar"><span>solkraft://validation-replay</span><b>RECORDED · LEGACY CONTRACT CORPUS</b></div>
-          <div id="validation-stream" class="validation-stream" aria-live="polite"></div>
-          <div class="validation-progress"><i id="validation-progress"></i></div>
-        </div>
-        <div class="validation-stats">
-          <article><small>REQUESTS</small><strong id="validation-count">100,000</strong><span>historical generated corpus</span></article>
-          <article><small>OVERALL PASS</small><strong>100.000%</strong><span>100,000 / 100,000</span></article>
-          <article><small>TARGET RECALL</small><strong>100.000%</strong><span>64,158 / 64,158 eligible cases</span></article>
-          <article><small>HARDENED BLOCKS</small><strong>100.000%</strong><span>30,062 / 30,062</span></article>
-          <article><small>CONSEQUENTIAL BOUNDARY</small><strong>100.000%</strong><span>5,780 / 5,780</span></article>
-          <article><small>EXECUTION AUTHORIZED</small><strong>FALSE</strong><span>100,000 / 100,000</span></article>
-        </div>
+      <div class="proof-limits"><strong>Coverage is strong. Precision still needs review.</strong><p id="proof-precision-note">Exact sets, extra selections, and unresolved work are reported separately.</p><p>Passing the configured gates does not establish perfect matching for arbitrary language, skill execution, or a deployed release.</p></div>
+      <div class="proof-lab">
+        <div class="proof-lab-copy"><div class="eyebrow">INSPECT A REAL EXAMPLE</div><h3>See the words.<br>See the methods.</h3><p>Choose a recorded request routed by the same Python engine. The result is precomputed, inspectable, and available without a server.</p><label for="proof-examples">Recorded regression request</label><select id="proof-examples" disabled><option>Loading examples…</option></select><button id="proof-open-route" class="button quiet" disabled>Use this request in Compose a route ↗</button><p class="proof-live-note">Custom semantic requests require a connected SolKraft API. Browse and inspect bundled skills here without a connection.</p></div>
+        <div class="proof-example"><div class="terminal-bar"><span>production-router / recorded-example</span><b>READ-ONLY</b></div><blockquote id="proof-request">Loading recorded request…</blockquote><ol id="proof-route" aria-label="Selected procedures"></ol><div id="proof-example-status" role="status">No routing example loaded.</div></div>
       </div>
-      <div class="validation-note">
-        <span><b>Historical contract replay</b> Retained to show hardened policy, blocking, boundaries, and advisory execution behavior.</span>
-        <span><b>New semantic proof</b> 1,000 distinct prompts per skill + 100,000 multi-skill compositions + 100,000 stability executions.</span>
-        <span><b>Proof gate</b> New semantic results are only treated as proven when the aggregate CI receipt passes its thresholds.</span>
-      </div>
+      <details class="proof-method"><summary>What the validation does—and what it does not establish</summary><p>The generated corpus uses catalog-derived semantic anchors without injecting skill IDs or full descriptions. Its locked holdout is generated, not an independent human-language study. The authored regression suite checks everyday requests and scope boundaries separately. All calls use the production router with a frozen catalog; routing outputs are not memoized.</p><p>Gates require ≥95% global and holdout single-skill behavior, ≥90% per skill, ≥90% compound coverage, ≥95% ordering, 100% stability, zero metadata leakage, and complete matching receipts. Exact sets and unresolved stages are disclosed but are not acceptance gates.</p><pre><code>python -m scripts.local_ci --semantic-proof --semantic-workers 6</code></pre><a href="https://github.com/halthinks/SolKraft/blob/main/docs/SEMANTIC_ROUTER_PROOF.md">Read the method and limitations ↗</a><p id="proof-source" class="proof-source">Source identity loads with the receipt.</p></details>
     </section>
 
     <section id="how-it-works" class="guide workspace">
@@ -119,7 +99,7 @@
         <article><span class="step-number">03</span><h3>Execute with preserved capability</h3><p>Copy instructions manually, or let an MCP or REST client retrieve them. Your agent reads the selected procedures, uses its own tools, and verifies the requested result.</p></article>
       </div>
       <div class="worked-example"><div class="eyebrow">TRY IT · NO CONNECTION NEEDED</div><h3>A bug fix with a release check</h3><blockquote>Inspect the codebase, fix the bug, add a regression test, and verify the release build. Do not deploy or publish anything.</blockquote><p>See the actual parser output generated from this request, inspect its selected procedures, and copy the request for your agent.</p><button id="example-btn" class="button primary">Walk through this example →</button></div>
-      <details class="parser-explanation"><summary>How the semantic parser and graph actually work</summary><div class="guide-grid"><article><h3>Identify the capability</h3><p>The deterministic parser still understands scoped rules, concept aliases, domain context, exclusions, quoted instructions, and completed or deferred work. It also matches published capability identity using distinctive tokens and unique capability signatures, preserving a high-confidence whole-request identity across multi-stage decomposition.</p></article><article><h3>Filter, compose, validate</h3><p>Hardened routing prefilters candidates through the ContractIndex before composition. The composer orders the requested stages, then whole-route validation checks contract admissibility, dependencies, and typed input/output dataflow. Bounded repair can recompose or repair a broken route instead of silently accepting an invalid chain.</p></article><article><h3>Keep the limits visible</h3><p>This is deterministic routing, not an LLM call. Scores are relative rankings, not probability estimates. Contract filtering, whole-route validation, and typed dataflow repair improve selection safety; a proposed route still never grants permission or executes a job.</p></article></div><p>Catalog search on this static site is keyword filtering. Custom semantic composition runs in your connected server. The example is real, precomputed parser output and is labelled separately from a live response.</p><a href="https://github.com/halthinks/SolKraft/blob/main/solkraft/skillpacks/solforge/SKILL.md">Read the orchestration skill ↗</a> · <a href="https://github.com/halthinks/SolKraft/blob/main/docs/CLIENTS.md">Set up REST or MCP ↗</a></details>
+      <details class="parser-explanation"><summary>How the semantic parser and graph actually work</summary><div class="guide-grid"><article><h3>Identify the capability</h3><p>The deterministic parser still understands scoped rules, concept aliases, domain context, exclusions, quoted instructions, and completed or deferred work. It also matches published capability identity using distinctive tokens and unique capability signatures, matching active clauses while keeping excluded, quoted, deferred, and delivery-only text out of capability selection.</p></article><article><h3>Filter, compose, validate</h3><p>Hardened routing prefilters candidates through the ContractIndex before composition. The composer orders the requested stages, then whole-route validation checks contract admissibility, dependencies, and typed input/output dataflow. Bounded repair can recompose or repair a broken route instead of silently accepting an invalid chain.</p></article><article><h3>Keep the limits visible</h3><p>This is deterministic routing, not an LLM call. Scores are relative rankings, not probability estimates. Contract filtering, whole-route validation, and typed dataflow repair improve selection safety; a proposed route still never grants permission or executes a job.</p></article></div><p>Catalog search on this static site is keyword filtering. Custom semantic composition runs in your connected server. The example is real, precomputed parser output and is labelled separately from a live response.</p><a href="https://github.com/halthinks/SolKraft/blob/main/solkraft/skillpacks/solforge/SKILL.md">Read the orchestration skill ↗</a> · <a href="https://github.com/halthinks/SolKraft/blob/main/docs/CLIENTS.md">Set up REST or MCP ↗</a></details>
     </section>
 
     <section id="install" class="guide workspace install-guide">
@@ -200,53 +180,16 @@ codex plugin add solkraft@solkraft</code></pre><p>You need Python 3.11 or newer,
         <div class="terminal-changelog-body">
           <div class="terminal-changelog-title">$ solkraft --what-changed</div>
           <ul>
-            <li>Added machine-readable <code>contract.yaml</code> skill contracts with typed inputs/outputs, namespaced effects, capability/resource requirements, verification checks, provenance, and digests.</li>
-            <li>Added explicit contract states: declared, legacy, opaque, unsupported, invalid.</li>
-            <li>Changed routing so inadmissible skills are filtered before composition instead of being deleted afterward.</li>
-            <li>Added whole-route validation, blocked/partially-blocked route states, dependency-break detection, and bounded safe repair.</li>
-            <li>Added typed dataflow composition so skill outputs can satisfy downstream inputs.</li>
-            <li>Added capability/resource grants instead of relying on the old scalar authorization ladder.</li>
-            <li>Removed old <code>AUTH_ORDER</code> enforcement for Contract v1 skills.</li>
-            <li>Removed the old post-hoc <code>apply_contracts()</code> / <code>violates()</code> filtering path.</li>
-            <li>Added declarative verification over structured execution evidence.</li>
-            <li>Added execution states: executed-unverified, verified, verification-failed.</li>
-            <li>Added digest-bound trust so a skill cannot simply declare itself trusted.</li>
-            <li>Added trust states including bundled-reviewed, signed, operator-trusted, local-unreviewed, legacy-inferred, opaque, invalid.</li>
-            <li>Added deterministic route and verification audit receipts.</li>
-            <li>Added a defined sandbox boundary while keeping SolKraft core non-executing.</li>
-            <li>Migrated 111 safe legacy skills to inferred Contract v1 sidecars while keeping them explicitly legacy-inferred.</li>
-            <li>Left 10 consequential legacy skills manual-only rather than fabricating safe contracts.</li>
-            <li>Added a compact ContractIndex for effects, capabilities, inputs, outputs, trust, digests, caching, and incremental refresh.</li>
-            <li>Added REST contract endpoints for contract metadata, schema, validation, filtering, import, and export.</li>
-            <li>Added MCP tools: <code>get_skill_contract</code> and <code>get_contract_index</code>.</li>
-            <li>Added read-only/idempotent MCP annotations.</li>
-            <li>Added CLI commands for contract init, validate, lint, show, schema, migrate, export, and import.</li>
-            <li>Added conservative MCP and OpenAPI metadata adapters that import declarations without granting trust or authority.</li>
-            <li>Added portable Contract v1 import/export with unknown effects failing closed.</li>
-            <li>Changed REST, MCP, and CLI routing to hardened defaults so opaque skills fail closed.</li>
-            <li>Kept the Python library backward-compatible unless a stricter policy is explicitly requested.</li>
-            <li>Added one reusable CI pipeline for normal PRs and pre-PR skill contribution validation.</li>
-            <li>Added local/pre-PR evidence bundles with receipts, routing results, wheel/plugin artifacts, hashes, and contract-index evidence.</li>
-            <li>Added contract schema/index/hardening CI receipts.</li>
-            <li>Added the advanced 100,000-request routing benchmark.</li>
-            <li>Expanded benchmark coverage from 25 ask families to 100 ask families per skill.</li>
-            <li>Added adversarial near-neighbor confusion, ambiguity, compound context, and capability-disambiguation cases.</li>
-            <li>Added a capability-identity matcher using published descriptions, distinctive tokens, and unique description signatures.</li>
-            <li>Changed routing precedence so high-confidence whole-request capability identity is preserved across multi-stage decomposition.</li>
-            <li>Final local acceptance: 100,000 / 100,000 passed.</li>
-            <li>Eligible target recall: 64,158 / 64,158 — 100%.</li>
-            <li>Hardened blocking: 30,062 / 30,062 — 100%.</li>
-            <li>Consequential boundary: 5,780 / 5,780 — 100%.</li>
-            <li><code>execution_authorized:false</code> held for 100,000 / 100,000 requests.</li>
-            <li>Added a durable local validation receipt and updated <code>VALIDATION.md</code>.</li>
-            <li>Added the public Recorded Validation · Reenactment module for the 100k result.</li>
-            <li>Added a Contributors page that recognizes community impact beyond pull requests, with Cozy (@Cozy2054934) as Contributor 001 for high-impact executable skill-contract idea work.</li>
-            <li>Added a public 1–5 star contributor rating rubric and a guided contributor nomination form for code and non-code community impact.</li>
-            <li>Added contributor badges, a public nominations archive, a visual README hero, and a contributions showcase for high-level community impact.</li>
-            <li>Added interactive showcase filters and a public contributor badge legend covering all five recognition levels and impact tags.</li>
-            <li>Added text-first contributor profile cards to the Contributions Showcase with earned badges, contribution areas, impact summaries, and links to public work—without profile images.</li>
+            <li>Completed the full local semantic corpus: 373,000 production routing calls across all 32 slices.</li>
+            <li>Fixed ordinary request routing, inline exclusions, inert quotations, deferred work, repeated test stages, and output requirements.</li>
+            <li>Preserved compound target order and enforced the requested skill limit.</li>
+            <li>Removed skipped ambiguous cases and duplicate composition templates from the proof harness.</li>
+            <li>Bound receipts to exact source inputs; incomplete, mixed-source, and smoke runs cannot pass the full proof.</li>
+            <li>Replaced simulated validation animation with actual receipts and recorded routing examples.</li>
+            <li>Reported exact matching, extra selections, and unresolved work alongside target coverage.</li>
+            <li>Kept contracts inspectable, public routing hardened, and execution authority with the host.</li>
           </ul>
-          <div class="terminal-changelog-end">[status] contract-aware routing hardened · validation 100.000% · execution remains external</div>
+          <div class="terminal-changelog-end">[status] local corpus complete · configured gates passed · precision limits disclosed · execution remains external</div>
         </div>
       </div>
     </section>

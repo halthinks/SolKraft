@@ -3,7 +3,7 @@ name: solforge-workflow-math-compute
 description: Design reproducible symbolic or numerical experiments that inform—but do not substitute for—proof.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
 
 # Run mathematical experiments
 
@@ -24,6 +24,6 @@ Report the statement tested, the methods and parameters used, what the computati
 - Hardened routing rejects opaque or contract-inadmissible capabilities.
 - Contract metadata is evaluated before full skill instructions are loaded.
 - Runtime authority stays with the host; `execution_authorized` remains `false`.
-- Current local acceptance: 100,000 unique 250-word requests, 100 ask families per skill, and 100% eligible target recall. See `VALIDATION.md`.
+- Validation evidence and limits: see repository VALIDATION.md and docs/SEMANTIC_ROUTER_PROOF.md for the completed local semantic corpus, source identity, precision limits, and rerun instructions. A selected route does not prove execution or perfect matching.
 
 <!-- END SOLKRAFT SKILL INTEGRATION -->

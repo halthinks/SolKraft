@@ -26,7 +26,8 @@ def main():
 
     single=Counter(); composition=Counter(); stability=Counter(); leakage=Counter()
     per_skill=defaultdict(Counter); confusion=defaultdict(Counter); single_hashes=defaultdict(set); duplicate_single_hashes=0; failures=[]; digests=[]
-    catalog=None; configured=None
+    catalog=None; configured=None; source=None
+    config_keys=('single_prompts_per_skill_configured', 'development_partition_boundary', 'holdout_partition_start', 'composition_cases_configured', 'stability_base_cases_configured', 'stability_repeats')
     shard_slices=set(); shard_counts=set(); slice_counts=set()
     for path in files:
         data=json.loads(path.read_text(encoding='utf-8'))
@@ -36,8 +37,15 @@ def main():
         if key in shard_slices:
             raise SystemExit(f'duplicate shard slice receipt: {key}')
         shard_slices.add(key); shard_counts.add(shard_count); slice_counts.add(slice_count)
-        catalog = catalog or data['catalog']
-        configured = configured or data['corpus']
+        if catalog is not None and catalog != data['catalog']:
+            raise SystemExit('inconsistent catalog receipts')
+        if configured is not None and any(configured[k] != data['corpus'][k] for k in config_keys):
+            raise SystemExit('inconsistent corpus configuration')
+        if not data.get('source') or (source is not None and source != data['source']):
+            raise SystemExit('missing or inconsistent source identity')
+        catalog = data['catalog']
+        configured = data['corpus']
+        source = data['source']
         single.update(data.get('single',{})); composition.update(data.get('composition',{})); stability.update(data.get('stability',{})); leakage.update(data.get('leakage',{}))
         for sid, metrics in data.get('per_skill',{}).items():
             per_skill[sid].update({k:v for k,v in metrics.items() if isinstance(v,int)})
@@ -91,6 +99,8 @@ def main():
     )
 
     gates={
+        'full_corpus_configuration': configured['single_prompts_per_skill_configured'] == 1000 and configured['composition_cases_configured'] == 100000 and configured['stability_base_cases_configured'] == 10000 and configured['stability_repeats'] == 10,
+        'complete_execution_counts': single['cases'] == catalog['skill_count'] * configured['single_prompts_per_skill_configured'] and composition['cases'] == configured['composition_cases_configured'] and stability['base_cases'] == configured['stability_base_cases_configured'] and stability['executions'] == configured['stability_base_cases_configured'] * configured['stability_repeats'],
         'complete_shard_slice_topology': topology_complete,
         'single_prompt_uniqueness': uniqueness_ok,
         'no_metadata_leakage': sum(leakage.values()) == 0,
@@ -110,6 +120,7 @@ def main():
         'thresholds':THRESHOLDS,
         'gates':gates,
         'catalog':catalog,
+        'source':source,
         'execution_topology':{'shard_count':shard_count,'slice_count':slice_count,
             'expected_receipts':len(expected_slices),'received_receipts':len(shard_slices),
             'missing_receipts':missing_slices[:50],'unexpected_receipts':unexpected_slices[:50]},

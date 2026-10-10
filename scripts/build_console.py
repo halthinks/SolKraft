@@ -60,7 +60,7 @@ def main():
     index = root / 'docs/index.html'
     text = index.read_text(encoding='utf-8')
     versions = {}
-    for name in ('app.js', 'flow.js', 'setup.js', 'static-data.js', 'style.css'):
+    for name in ('app.js', 'flow.js', 'setup.js', 'static-data.js', 'validation.js', 'style.css'):
         version = hashlib.sha256((assets / name).read_bytes()).hexdigest()[:12]
         versions[name] = version
         text = re.sub(r'assets/' + re.escape(name) + r'(?:\?v=[a-z0-9]+)?', f'assets/{name}?v={version}', text)

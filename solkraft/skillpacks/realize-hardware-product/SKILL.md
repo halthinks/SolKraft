@@ -3,7 +3,7 @@ name: realize-hardware-product
 description: Convert a hardware-product concept or source-bound architecture into a compact, dimensionally closed, supplier-evidence-bound realization package. Use for exact component/order selection, supplier STEP and sample control, custom PCB/carrier placement and routing, batteries and protection, connectors and cable bends, mechanisms and seals, thermal paths, representative collision and balance studies, assembly CAD/renders, BOMs, and first-article acceptance. Also use to audit whether a hardware package is truly digitally closed or physically verified.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
 
 # Realize Hardware Product
 
@@ -234,6 +234,6 @@ decision needed to resume promotion.
 - Public routing defaults to hardened policy; opaque or contract-inadmissible capabilities fail closed.
 - When `contract.yaml` exists, compact metadata is evaluated before this full instruction body is loaded.
 - Runtime authority stays with the host; SolKraft keeps `execution_authorized: false`.
-- Current local acceptance covers 100,000 unique 250-word requests, 100 ask families per skill, and 100% eligible target recall. See repository `VALIDATION.md`.
+- See repository `VALIDATION.md` and `docs/SEMANTIC_ROUTER_PROOF.md` for current executed results, source identity, precision limits, and rerun instructions. Do not infer perfect matching or execution from a selected route.
 
 <!-- END SOLKRAFT SKILL INTEGRATION -->

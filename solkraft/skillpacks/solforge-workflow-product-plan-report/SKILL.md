@@ -3,7 +3,7 @@ name: solforge-workflow-product-plan-report
 description: "Router-selected SolForge workflow node: study supplied sources and develop a source-bound product research, MVP, architecture, and design-plan report."
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
 
 # Develop a source-bound product plan report
 
@@ -24,6 +24,6 @@ Deliver the report as the requested artifact, then report source coverage (what 
 - Hardened routing rejects opaque or inadmissible capabilities.
 - Contract metadata is evaluated before loading the full instruction body.
 - Execution authority stays with the host.
-- Current local acceptance: 100,000 unique 250-word requests, 100 ask families per skill, 100% eligible target recall.
+- Validation evidence and limits: see the repository VALIDATION.md and docs/SEMANTIC_ROUTER_PROOF.md for the completed local semantic corpus, source identity, precision limits, and rerun instructions. A selected route does not prove execution or perfect matching.
 
 <!-- END SOLKRAFT SKILL INTEGRATION -->
