@@ -1,0 +1,4679 @@
+{
+  "summary": {
+    "catalog": {
+      "selectable_skill_count": 111,
+      "skill_count": 173
+    },
+    "composition": {
+      "all_targets_selected": 100000,
+      "cases": 100000,
+      "coverage_rate": 1.0,
+      "exact_set_rate": 0.27697,
+      "exact_target_set": 27697,
+      "extra_selected_total": 233968,
+      "no_unresolved": 60000,
+      "order_rate": 0.99655,
+      "size_2_cases": 25000,
+      "size_2_coverage": 25000,
+      "size_3_cases": 25000,
+      "size_3_coverage": 25000,
+      "size_4_cases": 25000,
+      "size_4_coverage": 25000,
+      "size_5_cases": 25000,
+      "size_5_coverage": 25000,
+      "target_order_preserved": 99655
+    },
+    "confusion": {
+      "solforge-workflow-solforge-plugin-development": {
+        "solforge-workflow-code-research": 67
+      }
+    },
+    "corpus": {
+      "aggregate_shard_digest_sha256": "3916602af2bacedcb31fa6cc5d0ba173e73ed54989920d357387a8becb02ae11",
+      "composition_cases": 100000,
+      "expected_total_executions": 373000,
+      "explicit_skill_ids_injected": false,
+      "full_descriptions_injected": false,
+      "single_prompts_per_skill": 1000,
+      "stability_base_cases": 10000,
+      "stability_repeats": 10
+    },
+    "execution_topology": {
+      "expected_receipts": 32,
+      "missing_receipts": [],
+      "received_receipts": 32,
+      "shard_count": 16,
+      "slice_count": 2,
+      "unexpected_receipts": []
+    },
+    "gates": {
+      "complete_execution_counts": true,
+      "complete_shard_slice_topology": true,
+      "composition_coverage_rate": true,
+      "composition_order_rate": true,
+      "every_skill_rate": true,
+      "full_corpus_configuration": true,
+      "no_metadata_leakage": true,
+      "single_global_rate": true,
+      "single_holdout_rate": true,
+      "single_prompt_uniqueness": true,
+      "stability_rate": true
+    },
+    "leakage": {},
+    "per_skill": {
+      "android-emulator-qa": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "audit-git-worktrees": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "brainstorming": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "build-chatgpt-app": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "build-selected-hardware-product": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "capability-preserving-execution": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "chatgpt-app-submission": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "deep-research": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "dispatching-parallel-agents": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "evidence-bound-product-pipeline": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "evidence-bound-product-realization": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "executing-plans": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "finishing-a-development-branch": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "generate-surfable-item-prompts": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "gh-address-comments": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "gh-fix-ci": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "hardware-product-pipeline": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "hf-cli": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "imagegen": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "netlify-ai-gateway": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "netlify-blobs": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "netlify-caching": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "netlify-cli-and-deploy": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "netlify-config": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "netlify-deploy": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "netlify-edge-functions": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "netlify-forms": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "netlify-frameworks": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "netlify-functions": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "netlify-identity": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "netlify-image-cdn": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "openai-docs": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "preserve-engineering-selections": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "realize-cad-bound-product": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "realize-hardware-product": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "receiving-code-review": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "requesting-code-review": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "select-and-validate-hardware-parts": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "skill-creator": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "skill-installer": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "sol-merge-report": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "sol-search": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-build": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-code-mastery": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-code-research": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 900,
+        "top1_rate": 0.9
+      },
+      "solforge-codebase": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-compatibility-report": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-context-curator": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-cross-build": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-finalize": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-independent-challenger": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-install-plan": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-launcher": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-mvp": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-mvp-create": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-now": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-package-build": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-package-detect": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-perfection": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-platform-adapter": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-plugin-development": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-plugin-skill-release": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-portability-audit": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-product-line-paper": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-product-plan-report": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-prompt": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-prompt-compiler": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-prompt-multi": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-prompt-single": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-propose": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-readme": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-release-matrix": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-report": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-report-writer": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-research": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-research-mastery-loop": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-research-mastery-perfection": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-result-validator": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-route-architect": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-run-comparison": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-run-multi": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-run-refactor": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-run-report-write": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-run-research": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-run-single": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-sign-and-prove": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-software-portability": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-steer": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-target-verify": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-user-control": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-business-compare": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-business-diligence": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-business-market": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-business-model": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-business-strategy": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-code-research": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-codebase": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-consequential-activate": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "solforge-workflow-consequential-delete": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "solforge-workflow-consequential-deploy": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "solforge-workflow-consequential-merge": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "solforge-workflow-consequential-publish": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "solforge-workflow-consequential-purchase": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "solforge-workflow-consequential-push": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "solforge-workflow-consequential-revoke": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "solforge-workflow-consequential-rotate": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "solforge-workflow-consequential-send": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "solforge-workflow-data-analyze": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-data-model": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-data-validate": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-data-visualize": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-engineering-prototype": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-engineering-requirements": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-engineering-trade": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-engineering-verify": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-finish": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-implementation": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-launcher-install": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-launcher-package-matrix": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-launcher-release-readiness": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-legal-compare": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-legal-draft": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-legal-research": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-legal-risk": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-math-compute": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-math-counterexample": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-math-explain": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-math-literature": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-math-prove": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-math-solve": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-math-verify": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-merge-report": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-product-line-paper": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-product-plan-report": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-report": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-research": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-science-analysis": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-science-experiment": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-science-hypothesis": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-science-literature": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-science-replication": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-science-report": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-software-build": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-software-compare": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-software-diagnose": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-software-mobile-adaptation": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-software-mvp-create": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-software-native-port": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-software-portability-audit": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-software-refactor": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-software-security": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-software-shared-core": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-software-target-verify": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-software-test": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-solforge-plugin-development": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 747,
+        "dev_rate": 0.93375,
+        "holdout_cases": 200,
+        "holdout_passed": 186,
+        "holdout_rate": 0.93,
+        "passed": 933,
+        "rate": 0.933,
+        "top1": 800,
+        "top1_rate": 0.8
+      },
+      "solforge-workflow-whitepaper-to-readme": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-writing-draft": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-writing-factcheck": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-writing-outline": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "solforge-workflow-writing-review": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1": 1000,
+        "top1_rate": 1.0
+      },
+      "subagent-driven-development": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "supabase": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "supabase-postgres-best-practices": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "systematic-debugging": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "test-driven-development": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "training-claim-verification": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "using-git-worktrees": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "using-superpowers": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "verification-before-completion": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "writing-plans": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "writing-skills": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      },
+      "yeet": {
+        "cases": 1000,
+        "dev_cases": 800,
+        "dev_passed": 800,
+        "dev_rate": 1.0,
+        "holdout_cases": 200,
+        "holdout_passed": 200,
+        "holdout_rate": 1.0,
+        "passed": 1000,
+        "rate": 1.0,
+        "top1_rate": 0.0
+      }
+    },
+    "proof_passed": true,
+    "sample_failures": [
+      {
+        "case": 155200,
+        "expected": "select-target",
+        "prompt_sha256": "957966e159d608051edf2f2e8a3265ad2983c62d24aa1fab3a31752575775f1a",
+        "selected": [
+          "solforge-workflow-code-research",
+          "solforge-run-refactor",
+          "solforge-package-detect",
+          "solforge-codebase",
+          "solforge-workflow-software-mvp-create",
+          "solforge-workflow-software-build",
+          "solforge-workflow-software-compare",
+          "solforge-workflow-software-refactor"
+        ],
+        "split": "dev",
+        "suite": "single",
+        "target": "solforge-workflow-solforge-plugin-development"
+      },
+      {
+        "case": 155680,
+        "expected": "select-target",
+        "prompt_sha256": "1b09668d466b0ae63b7a1169c29457b1efe6163090701e64c530dfe954f5da65",
+        "selected": [
+          "solforge-workflow-code-research",
+          "solforge-run-refactor",
+          "solforge-package-detect",
+          "solforge-codebase",
+          "solforge-workflow-software-mvp-create",
+          "solforge-workflow-software-build",
+          "solforge-workflow-software-compare",
+          "solforge-workflow-software-refactor"
+        ],
+        "split": "dev",
+        "suite": "single",
+        "target": "solforge-workflow-solforge-plugin-development"
+      },
+      {
+        "case": 155440,
+        "expected": "select-target",
+        "prompt_sha256": "b1f285811e747dca5b29626f36e86a2168ea45a65fc07f178b086f88d9a41b36",
+        "selected": [
+          "solforge-workflow-code-research",
+          "solforge-run-refactor",
+          "solforge-package-detect",
+          "solforge-codebase",
+          "solforge-workflow-software-mvp-create",
+          "solforge-workflow-software-build",
+          "solforge-workflow-software-compare",
+          "solforge-workflow-software-refactor"
+        ],
+        "split": "dev",
+        "suite": "single",
+        "target": "solforge-workflow-solforge-plugin-development"
+      },
+      {
+        "case": 155920,
+        "expected": "select-target",
+        "prompt_sha256": "63a93b7d9909c58dc5660502d587947586f6bd501c3a56882d3bbf7d39a7b000",
+        "selected": [
+          "solforge-workflow-code-research",
+          "solforge-run-refactor",
+          "solforge-package-detect",
+          "solforge-codebase",
+          "solforge-workflow-software-mvp-create",
+          "solforge-workflow-software-build",
+          "solforge-workflow-software-compare",
+          "solforge-workflow-software-refactor"
+        ],
+        "split": "holdout",
+        "suite": "single",
+        "target": "solforge-workflow-solforge-plugin-development"
+      },
+      {
+        "case": 155425,
+        "expected": "select-target",
+        "prompt_sha256": "b0d6b12b84d752cf8018d73eab5c54f17b3e927c7c7cb1c91b16f52c52c3ac2a",
+        "selected": [
+          "solforge-workflow-code-research",
+          "solforge-run-refactor",
+          "solforge-package-detect",
+          "solforge-codebase",
+          "solforge-workflow-software-mvp-create",
+          "solforge-workflow-software-build",
+          "solforge-workflow-software-compare",
+          "solforge-workflow-software-refactor"
+        ],
+        "split": "dev",
+        "suite": "single",
+        "target": "solforge-workflow-solforge-plugin-development"
+      },
+      {
+        "case": 155905,
+        "expected": "select-target",
+        "prompt_sha256": "7847344291b03000d93d454feb280ba88bbbf12630f96aa32a9ea9aaf706afd1",
+        "selected": [
+          "solforge-workflow-code-research",
+          "solforge-run-refactor",
+          "solforge-package-detect",
+          "solforge-codebase",
+          "solforge-workflow-software-mvp-create",
+          "solforge-workflow-software-build",
+          "solforge-workflow-software-compare",
+          "solforge-workflow-software-refactor"
+        ],
+        "split": "holdout",
+        "suite": "single",
+        "target": "solforge-workflow-solforge-plugin-development"
+      },
+      {
+        "case": 155185,
+        "expected": "select-target",
+        "prompt_sha256": "ae86aa4999effdadbe9406a32ff011056a176e5bc7ab9cbb64cffd8e94f273d8",
+        "selected": [
+          "solforge-workflow-code-research",
+          "solforge-run-refactor",
+          "solforge-package-detect",
+          "solforge-codebase",
+          "solforge-workflow-software-mvp-create",
+          "solforge-workflow-software-build",
+          "solforge-workflow-software-compare",
+          "solforge-workflow-software-refactor"
+        ],
+        "split": "dev",
+        "suite": "single",
+        "target": "solforge-workflow-solforge-plugin-development"
+      },
+      {
+        "case": 155665,
+        "expected": "select-target",
+        "prompt_sha256": "d43397cc766f3409a72727a041e2d67ad627ca0d3e004a7152e8aff90c4ad42d",
+        "selected": [
+          "solforge-workflow-code-research",
+          "solforge-run-refactor",
+          "solforge-package-detect",
+          "solforge-codebase",
+          "solforge-workflow-software-mvp-create",
+          "solforge-workflow-software-build",
+          "solforge-workflow-software-compare",
+          "solforge-workflow-software-refactor"
+        ],
+        "split": "dev",
+        "suite": "single",
+        "target": "solforge-workflow-solforge-plugin-development"
+      },
+      {
+        "case": 155050,
+        "expected": "select-target",
+        "prompt_sha256": "f07ffd51e0f7d860a60b4bea436be90bfb7c8d2d4008548bd368e63aab8dc7c0",
+        "selected": [
+          "solforge-workflow-code-research",
+          "solforge-run-refactor",
+          "solforge-package-detect",
+          "solforge-codebase",
+          "solforge-workflow-software-mvp-create",
+          "solforge-workflow-software-build",
+          "solforge-workflow-software-compare",
+          "solforge-workflow-software-refactor"
+        ],
+        "split": "dev",
+        "suite": "single",
+        "target": "solforge-workflow-solforge-plugin-development"
+      },
+      {
+        "case": 155530,
+        "expected": "select-target",
+        "prompt_sha256": "f312b15707f7fa0282e11b42b748d392d366dc14cc5522bfc03f02ae62a2a68a",
+        "selected": [
+          "solforge-workflow-code-research",
+          "solforge-run-refactor",
+          "solforge-package-detect",
+          "solforge-codebase",
+          "solforge-workflow-software-mvp-create",
+          "solforge-workflow-software-build",
+          "solforge-workflow-software-compare",
+          "solforge-workflow-software-refactor"
+        ],
+        "split": "dev",
+        "suite": "single",
+        "target": "solforge-workflow-solforge-plugin-development"
+      },
+      {
+        "case": 6186,
+        "coverage_ok": true,
+        "order_ok": false,
+        "prompt_sha256": "491f2b41cacf209a9ae35c2cff083ea457dd1921820d90f73da007510e187cde",
+        "selected": [
+          "solforge-workflow-business-diligence",
+          "solforge-workflow-software-target-verify",
+          "solforge-workflow-engineering-requirements",
+          "solforge-workflow-engineering-verify",
+          "solforge-workflow-software-mobile-adaptation",
+          "solforge-workflow-math-literature"
+        ],
+        "suite": "composition",
+        "targets": [
+          "solforge-workflow-business-diligence",
+          "solforge-workflow-engineering-requirements",
+          "solforge-workflow-math-literature",
+          "solforge-workflow-software-target-verify"
+        ]
+      },
+      {
+        "case": 155290,
+        "expected": "select-target",
+        "prompt_sha256": "366d507afbaf6b566891a7b415609af1fdc80007047c6c5f640955ece9066ae2",
+        "selected": [
+          "solforge-workflow-code-research",
+          "solforge-run-refactor",
+          "solforge-package-detect",
+          "solforge-codebase",
+          "solforge-workflow-software-mvp-create",
+          "solforge-workflow-software-build",
+          "solforge-workflow-software-compare",
+          "solforge-workflow-software-refactor"
+        ],
+        "split": "dev",
+        "suite": "single",
+        "target": "solforge-workflow-solforge-plugin-development"
+      },
+      {
+        "case": 155770,
+        "expected": "select-target",
+        "prompt_sha256": "707e5edb4825f61c5f4513f913aefbbcea81b05fe6829d6c63df70d4881455c4",
+        "selected": [
+          "solforge-workflow-code-research",
+          "solforge-run-refactor",
+          "solforge-package-detect",
+          "solforge-codebase",
+          "solforge-workflow-software-mvp-create",
+          "solforge-workflow-software-build",
+          "solforge-workflow-software-compare",
+          "solforge-workflow-software-refactor"
+        ],
+        "split": "dev",
+        "suite": "single",
+        "target": "solforge-workflow-solforge-plugin-development"
+      },
+      {
+        "case": 8346,
+        "coverage_ok": true,
+        "order_ok": false,
+        "prompt_sha256": "bb252244c9613678bf9daee4ba0c1850c167b041a4b3eb6af5dec94503e53862",
+        "selected": [
+          "solforge-workflow-code-research",
+          "solforge-code-research",
+          "solforge-now",
+          "solforge-readme",
+          "solforge-context-curator"
+        ],
+        "suite": "composition",
+        "targets": [
+          "solforge-code-research",
+          "solforge-now",
+          "solforge-readme",
+          "solforge-workflow-code-research"
+        ]
+      },
+      {
+        "case": 155275,
+        "expected": "select-target",
+        "prompt_sha256": "b97a22ae8e1c2de5107970fb39133530386c28887909129c7c85422bcadbf997",
+        "selected": [
+          "solforge-workflow-code-research",
+          "solforge-run-refactor",
+          "solforge-package-detect",
+          "solforge-codebase",
+          "solforge-workflow-software-mvp-create",
+          "solforge-workflow-software-build",
+          "solforge-workflow-software-compare",
+          "solforge-workflow-software-refactor"
+        ],
+        "split": "dev",
+        "suite": "single",
+        "target": "solforge-workflow-solforge-plugin-development"
+      },
+      {
+        "case": 155755,
+        "expected": "select-target",
+        "prompt_sha256": "e417c6395b6d19cd7f33586119c25429bef4ce46f8222a403873a15945675db8",
+        "selected": [
+          "solforge-workflow-code-research",
+          "solforge-run-refactor",
+          "solforge-package-detect",
+          "solforge-codebase",
+          "solforge-workflow-software-mvp-create",
+          "solforge-workflow-software-build",
+          "solforge-workflow-software-compare",
+          "solforge-workflow-software-refactor"
+        ],
+        "split": "dev",
+        "suite": "single",
+        "target": "solforge-workflow-solforge-plugin-development"
+      },
+      {
+        "case": 1611,
+        "coverage_ok": true,
+        "order_ok": false,
+        "prompt_sha256": "3a381d06f173804e94d9b45f02ab77150e122805e987dffb89bb268f9a014105",
+        "selected": [
+          "solforge-workflow-code-research",
+          "solforge-code-research",
+          "solforge-now",
+          "solforge-readme",
+          "solforge-workflow-math-verify"
+        ],
+        "suite": "composition",
+        "targets": [
+          "solforge-code-research",
+          "solforge-now",
+          "solforge-readme",
+          "solforge-workflow-code-research",
+          "solforge-workflow-math-verify"
+        ]
+      },
+      {
+        "case": 155035,
+        "expected": "select-target",
+        "prompt_sha256": "25b3c66da044f11a3ab124e2db4703e8751b1459a52a4e2f79b56821d29ed6aa",
+        "selected": [
+          "solforge-workflow-code-research",
+          "solforge-run-refactor",
+          "solforge-package-detect",
+          "solforge-codebase",
+          "solforge-workflow-software-mvp-create",
+          "solforge-workflow-software-build",
+          "solforge-workflow-software-compare",
+          "solforge-workflow-software-refactor"
+        ],
+        "split": "dev",
+        "suite": "single",
+        "target": "solforge-workflow-solforge-plugin-development"
+      },
+      {
+        "case": 155515,
+        "expected": "select-target",
+        "prompt_sha256": "31f1cd58643ed7553708d382b3361ad049c2374c3dcce6ac275f8c734c0a5d00",
+        "selected": [
+          "solforge-workflow-code-research",
+          "solforge-run-refactor",
+          "solforge-package-detect",
+          "solforge-codebase",
+          "solforge-workflow-software-mvp-create",
+          "solforge-workflow-software-build",
+          "solforge-workflow-software-compare",
+          "solforge-workflow-software-refactor"
+        ],
+        "split": "dev",
+        "suite": "single",
+        "target": "solforge-workflow-solforge-plugin-development"
+      },
+      {
+        "case": 155995,
+        "expected": "select-target",
+        "prompt_sha256": "7d9596bcc1cecb2abd6c0999fa49cac1e7d98d746739486566d8fcd8fda29876",
+        "selected": [
+          "solforge-workflow-code-research",
+          "solforge-run-refactor",
+          "solforge-package-detect",
+          "solforge-codebase",
+          "solforge-workflow-software-mvp-create",
+          "solforge-workflow-software-build",
+          "solforge-workflow-software-compare",
+          "solforge-workflow-software-refactor"
+        ],
+        "split": "holdout",
+        "suite": "single",
+        "target": "solforge-workflow-solforge-plugin-development"
+      },
+      {
+        "case": 155020,
+        "expected": "select-target",
+        "prompt_sha256": "77823ef901504c4112c5d0174bab699df56579b6c841dd6e80fc9d00227630ff",
+        "selected": [
+          "solforge-workflow-code-research",
+          "solforge-run-refactor",
+          "solforge-package-detect",
+          "solforge-codebase",
+          "solforge-workflow-software-mvp-create",
+          "solforge-workflow-software-build",
+          "solforge-workflow-software-compare",
+          "solforge-workflow-software-refactor"
+        ],
+        "split": "dev",
+        "suite": "single",
+        "target": "solforge-workflow-solforge-plugin-development"
+      },
+      {
+        "case": 155500,
+        "expected": "select-target",
+        "prompt_sha256": "d5581e7563e3cf6071df6d62fb1830ddbf952c7ee1ac341e4ee1ff36f789778e",
+        "selected": [
+          "solforge-workflow-code-research",
+          "solforge-run-refactor",
+          "solforge-package-detect",
+          "solforge-codebase",
+          "solforge-workflow-software-mvp-create",
+          "solforge-workflow-software-build",
+          "solforge-workflow-software-compare",
+          "solforge-workflow-software-refactor"
+        ],
+        "split": "dev",
+        "suite": "single",
+        "target": "solforge-workflow-solforge-plugin-development"
+      },
+      {
+        "case": 155980,
+        "expected": "select-target",
+        "prompt_sha256": "b682bc487da040be68f41605c83f45017f9ae16e5e1e9f8e3d4180133af30979",
+        "selected": [
+          "solforge-workflow-code-research",
+          "solforge-run-refactor",
+          "solforge-package-detect",
+          "solforge-codebase",
+          "solforge-workflow-software-mvp-create",
+          "solforge-workflow-software-build",
+          "solforge-workflow-software-compare",
+          "solforge-workflow-software-refactor"
+        ],
+        "split": "holdout",
+        "suite": "single",
+        "target": "solforge-workflow-solforge-plugin-development"
+      },
+      {
+        "case": 155260,
+        "expected": "select-target",
+        "prompt_sha256": "912881db2830757f1e3d94d6077b63bec38d562608f913a6a59a103faf412b02",
+        "selected": [
+          "solforge-workflow-code-research",
+          "solforge-run-refactor",
+          "solforge-package-detect",
+          "solforge-codebase",
+          "solforge-workflow-software-mvp-create",
+          "solforge-workflow-software-build",
+          "solforge-workflow-software-compare",
+          "solforge-workflow-software-refactor"
+        ],
+        "split": "dev",
+        "suite": "single",
+        "target": "solforge-workflow-solforge-plugin-development"
+      },
+      {
+        "case": 155740,
+        "expected": "select-target",
+        "prompt_sha256": "58d730fa2123044a9bdbf27d10314d31afc1ea52acc6e3cae2e342ab4d057b9b",
+        "selected": [
+          "solforge-workflow-code-research",
+          "solforge-run-refactor",
+          "solforge-package-detect",
+          "solforge-codebase",
+          "solforge-workflow-software-mvp-create",
+          "solforge-workflow-software-build",
+          "solforge-workflow-software-compare",
+          "solforge-workflow-software-refactor"
+        ],
+        "split": "dev",
+        "suite": "single",
+        "target": "solforge-workflow-solforge-plugin-development"
+      },
+      {
+        "case": 155245,
+        "expected": "select-target",
+        "prompt_sha256": "c740330fc35767f97042138b177b37c71d800be29aca3a4afc38d3dc270fd3dd",
+        "selected": [
+          "solforge-workflow-code-research",
+          "solforge-run-refactor",
+          "solforge-package-detect",
+          "solforge-codebase",
+          "solforge-workflow-software-mvp-create",
+          "solforge-workflow-software-build",
+          "solforge-workflow-software-compare",
+          "solforge-workflow-software-refactor"
+        ],
+        "split": "dev",
+        "suite": "single",
+        "target": "solforge-workflow-solforge-plugin-development"
+      },
+      {
+        "case": 155725,
+        "expected": "select-target",
+        "prompt_sha256": "7c6092eba8bddbf93f934f6717eb8772c2f92c6ceb1abb42e97ea6288eea1407",
+        "selected": [
+          "solforge-workflow-code-research",
+          "solforge-run-refactor",
+          "solforge-package-detect",
+          "solforge-codebase",
+          "solforge-workflow-software-mvp-create",
+          "solforge-workflow-software-build",
+          "solforge-workflow-software-compare",
+          "solforge-workflow-software-refactor"
+        ],
+        "split": "dev",
+        "suite": "single",
+        "target": "solforge-workflow-solforge-plugin-development"
+      },
+      {
+        "case": 155005,
+        "expected": "select-target",
+        "prompt_sha256": "e8629c9c858ca5b5486d3feaa9718bec59d4673f84fa71c8a09272e81f982106",
+        "selected": [
+          "solforge-workflow-code-research",
+          "solforge-run-refactor",
+          "solforge-package-detect",
+          "solforge-codebase",
+          "solforge-workflow-software-mvp-create",
+          "solforge-workflow-software-build",
+          "solforge-workflow-software-compare",
+          "solforge-workflow-software-refactor"
+        ],
+        "split": "dev",
+        "suite": "single",
+        "target": "solforge-workflow-solforge-plugin-development"
+      },
+      {
+        "case": 155485,
+        "expected": "select-target",
+        "prompt_sha256": "64cd510624d63f8d8218296f508e33df6ab6d2370f5612f02725c26e08916c6d",
+        "selected": [
+          "solforge-workflow-code-research",
+          "solforge-run-refactor",
+          "solforge-package-detect",
+          "solforge-codebase",
+          "solforge-workflow-software-mvp-create",
+          "solforge-workflow-software-build",
+          "solforge-workflow-software-compare",
+          "solforge-workflow-software-refactor"
+        ],
+        "split": "dev",
+        "suite": "single",
+        "target": "solforge-workflow-solforge-plugin-development"
+      },
+      {
+        "case": 155965,
+        "expected": "select-target",
+        "prompt_sha256": "2b52f0ea99dda2d5a698d396607b5e1d15bc931f0cf07e279e76e872fd37cba4",
+        "selected": [
+          "solforge-workflow-code-research",
+          "solforge-run-refactor",
+          "solforge-package-detect",
+          "solforge-codebase",
+          "solforge-workflow-software-mvp-create",
+          "solforge-workflow-software-build",
+          "solforge-workflow-software-compare",
+          "solforge-workflow-software-refactor"
+        ],
+        "split": "holdout",
+        "suite": "single",
+        "target": "solforge-workflow-solforge-plugin-development"
+      },
+      {
+        "case": 155470,
+        "expected": "select-target",
+        "prompt_sha256": "a205ab7369f28981db69b2a2b6a0b4635647375ebb7df868f18a37b3938f5cda",
+        "selected": [
+          "solforge-workflow-code-research",
+          "solforge-run-refactor",
+          "solforge-package-detect",
+          "solforge-codebase",
+          "solforge-workflow-software-mvp-create",
+          "solforge-workflow-software-build",
+          "solforge-workflow-software-compare",
+          "solforge-workflow-software-refactor"
+        ],
+        "split": "dev",
+        "suite": "single",
+        "target": "solforge-workflow-solforge-plugin-development"
+      },
+      {
+        "case": 155950,
+        "expected": "select-target",
+        "prompt_sha256": "8bd44eede84ded35348b443dcb9e0ec120c212c3361624a10f7447df27e5bc08",
+        "selected": [
+          "solforge-workflow-code-research",
+          "solforge-run-refactor",
+          "solforge-package-detect",
+          "solforge-codebase",
+          "solforge-workflow-software-mvp-create",
+          "solforge-workflow-software-build",
+          "solforge-workflow-software-compare",
+          "solforge-workflow-software-refactor"
+        ],
+        "split": "holdout",
+        "suite": "single",
+        "target": "solforge-workflow-solforge-plugin-development"
+      },
+      {
+        "case": 7086,
+        "coverage_ok": true,
+        "order_ok": false,
+        "prompt_sha256": "7071939d9dd899d2e6048e1844480f01edd7f6b784d1121fdf4caeb1b5137b8a",
+        "selected": [
+          "solforge-workflow-code-research",
+          "solforge-code-research",
+          "solforge-now",
+          "solforge-readme"
+        ],
+        "suite": "composition",
+        "targets": [
+          "solforge-code-research",
+          "solforge-now",
+          "solforge-readme",
+          "solforge-workflow-code-research"
+        ]
+      },
+      {
+        "case": 155230,
+        "expected": "select-target",
+        "prompt_sha256": "47cffcfc8e3cccffe9fcbb316e994c4a7b996f1b19956a934e66c690cc033705",
+        "selected": [
+          "solforge-workflow-code-research",
+          "solforge-run-refactor",
+          "solforge-package-detect",
+          "solforge-codebase",
+          "solforge-workflow-software-mvp-create",
+          "solforge-workflow-software-build",
+          "solforge-workflow-software-compare",
+          "solforge-workflow-software-refactor"
+        ],
+        "split": "dev",
+        "suite": "single",
+        "target": "solforge-workflow-solforge-plugin-development"
+      },
+      {
+        "case": 155710,
+        "expected": "select-target",
+        "prompt_sha256": "0ca032928fcf353b54c48f498ae86ba6ad889c161564d7a40042ef2a934672c2",
+        "selected": [
+          "solforge-workflow-code-research",
+          "solforge-run-refactor",
+          "solforge-package-detect",
+          "solforge-codebase",
+          "solforge-workflow-software-mvp-create",
+          "solforge-workflow-software-build",
+          "solforge-workflow-software-compare",
+          "solforge-workflow-software-refactor"
+        ],
+        "split": "dev",
+        "suite": "single",
+        "target": "solforge-workflow-solforge-plugin-development"
+      },
+      {
+        "case": 3166,
+        "coverage_ok": true,
+        "order_ok": false,
+        "prompt_sha256": "83172bd544f14139ecf07fc44003f2f8c562109dc6e74755ba7042ca1b1cd9ea",
+        "selected": [
+          "solforge-workflow-business-compare",
+          "solforge-workflow-business-model",
+          "solforge-workflow-business-market",
+          "solforge-workflow-business-strategy",
+          "solforge-workflow-business-diligence",
+          "solforge-workflow-software-target-verify",
+          "solforge-workflow-engineering-requirements",
+          "solforge-workflow-engineering-verify",
+          "solforge-workflow-software-mobile-adaptation",
+          "solforge-workflow-math-literature"
+        ],
+        "suite": "composition",
+        "targets": [
+          "solforge-workflow-business-diligence",
+          "solforge-workflow-engineering-requirements",
+          "solforge-workflow-math-literature",
+          "solforge-workflow-software-target-verify"
+        ]
+      },
+      {
+        "case": 155215,
+        "expected": "select-target",
+        "prompt_sha256": "9ae74cc8b04f32575b0500c6d053063fa5a16813fd1a392711bc0553bb68da0a",
+        "selected": [
+          "solforge-workflow-code-research",
+          "solforge-run-refactor",
+          "solforge-package-detect",
+          "solforge-codebase",
+          "solforge-workflow-software-mvp-create",
+          "solforge-workflow-software-build",
+          "solforge-workflow-software-compare",
+          "solforge-workflow-software-refactor"
+        ],
+        "split": "dev",
+        "suite": "single",
+        "target": "solforge-workflow-solforge-plugin-development"
+      },
+      {
+        "case": 155695,
+        "expected": "select-target",
+        "prompt_sha256": "38480073613f8d35cc7492673b5ff5b4d9ffaa952429069f9e64489bb2aceafc",
+        "selected": [
+          "solforge-workflow-code-research",
+          "solforge-run-refactor",
+          "solforge-package-detect",
+          "solforge-codebase",
+          "solforge-workflow-software-mvp-create",
+          "solforge-workflow-software-build",
+          "solforge-workflow-software-compare",
+          "solforge-workflow-software-refactor"
+        ],
+        "split": "dev",
+        "suite": "single",
+        "target": "solforge-workflow-solforge-plugin-development"
+      },
+      {
+        "case": 847,
+        "coverage_ok": true,
+        "order_ok": false,
+        "prompt_sha256": "2699744dc2b9d26aea77b58dbd4acf97137b119c0e8067164a458c81fa938151",
+        "selected": [
+          "solforge-sign-and-prove",
+          "solforge-workflow-software-mvp-create",
+          "solforge-workflow-software-build",
+          "solforge-workflow-software-compare",
+          "solforge-workflow-software-refactor",
+          "solforge-workflow-software-test",
+          "solforge-workflow-software-diagnose",
+          "solforge-workflow-codebase",
+          "solforge-workflow-software-security",
+          "solforge-workflow-code-research",
+          "solforge-workflow-legal-draft",
+          "solforge-independent-challenger"
+        ],
+        "suite": "composition",
+        "targets": [
+          "solforge-sign-and-prove",
+          "solforge-workflow-codebase",
+          "solforge-workflow-legal-draft",
+          "solforge-workflow-software-mvp-create",
+          "solforge-independent-challenger"
+        ]
+      },
+      {
+        "case": 155455,
+        "expected": "select-target",
+        "prompt_sha256": "a5b69ebb426f98224f9de7a6be17aef94dc6485b9ac753b4f91816b88531e5e0",
+        "selected": [
+          "solforge-workflow-code-research",
+          "solforge-run-refactor",
+          "solforge-package-detect",
+          "solforge-codebase",
+          "solforge-workflow-software-mvp-create",
+          "solforge-workflow-software-build",
+          "solforge-workflow-software-compare",
+          "solforge-workflow-software-refactor"
+        ],
+        "split": "dev",
+        "suite": "single",
+        "target": "solforge-workflow-solforge-plugin-development"
+      }
+    ],
+    "schema": "solkraft/semantic-router-proof-summary/v1",
+    "single": {
+      "ambiguity_cases": 2000,
+      "ambiguity_passed": 2000,
+      "boundary_cases": 62000,
+      "boundary_passed": 62000,
+      "cases": 173000,
+      "dev_boundary_cases": 49600,
+      "dev_boundary_passed": 49600,
+      "dev_eligible_cases": 88800,
+      "dev_eligible_passed": 88747,
+      "eligible_cases": 111000,
+      "eligible_passed": 110933,
+      "holdout_boundary_cases": 12400,
+      "holdout_boundary_passed": 12400,
+      "holdout_eligible_cases": 22200,
+      "holdout_eligible_passed": 22186,
+      "holdout_rate": 0.99959538,
+      "min_per_skill_holdout_rate": 0.93,
+      "min_per_skill_rate": 0.933,
+      "passed": 172933,
+      "rate": 0.99961272
+    },
+    "single_prompt_uniqueness": {
+      "duplicate_hashes": 0,
+      "per_skill_min": 1000,
+      "skills_measured": 173
+    },
+    "skills_below_threshold": [],
+    "source": {
+      "harness": "production-router/frozen-catalog",
+      "inputs_sha256": "8b1d167f26db05ca3c074dca542ff3cc62acbf225077b5a4fba49fde1c9249ad",
+      "revision": "5696a981ae056bffd45242e9a53d6f1021540343"
+    },
+    "stability": {
+      "base_cases": 10000,
+      "execution_stability_rate": 1.0,
+      "executions": 100000,
+      "mismatches": 0,
+      "stable_base_cases": 10000
+    },
+    "thresholds": {
+      "composition_coverage_rate": 0.9,
+      "composition_order_rate": 0.95,
+      "per_skill_rate": 0.9,
+      "single_global_rate": 0.95,
+      "single_holdout_rate": 0.95,
+      "stability_rate": 1.0
+    }
+  },
+  "examples": [
+    {
+      "label": "Fix a repository issue",
+      "objective": "Inspect the repository, diagnose the CI failure, implement a fix, run regression tests, and write the PR description",
+      "route": {
+        "objective": "Inspect the repository, diagnose the CI failure, implement a fix, run regression tests, and write the PR description",
+        "selected": [
+          "solforge-workflow-codebase",
+          "solforge-workflow-software-diagnose",
+          "solforge-workflow-software-build",
+          "solforge-workflow-software-test",
+          "solforge-workflow-writing-draft"
+        ],
+        "skills": [
+          {
+            "id": "solforge-workflow-codebase",
+            "name": "solforge-workflow-codebase",
+            "description": "Investigate a repository to answer how a feature works, where behavior lives, or what a change depends on. Use for focused code understanding."
+          },
+          {
+            "id": "solforge-workflow-software-diagnose",
+            "name": "solforge-workflow-software-diagnose",
+            "description": "Diagnose crashes, errors, hangs, regressions, or unexpected software behavior; trace the failure to code and evidence before selecting a fix."
+          },
+          {
+            "id": "solforge-workflow-software-build",
+            "name": "solforge-workflow-software-build",
+            "description": "Build or fix a software feature with scoped implementation and verification. Use for requested code changes with a concrete behavior to deliver."
+          },
+          {
+            "id": "solforge-workflow-software-test",
+            "name": "solforge-workflow-software-test",
+            "description": "Design and run software tests when behavior, a fix, or a regression needs verification; select checks proportional to the affected behavior."
+          },
+          {
+            "id": "solforge-workflow-writing-draft",
+            "name": "solforge-workflow-writing-draft",
+            "description": "Produce the selected document package with evidence, visuals, citations, review gates, and exports."
+          }
+        ],
+        "stages": [
+          {
+            "stage": 1,
+            "text": "inspect the repository",
+            "selected": [
+              "solforge-workflow-codebase"
+            ],
+            "reason": "repository or code investigation",
+            "confidence": "high"
+          },
+          {
+            "stage": 2,
+            "text": "diagnose the ci failure",
+            "selected": [
+              "solforge-workflow-software-diagnose"
+            ],
+            "reason": "diagnosis of a failing software gate",
+            "confidence": "high"
+          },
+          {
+            "stage": 3,
+            "text": "implement a fix",
+            "selected": [
+              "solforge-workflow-software-build"
+            ],
+            "reason": "software implementation",
+            "confidence": "high"
+          },
+          {
+            "stage": 4,
+            "text": "run regression tests",
+            "selected": [
+              "solforge-workflow-software-test"
+            ],
+            "reason": "software verification",
+            "confidence": "high"
+          },
+          {
+            "stage": 5,
+            "text": "write the pr description",
+            "selected": [
+              "solforge-workflow-writing-draft"
+            ],
+            "reason": "explicit text deliverable",
+            "confidence": "high"
+          }
+        ],
+        "unselected_requested_stages": [],
+        "excluded_effects": [],
+        "execution_authorized": false,
+        "selection_status": "matched",
+        "selection_trace": {
+          "active_clauses": [
+            "inspect the repository",
+            "diagnose the ci failure",
+            "implement a fix",
+            "run regression tests",
+            "write the pr description"
+          ],
+          "ignored_clauses": [],
+          "max_skills": 10,
+          "semantic_capability_rank": [],
+          "semantic_clause_order": [],
+          "contract_repair": {
+            "attempted": false,
+            "repaired": [],
+            "bounded_passes": 1
+          },
+          "capability_identity": [],
+          "dataflow": {
+            "added_producers": [],
+            "explanations": [],
+            "available_inputs": []
+          }
+        },
+        "next": "Read selected entrypoints in request order. Evaluate follow-up conditions within user authority.",
+        "dataflow": {
+          "additions": [],
+          "inputs": {},
+          "explanations": []
+        },
+        "blocked_stages": [],
+        "broken_dependencies": [],
+        "route_policy": {
+          "denied_effects": [],
+          "grant": null,
+          "granted_capabilities": null,
+          "granted_resources": null,
+          "legacy_auth_scope": null,
+          "contract_mode": "hardened"
+        },
+        "denied_effects": [],
+        "contract_decisions": {
+          "solforge-workflow-codebase": {
+            "status": "legacy-warning",
+            "contract_status": "legacy",
+            "reasons": [],
+            "effects": [],
+            "capabilities": [],
+            "resources": [],
+            "grant_checked": false,
+            "grant_id": null,
+            "trust": {
+              "state": "legacy-inferred",
+              "trusted": false,
+              "reason": "metadata inferred from legacy graph or migration"
+            },
+            "contract_digest": "sha256:31691506fe37bd807eb43f635055361e7481821768de87de48d8d01bbb605188",
+            "entrypoint_digest": "sha256:263a21c658140a834627a73e3c6eb74d15832f4f03c74478a7aca18f85fa1bde"
+          },
+          "solforge-workflow-software-build": {
+            "status": "legacy-warning",
+            "contract_status": "legacy",
+            "reasons": [],
+            "effects": [],
+            "capabilities": [],
+            "resources": [],
+            "grant_checked": false,
+            "grant_id": null,
+            "trust": {
+              "state": "legacy-inferred",
+              "trusted": false,
+              "reason": "metadata inferred from legacy graph or migration"
+            },
+            "contract_digest": "sha256:4d30b1b0dffddd300917fecb077990a9dbab2f26b4e7c34cf484a1009e4bf227",
+            "entrypoint_digest": "sha256:3a66ad9fc0cc0e4da9164d0a9e3bb51d4946452d90dc5b214adec747b45b6d50"
+          },
+          "solforge-workflow-software-diagnose": {
+            "status": "legacy-warning",
+            "contract_status": "legacy",
+            "reasons": [],
+            "effects": [],
+            "capabilities": [],
+            "resources": [],
+            "grant_checked": false,
+            "grant_id": null,
+            "trust": {
+              "state": "legacy-inferred",
+              "trusted": false,
+              "reason": "metadata inferred from legacy graph or migration"
+            },
+            "contract_digest": "sha256:409b0d4d08c7751d1b736ae6ab15841ce05edf8b6ea8ce0bfbcbac236d2178ac",
+            "entrypoint_digest": "sha256:510264d4a0ba9b267888efc7ca1cfb20a91a7110308e1c28a56c56d5191a8480"
+          },
+          "solforge-workflow-software-test": {
+            "status": "legacy-warning",
+            "contract_status": "legacy",
+            "reasons": [],
+            "effects": [],
+            "capabilities": [],
+            "resources": [],
+            "grant_checked": false,
+            "grant_id": null,
+            "trust": {
+              "state": "legacy-inferred",
+              "trusted": false,
+              "reason": "metadata inferred from legacy graph or migration"
+            },
+            "contract_digest": "sha256:5e1eb1053db15e0f6e3e6d416dfb572d351c75e06dade9bdcfd86f00dcf6671c",
+            "entrypoint_digest": "sha256:3350b9739bbfb9b958b474fa469f34523f7458eee4682ed0b248d11b74b41d1b"
+          },
+          "solforge-workflow-writing-draft": {
+            "status": "legacy-warning",
+            "contract_status": "legacy",
+            "reasons": [],
+            "effects": [],
+            "capabilities": [],
+            "resources": [],
+            "grant_checked": false,
+            "grant_id": null,
+            "trust": {
+              "state": "legacy-inferred",
+              "trusted": false,
+              "reason": "metadata inferred from legacy graph or migration"
+            },
+            "contract_digest": "sha256:2a2ac0639ab28fd5dd8adf204cbbd5464aa766be0595f90233546deeefba3f5e",
+            "entrypoint_digest": "sha256:f2fcdc400029e03ad3c0193abb550f96d181d6c0e51843b500af484234b9b1ac"
+          }
+        },
+        "required_capabilities": [],
+        "required_resources": [],
+        "selected_contracts": {
+          "solforge-workflow-codebase": {
+            "id": "solforge-workflow-codebase",
+            "name": "solforge-workflow-codebase",
+            "description": "Investigate a repository to answer how a feature works, where behavior lives, or what a change depends on. Use for focused code understanding.",
+            "status": "legacy",
+            "source": "sidecar",
+            "schema_version": "1.0",
+            "contract_revision": 1,
+            "contract_digest": "sha256:31691506fe37bd807eb43f635055361e7481821768de87de48d8d01bbb605188",
+            "entrypoint_digest": "sha256:263a21c658140a834627a73e3c6eb74d15832f4f03c74478a7aca18f85fa1bde",
+            "effects": [],
+            "capabilities": [],
+            "resources": [],
+            "auth_scope": "none",
+            "test_contract": "The requested diagnosis, architecture_map, evidence_report, patch_plan, verified_change is supported by inspected sources or observed behavior; unresolved limits are stated.",
+            "inputs": [
+              {
+                "name": "repository-and-revision",
+                "required": true,
+                "source": "user",
+                "description": "repository and revision",
+                "schema": {}
+              },
+              {
+                "name": "relevant-behavior-or-failure",
+                "required": true,
+                "source": "user",
+                "description": "relevant behavior or failure",
+                "schema": {}
+              },
+              {
+                "name": "requested-change-boundaries",
+                "required": true,
+                "source": "user",
+                "description": "requested change boundaries",
+                "schema": {}
+              },
+              {
+                "name": "user-scope-and-acceptance-criteria",
+                "required": true,
+                "source": "user",
+                "description": "user scope and acceptance criteria",
+                "schema": {}
+              }
+            ],
+            "outputs": [
+              {
+                "name": "diagnosis",
+                "description": "diagnosis",
+                "schema": {}
+              },
+              {
+                "name": "architecture-map",
+                "description": "architecture_map",
+                "schema": {}
+              },
+              {
+                "name": "evidence-report",
+                "description": "evidence_report",
+                "schema": {}
+              },
+              {
+                "name": "patch-plan",
+                "description": "patch_plan",
+                "schema": {}
+              },
+              {
+                "name": "verified-change",
+                "description": "verified_change",
+                "schema": {}
+              }
+            ],
+            "verification": {
+              "mode": "declarative",
+              "description": "The requested diagnosis, architecture_map, evidence_report, patch_plan, verified_change is supported by inspected sources or observed behavior; unresolved limits are stated.",
+              "checks": []
+            },
+            "risk": {
+              "external": false,
+              "destructive": false,
+              "open_world": false
+            },
+            "provenance": {
+              "migration": "legacy-graph",
+              "inferred": true
+            },
+            "trust": {
+              "state": "legacy-inferred",
+              "trusted": false,
+              "reason": "metadata inferred from legacy graph or migration"
+            },
+            "validation_errors": []
+          },
+          "solforge-workflow-software-diagnose": {
+            "id": "solforge-workflow-software-diagnose",
+            "name": "solforge-workflow-software-diagnose",
+            "description": "Diagnose crashes, errors, hangs, regressions, or unexpected software behavior; trace the failure to code and evidence before selecting a fix.",
+            "status": "legacy",
+            "source": "sidecar",
+            "schema_version": "1.0",
+            "contract_revision": 1,
+            "contract_digest": "sha256:409b0d4d08c7751d1b736ae6ab15841ce05edf8b6ea8ce0bfbcbac236d2178ac",
+            "entrypoint_digest": "sha256:510264d4a0ba9b267888efc7ca1cfb20a91a7110308e1c28a56c56d5191a8480",
+            "effects": [],
+            "capabilities": [],
+            "resources": [],
+            "auth_scope": "none",
+            "test_contract": "The requested diagnosis, architecture_map is supported by inspected sources or observed behavior; unresolved limits are stated.",
+            "inputs": [
+              {
+                "name": "repository-and-revision",
+                "required": true,
+                "source": "user",
+                "description": "repository and revision",
+                "schema": {}
+              },
+              {
+                "name": "relevant-behavior-or-failure",
+                "required": true,
+                "source": "user",
+                "description": "relevant behavior or failure",
+                "schema": {}
+              },
+              {
+                "name": "requested-change-boundaries",
+                "required": true,
+                "source": "user",
+                "description": "requested change boundaries",
+                "schema": {}
+              },
+              {
+                "name": "user-scope-and-acceptance-criteria",
+                "required": true,
+                "source": "user",
+                "description": "user scope and acceptance criteria",
+                "schema": {}
+              }
+            ],
+            "outputs": [
+              {
+                "name": "diagnosis",
+                "description": "diagnosis",
+                "schema": {}
+              },
+              {
+                "name": "architecture-map",
+                "description": "architecture_map",
+                "schema": {}
+              }
+            ],
+            "verification": {
+              "mode": "declarative",
+              "description": "The requested diagnosis, architecture_map is supported by inspected sources or observed behavior; unresolved limits are stated.",
+              "checks": []
+            },
+            "risk": {
+              "external": false,
+              "destructive": false,
+              "open_world": false
+            },
+            "provenance": {
+              "migration": "legacy-graph",
+              "inferred": true
+            },
+            "trust": {
+              "state": "legacy-inferred",
+              "trusted": false,
+              "reason": "metadata inferred from legacy graph or migration"
+            },
+            "validation_errors": []
+          },
+          "solforge-workflow-software-build": {
+            "id": "solforge-workflow-software-build",
+            "name": "solforge-workflow-software-build",
+            "description": "Build or fix a software feature with scoped implementation and verification. Use for requested code changes with a concrete behavior to deliver.",
+            "status": "legacy",
+            "source": "sidecar",
+            "schema_version": "1.0",
+            "contract_revision": 1,
+            "contract_digest": "sha256:4d30b1b0dffddd300917fecb077990a9dbab2f26b4e7c34cf484a1009e4bf227",
+            "entrypoint_digest": "sha256:3a66ad9fc0cc0e4da9164d0a9e3bb51d4946452d90dc5b214adec747b45b6d50",
+            "effects": [],
+            "capabilities": [],
+            "resources": [],
+            "auth_scope": "none",
+            "test_contract": "The requested implementation_plan, verified_change is supported by inspected sources or observed behavior; unresolved limits are stated.",
+            "inputs": [
+              {
+                "name": "repository-and-revision",
+                "required": true,
+                "source": "user",
+                "description": "repository and revision",
+                "schema": {}
+              },
+              {
+                "name": "relevant-behavior-or-failure",
+                "required": true,
+                "source": "user",
+                "description": "relevant behavior or failure",
+                "schema": {}
+              },
+              {
+                "name": "requested-change-boundaries",
+                "required": true,
+                "source": "user",
+                "description": "requested change boundaries",
+                "schema": {}
+              },
+              {
+                "name": "user-scope-and-acceptance-criteria",
+                "required": true,
+                "source": "user",
+                "description": "user scope and acceptance criteria",
+                "schema": {}
+              }
+            ],
+            "outputs": [
+              {
+                "name": "implementation-plan",
+                "description": "implementation_plan",
+                "schema": {}
+              },
+              {
+                "name": "verified-change",
+                "description": "verified_change",
+                "schema": {}
+              }
+            ],
+            "verification": {
+              "mode": "declarative",
+              "description": "The requested implementation_plan, verified_change is supported by inspected sources or observed behavior; unresolved limits are stated.",
+              "checks": []
+            },
+            "risk": {
+              "external": false,
+              "destructive": false,
+              "open_world": false
+            },
+            "provenance": {
+              "migration": "legacy-graph",
+              "inferred": true
+            },
+            "trust": {
+              "state": "legacy-inferred",
+              "trusted": false,
+              "reason": "metadata inferred from legacy graph or migration"
+            },
+            "validation_errors": []
+          },
+          "solforge-workflow-software-test": {
+            "id": "solforge-workflow-software-test",
+            "name": "solforge-workflow-software-test",
+            "description": "Design and run software tests when behavior, a fix, or a regression needs verification; select checks proportional to the affected behavior.",
+            "status": "legacy",
+            "source": "sidecar",
+            "schema_version": "1.0",
+            "contract_revision": 1,
+            "contract_digest": "sha256:5e1eb1053db15e0f6e3e6d416dfb572d351c75e06dade9bdcfd86f00dcf6671c",
+            "entrypoint_digest": "sha256:3350b9739bbfb9b958b474fa469f34523f7458eee4682ed0b248d11b74b41d1b",
+            "effects": [],
+            "capabilities": [],
+            "resources": [],
+            "auth_scope": "none",
+            "test_contract": "The requested test_plan, verification_report is supported by inspected sources or observed behavior; unresolved limits are stated.",
+            "inputs": [
+              {
+                "name": "repository-and-revision",
+                "required": true,
+                "source": "user",
+                "description": "repository and revision",
+                "schema": {}
+              },
+              {
+                "name": "relevant-behavior-or-failure",
+                "required": true,
+                "source": "user",
+                "description": "relevant behavior or failure",
+                "schema": {}
+              },
+              {
+                "name": "requested-change-boundaries",
+                "required": true,
+                "source": "user",
+                "description": "requested change boundaries",
+                "schema": {}
+              },
+              {
+                "name": "user-scope-and-acceptance-criteria",
+                "required": true,
+                "source": "user",
+                "description": "user scope and acceptance criteria",
+                "schema": {}
+              }
+            ],
+            "outputs": [
+              {
+                "name": "test-plan",
+                "description": "test_plan",
+                "schema": {}
+              },
+              {
+                "name": "verification-report",
+                "description": "verification_report",
+                "schema": {}
+              }
+            ],
+            "verification": {
+              "mode": "declarative",
+              "description": "The requested test_plan, verification_report is supported by inspected sources or observed behavior; unresolved limits are stated.",
+              "checks": []
+            },
+            "risk": {
+              "external": false,
+              "destructive": false,
+              "open_world": false
+            },
+            "provenance": {
+              "migration": "legacy-graph",
+              "inferred": true
+            },
+            "trust": {
+              "state": "legacy-inferred",
+              "trusted": false,
+              "reason": "metadata inferred from legacy graph or migration"
+            },
+            "validation_errors": []
+          },
+          "solforge-workflow-writing-draft": {
+            "id": "solforge-workflow-writing-draft",
+            "name": "solforge-workflow-writing-draft",
+            "description": "Produce the selected document package with evidence, visuals, citations, review gates, and exports.",
+            "status": "legacy",
+            "source": "sidecar",
+            "schema_version": "1.0",
+            "contract_revision": 1,
+            "contract_digest": "sha256:2a2ac0639ab28fd5dd8adf204cbbd5464aa766be0595f90233546deeefba3f5e",
+            "entrypoint_digest": "sha256:f2fcdc400029e03ad3c0193abb550f96d181d6c0e51843b500af484234b9b1ac",
+            "effects": [],
+            "capabilities": [],
+            "resources": [],
+            "auth_scope": "none",
+            "test_contract": "The requested configured_report is supported by inspected sources or observed behavior; unresolved limits are stated.",
+            "inputs": [
+              {
+                "name": "audience-purpose-and-format",
+                "required": true,
+                "source": "user",
+                "description": "audience, purpose, and format",
+                "schema": {}
+              },
+              {
+                "name": "source-material-and-claim-evidence",
+                "required": true,
+                "source": "user",
+                "description": "source material and claim evidence",
+                "schema": {}
+              },
+              {
+                "name": "user-scope-and-acceptance-criteria",
+                "required": true,
+                "source": "user",
+                "description": "user scope and acceptance criteria",
+                "schema": {}
+              }
+            ],
+            "outputs": [
+              {
+                "name": "configured-report",
+                "description": "configured_report",
+                "schema": {}
+              }
+            ],
+            "verification": {
+              "mode": "declarative",
+              "description": "The requested configured_report is supported by inspected sources or observed behavior; unresolved limits are stated.",
+              "checks": []
+            },
+            "risk": {
+              "external": false,
+              "destructive": false,
+              "open_world": false
+            },
+            "provenance": {
+              "migration": "legacy-graph",
+              "inferred": true
+            },
+            "trust": {
+              "state": "legacy-inferred",
+              "trusted": false,
+              "reason": "metadata inferred from legacy graph or migration"
+            },
+            "validation_errors": []
+          }
+        },
+        "audit": {
+          "schema": "solkraft/audit/route/v1",
+          "digest": "sha256:b2b0eb901b4707cb51800ca4e8cd9dca12a32d5e5597e13b132f15f4dafad2cb",
+          "payload": {
+            "objective": "Inspect the repository, diagnose the CI failure, implement a fix, run regression tests, and write the PR description",
+            "selected": [
+              "solforge-workflow-codebase",
+              "solforge-workflow-software-diagnose",
+              "solforge-workflow-software-build",
+              "solforge-workflow-software-test",
+              "solforge-workflow-writing-draft"
+            ],
+            "selection_status": "matched",
+            "policy": {
+              "denied_effects": [],
+              "grant": null,
+              "granted_capabilities": null,
+              "granted_resources": null,
+              "legacy_auth_scope": null,
+              "contract_mode": "hardened"
+            },
+            "contracts": {
+              "solforge-workflow-codebase": {
+                "status": "legacy",
+                "trust": {
+                  "state": "legacy-inferred",
+                  "trusted": false,
+                  "reason": "metadata inferred from legacy graph or migration"
+                },
+                "contract_digest": "sha256:31691506fe37bd807eb43f635055361e7481821768de87de48d8d01bbb605188",
+                "entrypoint_digest": "sha256:263a21c658140a834627a73e3c6eb74d15832f4f03c74478a7aca18f85fa1bde"
+              },
+              "solforge-workflow-software-build": {
+                "status": "legacy",
+                "trust": {
+                  "state": "legacy-inferred",
+                  "trusted": false,
+                  "reason": "metadata inferred from legacy graph or migration"
+                },
+                "contract_digest": "sha256:4d30b1b0dffddd300917fecb077990a9dbab2f26b4e7c34cf484a1009e4bf227",
+                "entrypoint_digest": "sha256:3a66ad9fc0cc0e4da9164d0a9e3bb51d4946452d90dc5b214adec747b45b6d50"
+              },
+              "solforge-workflow-software-diagnose": {
+                "status": "legacy",
+                "trust": {
+                  "state": "legacy-inferred",
+                  "trusted": false,
+                  "reason": "metadata inferred from legacy graph or migration"
+                },
+                "contract_digest": "sha256:409b0d4d08c7751d1b736ae6ab15841ce05edf8b6ea8ce0bfbcbac236d2178ac",
+                "entrypoint_digest": "sha256:510264d4a0ba9b267888efc7ca1cfb20a91a7110308e1c28a56c56d5191a8480"
+              },
+              "solforge-workflow-software-test": {
+                "status": "legacy",
+                "trust": {
+                  "state": "legacy-inferred",
+                  "trusted": false,
+                  "reason": "metadata inferred from legacy graph or migration"
+                },
+                "contract_digest": "sha256:5e1eb1053db15e0f6e3e6d416dfb572d351c75e06dade9bdcfd86f00dcf6671c",
+                "entrypoint_digest": "sha256:3350b9739bbfb9b958b474fa469f34523f7458eee4682ed0b248d11b74b41d1b"
+              },
+              "solforge-workflow-writing-draft": {
+                "status": "legacy",
+                "trust": {
+                  "state": "legacy-inferred",
+                  "trusted": false,
+                  "reason": "metadata inferred from legacy graph or migration"
+                },
+                "contract_digest": "sha256:2a2ac0639ab28fd5dd8adf204cbbd5464aa766be0595f90233546deeefba3f5e",
+                "entrypoint_digest": "sha256:f2fcdc400029e03ad3c0193abb550f96d181d6c0e51843b500af484234b9b1ac"
+              }
+            },
+            "required_capabilities": [],
+            "required_resources": [],
+            "blocked_stages": []
+          },
+          "execution_authorized": false
+        }
+      },
+      "names": {
+        "solforge-workflow-codebase": "solforge-workflow-codebase",
+        "solforge-workflow-software-diagnose": "solforge-workflow-software-diagnose",
+        "solforge-workflow-software-build": "solforge-workflow-software-build",
+        "solforge-workflow-software-test": "solforge-workflow-software-test",
+        "solforge-workflow-writing-draft": "solforge-workflow-writing-draft"
+      }
+    },
+    {
+      "label": "Validate a dataset",
+      "objective": "Validate the dataset for missing rows and duplicate records",
+      "route": {
+        "objective": "Validate the dataset for missing rows and duplicate records",
+        "selected": [
+          "solforge-workflow-data-validate"
+        ],
+        "skills": [
+          {
+            "id": "solforge-workflow-data-validate",
+            "name": "solforge-workflow-data-validate",
+            "description": "Check a dataset for missing values, duplicates, inconsistent types, leakage, and other quality defects before relying on its results."
+          }
+        ],
+        "stages": [
+          {
+            "stage": 1,
+            "text": "validate the dataset for missing rows and duplicate records",
+            "selected": [
+              "solforge-workflow-data-validate"
+            ],
+            "reason": "data quality validation",
+            "confidence": "high"
+          }
+        ],
+        "unselected_requested_stages": [],
+        "excluded_effects": [],
+        "execution_authorized": false,
+        "selection_status": "matched",
+        "selection_trace": {
+          "active_clauses": [
+            "validate the dataset for missing rows and duplicate records"
+          ],
+          "ignored_clauses": [],
+          "max_skills": 10,
+          "semantic_capability_rank": [],
+          "semantic_clause_order": [],
+          "contract_repair": {
+            "attempted": false,
+            "repaired": [],
+            "bounded_passes": 1
+          },
+          "capability_identity": [],
+          "dataflow": {
+            "added_producers": [],
+            "explanations": [],
+            "available_inputs": []
+          }
+        },
+        "next": "Read selected entrypoints in request order. Evaluate follow-up conditions within user authority.",
+        "dataflow": {
+          "additions": [],
+          "inputs": {},
+          "explanations": []
+        },
+        "blocked_stages": [],
+        "broken_dependencies": [],
+        "route_policy": {
+          "denied_effects": [],
+          "grant": null,
+          "granted_capabilities": null,
+          "granted_resources": null,
+          "legacy_auth_scope": null,
+          "contract_mode": "hardened"
+        },
+        "denied_effects": [],
+        "contract_decisions": {
+          "solforge-workflow-data-validate": {
+            "status": "legacy-warning",
+            "contract_status": "legacy",
+            "reasons": [],
+            "effects": [],
+            "capabilities": [],
+            "resources": [],
+            "grant_checked": false,
+            "grant_id": null,
+            "trust": {
+              "state": "legacy-inferred",
+              "trusted": false,
+              "reason": "metadata inferred from legacy graph or migration"
+            },
+            "contract_digest": "sha256:0600ced7a2c8f61461ad6f787c24f388b558f49a0be9e63008dd1ad314c14717",
+            "entrypoint_digest": "sha256:5d46e839a83dc7a273e9274467502a9662b718fdd246a5761eca16a7a13d3bac"
+          }
+        },
+        "required_capabilities": [],
+        "required_resources": [],
+        "selected_contracts": {
+          "solforge-workflow-data-validate": {
+            "id": "solforge-workflow-data-validate",
+            "name": "solforge-workflow-data-validate",
+            "description": "Check a dataset for missing values, duplicates, inconsistent types, leakage, and other quality defects before relying on its results.",
+            "status": "legacy",
+            "source": "sidecar",
+            "schema_version": "1.0",
+            "contract_revision": 1,
+            "contract_digest": "sha256:0600ced7a2c8f61461ad6f787c24f388b558f49a0be9e63008dd1ad314c14717",
+            "entrypoint_digest": "sha256:5d46e839a83dc7a273e9274467502a9662b718fdd246a5761eca16a7a13d3bac",
+            "effects": [],
+            "capabilities": [],
+            "resources": [],
+            "auth_scope": "none",
+            "test_contract": "The requested data_quality_audit, analysis_validation is supported by inspected sources or observed behavior; unresolved limits are stated.",
+            "inputs": [
+              {
+                "name": "dataset-and-grain",
+                "required": true,
+                "source": "user",
+                "description": "dataset and grain",
+                "schema": {}
+              },
+              {
+                "name": "metric-definitions",
+                "required": true,
+                "source": "user",
+                "description": "metric definitions",
+                "schema": {}
+              },
+              {
+                "name": "analysis-question",
+                "required": true,
+                "source": "user",
+                "description": "analysis question",
+                "schema": {}
+              },
+              {
+                "name": "user-scope-and-acceptance-criteria",
+                "required": true,
+                "source": "user",
+                "description": "user scope and acceptance criteria",
+                "schema": {}
+              }
+            ],
+            "outputs": [
+              {
+                "name": "data-quality-audit",
+                "description": "data_quality_audit",
+                "schema": {}
+              },
+              {
+                "name": "analysis-validation",
+                "description": "analysis_validation",
+                "schema": {}
+              }
+            ],
+            "verification": {
+              "mode": "declarative",
+              "description": "The requested data_quality_audit, analysis_validation is supported by inspected sources or observed behavior; unresolved limits are stated.",
+              "checks": []
+            },
+            "risk": {
+              "external": false,
+              "destructive": false,
+              "open_world": false
+            },
+            "provenance": {
+              "migration": "legacy-graph",
+              "inferred": true
+            },
+            "trust": {
+              "state": "legacy-inferred",
+              "trusted": false,
+              "reason": "metadata inferred from legacy graph or migration"
+            },
+            "validation_errors": []
+          }
+        },
+        "audit": {
+          "schema": "solkraft/audit/route/v1",
+          "digest": "sha256:20efdce9bbbb52a979d42262d064f4ebe3bd272c8553828affb2c3f77cbd93ae",
+          "payload": {
+            "objective": "Validate the dataset for missing rows and duplicate records",
+            "selected": [
+              "solforge-workflow-data-validate"
+            ],
+            "selection_status": "matched",
+            "policy": {
+              "denied_effects": [],
+              "grant": null,
+              "granted_capabilities": null,
+              "granted_resources": null,
+              "legacy_auth_scope": null,
+              "contract_mode": "hardened"
+            },
+            "contracts": {
+              "solforge-workflow-data-validate": {
+                "status": "legacy",
+                "trust": {
+                  "state": "legacy-inferred",
+                  "trusted": false,
+                  "reason": "metadata inferred from legacy graph or migration"
+                },
+                "contract_digest": "sha256:0600ced7a2c8f61461ad6f787c24f388b558f49a0be9e63008dd1ad314c14717",
+                "entrypoint_digest": "sha256:5d46e839a83dc7a273e9274467502a9662b718fdd246a5761eca16a7a13d3bac"
+              }
+            },
+            "required_capabilities": [],
+            "required_resources": [],
+            "blocked_stages": []
+          },
+          "execution_authorized": false
+        }
+      },
+      "names": {
+        "solforge-workflow-data-validate": "solforge-workflow-data-validate"
+      }
+    },
+    {
+      "label": "Compare business options",
+      "objective": "Build a business model, compare the business alternatives, and develop a business strategy",
+      "route": {
+        "objective": "Build a business model, compare the business alternatives, and develop a business strategy",
+        "selected": [
+          "solforge-workflow-business-model",
+          "solforge-workflow-business-compare",
+          "solforge-workflow-business-strategy"
+        ],
+        "skills": [
+          {
+            "id": "solforge-workflow-business-model",
+            "name": "solforge-workflow-business-model",
+            "description": "Build explicit assumptions, scenarios, sensitivities, and decision thresholds with auditable calculations."
+          },
+          {
+            "id": "solforge-workflow-business-compare",
+            "name": "solforge-workflow-business-compare",
+            "description": "Compare named alternatives using explicit criteria, evidence parity, sensitivity, and decision implications."
+          },
+          {
+            "id": "solforge-workflow-business-strategy",
+            "name": "solforge-workflow-business-strategy",
+            "description": "Translate evidence into options, tradeoffs, sequencing, metrics, risks, and a decision-ready recommendation."
+          }
+        ],
+        "stages": [
+          {
+            "stage": 1,
+            "text": "build a business model",
+            "selected": [
+              "solforge-workflow-business-model"
+            ],
+            "reason": "business model development",
+            "confidence": "high"
+          },
+          {
+            "stage": 2,
+            "text": "compare the business alternatives",
+            "selected": [
+              "solforge-workflow-business-compare"
+            ],
+            "reason": "business option comparison",
+            "confidence": "high"
+          },
+          {
+            "stage": 3,
+            "text": "develop a business strategy",
+            "selected": [
+              "solforge-workflow-business-strategy"
+            ],
+            "reason": "business strategy",
+            "confidence": "high"
+          }
+        ],
+        "unselected_requested_stages": [],
+        "excluded_effects": [],
+        "execution_authorized": false,
+        "selection_status": "matched",
+        "selection_trace": {
+          "active_clauses": [
+            "build a business model",
+            "compare the business alternatives",
+            "develop a business strategy"
+          ],
+          "ignored_clauses": [],
+          "max_skills": 10,
+          "semantic_capability_rank": [],
+          "semantic_clause_order": [],
+          "contract_repair": {
+            "attempted": false,
+            "repaired": [],
+            "bounded_passes": 1
+          },
+          "capability_identity": [],
+          "dataflow": {
+            "added_producers": [],
+            "explanations": [],
+            "available_inputs": []
+          }
+        },
+        "next": "Read selected entrypoints in request order. Evaluate follow-up conditions within user authority.",
+        "dataflow": {
+          "additions": [],
+          "inputs": {},
+          "explanations": []
+        },
+        "blocked_stages": [],
+        "broken_dependencies": [],
+        "route_policy": {
+          "denied_effects": [],
+          "grant": null,
+          "granted_capabilities": null,
+          "granted_resources": null,
+          "legacy_auth_scope": null,
+          "contract_mode": "hardened"
+        },
+        "denied_effects": [],
+        "contract_decisions": {
+          "solforge-workflow-business-compare": {
+            "status": "legacy-warning",
+            "contract_status": "legacy",
+            "reasons": [],
+            "effects": [],
+            "capabilities": [],
+            "resources": [],
+            "grant_checked": false,
+            "grant_id": null,
+            "trust": {
+              "state": "legacy-inferred",
+              "trusted": false,
+              "reason": "metadata inferred from legacy graph or migration"
+            },
+            "contract_digest": "sha256:104b489c51f33cfc6051c9743284f295327e4ff255bac96891240ffa8d6b58b0",
+            "entrypoint_digest": "sha256:8ee14d4edf006dfc241eb610010a1f4da17c6155b1b3b66699ba98d2f77a9acb"
+          },
+          "solforge-workflow-business-model": {
+            "status": "legacy-warning",
+            "contract_status": "legacy",
+            "reasons": [],
+            "effects": [],
+            "capabilities": [],
+            "resources": [],
+            "grant_checked": false,
+            "grant_id": null,
+            "trust": {
+              "state": "legacy-inferred",
+              "trusted": false,
+              "reason": "metadata inferred from legacy graph or migration"
+            },
+            "contract_digest": "sha256:f16db6f4d76fead10e31b43c7449d66ebaa699ed0d903b3102072729eecbbe76",
+            "entrypoint_digest": "sha256:0e2d99a4021cefa4f7f52efe474d3723103511cc0cd83d353d0775391bbfdfd1"
+          },
+          "solforge-workflow-business-strategy": {
+            "status": "legacy-warning",
+            "contract_status": "legacy",
+            "reasons": [],
+            "effects": [],
+            "capabilities": [],
+            "resources": [],
+            "grant_checked": false,
+            "grant_id": null,
+            "trust": {
+              "state": "legacy-inferred",
+              "trusted": false,
+              "reason": "metadata inferred from legacy graph or migration"
+            },
+            "contract_digest": "sha256:4a8d5718c265d68c69ff10e9638496e260d94abc36a1f4ccbf9a7b0f251bb861",
+            "entrypoint_digest": "sha256:b689fe6ea8b72e61a8dbc97a96127603b238840ec9652feadb7f770ac1c0eb93"
+          }
+        },
+        "required_capabilities": [],
+        "required_resources": [],
+        "selected_contracts": {
+          "solforge-workflow-business-model": {
+            "id": "solforge-workflow-business-model",
+            "name": "solforge-workflow-business-model",
+            "description": "Build explicit assumptions, scenarios, sensitivities, and decision thresholds with auditable calculations.",
+            "status": "legacy",
+            "source": "sidecar",
+            "schema_version": "1.0",
+            "contract_revision": 1,
+            "contract_digest": "sha256:f16db6f4d76fead10e31b43c7449d66ebaa699ed0d903b3102072729eecbbe76",
+            "entrypoint_digest": "sha256:0e2d99a4021cefa4f7f52efe474d3723103511cc0cd83d353d0775391bbfdfd1",
+            "effects": [],
+            "capabilities": [],
+            "resources": [],
+            "auth_scope": "none",
+            "test_contract": "The requested financial_model, scenario_analysis is supported by inspected sources or observed behavior; unresolved limits are stated.",
+            "inputs": [
+              {
+                "name": "decision-market-and-alternatives",
+                "required": true,
+                "source": "user",
+                "description": "decision, market, and alternatives",
+                "schema": {}
+              },
+              {
+                "name": "evidence-and-economic-assumptions",
+                "required": true,
+                "source": "user",
+                "description": "evidence and economic assumptions",
+                "schema": {}
+              },
+              {
+                "name": "user-scope-and-acceptance-criteria",
+                "required": true,
+                "source": "user",
+                "description": "user scope and acceptance criteria",
+                "schema": {}
+              }
+            ],
+            "outputs": [
+              {
+                "name": "financial-model",
+                "description": "financial_model",
+                "schema": {}
+              },
+              {
+                "name": "scenario-analysis",
+                "description": "scenario_analysis",
+                "schema": {}
+              }
+            ],
+            "verification": {
+              "mode": "declarative",
+              "description": "The requested financial_model, scenario_analysis is supported by inspected sources or observed behavior; unresolved limits are stated.",
+              "checks": []
+            },
+            "risk": {
+              "external": false,
+              "destructive": false,
+              "open_world": false
+            },
+            "provenance": {
+              "migration": "legacy-graph",
+              "inferred": true
+            },
+            "trust": {
+              "state": "legacy-inferred",
+              "trusted": false,
+              "reason": "metadata inferred from legacy graph or migration"
+            },
+            "validation_errors": []
+          },
+          "solforge-workflow-business-compare": {
+            "id": "solforge-workflow-business-compare",
+            "name": "solforge-workflow-business-compare",
+            "description": "Compare named alternatives using explicit criteria, evidence parity, sensitivity, and decision implications.",
+            "status": "legacy",
+            "source": "sidecar",
+            "schema_version": "1.0",
+            "contract_revision": 1,
+            "contract_digest": "sha256:104b489c51f33cfc6051c9743284f295327e4ff255bac96891240ffa8d6b58b0",
+            "entrypoint_digest": "sha256:8ee14d4edf006dfc241eb610010a1f4da17c6155b1b3b66699ba98d2f77a9acb",
+            "effects": [],
+            "capabilities": [],
+            "resources": [],
+            "auth_scope": "none",
+            "test_contract": "The requested competitive_comparison, option_scorecard is supported by inspected sources or observed behavior; unresolved limits are stated.",
+            "inputs": [
+              {
+                "name": "decision-market-and-alternatives",
+                "required": true,
+                "source": "user",
+                "description": "decision, market, and alternatives",
+                "schema": {}
+              },
+              {
+                "name": "evidence-and-economic-assumptions",
+                "required": true,
+                "source": "user",
+                "description": "evidence and economic assumptions",
+                "schema": {}
+              },
+              {
+                "name": "user-scope-and-acceptance-criteria",
+                "required": true,
+                "source": "user",
+                "description": "user scope and acceptance criteria",
+                "schema": {}
+              }
+            ],
+            "outputs": [
+              {
+                "name": "competitive-comparison",
+                "description": "competitive_comparison",
+                "schema": {}
+              },
+              {
+                "name": "option-scorecard",
+                "description": "option_scorecard",
+                "schema": {}
+              }
+            ],
+            "verification": {
+              "mode": "declarative",
+              "description": "The requested competitive_comparison, option_scorecard is supported by inspected sources or observed behavior; unresolved limits are stated.",
+              "checks": []
+            },
+            "risk": {
+              "external": false,
+              "destructive": false,
+              "open_world": false
+            },
+            "provenance": {
+              "migration": "legacy-graph",
+              "inferred": true
+            },
+            "trust": {
+              "state": "legacy-inferred",
+              "trusted": false,
+              "reason": "metadata inferred from legacy graph or migration"
+            },
+            "validation_errors": []
+          },
+          "solforge-workflow-business-strategy": {
+            "id": "solforge-workflow-business-strategy",
+            "name": "solforge-workflow-business-strategy",
+            "description": "Translate evidence into options, tradeoffs, sequencing, metrics, risks, and a decision-ready recommendation.",
+            "status": "legacy",
+            "source": "sidecar",
+            "schema_version": "1.0",
+            "contract_revision": 1,
+            "contract_digest": "sha256:4a8d5718c265d68c69ff10e9638496e260d94abc36a1f4ccbf9a7b0f251bb861",
+            "entrypoint_digest": "sha256:b689fe6ea8b72e61a8dbc97a96127603b238840ec9652feadb7f770ac1c0eb93",
+            "effects": [],
+            "capabilities": [],
+            "resources": [],
+            "auth_scope": "none",
+            "test_contract": "The requested strategy_proposal, execution_roadmap is supported by inspected sources or observed behavior; unresolved limits are stated.",
+            "inputs": [
+              {
+                "name": "decision-market-and-alternatives",
+                "required": true,
+                "source": "user",
+                "description": "decision, market, and alternatives",
+                "schema": {}
+              },
+              {
+                "name": "evidence-and-economic-assumptions",
+                "required": true,
+                "source": "user",
+                "description": "evidence and economic assumptions",
+                "schema": {}
+              },
+              {
+                "name": "user-scope-and-acceptance-criteria",
+                "required": true,
+                "source": "user",
+                "description": "user scope and acceptance criteria",
+                "schema": {}
+              }
+            ],
+            "outputs": [
+              {
+                "name": "strategy-proposal",
+                "description": "strategy_proposal",
+                "schema": {}
+              },
+              {
+                "name": "execution-roadmap",
+                "description": "execution_roadmap",
+                "schema": {}
+              }
+            ],
+            "verification": {
+              "mode": "declarative",
+              "description": "The requested strategy_proposal, execution_roadmap is supported by inspected sources or observed behavior; unresolved limits are stated.",
+              "checks": []
+            },
+            "risk": {
+              "external": false,
+              "destructive": false,
+              "open_world": false
+            },
+            "provenance": {
+              "migration": "legacy-graph",
+              "inferred": true
+            },
+            "trust": {
+              "state": "legacy-inferred",
+              "trusted": false,
+              "reason": "metadata inferred from legacy graph or migration"
+            },
+            "validation_errors": []
+          }
+        },
+        "audit": {
+          "schema": "solkraft/audit/route/v1",
+          "digest": "sha256:8fcc290ff6534c2465c30db2599db69c21cda138dcdf8ef9660e351e8a0fcf3f",
+          "payload": {
+            "objective": "Build a business model, compare the business alternatives, and develop a business strategy",
+            "selected": [
+              "solforge-workflow-business-model",
+              "solforge-workflow-business-compare",
+              "solforge-workflow-business-strategy"
+            ],
+            "selection_status": "matched",
+            "policy": {
+              "denied_effects": [],
+              "grant": null,
+              "granted_capabilities": null,
+              "granted_resources": null,
+              "legacy_auth_scope": null,
+              "contract_mode": "hardened"
+            },
+            "contracts": {
+              "solforge-workflow-business-compare": {
+                "status": "legacy",
+                "trust": {
+                  "state": "legacy-inferred",
+                  "trusted": false,
+                  "reason": "metadata inferred from legacy graph or migration"
+                },
+                "contract_digest": "sha256:104b489c51f33cfc6051c9743284f295327e4ff255bac96891240ffa8d6b58b0",
+                "entrypoint_digest": "sha256:8ee14d4edf006dfc241eb610010a1f4da17c6155b1b3b66699ba98d2f77a9acb"
+              },
+              "solforge-workflow-business-model": {
+                "status": "legacy",
+                "trust": {
+                  "state": "legacy-inferred",
+                  "trusted": false,
+                  "reason": "metadata inferred from legacy graph or migration"
+                },
+                "contract_digest": "sha256:f16db6f4d76fead10e31b43c7449d66ebaa699ed0d903b3102072729eecbbe76",
+                "entrypoint_digest": "sha256:0e2d99a4021cefa4f7f52efe474d3723103511cc0cd83d353d0775391bbfdfd1"
+              },
+              "solforge-workflow-business-strategy": {
+                "status": "legacy",
+                "trust": {
+                  "state": "legacy-inferred",
+                  "trusted": false,
+                  "reason": "metadata inferred from legacy graph or migration"
+                },
+                "contract_digest": "sha256:4a8d5718c265d68c69ff10e9638496e260d94abc36a1f4ccbf9a7b0f251bb861",
+                "entrypoint_digest": "sha256:b689fe6ea8b72e61a8dbc97a96127603b238840ec9652feadb7f770ac1c0eb93"
+              }
+            },
+            "required_capabilities": [],
+            "required_resources": [],
+            "blocked_stages": []
+          },
+          "execution_authorized": false
+        }
+      },
+      "names": {
+        "solforge-workflow-business-model": "solforge-workflow-business-model",
+        "solforge-workflow-business-compare": "solforge-workflow-business-compare",
+        "solforge-workflow-business-strategy": "solforge-workflow-business-strategy"
+      }
+    },
+    {
+      "label": "Review a mathematical proof",
+      "objective": "Verify every step of the mathematical proof",
+      "route": {
+        "objective": "Verify every step of the mathematical proof",
+        "selected": [
+          "solforge-workflow-math-verify"
+        ],
+        "skills": [
+          {
+            "id": "solforge-workflow-math-verify",
+            "name": "solforge-workflow-math-verify",
+            "description": "Check every inference, dependency, edge case, and hidden assumption; isolate gaps and propose bounded repairs."
+          }
+        ],
+        "stages": [
+          {
+            "stage": 1,
+            "text": "verify every step of the mathematical proof",
+            "selected": [
+              "solforge-workflow-math-verify"
+            ],
+            "reason": "mathematical verification",
+            "confidence": "high"
+          }
+        ],
+        "unselected_requested_stages": [],
+        "excluded_effects": [],
+        "execution_authorized": false,
+        "selection_status": "matched",
+        "selection_trace": {
+          "active_clauses": [
+            "verify every step of the mathematical proof"
+          ],
+          "ignored_clauses": [],
+          "max_skills": 10,
+          "semantic_capability_rank": [],
+          "semantic_clause_order": [],
+          "contract_repair": {
+            "attempted": false,
+            "repaired": [],
+            "bounded_passes": 1
+          },
+          "capability_identity": [],
+          "dataflow": {
+            "added_producers": [],
+            "explanations": [],
+            "available_inputs": []
+          }
+        },
+        "next": "Read selected entrypoints in request order. Evaluate follow-up conditions within user authority.",
+        "dataflow": {
+          "additions": [],
+          "inputs": {},
+          "explanations": []
+        },
+        "blocked_stages": [],
+        "broken_dependencies": [],
+        "route_policy": {
+          "denied_effects": [],
+          "grant": null,
+          "granted_capabilities": null,
+          "granted_resources": null,
+          "legacy_auth_scope": null,
+          "contract_mode": "hardened"
+        },
+        "denied_effects": [],
+        "contract_decisions": {
+          "solforge-workflow-math-verify": {
+            "status": "legacy-warning",
+            "contract_status": "legacy",
+            "reasons": [],
+            "effects": [],
+            "capabilities": [],
+            "resources": [],
+            "grant_checked": false,
+            "grant_id": null,
+            "trust": {
+              "state": "legacy-inferred",
+              "trusted": false,
+              "reason": "metadata inferred from legacy graph or migration"
+            },
+            "contract_digest": "sha256:64766ee1a6e1ab1d5e78fb65b19379986d08c45f5738c1c94e08eb43cd7ecc66",
+            "entrypoint_digest": "sha256:f1cb6ad5c369881a964fe33dd47c93a8e59abaad1d1c37bb3451b3dba6ba4e5c"
+          }
+        },
+        "required_capabilities": [],
+        "required_resources": [],
+        "selected_contracts": {
+          "solforge-workflow-math-verify": {
+            "id": "solforge-workflow-math-verify",
+            "name": "solforge-workflow-math-verify",
+            "description": "Check every inference, dependency, edge case, and hidden assumption; isolate gaps and propose bounded repairs.",
+            "status": "legacy",
+            "source": "sidecar",
+            "schema_version": "1.0",
+            "contract_revision": 1,
+            "contract_digest": "sha256:64766ee1a6e1ab1d5e78fb65b19379986d08c45f5738c1c94e08eb43cd7ecc66",
+            "entrypoint_digest": "sha256:f1cb6ad5c369881a964fe33dd47c93a8e59abaad1d1c37bb3451b3dba6ba4e5c",
+            "effects": [],
+            "capabilities": [],
+            "resources": [],
+            "auth_scope": "none",
+            "test_contract": "The requested proof_audit, verified_proof is supported by inspected sources or observed behavior; unresolved limits are stated.",
+            "inputs": [
+              {
+                "name": "statement-and-assumptions",
+                "required": true,
+                "source": "user",
+                "description": "statement and assumptions",
+                "schema": {}
+              },
+              {
+                "name": "definitions-and-allowed-methods",
+                "required": true,
+                "source": "user",
+                "description": "definitions and allowed methods",
+                "schema": {}
+              },
+              {
+                "name": "user-scope-and-acceptance-criteria",
+                "required": true,
+                "source": "user",
+                "description": "user scope and acceptance criteria",
+                "schema": {}
+              }
+            ],
+            "outputs": [
+              {
+                "name": "proof-audit",
+                "description": "proof_audit",
+                "schema": {}
+              },
+              {
+                "name": "verified-proof",
+                "description": "verified_proof",
+                "schema": {}
+              }
+            ],
+            "verification": {
+              "mode": "declarative",
+              "description": "The requested proof_audit, verified_proof is supported by inspected sources or observed behavior; unresolved limits are stated.",
+              "checks": []
+            },
+            "risk": {
+              "external": false,
+              "destructive": false,
+              "open_world": false
+            },
+            "provenance": {
+              "migration": "legacy-graph",
+              "inferred": true
+            },
+            "trust": {
+              "state": "legacy-inferred",
+              "trusted": false,
+              "reason": "metadata inferred from legacy graph or migration"
+            },
+            "validation_errors": []
+          }
+        },
+        "audit": {
+          "schema": "solkraft/audit/route/v1",
+          "digest": "sha256:fe9228847c3ade231673dc273cce055f67d862be546e80be453aaf96a9ce3746",
+          "payload": {
+            "objective": "Verify every step of the mathematical proof",
+            "selected": [
+              "solforge-workflow-math-verify"
+            ],
+            "selection_status": "matched",
+            "policy": {
+              "denied_effects": [],
+              "grant": null,
+              "granted_capabilities": null,
+              "granted_resources": null,
+              "legacy_auth_scope": null,
+              "contract_mode": "hardened"
+            },
+            "contracts": {
+              "solforge-workflow-math-verify": {
+                "status": "legacy",
+                "trust": {
+                  "state": "legacy-inferred",
+                  "trusted": false,
+                  "reason": "metadata inferred from legacy graph or migration"
+                },
+                "contract_digest": "sha256:64766ee1a6e1ab1d5e78fb65b19379986d08c45f5738c1c94e08eb43cd7ecc66",
+                "entrypoint_digest": "sha256:f1cb6ad5c369881a964fe33dd47c93a8e59abaad1d1c37bb3451b3dba6ba4e5c"
+              }
+            },
+            "required_capabilities": [],
+            "required_resources": [],
+            "blocked_stages": []
+          },
+          "execution_authorized": false
+        }
+      },
+      "names": {
+        "solforge-workflow-math-verify": "solforge-workflow-math-verify"
+      }
+    },
+    {
+      "label": "Respect excluded work",
+      "objective": "Do not audit software security",
+      "route": {
+        "objective": "Do not audit software security",
+        "selected": [],
+        "skills": [],
+        "stages": [],
+        "unselected_requested_stages": [],
+        "excluded_effects": [],
+        "execution_authorized": false,
+        "selection_status": "abstained",
+        "selection_trace": {
+          "active_clauses": [],
+          "ignored_clauses": [
+            {
+              "text": "do not audit software security",
+              "reason": "excluded scope"
+            }
+          ],
+          "max_skills": 10,
+          "semantic_capability_rank": [],
+          "semantic_clause_order": [],
+          "contract_repair": {
+            "attempted": false,
+            "repaired": [],
+            "bounded_passes": 1
+          },
+          "capability_identity": [],
+          "dataflow": {
+            "added_producers": [],
+            "explanations": [],
+            "available_inputs": []
+          }
+        },
+        "next": "No confident composed route.",
+        "dataflow": {
+          "additions": [],
+          "inputs": {},
+          "explanations": []
+        },
+        "blocked_stages": [],
+        "broken_dependencies": [],
+        "route_policy": {
+          "denied_effects": [],
+          "grant": null,
+          "granted_capabilities": null,
+          "granted_resources": null,
+          "legacy_auth_scope": null,
+          "contract_mode": "hardened"
+        },
+        "denied_effects": [],
+        "contract_decisions": {},
+        "required_capabilities": [],
+        "required_resources": [],
+        "selected_contracts": {},
+        "audit": {
+          "schema": "solkraft/audit/route/v1",
+          "digest": "sha256:7808171b44116cc498a1d1a8f4467ef39549d1eca420974ed245fe9d73e188e5",
+          "payload": {
+            "objective": "Do not audit software security",
+            "selected": [],
+            "selection_status": "abstained",
+            "policy": {
+              "denied_effects": [],
+              "grant": null,
+              "granted_capabilities": null,
+              "granted_resources": null,
+              "legacy_auth_scope": null,
+              "contract_mode": "hardened"
+            },
+            "contracts": {},
+            "required_capabilities": [],
+            "required_resources": [],
+            "blocked_stages": []
+          },
+          "execution_authorized": false
+        }
+      },
+      "names": {}
+    }
+  ]
+}

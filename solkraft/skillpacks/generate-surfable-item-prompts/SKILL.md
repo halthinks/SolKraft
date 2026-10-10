@@ -3,7 +3,7 @@ name: generate-surfable-item-prompts
 description: Write Blender and engine prompts for rideable objects in a massive-wave surfing game, preserving shape-derived handling.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
 
 # Surfable Item Prompt Generator
 
@@ -48,6 +48,6 @@ For a worn three-seat couch, require plausible full-size dimensions and mass; fr
 - Public routing defaults to hardened policy; opaque or contract-inadmissible capabilities fail closed.
 - When `contract.yaml` exists, compact metadata is evaluated before this full instruction body is loaded.
 - Runtime authority stays with the host; SolKraft keeps `execution_authorized: false`.
-- Current local acceptance covers 100,000 unique 250-word requests, 100 ask families per skill, and 100% eligible target recall. See repository `VALIDATION.md`.
+- See repository `VALIDATION.md` and `docs/SEMANTIC_ROUTER_PROOF.md` for current executed results, source identity, precision limits, and rerun instructions. Do not infer perfect matching or execution from a selected route.
 
 <!-- END SOLKRAFT SKILL INTEGRATION -->

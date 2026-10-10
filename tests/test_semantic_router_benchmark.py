@@ -11,7 +11,35 @@ from scripts.semantic_router_benchmark import (
     shared_anchor_prompt,
     shared_anchor_skills,
     single_prompt,
+    anchor_phrase,
 )
+
+def test_anchor_rotation_visits_short_profile_without_name_injection():
+    profile = {'anchors': ['portable', 'prompt', 'write', 'execution', 'objective']}
+    for case in range(20):
+        phrase = anchor_phrase(profile, case, 3)
+        assert len(set(phrase.split(', '))) == 3
+        assert set(phrase.split(', ')).issubset(set(profile['anchors']))
+
+
+def test_full_composition_corpus_is_unique_without_skill_id_padding():
+    from solkraft.routing import contract_index
+    from scripts.semantic_router_benchmark import composition_prompt, composition_targets, selectable_ids
+    catalog = SkillCatalog([BUNDLE_ROOT], preferred_root=BUNDLE_ROOT)
+    records = list(catalog.records())
+    graph = catalog_graph(catalog)
+    profiles = build_profiles(records, graph)
+    entries = {entry['id']: entry for entry in contract_index(catalog).entries()}
+    selectable = selectable_ids(records, graph, entries)
+    by_id = {record.id: record for record in records}
+    seen = set()
+    for case in range(100_000):
+        targets = composition_targets(selectable, case)
+        prompt = composition_prompt(by_id, profiles, targets, case)
+        assert prompt not in seen, case
+        assert all(target not in prompt for target in targets if '-' in target), case
+        seen.add(prompt)
+    assert len(seen) == 100_000
 
 
 def test_semantic_single_skill_corpus_shape_and_leakage():
@@ -165,11 +193,6 @@ def test_semantic_router_low_skill_rate_regression_probe():
             samples = []
             for local_case in range(100):
                 exact_anchor_set = exact_anchor_sets.get(skill_id)
-                if exact_anchor_set is None:
-                    # Non-identifiable targets belong to ambiguity coverage,
-                    # not hidden-label exact recall.
-                    passed += 1
-                    continue
                 prompt = single_prompt(
                     record, profiles[skill_id], profiles, local_case,
                     exact_anchor_set=exact_anchor_set,

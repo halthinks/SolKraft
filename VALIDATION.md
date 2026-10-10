@@ -1,36 +1,33 @@
-<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
 
 # Validation evidence
 
 <!-- BEGIN SOLKRAFT CURRENT SYSTEM -->
 ## Current SolKraft system — October 2026
 
-- Contract-aware routing uses semantic capability identity plus machine-readable `contract.yaml` metadata for typed inputs/outputs, namespaced effects, capability/resource requirements, declarative verification, provenance, trust, and exact digests.
-- Public REST, MCP, and CLI routing default to **hardened** policy. Opaque or otherwise inadmissible capabilities fail closed; the Python library stays compatibility-oriented unless stricter policy is requested.
-- SolKraft is advisory and non-executing. Runtime authority remains with the host and `execution_authorized` remains `false`.
-- The compact `ContractIndex` supplies routing/API/MCP/docs metadata without loading every full `SKILL.md` body into the hot path.
-- Read-only MCP tools: `search_skills`, `route_request`, `get_skill`, `get_skill_resource`, `get_selection_graph`, `get_skill_contract`, and `get_contract_index`.
-- Reusable CI and pre-PR contribution validation share contract/schema, routing, packaging, installed-MCP, index/hardening, and evidence gates.
-- Historical local contract acceptance recorded **100,000 / 100,000** generated cases. That run remains useful for hardened contract-policy and boundary behavior, but it is not the acceptance proof for broad semantic language coverage. The stronger semantic proof is defined in [docs/SEMANTIC_ROUTER_PROOF.md](docs/SEMANTIC_ROUTER_PROOF.md).
-- The public Validation display is a clearly labeled **recorded reenactment**, not live browser CI.
-- Canonical local acceptance receipt: `scripts/results-advanced-contract-100000-local-summary.json`.
+- Describe an outcome in ordinary language; SolKraft discovers procedures, composes requested stages, and retrieves selected instructions. The catalog contains **173 bundled skills** across software, research, data, writing, business, mathematics, legal research, and engineering.
+- Public REST, MCP, and CLI routing defaults to **hardened** contract policy. Routes expose selected methods, reasons, contract requirements, and unresolved work; review them before applying a procedure.
+- SolKraft is advisory. The host supplies tools, runtime authority, and verification. `execution_authorized` remains `false`.
+- Compact metadata is loaded before full instruction bodies. Seven read-only MCP tools provide search, routing, skill/resource retrieval, graph inspection, and contract metadata.
+- The full local semantic run completed **373,000 routing calls across all 32 slices** and passed its configured gates. Single-skill decisions: **99.961%**; compound target coverage: **100%**; ordering: **99.655%**; stability: **100%**.
+- Exact compound skill sets: **27.697%**, with **233,968 extra selections** and **60,000/100,000 requests without unresolved stages**. Coverage is not precision; passing this generated corpus does not prove perfect arbitrary-language matching, execution, or deployment.
+- The console displays actual completed receipts and recorded production-router examples. It performs no simulated or live browser CI. See [semantic validation and limitations](docs/SEMANTIC_ROUTER_PROOF.md) for source identity, methodology, and rerun instructions.
 
 <!-- END SOLKRAFT CURRENT SYSTEM -->
 
 
-The current local release gate passed **78 Python regression tests**, four Node setup behavior tests, and a separate real MCP integration test against the built wheel and packaged plugin. Earlier validation evidence below records previous revisions and test counts.
+The October 10 local release gate passed **260 Python regression tests**, seven Node setup behavior tests, three validation-display behavior tests, and a separate real MCP integration test against the built wheel and packaged plugin. The full semantic option completes all 373,000 routing calls before publishing source-bound console evidence. Earlier evidence below records previous revisions and test counts.
 
-Run the same suite:
+Run the complete local gate with Python 3.11+ and Node.js available:
 
 ```sh
 python -m pip install -e ".[dev]"
-SOLFORGE_TEST_ROOT=solkraft/skillpacks python -m pytest -q tests solkraft/skillpacks/solforge/tests -p no:cacheprovider
-node --check docs/assets/app.js
-node --check docs/assets/flow.js
-python -m compileall -q solkraft
+python -m scripts.local_ci --semantic-proof --semantic-workers 6
 ```
 
-On PowerShell, set `$env:SOLFORGE_TEST_ROOT = 'solkraft/skillpacks'` before pytest.
+The driver sets the test environment, checks contracts and hardening, builds the console and plugin, builds and installs a wheel in a separate environment, exercises the packaged MCP transport outside the checkout, and verifies the complete semantic aggregate. It writes `build/local-ci.json` and `build/semantic-proof-local/summary.json`. This local artifact check reuses installed dependencies; it does not establish a clean dependency download or hosted deployment.
+
+The console loads `docs/assets/semantic-proof.json`, validates completeness, and displays actual metrics and recorded production routes. Missing or failed evidence clears the numbers and disables examples with a retry control. Browser checks covered the desktop hero, the 390px mobile layout without horizontal overflow, offline skill search, and instruction retrieval. The page does not execute CI or claim skill execution.
 
 ### Supplemental deterministic routing battery
 

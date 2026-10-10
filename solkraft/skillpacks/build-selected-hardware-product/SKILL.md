@@ -3,7 +3,7 @@ name: build-selected-hardware-product
 description: Build an evidence-backed hardware product from preserved real-part and architecture selections, carrying them through exact BOM, supplier geometry, pinouts, schematics, routed PCB, target firmware, CAD, enclosure, assembly, first article, measurements, renders, and release evidence. Use when the host must turn an established engineering baseline into procurement-, fabrication-, prototype-, integration-, or release-ready deliverables without losing selection rationale or substituting parts merely to close gaps.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
 
 # Build Selected Hardware Product
 
@@ -99,6 +99,6 @@ Call the product built only at the declared readiness level and only when every 
 - Public routing defaults to hardened policy; opaque or contract-inadmissible capabilities fail closed.
 - When `contract.yaml` exists, compact metadata is evaluated before this full instruction body is loaded.
 - Runtime authority stays with the host; SolKraft keeps `execution_authorized: false`.
-- Current local acceptance covers 100,000 unique 250-word requests, 100 ask families per skill, and 100% eligible target recall. See repository `VALIDATION.md`.
+- See repository `VALIDATION.md` and `docs/SEMANTIC_ROUTER_PROOF.md` for current executed results, source identity, precision limits, and rerun instructions. Do not infer perfect matching or execution from a selected route.
 
 <!-- END SOLKRAFT SKILL INTEGRATION -->

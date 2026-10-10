@@ -22,6 +22,25 @@ import math
 from pathlib import Path
 import re
 import time
+import subprocess
+
+
+def source_identity():
+    """Bind receipts to exact tracked inputs, including uncommitted fixes."""
+    root = Path(__file__).resolve().parents[1]
+    names = [p.relative_to(root).as_posix() for folder in ('solkraft', 'scripts', 'tests')
+             for p in (root / folder).rglob('*') if p.is_file() and '__pycache__' not in p.parts]
+    names.append('pyproject.toml')
+    digest = hashlib.sha256()
+    for name in sorted(filter(None, names)):
+        if not (name.startswith(('solkraft/', 'scripts/', 'tests/')) or name == 'pyproject.toml'):
+            continue
+        path = root / name
+        digest.update(name.encode())
+        digest.update(b'\0')
+        digest.update(path.read_bytes() if path.is_file() else b'<missing>')
+    return {'revision': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=root).decode().strip(),
+            'inputs_sha256': digest.hexdigest(), 'harness': 'production-router/frozen-catalog'}
 
 from solkraft.catalog import SkillCatalog
 import solkraft.routing as routing_module
@@ -166,10 +185,6 @@ def build_profiles(records, graph):
             token_sets[skill_id],
             key=lambda token: (-(math.log((total + 1) / (df[token] + 1)) + 1), token),
         )
-        if len(unique) < 8:
-            for token in tokens(record.name):
-                if token not in STOPWORDS and token not in unique:
-                    unique.append(token)
         if len(unique) < 4:
             for token in raw_tokens[skill_id]:
                 if token not in unique:
@@ -282,7 +297,9 @@ def anchor_phrase(
                     picked.append(token)
     cursor = (case_index * 7 + 3) % len(anchors)
     for offset in range(max(width * 4, len(anchors))):
-        token = anchors[(cursor + offset * 5) % len(anchors)]
+        # Step through every position. A fixed stride of five visits only one
+        # position in a five-word profile and can inject an unrelated ID token.
+        token = anchors[(cursor + offset) % len(anchors)]
         if token not in picked:
             picked.append(token)
         if len(picked) == width:
@@ -375,13 +392,18 @@ def composition_prompt(records_by_id, profiles, target_ids: list[str], case_inde
         anchors = anchor_phrase(profile, case_index * 11 + position * 37, 3)
         domain = profile["domain"] if profile["domain"] != "general" else DOMAIN_FALLBACKS[(case_index + position) % len(DOMAIN_FALLBACKS)]
         opener = ACTION_OPENERS[(case_index + position * 3) % len(ACTION_OPENERS)]
-        context = CONTEXTS[(case_index // 7 + position * 2) % len(CONTEXTS)]
+        context = CONTEXTS[(case_index // 10 + position * 2) % len(CONTEXTS)]
         clause = f"{opener} the {domain} part involving {anchors} {context}."
         if position:
             connector = CONNECTORS[(case_index + position) % len(CONNECTORS)]
             clause = f"{connector}, {clause[0].lower()}{clause[1:]}"
         clauses.append(clause)
-    return " ".join(clauses) + " " + DELIVERABLES[(case_index * 3) % len(DELIVERABLES)]
+    # Independent mixed-radix wording choices avoid the old correlated cycles,
+    # which produced duplicate requests partway through the full 100k corpus.
+    return (TONE_PREFIXES[(case_index // 100) % len(TONE_PREFIXES)]
+            + " ".join(clauses) + " "
+            + DELIVERABLES[(case_index // 1000) % len(DELIVERABLES)]
+            + " Context notes: " + CONTEXTS[(case_index // 10000) % len(CONTEXTS)])
 
 
 def route_fingerprint(route: dict) -> str:
@@ -455,6 +477,7 @@ def parse_args():
 
 def main():
     args = parse_args()
+    source = source_identity()
     started = time.perf_counter()
     catalog = SkillCatalog([BUNDLE_ROOT], preferred_root=BUNDLE_ROOT)
     records = list(catalog.records())
@@ -514,12 +537,7 @@ def main():
             if (case_id // args.shard_count) % args.slice_count != args.slice_index:
                 continue
             exact_anchor_set = exact_anchor_sets.get(record.id)
-            # A selectable skill without a unique semantic anchor conjunction is
-            # not an exact-recall case: the observable prompt cannot determine
-            # one hidden label. It is exercised by the ambiguity suite instead.
-            if expected == "select-target" and exact_anchor_set is None:
-                single["moved_to_ambiguity"] += 1
-                continue
+            ambiguous = expected == "select-target" and exact_anchor_set is None
             prompt = single_prompt(
                 record, profile, profiles, local_case,
                 exact_anchor_set=exact_anchor_set,
@@ -532,6 +550,9 @@ def main():
             top = selected[0] if selected else None
             if expected == "select-target":
                 ok = record.id in selected
+                if ambiguous:
+                    single["ambiguity_cases"] += 1
+                    single["ambiguity_passed"] += int(ok)
                 single["eligible_cases"] += 1
                 single["eligible_passed"] += int(ok)
                 single[f"{split}_eligible_cases"] += 1
@@ -553,6 +574,7 @@ def main():
             single["passed"] += int(ok)
             if not ok and len(failures) < 30:
                 failures.append({"suite":"single","case":case_id,"target":record.id,"split":split,"expected":expected,"selected":selected[:8],"prompt_sha256":hashlib.sha256(prompt.encode()).hexdigest()})
+        print(f'[semantic-proof] single {record.id}: {single["cases"]} executions', flush=True)
 
     for case_id in range(args.composition_cases):
         if case_id % args.shard_count != args.shard_index:
@@ -563,6 +585,8 @@ def main():
         prompt = composition_prompt(records_by_id, profiles, targets, case_id)
         remember_prompt(prompt, targets)
         route = route_request(catalog, prompt, max_skills=50, policy=policy)
+        if composition["cases"] % 1000 == 0:
+            print(f'[semantic-proof] composition: {composition["cases"]} completed', flush=True)
         selected = route.get("selected") or []
         selected_set = set(selected)
         target_set = set(targets)
@@ -581,6 +605,7 @@ def main():
         if (not coverage_ok or not order_ok) and len(failures) < 30:
             failures.append({"suite":"composition","case":case_id,"targets":targets,"selected":selected[:12],"coverage_ok":coverage_ok,"order_ok":order_ok,"prompt_sha256":hashlib.sha256(prompt.encode()).hexdigest()})
 
+    stability_requests = []
     for base_case in range(args.stability_base_cases):
         if base_case % args.shard_count != args.shard_index:
             continue
@@ -606,11 +631,21 @@ def main():
                 leakage[issue] += 1
             if issues:
                 raise AssertionError(f"stability prompt leaked metadata for {target}: {issues}")
-        fingerprints = []
-        for _ in range(args.stability_repeats):
-            fingerprints.append(route_fingerprint(route_request(catalog, prompt, max_skills=50, policy=policy)))
-        baseline = fingerprints[0]
-        mismatches = sum(1 for item in fingerprints[1:] if item != baseline)
+        stability_requests.append((base_case, prompt, targets, base_hash))
+    baselines = {}
+    mismatch_counts = Counter()
+    # All other requests intervene between repeats of one request. This tests
+    # cross-request isolation, rather than only consecutive-call determinism.
+    for repeat in range(args.stability_repeats):
+        for base_case, prompt, targets, base_hash in stability_requests:
+            fingerprint = route_fingerprint(route_request(catalog, prompt, max_skills=50, policy=policy))
+            if repeat == 0:
+                baselines[base_case] = fingerprint
+            elif fingerprint != baselines[base_case]:
+                mismatch_counts[base_case] += 1
+        print(f'[semantic-proof] stability round {repeat + 1}/{args.stability_repeats}', flush=True)
+    for base_case, prompt, targets, base_hash in stability_requests:
+        mismatches = mismatch_counts[base_case]
         stability["base_cases"] += 1
         stability["executions"] += args.stability_repeats
         stability["mismatches"] += mismatches
@@ -633,6 +668,8 @@ def main():
             result["top1_rate"] = round(metrics["top1"] / metrics["cases"], 8)
         per_skill_result[skill_id] = result
 
+    if source != source_identity():
+        raise SystemExit('source changed during benchmark; discard this slice and rerun')
     summary = {
         "schema":"solkraft/semantic-router-proof-shard/v1",
         "shard_index":args.shard_index,
@@ -640,6 +677,7 @@ def main():
         "slice_index":args.slice_index,
         "slice_count":args.slice_count,
         "catalog":{"skill_count":len(records),"selectable_skill_count":len(selectable)},
+        "source": source,
         "corpus":{
             "single_prompts_per_skill_configured":args.single_per_skill,
             "development_partition_boundary":min(DEV_PROMPTS_PER_SKILL,args.single_per_skill),

@@ -1,18 +1,17 @@
-<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
 
 # SolKraft agent guide
 
 <!-- BEGIN SOLKRAFT CURRENT SYSTEM -->
 ## Current SolKraft system — October 2026
 
-- Contract-aware routing uses semantic capability identity plus machine-readable `contract.yaml` metadata for typed inputs/outputs, namespaced effects, capability/resource requirements, declarative verification, provenance, trust, and exact digests.
-- Public REST, MCP, and CLI routing default to **hardened** policy. Opaque or otherwise inadmissible capabilities fail closed; the Python library stays compatibility-oriented unless stricter policy is requested.
-- SolKraft is advisory and non-executing. Runtime authority remains with the host and `execution_authorized` remains `false`.
-- The compact `ContractIndex` supplies routing/API/MCP/docs metadata without loading every full `SKILL.md` body into the hot path.
-- Read-only MCP tools: `search_skills`, `route_request`, `get_skill`, `get_skill_resource`, `get_selection_graph`, `get_skill_contract`, and `get_contract_index`.
-- Reusable CI and pre-PR contribution validation share contract/schema, routing, packaging, installed-MCP, index/hardening, and evidence gates.
-- Latest local acceptance: **100,000 / 100,000** unique 250-word requests passed with **100 ask families per skill**, **100% eligible target recall**, **100% hardened blocking**, and **100% consequential-boundary correctness**; no explicit skill IDs were injected.
-- The public Validation display is a clearly labeled **recorded reenactment**, not live browser CI.
+- Describe an outcome in ordinary language; SolKraft discovers procedures, composes requested stages, and retrieves selected instructions. The catalog contains **173 bundled skills** across software, research, data, writing, business, mathematics, legal research, and engineering.
+- Public REST, MCP, and CLI routing defaults to **hardened** contract policy. Routes expose selected methods, reasons, contract requirements, and unresolved work; review them before applying a procedure.
+- SolKraft is advisory. The host supplies tools, runtime authority, and verification. `execution_authorized` remains `false`.
+- Compact metadata is loaded before full instruction bodies. Seven read-only MCP tools provide search, routing, skill/resource retrieval, graph inspection, and contract metadata.
+- The full local semantic run completed **373,000 routing calls across all 32 slices** and passed its configured gates. Single-skill decisions: **99.961%**; compound target coverage: **100%**; ordering: **99.655%**; stability: **100%**.
+- Exact compound skill sets: **27.697%**, with **233,968 extra selections** and **60,000/100,000 requests without unresolved stages**. Coverage is not precision; passing this generated corpus does not prove perfect arbitrary-language matching, execution, or deployment.
+- The console displays actual completed receipts and recorded production-router examples. It performs no simulated or live browser CI. See [semantic validation and limitations](docs/SEMANTIC_ROUTER_PROOF.md) for source identity, methodology, and rerun instructions.
 
 <!-- END SOLKRAFT CURRENT SYSTEM -->
 
@@ -89,7 +88,14 @@ Review findings must point to the concrete boundary, competing authority, invari
 4. Inspect `git diff --check`, the full diff, and `git status --short`. Review scope, compatibility, privacy, skill provenance, and direct evidence before calling work complete.
 5. Distinguish source integration, test execution, release readiness, and a live hosted deployment. A passing local suite does not prove production availability.
 
-Before publishing source/UI changes, run `python -m scripts.local_ci` in an environment with the development dependencies and Node.js installed. It generates the console and plugin archive, builds and exercises the installed wheel, and writes `build/local-ci.json`. Review and commit the generated static files. Automatic GitHub build/test runs are disabled; Pages uploads these files, and the verification workflow is manual. Use the same gate on Windows and Linux; only claim platforms actually executed.
+Before publishing source/UI changes, run `python -m scripts.local_ci` in an environment with the development dependencies and Node.js installed. It generates the console and plugin archive, builds and exercises the installed wheel, and writes `build/local-ci.json`. For semantic routing changes, also finish `python -m scripts.local_ci --semantic-proof` and inspect the full aggregate receipt. Review and commit the generated static files. GitHub test and semantic-proof workflows also have automatic triggers; inspect their actual YAML for current triggers. Use the same local gate on Windows and Linux; only claim platforms actually executed.
+
+The full semantic gate also generates `docs/assets/semantic-proof.json` through
+`scripts.build_semantic_console`. Publish this evidence asset only when all
+receipts are complete, all gates pass, and source identity matches. Preserve
+coverage, exact-set precision, extra selections, and unresolved-stage counts
+as separate measures. Never animate synthetic PASS rows or present generated
+holdout cases as an independent human-language study.
 
 Useful commands:
 

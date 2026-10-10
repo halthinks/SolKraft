@@ -17,6 +17,7 @@ import sys
 import tempfile
 import time
 import zipfile
+from scripts.semantic_router_benchmark import source_identity
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -31,7 +32,10 @@ def run_step(name, command, cwd, env, receipt):
 
 
 def main():
-    argparse.ArgumentParser(description=__doc__).parse_args()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--semantic-proof', action='store_true', help='Also finish the full local semantic corpus and enforce its aggregate gates.')
+    parser.add_argument('--semantic-workers', type=int, default=4)
+    args = parser.parse_args()
     node = shutil.which('node')
     if not node:
         raise SystemExit('Node.js is required for the UI checks. Install Node.js and retry.')
@@ -42,7 +46,7 @@ def main():
     env['PATH'] = str(Path(sys.executable).parent) + os.pathsep + env.get('PATH', '')
     steps = []
     receipt = {'schema': 'solkraft/local-ci/v1', 'platform': sys.platform,
-               'python': sys.version.split()[0], 'status': 'running', 'steps': steps}
+               'python': sys.version.split()[0], 'status': 'running', 'steps': steps, 'source': source_identity()}
     def run(name, command, cwd=ROOT, step_env=env):
         run_step(name, command, cwd, step_env, steps)
     try:
@@ -53,9 +57,10 @@ def main():
                                          '--report', 'build/contracts-migration.json'])
         run('Contract schema and index gate', [sys.executable, '-m', 'scripts.check_contracts'])
         run('Hardening invariants', [sys.executable, '-m', 'scripts.check_hardening'])
-        for asset in ('app.js', 'flow.js', 'setup.js', 'static-data.js'):
+        for asset in ('app.js', 'flow.js', 'setup.js', 'static-data.js', 'validation.js'):
             run(f'{asset} syntax', [node, '--check', f'docs/assets/{asset}'])
         run('Setup behavior tests', [node, '--test', 'tests/setup.test.cjs'])
+        run('Validation display behavior tests', [node, '--test', 'tests/validation.test.cjs'])
         run('Build static console', [sys.executable, '-m', 'scripts.build_console'])
         run('Package plugin', [sys.executable, 'scripts/package_plugin.py'])
         with tempfile.TemporaryDirectory(prefix='solkraft-ci-') as temporary:
@@ -84,6 +89,11 @@ def main():
             run('ZIP plugin against installed MCP runtime', [str(python), '-m', 'pytest', '-q',
                 str(ROOT / 'tests/test_plugin.py'), '-p', 'no:cacheprovider'], workspace, artifact_env)
         run('Whitespace review', ['git', '-c', f'safe.directory={ROOT.as_posix()}', 'diff', '--check'])
+        if args.semantic_proof:
+            run('Full local semantic proof', [sys.executable, '-m', 'scripts.local_semantic_ci', '--workers', str(args.semantic_workers)])
+            run('Publish source-bound console evidence', [sys.executable, '-m', 'scripts.build_semantic_console'])
+        if receipt['source'] != source_identity():
+            raise OSError('Source changed during local CI; rerun against the final source.')
         receipt['status'] = 'passed'
     except (subprocess.CalledProcessError, OSError, StopIteration) as error:
         receipt['status'] = 'failed'

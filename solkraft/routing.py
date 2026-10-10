@@ -45,14 +45,12 @@ _SPARSE_EXPLICIT_ANCHOR_CAP = 64
 
 def _explicit_query_anchors(query: str) -> frozenset[str]:
     match = re.search(
-        r"\b(?:centered on|involving)\s+([a-z0-9'-]+)"
-        r"(?:\s*,\s*([a-z0-9'-]+))?"
-        r"(?:\s*,\s*([a-z0-9'-]+))?",
+        r"\b(?:centered on|involving)\s+([a-z0-9'-]+(?:\s*,\s*[a-z0-9'-]+)*)",
         query.casefold(),
     )
     if not match:
         return frozenset()
-    return frozenset(token for token in match.groups() if token)
+    return frozenset(token.strip() for token in match.group(1).split(','))
 
 
 def _semantic_node_text(node: dict) -> str:
@@ -67,7 +65,7 @@ def _semantic_node_text(node: dict) -> str:
 
 def _graph_semantic_index(graph: dict) -> dict:
     nodes = graph.get("nodes", {})
-    cache_key = (id(graph), len(nodes))
+    cache_key = tuple((skill, _semantic_node_text(node)) for skill, node in nodes.items())
     cached = _GRAPH_SEMANTIC_CACHE.get(cache_key)
     if cached is not None:
         return cached
@@ -149,7 +147,7 @@ def _graph_identity_rank(graph: dict, query: str, *, limit: int = 8) -> list[dic
         weighted_overlap = sum(idf[token] for token in overlap)
         anchor_overlap = profile["anchors"] & query_tokens
         weighted_anchor_overlap = sum(idf[token] for token in anchor_overlap)
-        explicit_anchor_overlap = profile["anchors"] & explicit_query_anchors
+        explicit_anchor_overlap = profile["tokens"] & explicit_query_anchors
         weighted_explicit_anchor_overlap = sum(
             idf.get(token, 1.0) for token in explicit_anchor_overlap
         )
@@ -350,13 +348,28 @@ def route_request(
     # clause; on compound requests it can flood the route with cross-clause
     # false positives and exhaust the skill ceiling before later stages.
     try:
-        semantic_clauses, _ = composer.segment(objective)
+        semantic_clauses = result["selection_trace"]["active_clauses"]
     except (AttributeError, TypeError, ValueError):
         semantic_clauses = [objective]
 
     compound_identity_trace = []
-    if len(semantic_clauses) <= 1:
-        for match in catalog.identity_matches(objective, limit=min(max_skills, 8)):
+    abstained_stages = {
+        row.get("stage") for row in result["unselected_requested_stages"]
+        if row.get("reason") == "explanation request, no development workflow"
+    }
+    # Scope and deliberate abstention belong to the composer. Semantic recovery
+    # may resolve an unknown capability, but cannot resurrect rejected work.
+    semantic_stages = [
+        (i, clause) for i, clause in enumerate(semantic_clauses, 1)
+        if i not in abstained_stages
+    ]
+    semantic_clauses = [clause for _, clause in semantic_stages]
+    mapped_stages = {
+        stage["stage"] for stage in result["stages"]
+        if stage.get("confidence") == "high"
+    }
+    if len(semantic_clauses) == 1 and not mapped_stages:
+        for match in catalog.identity_matches(semantic_clauses[0], limit=min(max_skills, 8)):
             skill = match["id"]
             node = expanded.get("nodes", {}).get(skill, {})
             if node.get("effect") is True:
@@ -378,8 +391,10 @@ def route_request(
     semantic_trace = []
     semantic_groups = []
     semantic_primary = []
-    for stage_index, clause in enumerate(semantic_clauses, 1):
+    for stage_index, clause in semantic_stages:
         clause_explicit_anchors = _explicit_query_anchors(clause)
+        if stage_index in mapped_stages and not clause_explicit_anchors:
+            continue
         semantic_index = _graph_semantic_index(expanded)
         rank_limit = (
             max(32, len(semantic_index["profiles"]))
@@ -400,6 +415,8 @@ def route_request(
             graph_admissible.append(row)
 
         accepted = []
+        complete_matches = [row["id"] for row in graph_admissible
+                            if clause_explicit_anchors and row.get("explicit_anchor_overlap") == len(clause_explicit_anchors)]
         # If the explicit anchor list is sparse, recover every admissible skill
         # whose full semantic profile contains those anchors. This avoids an
         # arbitrary top-N cutoff when a short natural request uses a token
@@ -525,6 +542,10 @@ def route_request(
             if len(clause_explicit_anchors) <= 1
             else accepted[:8]
         )
+        if complete_matches:
+            # A full conjunction outranks partial matches and generic lexical
+            # neighbors. Keep all full matches when the wording is ambiguous.
+            accepted = complete_matches[:max_skills]
         if accepted:
             semantic_groups.append((stage_index, accepted))
             semantic_primary.append(accepted[0])
@@ -559,17 +580,14 @@ def route_request(
         if stage is None:
             stage = {
                 "stage": stage_index,
-                "text": semantic_clauses[stage_index - 1],
+                "text": dict(semantic_stages)[stage_index],
                 "selected": [],
                 "reason": "query-centric capability evidence",
                 "confidence": "high",
             }
             result.setdefault("stages", []).append(stage)
             stage_by_number[stage_index] = stage
-        stage["selected"] = [
-            *group,
-            *[skill for skill in stage.get("selected", []) if skill not in group],
-        ]
+        stage["selected"] = list(group)
 
     # Put exactly one primary semantic capability per clause first, in user
     # request order. Secondary candidates are useful supporting evidence, but
@@ -579,6 +597,7 @@ def route_request(
     ordered_primary = []
     primary_stage = {}
     candidate_stages = {}
+    anchored_stages = {number for number, clause in semantic_stages if _explicit_query_anchors(clause)}
     for stage_index, group in semantic_groups:
         if not group:
             continue
@@ -601,25 +620,26 @@ def route_request(
         if primary not in ordered_semantic:
             ordered_semantic.append(primary)
         for skill in group[1:]:
-            if any(later > stage_index for later in candidate_stages.get(skill, ())):
+            if any(later > stage_index and (stage_index not in anchored_stages or later in anchored_stages)
+                   for later in candidate_stages.get(skill, ())):
                 continue
             if skill not in ordered_semantic:
                 ordered_semantic.append(skill)
     selected = [
         *ordered_semantic,
-        *[skill for skill in selected if skill not in ordered_semantic],
+        *[skill for skill in selected if skill not in ordered_semantic and (
+            skill in explicit or any(skill in stage.get('selected', []) and stage.get('stage') not in {n for n, _ in semantic_groups}
+                                     for stage in result['stages'])
+        )],
     ]
-    # max_skills is a composer target, not permission to discard explicit
-    # semantic evidence. A sparse user-provided anchor can legitimately map to
-    # more candidates than the default route width; retain those candidates so
-    # downstream selection can disambiguate instead of creating false-negative
-    # capability recall.
-    semantic_floor = len(ordered_semantic)
-    selected = selected[:max(max_skills, semantic_floor)]
+    # The caller's ceiling applies to semantic recovery as well as composition.
+    # Preserve query evidence in the trace without expanding the requested route.
+    selected = selected[:max_skills]
     result.setdefault("selection_trace", {})["semantic_capability_rank"] = semantic_trace
     result["selection_trace"]["semantic_clause_order"] = ordered_semantic
-    objective_identity_skill, objective_identity = _identity_candidate(
-        catalog, expanded, decisions, objective
+    objective_identity_skill, objective_identity = (
+        _identity_candidate(catalog, expanded, decisions, semantic_clauses[0])
+        if len(semantic_clauses) == 1 and not mapped_stages and not ordered_semantic else (None, None)
     )
     if objective_identity_skill and objective_identity_skill not in selected:
         if ordered_semantic:
@@ -637,8 +657,10 @@ def route_request(
             **objective_identity,
         })
     for stage in result["stages"]:
-        identity_skill, identity = _identity_candidate(
-            catalog, expanded, decisions, stage["text"]
+        identity_skill, identity = (
+            _identity_candidate(catalog, expanded, decisions, stage["text"])
+            if stage.get("stage") not in mapped_stages and stage.get("stage") not in stage_by_number
+            else (None, None)
         )
         if objective_identity_skill and not identity_skill:
             identity_skill = objective_identity_skill
@@ -695,6 +717,10 @@ def route_request(
     for unresolved in result["unselected_requested_stages"]:
         stage_text = unresolved["text"]
         stage_number = unresolved.get("stage")
+        recovered = next((s for s in result["stages"] if s.get("stage") == stage_number and s.get("selected")), None)
+        if recovered and unresolved["reason"] == "candidate inadmissible by contract policy":
+            repaired.append({"stage": stage_number, "rejected": unresolved.get("candidate"), "replacement": recovered["selected"][0]})
+            continue
         if (
             stage_number is not None
             and unresolved["reason"] in repairable_reasons
@@ -803,6 +829,11 @@ def route_request(
     }
 
     original_selected = list(selected)
+    for stage in result["stages"]:
+        overflow = [skill for skill in stage["selected"] if skill not in selected]
+        stage["selected"] = [skill for skill in stage["selected"] if skill in selected]
+        for skill in overflow:
+            result["unselected_requested_stages"].append({"stage": stage.get("stage"), "text": stage["text"], "candidate": skill, "reason": "skill limit"})
     result = validate_route(
         result,
         graph,

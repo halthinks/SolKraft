@@ -3,7 +3,7 @@ name: netlify-frameworks
 description: Guide for deploying web frameworks on Netlify. Use when setting up a framework project (Vite/React, Astro, TanStack Start, Next.js, Nuxt, SvelteKit, Remix) for Netlify deployment, configuring adapters or plugins, or troubleshooting framework-specific Netlify integration. Covers what Netlify needs from each framework and how adapters handle server-side rendering.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
 
 # Frameworks on Netlify
 
@@ -81,6 +81,6 @@ Server-side code in all frameworks can access variables via `process.env.VAR` or
 - Public routing defaults to hardened policy; opaque or contract-inadmissible capabilities fail closed.
 - When `contract.yaml` exists, compact metadata is evaluated before this full instruction body is loaded.
 - Runtime authority stays with the host; SolKraft keeps `execution_authorized: false`.
-- Current local acceptance covers 100,000 unique 250-word requests, 100 ask families per skill, and 100% eligible target recall. See repository `VALIDATION.md`.
+- See repository `VALIDATION.md` and `docs/SEMANTIC_ROUTER_PROOF.md` for current executed results, source identity, precision limits, and rerun instructions. Do not infer perfect matching or execution from a selected route.
 
 <!-- END SOLKRAFT SKILL INTEGRATION -->

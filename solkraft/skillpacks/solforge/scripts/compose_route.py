@@ -27,11 +27,15 @@ selector = importlib.util.module_from_spec(_SELECTOR_SPEC)
 assert _SELECTOR_SPEC.loader is not None
 _SELECTOR_SPEC.loader.exec_module(selector)
 
-_ACTION = r"research|compare|draft|write|compose|create|prepare|inspect|review|diagnose|investigate|debug|implement|fix|build|refactor|run|test|verify|validate|generate|audit|analyze|summarize|derive|design|perform|conduct|reproduce|replicate|hand\s+off|train|tune|optimize|model|evaluate|plan|formulate|solve|prove|compute|explain|check|package|install|release|visualize|factcheck|outline|find|assess"
+_ACTION = r"research|compare|draft|write|compose|create|prepare|inspect|review|diagnose|investigate|debug|implement|fix|build|refactor|run|test|verify|validate|generate|audit|analyze|summarize|derive|design|perform|conduct|reproduce|replicate|hand\s+off|train|tune|optimize|model|evaluate|plan|formulate|develop|solve|prove|compute|explain|check|package|install|release|visualize|factcheck|outline|find|assess"
 def _is_constraint_context(clause):
     """Keep delivery constraints and candidate identifiers out of the route."""
     return bool(re.match(
-        r"(?:context notes\b|keep\b|preserve\b|retain\b|identify unresolved\b|state unresolved\b|record\b|distinguish findings\b|avoid unrelated\b|use the requested acceptance\b|candidate revision\b|use candidate revision\b)",
+        r"(?:context notes\b|keep\b|preserve\b|retain\b|identify unresolved\b|state unresolved\b|record\b|distinguish findings\b|avoid unrelated\b|use the requested acceptance\b|candidate revision\b|use candidate revision\b|"
+        r"give me (?:the )?(?:concrete )?next (?:actions|steps)\b|give me a reproducible path\b|"
+        r"i care about (?:the )?(?:actual )?(?:deliverable|answer|result)\b|call out (?:the )?assumptions\b|"
+        r"make (?:the )?completion criteria\b|separate what is known\b|"
+        r"show (?:the )?(?:important )?failure cases\b|include (?:the )?checks that distinguish\b)",
         clause,
     ))
 
@@ -51,12 +55,16 @@ def segment(objective):
         else:
             context_ignored.append({"text": tail.strip(" ,:"), "reason": "context notes"})
             text = text[:context_start.start()]
+    # Commas inside explicitly introduced topic lists are objects, even when a
+    # topic is also a verb (e.g. "involving inspect, verify, rollback").
+    text = re.sub(r"\b(?:centered on|involving)\s+[a-z0-9'-]+(?:\s*,\s*[a-z0-9'-]+)*",
+                  lambda match: match.group(0).replace(',', '\u241f'), text)
     # Preserve object lists joined by ``and``; split only where a new action starts.
     boundary = (
         rf"[;\n]+|[.!?](?:\s+(?:next,?\s*)?|$)|\b(?:then|after that|finally|otherwise)\b|"
-        rf"\band\s+(?=(?:{_ACTION})\b)"
+        rf",\s*(?:and\s+)?(?=(?:{_ACTION})\b)|\band\s+(?=(?:{_ACTION})\b)"
     )
-    raw = [part.strip(" ,:") for part in re.split(boundary, text) if part.strip(" ,:")]
+    raw = [part.replace('\u241f', ',').strip(" ,:") for part in re.split(boundary, text) if part.strip(" ,:")]
     # ``write and run focused tests`` is one verification request. The first
     # action can otherwise be stranded after action-aware splitting.
     coalesced = []
@@ -93,6 +101,10 @@ def segment(objective):
             "",
             clause,
         )
+        inline_exclusion = re.search(r"\b(?:do not|don't|dont|never|skip|avoid|without)\s+[a-z]", clause)
+        if inline_exclusion and inline_exclusion.start() > 0:
+            ignored.append({"text": clause[inline_exclusion.start():], "reason": "excluded scope"})
+            clause = clause[:inline_exclusion.start()].strip(' ,:')
         # Only treat an explicit leading negation as a clause exclusion.
         # Negation-like words may legitimately be semantic anchor tokens inside
         # "involving ..." lists; truncating on any occurrence destroys routing
@@ -104,6 +116,9 @@ def segment(objective):
         if clause and _is_constraint_context(clause):
             ignored.append({"text": clause, "reason": "constraint or context"})
             continue
+        if quoted and re.fullmatch(r"(?:explain|describe) (?:this|the) (?:quotation|quote|quoted text)\s*:?", clause):
+            ignored.append({"text": clause, "reason": "quoted explanation, no procedure requested"})
+            continue
         if clause:
             clauses.append(clause)
     return clauses, ignored
@@ -112,6 +127,12 @@ def segment(objective):
 def _mapped_skill(clause):
     """Return the specialized skill and explanation for a structured clause."""
     c = clause.casefold()
+    if re.match(r"summarize\b", c) and re.search(r"\b(?:text|quotation|quote|document)\b", c):
+        return "solforge-workflow-writing-draft", "requested text summary"
+    if re.search(r"\b(?:audit|assess|review)\b", c) and re.search(r"\b(?:application|software)\b", c) and re.search(r"\b(?:supports?|compatibility)\b", c) and re.search(r"\b(?:linux|windows|macos)\b", c):
+        return "solforge-workflow-software-portability-audit", "software platform support audit"
+    if re.search(r"\b(?:research|investigate|look up)\b", c) and re.search(r"\b(?:laws?|jurisdictions?|regulations?)\b", c):
+        return "solforge-workflow-legal-research", "legal source research"
     if re.search(r"\b(?:inspect|review|check|verify|test)\b", c) and re.search(r"\b(?:release gate|pre-merge gate|repository gate)\b", c):
         return "solforge-workflow-software-test", "repository release-gate verification"
     # Route short CI/release-gate failure questions by their diagnostic intent.
@@ -223,7 +244,7 @@ def _mapped_skill(clause):
         return "solforge-workflow-software-portability-audit", "software portability audit"
     if re.search(r"\b(?:diagnose|investigate|debug|root cause)\b", c) and re.search(r"\b(?:ci|check|test|build|failure|error|red|broken|flaky)\b", c):
         return "solforge-workflow-software-diagnose", "diagnosis of a software failure"
-    if re.search(r"\b(?:inspect|review|trace|understand)\b", c) and re.search(r"\b(?:repository|repo|code|files?|implementation|diff|architecture|module)\b", c):
+    if re.search(r"\b(?:inspect|review|trace|understand)\b", c) and re.search(r"\b(?:repository|repo|codebase|code|files?|implementation|diff|architecture|module)\b", c):
         return "solforge-workflow-codebase", "repository or code investigation"
     if re.search(r"\b(?:implement|fix|build)\b", c) and re.search(r"\b(?:code|software|compatible|compatibility|repository|fix)\b", c):
         return "solforge-workflow-software-build", "software implementation"
@@ -269,6 +290,10 @@ def compose_route(graph, objective, explicit=(), context=None, max_skills=10, bl
         raise ValueError("Unknown skills: " + ", ".join(sorted(unknown)))
 
     clauses, ignored = segment(objective)
+    if explicit and re.fullmatch(r"(?:use|run|follow|apply) (?:the |my )?(?:selected|requested|specified) (?:procedure|skills?|workflow)", objective.casefold().strip(" .")):
+        # An explicit procedural reference carries no additional discovery intent.
+        ignored.extend({"text": c, "reason": "explicit procedure reference"} for c in clauses)
+        clauses = []
     excluded_effects = _excluded_effects(objective)
     selected = []
     stages = []
@@ -276,15 +301,16 @@ def compose_route(graph, objective, explicit=(), context=None, max_skills=10, bl
     blocked = set(blocked_skills or ())
 
     def add(skill, stage, reason, confidence="high"):
-        if skill is None or skill not in nodes or nodes[skill]["effect"] or skill in selected:
+        if skill is None or skill not in nodes or nodes[skill]["effect"]:
             return False
         if skill in blocked:
             unselected.append({"stage": stage + 1, "text": clauses[stage], "candidate": skill, "reason": "candidate inadmissible by contract policy"})
             return False
-        if len(selected) >= max_skills:
-            unselected.append({"stage": stage, "text": clauses[stage], "candidate": skill, "reason": "skill limit"})
+        if skill not in selected and len(selected) >= max_skills:
+            unselected.append({"stage": stage + 1, "text": clauses[stage], "candidate": skill, "reason": "skill limit"})
             return False
-        selected.append(skill)
+        if skill not in selected:
+            selected.append(skill)
         stages.append({"stage": stage + 1, "text": clauses[stage], "selected": [skill], "reason": reason, "confidence": confidence})
         return True
 
@@ -332,7 +358,7 @@ def compose_route(graph, objective, explicit=(), context=None, max_skills=10, bl
         # already matched capability inflates compound routes and destroys
         # precision. The higher-level router may still replace this provisional
         # choice with stronger query-centric identity evidence.
-        if not stage_selected:
+        if not stage_selected and not (skill and skill in blocked):
             semantic = selector.semantic_candidates(
                 nodes,
                 clause,

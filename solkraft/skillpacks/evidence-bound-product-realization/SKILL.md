@@ -3,7 +3,7 @@ name: evidence-bound-product-realization
 description: Realize a physical product line from user experience and software requirements through exact supplier selection, pinouts, logical PCB mapping, CAD-bound enclosure work, render lineage, and first-article gates. Use for hardware products or product families that need a repeatable path from concept to source-bound, digitally closed, and physically verified evidence without proxy geometry, invented dimensions, or false readiness claims.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
 
 # Evidence-Bound Product Realization
 
@@ -68,6 +68,6 @@ Deliver an authority package containing the product registry, source manifest, r
 - Public routing defaults to hardened policy; opaque or contract-inadmissible capabilities fail closed.
 - When `contract.yaml` exists, compact metadata is evaluated before this full instruction body is loaded.
 - Runtime authority stays with the host; SolKraft keeps `execution_authorized: false`.
-- Current local acceptance covers 100,000 unique 250-word requests, 100 ask families per skill, and 100% eligible target recall. See repository `VALIDATION.md`.
+- See repository `VALIDATION.md` and `docs/SEMANTIC_ROUTER_PROOF.md` for current executed results, source identity, precision limits, and rerun instructions. Do not infer perfect matching or execution from a selected route.
 
 <!-- END SOLKRAFT SKILL INTEGRATION -->
