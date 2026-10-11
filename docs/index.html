@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/style.css?v=9f57d6c84534">
+  <link rel="stylesheet" href="assets/style.css?v=e070dd5f8051">
   <script defer src="assets/flow.js?v=5c9299226bcc"></script>
   <script defer src="assets/setup.js?v=e1002175be8d"></script>
   <script defer src="assets/static-data.js?v=25db82ccadda"></script>
@@ -45,15 +45,15 @@
     <div class="evidence-ribbon"><div><strong>173</strong><span>bundled procedures</span></div><div><strong>473,000</strong><span>calls required by the local proof</span></div><div><strong>7</strong><span>read-only MCP tools</span></div><a href="#validation-replay">Inspect the evidence <span>↗</span></a></div>
 
     <section id="features" class="workspace release-section">
-      <div class="release-head"><div><div class="eyebrow">FEATURES · THE ENGINE UNDER THE HOOD</div><h2>One request.<br>A whole toolkit.</h2></div><a class="button quiet" href="whitepaper.html">Read the whitepaper ↗</a></div>
+      <div class="release-head"><div><div class="eyebrow">THE ENGINE UNDER THE HOOD</div><h2>Features</h2></div><span class="feature-caption">One request. A whole toolkit.</span></div>
       <p class="release-lead">Intent becomes an inspectable workflow. Your agent gets the methods it needs, when it needs them.</p>
       <div class="release-grid">
-        <article><span class="release-kicker">01 · INTENT → WORKFLOW</span><h3>Five tasks. One sentence.</h3><p>Compose ordered stages from a compound request: inspect → diagnose → build → test → explain. Cross domains without manually assembling a stack of skills.</p></article>
-        <article><span class="release-kicker">02 · 173 PROCEDURES</span><h3>A catalog with range.</h3><p>Software, research, data, writing, business, mathematics, legal research, and engineering. Discover by capability and inspect the actual instructions.</p></article>
-        <article><span class="release-kicker">03 · CONTEXT ON DEMAND</span><h3>Load less. Get specific.</h3><p>Search compact metadata first. Retrieve a selected skill and its supporting resources when needed, keeping the full catalog out of the conversation.</p></article>
-        <article><span class="release-kicker">04 · INTENT BOUNDARIES</span><h3>“Don’t deploy” matters.</h3><p>Separate active work from exclusions, quoted text, deferred tasks, and delivery context. Ambiguous stages surface a clarification need instead of a pile of plausible skills.</p></article>
-        <article><span class="release-kicker">05 · CONTRACTS BEFORE CONTENT</span><h3>Know what a method requires.</h3><p>Inspect inputs, outputs, effects, requirements, and trust metadata before loading instructions. Hardened routing rejects inadmissible capabilities. Your agent retains execution authority.</p></article>
-        <article><span class="release-kicker">06 · YOUR ENVIRONMENT</span><h3>Local. Callable. Yours.</h3><p>A native Codex plugin, seven read-only MCP tools, a CLI, and a REST API. Run locally without a hosted account or model API key for the service.</p></article>
+        <article><div class="feature-visual route-visual" aria-label="An ordered workflow"><span>Inspect</span><i>→</i><span>Build</span><i>→</i><span>Test</span></div><span class="release-kicker">01 · INTENT → WORKFLOW</span><h3>Five tasks. One sentence.</h3><p>Compose ordered stages from a compound request: inspect → diagnose → build → test → explain. Cross domains without manually assembling a stack of skills.</p></article>
+        <article><div class="feature-visual catalog-visual" aria-label="A catalog across six domains"><span>⌘<small>CODE</small></span><span>◈<small>DATA</small></span><span>⌕<small>RESEARCH</small></span><span>✎<small>WRITING</small></span><span>∑<small>MATH</small></span><span>◎<small>BUSINESS</small></span></div><span class="release-kicker">02 · 173 PROCEDURES</span><h3>A catalog with range.</h3><p>Software, research, data, writing, business, mathematics, legal research, and engineering. Discover by capability and inspect the actual instructions.</p></article>
+        <article><div class="feature-visual load-visual" aria-label="Retrieve one selected procedure"><span>CATALOG<small>173 methods</small></span><i>→</i><span class="selected-method">SELECTED<small>Full instructions</small></span></div><span class="release-kicker">03 · CONTEXT ON DEMAND</span><h3>Load less. Get specific.</h3><p>Search compact metadata first. Retrieve a selected skill and its supporting resources when needed, keeping the full catalog out of the conversation.</p></article>
+        <article><div class="feature-visual intent-visual" aria-label="Active work and excluded work"><span>✓ Run tests</span><span class="excluded-intent">⊘ Don’t deploy</span></div><span class="release-kicker">04 · INTENT BOUNDARIES</span><h3>“Don’t deploy” matters.</h3><p>Separate active work from exclusions, quoted text, deferred tasks, and delivery context. Ambiguous stages surface a clarification need instead of a pile of plausible skills.</p></article>
+        <article><div class="feature-visual contract-visual" aria-label="Inspect requirements before loading"><span>INPUTS</span><i>→</i><b>◇<small>CONTRACT</small></b><i>→</i><span>OUTPUTS</span></div><span class="release-kicker">05 · CONTRACTS BEFORE CONTENT</span><h3>Know what a method requires.</h3><p>Inspect inputs, outputs, effects, requirements, and trust metadata before loading instructions. Hardened routing rejects inadmissible capabilities. Your agent retains execution authority.</p></article>
+        <article><div class="feature-visual ports-visual" aria-label="Local connection interfaces"><b>S<span>✳</span></b><div><span>PLUGIN</span><span>MCP</span><span>REST</span><span>CLI</span></div></div><span class="release-kicker">06 · YOUR ENVIRONMENT</span><h3>Local. Callable. Yours.</h3><p>A native Codex plugin, seven read-only MCP tools, a CLI, and a REST API. Run locally without a hosted account or model API key for the service.</p></article>
       </div>
       <div class="release-strip"><span><b>473,000 production-router calls</b>Completed local proof with downloadable receipts.</span><span><b>100% clarified compound exact matching</b>Zero extra selections and zero unresolved stages in the acceptance corpus.</span><span><b>Original diagnostics preserved</b>Ambiguous requests remain visible; the result does not claim universal language accuracy.</span></div>
     </section>
@@ -208,6 +208,7 @@ codex plugin add solkraft@solkraft</code></pre><p>You need Python 3.11 or newer,
       </div>
     </section>
 
+    <section class="whitepaper-link" aria-label="Technical whitepaper"><div><span class="eyebrow">GO DEEPER</span><h2>The ideas behind the engine.</h2><p>Architecture, routing repairs, and the evidence behind the results.</p></div><a class="button quiet" href="whitepaper.html">Read the whitepaper <span>↗</span></a></section>
   </main>
   <footer><a class="brand footer-brand" href="#top"><span class="brand-mark">S<span>✳</span></span><span>SOLKRAFT</span></a><span>Skill infrastructure, in the open.</span><div><a href="contributors.html">Contributors</a><a href="contributions.html">Showcase</a><a href="nominations.html">Nominations</a><a href="https://github.com/halthinks/SolKraft/blob/main/LICENSE">MIT License</a><a href="https://github.com/halthinks/SolKraft/issues/new?template=support_request.yml">Support</a><a href="https://github.com/halthinks/SolKraft/pulls">Pull requests</a></div></footer>
   <dialog id="skill-dialog" class="skill-dialog"><form method="dialog"><button class="dialog-close" aria-label="Close">×</button></form><div id="skill-detail"></div></dialog>
