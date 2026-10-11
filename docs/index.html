@@ -9,11 +9,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/style.css?v=e070dd5f8051">
+  <link rel="stylesheet" href="assets/style.css?v=da45162f78aa">
   <script defer src="assets/flow.js?v=5c9299226bcc"></script>
   <script defer src="assets/setup.js?v=e1002175be8d"></script>
   <script defer src="assets/static-data.js?v=25db82ccadda"></script>
-  <script defer src="assets/app.js?v=dd57d6c41043"></script>
+  <script defer src="assets/browser-router.js?v=64a76cf73db4"></script>
+  <script defer src="assets/skill-methods.js?v=e19879ce0553"></script>
+  <script defer src="assets/app.js?v=7b81f0e92ae5"></script>
   <script defer src="assets/validation.js?v=d6370eda9446"></script>
 </head>
 <body>
@@ -68,6 +70,28 @@
       </div>
       <div class="release-strip"><span><b>Inspectable contracts</b> Inputs, outputs, effects, requirements, and trust metadata.</span><span><b>Hardened public routing</b> Inadmissible capabilities are blocked and explained.</span><span><b>Host-controlled execution</b> A route supplies guidance; your agent’s tools and authority govern the work.</span></div>
     </section>
+
+    <section id="contract-architecture" class="workspace release-section">
+      <div class="release-head">
+        <div><div class="eyebrow">WHAT CHANGED · CONTRACT ARCHITECTURE</div><h2>Skills are no longer opaque superpowers.</h2></div>
+        <a class="button quiet" href="https://github.com/halthinks/SolKraft/blob/main/docs/SKILL_CONTRACT_ROADMAP.md" target="_blank" rel="noreferrer">Read the architecture ↗</a>
+      </div>
+      <p class="release-lead">SolKraft now treats each skill as a compact, inspectable capability contract. The router can reason about what a skill needs, what it may affect, what authority a host would need, how skills connect through typed inputs and outputs, and what evidence would verify success—before loading the full procedure.</p>
+      <div class="release-grid">
+        <article><span class="release-kicker">01 · CONTRACTS</span><h3>Inputs, outputs, effects, verification.</h3><p>Skills can carry typed <code>contract.yaml</code> sidecars with namespaced effects, capability/resource requirements, declarative checks, digests, provenance, and trust state.</p></article>
+        <article><span class="release-kicker">02 · ROUTING</span><h3>Admissibility before composition.</h3><p>Known-inadmissible skills are filtered before they shape a route. Whole routes are validated, broken dependencies are exposed, and one bounded repair pass can substitute a safe alternative.</p></article>
+        <article><span class="release-kicker">03 · DATAFLOW</span><h3>Capabilities can compose by type.</h3><p>Typed outputs can satisfy downstream inputs. A unique compatible producer can be inserted automatically; missing or ambiguous inputs remain visible instead of being guessed.</p></article>
+        <article><span class="release-kicker">04 · TRUST</span><h3>Verification is evidence-bound.</h3><p>Execution evidence is bound to exact contract and <code>SKILL.md</code> digests. Trust comes from external digest-bound review, never from a skill declaring itself trusted.</p></article>
+        <article><span class="release-kicker">05 · INTEROP</span><h3>REST, MCP, CLI, OpenAPI.</h3><p>Contract metadata is available over REST, MCP and CLI. Portable import/export and conservative MCP/OpenAPI adapters carry declarations only—never authority.</p></article>
+        <article><span class="release-kicker">06 · CI</span><h3>Pre-build a skill before the PR.</h3><p>Contributors can run the same reusable full gate locally or from GitHub before opening a PR, including the 100,000-route regression, packaging, installed MCP checks, contract indexing, and hardening receipts.</p></article>
+      </div>
+      <div class="release-strip">
+        <span><b>Hardened public defaults</b> Opaque skills fail closed over REST, MCP, and CLI.</span>
+        <span><b>Lazy by design</b> The route/index hot path still avoids loading full skill bodies.</span>
+        <span><b>Execution stays external</b> <code>execution_authorized</code> remains false.</span>
+      </div>
+    </section>
+
 
     <section id="validation-replay" class="workspace validation-replay" aria-label="Local exact-match validation evidence">
       <div class="validation-head"><div><div class="eyebrow"><span class="proof-check">✓</span> LOCAL EXACT-MATCH VALIDATION</div><h2>The right methods.<br><em>Every requested step.</em></h2><p>The full local gate requires 473,000 production-router calls across 32 slices: 173,000 single-skill cases, 100,000 clarified compound requests, 100,000 original diagnostic requests, and 100,000 stability calls. Results appear only when the complete exact-match receipt passes.</p></div><a class="button quiet" href="assets/semantic-proof.json" download>Download the receipt ↓</a></div>
@@ -178,10 +202,10 @@ codex plugin add solkraft@solkraft</code></pre><p>You need Python 3.11 or newer,
         <nav class="pagination" aria-label="Skill catalog pages"><button id="page-prev" class="button quiet">← Previous</button><span id="page-status" role="status" aria-live="polite"></span><label>Per page <select id="page-size"><option selected>12</option><option>24</option><option>48</option></select></label><button id="page-next" class="button quiet">Next →</button></nav>
       </div>
       <div id="route-panel" class="panel" role="tabpanel" hidden>
-        <div class="route-intro"><div><div class="eyebrow">ADVISORY ROUTING</div><h3>Describe the outcome. Get a sequence.</h3><p>Connect your API to compose a custom request, or load the worked example without connecting. Select a suggested skill to read and copy its procedure.</p></div><div class="route-glyph">↗</div></div>
+        <div class="route-intro"><div><div class="eyebrow">ADVISORY ROUTING</div><h3>Describe the outcome. Get a sequence.</h3><p>Compose a custom request right here, or load the worked example. Select a suggested skill to read and copy its procedure.</p></div><div class="route-glyph">↗</div></div>
         <label class="route-field"><span>YOUR TASK</span><textarea id="route-input" rows="4" maxlength="20000" placeholder="Example: inspect the codebase, fix the bug, add a regression test, and verify the release build"></textarea></label>
         <div class="route-controls"><label>Maximum skills <select id="max-skills"><option>5</option><option selected>10</option><option>20</option><option>50</option></select></label><button id="copy-task" class="button quiet">Copy request</button><button id="route-btn" class="button primary">Build my route <span>→</span></button></div>
-        <p id="route-mode" class="muted">Custom requests require a connected API. The worked example is available without one.</p><div id="route-results" class="route-results"></div>
+        <p id="route-mode" class="muted">No API connection needed. The first route loads the local Python engine; following routes reuse it.</p><div id="route-results" class="route-results"></div>
       </div>
     </section>
 

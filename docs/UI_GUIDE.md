@@ -65,3 +65,9 @@ The host agent applies capability-preserving execution for substantial work: pre
 The static site requires no key for browsing, inspection, or the worked example. A custom request requires a running SolKraft server with the applicable API key and CORS configuration. The key stays in the current tab. See [client setup](CLIENTS.md).
 
 The current walkthrough uses large vertical HTML cards. Cards reveal in order once when entering view, and a light pulse travels along each connector before the next stage appears. There is no pause control or continuously looping diagram; reduced-motion users see the complete static flow.
+
+## Custom browser routing and skill methods
+
+The GitHub Pages console composes custom routes without an API connection. On the first request it loads pinned Pyodide and PyYAML from the runtime CDN, then runs the bundled production Python router in a worker with hardened contract policy. Requests stay in the browser; an explicitly connected API remains available. Startup progress and failures are shown in the route panel, and a failed startup can be retried. This is routing only, not skill execution or browser CI.
+
+Skill inspection shows source-derived method prose and the contract's inputs and outputs before shared integration guidance. Full original instructions remain expandable and copyable, and supporting references link to their bundled source. The earlier contract-architecture modules remain visible alongside the graphical Features section; the whitepaper link is at the bottom of the page.

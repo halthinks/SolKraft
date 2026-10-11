@@ -137,7 +137,7 @@
       copy.addEventListener('click', () => copyText(skill.content || ''));
       const usage = document.createElement('p'); usage.className = 'muted';
       usage.textContent = 'Give this procedure to your agent with your task. Referenced files remain part of the skill; install the pack or retrieve them through REST/MCP when needed.';
-      detail.append(label, title, description, copy, usage);
+      detail.append(label, title, description, window.SolKraftSkillMethods.renderMethod(skill), copy, usage);
       const structure = skillStructure[id];
       if (structure) {
         const files = document.createElement('details'); files.className = 'parser-explanation';
@@ -152,7 +152,9 @@
         if (!paths.length) listing.textContent = 'This skill is instruction-based; no Python runtime is bundled in its folder.';
         files.append(summary, listing); detail.append(files);
       }
-      detail.append(body);
+      const full = document.createElement('details'); full.className = 'parser-explanation full-skill-instructions';
+      const fullHeading = document.createElement('summary'); fullHeading.textContent = 'Full original instructions · includes integration guidance';
+      full.append(fullHeading, body); detail.append(full);
     } catch (error) {
       detail.replaceChildren();
       const message = document.createElement('p');
@@ -216,12 +218,23 @@
     const objective = $('#route-input').value.trim();
     const output = $('#route-results');
     if (!objective) return notify('Describe the work you want to complete.');
-    if (!apiBase) return notify('Connect an API for custom routing, or use the worked example above.');
+    const button = $('#route-btn');
+    if (button.disabled) return;
+    button.disabled = true;
+    button.setAttribute('aria-busy', 'true');
     output.replaceChildren();
     setLoading(output, 'Composing an advisory route…');
     try {
-      const data = await request('/v1/route', { method: 'POST', body: JSON.stringify({ objective, max_skills: Number($('#max-skills').value) }) });
-      $('#route-mode').textContent = 'Live parser response from your connected API.';
+      const maxSkills = Number($('#max-skills').value);
+      const data = apiBase
+        ? await request('/v1/route', { method: 'POST', body: JSON.stringify({ objective, max_skills: maxSkills }) })
+        : await window.composeSolKraftBrowserRoute(objective, maxSkills, message => {
+          $('#route-mode').textContent = message;
+          setLoading(output, message);
+        });
+      $('#route-mode').textContent = apiBase
+        ? 'Live production-router response from your connected API.'
+        : 'Computed in this browser using the bundled production router. Your request stays in this tab.';
       renderRoute(data);
     } catch (error) {
       output.replaceChildren();
@@ -229,6 +242,10 @@
       p.className = 'error';
       p.textContent = error.message;
       output.append(p);
+      $('#route-mode').textContent = 'Routing failed. Retry, or connect your API in the Connect section.';
+    } finally {
+      button.disabled = false;
+      button.removeAttribute('aria-busy');
     }
   }
 

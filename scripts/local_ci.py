@@ -58,8 +58,9 @@ def main():
                                          '--report', 'build/contracts-migration.json'])
         run('Contract schema and index gate', [sys.executable, '-m', 'scripts.check_contracts'])
         run('Hardening invariants', [sys.executable, '-m', 'scripts.check_hardening'])
-        for asset in ('app.js', 'flow.js', 'setup.js', 'static-data.js', 'validation.js'):
+        for asset in ('browser-router.js', 'router-worker.js', 'skill-methods.js', 'app.js', 'flow.js', 'setup.js', 'static-data.js', 'validation.js'):
             run(f'{asset} syntax', [node, '--check', f'docs/assets/{asset}'])
+        run('Browser route and skill method behavior tests', [node, '--test', 'tests/browser-router.test.cjs', 'tests/skill-methods.test.cjs', 'tests/app.test.cjs'])
         run('Setup behavior tests', [node, '--test', 'tests/setup.test.cjs'])
         run('Validation display behavior tests', [node, '--test', 'tests/validation.test.cjs'])
         run('Build static console', [sys.executable, '-m', 'scripts.build_console'])
