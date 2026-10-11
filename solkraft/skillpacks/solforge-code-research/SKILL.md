@@ -1,9 +1,9 @@
 ---
 name: solforge-code-research
-description: Audit a whole codebase or ecosystem for intended architecture, hidden capabilities, inconsistencies, and completion gaps.
+description: Audit a whole codebase or ecosystem for intended architecture, hidden capabilities, inconsistencies, and completion gaps, with mastery coverage and an implementation handoff when requested.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # SolForge Code Research
 

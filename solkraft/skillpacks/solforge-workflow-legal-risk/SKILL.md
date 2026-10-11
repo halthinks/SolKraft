@@ -3,7 +3,7 @@ name: solforge-workflow-legal-risk
 description: Identify obligations, exposure, controls, evidence gaps, and questions requiring qualified professional review.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # Assess legal and compliance risk
 
@@ -24,6 +24,6 @@ Report the risk analysis and compliance gap map: obligations with sources, expos
 - Hardened routing rejects opaque or contract-inadmissible capabilities.
 - Contract metadata is evaluated before full skill instructions are loaded.
 - Runtime authority stays with the host; `execution_authorized` remains `false`.
-- Validation evidence and limits: see repository VALIDATION.md and docs/SEMANTIC_ROUTER_PROOF.md for the completed local semantic corpus, source identity, precision limits, and rerun instructions. A selected route does not prove execution or perfect matching.
+- Validation evidence and limits: see repository VALIDATION.md and docs/SEMANTIC_ROUTER_PROOF.md for the source-bound exact-match acceptance, retained original diagnostics, and rerun instructions. A selected route does not prove execution or perfect matching.
 
 <!-- END SOLKRAFT SKILL INTEGRATION -->

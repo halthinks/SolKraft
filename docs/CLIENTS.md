@@ -1,4 +1,4 @@
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # Connect an agent
 
@@ -9,8 +9,9 @@
 - Public REST, MCP, and CLI routing defaults to **hardened** contract policy. Routes expose selected methods, reasons, contract requirements, and unresolved work; review them before applying a procedure.
 - SolKraft is advisory. The host supplies tools, runtime authority, and verification. `execution_authorized` remains `false`.
 - Compact metadata is loaded before full instruction bodies. Seven read-only MCP tools provide search, routing, skill/resource retrieval, graph inspection, and contract metadata.
-- The full local semantic run completed **373,000 routing calls across all 32 slices** and passed its configured gates. Single-skill decisions: **99.961%**; compound target coverage: **100%**; ordering: **99.655%**; stability: **100%**.
-- Exact compound skill sets: **27.697%**, with **233,968 extra selections** and **60,000/100,000 requests without unresolved stages**. Coverage is not precision; passing this generated corpus does not prove perfect arbitrary-language matching, execution, or deployment.
+- The current acceptance gate requires **473,000 production-router calls across all 32 slices**: 173,000 single-skill cases, 100,000 clarified compound requests, 100,000 unchanged original compound diagnostics, and 100,000 stability executions.
+- Acceptance requires **100% of 111,000 eligible single-skill exact selections and 62,000 hardened policy decisions**, plus **100% holdout, per-skill, compound exact-set, coverage, order, and stability results**, with **zero extra selections and zero unresolved stages** in clarified compound requests. Clarifications preserve every original topic and target; the original corpus remains a separate diagnostic.
+- The historical 373,000-call run reached **27.697% compound exact matching** and is rejected as evidence of completion. Current results belong to the source-bound aggregate receipt; the October 10 full local CI passed all 22 steps and all 15 semantic gates across 32/32 receipts. Generated-corpus success does not establish perfect arbitrary-language matching, execution, or deployment.
 - The console displays actual completed receipts and recorded production-router examples. It performs no simulated or live browser CI. See [semantic validation and limitations](SEMANTIC_ROUTER_PROOF.md) for source identity, methodology, and rerun instructions.
 
 <!-- END SOLKRAFT CURRENT SYSTEM -->

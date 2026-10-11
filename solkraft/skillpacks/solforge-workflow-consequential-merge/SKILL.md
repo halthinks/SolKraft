@@ -3,7 +3,7 @@ name: solforge-workflow-consequential-merge
 description: Carry out an explicitly authorized merge action for its exact target and verify the resulting effect.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # Merge an authorized change
 

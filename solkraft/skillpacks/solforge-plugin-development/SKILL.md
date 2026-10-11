@@ -3,7 +3,7 @@ name: solforge-plugin-development
 description: Maintain SolForge-owned skill tooling, routing, packaging, or its separately requested plugin implementation.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # SolForge Plugin Development
 

@@ -3,7 +3,7 @@ name: solforge-mvp
 description: Define and deliver a bounded working MVP or vertical slice with acceptance evidence and explicit exclusions.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # SolForge MVP
 

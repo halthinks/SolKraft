@@ -3,7 +3,7 @@ name: solforge-run-research
 description: Execute a research plan with source tracking, contradictions, reproducible searches, and uncertainty.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # SolForge Run Research
 

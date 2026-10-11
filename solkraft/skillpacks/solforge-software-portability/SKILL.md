@@ -3,7 +3,7 @@ name: solforge-software-portability
 description: Audit, implement, build, and verify software portability across specified operating systems and architectures.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # SolForge Software Portability
 

@@ -3,7 +3,7 @@ name: solforge-target-verify
 description: Verify exact platform artifacts while distinguishing cross-build, emulator, simulator, and real-target evidence.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # SolForge Target Verify
 

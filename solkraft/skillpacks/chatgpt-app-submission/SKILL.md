@@ -3,7 +3,7 @@ name: chatgpt-app-submission
 description: Prepare chatgpt-app-submission.json and review MCP tool metadata, schemas, and test cases for submission.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # ChatGPT App Submission
 

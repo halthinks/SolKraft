@@ -3,7 +3,7 @@ name: gh-fix-ci
 description: Diagnose and fix GitHub Actions checks on a pull request using check logs and patch context.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 
 # GitHub Actions CI Fix

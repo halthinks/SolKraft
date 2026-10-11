@@ -3,7 +3,7 @@ name: solforge-workflow-business-diligence
 description: Test the investment or operating thesis against source quality, red flags, counterevidence, and uncertainty.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # Stress-test an investment or operating thesis
 

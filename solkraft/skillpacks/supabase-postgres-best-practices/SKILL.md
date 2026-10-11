@@ -10,7 +10,7 @@ metadata:
   abstract: Comprehensive Postgres performance optimization guide for developers using Supabase and Postgres. Contains performance rules across 8 categories, prioritized by impact from critical (query performance, connection management) to incremental (advanced features). Each rule includes detailed explanations, incorrect vs. correct SQL examples, query plan analysis, and specific performance metrics to guide automated optimization and code generation.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # Supabase Postgres Best Practices
 
@@ -72,6 +72,6 @@ Each rule file contains:
 - Hardened routing rejects opaque or inadmissible capabilities.
 - Contract metadata is evaluated before loading the full instruction body.
 - Execution authority stays with the host.
-- Validation evidence and limits: see the repository VALIDATION.md and docs/SEMANTIC_ROUTER_PROOF.md for the completed local semantic corpus, source identity, precision limits, and rerun instructions. A selected route does not prove execution or perfect matching.
+- Validation evidence and limits: see the repository VALIDATION.md and docs/SEMANTIC_ROUTER_PROOF.md for the source-bound exact-match acceptance, retained original diagnostics, and rerun instructions. A selected route does not prove execution or perfect matching.
 
 <!-- END SOLKRAFT SKILL INTEGRATION -->

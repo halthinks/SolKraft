@@ -1,4 +1,4 @@
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # Using SolKraft
 
@@ -9,8 +9,9 @@
 - Public REST, MCP, and CLI routing defaults to **hardened** contract policy. Routes expose selected methods, reasons, contract requirements, and unresolved work; review them before applying a procedure.
 - SolKraft is advisory. The host supplies tools, runtime authority, and verification. `execution_authorized` remains `false`.
 - Compact metadata is loaded before full instruction bodies. Seven read-only MCP tools provide search, routing, skill/resource retrieval, graph inspection, and contract metadata.
-- The full local semantic run completed **373,000 routing calls across all 32 slices** and passed its configured gates. Single-skill decisions: **99.961%**; compound target coverage: **100%**; ordering: **99.655%**; stability: **100%**.
-- Exact compound skill sets: **27.697%**, with **233,968 extra selections** and **60,000/100,000 requests without unresolved stages**. Coverage is not precision; passing this generated corpus does not prove perfect arbitrary-language matching, execution, or deployment.
+- The current acceptance gate requires **473,000 production-router calls across all 32 slices**: 173,000 single-skill cases, 100,000 clarified compound requests, 100,000 unchanged original compound diagnostics, and 100,000 stability executions.
+- Acceptance requires **100% of 111,000 eligible single-skill exact selections and 62,000 hardened policy decisions**, plus **100% holdout, per-skill, compound exact-set, coverage, order, and stability results**, with **zero extra selections and zero unresolved stages** in clarified compound requests. Clarifications preserve every original topic and target; the original corpus remains a separate diagnostic.
+- The historical 373,000-call run reached **27.697% compound exact matching** and is rejected as evidence of completion. Current results belong to the source-bound aggregate receipt; the October 10 full local CI passed all 22 steps and all 15 semantic gates across 32/32 receipts. Generated-corpus success does not establish perfect arbitrary-language matching, execution, or deployment.
 - The console displays actual completed receipts and recorded production-router examples. It performs no simulated or live browser CI. See [semantic validation and limitations](SEMANTIC_ROUTER_PROOF.md) for source identity, methodology, and rerun instructions.
 
 <!-- END SOLKRAFT CURRENT SYSTEM -->
@@ -28,7 +29,7 @@ The service adapters live separately in `solkraft/catalog.py`, `routing.py`, `ap
 
 **Validation:** inspect the completed local semantic receipt and its exact source
 identity. Metrics are loaded from `assets/semantic-proof.json`; missing, failed,
-or incomplete evidence shows an unavailable state with a retry button. Nothing
+incomplete, or older evidence that fails exact-match acceptance shows an unavailable state with a retry button. Nothing
 counts upward or simulates PASS rows. Select a recorded regression request to
 inspect actual production-router output, including a deliberately excluded task.
 The button transfers that request to Compose a route; it does not silently call
@@ -36,7 +37,7 @@ a server. Custom routing still requires the console's API connection.
 
 The six metrics distinguish calls completed, single-skill decisions, compound
 target coverage, target order, stability, and exact skill sets. The precision
-note exposes extras and unresolved work. Download the JSON for per-skill detail
+note exposes extras, unresolved work, and the separately rerun original compound diagnostics. The accepted clarified corpus must have zero extras and unresolved stages; its result does not replace the original diagnostic rate. Download the JSON for per-skill detail
 or expand the methodology section for gates, limitations, and the local command.
 
 **Discover skills:** keyword-filter the bundled skill names and descriptions, browse in pages, inspect instructions, view the pack's Python files and supporting references, and copy the procedure. An API connection switches discovery to the server catalog and its ranked search. Search starts at page one; the page indicator states which range is visible.
@@ -49,7 +50,7 @@ or expand the methodology section for gates, limitations, and the local command.
 
 The native Python engine is deterministic rather than an LLM call. It still parses scoped clauses, action rules, concept aliases, domain context, exclusions, quoted instructions, and completed or deferred work, but current routing adds a capability-identity matcher over published capability descriptions and distinctive/unique signatures. Capability identity is evaluated against active clauses; excluded, quoted, deferred, and delivery-only text must not introduce additional capabilities.
 
-Under hardened routing, the compact ContractIndex prefilters candidates before composition using declared contract state, effects, capabilities/resources, typed inputs/outputs, trust, and policy. The composer then preserves requested stage order and bounds selection to the requested maximum, up to 50 skills. After composition, whole-route validation checks contract admissibility, dependencies, and typed dataflow; bounded repair can recompose or repair broken dataflow while retaining unresolved stages when a safe route cannot be formed. Explicit IDs remain available for direct selection.
+Under hardened routing, the compact ContractIndex prefilters candidates before composition using declared contract state, effects, capabilities/resources, typed inputs/outputs, trust, and policy. The composer then preserves requested stage order and bounds selection to the requested maximum, up to 50 skills. After composition, whole-route validation checks contract admissibility, dependencies, and typed dataflow; bounded repair can recompose or repair broken dataflow while retaining unresolved stages when a safe route cannot be formed. A requested capability conjunction selects one admissible method only when its public evidence distinguishes that method. Multiple matches remain unresolved with a clarification request; unrelated candidates are not added to increase coverage. Explicit IDs remain available for direct selection.
 
 Graph relationships recommend supporting methods or subsequent work only when their conditions apply. The graph does not grant authority, execute tools, or create a background hook into an agent's internal skill picker. Scores are relative rankings, not confidence probabilities. Complex unfamiliar wording may require review or explicit selection.
 

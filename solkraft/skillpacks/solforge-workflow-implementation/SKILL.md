@@ -3,7 +3,7 @@ name: solforge-workflow-implementation
 description: Apply the selected Single, Multi, or Ultra runner to a bounded implementation task with explicit writes, tests, rollback, and verification.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # Implement a bounded change
 

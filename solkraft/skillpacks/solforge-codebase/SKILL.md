@@ -3,7 +3,7 @@ name: solforge-codebase
 description: "Understand how an existing repository works: trace behavior, architecture, ownership, and history at specific files and revisions."
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # Investigate a repository
 

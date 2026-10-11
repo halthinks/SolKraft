@@ -3,7 +3,7 @@ name: preserve-engineering-selections
 description: Preserve evidence-backed real-part selections, engineering rationale, constraints, and validation gates while carrying a hardware product through requirements, BOM, schematic, PCB, firmware, CAD, prototype, and release. Use when substantial engineering work already selected components or architecture for reasons; when closing design gaps without arbitrary substitutions; when reconciling supplier STEP, pinouts, ECAD, MCAD, code, and physical evidence; or when a project risks treating selected parts as generic TBD fields.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # Preserve Engineering Selections
 

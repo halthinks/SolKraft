@@ -3,7 +3,8 @@
 Run after installing .[dev]: python -m scripts.local_semantic_ci --workers 6.
 Each worker executes the production route function; no route-result memoization.
 Only matching source/configuration receipts can be resumed. Aggregation enforces
-all 373,000 executions for the current 173-skill bundle.
+all 473,000 executions, including unchanged original diagnostics, for the
+current 173-skill bundle.
 """
 import argparse
 from concurrent.futures import ThreadPoolExecutor, as_completed

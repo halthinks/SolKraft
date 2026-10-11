@@ -3,7 +3,7 @@ name: solforge-research-mastery-loop
 description: Coordinate codebase research and implementation in dependency order for a requested completion program.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # SolForge Research Mastery Loop
 

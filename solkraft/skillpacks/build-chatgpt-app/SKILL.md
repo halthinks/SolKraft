@@ -3,7 +3,7 @@ name: build-chatgpt-app
 description: Build or troubleshoot ChatGPT Apps SDK applications combining an MCP server and widget UI.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # Build ChatGPT App
 

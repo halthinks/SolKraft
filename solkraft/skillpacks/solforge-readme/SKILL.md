@@ -3,7 +3,7 @@ name: solforge-readme
 description: Convert reports and architecture evidence into a README with verified commands, links, and supported claims.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # SolForge README
 

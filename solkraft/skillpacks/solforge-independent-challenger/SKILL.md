@@ -3,7 +3,7 @@ name: solforge-independent-challenger
 description: Challenge consequential plans or results for missing evidence, unsupported assumptions, and untested failure modes.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # SolForge Independent Challenger
 

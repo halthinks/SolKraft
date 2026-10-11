@@ -3,7 +3,7 @@ name: realize-hardware-product
 description: Convert a hardware-product concept or source-bound architecture into a compact, dimensionally closed, supplier-evidence-bound realization package. Use for exact component/order selection, supplier STEP and sample control, custom PCB/carrier placement and routing, batteries and protection, connectors and cable bends, mechanisms and seals, thermal paths, representative collision and balance studies, assembly CAD/renders, BOMs, and first-article acceptance. Also use to audit whether a hardware package is truly digitally closed or physically verified.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # Realize Hardware Product
 

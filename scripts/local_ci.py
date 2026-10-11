@@ -35,6 +35,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--semantic-proof', action='store_true', help='Also finish the full local semantic corpus and enforce its aggregate gates.')
     parser.add_argument('--semantic-workers', type=int, default=4)
+    parser.add_argument('--semantic-output', type=Path, default=ROOT / 'build/semantic-proof-local', help='Receipt directory; use a fresh directory after changing source inputs.')
     args = parser.parse_args()
     node = shutil.which('node')
     if not node:
@@ -90,8 +91,8 @@ def main():
                 str(ROOT / 'tests/test_plugin.py'), '-p', 'no:cacheprovider'], workspace, artifact_env)
         run('Whitespace review', ['git', '-c', f'safe.directory={ROOT.as_posix()}', 'diff', '--check'])
         if args.semantic_proof:
-            run('Full local semantic proof', [sys.executable, '-m', 'scripts.local_semantic_ci', '--workers', str(args.semantic_workers)])
-            run('Publish source-bound console evidence', [sys.executable, '-m', 'scripts.build_semantic_console'])
+            run('Full local semantic proof', [sys.executable, '-m', 'scripts.local_semantic_ci', '--workers', str(args.semantic_workers), '--output', str(args.semantic_output)])
+            run('Publish source-bound console evidence', [sys.executable, '-m', 'scripts.build_semantic_console', '--receipt', str(args.semantic_output / 'summary.json')])
         if receipt['source'] != source_identity():
             raise OSError('Source changed during local CI; rerun against the final source.')
         receipt['status'] = 'passed'

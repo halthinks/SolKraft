@@ -3,7 +3,7 @@ name: solforge-compatibility-report
 description: Report verified platform compatibility, unsupported targets, migration costs, and remaining evidence gaps.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # SolForge Compatibility Report
 

@@ -3,7 +3,7 @@ name: solforge-perfection
 description: Improve a product through real user journeys, repairs, and repeated verification until the requested acceptance criteria hold.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # SolForge Perfection
 

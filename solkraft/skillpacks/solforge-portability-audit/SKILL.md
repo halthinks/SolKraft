@@ -3,7 +3,7 @@ name: solforge-portability-audit
 description: Audit platform coupling, runtime assumptions, dependencies, and evidence for requested software targets.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # SolForge Portability Audit
 

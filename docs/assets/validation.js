@@ -3,10 +3,14 @@
   function validateReceipt(data) {
     const s = data?.summary;
     const required = ['complete_execution_counts', 'complete_shard_slice_topology', 'composition_coverage_rate', 'composition_order_rate', 'every_skill_rate', 'full_corpus_configuration', 'no_metadata_leakage', 'single_global_rate', 'single_holdout_rate', 'single_prompt_uniqueness', 'stability_rate'];
-    if (!s?.proof_passed || !s.gates || !required.every(k => s.gates[k] === true)) throw new Error('The full proof has not passed.');
+    required.push('composition_exact_rate', 'composition_no_extra_selections', 'composition_no_unresolved', 'original_diagnostic_complete');
+    if (!s?.proof_passed || !s.gates || !required.every(k => s.gates[k] === true)) throw new Error('The full exact-match proof has not passed.');
+    if (s.single?.rate !== 1 || s.single?.holdout_rate !== 1 || s.single?.min_per_skill_rate !== 1 || s.composition?.coverage_rate !== 1 || s.composition?.order_rate !== 1 || s.stability?.execution_stability_rate !== 1) throw new Error('The required 100% matching or stability rates failed.');
+    if (s.composition?.exact_set_rate !== 1 || s.composition?.extra_selected_total !== 0 || s.composition?.no_unresolved !== s.composition?.cases) throw new Error('Exact matching, extra selections, or unresolved stages failed.');
     if (s.execution_topology?.received_receipts !== s.execution_topology?.expected_receipts || !s.execution_topology?.expected_receipts) throw new Error('The receipt set is incomplete.');
-    const expected = s.catalog?.skill_count * 1000 + 200000;
+    const expected = s.catalog?.skill_count * 1000 + 300000;
     if (s.single?.cases !== s.catalog?.skill_count * 1000 || s.composition?.cases !== 100000 || s.stability?.executions !== 100000 || s.corpus?.expected_total_executions !== expected) throw new Error('The full execution counts do not match.');
+    if (s.original_composition_diagnostic?.cases !== 100000) throw new Error('The original corpus diagnostic is incomplete.');
     if (!/^[a-f0-9]{64}$/.test(s.source?.inputs_sha256 || '')) throw new Error('Source identity is missing.');
     if (!Array.isArray(data.examples) || !data.examples.length || data.examples.some(x => x.route?.execution_authorized !== false)) throw new Error('Recorded examples are unavailable or invalid.');
     return s;
@@ -31,7 +35,7 @@
       text.append(name, code); row.append(step, text); $('proof-route').append(row);
     });
     if (!example.route.selected.length) {
-      const row = document.createElement('li'); row.textContent = 'No procedure selected: this work was explicitly excluded.'; $('proof-route').append(row);
+      const row = document.createElement('li'); row.textContent = 'No procedure selected. Inspect the unresolved stages or scope exclusions in the recorded route.'; $('proof-route').append(row);
     }
     $('proof-example-status').textContent = `${example.route.selected.length} selected · ${example.route.unselected_requested_stages?.length || 0} unresolved · execution_authorized: false`;
   }
@@ -47,7 +51,7 @@
       $('proof-order').textContent = percent(s.composition.order_rate);
       $('proof-stability').textContent = percent(s.stability.execution_stability_rate);
       $('proof-exact').textContent = percent(s.composition.exact_set_rate);
-      $('proof-precision-note').textContent = `${number(s.composition.exact_target_set)} / ${number(s.composition.cases)} exact sets · ${number(s.composition.extra_selected_total)} extra selections · ${number(s.composition.no_unresolved)} requests with no unresolved stages.`;
+      $('proof-precision-note').textContent = `${number(s.composition.exact_target_set)} / ${number(s.composition.cases)} clarified exact sets · ${number(s.composition.extra_selected_total)} extra selections · ${number(s.composition.no_unresolved)} requests with no unresolved stages. Original corpus: ${number(s.original_composition_diagnostic.exact_target_set)} exact sets; ${number(s.original_composition_diagnostic.clarification_requests)} requests report a need for clarification.`;
       $('proof-status').textContent = `${s.execution_topology.received_receipts}/${s.execution_topology.expected_receipts} receipts · all gates passed · recorded local run`;
       $('proof-source').textContent = `Tested inputs SHA-256 ${s.source.inputs_sha256}`;
       $('proof-examples').replaceChildren();

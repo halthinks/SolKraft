@@ -3,7 +3,7 @@ name: solforge-release-matrix
 description: Reconcile platform artifacts, signing, provenance, update support, and release-readiness evidence.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # SolForge Release Matrix
 

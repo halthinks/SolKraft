@@ -3,7 +3,7 @@ name: realize-cad-bound-product
 description: Convert a hardware product concept or existing iteration into a physically credible, dimensionally closed, CAD-bound product realization. Use for modular product architecture, selected supplier geometry, electronics packaging, power and thermal paths, mechanical interfaces, collision and balance analysis, photoreal renders that preserve CAD silhouette, BOM and evidence ledgers, and reusable product-line development without inventing received measurements or fabrication readiness.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # Realize a CAD-bound product
 

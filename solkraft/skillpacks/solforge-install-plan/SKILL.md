@@ -3,7 +3,7 @@ name: solforge-install-plan
 description: Design installation, launch, update, uninstall, troubleshooting, and rollback for a software product.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # SolForge Install Plan
 

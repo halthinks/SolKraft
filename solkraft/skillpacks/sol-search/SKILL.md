@@ -3,7 +3,7 @@ name: sol-search
 description: "Find current facts, primary sources, and contrary evidence for research, comparisons, technical questions, or claim checks. Use when an answer needs sourced evidence."
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # Sol Search
 

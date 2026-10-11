@@ -7,6 +7,7 @@ It measures three things:
 2. 100,000 distinct multi-skill composition prompts spanning 2-5 skills.
 3. 100,000 repeat executions over 10,000 difficult prompts (10 repeats each)
    to prove deterministic stability and absence of cross-request contamination.
+4. 100,000 unchanged original composition prompts, retained as diagnostics.
 
 The corpus never injects a skill id or copies a full published description.
 It is deterministic so failures are reproducible and sharded so CI can scale.
@@ -70,6 +71,7 @@ complex difficult real world correct appropriate relevant published bundled
 user objective supplied applicable scope acceptance criteria verified requested deliverable input inputs output outputs general
 description descriptions schema metadata field fields value values required optional type types
 name names identifier identifiers id ids version versions configuration config property properties
+router node solforge workflow workflows
 """.split())
 
 ACTION_OPENERS = (
@@ -155,6 +157,7 @@ def expectation(entry: dict, node: dict) -> str:
 
 
 def build_profiles(records, graph):
+    matching = routing_module._graph_semantic_index(graph)['profiles']
     token_sets: dict[str, set[str]] = {}
     raw_tokens: dict[str, list[str]] = {}
     for record in records:
@@ -222,6 +225,10 @@ def build_profiles(records, graph):
     for skill_id in ids:
         own = token_sets[skill_id]
         profiles[skill_id]["token_set"] = frozenset(own)
+        # Candidate membership uses the production public-field tokenizer.
+        # Anchor generation excludes wrapper words, but retained original
+        # requests may contain them and must still be disambiguated correctly.
+        profiles[skill_id]["matching_tokens"] = matching[skill_id]['tokens']
         scored = []
         for other in ids:
             if other == skill_id:
@@ -385,12 +392,28 @@ def shared_anchor_skills(profiles: dict, anchor: str) -> list[str]:
     )
 
 
-def composition_prompt(records_by_id, profiles, target_ids: list[str], case_index: int) -> str:
+def composition_prompt(records_by_id, profiles, target_ids: list[str], case_index: int, *, clarify: bool = True, source_profiles=None) -> str:
     clauses = []
     for position, skill_id in enumerate(target_ids):
         profile = profiles[skill_id]
-        anchors = anchor_phrase(profile, case_index * 11 + position * 37, 3)
-        domain = profile["domain"] if profile["domain"] != "general" else DOMAIN_FALLBACKS[(case_index + position) % len(DOMAIN_FALLBACKS)]
+        original_profile = (source_profiles or profiles)[skill_id]
+        anchors = anchor_phrase(original_profile, case_index * 11 + position * 37, 3)
+        if clarify:
+            # Preserve every original topic, target and case. Add semantic
+            # evidence only where those topics do not identify one capability.
+            picked = anchors.split(', ')
+            others = [p for sid, p in profiles.items() if sid != skill_id
+                      and set(picked).issubset(p.get('matching_tokens', p.get('token_set', ())))]
+            for token in profile['anchors']:
+                if not others:
+                    break
+                if token not in picked:
+                    picked.append(token)
+                    others = [p for p in others if token in p.get('matching_tokens', p.get('token_set', ()))]
+            if others:
+                raise AssertionError(f'Cannot distinguish capability {skill_id}; repair public metadata')
+            anchors = ', '.join(picked)
+        domain = original_profile["domain"] if original_profile["domain"] != "general" else DOMAIN_FALLBACKS[(case_index + position) % len(DOMAIN_FALLBACKS)]
         opener = ACTION_OPENERS[(case_index + position * 3) % len(ACTION_OPENERS)]
         context = CONTEXTS[(case_index // 10 + position * 2) % len(CONTEXTS)]
         clause = f"{opener} the {domain} part involving {anchors} {context}."
@@ -505,6 +528,8 @@ def main():
     leakage = Counter()
     single = Counter()
     composition = Counter()
+    original_diagnostic = Counter()
+    original_fixture = json.loads((Path(__file__).parent / 'fixtures/original-semantic-profiles.json').read_text(encoding='utf-8'))
     stability = Counter()
     per_skill = defaultdict(Counter)
     confusion = defaultdict(Counter)
@@ -549,7 +574,7 @@ def main():
             selected = route.get("selected") or []
             top = selected[0] if selected else None
             if expected == "select-target":
-                ok = record.id in selected
+                ok = selected == [record.id] and not route.get('unselected_requested_stages')
                 if ambiguous:
                     single["ambiguity_cases"] += 1
                     single["ambiguity_passed"] += int(ok)
@@ -582,7 +607,18 @@ def main():
         if (case_id // args.shard_count) % args.slice_count != args.slice_index:
             continue
         targets = composition_targets(selectable, case_id)
-        prompt = composition_prompt(records_by_id, profiles, targets, case_id)
+        original_targets = composition_targets(original_fixture['selectable'], case_id)
+        original_prompt = composition_prompt(records_by_id, original_fixture['profiles'], original_targets, case_id, clarify=False)
+        original_route = route_request(catalog, original_prompt, max_skills=50, policy=policy)
+        original_selected = original_route.get('selected') or []
+        original_diagnostic['cases'] += 1
+        original_diagnostic['exact_target_set'] += int(set(original_selected) == set(original_targets))
+        original_diagnostic['extra_selected_total'] += len(set(original_selected) - set(original_targets))
+        original_diagnostic['no_unresolved'] += int(not original_route.get('unselected_requested_stages'))
+        original_diagnostic['clarification_requests'] += int(any('clarification' in x.get('reason', '') for x in original_route.get('unselected_requested_stages', [])))
+        digest.update(('original:' + hashlib.sha256(original_prompt.encode()).hexdigest()).encode('ascii'))
+        assert targets == original_targets, 'Original composition targets changed'
+        prompt = composition_prompt(records_by_id, profiles, targets, case_id, source_profiles=original_fixture['profiles'])
         remember_prompt(prompt, targets)
         route = route_request(catalog, prompt, max_skills=50, policy=policy)
         if composition["cases"] % 1000 == 0:
@@ -602,8 +638,8 @@ def main():
         composition["extra_selected_total"] += max(0, len(selected_set - target_set))
         composition[f"size_{len(targets)}_cases"] += 1
         composition[f"size_{len(targets)}_coverage"] += int(coverage_ok)
-        if (not coverage_ok or not order_ok) and len(failures) < 30:
-            failures.append({"suite":"composition","case":case_id,"targets":targets,"selected":selected[:12],"coverage_ok":coverage_ok,"order_ok":order_ok,"prompt_sha256":hashlib.sha256(prompt.encode()).hexdigest()})
+        if (not exact_ok or not order_ok or not unresolved_ok) and len(failures) < 30:
+            failures.append({"suite":"composition","case":case_id,"targets":targets,"selected":selected[:12],"coverage_ok":coverage_ok,"order_ok":order_ok,"exact_ok":exact_ok,"unresolved":route.get('unselected_requested_stages'),"prompt":prompt,"prompt_sha256":hashlib.sha256(prompt.encode()).hexdigest()})
 
     stability_requests = []
     for base_case in range(args.stability_base_cases):
@@ -622,7 +658,7 @@ def main():
             targets = [record.id]
         else:
             targets = composition_targets(selectable, base_case * 97)
-            prompt = composition_prompt(records_by_id, profiles, targets, base_case * 97)
+            prompt = composition_prompt(records_by_id, profiles, targets, base_case * 97, source_profiles=original_fixture['profiles'])
         base_hash = hashlib.sha256(prompt.encode()).hexdigest()
         digest.update(("stability:" + base_hash).encode("ascii"))
         for target in targets:
@@ -693,6 +729,7 @@ def main():
         "leakage":dict(leakage),
         "single":dict(single),
         "composition":dict(composition),
+        "original_composition_diagnostic":dict(original_diagnostic),
         "stability":dict(stability),
         "per_skill":per_skill_result,
         "single_prompt_hashes_by_skill":{skill_id:hashes for skill_id,hashes in single_hashes_by_skill.items()},
@@ -700,7 +737,7 @@ def main():
         "sample_failures":failures,
         "performance":{
             "elapsed_seconds":round(elapsed,3),
-            "routes_per_second_approx":round((single["cases"]+composition["cases"]+stability["executions"])/elapsed,2) if elapsed else None,
+            "routes_per_second_approx":round((single["cases"]+composition["cases"]+original_diagnostic["cases"]+stability["executions"])/elapsed,2) if elapsed else None,
         },
     }
     output = args.output or Path(__file__).with_name(RESULT_TEMPLATE.format(shard=args.shard_index,count=args.shard_count))

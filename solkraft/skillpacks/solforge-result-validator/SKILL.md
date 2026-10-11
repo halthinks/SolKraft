@@ -3,7 +3,7 @@ name: solforge-result-validator
 description: "Check that a deliverable actually meets the requested outcome using inspected artifacts and observed behavior. Use before consequential completion claims."
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # Validate the requested result
 

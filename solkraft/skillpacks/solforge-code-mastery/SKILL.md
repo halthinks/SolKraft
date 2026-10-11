@@ -3,7 +3,7 @@ name: solforge-code-mastery
 description: Turn a codebase completion audit into coherent implementation, integration, and release evidence.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # SolForge Code Mastery
 

@@ -3,7 +3,7 @@ name: solforge-workflow-business-compare
 description: Compare named alternatives using explicit criteria, evidence parity, sensitivity, and decision implications.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # Compare business alternatives
 

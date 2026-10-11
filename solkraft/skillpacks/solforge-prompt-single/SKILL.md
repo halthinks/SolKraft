@@ -3,7 +3,7 @@ name: solforge-prompt-single
 description: Write a single-agent execution prompt preserving the objective, required inputs, and acceptance evidence.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # SolForge Prompt Single
 

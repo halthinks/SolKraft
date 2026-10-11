@@ -3,7 +3,7 @@ name: solforge-workflow-engineering-prototype
 description: Create a requested prototype or design artifact with simulation, test, rollback, and release boundaries.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # Prototype an engineering design
 

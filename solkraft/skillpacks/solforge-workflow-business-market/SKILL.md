@@ -3,7 +3,7 @@ name: solforge-workflow-business-market
 description: Build a source-verifiable market and segment view with competitors, demand evidence, and unresolved gaps.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # Build the market view
 

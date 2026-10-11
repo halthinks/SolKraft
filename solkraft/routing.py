@@ -368,7 +368,7 @@ def route_request(
         stage["stage"] for stage in result["stages"]
         if stage.get("confidence") == "high"
     }
-    if len(semantic_clauses) == 1 and not mapped_stages:
+    if len(semantic_clauses) == 1 and not mapped_stages and not _explicit_query_anchors(semantic_clauses[0]):
         for match in catalog.identity_matches(semantic_clauses[0], limit=min(max_skills, 8)):
             skill = match["id"]
             node = expanded.get("nodes", {}).get(skill, {})
@@ -417,6 +417,24 @@ def route_request(
         accepted = []
         complete_matches = [row["id"] for row in graph_admissible
                             if clause_explicit_anchors and row.get("explicit_anchor_overlap") == len(clause_explicit_anchors)]
+        if clause_explicit_anchors:
+            # A topic conjunction is one requested capability. Alternatives are
+            # evidence for clarification, never additional requested work.
+            accepted = complete_matches if len(complete_matches) == 1 else []
+            semantic_groups.append((stage_index, accepted))
+            semantic_trace.append({
+                "stage": stage_index, "text": clause,
+                "source": "explicit capability conjunction",
+                "candidates": complete_matches, "accepted": bool(accepted),
+            })
+            if not accepted:
+                result["unselected_requested_stages"].append({
+                    "stage": stage_index, "text": clause,
+                    "candidate": None, "candidates": complete_matches,
+                    "reason": "ambiguous capability; clarification required" if complete_matches
+                              else "no admissible capability satisfies requested topics",
+                })
+            continue
         # If the explicit anchor list is sparse, recover every admissible skill
         # whose full semantic profile contains those anchors. This avoids an
         # arbitrary top-N cutoff when a short natural request uses a token
@@ -689,7 +707,7 @@ def route_request(
                 **identity,
             })
 
-        if not available:
+        if not available and stage.get("stage") not in anchored_stages:
             candidate, denied_candidate = _repair_candidate(
                 catalog, decisions, stage["text"], selected
             )
@@ -718,7 +736,7 @@ def route_request(
         stage_text = unresolved["text"]
         stage_number = unresolved.get("stage")
         recovered = next((s for s in result["stages"] if s.get("stage") == stage_number and s.get("selected")), None)
-        if recovered and unresolved["reason"] == "candidate inadmissible by contract policy":
+        if recovered and unresolved["reason"] in repairable_reasons:
             repaired.append({"stage": stage_number, "rejected": unresolved.get("candidate"), "replacement": recovered["selected"][0]})
             continue
         if (

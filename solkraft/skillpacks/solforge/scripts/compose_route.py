@@ -45,6 +45,14 @@ def segment(objective):
     visible, quoted = _hide_quotes(objective)
     text = selector.normalize(visible)
     context_ignored = []
+    # Explicitly subordinate alternatives describe how to interpret the main
+    # request. Remove the whole context sentence before action-aware splitting
+    # can turn its commas or comparison checks into additional requested work.
+    subordinate = r"\b(?:there is adjacent context\b[^.!?\n]*?but do not let that replace[^.!?\n]*|someone suggested treating\b[^.!?\n]*?rather than assuming it is the right route)"
+    def retain_context(match):
+        context_ignored.append({"text": match.group(0), "reason": "subordinate interpretation context"})
+        return " "
+    text = re.sub(subordinate, retain_context, text)
     context_start = re.search(r"\bcontext notes\s*:", text)
     if context_start:
         tail = text[context_start.start():]
@@ -90,6 +98,9 @@ def segment(objective):
     clauses = []
     ignored = context_ignored + [{"text": item, "reason": "quoted content"} for item in quoted]
     for clause in raw:
+        if re.fullmatch(r"(?:i am stuck on something|for context,? this is a live project|treat this like a maintainer request|i need a second pair of eyes here|assume i know the domain basics|explain this like an implementation handoff|this is not theoretical|i want the shortest defensible path)", clause):
+            ignored.append({"text": clause, "reason": "request framing"})
+            continue
         if re.search(r"\b(?:tomorrow|next week|next month|later|after approval)\b", clause) and not re.search(r"\b(?:now|today)\b", clause):
             ignored.append({"text": clause, "reason": "deferred work"})
             continue
@@ -101,7 +112,9 @@ def segment(objective):
             "",
             clause,
         )
-        inline_exclusion = re.search(r"\b(?:do not|don't|dont|never|skip|avoid|without)\s+[a-z]", clause)
+        topic = re.search(r"\b(?:centered on|involving)\s+[a-z0-9'-]+(?:\s*,\s*[a-z0-9'-]+)*", clause)
+        inline_exclusion = next((m for m in re.finditer(r"\b(?:do not|don't|dont|never|skip|avoid|without)\s+[a-z]", clause)
+                                 if not topic or not topic.start() <= m.start() < topic.end()), None)
         if inline_exclusion and inline_exclusion.start() > 0:
             ignored.append({"text": clause[inline_exclusion.start():], "reason": "excluded scope"})
             clause = clause[:inline_exclusion.start()].strip(' ,:')
@@ -375,12 +388,14 @@ def compose_route(graph, objective, explicit=(), context=None, max_skills=10, bl
                 ):
                     stage_selected.append(candidate["id"])
 
-        if not stage_selected:
+        if not stage_selected and not any(row.get("stage") == index + 1 for row in unselected):
+            # add() already owns policy/limit failures. An unavailable mapped
+            # method is an unresolved match, not its descriptive success label.
             unselected.append({
                 "stage": index + 1,
                 "text": clause,
                 "candidate": None,
-                "reason": reason,
+                "reason": "no confident specialist match",
             })
 
     skills = []

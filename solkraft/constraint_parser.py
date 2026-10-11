@@ -26,7 +26,7 @@ def hide_quotes(text: str) -> tuple[str, list[str]]:
         return " "
 
     visible = re.sub(
-        r"\x60\x60\x60[\s\S]*?\x60\x60\x60|\x60[^\x60\n]*\x60|\"[^\"\n]*\"|'[^'\n]*'",
+        r"\x60\x60\x60[\s\S]*?\x60\x60\x60|\x60[^\x60\n]*\x60|\"[^\"\n]*\"|(?<!\w)'[^'\n]*'(?!\w)",
         replace,
         text,
     )

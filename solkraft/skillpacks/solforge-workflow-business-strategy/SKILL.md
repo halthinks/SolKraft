@@ -3,7 +3,7 @@ name: solforge-workflow-business-strategy
 description: Translate evidence into options, tradeoffs, sequencing, metrics, risks, and a decision-ready recommendation.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # Develop a business strategy
 

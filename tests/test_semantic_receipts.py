@@ -13,8 +13,10 @@ def receipt():
                    'holdout_partition_start': 800, 'composition_cases_configured': 100000,
                    'stability_base_cases_configured': 10000, 'stability_repeats': 10, 'shard_corpus_sha256': 'a'},
         'single': {'cases': 1000, 'passed': 1000, 'holdout_eligible_cases': 200, 'holdout_eligible_passed': 200},
-        'composition': {'cases': 100000, 'all_targets_selected': 100000, 'target_order_preserved': 100000},
+        'composition': {'cases': 100000, 'all_targets_selected': 100000, 'target_order_preserved': 100000,
+                        'exact_target_set': 100000, 'extra_selected_total': 0, 'no_unresolved': 100000},
         'stability': {'base_cases': 10000, 'executions': 100000, 'mismatches': 0},
+        'original_composition_diagnostic': {'cases': 100000},
         'per_skill': {'sample': {'cases': 1000, 'passed': 1000}},
         'single_prompt_hashes_by_skill': {'sample': [str(i) for i in range(1000)]},
     }
@@ -72,3 +74,13 @@ def test_missing_slice_cannot_pass(tmp_path):
     run, result = aggregate(tmp_path, data)
     assert run.returncode == 2
     assert not result['gates']['complete_shard_slice_topology']
+
+
+def test_recall_without_exact_matching_cannot_pass(tmp_path):
+    data = receipt()
+    data['composition'].update(exact_target_set=27697, extra_selected_total=233968, no_unresolved=60000)
+    run, result = aggregate(tmp_path, data)
+    assert run.returncode == 2
+    assert result['gates']['composition_coverage_rate']
+    for gate in ('composition_exact_rate', 'composition_no_extra_selections', 'composition_no_unresolved'):
+        assert not result['gates'][gate]

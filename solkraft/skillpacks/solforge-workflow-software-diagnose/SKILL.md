@@ -3,7 +3,7 @@ name: solforge-workflow-software-diagnose
 description: "Diagnose crashes, errors, hangs, regressions, or unexpected software behavior; trace the failure to code and evidence before selecting a fix."
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # Diagnose software behavior
 
@@ -24,6 +24,6 @@ Report cause, evidence, correction if performed, and remaining limits. Use [repo
 - Hardened routing rejects opaque or inadmissible capabilities.
 - Contract metadata is evaluated before loading the full instruction body.
 - Execution authority stays with the host.
-- Validation evidence and limits: see the repository VALIDATION.md and docs/SEMANTIC_ROUTER_PROOF.md for the completed local semantic corpus, source identity, precision limits, and rerun instructions. A selected route does not prove execution or perfect matching.
+- Validation evidence and limits: see the repository VALIDATION.md and docs/SEMANTIC_ROUTER_PROOF.md for the source-bound exact-match acceptance, retained original diagnostics, and rerun instructions. A selected route does not prove execution or perfect matching.
 
 <!-- END SOLKRAFT SKILL INTEGRATION -->

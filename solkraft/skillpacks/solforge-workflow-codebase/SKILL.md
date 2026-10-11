@@ -3,7 +3,7 @@ name: solforge-workflow-codebase
 description: "Investigate a repository to answer how a feature works, where behavior lives, or what a change depends on. Use for focused code understanding."
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # Investigate a codebase
 

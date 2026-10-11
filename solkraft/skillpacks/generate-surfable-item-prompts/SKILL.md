@@ -3,7 +3,7 @@ name: generate-surfable-item-prompts
 description: Write Blender and engine prompts for rideable objects in a massive-wave surfing game, preserving shape-derived handling.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # Surfable Item Prompt Generator
 

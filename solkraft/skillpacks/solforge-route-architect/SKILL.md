@@ -3,7 +3,7 @@ name: solforge-route-architect
 description: Compose a workflow graph with explicit inputs, dependencies, output checks, and conditional next steps.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # SolForge Route Architect
 

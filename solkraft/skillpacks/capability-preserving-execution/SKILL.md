@@ -3,7 +3,7 @@ name: capability-preserving-execution
 description: Orchestrate substantial multi-step coding, debugging, research, migration, and validation work with dependency-aware waves, selective recovery, and evidence-based completion while preserving capability. Use when a task spans multiple tools, files, systems, hypotheses, implementation stages, or validation layers. Do not use for simple explanations, rewrites, calculations, or tiny isolated edits unless explicitly invoked. Yield to specialized skills and repository workflows.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # Capability-Preserving Execution
 

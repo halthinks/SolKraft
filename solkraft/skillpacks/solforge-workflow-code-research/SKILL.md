@@ -3,7 +3,7 @@ name: solforge-workflow-code-research
 description: "Router-selected SolForge workflow node: audit a whole codebase or ecosystem for intended architecture, hidden capabilities, inconsistencies, and completion gaps, producing the code research package."
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # Audit a codebase for intended design and completion gaps
 

@@ -3,7 +3,7 @@ name: select-and-validate-hardware-parts
 description: Select real orderable hardware components through source-bound requirements, candidate comparison, calculations, geometry, supply evidence, and validation planning, and prove why the winner is preferable to alternatives. Use for component down-selection, architecture closure, exact MPN choice, supplier STEP and pinout research, make-versus-buy decisions, or when a hardware product needs defensible selections before BOM, schematic, PCB, firmware, CAD, or prototype work.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # Select and Validate Hardware Parts
 

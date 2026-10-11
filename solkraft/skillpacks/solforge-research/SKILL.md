@@ -3,7 +3,7 @@ name: solforge-research
 description: Conduct source-backed research with claim evidence, contrary findings, freshness, and uncertainty.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # SolForge Research
 

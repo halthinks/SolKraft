@@ -3,7 +3,7 @@ name: solforge-product-line-paper
 description: Turn an evidence-backed product plan into a consistent illustrated product-family paper, BOM, and power ledgers.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # SolForge Product Line Paper
 

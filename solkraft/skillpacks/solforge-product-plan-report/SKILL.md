@@ -1,9 +1,9 @@
 ---
 name: solforge-product-plan-report
-description: Study supplied sources and develop a source-bound product research, MVP, architecture, and design-plan report.
+description: Study supplied sources and develop a source-bound product research, MVP, architecture, and design-plan report, preserving audience decisions, calculations, output formats, and inspected exports.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # SolForge Product Plan Report
 

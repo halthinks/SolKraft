@@ -3,7 +3,7 @@ name: solforge-run-refactor
 description: Execute a scoped behavior-preserving repository refactor with regression evidence and rollback.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # SolForge Run Refactor
 

@@ -3,7 +3,7 @@ name: solforge-build
 description: Implement requested features, bug fixes, automation, or local artifacts; use when changing working code and verifying the result.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # SolForge Build
 

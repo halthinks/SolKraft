@@ -1,4 +1,4 @@
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # Validation evidence
 
@@ -9,14 +9,15 @@
 - Public REST, MCP, and CLI routing defaults to **hardened** contract policy. Routes expose selected methods, reasons, contract requirements, and unresolved work; review them before applying a procedure.
 - SolKraft is advisory. The host supplies tools, runtime authority, and verification. `execution_authorized` remains `false`.
 - Compact metadata is loaded before full instruction bodies. Seven read-only MCP tools provide search, routing, skill/resource retrieval, graph inspection, and contract metadata.
-- The full local semantic run completed **373,000 routing calls across all 32 slices** and passed its configured gates. Single-skill decisions: **99.961%**; compound target coverage: **100%**; ordering: **99.655%**; stability: **100%**.
-- Exact compound skill sets: **27.697%**, with **233,968 extra selections** and **60,000/100,000 requests without unresolved stages**. Coverage is not precision; passing this generated corpus does not prove perfect arbitrary-language matching, execution, or deployment.
+- The current acceptance gate requires **473,000 production-router calls across all 32 slices**: 173,000 single-skill cases, 100,000 clarified compound requests, 100,000 unchanged original compound diagnostics, and 100,000 stability executions.
+- Acceptance requires **100% of 111,000 eligible single-skill exact selections and 62,000 hardened policy decisions**, plus **100% holdout, per-skill, compound exact-set, coverage, order, and stability results**, with **zero extra selections and zero unresolved stages** in clarified compound requests. Clarifications preserve every original topic and target; the original corpus remains a separate diagnostic.
+- The historical 373,000-call run reached **27.697% compound exact matching** and is rejected as evidence of completion. Current results belong to the source-bound aggregate receipt; the October 10 full local CI passed all 22 steps and all 15 semantic gates across 32/32 receipts. Generated-corpus success does not establish perfect arbitrary-language matching, execution, or deployment.
 - The console displays actual completed receipts and recorded production-router examples. It performs no simulated or live browser CI. See [semantic validation and limitations](docs/SEMANTIC_ROUTER_PROOF.md) for source identity, methodology, and rerun instructions.
 
 <!-- END SOLKRAFT CURRENT SYSTEM -->
 
 
-The October 10 local release gate passed **260 Python regression tests**, seven Node setup behavior tests, three validation-display behavior tests, and a separate real MCP integration test against the built wheel and packaged plugin. The full semantic option completes all 373,000 routing calls before publishing source-bound console evidence. Earlier evidence below records previous revisions and test counts.
+The current October 10 full local CI passed **369 Python regression tests**, seven Node setup behavior tests, four validation-display behavior tests, and a real MCP integration test against the built wheel and packaged plugin. All **22 steps** and **15 semantic gates** passed. The semantic run completed **473,000 actual calls across 32/32 receipts**, with 100% eligible exact singleton matching, hardened policy decisions, clarified compound exact sets, order, coverage, and stability; clarified extras and unresolved stages were zero. The unchanged original diagnostic reached **44.704% exact sets**, zero extras, and **55,296 clarification requests**. These original results are separate from the clarified 100% acceptance. Tested source inputs: `1404e9a26fa11f106b606089de0bbb15e375297c34fc3c28f912d30864ab6714`. Earlier evidence below records previous revisions and test counts.
 
 Run the complete local gate with Python 3.11+ and Node.js available:
 
@@ -106,15 +107,16 @@ The targeted variants and 100,000 regression requests test routing, not 100,000 
 
 The semantic proof suite addresses a weakness in the earlier 100k generated benchmark: string uniqueness and repeated ask templates are not the same as broad semantic coverage.
 
-The current proof runs three independent surfaces:
+The current proof runs four separately reported surfaces:
 
-- **1,000 distinct prompts per skill**: 800 development cases plus a locked 200-case holdout for every bundled skill. Prompts vary framing, context, tone, deliverable wording, semantic anchors, and nearest-neighbor distractors.
-- **100,000 multi-skill composition requests**: each request requires two to five selectable skills, measuring complete target coverage, exact target sets, route order, unresolved stages, and extras.
-- **100,000 stability executions**: 10,000 difficult base prompts routed ten times each, with route fingerprints compared for deterministic stability.
+- **1,000 distinct prompts per skill**: 800 development cases plus a deterministic 200-case holdout for every bundled skill. Prompts vary framing, context, tone, deliverable wording, semantic anchors, and nearest-neighbor distractors.
+- **100,000 clarified multi-skill composition requests**: each requires two to five selectable skills. Capability-specific words resolve ambiguous generated requests while preserving every original topic, target, and case count; skill IDs are never injected.
+- **100,000 original composition diagnostics**: the unchanged requests are reconstructed from retained original profiles and routed separately. Their exact sets, extras, unresolved stages, and clarification requests remain visible and cannot be represented as the clarified acceptance result.
+- **100,000 stability executions**: 10,000 difficult base prompts routed ten times each, with actual route fingerprints compared for deterministic stability.
 
-With the current 173-skill catalog this is **373,000 routing executions**. The suite forbids literal structured skill IDs, full published descriptions, and copied eight-word description spans in generated prompts.
+With the current 173-skill catalog this is **473,000 production routing executions**. The suite forbids literal structured skill IDs, full published descriptions, and copied eight-word description spans in generated prompts.
 
-The aggregate gate requires >=95% global and holdout single-skill behavior, >=90% on every individual skill, >=90% multi-skill target coverage, >=95% route-order preservation, 100% repeat stability, and zero metadata leakage. A shard cannot declare success by itself; only the aggregate receipt may set `proof_passed: true`.
+The aggregate gate requires **100%** global and holdout single-skill behavior, every individual skill, compound target coverage, exact sets, route order, and repeat stability. Clarified requests must have **zero extra selections and zero unresolved stages**. It also requires zero metadata leakage, complete original diagnostics, all 32 slices, and matching source/corpus identity. A shard cannot declare success by itself; only the complete source-bound aggregate receipt may set `proof_passed: true`. The previous 27.697% compound exact-match result fails this gate. The October 10 full local CI passed all 22 steps and every semantic gate; the aggregate records 100% clarified exact sets, zero extras, and zero unresolved stages.
 
 See [docs/SEMANTIC_ROUTER_PROOF.md](docs/SEMANTIC_ROUTER_PROOF.md) and `.github/workflows/semantic-router-proof.yml`.
 

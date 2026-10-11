@@ -3,7 +3,7 @@ name: solforge-run-multi
 description: Execute an authorized multi-agent plan with bounded ownership, handoffs, and root integration.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # SolForge Run Multi
 

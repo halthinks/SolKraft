@@ -3,7 +3,7 @@ name: deep-research
 description: Use when the user asks for deep research, literature review, source-backed analysis, technical due diligence, market or policy research, model/dataset/paper investigation, repo-connected research, or a cited report with evidence, uncertainty, and recommendations.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # Deep Research
 

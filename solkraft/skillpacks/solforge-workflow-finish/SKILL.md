@@ -3,7 +3,7 @@ name: solforge-workflow-finish
 description: Explicitly accept the completed result as the final deliverable without creating another execution or report work bundle.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # Accept the completed result
 

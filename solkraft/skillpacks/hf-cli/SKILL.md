@@ -3,7 +3,7 @@ name: hf-cli
 description: Manage Hugging Face Hub resources with the hf CLI, including authentication, repositories, models, datasets, Spaces, jobs, and cache.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 Install: `curl -LsSf https://hf.co/cli/install.sh | bash -s`.
 

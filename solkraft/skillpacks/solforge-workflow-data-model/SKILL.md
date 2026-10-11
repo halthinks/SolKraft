@@ -3,7 +3,7 @@ name: solforge-workflow-data-model
 description: Build and validate a transparent model with baselines, holdouts, sensitivity, drift, and limitations.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # Model data
 

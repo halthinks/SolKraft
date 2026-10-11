@@ -22,6 +22,14 @@ def main():
     summary = json.loads(args.receipt.read_text(encoding='utf-8'))
     if not summary.get('proof_passed') or not summary.get('gates') or not all(summary['gates'].values()):
         raise SystemExit('Cannot publish an incomplete or failed semantic proof.')
+    required = ('composition_exact_rate', 'composition_no_extra_selections',
+                'composition_no_unresolved', 'original_diagnostic_complete')
+    composition = summary.get('composition', {})
+    if (not all(summary['gates'].get(gate) for gate in required)
+        or composition.get('exact_set_rate') != 1
+        or composition.get('extra_selected_total') != 0
+        or composition.get('no_unresolved') != composition.get('cases')):
+        raise SystemExit('Cannot publish a proof without complete exact matching.')
     if summary.get('source') != source_identity():
         raise SystemExit('Cannot publish a semantic proof for different source inputs.')
     catalog = SkillCatalog([BUNDLE_ROOT])

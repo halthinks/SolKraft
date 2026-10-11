@@ -14,7 +14,7 @@
   <script defer src="assets/setup.js?v=e1002175be8d"></script>
   <script defer src="assets/static-data.js?v=25db82ccadda"></script>
   <script defer src="assets/app.js?v=dd57d6c41043"></script>
-  <script defer src="assets/validation.js?v=7303ec4d5080"></script>
+  <script defer src="assets/validation.js?v=d6370eda9446"></script>
 </head>
 <body>
   <div class="noise"></div>
@@ -28,8 +28,8 @@
       <div class="hero-copy">
         <div class="eyebrow"><span class="pulse"></span> OPEN SOURCE · BUILT FOR YOUR AGENT</div>
         <h1>Your words.<br><em>A working method.</em></h1>
-        <p class="lead">Describe what you need. SolKraft finds reusable procedures, organizes multi-step requests, and gives your agent the instructions to move forward.</p>
-        <p class="hero-support">Especially useful when one task spans investigation, building, testing, and explaining the result.</p>
+        <p class="lead">Describe the work. SolKraft matches each requested capability to a reusable procedure, puts the steps in order, and gives your agent the instructions to follow.</p>
+        <p class="hero-support">Built for work that spans investigation, building, testing, and explaining the result. Ambiguous requests surface a need for clarification.</p>
         <div class="hero-actions"><a class="button primary" href="#setup-lab" data-start-path="plugin">Add to your agent <span>↗</span></a><a class="button quiet" href="#validation-replay">See the routing evidence <span>↓</span></a></div>
         <div class="hero-domains" aria-label="Available workflow domains"><span>Software</span><span>Research</span><span>Data</span><span>Writing</span><span>Business</span><span>Math + engineering</span></div>
         <div class="hero-note"><span class="dot"></span> Local plugin · REST · MCP · CLI <span class="slash">/</span> Your agent keeps control</div>
@@ -42,7 +42,7 @@
         <div class="hero-host"><span class="dot"></span> SOLKRAFT SELECTS <span>→</span> YOUR AGENT EXECUTES</div>
       </div>
     </section>
-    <div class="evidence-ribbon"><div><strong>173</strong><span>bundled procedures</span></div><div><strong>373,000</strong><span>local routing calls completed</span></div><div><strong>7</strong><span>read-only MCP tools</span></div><a href="#validation-replay">Inspect the evidence <span>↗</span></a></div>
+    <div class="evidence-ribbon"><div><strong>173</strong><span>bundled procedures</span></div><div><strong>473,000</strong><span>calls required by the local proof</span></div><div><strong>7</strong><span>read-only MCP tools</span></div><a href="#validation-replay">Inspect the evidence <span>↗</span></a></div>
 
     <section id="whats-new" class="workspace release-section">
       <div class="release-head"><div><div class="eyebrow">WHAT IT IS GOOD AT</div><h2>Less hunting for skills.<br>More clarity about the next step.</h2></div><a class="button quiet" href="#explore">Explore the catalog ↗</a></div>
@@ -55,23 +55,23 @@
       <div class="release-strip"><span><b>Inspectable contracts</b> Inputs, outputs, effects, requirements, and trust metadata.</span><span><b>Hardened public routing</b> Inadmissible capabilities are blocked and explained.</span><span><b>Host-controlled execution</b> A route supplies guidance; your agent’s tools and authority govern the work.</span></div>
     </section>
 
-    <section id="validation-replay" class="workspace validation-replay" aria-label="Completed local semantic validation">
-      <div class="validation-head"><div><div class="eyebrow"><span class="proof-check">✓</span> COMPLETED LOCAL VALIDATION</div><h2>Real routes.<br><em>Visible results.</em></h2><p>All 32 slices completed: 173,000 single-skill cases, 100,000 compound requests, and 100,000 stability calls. These are recorded production-router results from a generated corpus, plus independently authored regression requests.</p></div><a class="button quiet" href="assets/semantic-proof.json" download>Download the receipt ↓</a></div>
+    <section id="validation-replay" class="workspace validation-replay" aria-label="Local exact-match validation evidence">
+      <div class="validation-head"><div><div class="eyebrow"><span class="proof-check">✓</span> LOCAL EXACT-MATCH VALIDATION</div><h2>The right methods.<br><em>Every requested step.</em></h2><p>The full local gate requires 473,000 production-router calls across 32 slices: 173,000 single-skill cases, 100,000 clarified compound requests, 100,000 original diagnostic requests, and 100,000 stability calls. Results appear only when the complete exact-match receipt passes.</p></div><a class="button quiet" href="assets/semantic-proof.json" download>Download the receipt ↓</a></div>
       <div class="proof-status-bar"><span id="proof-status" role="status" aria-live="polite">Loading completed receipt…</span><button id="proof-retry" class="button quiet" hidden>Retry loading evidence</button><span>NO BROWSER-SIDE CI</span></div>
       <div class="validation-stats proof-metrics">
-        <article><small>ROUTING CALLS</small><strong id="validation-count">—</strong><span>complete corpus · all 32 slices</span></article>
+        <article><small>ROUTING CALLS</small><strong id="validation-count">—</strong><span>full proof + original diagnostics · 32 slices</span></article>
         <article><small>SINGLE-SKILL DECISIONS</small><strong id="proof-single">—</strong><span>selection + policy behavior · 173,000 cases</span></article>
-        <article><small>COMPOUND TARGET COVERAGE</small><strong id="proof-coverage">—</strong><span>expected methods present · 100,000 requests</span></article>
+        <article><small>COMPOUND TARGET COVERAGE</small><strong id="proof-coverage">—</strong><span>clarified requests · 100,000 cases</span></article>
         <article><small>TARGET ORDER PRESERVED</small><strong id="proof-order">—</strong><span>expected methods in sequence</span></article>
         <article><small>REPEAT STABILITY</small><strong id="proof-stability">—</strong><span>10,000 base cases × 10 interleaved rounds</span></article>
-        <article class="precision-metric"><small>EXACT COMPOUND SKILL SET</small><strong id="proof-exact">—</strong><span>coverage can include extra selections</span></article>
+        <article class="precision-metric"><small>EXACT COMPOUND SKILL SET</small><strong id="proof-exact">—</strong><span>all requested methods · zero extra selections</span></article>
       </div>
-      <div class="proof-limits"><strong>Coverage is strong. Precision still needs review.</strong><p id="proof-precision-note">Exact sets, extra selections, and unresolved work are reported separately.</p><p>Passing the configured gates does not establish perfect matching for arbitrary language, skill execution, or a deployed release.</p></div>
+      <div class="proof-limits"><strong>Exact matching is the acceptance gate.</strong><p id="proof-precision-note">Acceptance requires 100% exact compound sets, zero extra selections, and no unresolved stages in the clarified corpus. Original requests remain a separate diagnostic.</p><p>The receipt proves the stated corpus. Ambiguous original wording is reported separately; a generated test result does not establish perfect matching for arbitrary language, skill execution, or deployment.</p></div>
       <div class="proof-lab">
         <div class="proof-lab-copy"><div class="eyebrow">INSPECT A REAL EXAMPLE</div><h3>See the words.<br>See the methods.</h3><p>Choose a recorded request routed by the same Python engine. The result is precomputed, inspectable, and available without a server.</p><label for="proof-examples">Recorded regression request</label><select id="proof-examples" disabled><option>Loading examples…</option></select><button id="proof-open-route" class="button quiet" disabled>Use this request in Compose a route ↗</button><p class="proof-live-note">Custom semantic requests require a connected SolKraft API. Browse and inspect bundled skills here without a connection.</p></div>
         <div class="proof-example"><div class="terminal-bar"><span>production-router / recorded-example</span><b>READ-ONLY</b></div><blockquote id="proof-request">Loading recorded request…</blockquote><ol id="proof-route" aria-label="Selected procedures"></ol><div id="proof-example-status" role="status">No routing example loaded.</div></div>
       </div>
-      <details class="proof-method"><summary>What the validation does—and what it does not establish</summary><p>The generated corpus uses catalog-derived semantic anchors without injecting skill IDs or full descriptions. Its locked holdout is generated, not an independent human-language study. The authored regression suite checks everyday requests and scope boundaries separately. All calls use the production router with a frozen catalog; routing outputs are not memoized.</p><p>Gates require ≥95% global and holdout single-skill behavior, ≥90% per skill, ≥90% compound coverage, ≥95% ordering, 100% stability, zero metadata leakage, and complete matching receipts. Exact sets and unresolved stages are disclosed but are not acceptance gates.</p><pre><code>python -m scripts.local_ci --semantic-proof --semantic-workers 6</code></pre><a href="https://github.com/halthinks/SolKraft/blob/main/docs/SEMANTIC_ROUTER_PROOF.md">Read the method and limitations ↗</a><p id="proof-source" class="proof-source">Source identity loads with the receipt.</p></details>
+      <details class="proof-method"><summary>What the validation does—and what it does not establish</summary><p>The generated corpus uses catalog-derived semantic anchors without injecting skill IDs or full descriptions. Its locked holdout is generated, not an independent human-language study. The authored regression suite checks everyday requests and scope boundaries separately. All calls use the production router with a frozen catalog; routing outputs are not memoized.</p><p>Gates require 100% global, holdout, and per-skill decisions; 100% clarified compound coverage, ordering, and exact sets; zero extra selections and unresolved stages; 100% stability; zero metadata leakage; and complete matching receipts. Clarified requests retain every original topic and target, adding published capability words to distinguish ambiguous intent. All 100,000 unchanged original requests are rerun and disclosed separately.</p><pre><code>python -m scripts.local_ci --semantic-proof --semantic-workers 6</code></pre><a href="https://github.com/halthinks/SolKraft/blob/main/docs/SEMANTIC_ROUTER_PROOF.md">Read the method and limitations ↗</a><p id="proof-source" class="proof-source">Source identity loads with the receipt.</p></details>
     </section>
 
     <section id="how-it-works" class="guide workspace">
@@ -180,16 +180,16 @@ codex plugin add solkraft@solkraft</code></pre><p>You need Python 3.11 or newer,
         <div class="terminal-changelog-body">
           <div class="terminal-changelog-title">$ solkraft --what-changed</div>
           <ul>
-            <li>Completed the full local semantic corpus: 373,000 production routing calls across all 32 slices.</li>
+            <li>Expanded the full local proof to 473,000 production routing calls, including the preserved original diagnostic corpus.</li>
             <li>Fixed ordinary request routing, inline exclusions, inert quotations, deferred work, repeated test stages, and output requirements.</li>
             <li>Preserved compound target order and enforced the requested skill limit.</li>
             <li>Removed skipped ambiguous cases and duplicate composition templates from the proof harness.</li>
             <li>Bound receipts to exact source inputs; incomplete, mixed-source, and smoke runs cannot pass the full proof.</li>
             <li>Replaced simulated validation animation with actual receipts and recorded routing examples.</li>
-            <li>Reported exact matching, extra selections, and unresolved work alongside target coverage.</li>
+            <li>Made exact matching, zero extra selections, and resolved requested stages mandatory acceptance gates.</li>
             <li>Kept contracts inspectable, public routing hardened, and execution authority with the host.</li>
           </ul>
-          <div class="terminal-changelog-end">[status] local corpus complete · configured gates passed · precision limits disclosed · execution remains external</div>
+          <div class="terminal-changelog-end">[status] exact-match acceptance enforced · completed results require a verified receipt · execution remains external</div>
         </div>
       </div>
     </section>

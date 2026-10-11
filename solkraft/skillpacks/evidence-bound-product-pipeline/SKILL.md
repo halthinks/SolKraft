@@ -3,7 +3,7 @@ name: evidence-bound-product-pipeline
 description: Realize or audit a hardware/software product line that needs source-bound requirements, exact supplier geometry and pinouts, PCB mapping, CAD, renders, BOMs, and physical validation. Use for product recovery, first-article planning, hardware selection, power/thermal/mechanical closure, or release claims where proxy geometry, generated imagery, documentation, and test plans must not be confused with fabricated or measured evidence.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # Evidence-Bound Product Pipeline
 

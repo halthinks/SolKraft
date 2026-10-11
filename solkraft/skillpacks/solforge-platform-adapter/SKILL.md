@@ -3,7 +3,7 @@ name: solforge-platform-adapter
 description: Implement platform-specific filesystem, process, UI, storage, permissions, and lifecycle adapters.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # SolForge Platform Adapter
 

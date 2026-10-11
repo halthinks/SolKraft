@@ -3,7 +3,7 @@ name: solforge-workflow-data-analyze
 description: Execute a reproducible analysis with grain, definitions, assumptions, uncertainty, and decision implications.
 ---
 
-<!-- solkraft-doc-sync: contract-aware-v1 | semantic-proof-373k | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # Analyze data reproducibly
 
