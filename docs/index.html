@@ -5,24 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#090d13">
   <meta name="description" content="Turn ordinary requests into inspectable skill routes. Browse 173 procedures, retrieve instructions on demand, and review real local validation evidence.">
+  <link rel="icon" type="image/png" href="assets/solkraft-forge.png">
   <title>SolKraft — Your words. A working method.</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/style.css?v=da45162f78aa">
+  <link rel="stylesheet" href="assets/style.css?v=679905926f33">
   <script defer src="assets/flow.js?v=5c9299226bcc"></script>
   <script defer src="assets/setup.js?v=e1002175be8d"></script>
   <script defer src="assets/static-data.js?v=25db82ccadda"></script>
   <script defer src="assets/browser-router.js?v=64a76cf73db4"></script>
   <script defer src="assets/skill-methods.js?v=e19879ce0553"></script>
-  <script defer src="assets/app.js?v=7b81f0e92ae5"></script>
+  <script defer src="assets/app.js?v=c2ce4d29b1de"></script>
   <script defer src="assets/validation.js?v=d6370eda9446"></script>
 </head>
 <body>
   <div class="noise"></div>
   <header class="topbar">
-    <a class="brand" href="#top" aria-label="SolKraft home"><span class="brand-mark">S<span>✳</span></span><span>SOLKRAFT</span><small>METHODS FOR AGENTS</small></a>
-<nav aria-label="Main navigation"><a href="#features">Features</a><a href="#explore">Skills</a><a href="#how-it-works">Routing</a><a href="#validation-replay">Validation</a><a href="#setup-lab">Connect</a><a href="contributors.html">Community</a><a href="https://github.com/halthinks/SolKraft" target="_blank" rel="noreferrer">GitHub ↗</a></nav>
+    <a class="brand" href="#top" aria-label="SolKraft home"><img class="brand-logo" src="assets/solkraft-forge.png" width="36" height="36" alt=""><span>SOLKRAFT</span><small>METHODS FOR AGENTS</small></a>
+<nav aria-label="Main navigation"><a href="#features">Features</a><a href="#explore">Skills</a><a href="#how-it-works">Routing</a><a href="#validation-replay">Validation</a><a href="#setup-lab">Connect</a><a href="#agent-update">Update</a><a href="contributors.html">Community</a><a href="https://github.com/halthinks/SolKraft" target="_blank" rel="noreferrer">GitHub ↗</a></nav>
     <span id="connection" class="connection"><i></i> Not connected</span>
   </header>
   <main id="top">
@@ -232,9 +233,16 @@ codex plugin add solkraft@solkraft</code></pre><p>You need Python 3.11 or newer,
       </div>
     </section>
 
+    <section id="agent-update" class="agent-update" aria-labelledby="agent-update-title">
+      <div class="agent-update-icon" aria-hidden="true">↻</div>
+      <div><span class="eyebrow">KEEP YOUR AGENT CURRENT</span><h2 id="agent-update-title">One link. The latest SolKraft.</h2><p>Give your agent the update guide. It covers the runtime, bundled skills, plugin refresh, and connection checks.</p><a class="agent-guide-url" href="agent-update.md">solkraft / agent-update.md ↗</a></div>
+      <div class="agent-update-actions"><button id="copy-agent-update" class="button primary" type="button">Copy update prompt <span>↗</span></button><a class="button quiet" href="agent-update.md">Read agent guide</a><p>Use with the agent that manages your installation.</p></div>
+      <details><summary>Show the prompt</summary><p id="agent-update-prompt">Update my SolKraft installation using https://halthinks.github.io/SolKraft/agent-update.md . Inspect the installed source first, preserve local changes and configuration, update the runtime and bundled skills plus the native plugin where installed, then verify actual MCP tool calls. Report what updated and anything still requiring a restart.</p></details>
+    </section>
+
     <section class="whitepaper-link" aria-label="Technical whitepaper"><div><span class="eyebrow">GO DEEPER</span><h2>The ideas behind the engine.</h2><p>Architecture, routing repairs, and the evidence behind the results.</p></div><a class="button quiet" href="whitepaper.html">Read the whitepaper <span>↗</span></a></section>
   </main>
-  <footer><a class="brand footer-brand" href="#top"><span class="brand-mark">S<span>✳</span></span><span>SOLKRAFT</span></a><span>Skill infrastructure, in the open.</span><div><a href="contributors.html">Contributors</a><a href="contributions.html">Showcase</a><a href="nominations.html">Nominations</a><a href="https://github.com/halthinks/SolKraft/blob/main/LICENSE">MIT License</a><a href="https://github.com/halthinks/SolKraft/issues/new?template=support_request.yml">Support</a><a href="https://github.com/halthinks/SolKraft/pulls">Pull requests</a></div></footer>
+  <footer><a class="brand footer-brand" href="#top"><img class="brand-logo" src="assets/solkraft-forge.png" width="36" height="36" alt=""><span>SOLKRAFT</span></a><span>Skill infrastructure, in the open.</span><div><a class="release-label" href="version.json">Console 2026.10.11.1</a><a href="contributors.html">Contributors</a><a href="contributions.html">Showcase</a><a href="nominations.html">Nominations</a><a href="https://github.com/halthinks/SolKraft/blob/main/LICENSE">MIT License</a><a href="https://github.com/halthinks/SolKraft/issues/new?template=support_request.yml">Support</a><a href="https://github.com/halthinks/SolKraft/pulls">Pull requests</a></div></footer>
   <dialog id="skill-dialog" class="skill-dialog"><form method="dialog"><button class="dialog-close" aria-label="Close">×</button></form><div id="skill-detail"></div></dialog>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 </body>

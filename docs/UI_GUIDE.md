@@ -71,3 +71,7 @@ The current walkthrough uses large vertical HTML cards. Cards reveal in order on
 The GitHub Pages console composes custom routes without an API connection. On the first request it loads pinned Pyodide and PyYAML from the runtime CDN, then runs the bundled production Python router in a worker with hardened contract policy. Requests stay in the browser; an explicitly connected API remains available. Startup progress and failures are shown in the route panel, and a failed startup can be retried. This is routing only, not skill execution or browser CI.
 
 Skill inspection shows source-derived method prose and the contract's inputs and outputs before shared integration guidance. Full original instructions remain expandable and copyable, and supporting references link to their bundled source. The earlier contract-architecture modules remain visible alongside the graphical Features section; the whitepaper link is at the bottom of the page.
+
+## Update link for agents
+
+The Update section links to the stable, plain Markdown guide at https://halthinks.github.io/SolKraft/agent-update.md . Copy update prompt hands that guide to the agent managing the installation. The guide covers the Python runtime and bundled skills, refreshes the configured plugin source by its actual name, preserves editable checkouts and configuration, and requires actual MCP tool verification after a fresh session. The solar-forge emblem is stored in assets/solkraft-forge.png and used in the console header, footer, and favicon.

@@ -306,6 +306,7 @@
   $('#page-size').addEventListener('change', event => { pageSize = Number(event.currentTarget.value); searchSkills(currentQuery); });
   $('#search-input').addEventListener('input', event => searchSkills(event.currentTarget.value.trim()));
   document.querySelectorAll('[data-inspect-skill]').forEach(button => button.addEventListener('click', () => inspectSkill(button.dataset.inspectSkill)));
+  $('#copy-agent-update')?.addEventListener('click', () => copyText($('#agent-update-prompt').textContent.trim()));
   $('#copy-task').addEventListener('click', () => copyText($('#route-input').value));
 
   window.loadSolKraftStatic('assets/skill-structure.json').then(data => { skillStructure = data; }).catch(() => {});

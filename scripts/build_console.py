@@ -59,6 +59,11 @@ def main():
     (assets / 'example-route.json').write_text(json.dumps(example, ensure_ascii=False) + '\n', encoding='utf-8')
     index = root / 'docs/index.html'
     text = index.read_text(encoding='utf-8')
+    release = json.loads((root / 'docs/version.json').read_text(encoding='utf-8'))
+    if not re.fullmatch(r'\d{4}\.\d{2}\.\d{2}\.\d+', release['version']):
+        raise ValueError('Invalid console release version')
+    text = re.sub(r'(<a class="release-label" href="version.json">).*?(</a>)',
+                  lambda match: match[1] + 'Console ' + release['version'] + match[2], text)
     versions = {}
     from scripts.build_browser_router import build_runtime as build_browser_router
     build_browser_router()
