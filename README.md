@@ -1,4 +1,4 @@
-<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # SolKraft
 
@@ -6,12 +6,13 @@
 
 <img src="docs/assets/solkraft-readme-hero.svg" alt="SolKraft visual flow: request to routing, executable contracts, composition, and verification" width="100%">
 
-### ✳️ The open skill OS for agents
+### Your words. A working method.
 
-**Route normal-language requests to the right reusable capabilities — with contract-aware selection, typed composition, and CI-visible verification.**
+**Find reusable procedures from ordinary requests, organize multi-step work, and retrieve the instructions your agent needs.**
 
 [![CI](https://github.com/halthinks/SolKraft/actions/workflows/tests.yml/badge.svg)](https://github.com/halthinks/SolKraft/actions/workflows/tests.yml)
-[![Advanced Contract Benchmark](https://github.com/halthinks/SolKraft/actions/workflows/advanced-contract-benchmark.yml/badge.svg)](https://github.com/halthinks/SolKraft/actions/workflows/advanced-contract-benchmark.yml)\n[![Semantic Router Proof](https://github.com/halthinks/SolKraft/actions/workflows/semantic-router-proof.yml/badge.svg)](https://github.com/halthinks/SolKraft/actions/workflows/semantic-router-proof.yml)
+[![Advanced Contract Benchmark](https://github.com/halthinks/SolKraft/actions/workflows/advanced-contract-benchmark.yml/badge.svg)](https://github.com/halthinks/SolKraft/actions/workflows/advanced-contract-benchmark.yml)
+[![Semantic Router Proof](https://github.com/halthinks/SolKraft/actions/workflows/semantic-router-proof.yml/badge.svg)](https://github.com/halthinks/SolKraft/actions/workflows/semantic-router-proof.yml)
 [![GitHub Pages](https://img.shields.io/badge/console-live-b3f77c?logo=github&logoColor=111)](https://halthinks.github.io/SolKraft/)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![MCP](https://img.shields.io/badge/MCP-read--only-6b9cff)](docs/REMOTE_MCP.md)
@@ -32,14 +33,14 @@
 <!-- BEGIN SOLKRAFT CURRENT SYSTEM -->
 ## Current SolKraft system — October 2026
 
-- Contract-aware routing uses semantic capability identity plus machine-readable `contract.yaml` metadata for typed inputs/outputs, namespaced effects, capability/resource requirements, declarative verification, provenance, trust, and exact digests.
-- Public REST, MCP, and CLI routing default to **hardened** policy. Opaque or otherwise inadmissible capabilities fail closed; the Python library stays compatibility-oriented unless stricter policy is requested.
-- SolKraft is advisory and non-executing. Runtime authority remains with the host and `execution_authorized` remains `false`.
-- The compact `ContractIndex` supplies routing/API/MCP/docs metadata without loading every full `SKILL.md` body into the hot path.
-- Read-only MCP tools: `search_skills`, `route_request`, `get_skill`, `get_skill_resource`, `get_selection_graph`, `get_skill_contract`, and `get_contract_index`.
-- Reusable CI and pre-PR contribution validation share contract/schema, routing, packaging, installed-MCP, index/hardening, and evidence gates.
-- Historical local contract acceptance recorded **100,000 / 100,000** generated cases with hardened policy and boundary checks. That run is retained as contract/hardening evidence, not as proof of broad natural-language diversity. The stronger [Semantic Router Proof](docs/SEMANTIC_ROUTER_PROOF.md) now requires **1,000 distinct prompts per skill**, **100,000 multi-skill composition requests**, and **100,000 stability executions** before semantic routing is treated as proven.
-- The public Validation display is a clearly labeled **recorded reenactment**, not live browser CI.
+- Describe an outcome in ordinary language; SolKraft discovers procedures, composes requested stages, and retrieves selected instructions. The catalog contains **173 bundled skills** across software, research, data, writing, business, mathematics, legal research, and engineering.
+- Public REST, MCP, and CLI routing defaults to **hardened** contract policy. Routes expose selected methods, reasons, contract requirements, and unresolved work; review them before applying a procedure.
+- SolKraft is advisory. The host supplies tools, runtime authority, and verification. `execution_authorized` remains `false`.
+- Compact metadata is loaded before full instruction bodies. Seven read-only MCP tools provide search, routing, skill/resource retrieval, graph inspection, and contract metadata.
+- The current acceptance gate requires **473,000 production-router calls across all 32 slices**: 173,000 single-skill cases, 100,000 clarified compound requests, 100,000 unchanged original compound diagnostics, and 100,000 stability executions.
+- Acceptance requires **100% of 111,000 eligible single-skill exact selections and 62,000 hardened policy decisions**, plus **100% holdout, per-skill, compound exact-set, coverage, order, and stability results**, with **zero extra selections and zero unresolved stages** in clarified compound requests. Clarifications preserve every original topic and target; the original corpus remains a separate diagnostic.
+- The historical 373,000-call run reached **27.697% compound exact matching** and is rejected as evidence of completion. Current results belong to the source-bound aggregate receipt; the October 10 full local CI passed all 22 steps and all 15 semantic gates across 32/32 receipts. Generated-corpus success does not establish perfect arbitrary-language matching, execution, or deployment.
+- The console displays actual completed receipts and recorded production-router examples. It performs no simulated or live browser CI. See [semantic validation and limitations](docs/SEMANTIC_ROUTER_PROOF.md) for source identity, methodology, and rerun instructions.
 
 <!-- END SOLKRAFT CURRENT SYSTEM -->
 
@@ -68,7 +69,7 @@ SolKraft is deliberately **not** another opaque tool bag. It gives agents a comp
 | 🧩 **Composition** | Typed producer → consumer relationships and dependency-aware route validation |
 | 🔒 **Boundaries** | Hardened public defaults, explicit blocked states, and `execution_authorized: false` |
 | 🔎 **Selective retrieval** | Compact metadata first; full `SKILL.md` only when a capability earns its place |
-| 🧪 **Evidence** | Reusable CI, contract fixtures, packaging/MCP checks, the historical 100k contract regression, and the 373k-class semantic router proof |
+| 🧪 **Evidence** | Reusable CI, contract fixtures, packaging/MCP checks, the historical 100k contract regression, and the 473k-call exact semantic acceptance gate and retained original diagnostics |
 
 ### 🚀 Why it feels different
 
@@ -112,7 +113,7 @@ Cozy’s contribution helped push the project from descriptive skill metadata to
 | [`solkraft/skillpacks/`](solkraft/skillpacks) | The bundled skill operating layer |
 | [`scripts/local_ci.py`](scripts/local_ci.py) | Canonical local/reusable verification gate |
 | [`VALIDATION.md`](VALIDATION.md) | What has actually been tested and what it means |
-| [Live Console](https://halthinks.github.io/SolKraft/) | Browse, inspect, connect, and replay validation |
+| [Live Console](https://halthinks.github.io/SolKraft/) | Browse, inspect, connect, and review completed validation |
 | [Contributors](https://halthinks.github.io/SolKraft/contributors.html) | Community impact and recognition |
 | [Contributions Showcase](https://halthinks.github.io/SolKraft/contributions.html) | Filterable outcomes plus contributor profile cards and public impact links |
 | [Nominations Archive](https://halthinks.github.io/SolKraft/nominations.html) | Public nomination and recognition history |

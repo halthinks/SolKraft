@@ -4,6 +4,7 @@ Uses local rules and lexical evidence only: no network, models, or effect execut
 """
 import argparse
 from collections import Counter
+from functools import lru_cache
 import json
 import math
 from pathlib import Path
@@ -32,7 +33,8 @@ def normalize(text):
     return unicodedata.normalize('NFKC', text).casefold().replace('’', "'").replace('–', '-').replace('—', '-')
 
 
-def tokens(text):
+@lru_cache(maxsize=4096)
+def _tokens(text):
     result = []
     for word in re.findall(r'[a-z0-9]+', normalize(text)):
         if word in STOP or len(word) < 2:
@@ -43,7 +45,12 @@ def tokens(text):
         elif len(word) > 4 and word.endswith('s') and not word.endswith(('ss', 'us', 'is')):
             word = word[:-1]
         result.append(word)
-    return result
+    return tuple(result)
+
+
+def tokens(text):
+    # Callers receive their own list; caching never shares mutable query state.
+    return list(_tokens(text))
 
 
 def scope_clauses(objective):
@@ -132,6 +139,16 @@ def _binding_text(value):
     return ''
 
 
+def _lexical_text(n):
+    return ' '.join([
+        n['id'], n.get('description', ''), n.get('domain', ''), str(n.get('selection', '') or ''),
+        *[_binding_text(item) for item in n.get('inputs', [])],
+        *[_binding_text(item) for item in n.get('outputs', [])],
+        *[_binding_text(item) for item in ((n.get('authority') or {}).get('capabilities') or [])],
+        *[_binding_text(item) for item in ((n.get('authority') or {}).get('resources') or [])],
+    ])
+
+
 def lexical_index(nodes):
     documents = {
         k: Counter(tokens(' '.join([
@@ -152,15 +169,18 @@ def lexical_index(nodes):
 
 
 def cached_lexical_index(nodes):
-    key = id(nodes)
+    # The public router builds fresh contract-enriched dictionaries. Key by the
+    # fields consumed by lexical_index so equal snapshots reuse their index and
+    # edits invalidate it, including in-place edits to a mounted catalog.
+    key = tuple((k, _lexical_text(n)) for k, n in nodes.items())
     cached = _LEXICAL_INDEX_CACHE.get(key)
-    if cached is not None and cached[0] is nodes:
-        return cached[1]
+    if cached is not None:
+        return cached
     index = lexical_index(nodes)
     # Keep the cache bounded for callers that load several graphs in one run.
     if len(_LEXICAL_INDEX_CACHE) >= 8:
         _LEXICAL_INDEX_CACHE.clear()
-    _LEXICAL_INDEX_CACHE[key] = (nodes, index)
+    _LEXICAL_INDEX_CACHE[key] = index
     return index
 
 

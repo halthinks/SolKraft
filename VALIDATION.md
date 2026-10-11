@@ -1,36 +1,34 @@
-<!-- solkraft-doc-sync: contract-aware-v1 | validation-100k-100-family | 2026-10 -->
+<!-- solkraft-doc-sync: contract-aware-v1 | semantic-exact-match | 2026-10 -->
 
 # Validation evidence
 
 <!-- BEGIN SOLKRAFT CURRENT SYSTEM -->
 ## Current SolKraft system — October 2026
 
-- Contract-aware routing uses semantic capability identity plus machine-readable `contract.yaml` metadata for typed inputs/outputs, namespaced effects, capability/resource requirements, declarative verification, provenance, trust, and exact digests.
-- Public REST, MCP, and CLI routing default to **hardened** policy. Opaque or otherwise inadmissible capabilities fail closed; the Python library stays compatibility-oriented unless stricter policy is requested.
-- SolKraft is advisory and non-executing. Runtime authority remains with the host and `execution_authorized` remains `false`.
-- The compact `ContractIndex` supplies routing/API/MCP/docs metadata without loading every full `SKILL.md` body into the hot path.
-- Read-only MCP tools: `search_skills`, `route_request`, `get_skill`, `get_skill_resource`, `get_selection_graph`, `get_skill_contract`, and `get_contract_index`.
-- Reusable CI and pre-PR contribution validation share contract/schema, routing, packaging, installed-MCP, index/hardening, and evidence gates.
-- Historical local contract acceptance recorded **100,000 / 100,000** generated cases. That run remains useful for hardened contract-policy and boundary behavior, but it is not the acceptance proof for broad semantic language coverage. The stronger semantic proof is defined in [docs/SEMANTIC_ROUTER_PROOF.md](docs/SEMANTIC_ROUTER_PROOF.md).
-- The public Validation display is a clearly labeled **recorded reenactment**, not live browser CI.
-- Canonical local acceptance receipt: `scripts/results-advanced-contract-100000-local-summary.json`.
+- Describe an outcome in ordinary language; SolKraft discovers procedures, composes requested stages, and retrieves selected instructions. The catalog contains **173 bundled skills** across software, research, data, writing, business, mathematics, legal research, and engineering.
+- Public REST, MCP, and CLI routing defaults to **hardened** contract policy. Routes expose selected methods, reasons, contract requirements, and unresolved work; review them before applying a procedure.
+- SolKraft is advisory. The host supplies tools, runtime authority, and verification. `execution_authorized` remains `false`.
+- Compact metadata is loaded before full instruction bodies. Seven read-only MCP tools provide search, routing, skill/resource retrieval, graph inspection, and contract metadata.
+- The current acceptance gate requires **473,000 production-router calls across all 32 slices**: 173,000 single-skill cases, 100,000 clarified compound requests, 100,000 unchanged original compound diagnostics, and 100,000 stability executions.
+- Acceptance requires **100% of 111,000 eligible single-skill exact selections and 62,000 hardened policy decisions**, plus **100% holdout, per-skill, compound exact-set, coverage, order, and stability results**, with **zero extra selections and zero unresolved stages** in clarified compound requests. Clarifications preserve every original topic and target; the original corpus remains a separate diagnostic.
+- The historical 373,000-call run reached **27.697% compound exact matching** and is rejected as evidence of completion. Current results belong to the source-bound aggregate receipt; the October 10 full local CI passed all 22 steps and all 15 semantic gates across 32/32 receipts. Generated-corpus success does not establish perfect arbitrary-language matching, execution, or deployment.
+- The console displays actual completed receipts and recorded production-router examples. It performs no simulated or live browser CI. See [semantic validation and limitations](docs/SEMANTIC_ROUTER_PROOF.md) for source identity, methodology, and rerun instructions.
 
 <!-- END SOLKRAFT CURRENT SYSTEM -->
 
 
-The current local release gate passed **78 Python regression tests**, four Node setup behavior tests, and a separate real MCP integration test against the built wheel and packaged plugin. Earlier validation evidence below records previous revisions and test counts.
+The current October 10 full local CI passed **369 Python regression tests**, seven Node setup behavior tests, four validation-display behavior tests, and a real MCP integration test against the built wheel and packaged plugin. All **22 steps** and **15 semantic gates** passed. The semantic run completed **473,000 actual calls across 32/32 receipts**, with 100% eligible exact singleton matching, hardened policy decisions, clarified compound exact sets, order, coverage, and stability; clarified extras and unresolved stages were zero. The unchanged original diagnostic reached **44.704% exact sets**, zero extras, and **55,296 clarification requests**. These original results are separate from the clarified 100% acceptance. Tested source inputs: `1404e9a26fa11f106b606089de0bbb15e375297c34fc3c28f912d30864ab6714`. Earlier evidence below records previous revisions and test counts.
 
-Run the same suite:
+Run the complete local gate with Python 3.11+ and Node.js available:
 
 ```sh
 python -m pip install -e ".[dev]"
-SOLFORGE_TEST_ROOT=solkraft/skillpacks python -m pytest -q tests solkraft/skillpacks/solforge/tests -p no:cacheprovider
-node --check docs/assets/app.js
-node --check docs/assets/flow.js
-python -m compileall -q solkraft
+python -m scripts.local_ci --semantic-proof --semantic-workers 6
 ```
 
-On PowerShell, set `$env:SOLFORGE_TEST_ROOT = 'solkraft/skillpacks'` before pytest.
+The driver sets the test environment, checks contracts and hardening, builds the console and plugin, builds and installs a wheel in a separate environment, exercises the packaged MCP transport outside the checkout, and verifies the complete semantic aggregate. It writes `build/local-ci.json` and `build/semantic-proof-local/summary.json`. This local artifact check reuses installed dependencies; it does not establish a clean dependency download or hosted deployment.
+
+The console loads `docs/assets/semantic-proof.json`, validates completeness, and displays actual metrics and recorded production routes. Missing or failed evidence clears the numbers and disables examples with a retry control. Browser checks covered the desktop hero, the 390px mobile layout without horizontal overflow, offline skill search, and instruction retrieval. The page does not execute CI or claim skill execution.
 
 ### Supplemental deterministic routing battery
 
@@ -109,15 +107,16 @@ The targeted variants and 100,000 regression requests test routing, not 100,000 
 
 The semantic proof suite addresses a weakness in the earlier 100k generated benchmark: string uniqueness and repeated ask templates are not the same as broad semantic coverage.
 
-The current proof runs three independent surfaces:
+The current proof runs four separately reported surfaces:
 
-- **1,000 distinct prompts per skill**: 800 development cases plus a locked 200-case holdout for every bundled skill. Prompts vary framing, context, tone, deliverable wording, semantic anchors, and nearest-neighbor distractors.
-- **100,000 multi-skill composition requests**: each request requires two to five selectable skills, measuring complete target coverage, exact target sets, route order, unresolved stages, and extras.
-- **100,000 stability executions**: 10,000 difficult base prompts routed ten times each, with route fingerprints compared for deterministic stability.
+- **1,000 distinct prompts per skill**: 800 development cases plus a deterministic 200-case holdout for every bundled skill. Prompts vary framing, context, tone, deliverable wording, semantic anchors, and nearest-neighbor distractors.
+- **100,000 clarified multi-skill composition requests**: each requires two to five selectable skills. Capability-specific words resolve ambiguous generated requests while preserving every original topic, target, and case count; skill IDs are never injected.
+- **100,000 original composition diagnostics**: the unchanged requests are reconstructed from retained original profiles and routed separately. Their exact sets, extras, unresolved stages, and clarification requests remain visible and cannot be represented as the clarified acceptance result.
+- **100,000 stability executions**: 10,000 difficult base prompts routed ten times each, with actual route fingerprints compared for deterministic stability.
 
-With the current 173-skill catalog this is **373,000 routing executions**. The suite forbids literal structured skill IDs, full published descriptions, and copied eight-word description spans in generated prompts.
+With the current 173-skill catalog this is **473,000 production routing executions**. The suite forbids literal structured skill IDs, full published descriptions, and copied eight-word description spans in generated prompts.
 
-The aggregate gate requires >=95% global and holdout single-skill behavior, >=90% on every individual skill, >=90% multi-skill target coverage, >=95% route-order preservation, 100% repeat stability, and zero metadata leakage. A shard cannot declare success by itself; only the aggregate receipt may set `proof_passed: true`.
+The aggregate gate requires **100%** global and holdout single-skill behavior, every individual skill, compound target coverage, exact sets, route order, and repeat stability. Clarified requests must have **zero extra selections and zero unresolved stages**. It also requires zero metadata leakage, complete original diagnostics, all 32 slices, and matching source/corpus identity. A shard cannot declare success by itself; only the complete source-bound aggregate receipt may set `proof_passed: true`. The previous 27.697% compound exact-match result fails this gate. The October 10 full local CI passed all 22 steps and every semantic gate; the aggregate records 100% clarified exact sets, zero extras, and zero unresolved stages.
 
 See [docs/SEMANTIC_ROUTER_PROOF.md](docs/SEMANTIC_ROUTER_PROOF.md) and `.github/workflows/semantic-router-proof.yml`.
 

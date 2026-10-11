@@ -11,7 +11,49 @@ from scripts.semantic_router_benchmark import (
     shared_anchor_prompt,
     shared_anchor_skills,
     single_prompt,
+    anchor_phrase,
 )
+
+def test_anchor_rotation_visits_short_profile_without_name_injection():
+    profile = {'anchors': ['portable', 'prompt', 'write', 'execution', 'objective']}
+    for case in range(20):
+        phrase = anchor_phrase(profile, case, 3)
+        assert len(set(phrase.split(', '))) == 3
+        assert set(phrase.split(', ')).issubset(set(profile['anchors']))
+
+
+def test_full_composition_corpus_is_unique_without_skill_id_padding():
+    import json
+    from pathlib import Path
+    from solkraft.routing import contract_index
+    from scripts.semantic_router_benchmark import composition_prompt, composition_targets, selectable_ids
+    catalog = SkillCatalog([BUNDLE_ROOT], preferred_root=BUNDLE_ROOT)
+    records = list(catalog.records())
+    graph = catalog_graph(catalog)
+    profiles = build_profiles(records, graph)
+    entries = {entry['id']: entry for entry in contract_index(catalog).entries()}
+    selectable = selectable_ids(records, graph, entries)
+    by_id = {record.id: record for record in records}
+    fixture = json.loads((Path(__file__).resolve().parents[1] / 'scripts/fixtures/original-semantic-profiles.json').read_text(encoding='utf-8'))
+    assert selectable == fixture['selectable'], 'Clarification must retain the original target population and order'
+    seen = set()
+    for case in range(100_000):
+        targets = composition_targets(selectable, case)
+        prompt = composition_prompt(by_id, profiles, targets, case, source_profiles=fixture['profiles'])
+        original_targets = composition_targets(fixture['selectable'], case)
+        assert targets == original_targets
+        original = composition_prompt(by_id, fixture['profiles'], original_targets, case, clarify=False)
+        import re
+        topic_pattern = r'\binvolving\s+([a-z0-9\x27-]+(?:\s*,\s*[a-z0-9\x27-]+)*)'
+        original_topics = re.findall(topic_pattern, original)
+        clarified_topics = re.findall(topic_pattern, prompt)
+        assert len(original_topics) == len(clarified_topics) == len(targets), case
+        for original_clause, clarified_clause in zip(original_topics, clarified_topics):
+            assert set(original_clause.split(', ')).issubset(clarified_clause.split(', ')), case
+        assert prompt not in seen, case
+        assert all(target not in prompt for target in targets if '-' in target), case
+        seen.add(prompt)
+    assert len(seen) == 100_000
 
 
 def test_semantic_single_skill_corpus_shape_and_leakage():
@@ -91,7 +133,9 @@ def test_semantic_router_composition_regression_probe():
                     cursor += 1
             coverage = set(targets).issubset(set(selected))
             ordered = cursor == len(targets)
-            if not coverage or not ordered:
+            exact = selected == targets
+            resolved = not route.get('unselected_requested_stages')
+            if not exact or not resolved:
                 failures.append({
                     "case": case_id,
                     "prompt": prompt,
@@ -103,6 +147,8 @@ def test_semantic_router_composition_regression_probe():
                     "stages": route.get("stages"),
                     "coverage": coverage,
                     "ordered": ordered,
+                    "exact": exact,
+                    "resolved": resolved,
                 })
                 if len(failures) >= 3:
                     break
@@ -114,7 +160,7 @@ def test_semantic_router_composition_regression_probe():
 
 
 def test_semantic_router_low_skill_rate_regression_probe():
-    """Fast sample for skills that were below the full-proof 0.90 gate."""
+    """Every sampled eligible request must select exactly its target and resolve."""
     import json
     import solkraft.routing as routing_module
     from solkraft.routing import contract_index, route_request
@@ -165,18 +211,13 @@ def test_semantic_router_low_skill_rate_regression_probe():
             samples = []
             for local_case in range(100):
                 exact_anchor_set = exact_anchor_sets.get(skill_id)
-                if exact_anchor_set is None:
-                    # Non-identifiable targets belong to ambiguity coverage,
-                    # not hidden-label exact recall.
-                    passed += 1
-                    continue
                 prompt = single_prompt(
                     record, profiles[skill_id], profiles, local_case,
                     exact_anchor_set=exact_anchor_set,
                 )
                 route = route_request(catalog, prompt, max_skills=50, policy={"contract_mode": "hardened"})
                 selected = route.get("selected") or []
-                ok = skill_id in selected
+                ok = selected == [skill_id] and not route.get('unselected_requested_stages')
                 passed += int(ok)
                 if not ok and len(samples) < 3:
                     samples.append({
@@ -184,10 +225,11 @@ def test_semantic_router_low_skill_rate_regression_probe():
                         "prompt": prompt,
                         "anchors": profiles[skill_id]["anchors"],
                         "selected": selected[:20],
+                        "unresolved": route.get('unselected_requested_stages'),
                         "semantic_rank": route.get("selection_trace", {}).get("semantic_capability_rank"),
                     })
             rate = passed / 100
-            if rate < 0.90:
+            if rate != 1.0:
                 failures[skill_id] = {"rate": rate, "samples": samples}
         assert not failures, json.dumps(failures, indent=2, sort_keys=True)
     finally:
@@ -254,10 +296,10 @@ def test_shared_anchor_prompt_is_treated_as_ambiguous_not_exact_recall():
             prompt = shared_anchor_prompt(anchor, case_index)
             route = route_request(catalog, prompt, max_skills=50, policy={"contract_mode": "hardened"})
             selected = set(route.get("selected") or [])
-            # Ambiguity succeeds when routing preserves more than one plausible
-            # *admissible* shared-anchor candidate. Consequential/blocked skills
-            # are intentionally excluded from the ambiguity expectation.
-            assert len(selected & set(candidates)) >= 2, {
+            # Alternatives remain in clarification evidence, never selected work.
+            alternatives = {skill for row in route.get('unselected_requested_stages', [])
+                            for skill in row.get('candidates', [])}
+            assert not selected and len(alternatives & set(candidates)) >= 2, {
                 "anchor": anchor,
                 "candidates": candidates,
                 "selected": route.get("selected") or [],

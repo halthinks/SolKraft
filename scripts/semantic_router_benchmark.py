@@ -7,6 +7,7 @@ It measures three things:
 2. 100,000 distinct multi-skill composition prompts spanning 2-5 skills.
 3. 100,000 repeat executions over 10,000 difficult prompts (10 repeats each)
    to prove deterministic stability and absence of cross-request contamination.
+4. 100,000 unchanged original composition prompts, retained as diagnostics.
 
 The corpus never injects a skill id or copies a full published description.
 It is deterministic so failures are reproducible and sharded so CI can scale.
@@ -22,6 +23,25 @@ import math
 from pathlib import Path
 import re
 import time
+import subprocess
+
+
+def source_identity():
+    """Bind receipts to exact tracked inputs, including uncommitted fixes."""
+    root = Path(__file__).resolve().parents[1]
+    names = [p.relative_to(root).as_posix() for folder in ('solkraft', 'scripts', 'tests')
+             for p in (root / folder).rglob('*') if p.is_file() and '__pycache__' not in p.parts]
+    names.append('pyproject.toml')
+    digest = hashlib.sha256()
+    for name in sorted(filter(None, names)):
+        if not (name.startswith(('solkraft/', 'scripts/', 'tests/')) or name == 'pyproject.toml'):
+            continue
+        path = root / name
+        digest.update(name.encode())
+        digest.update(b'\0')
+        digest.update(path.read_bytes() if path.is_file() else b'<missing>')
+    return {'revision': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=root).decode().strip(),
+            'inputs_sha256': digest.hexdigest(), 'harness': 'production-router/frozen-catalog'}
 
 from solkraft.catalog import SkillCatalog
 import solkraft.routing as routing_module
@@ -51,6 +71,7 @@ complex difficult real world correct appropriate relevant published bundled
 user objective supplied applicable scope acceptance criteria verified requested deliverable input inputs output outputs general
 description descriptions schema metadata field fields value values required optional type types
 name names identifier identifiers id ids version versions configuration config property properties
+router node solforge workflow workflows
 """.split())
 
 ACTION_OPENERS = (
@@ -136,6 +157,7 @@ def expectation(entry: dict, node: dict) -> str:
 
 
 def build_profiles(records, graph):
+    matching = routing_module._graph_semantic_index(graph)['profiles']
     token_sets: dict[str, set[str]] = {}
     raw_tokens: dict[str, list[str]] = {}
     for record in records:
@@ -166,10 +188,6 @@ def build_profiles(records, graph):
             token_sets[skill_id],
             key=lambda token: (-(math.log((total + 1) / (df[token] + 1)) + 1), token),
         )
-        if len(unique) < 8:
-            for token in tokens(record.name):
-                if token not in STOPWORDS and token not in unique:
-                    unique.append(token)
         if len(unique) < 4:
             for token in raw_tokens[skill_id]:
                 if token not in unique:
@@ -207,6 +225,10 @@ def build_profiles(records, graph):
     for skill_id in ids:
         own = token_sets[skill_id]
         profiles[skill_id]["token_set"] = frozenset(own)
+        # Candidate membership uses the production public-field tokenizer.
+        # Anchor generation excludes wrapper words, but retained original
+        # requests may contain them and must still be disambiguated correctly.
+        profiles[skill_id]["matching_tokens"] = matching[skill_id]['tokens']
         scored = []
         for other in ids:
             if other == skill_id:
@@ -282,7 +304,9 @@ def anchor_phrase(
                     picked.append(token)
     cursor = (case_index * 7 + 3) % len(anchors)
     for offset in range(max(width * 4, len(anchors))):
-        token = anchors[(cursor + offset * 5) % len(anchors)]
+        # Step through every position. A fixed stride of five visits only one
+        # position in a five-word profile and can inject an unrelated ID token.
+        token = anchors[(cursor + offset) % len(anchors)]
         if token not in picked:
             picked.append(token)
         if len(picked) == width:
@@ -368,20 +392,41 @@ def shared_anchor_skills(profiles: dict, anchor: str) -> list[str]:
     )
 
 
-def composition_prompt(records_by_id, profiles, target_ids: list[str], case_index: int) -> str:
+def composition_prompt(records_by_id, profiles, target_ids: list[str], case_index: int, *, clarify: bool = True, source_profiles=None) -> str:
     clauses = []
     for position, skill_id in enumerate(target_ids):
         profile = profiles[skill_id]
-        anchors = anchor_phrase(profile, case_index * 11 + position * 37, 3)
-        domain = profile["domain"] if profile["domain"] != "general" else DOMAIN_FALLBACKS[(case_index + position) % len(DOMAIN_FALLBACKS)]
+        original_profile = (source_profiles or profiles)[skill_id]
+        anchors = anchor_phrase(original_profile, case_index * 11 + position * 37, 3)
+        if clarify:
+            # Preserve every original topic, target and case. Add semantic
+            # evidence only where those topics do not identify one capability.
+            picked = anchors.split(', ')
+            others = [p for sid, p in profiles.items() if sid != skill_id
+                      and set(picked).issubset(p.get('matching_tokens', p.get('token_set', ())))]
+            for token in profile['anchors']:
+                if not others:
+                    break
+                if token not in picked:
+                    picked.append(token)
+                    others = [p for p in others if token in p.get('matching_tokens', p.get('token_set', ()))]
+            if others:
+                raise AssertionError(f'Cannot distinguish capability {skill_id}; repair public metadata')
+            anchors = ', '.join(picked)
+        domain = original_profile["domain"] if original_profile["domain"] != "general" else DOMAIN_FALLBACKS[(case_index + position) % len(DOMAIN_FALLBACKS)]
         opener = ACTION_OPENERS[(case_index + position * 3) % len(ACTION_OPENERS)]
-        context = CONTEXTS[(case_index // 7 + position * 2) % len(CONTEXTS)]
+        context = CONTEXTS[(case_index // 10 + position * 2) % len(CONTEXTS)]
         clause = f"{opener} the {domain} part involving {anchors} {context}."
         if position:
             connector = CONNECTORS[(case_index + position) % len(CONNECTORS)]
             clause = f"{connector}, {clause[0].lower()}{clause[1:]}"
         clauses.append(clause)
-    return " ".join(clauses) + " " + DELIVERABLES[(case_index * 3) % len(DELIVERABLES)]
+    # Independent mixed-radix wording choices avoid the old correlated cycles,
+    # which produced duplicate requests partway through the full 100k corpus.
+    return (TONE_PREFIXES[(case_index // 100) % len(TONE_PREFIXES)]
+            + " ".join(clauses) + " "
+            + DELIVERABLES[(case_index // 1000) % len(DELIVERABLES)]
+            + " Context notes: " + CONTEXTS[(case_index // 10000) % len(CONTEXTS)])
 
 
 def route_fingerprint(route: dict) -> str:
@@ -455,6 +500,7 @@ def parse_args():
 
 def main():
     args = parse_args()
+    source = source_identity()
     started = time.perf_counter()
     catalog = SkillCatalog([BUNDLE_ROOT], preferred_root=BUNDLE_ROOT)
     records = list(catalog.records())
@@ -482,6 +528,8 @@ def main():
     leakage = Counter()
     single = Counter()
     composition = Counter()
+    original_diagnostic = Counter()
+    original_fixture = json.loads((Path(__file__).parent / 'fixtures/original-semantic-profiles.json').read_text(encoding='utf-8'))
     stability = Counter()
     per_skill = defaultdict(Counter)
     confusion = defaultdict(Counter)
@@ -514,12 +562,7 @@ def main():
             if (case_id // args.shard_count) % args.slice_count != args.slice_index:
                 continue
             exact_anchor_set = exact_anchor_sets.get(record.id)
-            # A selectable skill without a unique semantic anchor conjunction is
-            # not an exact-recall case: the observable prompt cannot determine
-            # one hidden label. It is exercised by the ambiguity suite instead.
-            if expected == "select-target" and exact_anchor_set is None:
-                single["moved_to_ambiguity"] += 1
-                continue
+            ambiguous = expected == "select-target" and exact_anchor_set is None
             prompt = single_prompt(
                 record, profile, profiles, local_case,
                 exact_anchor_set=exact_anchor_set,
@@ -531,7 +574,10 @@ def main():
             selected = route.get("selected") or []
             top = selected[0] if selected else None
             if expected == "select-target":
-                ok = record.id in selected
+                ok = selected == [record.id] and not route.get('unselected_requested_stages')
+                if ambiguous:
+                    single["ambiguity_cases"] += 1
+                    single["ambiguity_passed"] += int(ok)
                 single["eligible_cases"] += 1
                 single["eligible_passed"] += int(ok)
                 single[f"{split}_eligible_cases"] += 1
@@ -553,6 +599,7 @@ def main():
             single["passed"] += int(ok)
             if not ok and len(failures) < 30:
                 failures.append({"suite":"single","case":case_id,"target":record.id,"split":split,"expected":expected,"selected":selected[:8],"prompt_sha256":hashlib.sha256(prompt.encode()).hexdigest()})
+        print(f'[semantic-proof] single {record.id}: {single["cases"]} executions', flush=True)
 
     for case_id in range(args.composition_cases):
         if case_id % args.shard_count != args.shard_index:
@@ -560,9 +607,22 @@ def main():
         if (case_id // args.shard_count) % args.slice_count != args.slice_index:
             continue
         targets = composition_targets(selectable, case_id)
-        prompt = composition_prompt(records_by_id, profiles, targets, case_id)
+        original_targets = composition_targets(original_fixture['selectable'], case_id)
+        original_prompt = composition_prompt(records_by_id, original_fixture['profiles'], original_targets, case_id, clarify=False)
+        original_route = route_request(catalog, original_prompt, max_skills=50, policy=policy)
+        original_selected = original_route.get('selected') or []
+        original_diagnostic['cases'] += 1
+        original_diagnostic['exact_target_set'] += int(set(original_selected) == set(original_targets))
+        original_diagnostic['extra_selected_total'] += len(set(original_selected) - set(original_targets))
+        original_diagnostic['no_unresolved'] += int(not original_route.get('unselected_requested_stages'))
+        original_diagnostic['clarification_requests'] += int(any('clarification' in x.get('reason', '') for x in original_route.get('unselected_requested_stages', [])))
+        digest.update(('original:' + hashlib.sha256(original_prompt.encode()).hexdigest()).encode('ascii'))
+        assert targets == original_targets, 'Original composition targets changed'
+        prompt = composition_prompt(records_by_id, profiles, targets, case_id, source_profiles=original_fixture['profiles'])
         remember_prompt(prompt, targets)
         route = route_request(catalog, prompt, max_skills=50, policy=policy)
+        if composition["cases"] % 1000 == 0:
+            print(f'[semantic-proof] composition: {composition["cases"]} completed', flush=True)
         selected = route.get("selected") or []
         selected_set = set(selected)
         target_set = set(targets)
@@ -578,9 +638,10 @@ def main():
         composition["extra_selected_total"] += max(0, len(selected_set - target_set))
         composition[f"size_{len(targets)}_cases"] += 1
         composition[f"size_{len(targets)}_coverage"] += int(coverage_ok)
-        if (not coverage_ok or not order_ok) and len(failures) < 30:
-            failures.append({"suite":"composition","case":case_id,"targets":targets,"selected":selected[:12],"coverage_ok":coverage_ok,"order_ok":order_ok,"prompt_sha256":hashlib.sha256(prompt.encode()).hexdigest()})
+        if (not exact_ok or not order_ok or not unresolved_ok) and len(failures) < 30:
+            failures.append({"suite":"composition","case":case_id,"targets":targets,"selected":selected[:12],"coverage_ok":coverage_ok,"order_ok":order_ok,"exact_ok":exact_ok,"unresolved":route.get('unselected_requested_stages'),"prompt":prompt,"prompt_sha256":hashlib.sha256(prompt.encode()).hexdigest()})
 
+    stability_requests = []
     for base_case in range(args.stability_base_cases):
         if base_case % args.shard_count != args.shard_index:
             continue
@@ -597,7 +658,7 @@ def main():
             targets = [record.id]
         else:
             targets = composition_targets(selectable, base_case * 97)
-            prompt = composition_prompt(records_by_id, profiles, targets, base_case * 97)
+            prompt = composition_prompt(records_by_id, profiles, targets, base_case * 97, source_profiles=original_fixture['profiles'])
         base_hash = hashlib.sha256(prompt.encode()).hexdigest()
         digest.update(("stability:" + base_hash).encode("ascii"))
         for target in targets:
@@ -606,11 +667,21 @@ def main():
                 leakage[issue] += 1
             if issues:
                 raise AssertionError(f"stability prompt leaked metadata for {target}: {issues}")
-        fingerprints = []
-        for _ in range(args.stability_repeats):
-            fingerprints.append(route_fingerprint(route_request(catalog, prompt, max_skills=50, policy=policy)))
-        baseline = fingerprints[0]
-        mismatches = sum(1 for item in fingerprints[1:] if item != baseline)
+        stability_requests.append((base_case, prompt, targets, base_hash))
+    baselines = {}
+    mismatch_counts = Counter()
+    # All other requests intervene between repeats of one request. This tests
+    # cross-request isolation, rather than only consecutive-call determinism.
+    for repeat in range(args.stability_repeats):
+        for base_case, prompt, targets, base_hash in stability_requests:
+            fingerprint = route_fingerprint(route_request(catalog, prompt, max_skills=50, policy=policy))
+            if repeat == 0:
+                baselines[base_case] = fingerprint
+            elif fingerprint != baselines[base_case]:
+                mismatch_counts[base_case] += 1
+        print(f'[semantic-proof] stability round {repeat + 1}/{args.stability_repeats}', flush=True)
+    for base_case, prompt, targets, base_hash in stability_requests:
+        mismatches = mismatch_counts[base_case]
         stability["base_cases"] += 1
         stability["executions"] += args.stability_repeats
         stability["mismatches"] += mismatches
@@ -633,6 +704,8 @@ def main():
             result["top1_rate"] = round(metrics["top1"] / metrics["cases"], 8)
         per_skill_result[skill_id] = result
 
+    if source != source_identity():
+        raise SystemExit('source changed during benchmark; discard this slice and rerun')
     summary = {
         "schema":"solkraft/semantic-router-proof-shard/v1",
         "shard_index":args.shard_index,
@@ -640,6 +713,7 @@ def main():
         "slice_index":args.slice_index,
         "slice_count":args.slice_count,
         "catalog":{"skill_count":len(records),"selectable_skill_count":len(selectable)},
+        "source": source,
         "corpus":{
             "single_prompts_per_skill_configured":args.single_per_skill,
             "development_partition_boundary":min(DEV_PROMPTS_PER_SKILL,args.single_per_skill),
@@ -655,6 +729,7 @@ def main():
         "leakage":dict(leakage),
         "single":dict(single),
         "composition":dict(composition),
+        "original_composition_diagnostic":dict(original_diagnostic),
         "stability":dict(stability),
         "per_skill":per_skill_result,
         "single_prompt_hashes_by_skill":{skill_id:hashes for skill_id,hashes in single_hashes_by_skill.items()},
@@ -662,7 +737,7 @@ def main():
         "sample_failures":failures,
         "performance":{
             "elapsed_seconds":round(elapsed,3),
-            "routes_per_second_approx":round((single["cases"]+composition["cases"]+stability["executions"])/elapsed,2) if elapsed else None,
+            "routes_per_second_approx":round((single["cases"]+composition["cases"]+original_diagnostic["cases"]+stability["executions"])/elapsed,2) if elapsed else None,
         },
     }
     output = args.output or Path(__file__).with_name(RESULT_TEMPLATE.format(shard=args.shard_index,count=args.shard_count))
