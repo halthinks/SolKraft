@@ -1,10 +1,10 @@
 {
   "schema": "solkraft/console-release/v1",
-  "version": "2026.10.11.2",
+  "version": "2026.10.11.3",
   "released": "2026-10-11",
   "scope": "GitHub Pages console",
   "changes": [
-    "Fill anvil opening with solid white"
+    "Match logo fill to surrounding anvil steel color"
   ],
   "source": "https://github.com/halthinks/SolKraft"
 }
