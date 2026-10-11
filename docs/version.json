@@ -1,8 +1,10 @@
 {
   "schema": "solkraft/console-release/v1",
-  "version": "2026.10.11.1",
+  "version": "2026.10.11.2",
   "released": "2026-10-11",
   "scope": "GitHub Pages console",
-  "changes": ["Solar-forge logo", "Agent update guide and copyable prompt", "Durable footer release label"],
+  "changes": [
+    "Fill anvil opening with solid white"
+  ],
   "source": "https://github.com/halthinks/SolKraft"
 }
